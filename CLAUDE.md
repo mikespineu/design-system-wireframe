@@ -32,6 +32,8 @@ Use [Radix UI](https://www.radix-ui.com/primitives) (`radix-ui` package) for all
 - `npm run build-storybook` – static build
 - `npm test` / `npm run test:watch` / `npm run test:coverage` – Jest
 - `npm run typecheck` – `tsc --noEmit`
+- `npm run lint` / `npm run lint:fix` – ESLint
+- Husky `pre-push` hook runs `npm run lint && npm test`; never bypass it with `--no-verify`.
 
 ## Conventions
 
