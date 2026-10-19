@@ -12,6 +12,30 @@ Live canvas: https://claude.ai/artifact/4R5XwSAJ1Hj8gTqgLdwTmK
 | `Components.dc.html` | Buttons, inputs, selection controls, tags, navigation, cards, feedback, table |
 | `canvas.json` | Canvas layout (artboard sizes and positions) |
 
+## Tailwind
+
+Tokens live in `src/styles/tokens.css` (`--ds-*`). `src/styles/tailwind.css` imports them and maps them into the Tailwind v4 theme. Import that one file, as `.storybook/preview.tsx` does, to get the fonts, tokens and utilities.
+
+The default Tailwind palette, radii and shadows are cleared. Off-system classes such as `bg-blue-500`, `rounded-lg` or `shadow-md` generate no CSS.
+
+| Need | Utilities |
+| --- | --- |
+| Palette | `bg-white`, `bg-gray-50` … `bg-gray-900`, `bg-black` (also `text-*`, `border-*`, …) |
+| Semantic color | `bg-background`, `bg-surface`, `bg-surface-subtle`, `bg-fill`, `border-divider`, `border-border`, `text-disabled`, `placeholder:text-placeholder`, `text-muted`, `text-text`, `text-ink`, `bg-inverse`, `bg-primary`, `hover:bg-primary-hover`, `text-primary-contrast` |
+| Fonts | `font-mono` (titles; `h1`–`h6` default to it), `font-sans` (body, default) |
+| Type scale | `text-display`, `text-h1`, `text-h2`, `text-h3`, `text-body-lg`, `text-body`, `text-label` (add `uppercase`), `text-caption` |
+| Spacing | Tailwind's numeric scale is the 4 px base: `p-1` = 4, `p-4` = 16, `gap-6` = 24, `py-24` = 96. `h-control` = 44 px |
+| Shape | `rounded-md` (= 0), `border` (1 px), `focus-visible:focus-ring` (2 px black, 2 px offset) |
+| Photos | `photo` (applies `grayscale(1) contrast(1.1)`) |
+
+```tsx
+<button className="h-control px-6 bg-primary hover:bg-primary-hover text-primary-contrast font-mono text-sm font-medium focus-visible:focus-ring">
+  Continue
+</button>
+<img className="photo aspect-[4/5] object-cover" src={src} alt="" />
+<span className="font-mono text-label uppercase text-muted">Series</span>
+```
+
 ## Color
 
 | Token | Hex | Role |

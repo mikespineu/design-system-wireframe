@@ -1,14 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&family=Red+Hat+Text:wght@400;500;700&display=swap');
 @import 'tailwindcss';
 @import './tokens.css';
 
-/* Expose design tokens as Tailwind utilities (bg-primary, p-ds-4, rounded-md, ...). */
+/*
+ * MONO/00 theme. Tailwind's default palette, radii and shadows are cleared,
+ * so only on-system utilities exist: a class such as bg-blue-500, rounded-lg or
+ * shadow-md generates no CSS.
+ */
 @theme inline {
-  --color-primary: var(--ds-color-primary);
-  --color-primary-contrast: var(--ds-color-primary-contrast);
+  /* Colors: bg-white, text-gray-600, border-gray-300, bg-black ... */
+  --color-*: initial;
+  --color-white: var(--ds-color-white);
+  --color-gray-50: var(--ds-color-gray-50);
+  --color-gray-100: var(--ds-color-gray-100);
+  --color-gray-200: var(--ds-color-gray-200);
+  --color-gray-300: var(--ds-color-gray-300);
+  --color-gray-400: var(--ds-color-gray-400);
+  --color-gray-500: var(--ds-color-gray-500);
+  --color-gray-600: var(--ds-color-gray-600);
+  --color-gray-700: var(--ds-color-gray-700);
+  --color-gray-800: var(--ds-color-gray-800);
+  --color-gray-900: var(--ds-color-gray-900);
+  --color-black: var(--ds-color-black);
+
+  /* Semantic colors: bg-surface-subtle, text-muted, border-divider, bg-primary ... */
+  --color-background: var(--ds-color-background);
   --color-surface: var(--ds-color-surface);
+  --color-surface-subtle: var(--ds-color-surface-subtle);
+  --color-fill: var(--ds-color-fill);
+  --color-divider: var(--ds-color-divider);
   --color-border: var(--ds-color-border);
-  --radius-md: var(--ds-radius-md);
+  --color-disabled: var(--ds-color-disabled);
+  --color-placeholder: var(--ds-color-placeholder);
+  --color-muted: var(--ds-color-text-muted);
+  --color-text: var(--ds-color-text);
+  --color-ink: var(--ds-color-ink);
+  --color-inverse: var(--ds-color-inverse);
+  --color-primary: var(--ds-color-primary);
+  --color-primary-hover: var(--ds-color-primary-hover);
+  --color-primary-contrast: var(--ds-color-primary-contrast);
+
+  /* Fonts: font-mono for titles, font-sans (default) for body */
+  --font-sans: var(--ds-font-text);
+  --font-mono: var(--ds-font-mono);
+
+  /* Spacing: Tailwind's numeric scale runs on the 4 px base (p-4 = 16px, gap-6 = 24px) */
+  --spacing: var(--ds-space-1);
   --spacing-ds-2: var(--ds-space-2);
   --spacing-ds-4: var(--ds-space-4);
-  --font-sans: var(--ds-font-family);
+  --spacing-control: var(--ds-control-height);
+
+  /* Shape: square corners and no shadows */
+  --radius-*: initial;
+  --radius-md: var(--ds-radius-md);
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --ease-ds: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Type scale: text-display, text-h1 ... text-caption (size, leading, tracking, weight) */
+  --text-display: 4.5rem;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.04em;
+  --text-display--font-weight: 500;
+  --text-h1: 3rem;
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h1--font-weight: 500;
+  --text-h2: 2rem;
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2--font-weight: 500;
+  --text-h3: 1.375rem;
+  --text-h3--line-height: 1.3;
+  --text-h3--font-weight: 500;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.6;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.33;
+  --text-label--letter-spacing: 0.08em;
+  --text-label--font-weight: 500;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.5;
+}
+
+@layer base {
+  html {
+    background-color: var(--ds-color-background);
+    color: var(--ds-color-ink);
+    font-family: var(--ds-font-text);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--ds-font-mono);
+  }
+}
+
+/* Monochrome photo treatment: <img class="photo"> */
+@utility photo {
+  filter: var(--ds-photo-filter);
+  border-radius: 0;
+}
+
+/* 2 px black ring with offset: focus-visible:focus-ring */
+@utility focus-ring {
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
 }
