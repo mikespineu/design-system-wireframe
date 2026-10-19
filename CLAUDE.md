@@ -14,6 +14,18 @@ Always do feature, fix, and refactor work in a git worktree. Never edit files di
 - When the work is merged or abandoned, remove the worktree (`git worktree remove .worktrees/<name>`) and delete the branch.
 - Never commit or push from the primary checkout unless the user explicitly asks.
 
+## Radix primitives (required)
+
+Use [Radix UI](https://www.radix-ui.com/primitives) (`radix-ui` package) for all primitive UI interaction. Do not hand-roll behavior Radix already provides.
+
+- Build interactive components (dialog, popover, dropdown menu, tooltip, select, tabs, accordion, checkbox, switch, slider, etc.) on top of Radix primitives. Radix owns focus management, keyboard navigation, ARIA attributes, and portal/layering.
+- Import from the unified package: `import { Dialog } from 'radix-ui'`. Do not add individual `@radix-ui/react-*` packages.
+- Radix primitives are unstyled. Style them with the design system's tokens (`--ds-*`) and classes; never rely on Radix Themes.
+- Wrap primitives in our own components and expose a narrow, typed API. Do not re-export raw Radix parts as the public API unless the wrapper adds nothing.
+- Use `asChild` for composition instead of wrapper elements, and forward refs and rest props to the underlying primitive.
+- Style state through Radix data attributes (`[data-state="open"]`, `[data-disabled]`, `[data-highlighted]`), not extra JS state.
+- Stories must cover keyboard and open/closed states. Tests must use `userEvent` for keyboard interaction and include a `jest-axe` check. Primitives that need browser APIs (`ResizeObserver`, `PointerEvent`, `scrollIntoView`) may need stubs in `jest.setup.ts`.
+
 ## Commands
 
 - `npm run storybook` – dev server on :6006
