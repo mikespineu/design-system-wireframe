@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* Expose design tokens as Tailwind utilities (bg-primary, p-ds-4, rounded-md, ...). */
+@theme inline {
+  --color-primary: var(--ds-color-primary);
+  --color-primary-contrast: var(--ds-color-primary-contrast);
+  --color-surface: var(--ds-color-surface);
+  --color-border: var(--ds-color-border);
+  --radius-md: var(--ds-radius-md);
+  --spacing-ds-2: var(--ds-space-2);
+  --spacing-ds-4: var(--ds-space-4);
+  --font-sans: var(--ds-font-family);
+}
