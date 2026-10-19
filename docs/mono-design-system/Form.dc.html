@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MONO/00 Example form</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#000000}a:hover{color:#595959}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid #000000;outline-offset:2px}
+input::placeholder,textarea::placeholder{color:#767676}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1500px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 64px">
+
+<header style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959; border-bottom: 1px solid #000000; padding-bottom: 24px">
+<span>MONO/00 — Patterns</span>
+<span>Example form · v0.1</span>
+</header>
+
+<div style="display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 96px; align-items: start">
+
+<aside style="display: flex; flex-direction: column; gap: 32px">
+<span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">Contact</span>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -0.03em">Start a conversation</h1>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #404040">Tell us what you are working on. We reply within [RESPONSE TIME].</p>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+<svg viewBox="0 0 400 500" style="display: block; width: 100%; height: auto" role="img" aria-label="Photo stand-in: concrete building facade with hard shadows">
+<defs><filter id="fg1"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter></defs>
+<rect width="400" height="500" fill="#EEEEEE"></rect>
+<rect x="50" y="80" width="214" height="420" fill="#C7C7C7"></rect>
+<rect x="264" y="160" width="96" height="340" fill="#767676"></rect>
+<rect x="78" y="120" width="38" height="54" fill="#404040"></rect>
+<rect x="142" y="120" width="38" height="54" fill="#404040"></rect>
+<rect x="206" y="120" width="38" height="54" fill="#404040"></rect>
+<rect x="78" y="214" width="38" height="54" fill="#404040"></rect>
+<rect x="142" y="214" width="38" height="54" fill="#404040"></rect>
+<rect x="206" y="214" width="38" height="54" fill="#404040"></rect>
+<rect x="78" y="308" width="38" height="54" fill="#404040"></rect>
+<rect x="142" y="308" width="38" height="54" fill="#404040"></rect>
+<rect x="206" y="308" width="38" height="54" fill="#404040"></rect>
+<polygon points="50,400 264,240 264,500 50,500" fill="#000000" opacity="0.55"></polygon>
+<rect width="400" height="500" filter="url(#fg1)" opacity="0.18"></rect>
+</svg>
+<figcaption style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Studio · [LOCATION]</figcaption>
+</figure>
+</aside>
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+
+<sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="display: flex; flex-direction: column; gap: 24px; padding: 48px; background: #EDF5EF; border: 1px solid #9CC7AB">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2E6B45" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-7"></path></svg>
+<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em; color: #2E6B45">Message sent</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #404040">Thanks, {{v.first}}. We will reply to {{v.email}}.</p>
+<button type="button" onClick="{{reset}}" style="align-self: flex-start; height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #FFFFFF; color: #000000; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; cursor: pointer">Send another</button>
+</div>
+</sc-if>
+
+<sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+<form noValidate="{{ true }}" onSubmit="{{submit}}" style="display: flex; flex-direction: column; gap: 32px">
+
+<sc-if value="{{showSummary}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="display: flex; gap: 12px; padding: 16px; border: 1px solid #E3AAA6; background: #FBEDEC">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3302B" stroke-width="1.75" aria-hidden="true" style="flex: none"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 700; font-size: 14px; color: #A3302B">{{errorCount}} fields need attention</strong><span style="font-size: 14px; line-height: 1.5; color: #262626">Fix the marked fields and send again.</span></div>
+</div>
+</sc-if>
+
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 24px">
+<legend style="padding: 0; margin-bottom: 24px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 22px">About you</legend>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="f-first" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">First name</label>
+<input id="f-first" type="text" autoComplete="given-name" value="{{v.first}}" onChange="{{on.first}}" aria-invalid="{{f.first.invalid}}" aria-describedby="f-first-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.first.border}}; border-radius: 0; background: {{f.first.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<sc-if value="{{f.first.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-first-e" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: enter your first name</span></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="f-last" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Last name</label>
+<input id="f-last" type="text" autoComplete="family-name" value="{{v.last}}" onChange="{{on.last}}" aria-invalid="{{f.last.invalid}}" aria-describedby="f-last-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.last.border}}; border-radius: 0; background: {{f.last.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<sc-if value="{{f.last.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-last-e" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: enter your last name</span></sc-if>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="f-email" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Email</label>
+<input id="f-email" type="email" autoComplete="email" placeholder="name@domain.com" value="{{v.email}}" onChange="{{on.email}}" aria-invalid="{{f.email.invalid}}" aria-describedby="f-email-h" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.email.border}}; border-radius: 0; background: {{f.email.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<sc-if value="{{f.email.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-email-h" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: enter a full email address</span></sc-if>
+<sc-if value="{{f.email.valid}}" hint-placeholder-val="{{ true }}"><span id="f-email-h" style="font-size: 13px; color: #595959">We only use this to reply.</span></sc-if>
+</div>
+</fieldset>
+
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 24px">
+<legend style="padding: 0; margin-bottom: 24px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 22px">Your request</legend>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="f-topic" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Topic</label>
+<select id="f-topic" value="{{v.topic}}" onChange="{{on.topic}}" aria-invalid="{{f.topic.invalid}}" aria-describedby="f-topic-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.topic.border}}; border-radius: 0; background: {{f.topic.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<option value="">Choose a topic</option>
+<option value="project">New project</option>
+<option value="print">Print order</option>
+<option value="press">Press</option>
+<option value="other">Other</option>
+</select>
+<sc-if value="{{f.topic.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-topic-e" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: choose a topic</span></sc-if>
+</div>
+<div role="radiogroup" aria-labelledby="f-reply-l" style="display: flex; flex-direction: column; gap: 8px">
+<span id="f-reply-l" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Reply by</span>
+<div style="display: flex; gap: 24px">
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px"><input type="radio" name="reply" value="email" checked="{{replyEmail}}" onChange="{{on.reply}}" style="width: 20px; height: 20px; margin: 0; accent-color: #000000">Email</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px"><input type="radio" name="reply" value="call" checked="{{replyCall}}" onChange="{{on.reply}}" style="width: 20px; height: 20px; margin: 0; accent-color: #000000">Call</label>
+</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<label for="f-msg" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Message</label>
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">{{msgCount}} / 500</span>
+</div>
+<textarea id="f-msg" rows="6" maxLength="500" placeholder="A few lines about the project" value="{{v.message}}" onChange="{{on.message}}" aria-invalid="{{f.message.invalid}}" aria-describedby="f-msg-h" style="box-sizing: border-box; padding: 12px; border: {{f.message.border}}; border-radius: 0; background: {{f.message.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 15px; line-height: 1.5; color: #000000; resize: vertical"></textarea>
+<sc-if value="{{f.message.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-msg-h" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: write at least 20 characters</span></sc-if>
+<sc-if value="{{f.message.valid}}" hint-placeholder-val="{{ true }}"><span id="f-msg-h" style="font-size: 13px; color: #595959">At least 20 characters.</span></sc-if>
+</div>
+</fieldset>
+
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 24px; border-top: 1px solid #E0E0E0">
+<label style="display: flex; align-items: flex-start; gap: 12px; min-height: 44px; font-size: 15px; line-height: 1.5"><input type="checkbox" checked="{{v.consent}}" onChange="{{on.consent}}" aria-invalid="{{f.consent.invalid}}" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #000000">I agree that my details are stored to answer this request. [LINK TO PRIVACY POLICY]</label>
+<sc-if value="{{f.consent.invalid}}" hint-placeholder-val="{{ false }}"><span style="padding-left: 32px; font-size: 13px; font-weight: 500; color: #A3302B">Error: consent is required to send</span></sc-if>
+</div>
+
+<div style="display: flex; gap: 16px; align-items: center">
+<button type="submit" style="height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #000000; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; cursor: pointer">Send message</button>
+<button type="button" onClick="{{reset}}" style="height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #FFFFFF; color: #000000; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; cursor: pointer">Clear</button>
+<span style="margin-left: auto; font-size: 13px; color: #595959">All fields required</span>
+</div>
+
+</form>
+</sc-if>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { v: this.empty(), touched: false, sent: false };
+}
+empty() {
+return { first: '', last: '', email: '', topic: '', reply: 'email', message: '', consent: false };
+}
+set(key, val) {
+this.setState({ v: Object.assign({}, this.state.v, { [key]: val }) });
+}
+errors(v) {
+return {
+first: !v.first.trim(),
+last: !v.last.trim(),
+email: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()),
+topic: !v.topic,
+message: v.message.trim().length < 20,
+consent: !v.consent
+};
+}
+renderVals() {
+const v = this.state.v;
+const touched = this.state.touched;
+const errs = this.errors(v);
+const f = {};
+let count = 0;
+Object.keys(errs).forEach((k) => {
+const bad = touched && errs[k];
+if (bad) count += 1;
+f[k] = {
+invalid: bad,
+valid: !bad,
+border: bad ? '2px solid #A3302B' : '1px solid #C7C7C7',
+bg: '#FFFFFF'
+};
+});
+const text = (k) => (e) => this.set(k, e.target.value);
+return {
+v: v,
+f: f,
+sent: this.state.sent,
+notSent: !this.state.sent,
+showSummary: count > 0,
+errorCount: count,
+msgCount: v.message.length,
+replyEmail: v.reply === 'email',
+replyCall: v.reply === 'call',
+on: {
+first: text('first'),
+last: text('last'),
+email: text('email'),
+topic: text('topic'),
+message: text('message'),
+reply: text('reply'),
+consent: (e) => this.set('consent', e.target.checked)
+},
+submit: (e) => {
+e.preventDefault();
+const bad = Object.values(this.errors(this.state.v)).some(Boolean);
+this.setState({ touched: true, sent: !bad });
+},
+reset: () => this.setState({ v: this.empty(), touched: false, sent: false })
+};
+}
+}
+</script>
+</body>
+</html>

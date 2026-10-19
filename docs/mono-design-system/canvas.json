@@ -5,12 +5,13 @@
   "launch": {"view": "canvas"},
   "pages": [],
   "boards": {
-    "Main.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 2400, "title": "Foundations"},
-    "Components.dc.html": {"x": 1520, "y": 0, "w": 1440, "h": 3000, "title": "Components"}
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 2640, "title": "Foundations"},
+    "Components.dc.html": {"x": 1520, "y": 0, "w": 1440, "h": 3000, "title": "Components"},
+    "Form.dc.html": {"x": 3040, "y": 0, "w": 1440, "h": 1500, "title": "Example form", "is_interactive": true}
   },
-  "order": ["Main.dc.html", "Components.dc.html"],
+  "order": ["Main.dc.html", "Components.dc.html", "Form.dc.html"],
   "notes": {
-    "heading": {"x": 0, "y": -300, "text": "MONO/00 — black, gray, white", "kind": "title1", "maxW": 2960}
+    "heading": {"x": 0, "y": -300, "text": "MONO/00 — black, gray, white", "kind": "title1", "maxW": 4480}
   },
   "designSystems": []
 }

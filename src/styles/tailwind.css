@@ -5,7 +5,7 @@
 /*
  * MONO/00 theme. Tailwind's default palette, radii and shadows are cleared,
  * so only on-system utilities exist: a class such as bg-blue-500, rounded-lg or
- * shadow-md generates no CSS.
+ * shadow-md generates no CSS. The only hues are the muted status colors.
  */
 @theme inline {
   /* Colors: bg-white, text-gray-600, border-gray-300, bg-black ... */
@@ -39,6 +39,17 @@
   --color-primary: var(--ds-color-primary);
   --color-primary-hover: var(--ds-color-primary-hover);
   --color-primary-contrast: var(--ds-color-primary-contrast);
+
+  /* Status: text-error, border-error-border, bg-success-bg ... */
+  --color-info: var(--ds-color-info);
+  --color-info-border: var(--ds-color-info-border);
+  --color-info-bg: var(--ds-color-info-bg);
+  --color-success: var(--ds-color-success);
+  --color-success-border: var(--ds-color-success-border);
+  --color-success-bg: var(--ds-color-success-bg);
+  --color-error: var(--ds-color-error);
+  --color-error-border: var(--ds-color-error-border);
+  --color-error-bg: var(--ds-color-error-bg);
 
   /* Fonts: font-mono for titles, font-sans (default) for body */
   --font-sans: var(--ds-font-text);

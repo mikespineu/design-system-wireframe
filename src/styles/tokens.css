@@ -31,6 +31,18 @@
   --ds-color-primary-hover: var(--ds-color-gray-800);
   --ds-color-primary-contrast: var(--ds-color-white);
 
+  /* Status: the only hue in the system, used for feedback only and always
+     paired with an icon and a label. fg passes 4.5:1 on white and on its bg. */
+  --ds-color-info: var(--ds-color-gray-700);
+  --ds-color-info-border: var(--ds-color-gray-300);
+  --ds-color-info-bg: var(--ds-color-gray-50);
+  --ds-color-success: #2e6b45;
+  --ds-color-success-border: #9cc7ab;
+  --ds-color-success-bg: #edf5ef;
+  --ds-color-error: #a3302b;
+  --ds-color-error-border: #e3aaa6;
+  --ds-color-error-bg: #fbedec;
+
   /* Typography: Red Hat Mono for titles, Red Hat Text for body */
   --ds-font-mono: 'Red Hat Mono', ui-monospace, monospace;
   --ds-font-text: 'Red Hat Text', system-ui, sans-serif;
