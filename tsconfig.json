@@ -13,5 +13,5 @@
     "noEmit": true,
     "types": ["jest", "@testing-library/jest-dom"]
   },
-  "include": ["src", ".storybook", "jest.setup.ts", "*.d.ts"]
+  "include": ["src", "test", ".storybook", "jest.setup.ts", "*.d.ts"]
 }
