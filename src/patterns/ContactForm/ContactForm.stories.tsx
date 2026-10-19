@@ -1,14 +1,24 @@
-import { useId, useState, type ChangeEvent, type FormEvent } from 'react';
+import {
+  useId,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+  type SelectHTMLAttributes,
+  type TextareaHTMLAttributes,
+} from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
+import { Alert } from '../../components/Alert';
 import { Button } from '../../components/Button';
 import { Icon } from '../../components/Icon';
+import { Field, TextField, useFieldControl } from '../../components/Input';
 
 /*
  * Example form layout from docs/mono-design-system (artboard "Example form").
- * Field components (Input, Select, Textarea, Checkbox, RadioGroup) are not built yet
- * (docs/COMPONENTS_TODO.md C3-C9), so the fields here are native elements styled with
- * token utilities. Swap them for the real components when those land.
+ * Text fields use the real TextField/Field. Select, Textarea, Checkbox and RadioGroup are not
+ * built yet (docs/COMPONENTS_TODO.md C3-C9), so those are native elements; select and textarea
+ * are wired to Field through useFieldControl so errors and hints behave like Input.
+ * Swap them for the real components when those land.
  */
 
 type Values = {
@@ -39,11 +49,19 @@ const labelClass = 'font-mono text-label uppercase';
 const controlClass =
   'box-border w-full border border-border bg-white px-3 text-body text-ink rounded-md ' +
   'placeholder:text-placeholder focus-visible:focus-ring ' +
-  'aria-invalid:border-2 aria-invalid:border-ink aria-invalid:bg-surface-subtle';
-const inputClass = `${controlClass} h-control`;
-const errorClass = 'text-caption font-medium';
-const hintClass = 'text-caption text-muted';
+  'aria-[invalid=true]:border-2 aria-[invalid=true]:border-error';
+const errorClass = 'flex items-center gap-1.5 text-caption font-medium text-error';
 const legendClass = 'mb-6 p-0 font-mono text-h3';
+
+/** Stand-ins until Select and Textarea exist; wired to the surrounding Field. */
+const NativeSelect = (props: SelectHTMLAttributes<HTMLSelectElement>) => {
+  const field = useFieldControl();
+  return <select {...field} {...props} className={`${controlClass} h-control`} />;
+};
+const NativeTextarea = (props: TextareaHTMLAttributes<HTMLTextAreaElement>) => {
+  const field = useFieldControl();
+  return <textarea {...field} {...props} className={`${controlClass} resize-y py-3 leading-normal`} />;
+};
 
 const Facade = () => {
   const filter = `grain-${useId().replace(/:/g, '')}`;
@@ -126,89 +144,53 @@ const ContactForm = () => {
           ) : (
             <form noValidate onSubmit={submit} className="flex flex-col gap-8">
               {errorCount > 0 && (
-                <div role="alert" className="flex gap-3 border-2 border-ink bg-surface-subtle p-4">
-                  <Icon name="warning" size={20} strokeWidth={2} className="flex-none" />
-                  <div className="flex flex-col gap-1">
-                    <strong className="font-mono text-sm font-bold">{errorCount} fields need attention</strong>
-                    <span className="text-sm text-gray-800">Fix the marked fields and send again.</span>
-                  </div>
-                </div>
+                <Alert severity="error" title={`${errorCount} fields need attention`}>
+                  Fix the marked fields and send again.
+                </Alert>
               )}
 
               <fieldset className="m-0 flex min-w-0 flex-col gap-6 border-0 p-0">
                 <legend className={legendClass}>About you</legend>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="f-first" className={labelClass}>First name</label>
-                    <input
-                      id="f-first"
-                      type="text"
-                      autoComplete="given-name"
-                      value={values.first}
-                      onChange={text('first')}
-                      aria-invalid={show('first')}
-                      aria-describedby="f-first-e"
-                      className={inputClass}
-                    />
-                    {show('first') && <span id="f-first-e" className={errorClass}>Error: enter your first name</span>}
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="f-last" className={labelClass}>Last name</label>
-                    <input
-                      id="f-last"
-                      type="text"
-                      autoComplete="family-name"
-                      value={values.last}
-                      onChange={text('last')}
-                      aria-invalid={show('last')}
-                      aria-describedby="f-last-e"
-                      className={inputClass}
-                    />
-                    {show('last') && <span id="f-last-e" className={errorClass}>Error: enter your last name</span>}
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="f-email" className={labelClass}>Email</label>
-                  <input
-                    id="f-email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="name@domain.com"
-                    value={values.email}
-                    onChange={text('email')}
-                    aria-invalid={show('email')}
-                    aria-describedby="f-email-h"
-                    className={inputClass}
+                  <TextField
+                    label="First name"
+                    autoComplete="given-name"
+                    value={values.first}
+                    onChange={text('first')}
+                    error={show('first') && 'enter your first name'}
                   />
-                  {show('email') ? (
-                    <span id="f-email-h" className={errorClass}>Error: enter a full email address</span>
-                  ) : (
-                    <span id="f-email-h" className={hintClass}>We only use this to reply.</span>
-                  )}
+                  <TextField
+                    label="Last name"
+                    autoComplete="family-name"
+                    value={values.last}
+                    onChange={text('last')}
+                    error={show('last') && 'enter your last name'}
+                  />
                 </div>
+                <TextField
+                  label="Email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="name@domain.com"
+                  value={values.email}
+                  onChange={text('email')}
+                  hint="We only use this to reply."
+                  error={show('email') && 'enter a full email address'}
+                />
               </fieldset>
 
               <fieldset className="m-0 flex min-w-0 flex-col gap-6 border-0 p-0">
                 <legend className={legendClass}>Your request</legend>
                 <div className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2">
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="f-topic" className={labelClass}>Topic</label>
-                    <select
-                      id="f-topic"
-                      value={values.topic}
-                      onChange={text('topic')}
-                      aria-invalid={show('topic')}
-                      aria-describedby="f-topic-e"
-                      className={inputClass}
-                    >
+                  <Field label="Topic" error={show('topic') && 'choose a topic'}>
+                    <NativeSelect value={values.topic} onChange={text('topic')}>
                       <option value="">Choose a topic</option>
                       <option value="project">New project</option>
                       <option value="print">Print order</option>
                       <option value="press">Press</option>
                       <option value="other">Other</option>
-                    </select>
-                    {show('topic') && <span id="f-topic-e" className={errorClass}>Error: choose a topic</span>}
-                  </div>
+                    </NativeSelect>
+                  </Field>
                   <div role="radiogroup" aria-labelledby="f-reply-l" className="flex flex-col gap-2">
                     <span id="f-reply-l" className={labelClass}>Reply by</span>
                     <div className="flex gap-6">
@@ -228,30 +210,26 @@ const ContactForm = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-baseline justify-between">
-                    <label htmlFor="f-msg" className={labelClass}>Message</label>
-                    <span className="font-mono text-label tracking-normal text-muted">
-                      {values.message.length} / {MESSAGE_MAX}
+                <Field
+                  label={
+                    <span className="flex items-baseline justify-between">
+                      <span>Message</span>
+                      <span className="font-mono text-label tracking-normal text-muted">
+                        {values.message.length} / {MESSAGE_MAX}
+                      </span>
                     </span>
-                  </div>
-                  <textarea
-                    id="f-msg"
+                  }
+                  hint={`At least ${MESSAGE_MIN} characters.`}
+                  error={show('message') && `write at least ${MESSAGE_MIN} characters`}
+                >
+                  <NativeTextarea
                     rows={6}
                     maxLength={MESSAGE_MAX}
                     placeholder="A few lines about the project"
                     value={values.message}
                     onChange={text('message')}
-                    aria-invalid={show('message')}
-                    aria-describedby="f-msg-h"
-                    className={`${controlClass} resize-y py-3 leading-normal`}
                   />
-                  {show('message') ? (
-                    <span id="f-msg-h" className={errorClass}>Error: write at least {MESSAGE_MIN} characters</span>
-                  ) : (
-                    <span id="f-msg-h" className={hintClass}>At least {MESSAGE_MIN} characters.</span>
-                  )}
-                </div>
+                </Field>
               </fieldset>
 
               <div className="flex flex-col gap-2 border-t border-divider pt-6">
@@ -267,7 +245,7 @@ const ContactForm = () => {
                   I agree that my details are stored to answer this request. [LINK TO PRIVACY POLICY]
                 </label>
                 {show('consent') && (
-                  <span id="f-consent-e" className={`${errorClass} pl-8`}>Error: consent is required to send</span>
+                  <span id="f-consent-e" className={`${errorClass} pl-8`}><Icon name="alert" size={14} strokeWidth={2} />Error: consent is required to send</span>
                 )}
               </div>
 
