@@ -76,7 +76,7 @@ export const Field = ({ label, hint, error, disabled, required, id, className, c
           </span>
         )}
         {error && (
-          <span id={errorId} className="flex items-center gap-1.5 text-caption font-medium text-ink">
+          <span id={errorId} className="flex items-center gap-1.5 text-caption font-medium text-error">
             <Icon name="alert" size={14} strokeWidth={2} />
             <span>
               <span className="sr-only">Error: </span>
@@ -90,14 +90,14 @@ export const Field = ({ label, hint, error, disabled, required, id, className, c
 };
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  /** Mark invalid without a Field (Field sets this for you). Heavier border + gray fill. */
+  /** Mark invalid without a Field (Field sets this for you). 2px error border. */
   invalid?: boolean;
 }
 
 const inputBase =
   'box-border h-control w-full rounded-md border border-border bg-white px-3 font-sans text-body text-ink ' +
   'placeholder:text-placeholder transition-colors duration-[120ms] ease-ds focus-visible:focus-ring ' +
-  'aria-[invalid=true]:border-2 aria-[invalid=true]:border-ink aria-[invalid=true]:bg-gray-50 ' +
+  'aria-[invalid=true]:border-2 aria-[invalid=true]:border-error ' +
   'disabled:cursor-not-allowed disabled:border-divider disabled:bg-gray-50 disabled:text-placeholder';
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(({ invalid, className, ...rest }, ref) => {

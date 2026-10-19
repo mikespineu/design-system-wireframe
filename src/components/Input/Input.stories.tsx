@@ -14,7 +14,7 @@ import { Field, Input, TextField } from './Input';
  * ```
  *
  * - `label` renders a Radix `Label` bound with `htmlFor` to a `useId()` id (override with `id`).
- * - `error` sets `aria-invalid`, adds an alert icon and a message (prefixed with a screen-reader "Error:"). Never color.
+ * - `error` sets `aria-invalid`, adds an alert icon and a message (prefixed with a screen-reader "Error:"), plus a 2px error border and error-colored message. Never color alone.
  * - `hint` and `error` get ids and are joined into `aria-describedby`.
  * - `disabled` and `required` flow to the control and label.
  * - Controls read the wiring with `useFieldControl()` (returns `{ id, aria-invalid, aria-describedby, aria-required, disabled }`
