@@ -6,6 +6,9 @@ dist
 .DS_Store
 .idea
 .worktrees
-
-Close
 .vercel
+
+# Local env files (secrets). Commit .env.example only.
+.env
+.env.*
+!.env.example
