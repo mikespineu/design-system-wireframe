@@ -1,0 +1,14 @@
+.ds-button {
+  font-family: var(--ds-font-family);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border-radius: var(--ds-radius-md);
+  border: 1px solid var(--ds-color-border);
+  background: var(--ds-color-surface);
+  cursor: pointer;
+}
+.ds-button--primary {
+  background: var(--ds-color-primary);
+  color: var(--ds-color-primary-contrast);
+  border-color: var(--ds-color-primary);
+}
+.ds-button:disabled { opacity: 0.5; cursor: not-allowed; }
