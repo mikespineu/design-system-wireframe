@@ -23,7 +23,7 @@ a{color:#000000}a:hover{color:#595959}
 <span>Components · v0.1</span>
 </div>
 <h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Components</h1>
-<p style="margin: 0; max-width: 640px; font-size: 18px; line-height: 1.6; color: #404040">Black marks action. Grays mark structure and state. Every control is square-cornered, 44 px tall at default size, with a 2 px black focus ring.</p>
+<p style="margin: 0; max-width: 640px; font-size: 18px; line-height: 1.6; color: #404040">Black marks action. Grays mark structure and state. Muted green and red mark feedback only. Every control is square-cornered, 44 px tall at default size, with a 2 px black focus ring.</p>
 </header>
 
 <section style="display: flex; flex-direction: column; gap: 32px">
@@ -75,8 +75,8 @@ a{color:#000000}a:hover{color:#595959}
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <label for="in3" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Email</label>
-<input id="in3" type="email" value="ada@" aria-invalid="true" aria-describedby="in3e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 2px solid #000000; border-radius: 0; background: #F7F7F7; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
-<span id="in3e" style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: #000000"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Error: enter a full email address</span>
+<input id="in3" type="email" value="ada@" aria-invalid="true" aria-describedby="in3e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 2px solid #A3302B; border-radius: 0; background: #FFFFFF; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<span id="in3e" style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: #A3302B"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Error: enter a full email address</span>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <label for="in4" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #767676">Email</label>
@@ -134,6 +134,8 @@ a{color:#000000}a:hover{color:#595959}
 <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; background: #000000; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-size: 12px">New</span>
 <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; background: #EEEEEE; color: #262626; font-family: 'Red Hat Mono', monospace; font-size: 12px">Draft</span>
 <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border: 1px solid #000000; color: #000000; font-family: 'Red Hat Mono', monospace; font-size: 12px">Archived</span>
+<span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border: 1px solid #9CC7AB; background: #EDF5EF; color: #2E6B45; font-family: 'Red Hat Mono', monospace; font-size: 12px">Published</span>
+<span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border: 1px solid #E3AAA6; background: #FBEDEC; color: #A3302B; font-family: 'Red Hat Mono', monospace; font-size: 12px">Failed</span>
 <span style="display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 4px 0 10px; border: 1px solid #C7C7C7; color: #262626; font-family: 'Red Hat Mono', monospace; font-size: 12px">landscape<button type="button" aria-label="Remove landscape" style="width: 22px; height: 22px; padding: 0; border: 0; background: transparent; color: #595959; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span>
 <span style="display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; box-sizing: border-box; background: #000000; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-size: 11px; font-weight: 500">12</span>
 </div>
@@ -226,23 +228,23 @@ a{color:#000000}a:hover{color:#595959}
 </div>
 </article>
 <div style="display: flex; flex-direction: column; gap: 16px">
-<div role="status" style="display: flex; gap: 12px; padding: 16px; border: 1px solid #000000; background: #FFFFFF">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="10"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>
-<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px">Info</strong><span style="font-size: 14px; line-height: 1.5; color: #404040">New frames were added to the archive.</span></div>
+<div role="status" style="display: flex; gap: 12px; padding: 16px; border: 1px solid #C7C7C7; background: #F7F7F7">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#404040" stroke-width="1.5" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="10"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; color: #404040">Info</strong><span style="font-size: 14px; line-height: 1.5; color: #404040">New frames were added to the archive.</span></div>
 </div>
-<div role="status" style="display: flex; gap: 12px; padding: 16px; background: #EEEEEE">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" aria-hidden="true" style="flex: none"><path d="M5 12l5 5 9-10"></path></svg>
-<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px">Saved</strong><span style="font-size: 14px; line-height: 1.5; color: #404040">Your changes are stored.</span></div>
+<div role="status" style="display: flex; gap: 12px; padding: 16px; border: 1px solid #9CC7AB; background: #EDF5EF">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2E6B45" stroke-width="1.75" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-7"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; color: #2E6B45">Saved</strong><span style="font-size: 14px; line-height: 1.5; color: #262626">Your changes are stored.</span></div>
 </div>
-<div role="alert" style="display: flex; gap: 12px; padding: 16px; border: 2px solid #000000; background: #F7F7F7">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" aria-hidden="true" style="flex: none"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg>
-<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 700; font-size: 14px">Error</strong><span style="font-size: 14px; line-height: 1.5; color: #262626">Upload failed. Check the file and try again.</span></div>
+<div role="alert" style="display: flex; gap: 12px; padding: 16px; border: 1px solid #E3AAA6; background: #FBEDEC">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3302B" stroke-width="1.75" aria-hidden="true" style="flex: none"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 700; font-size: 14px; color: #A3302B">Error</strong><span style="font-size: 14px; line-height: 1.5; color: #262626">Upload failed. Check the file and try again.</span></div>
 </div>
 <div style="display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: #000000; color: #FFFFFF">
 <span style="flex: 1; font-size: 14px">Frame moved to Archive</span>
 <button type="button" style="height: 32px; padding: 0 8px; border: 0; background: transparent; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer">Undo</button>
 </div>
-<span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Severity is shown by weight, border and icon — never by color.</span>
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Status color always comes with an icon and a label — never color alone.</span>
 </div>
 </section>
 
