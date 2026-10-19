@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MONO/00 Components</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#000000}a:hover{color:#595959}
+</style>
+</helmet>
+<div style="width: 1440px; height: 3000px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>MONO/00 — Design System</span>
+<span>Components · v0.1</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Components</h1>
+<p style="margin: 0; max-width: 640px; font-size: 18px; line-height: 1.6; color: #404040">Black marks action. Grays mark structure and state. Every control is square-cornered, 44 px tall at default size, with a 2 px black focus ring.</p>
+</header>
+
+<section style="display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; align-items: baseline; gap: 24px">
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">01</span>
+<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Buttons</h2>
+</div>
+<div style="display: grid; grid-template-columns: 160px repeat(4, minmax(0, 1fr)); gap: 24px; align-items: center; font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">
+<span></span><span>Default</span><span>Hover</span><span>Focus</span><span>Disabled</span>
+<span>Primary</span>
+<button type="button" style="height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #000000; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; cursor: pointer; justify-self: start">Continue</button>
+<button type="button" style="height: 44px; padding: 0 24px; border: 1px solid #262626; border-radius: 0; background: #262626; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; cursor: pointer; justify-self: start">Continue</button>
+<button type="button" style="height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #000000; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; outline: 2px solid #000000; outline-offset: 2px; cursor: pointer; justify-self: start">Continue</button>
+<button type="button" disabled style="height: 44px; padding: 0 24px; border: 1px solid #E0E0E0; border-radius: 0; background: #E0E0E0; color: #767676; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; justify-self: start">Continue</button>
+<span>Secondary</span>
+<button type="button" style="height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #FFFFFF; color: #000000; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; cursor: pointer; justify-self: start">Cancel</button>
+<button type="button" style="height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #EEEEEE; color: #000000; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; cursor: pointer; justify-self: start">Cancel</button>
+<button type="button" style="height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #FFFFFF; color: #000000; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; outline: 2px solid #000000; outline-offset: 2px; cursor: pointer; justify-self: start">Cancel</button>
+<button type="button" disabled style="height: 44px; padding: 0 24px; border: 1px solid #C7C7C7; border-radius: 0; background: #FFFFFF; color: #767676; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; justify-self: start">Cancel</button>
+<span>Ghost</span>
+<button type="button" style="height: 44px; padding: 0 16px; border: 1px solid transparent; border-radius: 0; background: transparent; color: #000000; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; justify-self: start">Learn more</button>
+<button type="button" style="height: 44px; padding: 0 16px; border: 1px solid transparent; border-radius: 0; background: #EEEEEE; color: #000000; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; justify-self: start">Learn more</button>
+<button type="button" style="height: 44px; padding: 0 16px; border: 1px solid transparent; border-radius: 0; background: transparent; color: #000000; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; outline: 2px solid #000000; outline-offset: 2px; cursor: pointer; justify-self: start">Learn more</button>
+<button type="button" disabled style="height: 44px; padding: 0 16px; border: 1px solid transparent; border-radius: 0; background: transparent; color: #767676; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; justify-self: start">Learn more</button>
+<span>Icon</span>
+<button type="button" aria-label="Add" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #000000; border-radius: 0; background: #FFFFFF; color: #000000; cursor: pointer; justify-self: start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"></path></svg></button>
+<button type="button" aria-label="Add" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #000000; border-radius: 0; background: #EEEEEE; color: #000000; cursor: pointer; justify-self: start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"></path></svg></button>
+<button type="button" aria-label="Add" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #000000; border-radius: 0; background: #FFFFFF; color: #000000; outline: 2px solid #000000; outline-offset: 2px; cursor: pointer; justify-self: start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"></path></svg></button>
+<button type="button" aria-label="Add" disabled style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #C7C7C7; border-radius: 0; background: #FFFFFF; color: #A3A3A3; justify-self: start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"></path></svg></button>
+</div>
+</section>
+
+<section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px">
+<div style="display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; align-items: baseline; gap: 24px">
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">02</span>
+<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Inputs</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="in1" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Email</label>
+<input id="in1" type="email" placeholder="name@domain.com" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #C7C7C7; border-radius: 0; background: #FFFFFF; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<span style="font-size: 13px; color: #595959">Default</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="in2" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Email</label>
+<input id="in2" type="email" value="ada@studio" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #000000; border-radius: 0; background: #FFFFFF; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000; outline: 2px solid #000000; outline-offset: 2px">
+<span style="font-size: 13px; color: #595959">Focus</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="in3" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Email</label>
+<input id="in3" type="email" value="ada@" aria-invalid="true" aria-describedby="in3e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 2px solid #000000; border-radius: 0; background: #F7F7F7; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<span id="in3e" style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: #000000"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Error: enter a full email address</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="in4" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #767676">Email</label>
+<input id="in4" type="email" disabled placeholder="Unavailable" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #E0E0E0; border-radius: 0; background: #F7F7F7; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #767676">
+<span style="font-size: 13px; color: #595959">Disabled</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="in5" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Plan</label>
+<select id="in5" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #C7C7C7; border-radius: 0; background: #FFFFFF; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<option>Studio</option>
+<option>Team</option>
+</select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="in6" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Search</label>
+<div style="display: flex; align-items: center; gap: 8px; height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #C7C7C7; background: #FFFFFF; color: #595959">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+<input id="in6" type="search" placeholder="Search archive" style="flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; grid-column: 1 / -1">
+<label for="in7" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Message</label>
+<textarea id="in7" rows="3" placeholder="Write something short" style="box-sizing: border-box; padding: 12px; border: 1px solid #C7C7C7; border-radius: 0; background: #FFFFFF; font-family: 'Red Hat Text', sans-serif; font-size: 15px; line-height: 1.5; color: #000000; resize: vertical"></textarea>
+</div>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; align-items: baseline; gap: 24px">
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">03</span>
+<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Selection</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 12px">
+<legend style="padding: 0; margin-bottom: 12px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Checkbox</legend>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px"><input type="checkbox" checked style="width: 20px; height: 20px; margin: 0; accent-color: #000000">Grayscale</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; accent-color: #000000">Grain</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px; color: #767676"><input type="checkbox" disabled style="width: 20px; height: 20px; margin: 0; accent-color: #000000">Color</label>
+</fieldset>
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 12px">
+<legend style="padding: 0; margin-bottom: 12px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Radio</legend>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px"><input type="radio" name="crop" checked style="width: 20px; height: 20px; margin: 0; accent-color: #000000">4:5</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px"><input type="radio" name="crop" style="width: 20px; height: 20px; margin: 0; accent-color: #000000">1:1</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px"><input type="radio" name="crop" style="width: 20px; height: 20px; margin: 0; accent-color: #000000">16:9</label>
+</fieldset>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="margin-bottom: 12px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Switch</span>
+<button type="button" role="switch" aria-checked="true" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0; border: 0; background: transparent; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000; cursor: pointer"><span style="width: 40px; height: 22px; box-sizing: border-box; padding: 2px; background: #000000; display: flex; justify-content: flex-end"><span style="width: 18px; height: 18px; background: #FFFFFF"></span></span>Notifications</button>
+<button type="button" role="switch" aria-checked="false" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0; border: 0; background: transparent; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000; cursor: pointer"><span style="width: 40px; height: 22px; box-sizing: border-box; padding: 2px; background: #FFFFFF; border: 1px solid #767676; display: flex; justify-content: flex-start"><span style="width: 16px; height: 16px; background: #767676"></span></span>Autoplay</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Tags &amp; badges</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; background: #000000; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-size: 12px">New</span>
+<span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; background: #EEEEEE; color: #262626; font-family: 'Red Hat Mono', monospace; font-size: 12px">Draft</span>
+<span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border: 1px solid #000000; color: #000000; font-family: 'Red Hat Mono', monospace; font-size: 12px">Archived</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 4px 0 10px; border: 1px solid #C7C7C7; color: #262626; font-family: 'Red Hat Mono', monospace; font-size: 12px">landscape<button type="button" aria-label="Remove landscape" style="width: 22px; height: 22px; padding: 0; border: 0; background: transparent; color: #595959; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span>
+<span style="display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; box-sizing: border-box; background: #000000; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-size: 11px; font-weight: 500">12</span>
+</div>
+</div>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; align-items: baseline; gap: 24px">
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">04</span>
+<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Navigation</h2>
+</div>
+<nav aria-label="Primary" style="display: flex; align-items: center; gap: 40px; height: 64px; padding: 0 24px; border-top: 1px solid #000000; border-bottom: 1px solid #000000">
+<a href="#" style="font-family: 'Red Hat Mono', monospace; font-weight: 700; font-size: 16px; text-decoration: none; color: #000000">MONO/00</a>
+<div style="display: flex; gap: 32px; font-size: 15px">
+<a href="#" aria-current="page" style="color: #000000; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px">Work</a>
+<a href="#" style="color: #595959; text-decoration: none">Archive</a>
+<a href="#" style="color: #595959; text-decoration: none">Journal</a>
+<a href="#" style="color: #595959; text-decoration: none">About</a>
+</div>
+<a href="#" style="margin-left: auto; display: inline-flex; align-items: center; height: 40px; padding: 0 20px; background: #000000; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; text-decoration: none">Contact</a>
+</nav>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Tabs</span>
+<div role="tablist" aria-label="View" style="display: flex; border-bottom: 1px solid #E0E0E0">
+<button type="button" role="tab" aria-selected="true" style="height: 44px; padding: 0 16px; border: 0; border-bottom: 2px solid #000000; margin-bottom: -1px; background: transparent; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; color: #000000; cursor: pointer">Grid</button>
+<button type="button" role="tab" aria-selected="false" style="height: 44px; padding: 0 16px; border: 0; background: transparent; font-family: 'Red Hat Mono', monospace; font-size: 14px; color: #595959; cursor: pointer">List</button>
+<button type="button" role="tab" aria-selected="false" style="height: 44px; padding: 0 16px; border: 0; background: transparent; font-family: 'Red Hat Mono', monospace; font-size: 14px; color: #595959; cursor: pointer">Map</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Breadcrumb</span>
+<nav aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 8px; height: 44px; font-family: 'Red Hat Mono', monospace; font-size: 13px">
+<a href="#" style="color: #595959">Archive</a><span aria-hidden="true" style="color: #A3A3A3">/</span><a href="#" style="color: #595959">2026</a><span aria-hidden="true" style="color: #A3A3A3">/</span><span aria-current="page" style="color: #000000">Coastline</span>
+</nav>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Pagination</span>
+<nav aria-label="Pagination" style="display: flex; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 14px">
+<a href="#" aria-label="Previous page" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #C7C7C7; color: #000000"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></a>
+<a href="#" aria-current="page" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: #000000; color: #FFFFFF; text-decoration: none">1</a>
+<a href="#" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #000000; text-decoration: none">2</a>
+<a href="#" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #000000; text-decoration: none">3</a>
+<a href="#" aria-label="Next page" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #C7C7C7; color: #000000"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+</nav>
+</div>
+</div>
+</section>
+
+<section style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr); gap: 32px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 32px; grid-column: 1 / -1">
+<div style="display: flex; align-items: baseline; gap: 24px">
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">05</span>
+<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Cards &amp; feedback</h2>
+</div>
+</div>
+<article style="display: flex; flex-direction: column; border: 1px solid #E0E0E0">
+<svg viewBox="0 0 400 260" style="display: block; width: 100%; height: auto" role="img" aria-label="Photo stand-in: horizon with low sun over hills">
+<defs><filter id="cg1"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter></defs>
+<rect width="400" height="260" fill="#D4D4D4"></rect>
+<circle cx="260" cy="110" r="38" fill="#F7F7F7"></circle>
+<path d="M0 170 C 90 140 170 160 250 148 C 320 138 360 154 400 148 L400 260 L0 260 Z" fill="#8C8C8C"></path>
+<path d="M0 200 C 110 180 220 210 400 188 L400 260 L0 260 Z" fill="#404040"></path>
+<path d="M0 232 C 130 222 270 244 400 228 L400 260 L0 260 Z" fill="#141414"></path>
+<rect width="400" height="260" filter="url(#cg1)" opacity="0.18"></rect>
+</svg>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 20px">
+<span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">Series · 12 frames</span>
+<h3 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 22px; line-height: 1.3">Coastline</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #404040">[Short description of the series.]</p>
+<a href="#" style="margin-top: 8px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; color: #000000; text-underline-offset: 4px">View series →</a>
+</div>
+</article>
+<article style="display: flex; flex-direction: column; background: #141414; color: #FFFFFF">
+<svg viewBox="0 0 400 260" style="display: block; width: 100%; height: auto" role="img" aria-label="Photo stand-in: portrait silhouette with rim light">
+<defs><filter id="cg2"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter></defs>
+<rect width="400" height="260" fill="#A3A3A3"></rect>
+<rect width="160" height="260" fill="#BDBDBD"></rect>
+<circle cx="200" cy="105" r="44" fill="#E0E0E0"></circle>
+<circle cx="205" cy="107" r="43" fill="#141414"></circle>
+<path d="M110 260 C 118 190 160 165 205 163 C 255 165 290 190 300 260 Z" fill="#141414"></path>
+<rect width="400" height="260" filter="url(#cg2)" opacity="0.18"></rect>
+</svg>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 20px">
+<span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #C7C7C7">Inverse card</span>
+<h3 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 22px; line-height: 1.3">Portraits</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #E0E0E0">[Short description of the series.]</p>
+<a href="#" style="margin-top: 8px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; color: #FFFFFF; text-underline-offset: 4px">View series →</a>
+</div>
+</article>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div role="status" style="display: flex; gap: 12px; padding: 16px; border: 1px solid #000000; background: #FFFFFF">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="10"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px">Info</strong><span style="font-size: 14px; line-height: 1.5; color: #404040">New frames were added to the archive.</span></div>
+</div>
+<div role="status" style="display: flex; gap: 12px; padding: 16px; background: #EEEEEE">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" aria-hidden="true" style="flex: none"><path d="M5 12l5 5 9-10"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px">Saved</strong><span style="font-size: 14px; line-height: 1.5; color: #404040">Your changes are stored.</span></div>
+</div>
+<div role="alert" style="display: flex; gap: 12px; padding: 16px; border: 2px solid #000000; background: #F7F7F7">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" aria-hidden="true" style="flex: none"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 700; font-size: 14px">Error</strong><span style="font-size: 14px; line-height: 1.5; color: #262626">Upload failed. Check the file and try again.</span></div>
+</div>
+<div style="display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: #000000; color: #FFFFFF">
+<span style="flex: 1; font-size: 14px">Frame moved to Archive</span>
+<button type="button" style="height: 32px; padding: 0 8px; border: 0; background: transparent; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer">Undo</button>
+</div>
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Severity is shown by weight, border and icon — never by color.</span>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; align-items: baseline; gap: 24px">
+<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">06</span>
+<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Table</h2>
+</div>
+<table style="width: 100%; border-collapse: collapse; font-size: 15px">
+<thead>
+<tr style="border-bottom: 1px solid #000000">
+<th scope="col" style="text-align: left; height: 44px; padding: 0 16px 0 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Series</th>
+<th scope="col" style="text-align: left; height: 44px; padding: 0 16px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Status</th>
+<th scope="col" style="text-align: right; height: 44px; padding: 0 16px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Frames</th>
+<th scope="col" style="text-align: right; height: 44px; padding: 0 0 0 16px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid #E0E0E0"><td style="height: 52px; padding: 0 16px 0 0">Coastline</td><td style="padding: 0 16px"><span style="display: inline-flex; align-items: center; height: 24px; padding: 0 8px; background: #000000; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-size: 12px">Live</span></td><td style="padding: 0 16px; text-align: right; font-family: 'Red Hat Mono', monospace">12</td><td style="padding: 0 0 0 16px; text-align: right; font-family: 'Red Hat Mono', monospace; color: #595959">[DATE]</td></tr>
+<tr style="border-bottom: 1px solid #E0E0E0; background: #F7F7F7"><td style="height: 52px; padding: 0 16px 0 0">Portraits</td><td style="padding: 0 16px"><span style="display: inline-flex; align-items: center; height: 24px; padding: 0 8px; background: #EEEEEE; color: #262626; font-family: 'Red Hat Mono', monospace; font-size: 12px">Draft</span></td><td style="padding: 0 16px; text-align: right; font-family: 'Red Hat Mono', monospace">8</td><td style="padding: 0 0 0 16px; text-align: right; font-family: 'Red Hat Mono', monospace; color: #595959">[DATE]</td></tr>
+<tr style="border-bottom: 1px solid #E0E0E0"><td style="height: 52px; padding: 0 16px 0 0">Concrete</td><td style="padding: 0 16px"><span style="display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border: 1px solid #000000; font-family: 'Red Hat Mono', monospace; font-size: 12px">Archived</span></td><td style="padding: 0 16px; text-align: right; font-family: 'Red Hat Mono', monospace">20</td><td style="padding: 0 0 0 16px; text-align: right; font-family: 'Red Hat Mono', monospace; color: #595959">[DATE]</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3000}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

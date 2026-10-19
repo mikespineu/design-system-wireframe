@@ -1,10 +1,61 @@
+/* MONO/00 design tokens. Spec: docs/mono-design-system/README.md */
 :root {
-  --ds-color-primary: #2563eb;
-  --ds-color-primary-contrast: #ffffff;
-  --ds-color-surface: #ffffff;
-  --ds-color-border: #d1d5db;
-  --ds-radius-md: 8px;
+  /* Gray palette: white ground, gray accents, black ink. No hue. */
+  --ds-color-white: #ffffff;
+  --ds-color-gray-50: #f7f7f7;
+  --ds-color-gray-100: #eeeeee;
+  --ds-color-gray-200: #e0e0e0;
+  --ds-color-gray-300: #c7c7c7;
+  --ds-color-gray-400: #a3a3a3;
+  --ds-color-gray-500: #767676;
+  --ds-color-gray-600: #595959;
+  --ds-color-gray-700: #404040;
+  --ds-color-gray-800: #262626;
+  --ds-color-gray-900: #141414;
+  --ds-color-black: #000000;
+
+  /* Semantic roles */
+  --ds-color-background: var(--ds-color-white);
+  --ds-color-surface: var(--ds-color-white);
+  --ds-color-surface-subtle: var(--ds-color-gray-50);
+  --ds-color-fill: var(--ds-color-gray-100);
+  --ds-color-divider: var(--ds-color-gray-200);
+  --ds-color-border: var(--ds-color-gray-300);
+  --ds-color-disabled: var(--ds-color-gray-400);
+  --ds-color-placeholder: var(--ds-color-gray-500);
+  --ds-color-text-muted: var(--ds-color-gray-600);
+  --ds-color-text: var(--ds-color-gray-700);
+  --ds-color-ink: var(--ds-color-black);
+  --ds-color-inverse: var(--ds-color-gray-900);
+  --ds-color-primary: var(--ds-color-black);
+  --ds-color-primary-hover: var(--ds-color-gray-800);
+  --ds-color-primary-contrast: var(--ds-color-white);
+
+  /* Typography: Red Hat Mono for titles, Red Hat Text for body */
+  --ds-font-mono: 'Red Hat Mono', ui-monospace, monospace;
+  --ds-font-text: 'Red Hat Text', system-ui, sans-serif;
+  --ds-font-family: var(--ds-font-text);
+
+  /* Spacing: 4 px base */
+  --ds-space-1: 4px;
   --ds-space-2: 8px;
+  --ds-space-3: 12px;
   --ds-space-4: 16px;
-  --ds-font-family: system-ui, sans-serif;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-24: 96px;
+
+  /* Shape & line: square corners, no shadows, depth from borders and fills */
+  --ds-radius: 0;
+  --ds-radius-md: var(--ds-radius);
+  --ds-border-width: 1px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* Photography: always monochrome */
+  --ds-photo-filter: grayscale(1) contrast(1.1);
 }
