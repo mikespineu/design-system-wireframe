@@ -17,11 +17,11 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'px-6 border-primary bg-primary text-primary-contrast enabled:hover:border-gray-800 enabled:hover:bg-primary-hover ' +
+    'px-6 border-primary bg-primary text-primary-contrast enabled:hover:border-primary-hover enabled:hover:bg-primary-hover ' +
     'disabled:border-divider disabled:bg-divider disabled:text-placeholder',
   secondary:
-    'px-6 border-ink bg-white text-ink enabled:hover:bg-fill ' +
-    'disabled:border-border disabled:bg-white disabled:text-placeholder',
+    'px-6 border-ink bg-surface text-ink enabled:hover:bg-fill ' +
+    'disabled:border-border disabled:bg-surface disabled:text-placeholder',
   ghost:
     'px-4 border-transparent bg-transparent text-ink underline underline-offset-4 enabled:hover:bg-fill ' +
     'disabled:text-placeholder',

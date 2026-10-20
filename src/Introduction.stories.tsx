@@ -42,7 +42,7 @@ const Frame = ({ children, className = '' }: { children: React.ReactNode; classN
 );
 
 const WireframeDemo = () => (
-  <div className="border border-ink bg-white p-6 md:p-8">
+  <div className="border border-ink bg-surface p-6 md:p-8">
     <Breadcrumb items={[{ label: 'Projects', href: '#' }, { label: 'Launch plan' }]} />
     <div className="mt-6 flex flex-wrap items-center gap-3">
       <h2 className="text-h2 text-ink">Launch plan</h2>
@@ -66,7 +66,7 @@ const WireframeDemo = () => (
 
 export const Intro: Story = {
   render: () => (
-    <main className="bg-white font-sans text-text">
+    <main className="bg-surface font-sans text-text">
       <Frame>
         <div className="py-16 md:py-24">
           <p className="font-mono text-body text-muted">Design System Wireframe</p>
@@ -134,7 +134,7 @@ export const Intro: Story = {
             </ul>
           </div>
           <div>
-            <pre className="m-0 overflow-x-auto border border-ink bg-gray-50 p-6 font-mono text-caption leading-6 text-ink">
+            <pre className="m-0 overflow-x-auto border border-ink bg-surface-subtle p-6 font-mono text-caption leading-6 text-ink">
               <code>{install}</code>
             </pre>
             <h3 className="mt-10 text-h3 text-ink">Components</h3>

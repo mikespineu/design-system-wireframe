@@ -13,8 +13,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Theming
 
-- [ ] **DS-1 Theming infrastructure with a default theme.** Make themes switchable (e.g. `data-theme` on a root element) and register the current gray Wireframe tokens in `src/styles/tokens.css` as the `default` theme. Components keep reading semantic `--ds-*` roles only, so no component changes should be needed.
-  - type: build · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-1 Theming infrastructure with a default theme.** Make themes switchable (e.g. `data-theme` on a root element) and register the current gray Wireframe tokens in `src/styles/tokens.css` as the `default` theme. Components keep reading semantic `--ds-*` roles only, so no component changes should be needed.
+  - type: build · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - Themes switch via `data-theme` on a root element
     - Current Wireframe tokens are registered as the `default` theme in `src/styles/tokens.css`
@@ -102,4 +102,5 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-1** Theming infrastructure with a default theme — https://github.com/mikespineu/design-system-wireframe/pull/31
 - [x] **DS-3 Textarea — design.** [PR #27](https://github.com/mikespineu/design-system-wireframe/pull/27)

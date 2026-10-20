@@ -34,6 +34,7 @@
   --color-placeholder: var(--ds-color-placeholder);
   --color-muted: var(--ds-color-text-muted);
   --color-text: var(--ds-color-text);
+  --color-text-strong: var(--ds-color-text-strong);
   --color-ink: var(--ds-color-ink);
   --color-inverse: var(--ds-color-inverse);
   --color-primary: var(--ds-color-primary);
