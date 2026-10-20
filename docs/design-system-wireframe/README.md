@@ -17,14 +17,16 @@ Live canvas: https://claude.ai/artifact/4R5XwSAJ1Hj8gTqgLdwTmK
 
 The roadmap for this system is built by the [software factory](../factory/README.md). To see what's in progress, what needs you, and what's ready to start:
 
-- In Claude Code: type `/factory:status` (add a task ID, e.g. `/factory:status DS-4`, to also see that task's timeline and notes).
-- From a terminal, in the repo:
+- **Live (refreshes every 10 s):** from a terminal in the repo, run
 
   ```bash
-  node factory/plugin/skills/status/scripts/status-page.mjs --open
+  npm run factory:status
   ```
 
-Both write `.factory/status.html` (gitignored) and open it in the browser. The page is a snapshot, not live: run the command again to refresh it. Click a task on the board to see its details.
+  It opens the page and keeps rebuilding it every 10 seconds until you stop it with Ctrl+C. The page reloads itself, except while a task dialog is open.
+- **Snapshot:** type `/factory:status` in Claude Code (add a task ID, e.g. `/factory:status DS-4`, to also see that task's timeline and notes), or run `node factory/plugin/skills/status/scripts/status-page.mjs --open` once.
+
+The page is written to `.factory/status.html` (gitignored). Click a task on the board to see its details.
 
 | Flag | Effect |
 | --- | --- |
@@ -33,6 +35,7 @@ Both write `.factory/status.html` (gitignored) and open it in the browser. The p
 | `--quiet` | don't print the text summary |
 | `--no-fetch` | skip `git fetch` (faster, may be out of date) |
 | `--local` | read `roadmap.md` from your checkout instead of `origin/main` (preview unmerged roadmap edits) |
+| `--watch [seconds]` | keep rebuilding every N seconds (default 10); the page reloads itself |
 
 ## Tailwind
 

@@ -14,7 +14,7 @@ Design: [`design.md`](./design.md) · Rules the skills follow: [`factory/plugin/
 
 | Command | What it does |
 | --- | --- |
-| `/factory:status [DS-n]` | Opens the status page (needs you, in progress, runnable, epics, board); with an ID, shows that task's job file |
+| `/factory:status [DS-n]` | Opens the status page (needs you, in progress, runnable, epics, board); with an ID, shows that task's job file. For a live page that refreshes every 10 s, run `npm run factory:status` in a terminal |
 | `/factory:next [design\|build]` | Next runnable task and the command to start it |
 | `/factory:add <feature>` | Turns a feature into roadmap tasks, previews them, opens a roadmap PR after your ok |
 | `/factory:edit DS-n <change>` | Changes one todo/blocked task through a PR (incl. block/unblock, `needs_human`, deps) |

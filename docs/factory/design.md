@@ -20,7 +20,7 @@ Take a task from `roadmap.md` to a merged PR with as little hand-holding as poss
 | UI guard | `has_ui: no` builds that touch UI paths stop and ask; `--allow-ui` accepts and requires approval. |
 | Merge | Every task ends in a PR; the factory squash-merges on green checks (≥ 1 check), plus `factory:approved` where required. |
 | State | `roadmap.md` (via PRs), job files `factory/jobs/DS-n.md`, branches, PRs, labels. |
-| Watching | `/factory:status` writes and opens a static status page; each session shows its own run live. |
+| Watching | `npm run factory:status` keeps a status page live (10 s refresh); `/factory:status` for a snapshot. Each session shows its own run live. |
 
 ## 3. Goals, non-goals, anti-goals
 
@@ -71,7 +71,7 @@ docs/design-system-wireframe/*.dc.html   # canvases
 
 ## 9. Status page
 
-`factory/plugin/skills/status/scripts/status-page.mjs`: plain Node, no dependencies. It reads `origin/main:roadmap.md`, approved specs, job files, remote branches and open PRs (`gh`), and writes `.factory/status.html` (gitignored) styled with `tokens.css`. Sections: needs you, in progress, runnable now, epics, board (with job timeline and notes per task). Also `--json` (used by `/factory:next`) and `--local` (preview with the working-tree roadmap).
+`factory/plugin/skills/status/scripts/status-page.mjs`: plain Node, no dependencies. It reads `origin/main:roadmap.md`, approved specs, job files, remote branches and open PRs (`gh`), and writes `.factory/status.html` (gitignored) styled with `tokens.css`. Sections: needs you, in progress, runnable now, epics, board (with job timeline and notes per task). Also `--json` (used by `/factory:next`), `--local` (preview with the working-tree roadmap), and `--watch [s]`: `npm run factory:status` rebuilds every 10 s and the page reloads itself (skipped while a task dialog is open).
 
 ## 10. Calls made (check these)
 
@@ -84,5 +84,5 @@ docs/design-system-wireframe/*.dc.html   # canvases
 ## 11. Known limits
 
 - Rules in skills are followed by the model, not enforced by code; scope checks and gates are real commands, but they run because the skill says so. Watch the first runs.
-- The status page is a snapshot; rerun `/factory:status` to refresh it.
+- `/factory:status` gives a snapshot; `npm run factory:status` keeps it live (every 10 s).
 - Subagent tool limits restrict tool types, not paths; path scope is checked after each subagent with `git status` and reverted if needed.

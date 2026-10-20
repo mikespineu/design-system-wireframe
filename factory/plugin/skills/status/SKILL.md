@@ -21,4 +21,6 @@ Reply with the script's summary as-is. Put "needs you" items first, each with th
 
 If the user named a task (`$ARGUMENTS`), also show that task's job file: its status, stage, links, the last 10 timeline lines, and its notes. Read it from the worktree, else `git show origin/<branch>:factory/jobs/DS-<n>.md`, else `origin/main`.
 
+For a live page that refreshes every 10 seconds, tell the user to run `npm run factory:status` in a terminal (it keeps running until Ctrl+C). Don't start it yourself: it never exits.
+
 This skill only reads; it never starts, approves or merges anything.

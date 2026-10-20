@@ -2,14 +2,34 @@
 // Factory status page: reads roadmap.md (origin/main), design specs, job files, branches and PRs,
 // and writes a static overview to .factory/status.html. No dependencies; read-only except that file.
 //
-//   node status-page.mjs [--open] [--json] [--quiet] [--no-fetch] [--local]
+//   node status-page.mjs [--open] [--json] [--quiet] [--no-fetch] [--local] [--watch [seconds]]
 //   --local reads roadmap.md from the current checkout instead of origin/main (for previews).
+//   --watch rebuilds the page every N seconds (default 10) until Ctrl+C; the open page reloads itself.
 
 import { execFileSync, spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const args = new Set(process.argv.slice(2));
+const argv = process.argv.slice(2);
+const args = new Set(argv);
+
+if (args.has('--watch')) {
+  const n = Number(argv[argv.indexOf('--watch') + 1]);
+  const seconds = Number.isFinite(n) && n >= 2 ? n : 10;
+  const pass = argv.filter((a, i) => a !== '--watch' && a !== '--open' && !(i === argv.indexOf('--watch') + 1 && Number.isFinite(Number(a))));
+  const self = fileURLToPath(import.meta.url);
+  const build = (extra = []) => {
+    try {
+      execFileSync(process.execPath, [self, ...pass, '--quiet', '--live', String(seconds), ...extra], { stdio: 'inherit' });
+    } catch {
+      // keep watching; the next run may succeed
+    }
+  };
+  build(args.has('--open') ? ['--open'] : []);
+  console.log(`factory status: rebuilding every ${seconds}s (Ctrl+C to stop)`);
+  setInterval(build, seconds * 1000);
+} else {
 const sh = (cmd, a, opts = {}) => {
   try {
     return execFileSync(cmd, a, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], maxBuffer: 32 << 20, ...opts });
@@ -279,7 +299,7 @@ pre{white-space:pre-wrap;font-size:12px;background:var(--ds-color-surface-subtle
 .card{border:var(--ds-border-width, 1px) solid var(--ds-color-ink, #000);padding:var(--ds-space-3, 12px)}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--ds-space-3, 12px)}
 </style></head><body>
-<header><span>Design system — Factory status</span><span>Generated ${esc(new Date().toLocaleString())} · refresh with /factory:status</span></header>
+<header><span>Design system — Factory status</span><span>Generated ${esc(new Date().toLocaleString())} · ${args.has('--live') ? 'live: refreshes every ' + esc(Math.max(2, Number(argv[argv.indexOf('--live') + 1]) || 10)) + 's' : 'snapshot: npm run factory:status for live'}</span></header>
 <main>
 <section class="needs" aria-labelledby="h-needs"><h2 id="h-needs">Needs you (${needsYou.length})</h2>
 ${needsYou.length ? `<ul>${needsYou.map((n) => `<li class="need" data-kind="${esc(n.kind)}"><strong class="mono">${esc(n.task)}</strong> ${badge(n.kind, n.kind === 'blocked' ? 'error' : 'human')}<div>${esc(n.text)}</div>${n.action ? `<div class="act">${esc(n.action)}</div>` : ''}<div>${link(n.url, 'PR')} ${link(n.canvas, 'Canvas')}</div></li>`).join('')}</ul>` : '<p class="empty">Nothing needs you right now.</p>'}
@@ -327,6 +347,9 @@ ${tasks.map(taskDetail).join('\n')}
     }
   });
   dialog.addEventListener('close', () => opener?.focus());
+  const live = ${args.has('--live') ? Math.max(2, Number(argv[argv.indexOf('--live') + 1]) || 10) : 0};
+  // reload to pick up the rebuilt file, but not while a task dialog is open
+  if (live) setInterval(() => { if (!dialog.open) location.reload(); }, live * 1000);
 })();
 </script>
 </body></html>
@@ -348,3 +371,4 @@ if (!args.has('--quiet')) {
   console.log(lines.join('\n'));
 }
 if (args.has('--open') && process.platform === 'darwin') spawn('open', [outFile], { stdio: 'ignore', detached: true }).unref();
+}
