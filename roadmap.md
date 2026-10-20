@@ -35,18 +35,21 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Components
 
-- [ ] **DS-3 Textarea — design.** Define sizes, states (default, hover, focus, disabled, invalid, read-only), resize behavior, and character counter. Match `Input` / `TextField`.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-3 Textarea — design.** Define sizes, states (default, hover, focus, disabled, invalid, read-only), resize behavior, and character counter. Match `Input` / `TextField`.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers sizes and states: default, hover, focus, disabled, invalid, read-only
     - Spec defines resize behavior and the character counter
     - Spec matches `Input` / `TextField` tokens and keyboard behavior
-- [ ] **DS-4 Textarea — implementation.** `src/components/Textarea/` with component, CSS, stories, tests (incl. `jest-axe`), and export from `src/index.ts`.
+- [ ] **DS-4 Textarea — implementation.** Build `Textarea` and `TextareaField` in `src/components/Textarea/` per the approved spec `docs/specs/Textarea.md` ([canvas](https://claude.ai/artifact/2xzRy5QSUXVA3FGCTy25N2)): native `<textarea>` wired to the existing `Field` via `useFieldControl()`, with component, CSS, stories, tests (incl. `jest-axe`), and export from `src/index.ts`.
   - type: build · has_ui: yes · depends_on: DS-3 · needs_human: no · status: todo
   - done_when:
-    - Matches approved spec `docs/specs/Textarea.md` in every state
-    - Character counter and resize behave as specified
-    - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
+    - Matches approved spec `docs/specs/Textarea.md` in every state: default, filled, hover, focus, invalid, invalid + focus, disabled, read-only, read-only + focus
+    - Sizes `sm` / `md` / `lg` = 2 / 4 / 8 rows; `rows` overrides; `rows={1}` is 44 px and lines up with `Input`
+    - `resize`: `vertical` (default), `none`, `auto` (grows to `maxRows`, default 6, via `field-sizing: content`); disabled and read-only never resize
+    - Counter shows when `maxLength` is set, without native `maxlength`: "n / max", black at ≥ 90 %, error + icon and `aria-invalid` past the limit, polite debounced live region
+    - `TextareaField` mirrors `TextField` (label, hint, error); counter ids appended to Field's `aria-describedby`
+    - Story per state, size, resize mode and counter state, plus a keyboard story; `userEvent` tests and a `jest-axe` check; exported from `src/index.ts`
 - [ ] **DS-5 Toggle — design.** Define on/off, disabled, focus, sizes, and label placement.
   - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
   - done_when:
@@ -92,4 +95,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
-_Nothing yet._
+- [x] **DS-3 Textarea — design.** [PR #27](https://github.com/mikespineu/design-system-wireframe/pull/27)

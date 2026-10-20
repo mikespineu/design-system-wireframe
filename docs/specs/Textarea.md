@@ -3,9 +3,9 @@
 - task: DS-3
 - canvas: docs/design-system-wireframe/Textarea.dc.html
 - canvas_url: https://claude.ai/artifact/2xzRy5QSUXVA3FGCTy25N2
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-20
 - approval_hash:
 
 Multi-line text control. Visual twin of `Input` (`src/components/Input/Input.tsx`): same border, fill, type, padding-x, focus ring, invalid and disabled treatment, and the same `Field` wiring through `useFieldControl()`. Ships as `Textarea` (control only, works inside `Field`) and `TextareaField` (`Field` + `Textarea`, mirrors `TextField`).

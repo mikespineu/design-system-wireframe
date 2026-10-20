@@ -2,8 +2,8 @@
 task: DS-3
 title: "Textarea — design"
 line: design
-status: waiting
-stage: pr
+status: in-progress
+stage: ci
 branch: "feat/DS-3-textarea-design"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-3-textarea-design"
 pr: "27"
@@ -12,10 +12,10 @@ canvas_url: "https://claude.ai/artifact/2xzRy5QSUXVA3FGCTy25N2"
 storybook_url: ""
 model: default
 loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
-needs_you: "approve the design (/factory:approve DS-3) or ask for changes (/factory:design DS-3 <feedback>)"
+needs_you: ""
 blocked_reason: ""
 started: "2026-10-20T10:25Z"
-updated: "2026-10-20T10:29Z"
+updated: "2026-10-20T10:35Z"
 ---
 
 # DS-3 Textarea — design
@@ -29,6 +29,7 @@ updated: "2026-10-20T10:29Z"
 - 12:29 spec: check passed (fields, sections, 20 tokens all in tokens.css, canvas is complete HTML)
 - 12:29 pr: waiting for you: approve or request changes
 - 12:30 pr: opened draft #27 with factory:needs-approval
+- 12:35 approve: approved by mikespin (in chat); spec stamped, DS-3 ticked, DS-4 done_when updated to the approved spec
 
 ## Gate results
 
