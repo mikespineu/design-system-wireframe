@@ -5,3 +5,4 @@ export * from './components/Breadcrumb';
 export * from './components/Tag';
 export * from './components/Input';
 export * from './components/IconButton';
+export * from './components/Theme';

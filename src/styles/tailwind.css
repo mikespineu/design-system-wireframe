@@ -98,7 +98,9 @@
 }
 
 @layer base {
-  html {
+  /* A themed subtree paints its own ground and ink */
+  html,
+  [data-theme] {
     background-color: var(--ds-color-background);
     color: var(--ds-color-ink);
     font-family: var(--ds-font-text);

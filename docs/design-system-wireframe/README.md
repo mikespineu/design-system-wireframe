@@ -13,6 +13,16 @@ Live canvas: https://claude.ai/artifact/4R5XwSAJ1Hj8gTqgLdwTmK
 | `Form.dc.html` | Example contact form with live validation (interactive) |
 | `canvas.json` | Canvas layout (artboard sizes and positions) |
 
+## Theming
+
+Themes live in `src/styles/tokens.css`. `wireframe` is the default theme and applies at `:root`, so nothing changes unless you opt into another theme.
+
+- Whole page: `applyTheme('wireframe')` sets `data-theme` on `<html>`.
+- Subtree: `<Theme theme="wireframe">…</Theme>` (or `asChild` to put `data-theme` on your own element). The subtree paints its own background and ink.
+- Storybook: switch the theme from the toolbar's Theme menu.
+
+To add a theme, add a `[data-theme='<name>']` block with raw values only (palette, status colors, fonts, radius, photo filter), then add `<name>` to `themes` in `src/components/Theme/Theme.tsx`. Aliases such as `--ds-color-primary: var(--ds-color-black)` sit in a shared block that re-resolves on every theme root. A theme can override one by declaring it in its own block.
+
 ## Tailwind
 
 Tokens live in `src/styles/tokens.css` (`--ds-*`). `src/styles/tailwind.css` imports them and maps them into the Tailwind v4 theme. Import that one file, as `.storybook/preview.tsx` does, to get the fonts, tokens and utilities.
