@@ -92,6 +92,13 @@ Each task carries its fields in an indented line, read by the [software factory]
   - done_when:
     - Install and usage guide covers importing CSS, using components, applying a theme
     - Linked from the README and the Storybook Introduction page
+- [ ] **DS-12 Repository README.** Add `README.md` at the repo root: what the design system is, tech stack (React + TypeScript, Vite, Storybook, Jest, Radix UI), getting started (`npm ci`, `npm run storybook`), available scripts, project structure and component conventions, contribution workflow (worktrees, port isolation, `pre-push` gates), and the software factory (`/factory:*` skills, `npm run factory:status`).
+  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - `README.md` exists at repo root with sections: overview, tech stack, getting started, scripts, project structure, contributing, factory
+    - Every `npm run` script listed matches `package.json`
+    - Commands and conventions match `CLAUDE.md` (worktrees, ports, tokens-only styling, Radix)
+    - All relative links in the README resolve to existing files
 
 ## Done
 
