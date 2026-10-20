@@ -28,12 +28,33 @@ Use [Radix UI](https://www.radix-ui.com/primitives) (`radix-ui` package) for all
 
 ## Commands
 
-- `npm run storybook` – dev server on :6006
+- `npm run storybook` – dev server on :6006 (primary checkout only; worktrees use their own port, see below)
 - `npm run build-storybook` – static build
 - `npm test` / `npm run test:watch` / `npm run test:coverage` – Jest
 - `npm run typecheck` – `tsc --noEmit`
 - `npm run lint` / `npm run lint:fix` – ESLint
 - Husky `pre-push` hook runs `npm run lint && npm test`; never bypass it with `--no-verify`.
+
+## Preview link (required)
+
+Every time an agent finishes work in a worktree, its last message must end with a clickable preview link to that worktree's local Storybook, e.g. `http://localhost:6137`. Link only, no extra prose needed.
+
+- Start Storybook from the worktree in the background before replying: `npx storybook dev -p "$PORT" --no-open`.
+- Verify the server answers (`curl -sf "http://localhost:$PORT" >/dev/null`) before sending the link. Never send a dead link.
+- Leave the server running so the user can visit it. Stop it when the worktree is removed.
+
+## Port isolation between worktrees (required)
+
+Worktrees run side by side, so never use the shared default `:6006`. Each worktree gets its own deterministic port:
+
+```sh
+PORT=$((6100 + $(basename "$PWD" | cksum | cut -d' ' -f1) % 900))   # 6100-6999
+```
+
+- Same worktree name always maps to the same port, so the link stays stable.
+- If `$PORT` is already taken by another process (`lsof -i :$PORT`), increment until free; do not kill the other process.
+- Applies to every dev server (Storybook, Vite, any test UI). Do not hardcode ports in configs or scripts.
+- Do not share caches or state across worktrees: each has its own `node_modules` and `storybook-static`.
 
 ## Conventions
 
