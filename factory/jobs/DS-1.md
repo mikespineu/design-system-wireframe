@@ -2,17 +2,17 @@
 task: DS-1
 title: "Theming infrastructure with a default theme"
 line: build            # design | build
-status: in-progress    # claimed | in-progress | waiting | blocked | merged
-stage: pr
+status: waiting    # claimed | in-progress | waiting | blocked | merged
+stage: ci
 branch: "feat/DS-1-theming-infrastructure-with-a-default"
 worktree: ".worktrees/feat-DS-1-theming-infrastructure-with-a-default"
-pr: ""
-pr_url: ""
+pr: "31"
+pr_url: "https://github.com/mikespineu/design-system-wireframe/pull/31"
 canvas_url: ""
 storybook_url: ""
 model: default
 loops: { gates: 0, qa: 1, review: 0, ci: 0, spec: 0 }
-needs_you: ""
+needs_you: "approve the PR (/factory:approve DS-1)"
 blocked_reason: ""
 started: "2026-10-20 12:55"
 updated: "2026-10-20 12:56"
@@ -40,6 +40,8 @@ updated: "2026-10-20 12:56"
 - 13:01 qa: pass (re-run), no findings
 - 13:01 review: pass (re-run), no findings
 - 13:01 pr: roadmap ticked, opening PR
+- 13:01 pr: opened #31 with factory:needs-approval
+- 13:01 ci: waiting for you — approval required (--allow-ui)
 
 ## Gate results
 

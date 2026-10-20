@@ -102,4 +102,5 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-1** Theming infrastructure with a default theme — https://github.com/mikespineu/design-system-wireframe/pull/31
 - [x] **DS-3 Textarea — design.** [PR #27](https://github.com/mikespineu/design-system-wireframe/pull/27)
