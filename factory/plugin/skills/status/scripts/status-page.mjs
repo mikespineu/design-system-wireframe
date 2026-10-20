@@ -203,8 +203,15 @@ const tokens = fs.existsSync(tokensFile) ? fs.readFileSync(tokensFile, 'utf8') :
 const STATUSES = ['todo', 'ready', 'in-progress', 'review', 'blocked', 'done'];
 
 const badge = (text, tone = '') => `<span class="badge" data-tone="${esc(tone)}">${esc(text)}</span>`;
-const taskCard = (t) => `<details class="task"><summary><strong class="mono">${esc(t.id)}</strong> ${esc(t.title)}<span class="row">${badge(t.line, t.line)}${t.hasUi ? badge('ui') : ''}${t.needsHuman ? badge('human', 'human') : ''}${t.job?.stage && t.status !== 'done' ? badge(t.job.stage) : ''}</span></summary>
+const badges = (t) => `${badge(t.line, t.line)}${t.hasUi ? badge('ui') : ''}${t.needsHuman ? badge('human', 'human') : ''}${t.job?.stage && t.status !== 'done' ? badge(t.job.stage) : ''}`;
+// Compact card on the board; details open in a dialog (see the script at the end of the page).
+const taskCard = (t) => `<button type="button" class="task" data-task="${esc(t.id)}" aria-haspopup="dialog"><span><strong class="mono">${esc(t.id)}</strong> ${esc(t.title)}</span><span class="row">${badges(t)}</span></button>`;
+const taskDetail = (t) => `<template id="detail-${esc(t.id)}">
+<h3 id="detail-title"><span class="mono">${esc(t.id)}</span> ${esc(t.title)}</h3>
+<div class="row">${badge(t.status, t.status === 'blocked' ? 'error' : '')}${badges(t)}</div>
+${t.description ? `<p>${esc(t.description)}</p>` : ''}
 <dl>
+<dt>Epic</dt><dd>${esc(t.epic || '–')}</dd>
 <dt>Depends on</dt><dd>${esc(t.dependsOn.join(', ') || '–')}</dd>
 ${t.waitingOn.length && t.status !== 'done' ? `<dt>Waiting on</dt><dd>${esc(t.waitingOn.join('; '))}</dd>` : ''}
 <dt>Done when</dt><dd><ul>${t.doneWhen.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></dd>
@@ -213,10 +220,13 @@ ${t.pr ? `<dt>PR</dt><dd>${link(t.pr.url, `#${t.pr.number}`)}${t.pr.draft ? ' (d
 ${t.job?.canvas_url ? `<dt>Canvas</dt><dd>${link(t.job.canvas_url, 'open canvas')}</dd>` : ''}
 ${t.job?.storybook_url ? `<dt>Storybook</dt><dd>${link(t.job.storybook_url, t.job.storybook_url)}</dd>` : ''}
 ${t.job ? `<dt>Job</dt><dd class="mono">${esc(t.job.status)} · ${esc(t.job.stage)} · model ${esc(t.job.model || 'default')} · loops ${esc(t.job.loops || '')} (from ${esc(t.job.source)})</dd>` : ''}
+${t.job?.blocked_reason ? `<dt>Blocked</dt><dd>${esc(t.job.blocked_reason)}</dd>` : ''}
+${t.job?.needs_you ? `<dt>Needs you</dt><dd>${esc(t.job.needs_you)}</dd>` : ''}
 </dl>
+${t.status === 'ready' ? `<p class="mono">Start: /factory:${esc(t.line)} ${esc(t.id)}</p>` : ''}
 ${t.job?.timeline?.length ? `<h4>Timeline</h4><ul class="timeline">${t.job.timeline.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>` : ''}
 ${t.job?.notes ? `<h4>Notes</h4><pre>${esc(t.job.notes)}</pre>` : ''}
-</details>`;
+</template>`;
 
 const html = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -248,13 +258,18 @@ a{color:var(--ds-color-ink, #000)}
 .col{background:var(--ds-color-surface-subtle, #f7f7f7);padding:var(--ds-space-2, 8px);display:grid;align-content:start;gap:var(--ds-space-2, 8px);min-height:100px}
 .col[data-status="blocked"]{background:var(--ds-color-error-bg, #fbedec)}
 .col h3{font-family:var(--ds-font-mono, monospace);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin:0;display:flex;justify-content:space-between;color:var(--ds-color-text-muted, #595959)}
-.task{background:var(--ds-color-surface, #fff);border:var(--ds-border-width, 1px) solid var(--ds-color-border, #c7c7c7);padding:var(--ds-space-2, 8px);font-size:14px}
-.task summary{cursor:pointer}
-.task summary:focus-visible{outline:var(--ds-focus-width, 2px) solid var(--ds-color-ink, #000);outline-offset:var(--ds-focus-offset, 2px)}
-.task .row{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
-.task dl{display:grid;grid-template-columns:90px minmax(0,1fr);gap:2px 8px;font-size:13px;margin:var(--ds-space-2, 8px) 0}
-.task dt{font-family:var(--ds-font-mono, monospace);font-size:11px;text-transform:uppercase;color:var(--ds-color-text-muted, #595959)}
-.task dd{margin:0;overflow-wrap:anywhere}.task dd ul{margin:0;padding-left:16px}
+.task{display:grid;gap:4px;width:100%;text-align:left;font:inherit;font-size:14px;color:inherit;cursor:pointer;background:var(--ds-color-surface, #fff);border:var(--ds-border-width, 1px) solid var(--ds-color-border, #c7c7c7);border-radius:var(--ds-radius, 0);padding:var(--ds-space-2, 8px)}
+.task:hover{border-color:var(--ds-color-ink, #000)}
+.task:focus-visible,.detail button:focus-visible{outline:var(--ds-focus-width, 2px) solid var(--ds-color-ink, #000);outline-offset:var(--ds-focus-offset, 2px)}
+.row{display:flex;flex-wrap:wrap;gap:4px}
+.detail{width:min(720px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;padding:var(--ds-space-6, 24px);border:2px solid var(--ds-color-ink, #000);border-radius:var(--ds-radius, 0);background:var(--ds-color-background, #fff);color:var(--ds-color-text, #404040)}
+.detail::backdrop{background:color-mix(in srgb, var(--ds-color-black, #000) 40%, transparent)}
+.detail-close{float:right;font-family:var(--ds-font-mono, monospace);font-size:12px;text-transform:uppercase;min-height:32px;padding:0 var(--ds-space-3, 12px);background:var(--ds-color-surface, #fff);color:var(--ds-color-ink, #000);border:var(--ds-border-width, 1px) solid var(--ds-color-ink, #000);border-radius:var(--ds-radius, 0);cursor:pointer}
+.detail h3{font-family:var(--ds-font-mono, monospace);font-weight:500;font-size:18px;margin:0 0 var(--ds-space-2, 8px)}
+.detail dl{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 12px;font-size:14px;margin:var(--ds-space-4, 16px) 0}
+.detail dt{font-family:var(--ds-font-mono, monospace);font-size:11px;text-transform:uppercase;color:var(--ds-color-text-muted, #595959);padding-top:2px}
+.detail dd{margin:0;overflow-wrap:anywhere}.detail dd ul{margin:0;padding-left:16px}
+@media (max-width:640px){.detail{padding:var(--ds-space-4, 16px)}.detail dl{grid-template-columns:1fr}}
 .timeline{margin:0;padding-left:16px;font-family:var(--ds-font-mono, monospace);font-size:12px}
 pre{white-space:pre-wrap;font-size:12px;background:var(--ds-color-surface-subtle, #f7f7f7);padding:var(--ds-space-2, 8px);margin:0}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:var(--ds-space-8, 32px)}@media (max-width:760px){.split{grid-template-columns:1fr}}
@@ -286,7 +301,35 @@ ${runnable.length ? `<ul class="runnable">${runnable.map((t) => `<li><span><stro
   return `<div class="col" data-status="${s}"><h3><span>${s}</span><span>${list.length}</span></h3>${list.map(taskCard).join('')}</div>`;
 }).join('')}</div>
 </section>
-</main></body></html>
+</main>
+<dialog id="detail" class="detail" aria-labelledby="detail-title">
+<form method="dialog"><button class="detail-close" aria-label="Close details">Close</button></form>
+<div id="detail-body"></div>
+</dialog>
+${tasks.map(taskDetail).join('\n')}
+<script>
+(() => {
+  const dialog = document.getElementById('detail');
+  const body = document.getElementById('detail-body');
+  let opener;
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('[data-task]');
+    if (card) {
+      const tpl = document.getElementById('detail-' + card.dataset.task);
+      if (!tpl) return;
+      opener = card;
+      body.replaceChildren(tpl.content.cloneNode(true));
+      dialog.showModal();
+    } else if (e.target === dialog) {
+      // only clicks on the backdrop (outside the box) close it
+      const r = dialog.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close();
+    }
+  });
+  dialog.addEventListener('close', () => opener?.focus());
+})();
+</script>
+</body></html>
 `;
 
 const outDir = path.join(ROOT, '.factory');
