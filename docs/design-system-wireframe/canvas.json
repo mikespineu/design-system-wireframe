@@ -23,6 +23,13 @@
       "w": 1440,
       "x": 0,
       "y": 0
+    },
+    "Textarea.dc.html": {
+      "h": 3900,
+      "title": "Textarea",
+      "w": 1440,
+      "x": 4560,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -46,7 +53,8 @@
   "order": [
     "Main.dc.html",
     "Components.dc.html",
-    "Form.dc.html"
+    "Form.dc.html",
+    "Textarea.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
