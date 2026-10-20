@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Textarea</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#000000}a:hover{color:#595959}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:32px 24px}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.lb{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.lb.dis{color:#767676}
+.ta{display:block;box-sizing:border-box;width:100%;margin:0;padding:8px 12px;border:1px solid #C7C7C7;border-radius:0;background:#FFFFFF;font-family:'Red Hat Text',sans-serif;font-size:16px;line-height:26px;color:#000000;resize:vertical;overflow-y:auto;transition:border-color 120ms cubic-bezier(.2,0,0,1)}
+.ta::placeholder{color:#767676;opacity:1}
+.r1{height:44px}.r2{height:70px}.r4{height:122px}.r6{height:174px}.r8{height:226px}
+.hover{border-color:#000000}
+.focus{border-color:#000000;outline:2px solid #000000;outline-offset:2px}
+.invalid{border:2px solid #A3302B}
+.invalid.focus{border-color:#A3302B}
+.dis-ta{border-color:#E0E0E0;background:#F7F7F7;color:#767676;resize:none;cursor:not-allowed}
+.ro{border-color:#E0E0E0;background:#F7F7F7;color:#000000;resize:none;cursor:default}
+.ro.focus{border-color:#E0E0E0}
+.nores{resize:none}
+.meta{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;font-size:13px;line-height:20px}
+.hint{color:#595959}
+.count{margin-left:auto;color:#595959;font-variant-numeric:tabular-nums;white-space:nowrap}
+.count.near{color:#000000;font-weight:500}
+.count.over{display:flex;align-items:center;gap:6px;color:#A3302B;font-weight:500}
+.err{display:flex;align-items:center;gap:6px;font-size:13px;line-height:20px;font-weight:500;color:#A3302B}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:0 16px 0 0;border-bottom:1px solid #E0E0E0;color:#404040}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 3900px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Textarea · DS-3 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Textarea</h1>
+<p style="margin: 0; max-width: 720px; font-size: 18px; line-height: 1.6; color: #404040">Multi-line sibling of Input. Same border, fill, focus ring, invalid and disabled treatment, same Field wiring (label, hint, error). One row is exactly 44 px, so a one-line textarea lines up with an Input. Size is a row count; resize is vertical only; an optional character counter sits in the hint row.</p>
+</header>
+
+<!-- 01 SIZES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Sizes</h2></div>
+<p class="sec-d">Size sets the starting number of rows. Type stays body 16/26 at every size, like Input. Height = rows × 26 + 2 × 8 padding + 2 × 1 border.</p>
+<div class="grid3">
+<div class="ab">
+<div class="ab-h"><span>sm</span><span>rows 2 · 70 px</span></div>
+<div class="ab-b">
+<label class="lb" for="sz-sm">Caption</label>
+<textarea id="sz-sm" class="ta r2" placeholder="One or two lines"></textarea>
+</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>md (default)</span><span>rows 4 · 122 px</span></div>
+<div class="ab-b">
+<label class="lb" for="sz-md">Message</label>
+<textarea id="sz-md" class="ta r4" placeholder="Tell us about the series"></textarea>
+</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>lg</span><span>rows 8 · 226 px</span></div>
+<div class="ab-b">
+<label class="lb" for="sz-lg">Description</label>
+<textarea id="sz-lg" class="ta r8" placeholder="Long-form notes"></textarea>
+</div>
+</div>
+</div>
+<div class="grid3">
+<div class="ab" style="grid-column: 1 / -1">
+<div class="ab-h"><span>Alignment with Input</span><span>rows 1 · 44 px = control height</span></div>
+<div class="ab-b" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px">
+<label class="lb" for="al-in">Title (Input)</label>
+<label class="lb" for="al-ta">Title (Textarea rows 1)</label>
+<input id="al-in" type="text" placeholder="Untitled" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #C7C7C7; border-radius: 0; background: #FFFFFF; font-family: 'Red Hat Text', sans-serif; font-size: 16px; color: #000000">
+<textarea id="al-ta" class="ta r1 nores" placeholder="Untitled"></textarea>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 02 STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">States</h2></div>
+<p class="sec-d">Shown at md. Every state applies to every size. Header right side names what changes against Default.</p>
+<div class="grid3">
+
+<div class="ab">
+<div class="ab-h"><span>Default</span><span>border gray-300</span></div>
+<div class="ab-b">
+<label class="lb" for="st-1">Message</label>
+<textarea id="st-1" class="ta r4" placeholder="Tell us about the series"></textarea>
+<div class="meta"><span class="hint">Plain text, no formatting.</span></div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Filled</span><span>text black</span></div>
+<div class="ab-b">
+<label class="lb" for="st-2">Message</label>
+<textarea id="st-2" class="ta r4">Twelve frames shot along the north coast at low tide, printed on matte stock.</textarea>
+<div class="meta"><span class="hint">Plain text, no formatting.</span></div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Hover</span><span>border black</span></div>
+<div class="ab-b">
+<label class="lb" for="st-3">Message</label>
+<textarea id="st-3" class="ta r4 hover" placeholder="Tell us about the series"></textarea>
+<div class="meta"><span class="hint">Plain text, no formatting.</span></div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Focus (keyboard)</span><span>border black + 2 px ring, 2 px offset</span></div>
+<div class="ab-b">
+<label class="lb" for="st-4">Message</label>
+<textarea id="st-4" class="ta r4 focus">Twelve frames shot along the north coast</textarea>
+<div class="meta"><span class="hint">Plain text, no formatting.</span></div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Invalid</span><span>2 px error border + message</span></div>
+<div class="ab-b">
+<label class="lb" for="st-5">Message</label>
+<textarea id="st-5" class="ta r4 invalid" aria-invalid="true" aria-describedby="st-5e"></textarea>
+<span id="st-5e" class="err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Error: enter a message</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Invalid + focus</span><span>error border kept + black ring</span></div>
+<div class="ab-b">
+<label class="lb" for="st-6">Message</label>
+<textarea id="st-6" class="ta r4 invalid focus" aria-invalid="true" aria-describedby="st-6e"></textarea>
+<span id="st-6e" class="err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Error: enter a message</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Disabled</span><span>border gray-200 · fill gray-50 · text gray-500 · no resize</span></div>
+<div class="ab-b">
+<label class="lb dis" for="st-7">Message</label>
+<textarea id="st-7" class="ta r4 dis-ta" disabled placeholder="Unavailable"></textarea>
+<div class="meta"><span class="hint">Plain text, no formatting.</span></div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Read-only</span><span>border gray-200 · fill gray-50 · text black · no resize</span></div>
+<div class="ab-b">
+<label class="lb" for="st-8">Message</label>
+<textarea id="st-8" class="ta r4 ro" readonly>Twelve frames shot along the north coast at low tide, printed on matte stock.</textarea>
+<div class="meta"><span class="hint">Submitted. Contact us to change it.</span></div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Read-only + focus</span><span>focusable, selectable · 2 px ring</span></div>
+<div class="ab-b">
+<label class="lb" for="st-9">Message</label>
+<textarea id="st-9" class="ta r4 ro focus" readonly>Twelve frames shot along the north coast at low tide, printed on matte stock.</textarea>
+<div class="meta"><span class="hint">Submitted. Contact us to change it.</span></div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- 03 RESIZE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Resize</h2></div>
+<p class="sec-d">Width always fills the container; only height changes. The starting rows are the minimum height. Disabled and read-only never resize.</p>
+<div class="grid3">
+<div class="ab">
+<div class="ab-h"><span>resize="vertical" (default)</span><span>native handle, drag down</span></div>
+<div class="ab-b">
+<label class="lb" for="rs-1">Message</label>
+<textarea id="rs-1" class="ta r4" placeholder="Drag the corner to grow" style="min-height: 122px"></textarea>
+</div>
+<div class="ab-f">Min height = rows. No max. Handle is pointer-only; keyboard users rely on scrolling.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>resize="none"</span><span>fixed height, scrolls</span></div>
+<div class="ab-b">
+<label class="lb" for="rs-2">Message</label>
+<textarea id="rs-2" class="ta r4 nores">Twelve frames shot along the north coast at low tide, printed on matte stock. Each print is signed and numbered. The series was first shown in the spring and travels next year. Overflow scrolls inside the field.</textarea>
+</div>
+<div class="ab-f">For tight layouts (dialogs, table cells). Content scrolls vertically.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>resize="auto"</span><span>grows with content · rows 2 to maxRows 6</span></div>
+<div class="ab-b">
+<label class="lb" for="rs-3">Comment</label>
+<textarea id="rs-3" class="ta r2 nores" placeholder="Add a comment"></textarea>
+<label class="lb" for="rs-4" style="margin-top: 16px">Comment (typed)</label>
+<textarea id="rs-4" class="ta r6 nores">Line one
+Line two
+Line three
+Line four
+Line five
+Line six, now at maxRows; more lines scroll</textarea>
+</div>
+<div class="ab-f">Grows one row at a time from rows to maxRows, then scrolls. No handle.</div>
+</div>
+</div>
+</section>
+
+<!-- 04 CHARACTER COUNTER -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Character counter</h2></div>
+<p class="sec-d">Shown only when maxLength is set. Right-aligned in the hint row, caption 13/20, tabular numbers. Typing past the limit is allowed (pasted text is never cut off); the field then turns invalid. Color appears only past the limit, always with an icon.</p>
+<div class="grid4">
+
+<div class="ab">
+<div class="ab-h"><span>Under limit</span><span>&lt; 90 %</span></div>
+<div class="ab-b">
+<label class="lb" for="cc-1">Bio</label>
+<textarea id="cc-1" class="ta r4" aria-describedby="cc-1h cc-1s">Photographer based on the coast.</textarea>
+<div class="meta"><span id="cc-1h" class="hint">Shown on your profile.</span><span class="count" aria-hidden="true">32 / 160</span></div>
+<span id="cc-1s" class="sr">You can enter up to 160 characters</span>
+</div>
+<div class="ab-f">Counter gray-600.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Near limit</span><span>≥ 90 %</span></div>
+<div class="ab-b">
+<label class="lb" for="cc-2">Bio</label>
+<textarea id="cc-2" class="ta r4" aria-describedby="cc-2h cc-2s">Photographer based on the coast. Works in black and white, mostly large format, printing every frame by hand in a small darkroom by the sea.</textarea>
+<div class="meta"><span id="cc-2h" class="hint">Shown on your profile.</span><span class="count near" aria-hidden="true">148 / 160</span></div>
+<span id="cc-2s" class="sr">You can enter up to 160 characters</span>
+</div>
+<div class="ab-f">Counter black, weight 500. No hue.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>At limit</span><span>= 100 %</span></div>
+<div class="ab-b">
+<label class="lb" for="cc-3">Bio</label>
+<textarea id="cc-3" class="ta r4 focus" aria-describedby="cc-3h cc-3s">Photographer based on the coast. Works in black and white, mostly large format, printing every frame by hand in a small darkroom by the sea. Est. 2014.</textarea>
+<div class="meta"><span id="cc-3h" class="hint">Shown on your profile.</span><span class="count near" aria-hidden="true">160 / 160</span></div>
+<span id="cc-3s" class="sr">You can enter up to 160 characters</span>
+</div>
+<div class="ab-f">Still valid. Shown with focus ring.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Over limit</span><span>&gt; 100 % · invalid</span></div>
+<div class="ab-b">
+<label class="lb" for="cc-4">Bio</label>
+<textarea id="cc-4" class="ta r4 invalid" aria-invalid="true" aria-describedby="cc-4h cc-4s">Photographer based on the coast. Works in black and white, mostly large format, printing every frame by hand in a small darkroom by the sea. Est. 2014 in Porto.</textarea>
+<div class="meta"><span id="cc-4h" class="hint">Shown on your profile.</span><span class="count over" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>169 / 160</span></div>
+<span id="cc-4s" class="sr">You can enter up to 160 characters</span>
+</div>
+<div class="ab-f">2 px error border, counter error + icon. Live region: "9 characters too many".</div>
+</div>
+
+</div>
+</section>
+
+<!-- 05 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Keyboard</h2></div>
+<table class="tbl">
+<thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift</span> <span class="kbd">Tab</span></td><td>Move focus in / out. Never inserts a tab character. Disabled is skipped; read-only is a stop.</td></tr>
+<tr><td><span class="kbd">Enter</span> / <span class="kbd">Shift</span> <span class="kbd">Enter</span></td><td>Insert a new line. Never submits the form.</td></tr>
+<tr><td><span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">↑</span> <span class="kbd">↓</span> <span class="kbd">Home</span> <span class="kbd">End</span> <span class="kbd">PgUp</span> <span class="kbd">PgDn</span></td><td>Native caret movement and scrolling (also in read-only).</td></tr>
+<tr><td><span class="kbd">Cmd/Ctrl</span> <span class="kbd">A</span>, <span class="kbd">C</span>, <span class="kbd">X</span>, <span class="kbd">V</span>, <span class="kbd">Z</span></td><td>Native select all, copy, cut, paste, undo. Cut and paste do nothing in read-only.</td></tr>
+<tr><td><span class="kbd">Esc</span></td><td>No action (bubbles, so a parent Dialog can close).</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
