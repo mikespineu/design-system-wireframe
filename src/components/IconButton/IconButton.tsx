@@ -16,9 +16,9 @@ export interface IconButtonProps
 }
 
 const base =
-  'inline-flex h-control w-11 items-center justify-center rounded-md border border-ink bg-white text-ink ' +
+  'inline-flex h-control w-11 items-center justify-center rounded-md border border-ink bg-surface text-ink ' +
   'cursor-pointer transition-colors duration-[120ms] ease-ds focus-visible:focus-ring ' +
-  'enabled:hover:bg-gray-100 disabled:cursor-not-allowed disabled:border-gray-300 disabled:text-gray-400 ' +
+  'enabled:hover:bg-fill disabled:cursor-not-allowed disabled:border-border disabled:text-disabled ' +
   'aria-disabled:cursor-not-allowed';
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(

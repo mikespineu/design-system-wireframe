@@ -62,7 +62,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
                 <span className="text-muted">{item.label}</span>
               )}
               {!last && (
-                <span aria-hidden="true" className="text-gray-400">
+                <span aria-hidden="true" className="text-disabled">
                   /
                 </span>
               )}

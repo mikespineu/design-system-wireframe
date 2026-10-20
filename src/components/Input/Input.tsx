@@ -95,10 +95,10 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const inputBase =
-  'box-border h-control w-full rounded-md border border-border bg-white px-3 font-sans text-body text-ink ' +
+  'box-border h-control w-full rounded-md border border-border bg-surface px-3 font-sans text-body text-ink ' +
   'placeholder:text-placeholder transition-colors duration-[120ms] ease-ds focus-visible:focus-ring ' +
   'aria-[invalid=true]:border-2 aria-[invalid=true]:border-error ' +
-  'disabled:cursor-not-allowed disabled:border-divider disabled:bg-gray-50 disabled:text-placeholder';
+  'disabled:cursor-not-allowed disabled:border-divider disabled:bg-surface-subtle disabled:text-placeholder';
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(({ invalid, className, ...rest }, ref) => {
   const field = useFieldControl();

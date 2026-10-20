@@ -20,9 +20,9 @@ const base = 'inline-flex items-center font-mono text-xs';
 
 const variants: Record<TagVariant, string> = {
   solid: 'border border-transparent bg-primary text-primary-contrast',
-  subtle: 'border border-transparent bg-fill text-gray-800',
+  subtle: 'border border-transparent bg-fill text-text-strong',
   outline: 'border border-ink bg-transparent text-ink',
-  neutral: 'border border-border bg-transparent text-gray-800',
+  neutral: 'border border-border bg-transparent text-text-strong',
 };
 
 const sizes: Record<TagSize, string> = {

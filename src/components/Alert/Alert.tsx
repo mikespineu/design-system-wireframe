@@ -31,7 +31,7 @@ const config: Record<
     strokeWidth: 1.5,
     box: "border border-info-border bg-info-bg text-info",
     titleWeight: "font-medium",
-    body: "text-gray-700",
+    body: "text-text",
     role: "status",
   },
   success: {
@@ -39,7 +39,7 @@ const config: Record<
     strokeWidth: 1.75,
     box: "border border-success-border bg-success-bg text-success",
     titleWeight: "font-medium",
-    body: "text-gray-700",
+    body: "text-text",
     role: "status",
   },
   error: {
@@ -47,7 +47,7 @@ const config: Record<
     strokeWidth: 1.75,
     box: "border border-error-border bg-error-bg text-error",
     titleWeight: "font-bold",
-    body: "text-gray-800",
+    body: "text-text-strong",
     role: "alert",
   },
 };

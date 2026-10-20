@@ -26,6 +26,7 @@
   --ds-color-placeholder: var(--ds-color-gray-500);
   --ds-color-text-muted: var(--ds-color-gray-600);
   --ds-color-text: var(--ds-color-gray-700);
+  --ds-color-text-strong: var(--ds-color-gray-800);
   --ds-color-ink: var(--ds-color-black);
   --ds-color-inverse: var(--ds-color-gray-900);
   --ds-color-primary: var(--ds-color-black);

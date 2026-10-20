@@ -47,7 +47,7 @@ const invalid = (v: Values) => ({
 
 const labelClass = 'font-mono text-label uppercase';
 const controlClass =
-  'box-border w-full border border-border bg-white px-3 text-body text-ink rounded-md ' +
+  'box-border w-full border border-border bg-surface px-3 text-body text-ink rounded-md ' +
   'placeholder:text-placeholder focus-visible:focus-ring ' +
   'aria-[invalid=true]:border-2 aria-[invalid=true]:border-error';
 const errorClass = 'flex items-center gap-1.5 text-caption font-medium text-error';
@@ -73,13 +73,13 @@ const Facade = () => {
           <feColorMatrix type="saturate" values="0" />
         </filter>
       </defs>
-      <rect width="400" height="500" fill="var(--ds-color-gray-100)" />
-      <rect x="50" y="80" width="214" height="420" fill="var(--ds-color-gray-300)" />
-      <rect x="264" y="160" width="96" height="340" fill="var(--ds-color-gray-500)" />
+      <rect width="400" height="500" fill="var(--ds-color-fill)" />
+      <rect x="50" y="80" width="214" height="420" fill="var(--ds-color-border)" />
+      <rect x="264" y="160" width="96" height="340" fill="var(--ds-color-placeholder)" />
       {[120, 214, 308].flatMap((y) =>
-        [78, 142, 206].map((x) => <rect key={`${x}-${y}`} x={x} y={y} width="38" height="54" fill="var(--ds-color-gray-700)" />),
+        [78, 142, 206].map((x) => <rect key={`${x}-${y}`} x={x} y={y} width="38" height="54" fill="var(--ds-color-text)" />),
       )}
-      <polygon points="50,400 264,240 264,500 50,500" fill="var(--ds-color-black)" opacity="0.55" />
+      <polygon points="50,400 264,240 264,500 50,500" fill="var(--ds-color-ink)" opacity="0.55" />
       <rect width="400" height="500" filter={`url(#${filter})`} opacity="0.18" />
     </svg>
   );
