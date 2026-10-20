@@ -1,6 +1,6 @@
 # Component build plan
 
-Source of truth: `docs/mono-design-system/Components.dc.html` (visual spec, sections 01–06), `docs/mono-design-system/README.md` (tokens, Tailwind utilities), `src/styles/tokens.css`.
+Source of truth: `docs/design-system-wireframe/Components.dc.html` (visual spec, sections 01–06), `docs/design-system-wireframe/README.md` (tokens, Tailwind utilities), `src/styles/tokens.css`.
 Rules: `CLAUDE.md` (worktrees, Radix for interaction, `--ds-*` tokens, story + test + jest-axe per component).
 
 ## How agents use this file
@@ -60,7 +60,7 @@ Rules: `CLAUDE.md` (worktrees, Radix for interaction, `--ds-*` tokens, story + t
 | [ ] | C11 | Tabs | `Tabs` | F1 | — | Grid / List / Map. Active = black underline/ink. |
 | [ ] | C12 | Breadcrumb | — | F2 | — | `<nav aria-label>` + `<ol>`, `/` separators, last item `aria-current="page"`. |
 | [ ] | C13 | Pagination | — | C2, F2 | — | Prev / next icon buttons + page numbers, `aria-current`. |
-| [ ] | C14 | NavBar (header) | `NavigationMenu` | C1 | — | Wordmark "MONO/00" + links (Work, Archive, Journal, About, Contact). Mobile collapse optional follow-up. |
+| [ ] | C14 | NavBar (header) | `NavigationMenu` | C1 | — | Wordmark "Design System Wireframe" + links (Work, Archive, Journal, About, Contact). Mobile collapse optional follow-up. |
 
 ### 05 Cards & feedback
 | ✓ | ID | Component | Radix | Deps | Owner | Spec notes |

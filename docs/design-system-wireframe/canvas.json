@@ -37,7 +37,7 @@
     "heading": {
       "kind": "title1",
       "maxW": 4480,
-      "text": "MONO/00 — black, gray, white",
+      "text": "Design System Wireframe — black, gray, white",
       "w": 240,
       "x": 0,
       "y": -300
@@ -49,5 +49,5 @@
     "Form.dc.html"
   ],
   "pages": [],
-  "title": "Monochrome Design System"
+  "title": "Design System Wireframe"
 }

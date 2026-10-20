@@ -14,7 +14,7 @@ import { Icon } from '../../components/Icon';
 import { Field, TextField, useFieldControl } from '../../components/Input';
 
 /*
- * Example form layout from docs/mono-design-system (artboard "Example form").
+ * Example form layout from docs/design-system-wireframe (artboard "Example form").
  * Text fields use the real TextField/Field. Select, Textarea, Checkbox and RadioGroup are not
  * built yet (docs/COMPONENTS_TODO.md C3-C9), so those are native elements; select and textarea
  * are wired to Field through useFieldControl so errors and hints behave like Input.
@@ -114,7 +114,7 @@ const ContactForm = () => {
   return (
     <div className="mx-auto flex w-full max-w-360 flex-col gap-16 p-6 lg:p-24">
       <header className="flex justify-between border-b border-ink pb-6 font-mono text-caption uppercase tracking-[0.08em] text-muted">
-        <span>MONO/00 — Patterns</span>
+        <span>Design System Wireframe — Patterns</span>
         <span>Example form · v0.1</span>
       </header>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>MONO/00 Example form</title>
+<title>Design System Wireframe Example form</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -20,7 +20,7 @@ input::placeholder,textarea::placeholder{color:#767676}
 <div style="width: 1440px; height: 1500px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 64px">
 
 <header style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959; border-bottom: 1px solid #000000; padding-bottom: 24px">
-<span>MONO/00 — Patterns</span>
+<span>Design System Wireframe — Patterns</span>
 <span>Example form · v0.1</span>
 </header>
 
@@ -78,18 +78,18 @@ input::placeholder,textarea::placeholder{color:#767676}
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <label for="f-first" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">First name</label>
-<input id="f-first" type="text" autoComplete="given-name" value="{{v.first}}" onChange="{{on.first}}" aria-invalid="{{f.first.invalid}}" aria-describedby="f-first-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.first.border}}; border-radius: 0; background: {{f.first.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<input id="f-first" type="text" autoComplete="given-name" value="{{v.first}}" onChange="{{on.first}}" aria-invalid="{{f.first.invalid}}" aria-describedby="f-first-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.first.border}}; border-radius: 0; background: {{f.first.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 16px; color: #000000">
 <sc-if value="{{f.first.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-first-e" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: enter your first name</span></sc-if>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <label for="f-last" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Last name</label>
-<input id="f-last" type="text" autoComplete="family-name" value="{{v.last}}" onChange="{{on.last}}" aria-invalid="{{f.last.invalid}}" aria-describedby="f-last-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.last.border}}; border-radius: 0; background: {{f.last.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<input id="f-last" type="text" autoComplete="family-name" value="{{v.last}}" onChange="{{on.last}}" aria-invalid="{{f.last.invalid}}" aria-describedby="f-last-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.last.border}}; border-radius: 0; background: {{f.last.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 16px; color: #000000">
 <sc-if value="{{f.last.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-last-e" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: enter your last name</span></sc-if>
 </div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <label for="f-email" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Email</label>
-<input id="f-email" type="email" autoComplete="email" placeholder="name@domain.com" value="{{v.email}}" onChange="{{on.email}}" aria-invalid="{{f.email.invalid}}" aria-describedby="f-email-h" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.email.border}}; border-radius: 0; background: {{f.email.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<input id="f-email" type="email" autoComplete="email" placeholder="name@domain.com" value="{{v.email}}" onChange="{{on.email}}" aria-invalid="{{f.email.invalid}}" aria-describedby="f-email-h" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.email.border}}; border-radius: 0; background: {{f.email.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 16px; color: #000000">
 <sc-if value="{{f.email.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-email-h" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: enter a full email address</span></sc-if>
 <sc-if value="{{f.email.valid}}" hint-placeholder-val="{{ true }}"><span id="f-email-h" style="font-size: 13px; color: #595959">We only use this to reply.</span></sc-if>
 </div>
@@ -100,7 +100,7 @@ input::placeholder,textarea::placeholder{color:#767676}
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <label for="f-topic" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Topic</label>
-<select id="f-topic" value="{{v.topic}}" onChange="{{on.topic}}" aria-invalid="{{f.topic.invalid}}" aria-describedby="f-topic-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.topic.border}}; border-radius: 0; background: {{f.topic.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 15px; color: #000000">
+<select id="f-topic" value="{{v.topic}}" onChange="{{on.topic}}" aria-invalid="{{f.topic.invalid}}" aria-describedby="f-topic-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.topic.border}}; border-radius: 0; background: {{f.topic.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 16px; color: #000000">
 <option value="">Choose a topic</option>
 <option value="project">New project</option>
 <option value="print">Print order</option>
@@ -122,7 +122,7 @@ input::placeholder,textarea::placeholder{color:#767676}
 <label for="f-msg" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Message</label>
 <span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">{{msgCount}} / 500</span>
 </div>
-<textarea id="f-msg" rows="6" maxLength="500" placeholder="A few lines about the project" value="{{v.message}}" onChange="{{on.message}}" aria-invalid="{{f.message.invalid}}" aria-describedby="f-msg-h" style="box-sizing: border-box; padding: 12px; border: {{f.message.border}}; border-radius: 0; background: {{f.message.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 15px; line-height: 1.5; color: #000000; resize: vertical"></textarea>
+<textarea id="f-msg" rows="6" maxLength="500" placeholder="A few lines about the project" value="{{v.message}}" onChange="{{on.message}}" aria-invalid="{{f.message.invalid}}" aria-describedby="f-msg-h" style="box-sizing: border-box; padding: 12px; border: {{f.message.border}}; border-radius: 0; background: {{f.message.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 16px; line-height: 1.5; color: #000000; resize: vertical"></textarea>
 <sc-if value="{{f.message.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-msg-h" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: write at least 20 characters</span></sc-if>
 <sc-if value="{{f.message.valid}}" hint-placeholder-val="{{ true }}"><span id="f-msg-h" style="font-size: 13px; color: #595959">At least 20 characters.</span></sc-if>
 </div>
