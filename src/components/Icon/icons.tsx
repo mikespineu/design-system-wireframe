@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-/** Paths copied from docs/mono-design-system/Components.dc.html (24x24 viewBox, stroked, no fill). */
+/** Paths copied from docs/design-system-wireframe/Components.dc.html (24x24 viewBox, stroked, no fill). */
 export const icons = {
   plus: <path d="M12 4v16M4 12h16" />,
   search: (

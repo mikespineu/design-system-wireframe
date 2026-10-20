@@ -3,7 +3,7 @@
 @import './tokens.css';
 
 /*
- * MONO/00 theme. Tailwind's default palette, radii and shadows are cleared,
+ * Design System Wireframe theme. Tailwind's default palette, radii and shadows are cleared,
  * so only on-system utilities exist: a class such as bg-blue-500, rounded-lg or
  * shadow-md generates no CSS. The only hues are the muted status colors.
  */

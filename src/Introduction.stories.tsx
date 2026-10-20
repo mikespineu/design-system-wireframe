@@ -69,7 +69,7 @@ export const Intro: Story = {
     <main className="bg-white font-sans text-text">
       <Frame>
         <div className="py-16 md:py-24">
-          <p className="font-mono text-body text-muted">MONO/00 design system</p>
+          <p className="font-mono text-body text-muted">Design System Wireframe</p>
           <h1 className="mt-6 max-w-[14ch] text-[clamp(3rem,9vw,7.5rem)] font-medium leading-[0.95] tracking-[-0.04em] text-ink">
             Wireframe the whole app. Style it later.
           </h1>

@@ -1,4 +1,4 @@
-# MONO/00 — Monochrome Design System
+# Design System Wireframe
 
 Minimal black / gray / white system. White ground, gray accents, black for ink and action, muted green and red for feedback only. Photography is always monochrome. Titles in Red Hat Mono, body in Red Hat Text.
 
