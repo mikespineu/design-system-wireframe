@@ -3,7 +3,7 @@ task: DS-1
 title: "Theming infrastructure with a default theme"
 line: build            # design | build
 status: in-progress    # claimed | in-progress | waiting | blocked | merged
-stage: qa
+stage: pr
 branch: "feat/DS-1-theming-infrastructure-with-a-default"
 worktree: ".worktrees/feat-DS-1-theming-infrastructure-with-a-default"
 pr: ""
@@ -37,6 +37,9 @@ updated: "2026-10-20 12:56"
 - 13:00 build: fix loop 1 done (7 tool uses, default model): palette utilities → role utilities, new role --ds-color-text-strong (aliases gray-800), guard test semanticColors.test.ts
 - 13:00 gates: lint, typecheck, test (91), storybook pass
 - 13:00 qa: qa re-run started
+- 13:01 qa: pass (re-run), no findings
+- 13:01 review: pass (re-run), no findings
+- 13:01 pr: roadmap ticked, opening PR
 
 ## Gate results
 
