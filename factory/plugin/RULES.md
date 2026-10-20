@@ -1,6 +1,6 @@
 # Factory rules (shared by every `/factory:*` skill)
 
-The factory is a set of Claude Code skills. You (the main session) are the orchestrator: you follow these rules exactly, delegate the creative work to the factory subagents (`designer`, `builder`, `qa`, `reviewer`), and run every check yourself as a real command. Whether something passed is decided by exit codes and these rules, never by an agent's opinion. No agent approves its own output, and you never approve on the user's behalf.
+The factory is a set of Claude Code skills. You (the main session) are the orchestrator: you follow these rules exactly, delegate the creative work to the factory subagents (`planner`, `designer`, `builder`, `qa`, `reviewer`), and run every check yourself as a real command. Whether something passed is decided by exit codes and these rules, never by an agent's opinion. No agent approves its own output, and you never approve on the user's behalf.
 
 State lives in files and git: `roadmap.md` on `main` (the backlog), one **job file per task** (`factory/jobs/DS-<n>.md`, below), task branches, and PRs. Don't keep state anywhere else.
 
@@ -19,7 +19,7 @@ State lives in files and git: `roadmap.md` on `main` (the backlog), one **job fi
 - `has_ui: yes` build tasks need an **approved spec on `main`** from the design task they depend on.
 - **Ready** means: status `todo`, every `depends_on` task is `[x]` done on main, there's no `feat/DS-n-*` branch on origin, and (for UI builds) the approved spec exists.
 - `needs_human: yes`: `/factory:next` skips it. If the user starts it explicitly, its PR needs their approval before merging.
-- Never edit `roadmap.md` on `main`. Roadmap changes go through a PR: the task's own PR ticks it done; `/factory:add` and `/factory:edit` open roadmap PRs.
+- Never edit `roadmap.md` on `main`. Roadmap changes go through a PR: the task's own PR ticks it done; `/factory:add`, `/factory:plan` and `/factory:edit` open roadmap PRs.
 
 Read the backlog with `git fetch -q origin main && git show origin/main:roadmap.md`.
 
@@ -82,7 +82,7 @@ After every Builder pass: `git -C <worktree> diff --name-only origin/main...HEAD
 - **Designer** may only change `docs/specs/**` and `docs/design-system-wireframe/**`.
 - **Builder** may not change `docs/specs/**`, `docs/design-system-wireframe/**`, `.husky/**`, or `.github/workflows/claude-code-review.yml`.
 - **QA** may only add or change `*.test.ts(x)` files and `.qa/**` (gitignored).
-- **Reviewer** changes nothing.
+- **Reviewer** and **Planner** change nothing.
 
 Revert anything outside scope (`git checkout -- <file>` / delete untracked) and tell the user what you reverted.
 

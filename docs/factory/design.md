@@ -14,7 +14,7 @@ Take a task from `roadmap.md` to a merged PR with as little hand-holding as poss
 | Where it runs | Locally on the MacBook. GitHub Actions only run the PR checks. |
 | Auth / budget | The `claude` terminal login; no API key. The usage limit is the only ceiling. |
 | Trigger | Manual. Parallel tasks run in separate Claude Code sessions, one worktree each. |
-| Orchestration | The main session follows the skill and `RULES.md`; the `designer`, `builder`, `qa` and `reviewer` subagents do the creative work. |
+| Orchestration | The main session follows the skill and `RULES.md`; the `planner`, `designer`, `builder`, `qa` and `reviewer` subagents do the creative work. |
 | Fix loops | Max 2 per stage, then blocked. `/factory:retry DS-n opus` for a stronger model. |
 | Design | Only design tasks make a canvas and a spec. Canvas published to claude.ai (stable URL). The human always approves. |
 | UI guard | `has_ui: no` builds that touch UI paths stop and ask; `--allow-ui` accepts and requires approval. |
@@ -39,7 +39,7 @@ factory/
   plugin/
     .claude-plugin/plugin.json
     RULES.md                         # shared rules every skill reads
-    agents/                          # designer, builder, qa, reviewer (prompt, tools, model)
+    agents/                          # planner, designer, builder, qa, reviewer (prompt, tools, model)
     skills/
       status/ (+ scripts/status-page.mjs)   next/   add/   edit/
       design/   build/   approve/   merge/   retry/
@@ -67,7 +67,7 @@ docs/design-system-wireframe/*.dc.html   # canvases
 
 ## 8. Adding to the roadmap
 
-`/factory:add <feature>`: at most 3 questions → split (UI → design + build; non-UI → one task; tokens/release/secrets → `needs_human`; > 4 tasks → "split it") → preview the exact markdown → only after the user's ok: reserve the ID through the branch name `chore/roadmap-DS-n-<slug>` (GitHub API, atomic; also counts IDs in other branches) → roadmap PR labeled `factory:approved` → merge on green checks. `/factory:edit DS-n <change>` is the same for one todo/blocked task.
+`/factory:add <feature>`: at most 3 questions → split (UI → design + build; non-UI → one task; tokens/release/secrets → `needs_human`; > 4 tasks → "split it") → preview the exact markdown → only after the user's ok: reserve the ID through the branch name `chore/roadmap-DS-n-<slug>` (GitHub API, atomic; also counts IDs in other branches) → roadmap PR labeled `factory:approved` → merge on green checks. `/factory:edit DS-n <change>` is the same for one todo/blocked task. `/factory:plan [focus] [count]` puts a read-only `planner` subagent in front (repo inventory, job history, gap analysis, optional web search → ranked JSON proposals), validates its tasks against the same rules, lets the user pick, and lands the picked ones in one `roadmap: plan …` PR.
 
 ## 9. Status page
 

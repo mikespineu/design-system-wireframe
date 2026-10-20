@@ -16,6 +16,7 @@ Design: [`design.md`](./design.md) · Rules the skills follow: [`factory/plugin/
 | --- | --- |
 | `/factory:status [DS-n]` | Opens the status page (needs you, in progress, runnable, epics, board); with an ID, shows that task's job file. For a live page that refreshes every 10 s, run `npm run factory:status` in a terminal |
 | `/factory:next [design\|build]` | Next runnable task and the command to start it |
+| `/factory:plan [focus] [count]` | Researches the repo, backlog and job history, proposes the next features as tasks; you pick, it opens a roadmap PR |
 | `/factory:add <feature>` | Turns a feature into roadmap tasks, previews them, opens a roadmap PR after your ok |
 | `/factory:edit DS-n <change>` | Changes one todo/blocked task through a PR (incl. block/unblock, `needs_human`, deps) |
 | `/factory:design DS-n` | Design line: canvas + spec → draft PR waiting for you |
@@ -41,6 +42,16 @@ Claude asks up to 3 short questions, then shows the tasks exactly as they'll app
 | No UI (tooling, CI, docs) | one task: build, infra or docs |
 | Needs new tokens, a release or secrets | the same, marked `needs_human` |
 | More than 4 tasks | "split it into smaller features" |
+
+## 1b. Plan the roadmap
+
+```text
+/factory:plan
+/factory:plan components 3
+/factory:plan publishing
+```
+
+The Planner (read-only) inventories `src/components`, specs, canvases, tokens, CI and the backlog, reads the factory's job history (blocked reasons, repeated failures), and looks for gaps (missing components, Radix primitives without a wrapper, missing infra). It may do a few web searches when the focus asks for an outside view. You get a summary, a recommended next task, and ranked features with the exact roadmap markdown. Answer `all`, `1,3` or a change; it lands only what you picked through a `roadmap: plan …` PR, like `/factory:add`.
 
 ## 2. Design a component
 
