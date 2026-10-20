@@ -3,7 +3,7 @@ task: DS-1
 title: "Theming infrastructure with a default theme"
 line: build            # design | build
 status: in-progress    # claimed | in-progress | waiting | blocked | merged
-stage: build
+stage: qa
 branch: "feat/DS-1-theming-infrastructure-with-a-default"
 worktree: ".worktrees/feat-DS-1-theming-infrastructure-with-a-default"
 pr: ""
@@ -34,6 +34,9 @@ updated: "2026-10-20 12:56"
 - 12:59 review: pass, no findings (ran alongside QA)
 - 12:59 qa: fail — components use palette utilities (bg-white, bg-gray-*, text-gray-*) not semantic roles
 - 12:59 build: fix loop 1 (qa); user allowed component edits
+- 13:00 build: fix loop 1 done (7 tool uses, default model): palette utilities → role utilities, new role --ds-color-text-strong (aliases gray-800), guard test semanticColors.test.ts
+- 13:00 gates: lint, typecheck, test (91), storybook pass
+- 13:00 qa: qa re-run started
 
 ## Gate results
 
@@ -48,3 +51,4 @@ updated: "2026-10-20 12:56"
 
 - Run with `--allow-ui`: done_when requires changing `src/styles/tokens.css`, which the UI guard would block. UI guard skipped; PR gets `factory:needs-approval`.
 - QA found components read palette primitives. User allowed component edits (overrides "no component changes") to swap them for role utilities with identical rendered values.
+- New semantic role `--ds-color-text-strong` (= gray-800, no new raw value) for Alert/Tag text.
