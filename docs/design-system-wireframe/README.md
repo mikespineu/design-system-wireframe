@@ -13,6 +13,27 @@ Live canvas: https://claude.ai/artifact/4R5XwSAJ1Hj8gTqgLdwTmK
 | `Form.dc.html` | Example contact form with live validation (interactive) |
 | `canvas.json` | Canvas layout (artboard sizes and positions) |
 
+## Factory status
+
+The roadmap for this system is built by the [software factory](../factory/README.md). To see what's in progress, what needs you, and what's ready to start:
+
+- In Claude Code: type `/factory:status` (add a task ID, e.g. `/factory:status DS-4`, to also see that task's timeline and notes).
+- From a terminal, in the repo:
+
+  ```bash
+  node factory/plugin/skills/status/scripts/status-page.mjs --open
+  ```
+
+Both write `.factory/status.html` (gitignored) and open it in the browser. The page is a snapshot, not live: run the command again to refresh it. Click a task on the board to see its details.
+
+| Flag | Effect |
+| --- | --- |
+| `--open` | open the page in the browser |
+| `--json` | print the data as JSON instead of the summary |
+| `--quiet` | don't print the text summary |
+| `--no-fetch` | skip `git fetch` (faster, may be out of date) |
+| `--local` | read `roadmap.md` from your checkout instead of `origin/main` (preview unmerged roadmap edits) |
+
 ## Tailwind
 
 Tokens live in `src/styles/tokens.css` (`--ds-*`). `src/styles/tailwind.css` imports them and maps them into the Tailwind v4 theme. Import that one file, as `.storybook/preview.tsx` does, to get the fonts, tokens and utilities.
