@@ -3,6 +3,7 @@ import '../src/styles/tailwind.css'
 
 const preview: Preview = {
   parameters: {
+    options: { storySort: { order: ['Introduction', 'Foundations', 'Components', 'Patterns'] } },
     controls: {
       matchers: {
        color: /(background|color)$/i,
