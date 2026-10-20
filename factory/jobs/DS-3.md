@@ -2,8 +2,8 @@
 task: DS-3
 title: "Textarea — design"
 line: design
-status: in-progress
-stage: ci
+status: merged
+stage: merge
 branch: "feat/DS-3-textarea-design"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-3-textarea-design"
 pr: "27"
@@ -15,7 +15,7 @@ loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
 needs_you: ""
 blocked_reason: ""
 started: "2026-10-20T10:25Z"
-updated: "2026-10-20T10:35Z"
+updated: "2026-10-20T10:36Z"
 ---
 
 # DS-3 Textarea — design
@@ -30,6 +30,8 @@ updated: "2026-10-20T10:35Z"
 - 12:29 pr: waiting for you: approve or request changes
 - 12:30 pr: opened draft #27 with factory:needs-approval
 - 12:35 approve: approved by mikespin (in chat); spec stamped, DS-3 ticked, DS-4 done_when updated to the approved spec
+- 12:36 ci: claude-review and deploy passed
+- 12:36 merge: squash-merging #27
 
 ## Gate results
 
