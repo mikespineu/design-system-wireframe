@@ -1,74 +1,46 @@
 # Software factory
 
-> **Status: planned, not built yet.** This guide describes how the factory will work once it's built from [`design.md`](./design.md). Commands below don't exist yet.
+The factory takes tasks from [`roadmap.md`](../../roadmap.md), designs or builds each one in its own worktree with Claude subagents, checks the result with hard gates, opens a pull request, and merges it when checks pass and you've approved what needs approving. Everything is a Claude Code skill: you type `/factory:…`.
 
-The factory takes tasks from [`roadmap.md`](../../roadmap.md), designs or builds each one in its own worktree with Claude agents, checks the result with hard gates, opens a pull request, and merges it when checks pass and you've approved what needs approving. You start everything by hand and watch it on a local dashboard.
+Design: [`design.md`](./design.md) · Rules the skills follow: [`factory/plugin/RULES.md`](../../factory/plugin/RULES.md) · Reusable prompt for other projects: [`PROMPT.md`](./PROMPT.md)
 
-## Before you start
+## Setup (once)
 
-- You're logged in to Claude Code in the terminal (run `claude` once). The factory reuses that login; there's no API key to set.
-- `gh` is installed and logged in (`gh auth status`).
-- You're in the primary checkout of this repo, with `npm ci` done.
+1. Be logged in to Claude Code in the terminal (`claude`). No API key needed; your usage limit is the only budget.
+2. Be logged in to GitHub CLI: `gh auth status`.
+3. Open Claude Code in this repo and trust the folder. `.claude/settings.json` registers the repo-local plugin. Run `/plugin` and check that **factory@design-system-factory** is enabled; if it isn't, install it from the `design-system-factory` marketplace there.
 
-Your usage limit is the only budget. If you hit it, the task is marked blocked with the reason "usage limit reached" and you retry it later.
+## Commands
 
-## The everyday loop
+| Command | What it does |
+| --- | --- |
+| `/factory:status [DS-n]` | Opens the status page (needs you, in progress, runnable, epics, board); with an ID, shows that task's job file |
+| `/factory:next [design\|build]` | Next runnable task and the command to start it |
+| `/factory:add <feature>` | Turns a feature into roadmap tasks, previews them, opens a roadmap PR after your ok |
+| `/factory:edit DS-n <change>` | Changes one todo/blocked task through a PR (incl. block/unblock, `needs_human`, deps) |
+| `/factory:design DS-n` | Design line: canvas + spec → draft PR waiting for you |
+| `/factory:design DS-n <feedback>` | Revises the design (same canvas link) |
+| `/factory:build DS-n [opus]` | Build line: Builder → gates → QA → Reviewer → PR → merge on green checks |
+| `/factory:approve DS-n` | Your approval: a design, or a PR that needs you; then it merges on green checks |
+| `/factory:merge DS-n` | Re-checks a PR and merges it if the rules allow |
+| `/factory:retry DS-n [opus] [--from stage] [--allow-ui]` | Resumes a blocked task, optionally with a stronger model |
+
+Run one task per Claude Code session if you want several at once: each gets its own worktree and branch, and a task can't be taken twice.
+
+## 1. Add a feature
 
 ```text
-/factory:add "…"        add a feature to the roadmap
-/factory:design DS-n    designer makes a canvas + spec → you approve
-/factory:build DS-n     builder implements → gates → QA → review → PR → merge
-/factory:dashboard      watch it all live
+/factory:add Tooltip that shows on IconButton hover and keyboard focus
 ```
 
-Each `/factory:*` command works in any Claude Code session. `design` and `build` start a background run and reply right away with the worktree and dashboard link, so you can start another task from a second session while the first one runs.
-
-## 1. Add a feature to the roadmap
-
-```text
-/factory:add "Tooltip that shows on IconButton hover and keyboard focus"
-```
-
-1. Claude may ask up to 3 short questions (which epic, does it have UI, what does it depend on).
-2. It shows you the new tasks exactly as they'll appear in `roadmap.md`:
-
-   ```md
-   - [ ] **DS-13 Tooltip — design.** Define placement, delay, states, keyboard behavior.
-     - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
-     - done_when:
-       - Canvas published and linked in `docs/specs/Tooltip.md`
-       - Spec covers every state and keyboard behavior
-   - [ ] **DS-14 Tooltip — implementation.** Build on Radix `Tooltip`.
-     - type: build · has_ui: yes · depends_on: DS-13 · needs_human: no · status: todo
-     - done_when:
-       - Matches approved spec in every state
-       - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-   ```
-
-3. Say "ok" to apply, or ask for changes and get a new preview.
-4. The factory opens a PR `roadmap: add DS-13, DS-14` and merges it once checks are green.
-
-How features get split:
+Claude asks up to 3 short questions, then shows the tasks exactly as they'll appear in `roadmap.md`, e.g. `DS-13 Tooltip — design` and `DS-14 Tooltip — implementation` (depends on DS-13). Say "ok" to apply. It opens a `roadmap: add …` PR that merges once checks are green.
 
 | Feature | You get |
 | --- | --- |
-| Has UI | a **design** task, then a **build** task that depends on it |
-| No UI (tooling, CI, docs) | one task: `build`, `infra` or `docs` |
-| Needs new tokens, a release, or secrets | the same, marked `needs_human: yes` |
-| More than 4 tasks | rejected: split it into smaller features |
-
-Other ways to add or change work:
-
-```bash
-# one quick task, no questions
-npm run factory -- add task "Fix Tag focus ring" --type build --has-ui yes --done "Focus ring matches Button"
-```
-
-```text
-/factory:edit DS-6      change an existing task (todo or blocked only)
-```
-
-You can still edit `roadmap.md` by hand in a PR. `npm run lint` runs `factory lint-roadmap`, which checks the fields, IDs and dependencies.
+| Has UI | a design task, then a build task that depends on it |
+| No UI (tooling, CI, docs) | one task: build, infra or docs |
+| Needs new tokens, a release or secrets | the same, marked `needs_human` |
+| More than 4 tasks | "split it into smaller features" |
 
 ## 2. Design a component
 
@@ -76,21 +48,14 @@ You can still edit `roadmap.md` by hand in a PR. `npm run lint` runs `factory li
 /factory:design DS-3
 ```
 
-The Designer:
-
-1. Draws a canvas `docs/design-system-wireframe/<Component>.dc.html` with every size and state, using only existing `--ds-*` tokens.
-2. Publishes it to claude.ai and keeps the same link across revisions.
-3. Writes `docs/specs/<Component>.md` with the canvas link, states, keyboard behavior, token mapping, a11y notes, and `approved: no`.
-4. Opens a draft PR and puts the design in **Needs you** on the dashboard.
-
-Then it's your turn, every time:
+The Designer draws `docs/design-system-wireframe/<Component>.dc.html` with every size and state, and writes `docs/specs/<Component>.md` (states, keyboard, Radix primitive, token mapping, a11y, token requests). The canvas is published to claude.ai, and a draft PR opens with the link. Then it's always your call:
 
 ```text
-/factory:approve DS-3                              looks good
-npm run factory -- request-changes DS-3 "…"        what to change (or use the dashboard)
+/factory:approve DS-3                       looks good → merges on green checks
+/factory:design DS-3 make the counter right-aligned   → revision, same canvas link
 ```
 
-Request changes as many times as you like. Approving sets `approved: yes` with the date and your name, and labels the PR `factory:approved`. The factory merges it once checks are green. The build task can start only after the approved spec is on `main`.
+The build task (DS-4) is ready once the approved spec is on `main`.
 
 ## 3. Build a task
 
@@ -98,62 +63,48 @@ Request changes as many times as you like. Approving sets `approved: yes` with t
 /factory:build DS-4
 ```
 
-What happens, in order:
-
-| Stage | What it does | If it fails |
+| Stage | What happens | If it fails |
 | --- | --- | --- |
-| Builder | implements with TDD in `.worktrees/feat-DS-4-…`, from the approved spec if the task has UI | – |
-| UI guard | for `has_ui: no` tasks, stops if UI files changed | blocked, asks you |
-| Gates | `lint`, `typecheck`, `test` (coverage ≥ 80 %), `build-storybook` | back to Builder, max 2 loops |
-| QA | checks Storybook against the canvas, keyboard, axe | back to Builder, max 2 loops |
-| Reviewer | reads the diff against `done_when` and `CLAUDE.md` | back to Builder, max 2 loops |
-| PR | `DS-4: <title>`, each `done_when` with how it's met | – |
-| Merge | squash-merge when every GitHub check is green (and `factory:approved` if needed) | red check → back to Builder |
+| Builder | TDD in `.worktrees/feat-DS-4-…`, from the approved spec if the task has UI | – |
+| UI guard | `has_ui: no` tasks stop if they touch UI files | blocked; `/factory:retry DS-n --allow-ui` accepts it |
+| Gates | lint, typecheck, test (coverage ≥ 80 %), build-storybook | back to Builder, max 2 loops |
+| QA | Storybook vs spec and canvas, keyboard, axe; may add tests | back to Builder, max 2 loops |
+| Reviewer | diff vs `done_when`, spec and `CLAUDE.md` | back to Builder, max 2 loops |
+| PR | `DS-4: <title>`, each `done_when` with how it's met; task ticked in the roadmap | – |
+| Merge | squash-merge when every check is green (and `factory:approved` if needed) | red check → back to Builder |
 
-`build` refuses with a reason if the task is the wrong type, its dependencies aren't done, it's marked `needs_human`, or it has UI and no approved spec.
+Your approval is needed before merge for design PRs, `needs_human` tasks, and UI changes you accepted with `--allow-ui`.
 
-**Human approval is needed before merging** for design PRs, tasks with `needs_human: yes`, and anything you unblocked with `--allow-ui`. Everything else merges on its own once checks pass.
+## 4. When something's blocked
 
-## 4. When something goes wrong
-
-```text
-/factory:status                        what's running, ready, waiting for you
-/factory:retry DS-4                    rerun from the stage that failed
-/factory:retry DS-4 --model opus       same, with a stronger model
-/factory:unblock DS-4 --allow-ui       accept a UI change on a no-UI task
-/factory:block DS-4 "waiting on API"   park a task
-/factory:stop                          stop every run at the next safe point
-```
-
-`/factory:stop` creates `.factory/STOP`; runs finish their current step and stop. `npm run factory -- stop --clear` lets them run again.
-
-## 5. Dashboard
+The PR gets `factory:blocked` and a comment with the reason, the next step and the last output. The job file says the same.
 
 ```text
-/factory:dashboard
+/factory:status DS-4          what happened (timeline + notes)
+/factory:retry DS-4 opus      try again from the failed stage with a stronger model
 ```
 
-Opens a local page (its own port, `127.0.0.1` only) that updates live:
+To stop a run, press Esc in its session; then `/factory:retry` picks it up later.
 
-- **Needs you:** designs to approve, blocked tasks with the reason, PRs waiting for you. You get a browser and macOS notification for each new item.
-- **Now running:** one card per run with its stage, elapsed time, model and live activity.
-- **Board**, **Runnable now** (with Run buttons), task details with logs and gate results, and a global **STOP**.
+## Job files
+
+Each task has `factory/jobs/DS-<n>.md`: status, stage, links (branch, PR, canvas, Storybook), loop counts, model, a timeline of every step, gate results, and notes. It's written on the task branch while the task runs and lands in `factory/jobs/` when the PR merges, so the folder is the factory's history.
 
 ## Where things live
 
 | Path | What |
 | --- | --- |
-| `roadmap.md` | tasks: the only backlog, changed only by PRs |
-| `docs/specs/<Component>.md` | approved design specs |
+| `roadmap.md` | the backlog; changed only through PRs |
+| `factory/jobs/DS-<n>.md` | per-task status and history |
+| `docs/specs/<Component>.md` | design specs (approved = `approved: yes`) |
 | `docs/design-system-wireframe/*.dc.html` | canvases |
-| `.factory/events.jsonl` | every event, append-only (gitignored) |
-| `.factory/state.json` | current snapshot, rebuilt from events |
-| `.factory/logs/DS-n.log` | full log per task |
-| `.worktrees/feat-DS-n-…` | each task's worktree |
+| `factory/plugin/` | the plugin: `RULES.md`, `agents/`, `skills/` |
+| `.factory/status.html` | the generated status page (gitignored) |
+| `.worktrees/feat-DS-n-…` | each running task's worktree |
 
 ## Rules the factory never breaks
 
-- Never pushes to `main` directly and never uses `--no-verify`.
+- Never pushes to `main` and never uses `--no-verify`.
 - Never merges with a red or missing check, or without your approval where it's required.
-- Never lets an agent approve its own work.
-- Never writes secrets to logs or events.
+- Never lets an agent approve its own work, and never approves on your behalf.
+- Never writes secrets into job files, logs or PRs.

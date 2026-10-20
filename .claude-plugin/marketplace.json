@@ -1,0 +1,12 @@
+{
+  "name": "design-system-factory",
+  "owner": { "name": "mikespin" },
+  "metadata": { "description": "Local plugins for the design-system repo" },
+  "plugins": [
+    {
+      "name": "factory",
+      "source": "./factory/plugin",
+      "description": "Software factory: /factory:* commands to plan, design, build, approve and merge roadmap tasks"
+    }
+  ]
+}

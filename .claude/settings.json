@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "design-system-factory": {
+      "source": { "source": "directory", "path": "./" }
+    }
+  },
+  "enabledPlugins": {
+    "factory@design-system-factory": true
+  }
+}

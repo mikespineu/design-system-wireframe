@@ -9,3 +9,7 @@ dist
 
 Close
 .vercel
+
+# software factory runtime
+.factory
+.qa

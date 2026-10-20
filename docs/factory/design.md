@@ -1,317 +1,88 @@
 # Software factory: design
 
-Status: **draft v2, awaiting approval**. Source brief: [`PROMPT.md`](./PROMPT.md).
+Status: **v3, built as Claude Code skills.** Source brief: [`PROMPT.md`](./PROMPT.md) (reusable in other projects). Usage: [`README.md`](./README.md). Operating rules the skills follow: [`factory/plugin/RULES.md`](../../factory/plugin/RULES.md).
 
 ## 1. Intent
 
-Take a task from `roadmap.md` to an open pull request with as little hand-holding as possible, while the human keeps every decision that matters: approving designs and merging PRs. Each task runs isolated in its own worktree, is checked by hard gates (not agent opinion), and is visible live on a local dashboard.
+Take a task from `roadmap.md` to a merged PR with as little hand-holding as possible, while the human keeps the decisions that matter: approving designs and anything marked `needs_human`. Each task runs isolated in its own worktree, is checked by hard gates (not agent opinion), and leaves a written record.
 
-## 2. Decisions from the brainstorm (yours)
+## 2. Decisions
 
 | Topic | Decision |
 | --- | --- |
-| Where it runs | Locally on the MacBook only. Agents don't run in GitHub Actions; Actions only run the PR checks. |
-| Auth / budget | No separate login and no API key: agents reuse the session you're already logged into with `claude` in the terminal (verified: headless `claude -p` runs with no `ANTHROPIC_API_KEY`). No dollar budget; the usage limit is the ceiling. |
-| Fix loops | At most **2** fix loops per stage (gates, QA, review). Then `blocked`; `factory retry DS-n --model <id>` reruns with a stronger model. |
-| Canvas scope | Only `design` tasks create a canvas and a spec. A `build` task with no UI needs no spec, and the factory makes sure it really has no UI (§10). |
-| PR and merge | Every task ends in a PR. The factory merges it itself once GitHub checks are green and, where needed, a human has approved it on GitHub (§10.6). |
-| Trigger | Manual, from Claude Code (`/factory:build DS-4`, `/factory:next`, …). No daemon picks work on its own. |
-| Concurrency | Several tasks at once, each in its own worktree, started from separate Claude Code sessions. |
-| Where you watch | The dashboard. The slash command starts a background run and returns immediately; no chat is attached to the run. |
-| Design | Every design task produces a Claude Design canvas. You always approve the design; no agent approves it. The approved canvas becomes part of the spec the Builder and QA work from. |
+| Interface | Claude Code skills typed as `/factory:…`, packaged as a repo-local plugin. No CLI, daemon or server. |
+| Where it runs | Locally on the MacBook. GitHub Actions only run the PR checks. |
+| Auth / budget | The `claude` terminal login; no API key. The usage limit is the only ceiling. |
+| Trigger | Manual. Parallel tasks run in separate Claude Code sessions, one worktree each. |
+| Orchestration | The main session follows the skill and `RULES.md`; the `designer`, `builder`, `qa` and `reviewer` subagents do the creative work. |
+| Fix loops | Max 2 per stage, then blocked. `/factory:retry DS-n opus` for a stronger model. |
+| Design | Only design tasks make a canvas and a spec. Canvas published to claude.ai (stable URL). The human always approves. |
+| UI guard | `has_ui: no` builds that touch UI paths stop and ask; `--allow-ui` accepts and requires approval. |
+| Merge | Every task ends in a PR; the factory squash-merges on green checks (≥ 1 check), plus `factory:approved` where required. |
+| State | `roadmap.md` (via PRs), job files `factory/jobs/DS-n.md`, branches, PRs, labels. |
+| Watching | `/factory:status` writes and opens a static status page; each session shows its own run live. |
 
 ## 3. Goals, non-goals, anti-goals
 
-**Goals**
-- `factory design DS-n` → canvas + spec, waiting for your approval.
-- `factory build DS-n` → implemented change in a worktree, all gates green, QA + review passed, PR open, merged once GitHub checks (and, if required, a human) approve.
-- Live dashboard showing every run across sessions, with a "Needs you" panel.
-- Two lines (design, build) independently runnable.
+**Goals:** design → approved spec → build → merged PR, with a job file per task and a status page across all tasks; adding features to the roadmap from Claude Code.
 
-**Non-goals (now):** GitHub Issues backlog (adapter seam only), npm publishing, hosted/team dashboard, scheduled or unattended runs, running agents in CI.
+**Non-goals:** a CLI or dashboard server, unattended or scheduled runs, running agents in CI, GitHub Issues as the backlog, npm publishing.
 
-**Anti-goals (failure even if it "works")**
-- Any direct push to `main`, any `--no-verify`, or a merge with a red/missing check or without a required human approval.
-- A build starting from a spec you did not approve.
-- An agent marking its own output as passed (gates are code; QA/Reviewer are separate agents).
-- Two runs silently clobbering each other's state or worktree.
-- A dead dashboard or preview link.
+**Anti-goals:** any push to `main` or `--no-verify`; merging with a red or missing check or without required approval; a build from an unapproved spec; an agent approving its own work; two sessions taking the same task or ID.
 
-## 4. Constraints
-
-- `CLAUDE.md` rules apply to every run: worktrees under `.worktrees/`, `npm ci` per worktree, per-worktree port formula, Radix primitives, `--ds-*` tokens only, story + test + `jest-axe` per component, coverage ≥ 80 %, Husky pre-push never bypassed.
-- The factory never commits or pushes to `main` directly; `main` only changes by merging PRs. So **`roadmap.md` on `main` only changes through PRs** (see §6.3).
-- Secrets only from the environment; never written to logs or events.
-
-## 5. Architecture
+## 4. Layout
 
 ```
-Claude Code session ──/factory:*──▶ factory CLI ◀──POST── dashboard (browser)
-                                        │                    ▲ SSE
-                     spawns detached ▼  │ appends            │
-                     run process ──────▶ .factory/events.jsonl ──tail──┘
-                        │  (Agent SDK agents: Designer | Builder, QA, Reviewer)
-                        ▼
-                  .worktrees/feat-DS-n-<slug>
-```
-
-- **One CLI owns all logic** (`factory/cli.ts`, run as `npm run factory -- <cmd>`). Slash commands, dashboard and status line only call it.
-- **Orchestrator core is deterministic TypeScript**, not an LLM: backlog adapter, pick, claim, dependency check, routing by `type`, gates, limits, retries, logs, events, kill switch.
-- **Agents** are Claude Agent SDK (`@anthropic-ai/claude-agent-sdk`, TypeScript) `query()` calls inside the run process, each with its own system prompt, tool allowlist, `maxTurns`, and working directory = the task's worktree. Model IDs and SDK API are checked against the `claude-api` skill at implementation time, not from memory.
-
-### 5.1 Code layout (my call)
-
-```
+.claude-plugin/marketplace.json      # repo-local marketplace → plugin "factory"
+.claude/settings.json                # enables factory@design-system-factory for this repo
 factory/
-  cli.ts                 # commander-style entry: status, next, design, build, approve, block, unblock, retry, stop, dashboard
-  core/
-    backlog/             # BacklogSource interface + RoadmapMdSource (GitHub Issues later)
-    picker.ts            # next runnable task
-    claim.ts             # branch-push claim
-    events.ts            # append / read / tail events.jsonl
-    state.ts             # snapshot rebuilt from events
-    lock.ts              # file lock for shared files
-    limits.ts            # time / turn limits, retries, STOP file
-    gates.ts             # lint, typecheck, test, storybook
-    worktree.ts          # create, npm ci, port, storybook start/stop
-  lines/
-    design.ts            # Designer pipeline
-    build.ts             # Builder → gates → QA → Reviewer → PR
-  agents/                # system prompts + tool allowlists per role
-  dashboard/             # server.ts (http + SSE) and static/ (HTML/CSS/JS)
-  __tests__/
-.claude/commands/factory/*.md   # /factory:status etc.
+  plugin/
+    .claude-plugin/plugin.json
+    RULES.md                         # shared rules every skill reads
+    agents/                          # designer, builder, qa, reviewer (prompt, tools, model)
+    skills/
+      status/ (+ scripts/status-page.mjs)   next/   add/   edit/
+      design/   build/   approve/   merge/   retry/
+  jobs/
+    TEMPLATE.md   README.md   DS-<n>.md (one per task, land with each PR)
+docs/specs/<Component>.md            # design specs (written by the design line)
+docs/design-system-wireframe/*.dc.html   # canvases
 ```
 
-Factory tests run in the existing Jest setup with `@jest-environment node`; they count toward `npm test`, `typecheck` and `lint`.
+## 5. Task model
 
-## 6. Task model and backlog
+`roadmap.md` tasks carry `type · has_ui · depends_on · needs_human · status` and a `done_when` list (1–5 items). A `build` with `has_ui: yes` depends on a `design` task. **Ready** = todo, deps done on main, no branch, and (UI build) an approved spec on main. The factory never edits `main`: a task's own PR ticks it done; `/factory:add` and `/factory:edit` open roadmap PRs. Existing tasks got their fields in this PR (DS-1 to DS-11, plus the new DS-12 for the second theme's build).
 
-### 6.1 Fields
+## 6. Job files
 
-`id, title, epic, type (design|build|infra|docs), status (todo|ready|in-progress|review|done|blocked), depends_on, needs_human, done_when[], branch, pr, blocked_reason` — as in the brief — plus **`has_ui: boolean`** (does this task change anything a user sees: components, styles, tokens, Storybook pages). A `build` task with `has_ui: yes` must depend on a `design` task.
+`factory/jobs/DS-n.md`: frontmatter (`status`, `stage`, branch, worktree, PR, canvas and Storybook links, model, loop counts, `needs_you`, `blocked_reason`, timestamps), then `## Timeline` (one line per event), `## Gate results`, and `## Notes`. The skill updates it at every stage and commits it with the work, so it's in the PR and stays on `main` as history. The status page reads it from the worktree (live), else from the task branch, else from `main`.
 
-### 6.2 Format in `roadmap.md` (Phase 0)
+## 7. Lines
 
-The existing line stays; metadata goes in indented sub-bullets so it still reads well on GitHub:
+**Design (`/factory:design DS-n`):** claim (branch via GitHub API) → worktree + `npm ci` → job file → Designer subagent (scope: specs and canvases only) → publish the canvas with the Artifact tool (same URL on revisions) → deterministic spec check (fields, sections, tokens exist, canvas is valid HTML; max 2 loops) → draft PR labeled `factory:needs-approval` → waiting for the human. `/factory:design DS-n <feedback>` revises; `/factory:approve DS-n` stamps `approved: yes` with name and date, ticks the roadmap, labels `factory:approved`, and merges on green checks.
 
-```md
-- [ ] **DS-4 Textarea — implementation.** `src/components/Textarea/` with component, CSS, stories, tests …
-  - type: build · has_ui: yes · depends_on: DS-3 · needs_human: no · status: todo
-  - done_when:
-    - Matches approved spec `docs/specs/Textarea.md` in every state
-    - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-```
+**Build (`/factory:build DS-n`):** refuses on the wrong type, open deps, or (UI) no approved spec unchanged since approval → claim → worktree → job file → Builder (TDD; scope excludes specs, canvases, hooks) → UI guard (`has_ui: no`) → gates (lint, typecheck, test with ≥ 80 % coverage, build-storybook) → QA (Storybook on the worktree's port; may only add tests) → Reviewer (read-only; JSON verdict) → tick roadmap + Done entry → PR → wait for checks → merge (approval label if required) → clean up. Each failing stage loops back to the Builder at most twice.
 
-Checkbox is derived from status: `[ ]` todo/ready/blocked, `[~]` in-progress/review, `[x]` done. Unknown fields are kept untouched on rewrite.
+**Blocking:** commit, push, draft PR with `factory:blocked`, a comment with the reason, next step and last output, and the job file updated. `/factory:retry` resumes from that stage.
 
-### 6.3 Who owns which status
+## 8. Adding to the roadmap
 
-Because the factory can't edit `main`:
+`/factory:add <feature>`: at most 3 questions → split (UI → design + build; non-UI → one task; tokens/release/secrets → `needs_human`; > 4 tasks → "split it") → preview the exact markdown → only after the user's ok: reserve the ID through the branch name `chore/roadmap-DS-n-<slug>` (GitHub API, atomic; also counts IDs in other branches) → roadmap PR labeled `factory:approved` → merge on green checks. `/factory:edit DS-n <change>` is the same for one todo/blocked task.
 
-| Status | Lives in | Set by |
-| --- | --- | --- |
-| `todo`, `ready`, `blocked` (human), `needs_human` | `roadmap.md` on `main` | You, via PR (factory can prepare the edit on the task branch) |
-| `in-progress`, `review` | runtime: `.factory/` state + branch/PR existence | Factory |
-| `blocked` (runtime: gate failure, usage limit, timeout) | runtime state, with reason | Factory; cleared by `unblock`/`retry` |
-| `done` | `roadmap.md` `[x]` + Done section | The task's own PR (the Builder ticks it in the PR), so it's true once you merge |
+## 9. Status page
 
-Effective status = runtime overlay on top of `roadmap.md`. `branch` and `pr` are runtime fields (derived from git/`gh`), not written to `roadmap.md`.
+`factory/plugin/skills/status/scripts/status-page.mjs`: plain Node, no dependencies. It reads `origin/main:roadmap.md`, approved specs, job files, remote branches and open PRs (`gh`), and writes `.factory/status.html` (gitignored) styled with `tokens.css`. Sections: needs you, in progress, runnable now, epics, board (with job timeline and notes per task). Also `--json` (used by `/factory:next`) and `--local` (preview with the working-tree roadmap).
 
-### 6.4 Proposed values for existing tasks (you approve in Phase 0)
+## 10. Calls made (check these)
 
-| ID | type | has_ui | depends_on | needs_human | Notes |
-| --- | --- | --- | --- | --- | --- |
-| DS-1 | build | no | – | no | Theming infra; current tokens become `default`, nothing visible changes. UI guard (§10.1) checks that's true |
-| DS-2 | design | yes | DS-1 | **yes** | New theme = new raw token values → human. Canvas shows the theme on existing components |
-| DS-3 | design | yes | – | no | Textarea |
-| DS-4 | build | yes | DS-3 | no | |
-| DS-5 | design | yes | – | no | Toggle |
-| DS-6 | build | yes | DS-5 | no | |
-| DS-7 | infra | no | – | no | Library build |
-| DS-8 | infra | no | DS-7 | no | CI pipeline. **Recommended first**: auto-merge relies on real checks (§10.6) |
-| DS-9 | infra | no | DS-7, DS-8 | **yes** | npm release / trusted publishing → proposal only |
-| DS-10 | docs | no | DS-1, DS-7 | no | Theme skill |
-| DS-11 | docs | no | DS-1, DS-7 | no | Consumer docs |
+- Approval is the `factory:approved` label plus `approved: yes` in the spec, not a GitHub review (GitHub doesn't let you approve your own PR).
+- Branch protection isn't available on this private repo with the current plan, so these rules are the only merge gate. **DS-8 (CI) is recommended first**: today only `claude-code-review` and `storybook-vercel` run on PRs.
+- DS-1 is `has_ui: no` but edits `src/styles/tokens.css`, so the UI guard will stop it. Accept with `/factory:retry DS-1 --allow-ui` (then the PR needs your approval).
+- Default models: Designer and Reviewer `opus`, Builder and QA `sonnet`.
+- Skills that change things are user-only (`disable-model-invocation: true`).
 
-DS-2 also needs a build task for the theme itself and the Storybook theme switcher; Phase 0 proposes it as **DS-12** (`build`, `has_ui: yes`, depends on DS-2).
+## 11. Known limits
 
-### 6.5 Backlog adapter
-
-```ts
-interface BacklogSource {
-  list(): Promise<Task[]>;
-  get(id: TaskId): Promise<Task>;
-  proposeUpdate(id: TaskId, patch: Partial<Task>): Promise<Patch>; // returns an edit to apply on a branch, never writes main
-}
-```
-
-`RoadmapMdSource` parses and serializes `roadmap.md` (round-trip tested). A `GitHubIssuesSource` can be added later without touching core.
-
-## 7. Shared runtime state (parallel runs)
-
-- `.factory/` lives in the **primary checkout** (resolved via `git rev-parse --git-common-dir`), gitignored, so every worktree and session sees the same state.
-- `events.jsonl` is append-only, one JSON line per event, written under a file lock. `state.json` is a snapshot rebuilt from events (never hand-edited). Logs: `.factory/logs/DS-n.log`.
-- **Claim** = `git push origin origin/main:refs/heads/feat/DS-n-<slug>` (design tasks use the same `feat/` prefix per the brief). If the branch already exists, the push fails and the task is taken. Then the worktree is created from that branch and `npm ci` runs.
-- **Ports**: every worktree uses the `CLAUDE.md` cksum formula, incrementing if busy. The dashboard uses the same formula on the name `factory-dashboard`.
-
-## 8. Run lifecycle
-
-`/factory:build DS-4` → `factory build DS-4 --detach`:
-1. Validate: right `type`, dependencies `done`, `needs_human` false, and (build with `has_ui: yes`) an approved spec on `main`. Otherwise refuse with the reason.
-2. Claim, create worktree, `npm ci`.
-3. Spawn a detached Node process for the run; CLI prints task, worktree, and dashboard URL, then exits.
-4. Run process executes the line (§9 / §10), emitting events, honoring limits and STOP.
-
-**Auth:** agents run through the Agent SDK, which drives the installed `claude` CLI and reuses its existing terminal login. The factory never sets or asks for an API key. If `claude` isn't logged in, the run refuses up front with "run `claude` and log in first".
-
-**Loops (yours): max 2.** Each stage that can send work back to the Builder (gates, QA, review) gets at most 2 fix loops. After the 2nd failed loop the task is `blocked` with the last failure output, plus a `needs_human` event.
-
-**Limits (my call, configurable in `factory/config.ts`):** per-agent `maxTurns` (Designer 60, Builder 80, QA 40, Reviewer 20), per-task wall clock 90 min. No cost limits; `cost.updated` is replaced by `usage.updated` (turns, duration, tokens if the SDK reports them).
-
-**Models (my call):** a default model per role in `factory/config.ts`, picked from current IDs via the `claude-api` skill at build time.
-
-**Retry:** `factory retry DS-n [--model <id>] [--from <stage>]` (and `/factory:retry DS-n --model opus`). It resumes on the same branch from the stage that failed (or `--from`), resets the loop counter, and uses the given model for every agent in that run. The model used is recorded in events and shown on the dashboard. The dashboard's Retry button has the same model picker.
-
-**Usage limit reached:** SDK error is caught → task `blocked`, reason `usage limit reached`, `needs_human` event; work stays committed on the branch. `factory retry DS-n` resumes from the last finished stage.
-
-**Kill switch:** `factory stop` writes `.factory/STOP`. Runs check it between stages and between agent turns (abort controller), then stop at that safe point and mark `blocked: stopped`. `factory stop --clear` removes it.
-
-## 9. Design line (`type: design`)
-
-Only `design` tasks produce a canvas and a spec. The spec is the extra input the matching build task works from.
-
-1. **Designer agent** (tools: Read, Glob, Grep, Write/Edit limited to `docs/specs/**` and `docs/design-system-wireframe/**`, `Artifact` for publishing; no Bash) reads `README.md`, `tokens.css`, existing canvases and similar components (e.g. `Input`).
-2. Writes the canvas `docs/design-system-wireframe/<Component>.dc.html` in the same `x-dc` format as `Components.dc.html` (every size and state as an artboard), adds it to `canvas.json`.
-3. **Publishes the canvas** to claude.ai as a private artifact and records `canvas_url` in the spec. On a revision it republishes to the same URL, so the link never changes.
-4. Writes `docs/specs/<Component>.md`: canvas path, `canvas_url`, sizes, all states, keyboard behavior, Radix primitive, token mapping (existing `--ds-*` only), a11y notes, `approved: no`. Any new token is listed under **Token requests** and forces `needs_human`.
-5. A deterministic check validates the spec (required sections present, every token referenced exists in `tokens.css`, canvas file parses, `canvas_url` set).
-6. Commit, push branch, open a **draft PR** `DS-n: <title>` with the canvas link in the body. Event `needs_human: approve design`.
-
-**Your touch point (always):** dashboard shows the canvas rendered in an iframe next to the spec, with the live claude.ai link. You either:
-- **Request changes** with a comment → Designer re-runs on the same branch with your feedback. These review rounds are yours, so the 2-loop cap doesn't apply to them, or
-- **Approve** (`factory approve DS-n`) → factory commits `approved: yes`, date, approver (git user) to the spec on the branch, adds the `factory:approved` label, and marks the PR ready. The PR then merges like any other (§10.6). (Not a GitHub review: PRs are opened under your account, and GitHub doesn't allow approving your own PR.)
-
-A build task becomes `ready` only when the approved spec is on `main`. Any later change to the canvas or spec resets `approved: no` (enforced by the spec check: approval stores a hash of canvas + spec).
-
-**Live canvas: tested 2026-10-20.** A headless `claude -p` run, with no API key and `--allowedTools Artifact,Read`, published a test page to claude.ai and returned the URL. The Designer can therefore publish on its own. Phase 3 rechecks this through the Agent SDK `query()` path. The fallback, if that path lacks the tool, is a `claude -p` subprocess for the publish step only.
-
-## 10. Build line (`type: build | infra | docs`)
-
-1. **Builder** (tools: Read, Write, Edit, Glob, Grep, Bash with allowlist: `npm`, `npx`, `git` excluding `push`/`merge`/`--no-verify`) implements with TDD, following `CLAUDE.md`. For `has_ui: yes` it works from the approved spec + canvas. For `has_ui: no` there is no spec; it works from the task text and `done_when`, and its prompt says not to change UI. Infra/docs tasks get task-specific skill text added to its prompt. Ticks the task in `roadmap.md` on the branch.
-   - **UI guard (`has_ui: no` only)** makes sure the task really needs no UI. It's a deterministic check after each Builder pass: if the diff touches UI paths (`src/components/**`, `src/styles/**`, `*.css`, `*.stories.tsx`, `.storybook/**`, `docs/design-system-wireframe/**`), the run stops. The task goes `blocked` with the files listed and a `needs_human` event: "this changes UI, so it needs a design task". You either add a design task, or mark the change as fine (`factory unblock DS-n --allow-ui`, recorded in events and in the PR body).
-2. **Gates** (code, in order): `npm run lint`, `npm run typecheck`, `npm test -- --coverage` (≥ 80 %), `npm run build-storybook`. Failure → errors fed back to the Builder, max 2 loops, then `blocked` with the failing gate's output.
-3. **QA** (tools: Read, Glob, Grep, Bash limited to Playwright scripts and writing files under `src/**/*.test.tsx`; may add tests, never edits production code — enforced by a post-check that the diff from QA touches only test files). For `has_ui: yes` it starts the worktree's Storybook, checks every spec state has a story, screenshots each state next to the canvas artboard, tests keyboard, and runs axe. For `has_ui: no` it checks each `done_when` item black-box (e.g. runs the new build/workflow command). Failures → back to Builder, max 2 loops.
-4. **Reviewer** (read-only: Read, Glob, Grep, `git diff`) reviews the diff against `done_when` and `CLAUDE.md`. Findings → Builder, then gates rerun, max 2 loops; still failing → `blocked` + `needs_human`.
-5. **PR (always):** push (Husky hook runs), `gh pr create` titled `DS-n: <title>`, body lists each `done_when` criterion with how it's met, gate results, model(s) used, and the worktree's Storybook link.
-6. **Merge (by the factory):** the run waits on `gh pr checks --watch` (timeout 30 min, my call), then merges with `gh pr merge --squash --delete-branch` only when all of these hold:
-   - every GitHub check on the PR is green, with at least one check reported (no checks = no merge);
-   - the branch is up to date with `main` and has no conflicts. If it's behind, the factory merges `main` into the branch, reruns the gates, and pushes, which counts toward the loop cap;
-   - **if human approval is required**, the PR has `factory:approved`. Required for: design PRs (always), tasks with `needs_human: yes`, and runs unblocked with `--allow-ui`. If approval is still missing, the run ends with `needs_human: approve PR`, and `factory approve DS-n` later does the check-then-merge;
-   - GitHub allows it. Checked 2026-10-20: branch protection isn't available on this private repo with the current GitHub plan, so these factory rules are the only merge gate. If protection is added later and blocks the merge, the factory doesn't work around it; the PR shows up in "Needs you" as "merge on GitHub".
-
-   After merge: worktree removed, local branch deleted, its Storybook stopped, `task.done` emitted. A red check → logs fetched (`gh run view --log-failed`) and fed back to the Builder as a gate failure (counts toward the loop cap).
-
-No agent approves its own output: gates are code, QA and Reviewer are separate agents with their own prompts and no write access to production code.
-
-## 11. Interfaces
-
-**CLI:** `status`, `next`, `design <id>`, `build <id>`, `approve <id>`, `request-changes <id> <comment>`, `block <id> <reason>`, `unblock <id> [--allow-ui]`, `retry <id> [--model <id>] [--from <stage>]`, `merge <id>` (check-then-merge, same rules as §10.6), `add --draft <file> --preview|--apply`, `add task …`, `edit <id>`, `lint-roadmap`, `stop [--clear]`, `dashboard`, `status --line`.
-
-**Slash commands:** `.claude/commands/factory/{status,next,add,edit,design,build,approve,merge,block,unblock,retry,stop,dashboard}.md`, each a thin wrapper calling the CLI and reporting its output. `design`/`build` relay the CLI's refusal reason verbatim.
-
-**Status line (optional, last):** `factory status --line` → `factory ▸ 1 running · 3 ready · 2 awaiting you`.
-
-## 12. Events
-
-One JSON line each: `{ ts, task, type, stage?, data }`. Types: `task.claimed`, `stage.started`, `stage.finished` (`design`, `build`, `gate:lint`, `gate:typecheck`, `gate:test`, `gate:storybook`, `ui-guard`, `qa`, `review`, `pr`, `ci`, `merge`), `agent.activity` (short summary derived from the SDK message stream: file edited, command run, test result), `gate.passed`, `gate.failed`, `needs_human` (reason, action), `task.blocked`, `task.done`, `pr.merged`, `usage.updated` (includes model used). Payloads are scrubbed of anything that looks like a secret before writing.
-
-## 13. Dashboard
-
-- `factory dashboard` starts a small Node `http` server (no framework) on its own port; it tails `events.jsonl` and pushes over SSE. On connect: snapshot, then stream. Actions are POSTs that run the CLI. Binds to `127.0.0.1` only.
-- Page (plain HTML/CSS/JS, styled with `tokens.css` and the design system's look):
-  - **Needs you** (pinned): designs to approve (canvas + spec inline, Approve / Request changes), blocked tasks with reason (Retry with model picker / Unblock), PRs waiting for your approval or a manual merge (Approve / link). Browser notification + macOS notification (`osascript`) on new items.
-  - **Now running:** card per run, stepper claim → design/build → gates → QA → review → PR → CI → merge, model in use, elapsed time, turns used, live `agent.activity` tail, Stop button.
-  - **Board:** kanban by status with design/build badges and a blocked column.
-  - **Runnable now** with Run buttons per line.
-  - **Task detail:** deps, done-when, spec + approval + canvas, branch, PR, gate results, full log, usage, timeline.
-  - Epic progress bars, connection indicator, global STOP.
-
-## 14. Adding features to the roadmap
-
-You describe a feature in plain words; the factory turns it into properly shaped tasks and lands them in `roadmap.md` through a PR.
-
-### 14.1 Flow
-
-```
-/factory:add "Tooltip on IconButton hover and focus"
-   │  1. Draft (in your Claude Code session, interactive)
-   │     Claude asks at most 3 questions, only if needed: which epic, has UI, anything
-   │     that blocks it. Then writes a draft: .factory/drafts/<slug>.json
-   ▼
-factory add --draft .factory/drafts/<slug>.json --preview
-   │  2. Validate (CLI, deterministic) and show the result as roadmap markdown
-   ▼
-you: "ok" / "change X"   (edit and preview again as often as you like)
-   ▼
-factory add --draft … --apply
-   │  3. Reserve IDs, write roadmap.md on branch chore/roadmap-DS-<n>-<slug>,
-   │     open PR "roadmap: add DS-<n>…", label factory:approved (you just approved it)
-   ▼
-merge per §10.6 (green checks) → tasks appear as todo / ready on the dashboard
-```
-
-The session does the thinking (the drafting is LLM work); the CLI owns every write, as everywhere else. Nothing reaches `roadmap.md` without you seeing the preview.
-
-### 14.2 Splitting rules (the drafter follows them, the CLI enforces them)
-
-| Feature | Tasks created |
-| --- | --- |
-| Has UI (new component, visual change, new state) | `design` task + `build` task with `has_ui: yes`, `depends_on` the design |
-| No UI (build tooling, CI, docs, refactor) | one `build` / `infra` / `docs` task, `has_ui: no` |
-| Needs new tokens, a release, secrets, or anything outside the repo | same as above, plus `needs_human: yes` |
-| Too big (draft has > 4 tasks, or one task with > 5 `done_when` items) | rejected with "split into separate features" |
-
-Every task needs a title, `type`, `has_ui`, `epic` (an existing one, or a new epic named in the draft), `depends_on` (existing IDs only, no cycles), `needs_human`, and 1–5 testable `done_when` items. A new UI component's `done_when` always includes "story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`" (added by the CLI if missing).
-
-### 14.3 IDs without collisions
-
-IDs are never reused or renumbered once they're on `main`. Two sessions adding at the same time must not take the same number, so reserving works like claiming: the CLI takes the next free ID (the highest of `roadmap.md` on `origin/main`, open roadmap PRs, and existing `refs/heads/*DS-*` branches, plus 1), then pushes `chore/roadmap-DS-<n>-<slug>`. If that push fails, it takes the next number and tries again. A multi-task feature reserves on its first ID; the others follow in order, and the push check covers them too.
-
-### 14.4 Other ways in
-
-- **One quick task, no conversation:** `factory add task "Fix Tag focus ring" --type build --has-ui yes --depends DS-3 --done "Focus ring matches Button"` → same validate → preview → apply.
-- **Edit an existing task:** `/factory:edit DS-6` → same draft/preview/apply loop on a `chore/roadmap-…` branch. Only `todo`/`blocked` tasks can be edited; `type` can't change after a run has started.
-- **Dashboard:** "Add feature" opens the drafting in a new background Claude run (same rules); the preview lands in **Needs you** with Apply / Edit / Discard.
-- **By hand:** editing `roadmap.md` in a PR still works. `factory lint-roadmap` checks it with the same rules (fields, IDs, deps, `has_ui` splits); Phase 0 adds it to `npm run lint`.
-
-## 15. Build order (phases; stop for your review after each)
-
-0. Backlog fields in `roadmap.md` + `RoadmapMdSource` + adapter interface + `factory lint-roadmap`. You approve proposed values (§6.4).
-1. CLI core: status, next, claim, events, state, lock, logs, stop, retry.
-2. Slash commands + adding to the roadmap (`factory add`, `/factory:add`, `/factory:edit`, §14).
-3. Design line, incl. canvas publishing (recheck the Artifact tool via SDK `query()`).
-4. Build line: UI guard, gates, QA, Reviewer, PR, CI wait, merge.
-5. Dashboard.
-6. Status line.
-
-**Demo:** `factory design DS-3` (Textarea) → you approve → factory merges → `factory build DS-4` → PR, gates and checks green → factory merges, all watched live on the dashboard.
-
-## 16. Calls I made (check these)
-
-- Factory code in `factory/` in this repo, TypeScript run via `tsx`, tests in the existing Jest.
-- Runtime status not written to `roadmap.md`; `done` arrives through the task's own PR (§6.3).
-- Design PRs are drafts until you approve. Your approval is the `factory:approved` label plus `approved: yes` in the spec, not a GitHub review (§9).
-- Human approval is required for design PRs, `needs_human` tasks and `--allow-ui` unblocks. Every other PR auto-merges on green checks (§10.6).
-- Merging needs at least one green check, so DS-8 (CI) is recommended as the first build task; today only `claude-code-review` and `storybook-vercel` run on PRs.
-- Squash merge, 30 min CI wait.
-- Adding features (§14): drafting runs in your session with at most 3 questions; roadmap PRs merge on green checks after your preview OK; size limits (≤ 4 tasks, ≤ 5 `done_when`).
-- Limits in §8 (turns, 90 min); loops are capped at 2 per stage (yours).
-- `cost.updated` replaced by `usage.updated`; no dollar figures shown.
-- Proposed task metadata in §6.4, notably `has_ui`, DS-2 and DS-9 as `needs_human`, and the new DS-12.
-
-## 17. Open questions to verify during build
-
-- How the SDK reports a usage-limit error (exact shape, to map it to `blocked`).
-- That the `Artifact` tool is exposed through SDK `query()` as it is through `claude -p` (fallback in §9).
-
+- Rules in skills are followed by the model, not enforced by code; scope checks and gates are real commands, but they run because the skill says so. Watch the first runs.
+- The status page is a snapshot; rerun `/factory:status` to refresh it.
+- Subagent tool limits restrict tool types, not paths; path scope is checked after each subagent with `git status` and reverted if needed.
