@@ -9,7 +9,7 @@ worktree: ".worktrees/feat-DS-1-theming-infrastructure-with-a-default"
 pr: "31"
 pr_url: "https://github.com/mikespineu/design-system-wireframe/pull/31"
 canvas_url: ""
-storybook_url: ""
+storybook_url: "http://localhost:6724"
 model: default
 loops: { gates: 0, qa: 1, review: 0, ci: 0, spec: 0 }
 needs_you: "approve the PR (/factory:approve DS-1)"
