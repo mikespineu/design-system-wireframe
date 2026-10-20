@@ -1,0 +1,6 @@
+{
+  "name": "factory",
+  "version": "0.1.0",
+  "description": "Software factory for the design system: run design and build lines on roadmap tasks, approve designs, add features to the roadmap, and see it all on a status page.",
+  "author": { "name": "mikespin" }
+}

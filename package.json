@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "factory:status": "node factory/plugin/skills/status/scripts/status-page.mjs --watch 10 --open"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "latest",

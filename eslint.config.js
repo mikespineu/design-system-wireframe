@@ -14,6 +14,10 @@ export default tseslint.config(
     rules: reactHooks.configs.recommended.rules,
   },
   {
+    files: ['**/*.mjs'],
+    languageOptions: { globals: { ...globals.node } },
+  },
+  {
     files: ['**/*.test.{ts,tsx}', 'jest.setup.ts'],
     languageOptions: { globals: { ...globals.jest } },
   },
