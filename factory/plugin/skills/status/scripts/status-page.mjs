@@ -88,6 +88,13 @@ function parseRoadmap(text) {
       }
     }
     i = j - 1;
+    // A task listed twice (e.g. kept in its epic and linked again under "## Done")
+    // is one task: keep the first entry and only mark it done.
+    const seen = tasks.find((t) => t.id === m[2]);
+    if (seen) {
+      if (inDone || m[1] === 'x') seen.roadmapStatus = 'done';
+      continue;
+    }
     const type = meta.type || 'build';
     tasks.push({
       id: m[2],
