@@ -6,8 +6,8 @@ status: waiting
 stage: pr
 branch: "feat/DS-3-textarea-design"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-3-textarea-design"
-pr: ""
-pr_url: ""
+pr: "27"
+pr_url: "https://github.com/mikespineu/design-system-wireframe/pull/27"
 canvas_url: "https://claude.ai/artifact/2xzRy5QSUXVA3FGCTy25N2"
 storybook_url: ""
 model: default
@@ -28,6 +28,7 @@ updated: "2026-10-20T10:29Z"
 - 12:29 publish: canvas at https://claude.ai/artifact/2xzRy5QSUXVA3FGCTy25N2
 - 12:29 spec: check passed (fields, sections, 20 tokens all in tokens.css, canvas is complete HTML)
 - 12:29 pr: waiting for you: approve or request changes
+- 12:30 pr: opened draft #27 with factory:needs-approval
 
 ## Gate results
 
