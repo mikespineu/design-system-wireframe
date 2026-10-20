@@ -1,5 +1,6 @@
 /* Design System Wireframe design tokens. Spec: docs/design-system-wireframe/README.md */
-:root {
+:root,
+[data-theme="default"] {
   /* Gray palette: white ground, gray accents, black ink. No hue. */
   --ds-color-white: #ffffff;
   --ds-color-gray-50: #f7f7f7;
