@@ -25,7 +25,7 @@ const foundations = [
   { name: 'Color', path: 'foundations-colors--docs' },
   { name: 'Typography', path: 'foundations-typography--docs' },
   { name: 'Spacing', path: 'foundations-spacing--docs' },
-  { name: 'Shape and line', path: 'foundations-shapeandline--docs' },
+  { name: 'Shape and line', path: 'foundations-shape-and-line--docs' },
 ];
 
 const install = `import './styles/tailwind.css'; // fonts, tokens, utilities
