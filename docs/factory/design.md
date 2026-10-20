@@ -216,9 +216,9 @@ No agent approves its own output: gates are code, QA and Reviewer are separate a
 
 ## 11. Interfaces
 
-**CLI:** `status`, `next`, `design <id>`, `build <id>`, `approve <id>`, `request-changes <id> <comment>`, `block <id> <reason>`, `unblock <id> [--allow-ui]`, `retry <id> [--model <id>] [--from <stage>]`, `merge <id>` (check-then-merge, same rules as §10.6), `stop [--clear]`, `dashboard`, `status --line`.
+**CLI:** `status`, `next`, `design <id>`, `build <id>`, `approve <id>`, `request-changes <id> <comment>`, `block <id> <reason>`, `unblock <id> [--allow-ui]`, `retry <id> [--model <id>] [--from <stage>]`, `merge <id>` (check-then-merge, same rules as §10.6), `add --draft <file> --preview|--apply`, `add task …`, `edit <id>`, `lint-roadmap`, `stop [--clear]`, `dashboard`, `status --line`.
 
-**Slash commands:** `.claude/commands/factory/{status,next,design,build,approve,merge,block,unblock,retry,stop,dashboard}.md`, each a thin wrapper calling the CLI and reporting its output. `design`/`build` relay the CLI's refusal reason verbatim.
+**Slash commands:** `.claude/commands/factory/{status,next,add,edit,design,build,approve,merge,block,unblock,retry,stop,dashboard}.md`, each a thin wrapper calling the CLI and reporting its output. `design`/`build` relay the CLI's refusal reason verbatim.
 
 **Status line (optional, last):** `factory status --line` → `factory ▸ 1 running · 3 ready · 2 awaiting you`.
 
@@ -237,11 +237,59 @@ One JSON line each: `{ ts, task, type, stage?, data }`. Types: `task.claimed`, `
   - **Task detail:** deps, done-when, spec + approval + canvas, branch, PR, gate results, full log, usage, timeline.
   - Epic progress bars, connection indicator, global STOP.
 
-## 14. Build order (phases; stop for your review after each)
+## 14. Adding features to the roadmap
 
-0. Backlog fields in `roadmap.md` + `RoadmapMdSource` + adapter interface. You approve proposed values (§6.4).
+You describe a feature in plain words; the factory turns it into properly shaped tasks and lands them in `roadmap.md` through a PR.
+
+### 14.1 Flow
+
+```
+/factory:add "Tooltip on IconButton hover and focus"
+   │  1. Draft (in your Claude Code session, interactive)
+   │     Claude asks at most 3 questions, only if needed: which epic, has UI, anything
+   │     that blocks it. Then writes a draft: .factory/drafts/<slug>.json
+   ▼
+factory add --draft .factory/drafts/<slug>.json --preview
+   │  2. Validate (CLI, deterministic) and show the result as roadmap markdown
+   ▼
+you: "ok" / "change X"   (edit and preview again as often as you like)
+   ▼
+factory add --draft … --apply
+   │  3. Reserve IDs, write roadmap.md on branch chore/roadmap-DS-<n>-<slug>,
+   │     open PR "roadmap: add DS-<n>…", label factory:approved (you just approved it)
+   ▼
+merge per §10.6 (green checks) → tasks appear as todo / ready on the dashboard
+```
+
+The session does the thinking (the drafting is LLM work); the CLI owns every write, as everywhere else. Nothing reaches `roadmap.md` without you seeing the preview.
+
+### 14.2 Splitting rules (the drafter follows them, the CLI enforces them)
+
+| Feature | Tasks created |
+| --- | --- |
+| Has UI (new component, visual change, new state) | `design` task + `build` task with `has_ui: yes`, `depends_on` the design |
+| No UI (build tooling, CI, docs, refactor) | one `build` / `infra` / `docs` task, `has_ui: no` |
+| Needs new tokens, a release, secrets, or anything outside the repo | same as above, plus `needs_human: yes` |
+| Too big (draft has > 4 tasks, or one task with > 5 `done_when` items) | rejected with "split into separate features" |
+
+Every task needs a title, `type`, `has_ui`, `epic` (an existing one, or a new epic named in the draft), `depends_on` (existing IDs only, no cycles), `needs_human`, and 1–5 testable `done_when` items. A new UI component's `done_when` always includes "story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`" (added by the CLI if missing).
+
+### 14.3 IDs without collisions
+
+IDs are never reused or renumbered once they're on `main`. Two sessions adding at the same time must not take the same number, so reserving works like claiming: the CLI takes the next free ID (the highest of `roadmap.md` on `origin/main`, open roadmap PRs, and existing `refs/heads/*DS-*` branches, plus 1), then pushes `chore/roadmap-DS-<n>-<slug>`. If that push fails, it takes the next number and tries again. A multi-task feature reserves on its first ID; the others follow in order, and the push check covers them too.
+
+### 14.4 Other ways in
+
+- **One quick task, no conversation:** `factory add task "Fix Tag focus ring" --type build --has-ui yes --depends DS-3 --done "Focus ring matches Button"` → same validate → preview → apply.
+- **Edit an existing task:** `/factory:edit DS-6` → same draft/preview/apply loop on a `chore/roadmap-…` branch. Only `todo`/`blocked` tasks can be edited; `type` can't change after a run has started.
+- **Dashboard:** "Add feature" opens the drafting in a new background Claude run (same rules); the preview lands in **Needs you** with Apply / Edit / Discard.
+- **By hand:** editing `roadmap.md` in a PR still works. `factory lint-roadmap` checks it with the same rules (fields, IDs, deps, `has_ui` splits); Phase 0 adds it to `npm run lint`.
+
+## 15. Build order (phases; stop for your review after each)
+
+0. Backlog fields in `roadmap.md` + `RoadmapMdSource` + adapter interface + `factory lint-roadmap`. You approve proposed values (§6.4).
 1. CLI core: status, next, claim, events, state, lock, logs, stop, retry.
-2. Slash commands.
+2. Slash commands + adding to the roadmap (`factory add`, `/factory:add`, `/factory:edit`, §14).
 3. Design line, incl. canvas publishing (recheck the Artifact tool via SDK `query()`).
 4. Build line: UI guard, gates, QA, Reviewer, PR, CI wait, merge.
 5. Dashboard.
@@ -249,7 +297,7 @@ One JSON line each: `{ ts, task, type, stage?, data }`. Types: `task.claimed`, `
 
 **Demo:** `factory design DS-3` (Textarea) → you approve → factory merges → `factory build DS-4` → PR, gates and checks green → factory merges, all watched live on the dashboard.
 
-## 15. Calls I made (check these)
+## 16. Calls I made (check these)
 
 - Factory code in `factory/` in this repo, TypeScript run via `tsx`, tests in the existing Jest.
 - Runtime status not written to `roadmap.md`; `done` arrives through the task's own PR (§6.3).
@@ -257,11 +305,12 @@ One JSON line each: `{ ts, task, type, stage?, data }`. Types: `task.claimed`, `
 - Human approval is required for design PRs, `needs_human` tasks and `--allow-ui` unblocks. Every other PR auto-merges on green checks (§10.6).
 - Merging needs at least one green check, so DS-8 (CI) is recommended as the first build task; today only `claude-code-review` and `storybook-vercel` run on PRs.
 - Squash merge, 30 min CI wait.
+- Adding features (§14): drafting runs in your session with at most 3 questions; roadmap PRs merge on green checks after your preview OK; size limits (≤ 4 tasks, ≤ 5 `done_when`).
 - Limits in §8 (turns, 90 min); loops are capped at 2 per stage (yours).
 - `cost.updated` replaced by `usage.updated`; no dollar figures shown.
 - Proposed task metadata in §6.4, notably `has_ui`, DS-2 and DS-9 as `needs_human`, and the new DS-12.
 
-## 16. Open questions to verify during build
+## 17. Open questions to verify during build
 
 - How the SDK reports a usage-limit error (exact shape, to map it to `blocked`).
 - That the `Artifact` tool is exposed through SDK `query()` as it is through `claude -p` (fallback in §9).
