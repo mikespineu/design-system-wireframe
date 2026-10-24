@@ -61,6 +61,66 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Built on Radix `Switch`, styled via `[data-state]` / `[data-disabled]`
     - Matches approved spec `docs/specs/Toggle.md` in every state
     - Stories cover keyboard and on/off; tests use `userEvent` and `jest-axe`
+- [ ] **DS-13 Checkbox — design.** Define checked, unchecked, indeterminate, disabled, focus and invalid states, the label, and a group with a legend, all matched to Field tokens.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas covers checked, unchecked, indeterminate, disabled, focus and invalid
+    - Spec defines label placement and a CheckboxGroup with fieldset/legend, hint and error
+    - Spec names Radix `Checkbox` and maps every state to `--ds-*` tokens
+- [ ] **DS-14 Checkbox — implementation.** Build `Checkbox` and `CheckboxGroup` in `src/components/Checkbox/` on Radix `Checkbox` (`import { Checkbox } from 'radix-ui'`), styled via `[data-state]` / `[data-disabled]`.
+  - type: build · has_ui: yes · depends_on: DS-13 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state
+    - Indeterminate state supported via `checked="indeterminate"`
+    - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-15 RadioGroup — design.** Define item states, vertical and horizontal orientation, and the group label, hint and error, consistent with Checkbox.
+  - type: design · has_ui: yes · depends_on: DS-13 · needs_human: no · status: todo
+  - done_when:
+    - Canvas covers selected, unselected, disabled, focus and invalid, in both orientations
+    - Spec names Radix `RadioGroup` and maps every state to tokens
+    - Spec documents arrow-key and roving-tabindex behavior
+- [ ] **DS-16 RadioGroup — implementation.** Build `RadioGroup` in `src/components/RadioGroup/` on Radix `RadioGroup`, styled via `[data-state]` / `[data-disabled]`.
+  - type: build · has_ui: yes · depends_on: DS-15 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state
+    - Arrow keys move selection; Tab enters and leaves the group once
+    - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-17 Select — design.** Define a trigger styled as Input, the open listbox, item states (highlighted, selected, disabled), groups, and the placeholder, inside Field.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas covers trigger default, hover, focus, open, disabled and invalid, plus item highlighted, selected and disabled
+    - Spec names Radix `Select` and defines portal layering and max height
+    - Spec matches `Input` / `TextField` tokens and the 44 px height
+- [ ] **DS-18 Select — implementation.** Build `Select` and `SelectField` in `src/components/Select/` on Radix `Select`, wired to `Field` via `useFieldControl()`, styled via `[data-state]` / `[data-highlighted]`.
+  - type: build · has_ui: yes · depends_on: DS-17 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state
+    - Keyboard typeahead, arrow navigation and Escape-to-close covered by `userEvent` tests
+    - Story per state, keyboard story, open/closed stories, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-19 Dialog — design.** Define overlay, panel sizes, header/title, body, footer actions and close button, within the 0-radius, no-shadow wireframe rules.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas covers open dialog in sm, md and lg, with overlay, title, description, actions and close button
+    - Spec names Radix `Dialog` and defines focus trap, Escape and outside-click behavior
+    - Spec maps overlay and panel to existing `--ds-*` tokens or lists Token requests
+- [ ] **DS-20 Dialog — implementation.** Build `Dialog` in `src/components/Dialog/` on Radix `Dialog` with a narrow typed API (`Dialog`, `DialogTrigger` via `asChild`, `DialogContent`, title and description required), styled via `[data-state]`.
+  - type: build · has_ui: yes · depends_on: DS-19 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state
+    - Focus moves into the dialog on open and returns to the trigger on close; Escape closes
+    - Story per state, keyboard story, open/closed stories, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-21 Tabs — design.** Define the tab list and triggers (default, hover, focus, active, disabled), the active underline/ink treatment, and the panel spacing.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas covers trigger default, hover, focus, active and disabled
+    - Spec names Radix `Tabs` and defines automatic vs manual activation
+    - Spec maps every state to `--ds-*` tokens
+- [ ] **DS-22 Tabs — implementation.** Build `Tabs` in `src/components/Tabs/` on Radix `Tabs`, styled via `[data-state="active"]` / `[data-disabled]`.
+  - type: build · has_ui: yes · depends_on: DS-21 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state
+    - Arrow keys move between tabs, Home/End jump; tested with `userEvent`
+    - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
 
 ### Epic: Publishing
 
