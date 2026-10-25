@@ -2,7 +2,7 @@
 task: DS-4
 title: "Textarea — implementation"
 line: build            # design | build
-status: in-progress
+status: waiting
 stage: ci
 branch: "feat/DS-4-textarea-implementation"
 worktree: ".worktrees/feat-DS-4-textarea-implementation"
@@ -12,7 +12,7 @@ canvas_url: ""
 storybook_url: "http://localhost:6475"
 model: default
 loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
-needs_you: ""
+needs_you: "merge PR #33 (checks green), then /factory:merge DS-4 to clean up"
 blocked_reason: ""
 started: "2026-10-25 17:36"
 updated: "2026-10-25 18:01"
@@ -32,6 +32,7 @@ updated: "2026-10-25 18:01"
 - 18:01 pr: roadmap ticked, opening PR
 - 18:02 pr: opened #33
 - 18:02 ci: waiting for checks
+- 18:03 ci: claude-review and deploy pass; mergeable; waiting for you to merge
 
 ## Gate results
 
