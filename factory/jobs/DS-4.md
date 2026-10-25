@@ -2,8 +2,8 @@
 task: DS-4
 title: "Textarea — implementation"
 line: build            # design | build
-status: waiting
-stage: ci
+status: merged
+stage: merge
 branch: "feat/DS-4-textarea-implementation"
 worktree: ".worktrees/feat-DS-4-textarea-implementation"
 pr: "33"
@@ -12,10 +12,10 @@ canvas_url: ""
 storybook_url: "http://localhost:6475"
 model: default
 loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
-needs_you: "merge PR #33 (checks green), then /factory:merge DS-4 to clean up"
+needs_you: ""
 blocked_reason: ""
 started: "2026-10-25 17:36"
-updated: "2026-10-25 18:01"
+updated: "2026-10-25 18:06"
 ---
 
 # DS-4 Textarea — implementation
@@ -34,6 +34,7 @@ updated: "2026-10-25 18:01"
 - 18:02 ci: waiting for checks
 - 18:03 ci: claude-review and deploy pass; mergeable; waiting for you to merge
 - 18:05 build: user asked ContactForm pattern to use TextareaField; native textarea stand-in removed; lint, typecheck, test, storybook pass
+- 18:06 merge: checks green (claude-review, deploy); squash-merging #33 via /factory:merge
 
 ## Gate results
 
