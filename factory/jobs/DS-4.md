@@ -3,11 +3,11 @@ task: DS-4
 title: "Textarea — implementation"
 line: build            # design | build
 status: in-progress
-stage: pr
+stage: ci
 branch: "feat/DS-4-textarea-implementation"
 worktree: ".worktrees/feat-DS-4-textarea-implementation"
-pr: ""
-pr_url: ""
+pr: "33"
+pr_url: "https://github.com/mikespineu/design-system-wireframe/pull/33"
 canvas_url: ""
 storybook_url: "http://localhost:6475"
 model: default
@@ -30,6 +30,8 @@ updated: "2026-10-25 18:01"
 - 18:01 qa: pass, no findings (24 stories, 0 axe violations)
 - 18:01 review: pass, no findings
 - 18:01 pr: roadmap ticked, opening PR
+- 18:02 pr: opened #33
+- 18:02 ci: waiting for checks
 
 ## Gate results
 
