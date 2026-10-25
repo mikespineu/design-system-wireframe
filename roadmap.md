@@ -41,8 +41,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers sizes and states: default, hover, focus, disabled, invalid, read-only
     - Spec defines resize behavior and the character counter
     - Spec matches `Input` / `TextField` tokens and keyboard behavior
-- [ ] **DS-4 Textarea — implementation.** Build `Textarea` and `TextareaField` in `src/components/Textarea/` per the approved spec `docs/specs/Textarea.md` ([canvas](https://claude.ai/artifact/2xzRy5QSUXVA3FGCTy25N2)): native `<textarea>` wired to the existing `Field` via `useFieldControl()`, with component, CSS, stories, tests (incl. `jest-axe`), and export from `src/index.ts`.
-  - type: build · has_ui: yes · depends_on: DS-3 · needs_human: no · status: todo
+- [x] **DS-4 Textarea — implementation.** Build `Textarea` and `TextareaField` in `src/components/Textarea/` per the approved spec `docs/specs/Textarea.md` ([canvas](https://claude.ai/artifact/2xzRy5QSUXVA3FGCTy25N2)): native `<textarea>` wired to the existing `Field` via `useFieldControl()`, with component, CSS, stories, tests (incl. `jest-axe`), and export from `src/index.ts`.
+  - type: build · has_ui: yes · depends_on: DS-3 · needs_human: no · status: done
   - done_when:
     - Matches approved spec `docs/specs/Textarea.md` in every state: default, filled, hover, focus, invalid, invalid + focus, disabled, read-only, read-only + focus
     - Sizes `sm` / `md` / `lg` = 2 / 4 / 8 rows; `rows` overrides; `rows={1}` is 44 px and lines up with `Input`
