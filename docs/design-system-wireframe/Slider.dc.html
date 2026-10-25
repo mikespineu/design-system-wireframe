@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Slider</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:820px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column}
+.ab.pick{border:1px solid #000000}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:40px 24px 32px}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.dir{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:48px;padding:32px 24px;align-items:start}
+.dv{display:flex;flex-direction:column;gap:8px}
+.sub{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#595959;margin-bottom:16px}
+.gap{height:32px}
+.badge{display:inline-flex;align-items:center;height:24px;padding:0 8px;background:#000000;color:#FFFFFF;font-family:'Red Hat Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase}
+.ph{box-sizing:border-box;width:390px;border:1px solid #E0E0E0;padding:32px 16px;display:flex;flex-direction:column;gap:8px}
+.lrow{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.lb{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.lb.dis{color:#767676}
+.cap{font-size:13px;line-height:20px;color:#595959}
+.hint{font-size:13px;line-height:20px;color:#595959}
+.err{display:flex;align-items:center;gap:6px;font-size:13px;line-height:20px;font-weight:500;color:#A3302B}
+.readout{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:16px;font-variant-numeric:tabular-nums}
+
+/* Direction A (recommended) – hairline */
+.row{display:flex;align-items:flex-start;gap:16px}
+.col{flex:1;min-width:0}
+.sl{box-sizing:border-box;display:flex;align-items:stretch;height:44px;padding:0 8px;cursor:pointer}
+.sl.sm{height:32px;padding:0 6px}
+.sl.lg{height:48px;padding:0 12px}
+.rail{position:relative;flex:1}
+.tr{position:absolute;left:0;right:0;top:50%;height:2px;transform:translateY(-50%);background:#767676}
+.fi{position:absolute;left:0;top:50%;height:4px;transform:translateY(-50%);background:#000000}
+.sm .fi{height:2px}
+.lg .fi{height:8px}
+.tk{position:absolute;top:calc(50% + 6px);width:1px;height:8px;transform:translateX(-50%);background:#767676}
+.tk.on{background:#000000}
+.sm .tk{top:calc(50% + 5px);height:4px}
+.lg .tk{top:calc(50% + 8px)}
+.th{position:absolute;top:50%;z-index:1;box-sizing:border-box;width:16px;height:16px;transform:translate(-50%,-50%);background:#FFFFFF;border:2px solid #000000;cursor:grab;transition:background-color 120ms cubic-bezier(.2,0,0,1)}
+.sm .th{width:12px;height:12px}
+.lg .th{width:24px;height:24px}
+.th.hover{background:#EEEEEE}
+.th.focus{outline:2px solid #000000;outline-offset:2px}
+.th.drag{background:#000000;cursor:grabbing}
+.bub{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);padding:4px 8px;background:#141414;color:#FFFFFF;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.dis{cursor:not-allowed}
+.dis .tr{background:#E0E0E0}
+.dis .fi{background:#A3A3A3}
+.dis .tk,.dis .tk.on{background:#C7C7C7}
+.dis .th{background:#F7F7F7;border-color:#A3A3A3;cursor:not-allowed}
+.inv .fi{background:#A3302B}
+.inv .tk.on{background:#A3302B}
+.inv .th{border-color:#A3302B}
+.mk{position:relative;height:16px;margin:4px 8px 0}
+.mk.sm{margin:4px 6px 0}
+.mk.lg{margin:4px 12px 0}
+.mk span{position:absolute;top:0;transform:translateX(-50%);font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mk span.on{color:#000000;font-weight:500}
+.mk.dis span{color:#767676}
+.num{box-sizing:border-box;flex:none;width:64px;height:44px;margin:0;padding:0 12px;border:1px solid #C7C7C7;border-radius:0;background:#FFFFFF;font-family:'Red Hat Text',sans-serif;font-size:16px;color:#000000;text-align:right;font-variant-numeric:tabular-nums}
+.num.sm{height:32px;padding:0 8px}
+.num.lg{height:48px}
+.num.hover{border-color:#000000}
+.num.focus{border-color:#000000;outline:2px solid #000000;outline-offset:2px}
+.num.inv{border:2px solid #A3302B}
+.num.inv.focus{border-color:#A3302B}
+.num.dis{border-color:#E0E0E0;background:#F7F7F7;color:#767676;cursor:not-allowed}
+.hit{outline:1px dashed #A3A3A3}
+
+/* Direction B – block */
+.b-sl{position:relative;display:flex;align-items:center;height:44px;margin:0 4px}
+.b-sl.lg{height:48px;margin:0 6px}
+.b-tr{position:relative;flex:1;box-sizing:border-box;height:12px;border:1px solid #000000;background:#FFFFFF}
+.b-sl.lg .b-tr{height:16px}
+.b-fi{position:absolute;left:0;top:0;bottom:0;background:#000000}
+.b-n{position:absolute;top:0;bottom:0;width:2px;transform:translateX(-50%);background:#FFFFFF;mix-blend-mode:difference}
+.b-th{position:absolute;top:50%;width:8px;height:28px;transform:translate(-50%,-50%);background:#000000;outline:2px solid #FFFFFF}
+.b-sl.lg .b-th{width:12px;height:44px}
+.b-mk{position:relative;height:16px;margin:4px 4px 0}
+.b-mk span{position:absolute;transform:translateX(-50%);font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.b-mk span.on{color:#000000;font-weight:500}
+
+/* Direction C – segmented */
+.c-seg{display:grid;gap:2px;height:44px;align-items:center}
+.c-seg i{display:block;height:12px;background:#EEEEEE}
+.c-seg i.on{background:#000000}
+.c-seg i.cur{height:28px;background:#000000;outline:2px solid #000000;outline-offset:2px}
+.c-seg.lg{height:48px}
+.c-seg.lg i{height:24px}
+.c-seg.lg i.cur{height:40px}
+.c-lbl{display:grid;gap:2px;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959;text-align:center;margin-top:4px}
+.c-lbl span.on{color:#000000;font-weight:500}
+
+/* Direction D – ruler */
+.d-sl{position:relative;height:72px;margin:0 8px}
+.d-base{position:absolute;left:0;right:0;bottom:20px;height:1px;background:#000000}
+.d-tk{position:absolute;bottom:21px;width:1px;height:8px;transform:translateX(-50%);background:#767676}
+.d-tk.on{background:#000000}
+.d-tk.M{height:16px}
+.d-lb{position:absolute;bottom:0;transform:translateX(-50%);font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.d-lb.on{color:#000000;font-weight:500}
+.d-nd{position:absolute;bottom:20px;width:2px;height:32px;transform:translateX(-50%);background:#000000}
+.d-fl{position:absolute;bottom:52px;transform:translateX(-50%);padding:2px 6px;background:#141414;color:#FFFFFF;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;white-space:nowrap}
+.d-hit{position:absolute;bottom:4px;width:44px;height:48px;transform:translateX(-50%);outline:1px dashed #A3A3A3}
+
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:0 16px 0 0;border-bottom:1px solid #E0E0E0;color:#404040}
+.mono{font-family:'Red Hat Mono',monospace;font-size:13px}
+.arrow{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#595959;padding:8px 0}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 7600px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Slider · DS-23 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Slider</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">Pick a number, or a range, by dragging along a track. Built on Radix Slider. Works with uniform steps (min, max, step) or a custom list of allowed values (e.g. 1, 2, 3, 5, 8, 10). An optional numeric input sits next to the track and snaps whatever is typed to the nearest allowed value. Section 01 explores four directions; sections 02 to 07 detail the recommended one (A, Hairline).</p>
+</header>
+
+<!-- 01 DIRECTIONS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Directions</h2></div>
+<p class="sec-d">Four directions in the same token language. Each shows a uniform scale (0 to 100, step 5) and a custom value list (1, 2, 3, 5, 8, 10) with marks, on desktop (md) and at touch size inside a 390 px phone frame. Dashed outlines are hit areas, not part of the design.</p>
+
+<!-- A -->
+<div class="ab pick">
+<div class="ab-h"><span>A · Hairline <span class="badge" style="margin-left: 12px">Recommended</span></span><span>2 px gray-500 track · black fill · square outlined thumb · tick marks · attached input</span></div>
+<div class="dir">
+<div class="dv">
+<span class="sub">Desktop · md · root 44 px</span>
+<div class="lrow"><label class="lb" for="a-d1">Opacity</label><span class="cap">Uniform · 0–100 · step 5</span></div>
+<div class="row">
+<div class="sl col"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div><div class="th" style="left: 40%"></div></div></div>
+<input id="a-d1" class="num" type="text" inputmode="decimal" value="40">
+</div>
+<div class="gap"></div>
+<div class="lrow"><label class="lb" for="a-d2">Story points</label><span class="cap">values [1, 2, 3, 5, 8, 10]</span></div>
+<div class="row">
+<div class="col">
+<div class="sl"><div class="rail"><div class="tr"></div><div class="fi" style="width: 60%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 20%"></i><i class="tk on" style="left: 40%"></i><i class="tk on" style="left: 60%"></i><i class="tk" style="left: 80%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 60%"></div></div></div>
+<div class="mk"><span style="left: 0%">1</span><span style="left: 20%">2</span><span style="left: 40%">3</span><span class="on" style="left: 60%">5</span><span style="left: 80%">8</span><span style="left: 100%">10</span></div>
+</div>
+<input id="a-d2" class="num" type="text" inputmode="decimal" value="5">
+</div>
+</div>
+<div class="ph">
+<span class="sub">Touch · lg · root 48 px</span>
+<div class="lrow"><label class="lb" for="a-t1">Opacity</label><span class="cap">step 5</span></div>
+<div class="row">
+<div class="sl lg col hit"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div><div class="th" style="left: 40%"></div></div></div>
+<input id="a-t1" class="num lg" type="text" inputmode="decimal" value="40">
+</div>
+<div class="gap"></div>
+<div class="lrow"><label class="lb" for="a-t2">Story points</label><span class="cap">custom list</span></div>
+<div class="row">
+<div class="col">
+<div class="sl lg hit"><div class="rail"><div class="tr"></div><div class="fi" style="width: 60%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 20%"></i><i class="tk on" style="left: 40%"></i><i class="tk on" style="left: 60%"></i><i class="tk" style="left: 80%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 60%"></div></div></div>
+<div class="mk lg"><span style="left: 0%">1</span><span style="left: 20%">2</span><span style="left: 40%">3</span><span class="on" style="left: 60%">5</span><span style="left: 80%">8</span><span style="left: 100%">10</span></div>
+</div>
+<input id="a-t2" class="num lg" type="text" inputmode="decimal" value="5">
+</div>
+</div>
+</div>
+<div class="ab-f">Why recommended: the lightest form, and the closest to Input and Switch (square, black on white, 1 px and 2 px lines). Thumb, fill and ticks scale cleanly from sm to touch. The unfilled track is gray-500, so it passes 3:1 against white. The attached input reuses Input styling exactly. Weakness: quiet at rest, so the value relies on the input, the marks or the bubble.</div>
+</div>
+
+<!-- B -->
+<div class="ab">
+<div class="ab-h"><span>B · Block</span><span>12 px outlined bar · solid fill · tall bar thumb · notch marks · value readout</span></div>
+<div class="dir">
+<div class="dv">
+<span class="sub">Desktop · md</span>
+<div class="lrow"><span class="lb">Opacity</span><span class="readout">40</span></div>
+<div class="b-sl"><div class="b-tr"><div class="b-fi" style="width: 40%"></div></div><div class="b-th" style="left: 40%"></div></div>
+<div class="gap"></div>
+<div class="lrow"><span class="lb">Story points</span><span class="readout">5</span></div>
+<div class="b-sl"><div class="b-tr"><div class="b-fi" style="width: 60%"></div><i class="b-n" style="left: 20%"></i><i class="b-n" style="left: 40%"></i><i class="b-n" style="left: 60%"></i><i class="b-n" style="left: 80%"></i></div><div class="b-th" style="left: 60%"></div></div>
+<div class="b-mk"><span style="left: 0%">1</span><span style="left: 20%">2</span><span style="left: 40%">3</span><span class="on" style="left: 60%">5</span><span style="left: 80%">8</span><span style="left: 100%">10</span></div>
+</div>
+<div class="ph">
+<span class="sub">Touch · lg</span>
+<div class="lrow"><span class="lb">Opacity</span><span class="readout">40</span></div>
+<div class="b-sl lg hit"><div class="b-tr"><div class="b-fi" style="width: 40%"></div></div><div class="b-th" style="left: 40%"></div></div>
+<div class="gap"></div>
+<div class="lrow"><span class="lb">Story points</span><span class="readout">5</span></div>
+<div class="b-sl lg hit"><div class="b-tr"><div class="b-fi" style="width: 60%"></div><i class="b-n" style="left: 20%"></i><i class="b-n" style="left: 40%"></i><i class="b-n" style="left: 60%"></i><i class="b-n" style="left: 80%"></i></div><div class="b-th" style="left: 60%"></div></div>
+<div class="b-mk"><span style="left: 0%">1</span><span style="left: 20%">2</span><span style="left: 40%">3</span><span class="on" style="left: 60%">5</span><span style="left: 80%">8</span><span style="left: 100%">10</span></div>
+</div>
+</div>
+<div class="ab-f">Strong and very legible at a glance; a progress-bar feel. Notches are cut into the bar. The readout replaces the input (no typing). Weakness: reads like a progress bar, and the bar thumb is hard to tell apart from the fill edge when the fill is black.</div>
+</div>
+
+<!-- C -->
+<div class="ab">
+<div class="ab-h"><span>C · Segmented</span><span>one cell per allowed value · current cell tall + ring · value readout</span></div>
+<div class="dir">
+<div class="dv">
+<span class="sub">Desktop · md</span>
+<div class="lrow"><span class="lb">Opacity</span><span class="readout">40</span></div>
+<div class="c-seg" style="grid-template-columns: repeat(21, 1fr)"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="c-lbl" style="grid-template-columns: repeat(21, 1fr)"><span>0</span><span></span><span></span><span></span><span></span><span>25</span><span></span><span></span><span></span><span></span><span>50</span><span></span><span></span><span></span><span></span><span>75</span><span></span><span></span><span></span><span></span><span>100</span></div>
+<div class="gap"></div>
+<div class="lrow"><span class="lb">Story points</span><span class="readout">5</span></div>
+<div class="c-seg" style="grid-template-columns: repeat(6, 1fr)"><i class="on"></i><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i></div>
+<div class="c-lbl" style="grid-template-columns: repeat(6, 1fr)"><span>1</span><span>2</span><span>3</span><span class="on">5</span><span>8</span><span>10</span></div>
+</div>
+<div class="ph">
+<span class="sub">Touch · lg</span>
+<div class="lrow"><span class="lb">Opacity</span><span class="readout">40</span></div>
+<div class="c-seg lg hit" style="grid-template-columns: repeat(21, 1fr)"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="gap"></div>
+<div class="lrow"><span class="lb">Story points</span><span class="readout">5</span></div>
+<div class="c-seg lg hit" style="grid-template-columns: repeat(6, 1fr)"><i class="on"></i><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i></div>
+<div class="c-lbl" style="grid-template-columns: repeat(6, 1fr)"><span>1</span><span>2</span><span>3</span><span class="on">5</span><span>8</span><span>10</span></div>
+</div>
+</div>
+<div class="ab-f">Makes discreteness obvious; great for short custom lists. Weakness: breaks down with many steps (21 cells at 390 px are about 15 px each, well under 44 px per tap) and visually competes with a segmented control.</div>
+</div>
+
+<!-- D -->
+<div class="ab">
+<div class="ab-h"><span>D · Ruler</span><span>baseline with minor/major ticks · needle thumb · value flag always on</span></div>
+<div class="dir">
+<div class="dv">
+<span class="sub">Desktop · md</span>
+<span class="lb">Opacity</span>
+<div class="d-sl"><div class="d-base"></div>
+<i class="d-tk on M" style="left: 0%"></i><i class="d-tk on" style="left: 5%"></i><i class="d-tk on" style="left: 10%"></i><i class="d-tk on" style="left: 15%"></i><i class="d-tk on" style="left: 20%"></i><i class="d-tk on M" style="left: 25%"></i><i class="d-tk on" style="left: 30%"></i><i class="d-tk on" style="left: 35%"></i><i class="d-tk" style="left: 45%"></i><i class="d-tk M" style="left: 50%"></i><i class="d-tk" style="left: 55%"></i><i class="d-tk" style="left: 60%"></i><i class="d-tk" style="left: 65%"></i><i class="d-tk" style="left: 70%"></i><i class="d-tk M" style="left: 75%"></i><i class="d-tk" style="left: 80%"></i><i class="d-tk" style="left: 85%"></i><i class="d-tk" style="left: 90%"></i><i class="d-tk" style="left: 95%"></i><i class="d-tk M" style="left: 100%"></i>
+<span class="d-lb" style="left: 0%">0</span><span class="d-lb" style="left: 25%">25</span><span class="d-lb" style="left: 50%">50</span><span class="d-lb" style="left: 75%">75</span><span class="d-lb" style="left: 100%">100</span>
+<div class="d-nd" style="left: 40%"></div><span class="d-fl" style="left: 40%">40</span></div>
+<div class="gap"></div>
+<span class="lb">Story points</span>
+<div class="d-sl"><div class="d-base"></div>
+<i class="d-tk on M" style="left: 0%"></i><i class="d-tk on M" style="left: 20%"></i><i class="d-tk on M" style="left: 40%"></i><i class="d-tk M" style="left: 80%"></i><i class="d-tk M" style="left: 100%"></i>
+<span class="d-lb" style="left: 0%">1</span><span class="d-lb" style="left: 20%">2</span><span class="d-lb" style="left: 40%">3</span><span class="d-lb on" style="left: 60%">5</span><span class="d-lb" style="left: 80%">8</span><span class="d-lb" style="left: 100%">10</span>
+<div class="d-nd" style="left: 60%"></div><span class="d-fl" style="left: 60%">5</span></div>
+</div>
+<div class="ph">
+<span class="sub">Touch · lg</span>
+<span class="lb">Opacity</span>
+<div class="d-sl"><div class="d-base"></div>
+<i class="d-tk on M" style="left: 0%"></i><i class="d-tk on" style="left: 10%"></i><i class="d-tk on" style="left: 20%"></i><i class="d-tk on M" style="left: 25%"></i><i class="d-tk on" style="left: 30%"></i><i class="d-tk M" style="left: 50%"></i><i class="d-tk" style="left: 60%"></i><i class="d-tk" style="left: 70%"></i><i class="d-tk M" style="left: 75%"></i><i class="d-tk" style="left: 80%"></i><i class="d-tk" style="left: 90%"></i><i class="d-tk M" style="left: 100%"></i>
+<span class="d-lb" style="left: 0%">0</span><span class="d-lb" style="left: 50%">50</span><span class="d-lb" style="left: 100%">100</span>
+<div class="d-nd" style="left: 40%"></div><span class="d-fl" style="left: 40%">40</span><span class="d-hit" style="left: 40%"></span></div>
+<div class="gap"></div>
+<span class="lb">Story points</span>
+<div class="d-sl"><div class="d-base"></div>
+<i class="d-tk on M" style="left: 0%"></i><i class="d-tk on M" style="left: 20%"></i><i class="d-tk on M" style="left: 40%"></i><i class="d-tk M" style="left: 80%"></i><i class="d-tk M" style="left: 100%"></i>
+<span class="d-lb" style="left: 0%">1</span><span class="d-lb" style="left: 20%">2</span><span class="d-lb" style="left: 40%">3</span><span class="d-lb on" style="left: 60%">5</span><span class="d-lb" style="left: 80%">8</span><span class="d-lb" style="left: 100%">10</span>
+<div class="d-nd" style="left: 60%"></div><span class="d-fl" style="left: 60%">5</span><span class="d-hit" style="left: 60%"></span></div>
+</div>
+</div>
+<div class="ab-f">Most expressive and on-brand for the mono type. Weakness: 72 px tall, the needle is a thin target (needs an invisible 44 px hit box), the always-on flag adds noise in forms, and ranges get crowded.</div>
+</div>
+</section>
+
+<!-- 02 SIZES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Sizes · A Hairline</h2></div>
+<p class="sec-d">Size changes the root height (the hit area), thumb, fill thickness, tick length and the attached input height. Unfilled track stays 2 px. Width is always 100 % of the container. lg is the touch size.</p>
+<div class="grid3">
+<div class="ab">
+<div class="ab-h"><span>sm</span><span>root 32 · thumb 12 · fill 2 · ticks 4</span></div>
+<div class="ab-b">
+<label class="lb" for="sz-sm">Grain</label>
+<div class="row">
+<div class="col">
+<div class="sl sm hit"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 25%"></i><i class="tk" style="left: 50%"></i><i class="tk" style="left: 75%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 40%"></div></div></div>
+<div class="mk sm"><span style="left: 0%">0</span><span style="left: 100%">100</span></div>
+</div>
+<input id="sz-sm" class="num sm" type="text" inputmode="decimal" value="40">
+</div>
+</div>
+<div class="ab-f">Dense desktop panels only. 32 px target meets WCAG 2.5.8 (24 px), not touch.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>md (default)</span><span>root 44 · thumb 16 · fill 4 · ticks 8</span></div>
+<div class="ab-b">
+<label class="lb" for="sz-md">Grain</label>
+<div class="row">
+<div class="col">
+<div class="sl hit"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 25%"></i><i class="tk" style="left: 50%"></i><i class="tk" style="left: 75%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 40%"></div></div></div>
+<div class="mk"><span style="left: 0%">0</span><span style="left: 100%">100</span></div>
+</div>
+<input id="sz-md" class="num" type="text" inputmode="decimal" value="40">
+</div>
+</div>
+<div class="ab-f">Root = control height 44, lines up with Input.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>lg (touch)</span><span>root 48 · thumb 24 · fill 8 · ticks 8</span></div>
+<div class="ab-b">
+<label class="lb" for="sz-lg">Grain</label>
+<div class="row">
+<div class="col">
+<div class="sl lg hit"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 25%"></i><i class="tk" style="left: 50%"></i><i class="tk" style="left: 75%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 40%"></div></div></div>
+<div class="mk lg"><span style="left: 0%">0</span><span style="left: 100%">100</span></div>
+</div>
+<input id="sz-lg" class="num lg" type="text" inputmode="decimal" value="40">
+</div>
+</div>
+<div class="ab-f">Touch and mobile forms. Hit area 48 px tall, full width.</div>
+</div>
+</div>
+</section>
+
+<!-- 03 STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">States · A Hairline</h2></div>
+<p class="sec-d">Shown at md with the attached input, uniform 0–100 step 5. Every state applies to every size, to custom value lists and to both thumbs of a range. Header right side names what changes against Default.</p>
+<div class="grid3">
+
+<div class="ab">
+<div class="ab-h"><span>Default</span><span>track gray-500 · fill black · thumb white, 2 px black</span></div>
+<div class="ab-b">
+<label class="lb" for="st-1">Opacity</label>
+<div class="row"><div class="sl col"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div><div class="th" style="left: 40%"></div></div></div><input id="st-1" class="num" type="text" inputmode="decimal" value="40"></div>
+<span class="hint">Applies to every frame.</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Hover</span><span>thumb fill gray-100 · cursor grab</span></div>
+<div class="ab-b">
+<label class="lb" for="st-2">Opacity</label>
+<div class="row"><div class="sl col"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div><div class="th hover" style="left: 40%"></div></div></div><input id="st-2" class="num" type="text" inputmode="decimal" value="40"></div>
+<span class="hint">Pointer anywhere over the root.</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Focus-visible (thumb)</span><span>2 px black ring, 2 px offset</span></div>
+<div class="ab-b">
+<label class="lb" for="st-3">Opacity</label>
+<div class="row"><div class="sl col"><div class="rail"><div class="tr"></div><div class="fi" style="width: 45%"></div><div class="th focus" style="left: 45%"></div></div></div><input id="st-3" class="num" type="text" inputmode="decimal" value="45"></div>
+<span class="hint">Keyboard only. Arrow keys move by 5.</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Dragging</span><span>thumb fill black · cursor grabbing · bubble (if on)</span></div>
+<div class="ab-b">
+<label class="lb" for="st-4">Opacity</label>
+<div class="row"><div class="sl col"><div class="rail"><div class="tr"></div><div class="fi" style="width: 55%"></div><div class="th drag" style="left: 55%"><span class="bub" aria-hidden="true">55</span></div></div></div><input id="st-4" class="num" type="text" inputmode="decimal" value="55"></div>
+<span class="hint">Input mirrors the value live.</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Disabled</span><span>track gray-200 · fill gray-400 · thumb gray-50 / gray-400</span></div>
+<div class="ab-b">
+<label class="lb dis" for="st-5">Opacity</label>
+<div class="row"><div class="sl col dis"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div><div class="th" style="left: 40%"></div></div></div><input id="st-5" class="num dis" type="text" inputmode="decimal" value="40" disabled></div>
+<span class="hint">Not focusable; no hover.</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Invalid</span><span>fill + thumb border error · input 2 px error · message</span></div>
+<div class="ab-b">
+<label class="lb" for="st-6">Opacity</label>
+<div class="row"><div class="sl col inv"><div class="rail"><div class="tr"></div><div class="fi" style="width: 10%"></div><div class="th" style="left: 10%"></div></div></div><input id="st-6" class="num inv" type="text" inputmode="decimal" value="10" aria-invalid="true" aria-describedby="st-6e"></div>
+<span id="st-6e" class="err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Error: opacity must be at least 20</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Invalid + focus (thumb)</span><span>error kept + black ring</span></div>
+<div class="ab-b">
+<label class="lb" for="st-7">Opacity</label>
+<div class="row"><div class="sl col inv"><div class="rail"><div class="tr"></div><div class="fi" style="width: 10%"></div><div class="th focus" style="left: 10%"></div></div></div><input id="st-7" class="num inv" type="text" inputmode="decimal" value="10" aria-invalid="true" aria-describedby="st-7e"></div>
+<span id="st-7e" class="err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Error: opacity must be at least 20</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Input hover</span><span>input border black (as Input)</span></div>
+<div class="ab-b">
+<label class="lb" for="st-8">Opacity</label>
+<div class="row"><div class="sl col"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div><div class="th" style="left: 40%"></div></div></div><input id="st-8" class="num hover" type="text" inputmode="decimal" value="40"></div>
+<span class="hint">Slider unchanged.</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Input focus (typing)</span><span>input black border + ring · draft not applied yet</span></div>
+<div class="ab-b">
+<label class="lb" for="st-9">Opacity</label>
+<div class="row"><div class="sl col"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div><div class="th" style="left: 40%"></div></div></div><input id="st-9" class="num focus" type="text" inputmode="decimal" value="63"></div>
+<span class="hint">Enter or blur snaps 63 to 65.</span>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- 04 STEPS, MARKS AND SNAPPING -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Steps, marks &amp; snapping</h2></div>
+<p class="sec-d">Uniform scales use min, max and step. Custom lists use values[]; each value gets an equal share of the track (ordinal spacing), because the list maps to Radix index steps 0…n−1. Ticks under the fill are black; the current value's label is black 500.</p>
+<div class="grid3">
+
+<div class="ab">
+<div class="ab-h"><span>Uniform · step 1</span><span>marks off (default)</span></div>
+<div class="ab-b">
+<label class="lb" for="mk-1">Volume</label>
+<div class="row"><div class="sl col"><div class="rail"><div class="tr"></div><div class="fi" style="width: 37%"></div><div class="th" style="left: 37%"></div></div></div><input id="mk-1" class="num" type="text" inputmode="decimal" value="37"></div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Uniform · step 5 · marks</span><span>tick per step, labels at min / max</span></div>
+<div class="ab-b">
+<label class="lb" for="mk-2">Opacity</label>
+<div class="row"><div class="col">
+<div class="sl"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 5%"></i><i class="tk on" style="left: 10%"></i><i class="tk on" style="left: 15%"></i><i class="tk on" style="left: 20%"></i><i class="tk on" style="left: 25%"></i><i class="tk on" style="left: 30%"></i><i class="tk on" style="left: 35%"></i><i class="tk" style="left: 45%"></i><i class="tk" style="left: 50%"></i><i class="tk" style="left: 55%"></i><i class="tk" style="left: 60%"></i><i class="tk" style="left: 65%"></i><i class="tk" style="left: 70%"></i><i class="tk" style="left: 75%"></i><i class="tk" style="left: 80%"></i><i class="tk" style="left: 85%"></i><i class="tk" style="left: 90%"></i><i class="tk" style="left: 95%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 40%"></div></div></div>
+<div class="mk"><span style="left: 0%">0</span><span style="left: 100%">100</span></div>
+</div><input id="mk-2" class="num" type="text" inputmode="decimal" value="40"></div>
+</div>
+<div class="ab-f">marks={true}. More than 21 steps: ticks only at min and max (dev warning).</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Uniform · step 5 · marks list</span><span>marks={[0, 25, 50, 75, 100]}</span></div>
+<div class="ab-b">
+<label class="lb" for="mk-3">Opacity</label>
+<div class="row"><div class="col">
+<div class="sl"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 25%"></i><i class="tk" style="left: 50%"></i><i class="tk" style="left: 75%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 40%"></div></div></div>
+<div class="mk"><span style="left: 0%">0</span><span style="left: 25%">25</span><span style="left: 50%">50</span><span style="left: 75%">75</span><span style="left: 100%">100</span></div>
+</div><input id="mk-3" class="num" type="text" inputmode="decimal" value="40"></div>
+</div>
+<div class="ab-f">Labels only at listed marks; the current label is highlighted only if it is a mark.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Custom list</span><span>values [1, 2, 3, 5, 8, 10] · marks on (default)</span></div>
+<div class="ab-b">
+<label class="lb" for="mk-4">Story points</label>
+<div class="row"><div class="col">
+<div class="sl"><div class="rail"><div class="tr"></div><div class="fi" style="width: 80%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 20%"></i><i class="tk on" style="left: 40%"></i><i class="tk on" style="left: 60%"></i><i class="tk on" style="left: 80%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 80%"></div></div></div>
+<div class="mk"><span style="left: 0%">1</span><span style="left: 20%">2</span><span style="left: 40%">3</span><span style="left: 60%">5</span><span class="on" style="left: 80%">8</span><span style="left: 100%">10</span></div>
+</div><input id="mk-4" class="num" type="text" inputmode="decimal" value="8"></div>
+</div>
+<div class="ab-f">Radix sees min 0, max 5, step 1; index 4 ↔ value 8. Equal spacing, not proportional.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Custom list · formatValue</span><span>values [25, 50, 100, 200, 400] · v → `${v}%`</span></div>
+<div class="ab-b">
+<label class="lb" for="mk-5">Zoom</label>
+<div class="row"><div class="col">
+<div class="sl"><div class="rail"><div class="tr"></div><div class="fi" style="width: 50%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 25%"></i><i class="tk on" style="left: 50%"></i><i class="tk" style="left: 75%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 50%"></div></div></div>
+<div class="mk"><span style="left: 0%">25%</span><span style="left: 25%">50%</span><span class="on" style="left: 50%">100%</span><span style="left: 75%">200%</span><span style="left: 100%">400%</span></div>
+</div><input id="mk-5" class="num" type="text" inputmode="decimal" value="100"></div>
+</div>
+<div class="ab-f">formatValue drives labels, bubble and aria-valuetext. The input shows the bare number.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Disabled with marks</span><span>ticks gray-300 · labels gray-500</span></div>
+<div class="ab-b">
+<label class="lb dis" for="mk-6">Story points</label>
+<div class="row"><div class="col">
+<div class="sl dis"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 20%"></i><i class="tk on" style="left: 40%"></i><i class="tk" style="left: 60%"></i><i class="tk" style="left: 80%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 40%"></div></div></div>
+<div class="mk dis"><span style="left: 0%">1</span><span style="left: 20%">2</span><span style="left: 40%">3</span><span style="left: 60%">5</span><span style="left: 80%">8</span><span style="left: 100%">10</span></div>
+</div><input id="mk-6" class="num dis" type="text" inputmode="decimal" value="3" disabled></div>
+</div>
+</div>
+
+</div>
+
+<h3 style="margin: 16px 0 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 22px; line-height: 29px">Typed input snaps on Enter or blur</h3>
+<div class="grid2">
+
+<div class="ab">
+<div class="ab-h"><span>Custom list · tie goes up</span><span>typed 4 → 5</span></div>
+<div class="ab-b">
+<span class="arrow">Before · typing</span>
+<label class="lb" for="sn-1a">Story points</label>
+<div class="row"><div class="col">
+<div class="sl"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 20%"></i><i class="tk on" style="left: 40%"></i><i class="tk" style="left: 60%"></i><i class="tk" style="left: 80%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 40%"></div></div></div>
+<div class="mk"><span style="left: 0%">1</span><span style="left: 20%">2</span><span class="on" style="left: 40%">3</span><span style="left: 60%">5</span><span style="left: 80%">8</span><span style="left: 100%">10</span></div>
+</div><input id="sn-1a" class="num focus" type="text" inputmode="decimal" value="4"></div>
+<span class="arrow">After · <span class="kbd">Enter</span></span>
+<label class="lb" for="sn-1b">Story points</label>
+<div class="row"><div class="col">
+<div class="sl"><div class="rail"><div class="tr"></div><div class="fi" style="width: 60%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 20%"></i><i class="tk on" style="left: 40%"></i><i class="tk on" style="left: 60%"></i><i class="tk" style="left: 80%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 60%"></div></div></div>
+<div class="mk"><span style="left: 0%">1</span><span style="left: 20%">2</span><span style="left: 40%">3</span><span class="on" style="left: 60%">5</span><span style="left: 80%">8</span><span style="left: 100%">10</span></div>
+</div><input id="sn-1b" class="num focus" type="text" inputmode="decimal" value="5"></div>
+</div>
+<div class="ab-f">4 is 1 from 3 and 1 from 5: a tie resolves to the higher value. Live region: "Set to 5".</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Uniform · clamp, nearest, revert</span><span>0–100 · step 5</span></div>
+<div class="ab-b">
+<table class="tbl">
+<thead><tr><th scope="col">Typed</th><th scope="col">Result</th><th scope="col">Rule</th></tr></thead>
+<tbody>
+<tr><td class="mono">42</td><td class="mono">40</td><td>nearest step</td></tr>
+<tr><td class="mono">42.5</td><td class="mono">45</td><td>tie goes up</td></tr>
+<tr><td class="mono">120</td><td class="mono">100</td><td>clamp to max</td></tr>
+<tr><td class="mono">-8</td><td class="mono">0</td><td>clamp to min</td></tr>
+<tr><td class="mono">7,5</td><td class="mono">10</td><td>comma = decimal point</td></tr>
+<tr><td class="mono">abc / empty</td><td class="mono">40</td><td>revert to current, no change event</td></tr>
+<tr><td class="mono"><span class="kbd">Esc</span></td><td class="mono">40</td><td>discard draft, keep focus</td></tr>
+</tbody>
+</table>
+</div>
+<div class="ab-f">Snapping never shows an error: the input always ends on an allowed value.</div>
+</div>
+
+</div>
+</section>
+
+<!-- 05 OPTIONS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Options · bubble, range, Field</h2></div>
+<p class="sec-d">Value bubble (showBubble) appears above the thumb only while dragging or keyboard-focused. Range = two thumbs, one fill between them; thumbs cannot cross. With showInput a range gets From / To inputs on either side.</p>
+<div class="grid3">
+
+<div class="ab">
+<div class="ab-h"><span>Bubble · focus-visible</span><span>inverse gray-900 · mono 12 · 8 px above</span></div>
+<div class="ab-b">
+<label class="lb" id="bb-1l">Opacity</label>
+<div class="sl" style="margin-top: 32px"><div class="rail"><div class="tr"></div><div class="fi" style="width: 65%"></div><div class="th focus" style="left: 65%" role="slider" tabindex="0" aria-labelledby="bb-1l" aria-valuemin="0" aria-valuemax="100" aria-valuenow="65" aria-valuetext="65%"><span class="bub" aria-hidden="true">65%</span></div></div></div>
+</div>
+<div class="ab-f">Not shown on hover alone. aria-hidden; aria-valuetext carries the value.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Range · marks</span><span>value [20, 70] · two thumbs</span></div>
+<div class="ab-b">
+<span class="lb">Price</span>
+<div class="sl" style="margin-top: 0"><div class="rail"><div class="tr"></div><div class="fi" style="left: 20%; width: 50%"></div>
+<i class="tk" style="left: 0%"></i><i class="tk on" style="left: 25%"></i><i class="tk on" style="left: 50%"></i><i class="tk" style="left: 75%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 20%"></div><div class="th" style="left: 70%"></div></div></div>
+<div class="mk"><span style="left: 0%">€0</span><span style="left: 25%">€250</span><span style="left: 50%">€500</span><span style="left: 75%">€750</span><span style="left: 100%">€1000</span></div>
+</div>
+<div class="ab-f">Ticks inside the selected span are black. Thumbs named "Price, minimum" / "Price, maximum".</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Range · custom list</span><span>values [1, 2, 3, 5, 8, 10] · [2, 8]</span></div>
+<div class="ab-b">
+<span class="lb">Estimate</span>
+<div class="sl"><div class="rail"><div class="tr"></div><div class="fi" style="left: 20%; width: 60%"></div>
+<i class="tk" style="left: 0%"></i><i class="tk on" style="left: 20%"></i><i class="tk on" style="left: 40%"></i><i class="tk on" style="left: 60%"></i><i class="tk on" style="left: 80%"></i><i class="tk" style="left: 100%"></i>
+<div class="th focus" style="left: 20%"><span class="bub" aria-hidden="true">2</span></div><div class="th" style="left: 80%"></div></div></div>
+<div class="mk"><span style="left: 0%">1</span><span class="on" style="left: 20%">2</span><span style="left: 40%">3</span><span style="left: 60%">5</span><span class="on" style="left: 80%">8</span><span style="left: 100%">10</span></div>
+</div>
+<div class="ab-f">Minimum thumb focused with bubble.</div>
+</div>
+
+<div class="ab" style="grid-column: span 2">
+<div class="ab-h"><span>Range · showInput</span><span>From input · track · To input</span></div>
+<div class="ab-b">
+<span class="lb">Price</span>
+<div class="row">
+<input class="num" type="text" inputmode="decimal" value="200" aria-label="Price, minimum">
+<div class="col">
+<div class="sl"><div class="rail"><div class="tr"></div><div class="fi" style="left: 20%; width: 50%"></div>
+<i class="tk" style="left: 0%"></i><i class="tk on" style="left: 25%"></i><i class="tk on" style="left: 50%"></i><i class="tk" style="left: 75%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 20%"></div><div class="th" style="left: 70%"></div></div></div>
+<div class="mk"><span style="left: 0%">0</span><span style="left: 50%">500</span><span style="left: 100%">1000</span></div>
+</div>
+<input class="num" type="text" inputmode="decimal" value="700" aria-label="Price, maximum">
+</div>
+<span class="hint">min 0 · max 1000 · step 50. Typing 800 in From when To is 700 sets From to 700 (no crossing).</span>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>SliderField wiring</span><span>label · hint · error · required</span></div>
+<div class="ab-b">
+<label class="lb" id="fw-l" for="fw-1">Exposure <span aria-hidden="true">*</span></label>
+<div class="row"><div class="sl col inv"><div class="rail"><div class="tr"></div><div class="fi" style="width: 0%"></div><div class="th" style="left: 0%"></div></div></div><input id="fw-1" class="num inv" type="text" inputmode="decimal" value="-2" aria-invalid="true" aria-describedby="fw-h fw-e"></div>
+<span id="fw-h" class="hint">Stops, −2 to +2.</span>
+<span id="fw-e" class="err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Error: choose a value above −2</span>
+</div>
+<div class="ab-f">Label click focuses the input (or the thumb when there is no input).</div>
+</div>
+
+</div>
+</section>
+
+<!-- 06 TOUCH -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Touch · lg</h2></div>
+<p class="sec-d">At lg the whole root is a 48 px tall, full-width target; pressing anywhere moves the nearest thumb there. Inputs are 48 px. Dashed outlines show hit areas.</p>
+<div class="grid3">
+<div class="ph">
+<span class="sub">Single + input</span>
+<label class="lb" for="tc-1">Brightness</label>
+<div class="row"><div class="sl lg col hit"><div class="rail"><div class="tr"></div><div class="fi" style="width: 55%"></div><div class="th drag" style="left: 55%"><span class="bub" aria-hidden="true">55</span></div></div></div><input id="tc-1" class="num lg hit" type="text" inputmode="decimal" value="55"></div>
+<span class="hint">Dragging, bubble on.</span>
+</div>
+<div class="ph">
+<span class="sub">Custom list</span>
+<span class="lb">Story points</span>
+<div class="sl lg hit"><div class="rail"><div class="tr"></div><div class="fi" style="width: 40%"></div>
+<i class="tk on" style="left: 0%"></i><i class="tk on" style="left: 20%"></i><i class="tk on" style="left: 40%"></i><i class="tk" style="left: 60%"></i><i class="tk" style="left: 80%"></i><i class="tk" style="left: 100%"></i>
+<div class="th" style="left: 40%"></div></div></div>
+<div class="mk lg"><span style="left: 0%">1</span><span style="left: 20%">2</span><span class="on" style="left: 40%">3</span><span style="left: 60%">5</span><span style="left: 80%">8</span><span style="left: 100%">10</span></div>
+<span class="hint">About 66 px between values at 390 px.</span>
+</div>
+<div class="ph">
+<span class="sub">Range + inputs</span>
+<span class="lb">Price</span>
+<div class="row">
+<input class="num lg hit" type="text" inputmode="decimal" value="200" aria-label="Price, minimum">
+<div class="sl lg col hit"><div class="rail"><div class="tr"></div><div class="fi" style="left: 20%; width: 50%"></div><div class="th" style="left: 20%"></div><div class="th" style="left: 70%"></div></div></div>
+<input class="num lg hit" type="text" inputmode="decimal" value="700" aria-label="Price, maximum">
+</div>
+<span class="hint">Below about 320 px, inputs move under the track (From left, To right).</span>
+</div>
+</div>
+</section>
+
+<!-- 07 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Keyboard</h2></div>
+<p class="sec-d">Thumb keys come from Radix Slider. In a custom list one step is one list item.</p>
+<table class="tbl">
+<thead><tr><th scope="col">Key (thumb focused)</th><th scope="col">Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">→</span> <span class="kbd">↑</span></td><td>Next allowed value (+1 step). In RTL, ← increases.</td></tr>
+<tr><td><span class="kbd">←</span> <span class="kbd">↓</span></td><td>Previous allowed value (−1 step).</td></tr>
+<tr><td><span class="kbd">PgUp</span> / <span class="kbd">Shift</span> <span class="kbd">→</span> <span class="kbd">↑</span></td><td>+10 steps, clamped to max.</td></tr>
+<tr><td><span class="kbd">PgDn</span> / <span class="kbd">Shift</span> <span class="kbd">←</span> <span class="kbd">↓</span></td><td>−10 steps, clamped to min.</td></tr>
+<tr><td><span class="kbd">Home</span> / <span class="kbd">End</span></td><td>Min / max (range: limited by the other thumb).</td></tr>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift</span> <span class="kbd">Tab</span></td><td>Single: thumb → input. Range: From input → min thumb → max thumb → To input.</td></tr>
+</tbody>
+</table>
+<table class="tbl">
+<thead><tr><th scope="col">Key (input focused)</th><th scope="col">Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Enter</span></td><td>Parse, clamp, snap, commit. Does not submit the form. Focus stays.</td></tr>
+<tr><td><span class="kbd">Tab</span> / blur</td><td>Same commit as Enter, then focus moves.</td></tr>
+<tr><td><span class="kbd">Esc</span></td><td>Discard the draft and show the current value. If there is no draft, bubbles (a parent Dialog can close).</td></tr>
+<tr><td><span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">↑</span> <span class="kbd">↓</span></td><td>Native caret movement only; use the thumb to step.</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- 08 OUT OF SCOPE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Out of scope</h2></div>
+<p class="sec-d">Vertical orientation · more than two thumbs · minimum distance between range thumbs · read-only · logarithmic or proportional spacing for custom lists · clickable mark labels · a value bubble on hover · spin buttons on the input.</p>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":7600}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
