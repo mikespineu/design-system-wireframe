@@ -121,6 +121,22 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every state
     - Arrow keys move between tabs, Home/End jump; tested with `userEvent`
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-23 Slider — design.** Explore and settle the Slider design in one task: a canvas with 3–4 bold visual directions in the `--ds-*` token language (track/fill, thumb shape, ticks/marks, value bubble, attached numeric input, two-thumb range, sizes), on desktop and at a touch size; iterate with the user to one direction; then write the full spec `docs/specs/Slider.md` for it on Radix `Slider`, covering every state, uniform steps and custom value lists (e.g. 1, 2, 3, 5, 8, 10), and a numeric input that snaps to the nearest allowed value.
+  - type: design · has_ui: yes · depends_on: – · needs_human: yes · status: todo
+  - done_when:
+    - Canvas shows ≥ 3 explored directions plus the chosen one, each with uniform steps (e.g. step 5) and a custom value list with ticks/marks, on desktop and touch (hit targets ≥ 44 px)
+    - Chosen direction covers default, hover, focus-visible, dragging, disabled and invalid; optional variants (value bubble, range, sm/md/lg) shown or marked out of scope
+    - Spec defines the typed API (`min`/`max`/`step` or `values[]`, `value`/`defaultValue`, `onValueChange`/`onValueCommit`, `showInput`, `marks`, `size`)
+    - Spec defines snapping: custom values map to Radix index steps; typed input snaps to nearest allowed value on blur/Enter, with clamping and tie-breaking
+    - Spec names Radix `Slider`, maps every state to `--ds-*` tokens (new raw values under Token requests), and defines keyboard (arrows, Page Up/Down, Home/End) and Field wiring (label, hint, error, `aria-valuetext`)
+- [ ] **DS-24 Slider — implementation.** Build `Slider` and `SliderField` in `src/components/Slider/` on Radix `Slider` (`import { Slider } from 'radix-ui'`), styled via `[data-orientation]` / `[data-disabled]`. The numeric input reuses `Input`, is wired through `Field` / `useFieldControl()`, and snaps to the nearest allowed value.
+  - type: build · has_ui: yes · depends_on: DS-23 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state
+    - Uniform `step` and custom `values[]` modes both snap only to allowed values; typing in the numeric input snaps to the nearest allowed value on commit
+    - Touch hit targets ≥ 44 px; `jest.setup.ts` gets `ResizeObserver` / `PointerEvent` stubs if missing
+    - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
+    - `userEvent` tests cover arrow/Home/End keys, input snapping and clamping
 
 ### Epic: Publishing
 
