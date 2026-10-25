@@ -33,6 +33,7 @@ updated: "2026-10-25 18:01"
 - 18:02 pr: opened #33
 - 18:02 ci: waiting for checks
 - 18:03 ci: claude-review and deploy pass; mergeable; waiting for you to merge
+- 18:05 build: user asked ContactForm pattern to use TextareaField; native textarea stand-in removed; lint, typecheck, test, storybook pass
 
 ## Gate results
 
