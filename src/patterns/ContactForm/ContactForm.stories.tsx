@@ -4,7 +4,6 @@ import {
   type ChangeEvent,
   type FormEvent,
   type SelectHTMLAttributes,
-  type TextareaHTMLAttributes,
 } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
@@ -12,12 +11,13 @@ import { Alert } from '../../components/Alert';
 import { Button } from '../../components/Button';
 import { Icon } from '../../components/Icon';
 import { Field, TextField, useFieldControl } from '../../components/Input';
+import { TextareaField } from '../../components/Textarea';
 
 /*
  * Example form layout from docs/design-system-wireframe (artboard "Example form").
- * Text fields use the real TextField/Field. Select, Textarea, Checkbox and RadioGroup are not
- * built yet (docs/COMPONENTS_TODO.md C3-C9), so those are native elements; select and textarea
- * are wired to Field through useFieldControl so errors and hints behave like Input.
+ * Text fields use the real TextField/Field and the message uses TextareaField. Select, Checkbox
+ * and RadioGroup are not built yet (docs/COMPONENTS_TODO.md C3-C9), so those are native elements;
+ * the select is wired to Field through useFieldControl so errors and hints behave like Input.
  * Swap them for the real components when those land.
  */
 
@@ -53,14 +53,10 @@ const controlClass =
 const errorClass = 'flex items-center gap-1.5 text-caption font-medium text-error';
 const legendClass = 'mb-6 p-0 font-mono text-h3';
 
-/** Stand-ins until Select and Textarea exist; wired to the surrounding Field. */
+/** Stand-in until Select exists; wired to the surrounding Field. */
 const NativeSelect = (props: SelectHTMLAttributes<HTMLSelectElement>) => {
   const field = useFieldControl();
   return <select {...field} {...props} className={`${controlClass} h-control`} />;
-};
-const NativeTextarea = (props: TextareaHTMLAttributes<HTMLTextAreaElement>) => {
-  const field = useFieldControl();
-  return <textarea {...field} {...props} className={`${controlClass} resize-y py-3 leading-normal`} />;
 };
 
 const Facade = () => {
@@ -210,26 +206,16 @@ const ContactForm = () => {
                     </div>
                   </div>
                 </div>
-                <Field
-                  label={
-                    <span className="flex items-baseline justify-between">
-                      <span>Message</span>
-                      <span className="font-mono text-label tracking-normal text-muted">
-                        {values.message.length} / {MESSAGE_MAX}
-                      </span>
-                    </span>
-                  }
+                <TextareaField
+                  label="Message"
+                  rows={6}
+                  maxLength={MESSAGE_MAX}
+                  placeholder="A few lines about the project"
+                  value={values.message}
+                  onChange={text('message')}
                   hint={`At least ${MESSAGE_MIN} characters.`}
                   error={show('message') && `write at least ${MESSAGE_MIN} characters`}
-                >
-                  <NativeTextarea
-                    rows={6}
-                    maxLength={MESSAGE_MAX}
-                    placeholder="A few lines about the project"
-                    value={values.message}
-                    onChange={text('message')}
-                  />
-                </Field>
+                />
               </fieldset>
 
               <div className="flex flex-col gap-2 border-t border-divider pt-6">
@@ -291,7 +277,7 @@ export const Sent: Story = {
     await userEvent.type(canvas.getByRole('textbox', { name: 'Last name' }), 'Lovelace');
     await userEvent.type(canvas.getByRole('textbox', { name: 'Email' }), 'ada@example.com');
     await userEvent.selectOptions(canvas.getByRole('combobox', { name: 'Topic' }), 'project');
-    await userEvent.type(canvas.getByRole('textbox', { name: /^Message/ }), 'A few lines about a new project.');
+    await userEvent.type(canvas.getByRole('textbox', { name: 'Message' }), 'A few lines about a new project.');
     await userEvent.click(canvas.getByRole('checkbox', { name: /I agree/ }));
     await userEvent.click(canvas.getByRole('button', { name: 'Send message' }));
     await expect(canvas.getByRole('status')).toHaveTextContent('Thanks, Ada. We will reply to ada@example.com.');

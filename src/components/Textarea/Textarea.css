@@ -1,0 +1,109 @@
+/* Textarea: visual twin of Input. Tokens only (--ds-*). Spec: docs/specs/Textarea.md */
+.ds-textarea {
+  --ds-textarea-line: 26px;
+  --ds-textarea-chrome: calc(2 * var(--ds-space-2) + 2 * var(--ds-border-width));
+  --ds-textarea-min: calc(var(--ds-textarea-rows, 4) * var(--ds-textarea-line) + var(--ds-textarea-chrome));
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-height: var(--ds-textarea-min);
+  height: var(--ds-textarea-min);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border: var(--ds-border-width) solid var(--ds-color-border);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-surface);
+  color: var(--ds-color-ink);
+  font-family: var(--ds-font-text);
+  font-size: 1rem;
+  line-height: var(--ds-textarea-line);
+  overflow-y: auto;
+  resize: vertical;
+  transition: border-color var(--ds-motion), background-color var(--ds-motion);
+}
+
+.ds-textarea::placeholder {
+  color: var(--ds-color-placeholder);
+}
+
+.ds-textarea[data-resize='none'] {
+  resize: none;
+}
+
+.ds-textarea[data-resize='auto'] {
+  resize: none;
+}
+
+@supports (field-sizing: content) {
+  .ds-textarea[data-resize='auto'] {
+    field-sizing: content;
+    height: auto;
+    max-height: calc(var(--ds-textarea-max-rows, 6) * var(--ds-textarea-line) + var(--ds-textarea-chrome));
+  }
+}
+
+.ds-textarea:hover:not(:disabled, [readonly], [aria-invalid='true']) {
+  border-color: var(--ds-color-ink);
+}
+
+.ds-textarea:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.ds-textarea:focus-visible:not(:disabled, [readonly], [aria-invalid='true']) {
+  border-color: var(--ds-color-ink);
+}
+
+.ds-textarea[aria-invalid='true'] {
+  border-width: 2px;
+  border-color: var(--ds-color-error);
+}
+
+.ds-textarea[readonly] {
+  border-color: var(--ds-color-divider);
+  background: var(--ds-color-surface-subtle);
+  cursor: default;
+  resize: none;
+}
+
+.ds-textarea:disabled {
+  border-color: var(--ds-color-divider);
+  background: var(--ds-color-surface-subtle);
+  color: var(--ds-color-placeholder);
+  cursor: not-allowed;
+  resize: none;
+}
+
+.ds-textarea-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+}
+
+.ds-textarea-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  font-family: var(--ds-font-text);
+  font-size: 0.8125rem;
+  line-height: 20px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+  color: var(--ds-color-text-muted);
+}
+
+.ds-textarea-wrap > .ds-textarea-counter {
+  align-self: flex-end;
+}
+
+.ds-textarea-counter[data-state='near'],
+.ds-textarea-counter[data-state='at'] {
+  font-weight: 500;
+  color: var(--ds-color-ink);
+}
+
+.ds-textarea-counter[data-state='over'] {
+  font-weight: 500;
+  color: var(--ds-color-error);
+}
