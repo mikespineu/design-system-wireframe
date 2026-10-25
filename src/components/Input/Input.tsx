@@ -40,11 +40,13 @@ export interface FieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childr
   required?: boolean;
   /** Override the generated control id. */
   id?: string;
+  /** Content aligned to the right of the hint row (e.g. a character counter). */
+  hintAside?: ReactNode;
   /** The control. Any child calling `useFieldControl()` (e.g. Input) is wired automatically. */
   children: ReactNode;
 }
 
-export const Field = ({ label, hint, error, disabled, required, id, className, children, ...rest }: FieldProps) => {
+export const Field = ({ label, hint, error, disabled, required, id, className, children, hintAside, ...rest }: FieldProps) => {
   const generated = useId();
   const controlId = id ?? generated;
   const hintId = hint ? `${controlId}-hint` : undefined;
@@ -70,10 +72,21 @@ export const Field = ({ label, hint, error, disabled, required, id, className, c
           {required && <span aria-hidden="true"> *</span>}
         </Label.Root>
         {children}
-        {hint && (
-          <span id={hintId} className="text-caption text-muted">
-            {hint}
-          </span>
+        {hintAside ? (
+          <div className="flex items-start justify-between gap-4">
+            {hint ? (
+              <span id={hintId} className="text-caption text-muted">
+                {hint}
+              </span>
+            ) : null}
+            <span className="ml-auto">{hintAside}</span>
+          </div>
+        ) : (
+          hint && (
+            <span id={hintId} className="text-caption text-muted">
+              {hint}
+            </span>
+          )
         )}
         {error && (
           <span id={errorId} className="flex items-center gap-1.5 text-caption font-medium text-error">
