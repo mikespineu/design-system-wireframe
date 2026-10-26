@@ -34,6 +34,7 @@ updated: "2026-10-26T18:05:23Z"
 - 12:23 design: revised per canvas comment (SegmentedControl selection slides between segments, --ds-motion); canvas republished
 - 12:24 design: example labels replaced with neutral app-settings copy (no 1:1 labels from reference screenshots); spec check passed; canvas republished
 - 13:07 approve: approved by mikespin
+- 19:05 approve: approval_hash set (spec+canvas blobs) so the approval is the latest spec commit
 - 13:09 ci: checks green (ci, claude-review, deploy)
 - 13:09 merge: squash-merged PR #49
 - 19:02 publish: re-approval requested — spec amended in DS-30 (#59, scroll-snap dropped); approval reset
