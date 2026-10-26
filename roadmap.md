@@ -364,3 +364,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-8** CI pipeline — https://github.com/mikespineu/design-system-wireframe/pull/42
 - **DS-9** Release pipeline to npm — https://github.com/mikespineu/design-system-wireframe/pull/43
 - **DS-30** SegmentedControl — implementation — https://github.com/mikespineu/design-system-wireframe/pull/59
+- **DS-31** TileGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/63
