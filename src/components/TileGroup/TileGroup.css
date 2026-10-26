@@ -1,0 +1,83 @@
+/* TileGroup look. Layout, scroll and fade come from ../ChoiceGroup/ChoiceGroup.css. Spec: docs/specs/Toggle.md */
+.ds-choice-control[data-variant='tile'] {
+  --ds-tile-min-width: var(--ds-space-24);
+  --ds-tile-min-height: calc(var(--ds-space-16) + var(--ds-space-6));
+  --ds-tile-pad: var(--ds-space-3);
+  --ds-tile-icon: var(--ds-space-6);
+  --ds-tile-icon-gap: var(--ds-space-2);
+  --ds-choice-pad: var(--ds-space-1);
+  gap: var(--ds-space-2);
+  /* Focus ring clearance: overflow clips outlines, so pad the scroller and pull it back out. */
+  padding: var(--ds-space-1);
+  margin: calc(-1 * var(--ds-space-1));
+}
+
+.ds-choice-control[data-variant='tile'][data-size='sm'] {
+  --ds-tile-min-width: calc(var(--ds-space-16) + var(--ds-space-2));
+  --ds-tile-min-height: var(--ds-space-16);
+  --ds-tile-pad: var(--ds-space-2);
+  --ds-tile-icon: var(--ds-space-4);
+  --ds-tile-icon-gap: var(--ds-space-1);
+}
+
+.ds-choice-control[data-variant='tile'][data-overflow] {
+  padding-inline-end: 0; /* the ::after spacer holds the end clearance */
+}
+
+.ds-choice-control[data-variant='tile'] .ds-choice-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-tile-icon-gap);
+  min-width: var(--ds-tile-min-width);
+  min-height: var(--ds-tile-min-height);
+  padding-inline: var(--ds-tile-pad);
+  border: var(--ds-border-width-strong) solid transparent;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-fill);
+  color: var(--ds-color-text);
+  font-size: 0.8125rem;
+  line-height: 20px;
+}
+
+.ds-tile-icon {
+  display: inline-flex;
+  flex: none;
+  width: var(--ds-tile-icon);
+  height: var(--ds-tile-icon);
+}
+
+.ds-tile-icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ds-tile-label {
+  white-space: nowrap;
+}
+
+.ds-choice-control[data-variant='tile'] .ds-choice-item[data-state='unchecked']:not([data-disabled]):hover {
+  background: var(--ds-color-divider); /* gray-200 */
+  color: var(--ds-color-ink);
+}
+
+.ds-choice-control[data-variant='tile'] .ds-choice-item[data-state='checked'] {
+  border-color: var(--ds-color-ink);
+  background: var(--ds-color-surface);
+  color: var(--ds-color-ink);
+}
+
+.ds-choice-control[data-variant='tile'] .ds-choice-item[data-disabled] {
+  background: var(--ds-color-surface-subtle);
+  color: var(--ds-color-placeholder);
+}
+
+.ds-choice-control[data-variant='tile'] .ds-choice-item[data-disabled] .ds-tile-icon {
+  color: var(--ds-color-disabled);
+}
+
+.ds-choice-control[data-variant='tile'][data-disabled] .ds-choice-item[data-state='checked'] {
+  border-color: var(--ds-color-disabled);
+  background: var(--ds-color-surface);
+}
