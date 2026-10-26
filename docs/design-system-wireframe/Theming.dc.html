@@ -10,6 +10,8 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<!-- Example fonts for the Fonts knob and the Orchard example only (illustrative, not part of the library) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&amp;family=DM+Sans:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Fraunces:wght@400;500;700&amp;family=Outfit:wght@400;500;700&amp;family=DM+Mono:wght@400;500&amp;display=swap">
 <style>
 body{margin:0;background:#FFFFFF}
 /* house chrome (not themed) */
@@ -77,11 +79,42 @@ body{margin:0;background:#FFFFFF}
 }
 
 /* ===== Knob overrides: each panel sets roles only ===== */
-.t-brand{--ds-color-primary:#3730A3;--ds-color-primary-hover:#312E81;--ds-color-primary-contrast:#FFFFFF;--ds-color-focus:#3730A3}
-.t-font{--ds-font-heading:Georgia,'Times New Roman',serif;--ds-font-body:system-ui,-apple-system,'Segoe UI',sans-serif;--ds-font-label:system-ui,-apple-system,'Segoe UI',sans-serif}
-.t-type{--ds-text-heading-weight:var(--ds-font-weight-bold);--ds-text-h3-size:1.5rem;--ds-text-h3-line-height:32px;--ds-text-h3-tracking:-0.01em;
-  --ds-text-label-transform:none;--ds-text-label-tracking:0;--ds-text-label-size:0.8125rem;--ds-text-label-line-height:20px;
-  --ds-text-ui-weight:var(--ds-font-weight-bold);--ds-text-ui-size:0.9375rem;--ds-text-body-line-height:24px}
+/* Color knob: one brand color (magenta) -> 22 color roles, neutrals tinted toward the brand hue (blush ground, plum ink). Status hues kept. */
+.t-brand{
+  --ds-color-background:#FCEEF4;--ds-color-surface-subtle:#F9E6EF;--ds-color-fill:#F6DCE8;
+  --ds-color-divider:#EBCBDA;--ds-color-border:#A97590;--ds-color-disabled:#C9A3B6;--ds-color-placeholder:#8F5F78;
+  --ds-color-text-muted:#74435C;--ds-color-text:#5A2E45;--ds-color-text-strong:#44203A;--ds-color-text-emphasis:#2E0F22;
+  --ds-color-border-strong:#2E0F22;--ds-color-icon:#2E0F22;--ds-color-focus:#BE185D;
+  --ds-color-overlay:rgb(46 15 34 / 0.55);--ds-color-inverse:#2E0F22;
+  --ds-color-primary:#BE185D;--ds-color-primary-hover:#9D174D;--ds-color-primary-contrast:#FFFFFF;
+  --ds-color-info:#5A2E45;--ds-color-info-border:#EBCBDA;--ds-color-info-bg:#F9E6EF}
+/* Fonts knob: didone display serif headings, geometric sans body and labels, a different mono for numerals */
+.t-font{--ds-font-heading:'Playfair Display',Georgia,serif;--ds-font-body:'DM Sans',system-ui,sans-serif;--ds-font-label:'DM Sans',system-ui,sans-serif;--ds-font-mono:'JetBrains Mono',ui-monospace,monospace}
+/* Type scale knob: big bold tight headings, larger body, sentence-case bold labels, bigger bold buttons */
+.t-type{--ds-text-heading-weight:var(--ds-font-weight-bold);--ds-text-h3-size:2rem;--ds-text-h3-line-height:36px;--ds-text-h3-tracking:-0.05em;
+  --ds-text-body-size:1.125rem;--ds-text-body-line-height:28px;--ds-text-body-xs-size:0.9375rem;
+  --ds-text-caption-size:0.875rem;--ds-text-caption-line-height:20px;
+  --ds-text-label-transform:none;--ds-text-label-tracking:-0.01em;--ds-text-label-size:0.9375rem;--ds-text-label-line-height:20px;--ds-text-label-weight:var(--ds-font-weight-bold);
+  --ds-text-ui-weight:var(--ds-font-weight-bold);--ds-text-ui-size:1rem;--ds-text-ui-line-height:24px;
+  --ds-text-ui-sm-size:0.8125rem;--ds-text-ui-sm-line-height:20px}
+/* All knobs together: "Orchard", an illustrative consumer theme (not shipped) */
+.t-orchard{
+  --ds-color-background:#FBF3E4;--ds-color-surface:#FFFDF8;--ds-color-surface-subtle:#F5EBD8;--ds-color-fill:#EFE1C8;
+  --ds-color-divider:#E3D2B4;--ds-color-border:#9C8466;--ds-color-disabled:#C4B396;--ds-color-placeholder:#7F6A55;
+  --ds-color-text-muted:#6B5744;--ds-color-text:#4A3A2C;--ds-color-text-strong:#3A2C20;--ds-color-text-emphasis:#2A1C12;
+  --ds-color-text-inverse:#FBF3E4;--ds-color-border-strong:#2A1C12;--ds-color-icon:#2A1C12;--ds-color-focus:#C2410C;
+  --ds-color-overlay:rgb(42 28 18 / 0.55);--ds-color-inverse:#2A1C12;
+  --ds-color-primary:#C2410C;--ds-color-primary-hover:#9A3412;--ds-color-primary-contrast:#FFFFFF;
+  --ds-color-info:#4A3A2C;--ds-color-info-border:#E3D2B4;--ds-color-info-bg:#F5EBD8;
+  --ds-font-heading:'Fraunces',Georgia,serif;--ds-font-body:'Outfit',system-ui,sans-serif;--ds-font-label:'Outfit',system-ui,sans-serif;--ds-font-mono:'DM Mono',ui-monospace,monospace;
+  --ds-text-heading-weight:var(--ds-font-weight-bold);--ds-text-h3-size:1.75rem;--ds-text-h3-line-height:34px;--ds-text-h3-tracking:-0.02em;
+  --ds-text-label-transform:none;--ds-text-label-tracking:0;--ds-text-label-size:0.875rem;--ds-text-label-line-height:20px;
+  --ds-text-ui-size:0.9375rem;--ds-text-ui-line-height:22px;
+  --ds-radius-sm:6px;--ds-radius-md:12px;--ds-radius-lg:20px;--ds-radius-full:9999px;
+  --ds-shadow-sm:0 1px 3px rgb(42 28 18 / 0.16);--ds-shadow-md:0 6px 16px rgb(42 28 18 / 0.16);--ds-shadow-lg:0 24px 48px rgb(42 28 18 / 0.24);
+  --ds-control-height:48px}
+/* Side-by-side comparison: house layout only (applies to both artboards equally), stacks the set in one column */
+.pair .set{grid-template-columns:minmax(0,1fr)}
 .t-radius{--ds-radius-sm:4px;--ds-radius-md:8px;--ds-radius-lg:12px;--ds-radius-full:9999px}
 .t-shadow{--ds-shadow-sm:0 1px 2px rgb(0 0 0 / 0.12);--ds-shadow-md:0 4px 12px rgb(0 0 0 / 0.14);--ds-shadow-lg:0 16px 40px rgb(0 0 0 / 0.2)}
 .t-dark{color-scheme:dark;
@@ -164,7 +197,7 @@ body{margin:0;background:#FFFFFF}
 .sgrid .rh{font-family:var(--ds-font-mono);font-size:11px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-emphasis)}
 </style>
 </helmet>
-<div style="width: 1440px; min-height: 10600px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+<div style="width: 1440px; min-height: 13000px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
 
 <header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
 <div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
@@ -224,15 +257,27 @@ body{margin:0;background:#FFFFFF}
 
 <!-- 03 BRAND -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Knob · Brand color</h2></div>
-<p class="sec-d">Four color roles. Everything that means "action" or "selected" follows: primary button, checked box, slider range, solid tag, badge, focus ring, pressed fills. Text, borders and feedback stay neutral. The indigo is an illustrative value for this canvas, not a token.</p>
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Knob · Color (one brand color)</h2></div>
+<p class="sec-d">Color roles only, derived from one brand color. Primary, hover and focus take a saturated magenta; every neutral (ground, fills, dividers, borders, all text roles, ink, inverse, scrim) is tinted toward the same hue: blush ground, plum ink. Success and error keep their hues so feedback still reads as feedback. Fonts, type, corners and depth are untouched. All values are illustrative for this canvas, not tokens.</p>
 <div class="ab knob">
-<div class="knob-l"><h4>Overrides</h4><ul class="kv">
-<li><b>--ds-color-primary</b>#3730A3 · white on it 9.9:1</li>
-<li><b>--ds-color-primary-hover</b>#312E81 · 11.4:1</li>
-<li><b>--ds-color-primary-contrast</b>#FFFFFF</li>
-<li><b>--ds-color-focus</b>#3730A3 · 9.9:1 on white</li>
-</ul><p class="note">createTheme() derives these from one brand color (50–900 scale) and checks the pairs.</p></div>
+<div class="knob-l"><h4>Overrides (22 of 30 color roles)</h4><ul class="kv">
+<li><b>primary</b>#BE185D · white on it 6.04 · on background 5.37</li>
+<li><b>primary-hover</b>#9D174D · white on it 7.89</li>
+<li><b>primary-contrast</b>#FFFFFF</li>
+<li><b>focus</b>#BE185D · 5.37 on background · 6.04 on surface</li>
+<li><b>background</b>#FCEEF4 (blush) · surface stays #FFFFFF</li>
+<li><b>surface-subtle · fill · divider</b>#F9E6EF · #F6DCE8 · #EBCBDA</li>
+<li><b>text-emphasis, border-strong, icon, inverse</b>#2E0F22 · 15.46 on background · 13.52 on fill</li>
+<li><b>text-strong</b>#44203A · 12.34 · 10.78 on fill</li>
+<li><b>text</b>#5A2E45 · 9.77 · 9.20 on info-bg</li>
+<li><b>text-muted</b>#74435C · 6.92 · 7.78 on surface</li>
+<li><b>placeholder</b>#8F5F78 · 4.58 · 5.15 on surface</li>
+<li><b>border</b>#A97590 · 3.31 on background · 3.73 on surface</li>
+<li><b>disabled</b>#C9A3B6 · exempt</li>
+<li><b>overlay</b>rgb(46 15 34 / 0.55)</li>
+<li><b>info · border · bg</b>#5A2E45 · #EBCBDA · #F9E6EF</li>
+<li><b>unchanged</b>surface, text-inverse (#FFFFFF, 17.39 on inverse), success ×3, error ×3 (error 6.20, success 5.65 on background)</li>
+</ul><p class="note">Names are color roles (prefix --ds-color- omitted). createTheme() derives this set from one brand color: a 50–900 brand scale for primary, and a neutral ramp mixed toward the brand hue for every other role, then checks every pair.</p></div>
 <div class="th t-brand">
 <div class="set">
 <div class="col">
@@ -257,13 +302,14 @@ body{margin:0;background:#FFFFFF}
 <!-- 04 FONTS -->
 <section class="sec">
 <div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Knob · Fonts</h2></div>
-<p class="sec-d">Three family roles. Headings (h3, dialog title) take a serif, body and UI labels take the system sans. Numerals in the slider bubble stay on font-mono, which this panel does not override.</p>
+<p class="sec-d">Four family roles. Headings (h3, dialog title) take a high-contrast display serif, body and UI labels take a geometric sans, numerals in the slider bubble take a different mono. Colors, sizes and case are untouched, yet the panel no longer reads as Red Hat. Fonts are illustrative web fonts loaded for this canvas, not library defaults.</p>
 <div class="ab knob">
 <div class="knob-l"><h4>Overrides</h4><ul class="kv">
-<li><b>--ds-font-heading</b>Georgia, 'Times New Roman', serif</li>
-<li><b>--ds-font-body</b>system-ui, -apple-system, 'Segoe UI', sans-serif</li>
-<li><b>--ds-font-label</b>system-ui, -apple-system, 'Segoe UI', sans-serif</li>
-</ul><p class="note">Label case and tracking are type-scale roles, not font roles: the field label stays uppercase here.</p></div>
+<li><b>--ds-font-heading</b>'Playfair Display', Georgia, serif</li>
+<li><b>--ds-font-body</b>'DM Sans', system-ui, sans-serif</li>
+<li><b>--ds-font-label</b>'DM Sans', system-ui, sans-serif</li>
+<li><b>--ds-font-mono</b>'JetBrains Mono', ui-monospace, monospace</li>
+</ul><p class="note">Label case and tracking are type-scale roles, not font roles: the field label stays uppercase here. A consumer loads its own font files; the library ships only Red Hat.</p></div>
 <div class="th t-font">
 <div class="set">
 <div class="col">
@@ -288,17 +334,21 @@ body{margin:0;background:#FFFFFF}
 <!-- 05 TYPE SCALE -->
 <section class="sec">
 <div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Knob · Type scale</h2></div>
-<p class="sec-d">Size, line-height, weight, tracking and transform per style. Here: bolder, larger headings with slight negative tracking; sentence-case labels; bolder, slightly larger buttons; tighter body leading. Families are untouched.</p>
+<p class="sec-d">Size, line-height, weight, tracking and transform per style. Here: h3 jumps from 22 to 32 px, bold, tightly tracked; body grows to 18 px; field labels drop uppercase and wide tracking for bold sentence case; buttons grow to 16 px bold. Families and colors are untouched.</p>
 <div class="ab knob">
 <div class="knob-l"><h4>Overrides</h4><ul class="kv">
 <li><b>--ds-text-heading-weight</b>var(--ds-font-weight-bold)</li>
-<li><b>--ds-text-h3-size / -line-height / -tracking</b>1.5rem / 32px / -0.01em</li>
-<li><b>--ds-text-label-transform</b>none</li>
-<li><b>--ds-text-label-tracking</b>0</li>
-<li><b>--ds-text-label-size / -line-height</b>0.8125rem / 20px</li>
+<li><b>--ds-text-h3-size / -line-height / -tracking</b>2rem / 36px / -0.05em</li>
+<li><b>--ds-text-body-size / -line-height</b>1.125rem / 28px</li>
+<li><b>--ds-text-body-xs-size</b>0.9375rem</li>
+<li><b>--ds-text-caption-size / -line-height</b>0.875rem / 20px</li>
+<li><b>--ds-text-label-transform</b>none (sentence case)</li>
+<li><b>--ds-text-label-tracking</b>-0.01em</li>
+<li><b>--ds-text-label-size / -line-height</b>0.9375rem / 20px</li>
+<li><b>--ds-text-label-weight</b>var(--ds-font-weight-bold)</li>
+<li><b>--ds-text-ui-size / -line-height</b>1rem / 24px</li>
 <li><b>--ds-text-ui-weight</b>var(--ds-font-weight-bold)</li>
-<li><b>--ds-text-ui-size</b>0.9375rem</li>
-<li><b>--ds-text-body-line-height</b>24px</li>
+<li><b>--ds-text-ui-sm-size / -line-height</b>0.8125rem / 20px</li>
 </ul></div>
 <div class="th t-type">
 <div class="set">
@@ -384,9 +434,97 @@ body{margin:0;background:#FFFFFF}
 </div>
 </section>
 
-<!-- 08 DARK -->
+<!-- 08 ALL KNOBS TOGETHER -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Knob · Dark</h2></div>
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">All knobs together · Example: Orchard</h2></div>
+<p class="sec-d">Every knob turned at once: color, fonts, type scale, radius, shadow and control height. Left is Default, right is Orchard; the markup and CSS are identical, the right panel root only adds the role block below. Orchard is an illustrative consumer theme to show the range of the contract. It is not shipped: DS-2 designs the library's real soft and dark themes.</p>
+<div class="grid2 pair">
+<div class="ab"><div class="ab-h"><span>Default · Wireframe</span><span>no overrides</span></div>
+<div class="th">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>Example: Orchard</span><span>data-theme="orchard" · illustrative</span></div>
+<div class="th t-orchard">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div></div>
+</div>
+<div class="ab"><div class="ab-h"><span>Orchard · role block</span><span>[data-theme="orchard"] { … } · values illustrative, not tokens</span></div>
+<div class="ab-b"><div class="grid4">
+<div class="stk"><h4 class="sec-n" style="margin:0">Color · 24 of 30 (ratio on background)</h4><ul class="kv">
+<li><b>primary · focus</b>#C2410C persimmon · white on it 5.18 · on background 4.70 · on surface 5.09</li>
+<li><b>primary-hover</b>#9A3412 · white on it 7.31</li>
+<li><b>primary-contrast</b>#FFFFFF</li>
+<li><b>background · surface</b>#FBF3E4 cream · #FFFDF8</li>
+<li><b>surface-subtle · fill · divider</b>#F5EBD8 · #EFE1C8 · #E3D2B4</li>
+<li><b>text-emphasis, border-strong, icon, inverse</b>#2A1C12 · 14.96 · 16.22 on surface · 12.78 on fill</li>
+<li><b>text-strong</b>#3A2C20 · 12.20 · 10.43 on fill</li>
+<li><b>text</b>#4A3A2C · 9.85 · 9.19 on info-bg</li>
+<li><b>text-muted</b>#6B5744 · 6.20 · 6.72 on surface</li>
+<li><b>placeholder</b>#7F6A55 · 4.65 · 5.04 on surface</li>
+<li><b>border</b>#9C8466 · 3.22 · 3.50 on surface</li>
+<li><b>text-inverse</b>#FBF3E4 · 14.96 on inverse</li>
+<li><b>disabled</b>#C4B396 · exempt</li>
+<li><b>overlay</b>rgb(42 28 18 / 0.55)</li>
+<li><b>info · border · bg</b>#4A3A2C · #E3D2B4 · #F5EBD8</li>
+<li><b>unchanged</b>success ×3, error ×3 (error 6.32, success 5.76 on background; error 6.86 on surface)</li>
+</ul></div>
+<div class="stk"><h4 class="sec-n" style="margin:0">Fonts</h4><ul class="kv">
+<li><b>--ds-font-heading</b>'Fraunces', Georgia, serif</li>
+<li><b>--ds-font-body</b>'Outfit', system-ui, sans-serif</li>
+<li><b>--ds-font-label</b>'Outfit', system-ui, sans-serif</li>
+<li><b>--ds-font-mono</b>'DM Mono', ui-monospace, monospace</li>
+</ul></div>
+<div class="stk"><h4 class="sec-n" style="margin:0">Type scale</h4><ul class="kv">
+<li><b>--ds-text-heading-weight</b>var(--ds-font-weight-bold)</li>
+<li><b>--ds-text-h3-size / -line-height / -tracking</b>1.75rem / 34px / -0.02em</li>
+<li><b>--ds-text-label-transform / -tracking</b>none / 0</li>
+<li><b>--ds-text-label-size / -line-height</b>0.875rem / 20px</li>
+<li><b>--ds-text-ui-size / -line-height</b>0.9375rem / 22px</li>
+</ul></div>
+<div class="stk"><h4 class="sec-n" style="margin:0">Radius · shadow · shape</h4><ul class="kv">
+<li><b>--ds-radius-sm / md / lg / full</b>6px / 12px / 20px / 9999px</li>
+<li><b>--ds-shadow-sm</b>0 1px 3px rgb(42 28 18 / 0.16)</li>
+<li><b>--ds-shadow-md</b>0 6px 16px rgb(42 28 18 / 0.16)</li>
+<li><b>--ds-shadow-lg</b>0 24px 48px rgb(42 28 18 / 0.24)</li>
+<li><b>--ds-control-height</b>48px (contract minimum 40px)</li>
+</ul></div>
+</div></div>
+<div class="ab-f">Shadows are tinted with the ink hue rather than black so depth stays warm. Feedback hues are kept so success and error still read as feedback; a theme may retint them as long as the status pairs pass.</div></div>
+</section>
+
+<!-- 09 DARK -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">Knob · Dark</h2></div>
 <p class="sec-d">data-theme="dark" overrides the 30 color roles and sets color-scheme: dark. Fonts, type, radius and shadow stay default. Ground gray-900, ink gray-50, light primary with dark text, the same muted green and red with their light-mode fg and border swapped and new deep backgrounds. Overlay rises to 70 %.</p>
 <div class="ab knob">
 <div class="knob-l"><h4>Overrides (30)</h4><ul class="kv">
@@ -428,9 +566,9 @@ body{margin:0;background:#FFFFFF}
 </div>
 </section>
 
-<!-- 09 SCALES (SIZES) -->
+<!-- 10 SCALES (SIZES) -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">Scales · defaults</h2></div>
+<div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Scales · defaults</h2></div>
 <p class="sec-d">The sizing knobs at their Wireframe defaults: 13 type styles, 4 radius steps (all 0), 3 shadow steps (all none), 44 px control height. Radius and shadow are also drawn at the example values from sections 06 and 07 for comparison.</p>
 <div class="ab"><div class="ab-h"><span>Type scale</span><span>style · font role · size / line-height · weight · tracking · transform</span></div>
 <div class="th" style="padding:24px">
@@ -485,9 +623,9 @@ body{margin:0;background:#FFFFFF}
 </div>
 </section>
 
-<!-- 10 STATES -->
+<!-- 11 STATES -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Interaction states · default and dark</h2></div>
+<div class="sec-h"><span class="sec-n">11</span><h2 class="sec-t">Interaction states · default and dark</h2></div>
 <p class="sec-d">Every interaction state reads a role, so it survives any theme. Same markup in both artboards; the right one only adds data-theme="dark". Focus-visible: outline in color-focus, focus-width, focus-offset.</p>
 <div class="grid2">
 
@@ -552,9 +690,9 @@ body{margin:0;background:#FFFFFF}
 </div></div>
 </section>
 
-<!-- 11 CONTRAST -->
+<!-- 12 CONTRAST -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">11</span><h2 class="sec-t">Contrast · light and dark</h2></div>
+<div class="sec-h"><span class="sec-n">12</span><h2 class="sec-t">Contrast · light and dark</h2></div>
 <p class="sec-d">WCAG 2.x relative luminance from the hex values. Text pairs need 4.5:1, UI pairs 3:1. Disabled and decorative pairs are listed for completeness and are exempt.</p>
 <div class="ab"><div class="ab-b">
 <table class="tbl">

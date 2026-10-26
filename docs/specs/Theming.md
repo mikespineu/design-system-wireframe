@@ -109,7 +109,7 @@ Not themeable: the spacing scale (`--ds-space-1` to `--ds-space-24`), the palett
 
 ## Sizes
 
-Theming has no component sizes of its own. The sizing knobs it exposes are the type scale, the radius scale, the shadow scale and control height. Canvas section 09.
+Theming has no component sizes of its own. The sizing knobs it exposes are the type scale, the radius scale, the shadow scale and control height. Canvas section 10.
 
 ### Type scale
 
@@ -160,7 +160,7 @@ Buttons, inputs, alerts and tags stay flat in every theme (no shadow role assign
 
 ## States
 
-Two kinds of state matter: which theme is active, and which role each interaction state reads. Canvas sections 02 to 08 (one per knob) and 10 (interaction states in default and dark).
+Two kinds of state matter: which theme is active, and which role each interaction state reads. Canvas sections 02 to 09 (02 default, 03 to 07 one per knob, 08 all knobs together, 09 dark) and 11 (interaction states in default and dark). Every themed panel uses identical markup and CSS; only a block of role overrides on the panel root differs. All example values in those panels (colors, web fonts, sizes, radii, shadows) are illustrative, not tokens.
 
 ### Theme states
 
@@ -170,11 +170,13 @@ Two kinds of state matter: which theme is active, and which role each interactio
 | Dark | `data-theme="dark"` on `html` or any ancestor | all 30 color roles take dark values; `color-scheme: dark`; fonts, type, radius, shadow, shape unchanged |
 | Consumer theme | `data-theme="<name>"` with the consumer's own block | only the roles the theme sets; everything else inherits from default |
 | Scoped (nested) theme | `data-theme` on a subtree, e.g. a dark card inside a light page | roles resolve from the nearest ancestor with `data-theme`; portaled content needs care (see Radix) |
-| Brand knob | override `--ds-color-primary`, `--ds-color-primary-hover`, `--ds-color-primary-contrast`, `color-focus` | primary button, checked box, slider range and filled ticks, solid tag, badge, pressed fills, focus ring |
-| Fonts knob | override `font-heading`, `font-body`, `font-label` (and optionally `--ds-font-mono`) | titles, body, UI labels |
-| Type scale knob | override any `text-*` role | sizes, line-heights, heading weight and tracking, label case and tracking, button weight |
+| Brand knob (minimum) | override `--ds-color-primary`, `--ds-color-primary-hover`, `--ds-color-primary-contrast`, `color-focus` | primary button, checked box, slider range and filled ticks, solid tag, badge, pressed fills, focus ring |
+| Color knob (full, canvas 03) | override any color role; canvas example: magenta primary #BE185D / hover #9D174D / focus, plus every neutral tinted toward the brand hue (blush ground #FCEEF4, plum ink #2E0F22, tinted fills, borders, text roles, inverse, scrim, info); 22 of 30 roles, status kept | ground, surfaces, text, borders, icons, focus, action, scrim; every pair still passes (ratios on the canvas) |
+| Fonts knob | override `font-heading`, `font-body`, `font-label` (and optionally `--ds-font-mono`); canvas example: Playfair Display / DM Sans / DM Sans / JetBrains Mono | titles, body, UI labels, numerals |
+| Type scale knob | override any `text-*` role; canvas example: bold h3 at 32px / 36px with -0.05em tracking, 18px body, bold sentence-case labels, 16px bold buttons | sizes, line-heights, heading weight and tracking, label case and tracking, button weight |
 | Radius knob | override `radius-sm`, `--ds-radius-md`, `radius-lg`, `radius-full` | corners; focus rings follow the radius |
 | Shadow knob | override `shadow-sm`, `shadow-md`, `shadow-lg` | thumb, bubble, dialog panel depth |
+| All knobs together (canvas 08, "Example: Orchard") | one block setting color, font, type, radius, shadow and `--ds-control-height` roles; shown side by side with Default | everything at once: cream ground #FBF3E4, brown ink #2A1C12, persimmon primary #C2410C, Fraunces / Outfit / DM Mono, sentence-case labels, radius 6 / 12 / 20 / full, warm soft shadows, 48px controls. Illustrative only; the shipped example themes are DS-2's soft and dark |
 
 ### Interaction state → role
 
@@ -438,7 +440,7 @@ Mapping of every hardcoded typography, shadow and text-transform value, and ever
 
 ## Dark mode
 
-`[data-theme="dark"]` overrides the 30 color roles and sets `color-scheme: dark` (native scrollbars, form controls, autofill). Fonts, type, radius, shadow and shape stay at their defaults, so dark Wireframe is the same system with the ground inverted: near-black ground, light-gray text, near-white ink and action, the same muted green and red for feedback. Values and the full role table are under Token requests. Canvas section 08 shows the component set; section 10 shows interaction states; section 11 the contrast table.
+`[data-theme="dark"]` overrides the 30 color roles and sets `color-scheme: dark` (native scrollbars, form controls, autofill). Fonts, type, radius, shadow and shape stay at their defaults, so dark Wireframe is the same system with the ground inverted: near-black ground, light-gray text, near-white ink and action, the same muted green and red for feedback. Values and the full role table are under Token requests. Canvas section 09 shows the component set; section 11 shows interaction states; section 12 the contrast table.
 
 Principles:
 
@@ -495,8 +497,8 @@ How a product themes the library.
 
    ```css
    [data-theme="acme"] {
-     --ds-color-primary: #3730a3;
-     --ds-color-primary-hover: #312e81;
+     --ds-color-primary: #be185d;
+     --ds-color-primary-hover: #9d174d;
      --ds-color-primary-contrast: #ffffff;
    }
    ```
@@ -512,7 +514,7 @@ Rules:
 - Keep focus visible (see Keyboard) and `--ds-control-height` at 40px or more.
 - No `!important`, no component selectors in themes. If something cannot be themed through a role, that is a contract gap: file it, do not patch the component.
 
-`createTheme()` (DS-28) fill guide: from a brand color generate a 50–900 OKLCH scale; light theme takes primary from the darkest step that gives 4.5:1 with white (typically 700–900), primary-hover one step darker, color-focus equal to primary; dark theme takes primary from a light step (100–200) with primary-contrast from 900. Neutral roles map to the neutral scale exactly as the gray ramp does today (light: background 0, surface-subtle 50, fill 100, divider 200, border 300, disabled 400, placeholder 500, text-muted 600, text 700, text-strong 800, inverse 900; dark: the values under Token requests). Then run the pair checks.
+`createTheme()` (DS-28) fill guide: from a brand color generate a 50–900 OKLCH scale; light theme takes primary from the darkest step that gives 4.5:1 with white (typically 700–900), primary-hover one step darker, color-focus equal to primary; dark theme takes primary from a light step (100–200) with primary-contrast from 900. Neutral roles map to the neutral scale exactly as the gray ramp does today (light: background 0, surface-subtle 50, fill 100, divider 200, border 300, disabled 400, placeholder 500, text-muted 600, text 700, text-strong 800, inverse 900; dark: the values under Token requests). Optionally the neutral ramp is mixed toward the brand hue, so one brand color also tints ground, fills, borders, text and ink (canvas section 03 shows this with a magenta brand: blush ground, plum ink). Then run the pair checks.
 
 ## Accessibility
 
