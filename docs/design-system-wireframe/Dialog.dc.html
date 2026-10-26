@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Dialog</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:32px 24px}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+/* stage = viewport with overlay */
+.stage{position:relative;display:flex;align-items:center;justify-content:center;padding:48px 32px;background:#F7F7F7}
+.page{position:absolute;inset:0;padding:24px;display:flex;flex-direction:column;gap:12px}
+.page i{display:block;height:12px;background:#C7C7C7}
+.ov{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.dlg{position:relative;box-sizing:border-box;width:100%;max-height:calc(100% - 0px);display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #000000;border-radius:0;box-shadow:none;color:#404040}
+.sm{max-width:400px}.md{max-width:560px}.lg{max-width:720px}
+.hd{display:flex;align-items:flex-start;gap:16px;padding:24px 24px 0}
+.hd>div{flex:1;display:flex;flex-direction:column;gap:8px}
+.ttl{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:22px;line-height:29px;color:#000000}
+.desc{margin:0;font-size:16px;line-height:26px;color:#595959}
+.bd{padding:16px 24px 24px;font-size:16px;line-height:26px;color:#404040}
+.ft{display:flex;justify-content:flex-end;gap:12px;padding:16px 24px;border-top:1px solid #E0E0E0}
+.x{flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:-4px -8px 0 0;border:1px solid transparent;background:#FFFFFF;color:#000000;cursor:pointer}
+.x.hover{background:#EEEEEE}
+.x.focus{border-color:#000000;outline:2px solid #000000;outline-offset:2px}
+.x.press{background:#000000;color:#FFFFFF}
+.btn{height:44px;padding:0 16px;border:1px solid #000000;background:#FFFFFF;font-family:'Red Hat Text',sans-serif;font-weight:500;font-size:16px;color:#000000}
+.btn.pri{background:#000000;color:#FFFFFF}
+.btn.focus{outline:2px solid #000000;outline-offset:2px}
+.lb{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.in{height:44px;box-sizing:border-box;width:100%;padding:0 12px;border:1px solid #C7C7C7;font-family:'Red Hat Text',sans-serif;font-size:16px}
+.in.focus{border-color:#000000;outline:2px solid #000000;outline-offset:2px}
+.scroll{overflow-y:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:0 16px 0 0;border-bottom:1px solid #E0E0E0;color:#404040}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 4200px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Dialog · DS-19 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Dialog</h1>
+<p style="margin: 0; max-width: 720px; font-size: 18px; line-height: 1.6; color: #404040">Modal panel over a 50 % black overlay. Square corners, no shadow: the panel separates from the page by a 1 px black border and the dimmed ground. Header holds the title, optional description and the close button; the footer holds right-aligned actions over a gray-200 divider. Built on Radix Dialog.</p>
+</header>
+
+<!-- 01 SIZES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Sizes</h2></div>
+<p class="sec-d">Size sets the panel max width only; padding, type and parts are identical. The panel is width 100 % of the viewport minus 16 px gutters on each side, so on narrow screens every size becomes full width minus gutters. Max height is viewport minus 2 × 48 px; the body scrolls beyond that.</p>
+
+<div class="ab">
+<div class="ab-h"><span>sm</span><span>max width 400 px · confirmations</span></div>
+<div class="stage" style="height: 420px">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="dlg sm" role="dialog" aria-modal="true" aria-labelledby="t-sm" aria-describedby="d-sm">
+<div class="hd"><div><h2 class="ttl" id="t-sm">Delete draft?</h2><p class="desc" id="d-sm">This removes the draft for everyone.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd">You can't undo this.</div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri">Delete</button></div>
+</div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>md (default)</span><span>max width 560 px · short forms</span></div>
+<div class="stage" style="height: 520px">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="dlg md" role="dialog" aria-modal="true" aria-labelledby="t-md" aria-describedby="d-md">
+<div class="hd"><div><h2 class="ttl" id="t-md">Rename series</h2><p class="desc" id="d-md">The new name shows on every photo in the series.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd" style="display:flex;flex-direction:column;gap:8px"><label class="lb" for="md-in">Name</label><input id="md-in" class="in focus" value="Harbour, winter"></div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri">Save</button></div>
+</div>
+</div>
+<div class="ab-f">Opened: focus moves to the first focusable element in the body (the input), not the close button.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>lg</span><span>max width 720 px · rich content</span></div>
+<div class="stage" style="height: 620px">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="dlg lg" role="dialog" aria-modal="true" aria-labelledby="t-lg" aria-describedby="d-lg">
+<div class="hd"><div><h2 class="ttl" id="t-lg">Licence terms</h2><p class="desc" id="d-lg">Read before publishing the series.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><p style="margin:0 0 16px">Photos are licensed for editorial use only. Commercial use requires written permission from the author.</p><p style="margin:0">Credit the author on every use. Crops are allowed; colour changes are not, because the archive is monochrome.</p></div>
+<div class="ft"><button class="btn">Decline</button><button class="btn pri">Accept</button></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 02 ANATOMY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Anatomy</h2></div>
+<table class="tbl">
+<thead><tr><th>Part</th><th>Spec</th></tr></thead>
+<tbody>
+<tr><td>Overlay</td><td>fixed, inset 0, black at 50 % (color-mix of --ds-color-ink); no blur</td></tr>
+<tr><td>Panel</td><td>white surface, 1 px black border, radius 0, no shadow; centered; gutters 16 px</td></tr>
+<tr><td>Header</td><td>padding 24 / 24 / 0; title + description column, gap 8; close button top-right</td></tr>
+<tr><td>Title</td><td>Red Hat Mono 500, h3 22/29, black; required</td></tr>
+<tr><td>Description</td><td>body 16/26, gray-600; optional</td></tr>
+<tr><td>Body</td><td>padding 16 / 24 / 24, body 16/26 gray-700; scrolls when tall</td></tr>
+<tr><td>Footer</td><td>1 px gray-200 top divider, padding 16 / 24, actions right-aligned, gap 12, primary last</td></tr>
+<tr><td>Close button</td><td>32 × 32, 16 px X icon (2 px stroke), transparent border; aria-label "Close"</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- 03 STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">States</h2></div>
+<p class="sec-d">Panel states: closed (nothing rendered), open, and scrolling. Close button states shown in isolation. Focus rings are 2 px black at 2 px offset.</p>
+
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>Close · default</span><span>fill white</span></div><div class="ab-b" style="align-items:center"><button class="x" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>Close · hover</span><span>fill gray-100</span></div><div class="ab-b" style="align-items:center"><button class="x hover" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>Close · focus-visible</span><span>black border + ring</span></div><div class="ab-b" style="align-items:center"><button class="x focus" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>Close · pressed</span><span>fill black, icon white</span></div><div class="ab-b" style="align-items:center"><button class="x press" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+</div>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Closed</span><span>data-state="closed"</span></div>
+<div class="stage" style="height: 360px">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:80%"></i><i></i><button class="btn" style="align-self:flex-start;margin-top:12px">Rename series</button></div>
+</div>
+<div class="ab-f">No overlay, no panel in the DOM. Focus returns to the trigger after close.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · focus on close button</span><span>keyboard Tab cycle</span></div>
+<div class="stage" style="height: 360px">
+<div class="ov"></div>
+<div class="dlg sm" role="dialog" aria-modal="true" aria-labelledby="t-f1">
+<div class="hd"><div><h2 class="ttl" id="t-f1">Delete draft?</h2></div>
+<button class="x focus" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd">You can't undo this.</div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri">Delete</button></div>
+</div>
+</div>
+<div class="ab-f">Without description: title only, aria-describedby omitted.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · focus on primary action</span><span>Tab wraps inside panel</span></div>
+<div class="stage" style="height: 360px">
+<div class="ov"></div>
+<div class="dlg sm" role="dialog" aria-modal="true" aria-labelledby="t-f2">
+<div class="hd"><div><h2 class="ttl" id="t-f2">Delete draft?</h2></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd">You can't undo this.</div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri focus">Delete</button></div>
+</div>
+</div>
+<div class="ab-f">Next Tab goes back to the close button (focus trap).</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · scrolling body</span><span>header and footer fixed</span></div>
+<div class="stage" style="height: 360px; padding: 24px 32px">
+<div class="ov"></div>
+<div class="dlg md" style="max-height:312px" role="dialog" aria-modal="true" aria-labelledby="t-sc">
+<div class="hd"><div><h2 class="ttl" id="t-sc">Licence terms</h2></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd scroll" style="border-bottom:0">Photos are licensed for editorial use only. Commercial use requires written permission. Credit the author on every use. Crops are allowed; colour changes are not. Licences end after five years unless renewed. Archive prints need a separate agreement.</div>
+<div class="ft"><button class="btn">Decline</button><button class="btn pri">Accept</button></div>
+</div>
+</div>
+<div class="ab-f">Only the body scrolls; footer divider marks the cut. Page behind does not scroll (Radix scroll lock).</div>
+</div>
+</div>
+</section>
+
+<!-- 04 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Keyboard and dismissal</h2></div>
+<table class="tbl">
+<thead><tr><th>Input</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Enter</span> / <span class="kbd">Space</span> on trigger</td><td>Open; focus first focusable in body, else first in panel</td></tr>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Cycle inside panel only (focus trap): close, body controls, footer actions</td></tr>
+<tr><td><span class="kbd">Esc</span></td><td>Close; focus returns to trigger</td></tr>
+<tr><td>Click on overlay</td><td>Close (default); can be disabled with dismissible={false}</td></tr>
+<tr><td>Close button / Cancel</td><td>Close; focus returns to trigger</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4200}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

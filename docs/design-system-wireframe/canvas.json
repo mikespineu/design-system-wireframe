@@ -37,6 +37,13 @@
       "w": 1440,
       "x": 6080,
       "y": 0
+    },
+    "Dialog.dc.html": {
+      "h": 4200,
+      "title": "Dialog",
+      "w": 1440,
+      "x": 7600,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -62,7 +69,8 @@
     "Components.dc.html",
     "Form.dc.html",
     "Textarea.dc.html",
-    "Slider.dc.html"
+    "Slider.dc.html",
+    "Dialog.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
