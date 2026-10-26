@@ -103,8 +103,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers open dialog in sm, md and lg, with overlay, title, description, actions and close button
     - Spec names Radix `Dialog` and defines focus trap, Escape and outside-click behavior
     - Spec maps overlay and panel to existing `--ds-*` tokens or lists Token requests
-- [ ] **DS-20 Dialog — implementation.** Build `Dialog` in `src/components/Dialog/` on Radix `Dialog` with a narrow typed API (`Dialog`, `DialogTrigger` via `asChild`, `DialogContent`, title and description required), styled via `[data-state]`.
-  - type: build · has_ui: yes · depends_on: DS-19 · needs_human: no · status: todo
+- [x] **DS-20 Dialog — implementation.** Build `Dialog` in `src/components/Dialog/` on Radix `Dialog` with a narrow typed API (`Dialog`, `DialogTrigger` via `asChild`, `DialogContent`, title and description required), styled via `[data-state]`.
+  - type: build · has_ui: yes · depends_on: DS-19 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state
     - Focus moves into the dialog on open and returns to the trigger on close; Escape closes
@@ -180,6 +180,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 ## Done
 
 - **DS-13** Checkbox — design — https://github.com/mikespineu/design-system-wireframe/pull/44
+- **DS-20** Dialog — implementation — https://github.com/mikespineu/design-system-wireframe/pull/47
 - **DS-1** Theming infrastructure with a default theme — https://github.com/mikespineu/design-system-wireframe/pull/31
 - **DS-4** Textarea — implementation — https://github.com/mikespineu/design-system-wireframe/pull/33
 - [x] **DS-3 Textarea — design.** [PR #27](https://github.com/mikespineu/design-system-wireframe/pull/27)
