@@ -1,0 +1,141 @@
+/* Dialog: modal panel on Radix Dialog. Tokens only (--ds-*). Spec: docs/specs/Dialog.md */
+.ds-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--ds-color-ink) 50%, transparent);
+  z-index: 50;
+}
+
+/* Centers the panel without transforms; lets overlay clicks through. */
+.ds-dialog-positioner {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--ds-space-12) var(--ds-space-4);
+  box-sizing: border-box;
+  pointer-events: none;
+  z-index: 51;
+}
+
+.ds-dialog {
+  --ds-dialog-width-sm: 400px;
+  --ds-dialog-width-md: 560px;
+  --ds-dialog-width-lg: 720px;
+  pointer-events: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--ds-dialog-width-md);
+  max-height: calc(100vh - 2 * var(--ds-space-12));
+  max-height: calc(100dvh - 2 * var(--ds-space-12));
+  background: var(--ds-color-surface);
+  border: var(--ds-border-width) solid var(--ds-color-ink);
+  border-radius: var(--ds-radius-md);
+  box-shadow: none;
+  outline: none;
+}
+.ds-dialog[data-size='sm'] { max-width: var(--ds-dialog-width-sm); }
+.ds-dialog[data-size='md'] { max-width: var(--ds-dialog-width-md); }
+.ds-dialog[data-size='lg'] { max-width: var(--ds-dialog-width-lg); }
+
+.ds-dialog-overlay,
+.ds-dialog {
+  transition: opacity var(--ds-motion);
+}
+.ds-dialog-overlay[data-state='open'],
+.ds-dialog[data-state='open'] { opacity: 1; }
+.ds-dialog-overlay[data-state='closed'],
+.ds-dialog[data-state='closed'] { opacity: 0; }
+@starting-style {
+  .ds-dialog-overlay[data-state='open'],
+  .ds-dialog[data-state='open'] { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-dialog-overlay,
+  .ds-dialog,
+  .ds-dialog-close { transition: none; }
+}
+
+.ds-dialog-header {
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  padding: var(--ds-space-6) var(--ds-space-6) 0;
+}
+.ds-dialog-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  min-width: 0;
+}
+.ds-dialog-title {
+  margin: 0;
+  font-family: var(--ds-font-mono);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 29px;
+  color: var(--ds-color-ink);
+}
+.ds-dialog-description {
+  margin: 0;
+  font-family: var(--ds-font-text);
+  font-size: 1rem;
+  line-height: 26px;
+  color: var(--ds-color-text-muted);
+}
+
+.ds-dialog-close {
+  flex: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ds-space-8);
+  height: var(--ds-space-8);
+  margin: calc(-1 * var(--ds-space-1)) calc(-1 * var(--ds-space-2)) 0 0;
+  padding: 0;
+  border: var(--ds-border-width) solid transparent;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-surface);
+  color: var(--ds-color-ink);
+  cursor: pointer;
+  transition: background-color var(--ds-motion), color var(--ds-motion);
+}
+.ds-dialog-close:hover { background: var(--ds-color-fill); }
+.ds-dialog-close:focus-visible {
+  border-color: var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+}
+.ds-dialog-close:active {
+  background: var(--ds-color-ink);
+  color: var(--ds-color-primary-contrast);
+}
+
+.ds-dialog-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--ds-space-4) var(--ds-space-6) var(--ds-space-6);
+  font-family: var(--ds-font-text);
+  font-size: 1rem;
+  line-height: 26px;
+  color: var(--ds-color-text);
+}
+
+.ds-dialog-footer {
+  flex: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4) var(--ds-space-6);
+  border-top: var(--ds-border-width) solid var(--ds-color-divider);
+}
+@media (max-width: 479px) {
+  .ds-dialog-footer { flex-direction: column-reverse; }
+  .ds-dialog-footer > * { width: 100%; }
+}
