@@ -16,9 +16,9 @@
 | `SegmentedControl` | Pick exactly one of 2–7 short text options | `RadioGroup` | 05–07, 10 |
 | `TileGroup` | Pick exactly one of N options shown as icon + label | `RadioGroup` | 07–10 |
 
-`SegmentedControl` and `TileGroup` share one internal base (`ChoiceGroup`, not exported). The base holds the label row, the help slot, the Radix `RadioGroup` wiring and the horizontal-scroll behaviour. The two public components only set how an item looks. In the configurator screenshots, the style row is a `TileGroup`. Depth, legs, back panels and finish are `SegmentedControl`s. The width stepper and the height slider are the existing `Slider` (DS-23, `docs/specs/Slider.md`, `stepper` and `values` + `marks="steps"`) and are out of scope here.
+`SegmentedControl` and `TileGroup` share one internal base (`ChoiceGroup`, not exported). The base holds the label row, the help slot, the Radix `RadioGroup` wiring and the horizontal-scroll behaviour. The two public components only set how an item looks. Rows of picture-led options (e.g. a quick-action or layout picker) are `TileGroup`s; rows of short text values (density, view, theme) are `SegmentedControl`s. The width stepper and the height slider are the existing `Slider` (DS-23, `docs/specs/Slider.md`, `stepper` and `values` + `marks="steps"`) and are out of scope here.
 
-Visual translation: the screenshots use rounded pills and an orange-red accent. This system has square corners and no brand hue, so the selected item is white with a black border and black text, on a gray-100 strip. See Token requests for the accent.
+Visual translation: the reference examples use rounded pills and an orange-red accent. This system has square corners and no brand hue, so the selected item is white with a black border and black text, on a gray-100 strip. See Token requests for the accent.
 
 Proposed API:
 
@@ -52,7 +52,7 @@ interface ChoiceGroupBaseProps<V extends string> {
   label: ReactNode;                       // group label (Field label style)
   labelPosition?: 'start' | 'top';        // SegmentedControl default 'start', TileGroup default 'top'
   hint?: ReactNode;                       // caption; shown under the label when labelPosition='top'
-  help?: ReactNode;                       // trailing slot, e.g. <IconButton icon="help" aria-label="About legs" />
+  help?: ReactNode;                       // trailing slot, e.g. <IconButton icon="help" aria-label="About views" />
   size?: 'sm' | 'md';                     // default 'md'
   disabled?: boolean;                     // whole group
   name?: string; required?: boolean;      // form submission (Radix hidden inputs)
@@ -85,12 +85,12 @@ Switch (canvas 02, 04):
 | Size | Track | Thumb | Thumb travel | Row / hit height | Track to label gap | Label type | Use |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `sm` | 32 × 16 | 8 × 8 | 16 | 32 | 8 | body-sm 15/24 | dense desktop lists (fine pointer only) |
-| `md` (default) | 48 × 24 | 16 × 16 | 24 | 44 (= control height) | 12 | body 16/26 | forms, configurator, touch |
+| `md` (default) | 48 × 24 | 16 × 16 | 24 | 44 (= control height) | 12 | body 16/26 | forms, settings, touch |
 
 - The track has a 2 px border and 2 px inner padding, and the thumb is square. Off: thumb at the inline start. On: thumb at the inline end. The thumb slides with `--ds-motion` and does not move under `prefers-reduced-motion`.
 - Label placement (`labelPosition`):
   - `end` (default): the track comes first and the label follows, as in `Checkbox`.
-  - `start`: the label comes first and the track is pushed to the far edge (`justify-content: space-between`, full width). Use it for settings lists and configurator rows, so a Switch row lines up with a `SegmentedControl` row whose label is at the start.
+  - `start`: the label comes first and the track is pushed to the far edge (`justify-content: space-between`, full width). Use it for settings lists and settings rows, so a Switch row lines up with a `SegmentedControl` row whose label is at the start.
   - Both follow `dir`.
 - A wrapping label aligns the track with the first line (`align-items: flex-start`, track margin-top 1 px md / 4 px sm). This is the same rule as `Checkbox`.
 - The description is caption 13/20 in `--ds-color-text-muted`, under the label.
@@ -243,7 +243,7 @@ SegmentedControl and TileGroup (Radix `RadioGroup`, roving tabindex):
 - `SegmentedControl` and `TileGroup`: `RadioGroup` from `radix-ui`. `RadioGroup.Root` is the strip, with `role="radiogroup"`. Each item is a `RadioGroup.Item`, a `button` with `role="radio"`. `RadioGroup.Indicator` is not used, because the whole item restyles from `[data-state="checked"]`.
   - Why `RadioGroup` and not `ToggleGroup type="single"`: the value must always be set. `ToggleGroup` lets the user click the active item to deselect it (`value` becomes `''`), and the wrapper would have to fight that in `onValueChange`, which also breaks uncontrolled use.
   - `RadioGroup` has no deselect, gives the correct semantics for "one value of a form field" (`radiogroup` / `radio`, announced "2 of 4"), and submits `name` / `value` through hidden inputs.
-  - Selection follows focus on arrow keys, which is the expected radio behaviour. For the configurator, every arrow press updates the model. Consumers whose `onValueChange` is expensive should debounce in their handler, not in the component.
+  - Selection follows focus on arrow keys, which is the expected radio behaviour. In a live-preview settings panel, every arrow press updates the model. Consumers whose `onValueChange` is expensive should debounce in their handler, not in the component.
   - `ToggleGroup` remains the right primitive for toolbars (bold, italic, align), which is not this job.
 - The group label is a `span` whose id goes in `aria-labelledby` on `RadioGroup.Root`. The hint id goes in `aria-describedby`. There is no `fieldset` / `legend`, because Radix's `radiogroup` role already groups the items and a `fieldset` around a `role="radiogroup"` would double the group.
 - The help slot renders outside `RadioGroup.Root`, so it is not part of the roving focus.
@@ -344,7 +344,7 @@ Shared (choice-group row, overflow, focus):
   - Role `radiogroup` (named by `aria-labelledby` = group label id, described by the hint), with items of role `radio` and `aria-checked` (Radix).
   - Each item's name is its visible label. TileGroup icons are `aria-hidden`.
   - `required` sets `aria-required` on the group.
-  - The help button sits outside the group and needs its own `aria-label` (for example "About legs"). The `help` slot docs must say so.
+  - The help button sits outside the group and needs its own `aria-label` (for example "About views"). The `help` slot docs must say so.
 - **Overflow**
   - Hidden items stay in the accessibility tree and in the arrow-key order. Screen readers announce "n of m".
   - The fade is decorative (a mask), so it has no a11y impact.
@@ -390,7 +390,7 @@ None required. Everything above maps to existing tokens, including `--ds-border-
 
 Not requested, for the reviewer to decide:
 
-- `--ds-color-accent` (about `#E5482E`, the orange-red in the configurator screenshots) for selected text and icons. **Not recommended.** The system has no brand hue, and hue is reserved for status feedback (README, "Color"). The design shows selection with a black border, white fill and black text, which is clearer than an accent color and passes contrast without it. If a brand theme is wanted later, it should be a theme-level override of `--ds-color-ink` / `--ds-color-primary` under a `[data-theme]` selector, not a new token used only here. A ~`#E5482E` text would also fail 4.5:1 on white (about 4.0:1).
+- `--ds-color-accent` (about `#E5482E`, the orange-red in the reference examples) for selected text and icons. **Not recommended.** The system has no brand hue, and hue is reserved for status feedback (README, "Color"). The design shows selection with a black border, white fill and black text, which is clearer than an accent color and passes contrast without it. If a brand theme is wanted later, it should be a theme-level override of `--ds-color-ink` / `--ds-color-primary` under a `[data-theme]` selector, not a new token used only here. A ~`#E5482E` text would also fail 4.5:1 on white (about 4.0:1).
 - `--ds-color-fill-hover` (= gray-200) as a semantic role for "hover on a gray-100 fill". The spec uses the palette token `--ds-color-gray-200` directly for now. Add the role only if more components need it.
 
 ## Notes and open questions
@@ -400,10 +400,10 @@ Not requested, for the reviewer to decide:
   - `TileGroup — implementation` (depends on the first)
 - **Naming.** The roadmap calls this "Toggle", but the boolean component is named `Switch` to match its role and Radix, and to avoid confusion with Radix `Toggle` (a pressed/unpressed button). Is `TileGroup` the preferred name, or `OptionTiles` / `IconChoice`?
 - **Switch vs 2-option SegmentedControl for on/off** (canvas 07):
-  - The default advice is `Switch` (with `labelPosition="start"` in configurator rows).
-  - A 2-option SegmentedControl ("Off / On") is allowed when the row sits in a stack of SegmentedControls and should read the same, or when both states have their own names (Standard / Plinth).
-  - Please confirm which the configurator should use for "back panels".
+  - The default advice is `Switch` (with `labelPosition="start"` in settings rows).
+  - A 2-option SegmentedControl ("Off / On") is allowed when the row sits in a stack of SegmentedControls and should read the same, or when both states have their own names (List / Cards).
+  - Product teams pick per row; the default is `Switch`.
 - **Help slot content.** There is no Tooltip or Popover component yet. Until one exists, the help `IconButton` can open a `Dialog` (DS-20), or the consumer can wire it up themselves. Does a "help" icon need to be added to `Icon`?
 - **Scroll buttons.** v1 relies on swipe, trackpad, the thin scrollbar and the arrow keys. Optional prev/next `IconButton`s at the strip edges could come later if mouse-only testing shows the scrollbar is not discoverable enough.
-- **Tiles with images** (for example finish swatches shown as photos) are out of scope. The icon slot takes any node, but photo tiles would need the photography filter and a different size scale.
-- **Out of scope:** the width stepper and the height slider from the screenshots are `Slider` (DS-23).
+- **Tiles with images** (for example colour or material swatches shown as photos) are out of scope. The icon slot takes any node, but photo tiles would need the photography filter and a different size scale.
+- **Out of scope:** numeric steppers and stepped sliders are `Slider` (DS-23).

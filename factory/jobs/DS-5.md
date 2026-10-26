@@ -32,6 +32,7 @@ updated: "2026-10-26T11:17:58Z"
 - 12:21 design: revised per canvas comment (segmented track hugs its items, no stretch to container width); canvas republished
 - 12:22 design: revised per canvas comment (tile examples use Icon set icons, varied label lengths); canvas republished
 - 12:23 design: revised per canvas comment (SegmentedControl selection slides between segments, --ds-motion); canvas republished
+- 12:24 design: example labels replaced with neutral app-settings copy (no 1:1 labels from reference screenshots); spec check passed; canvas republished
 
 ## Gate results
 
@@ -47,4 +48,5 @@ updated: "2026-10-26T11:17:58Z"
 - User asked: Toggle must cover on/off (true/false) and the choice cases from their screenshots (icon tile picker "Styl", pill segmented control "Głębokość/Nóżki/Panele tylne/Wykończenie"); overflow scrolls on X; consider splitting into several components.
 - Design split into Switch (Radix Switch), SegmentedControl and TileGroup (Radix RadioGroup, shared internal ChoiceGroup; overflow scrolls on X with snap + edge fade). Stepper/slider from screenshot 3 = existing Slider (DS-23), out of scope.
 - No accent color: screenshots' orange mapped to black/white per system; optional `--ds-color-accent` proposed but not recommended.
+- Example copy is neutral (density, view, theme, notifications) on purpose; reference screenshot labels are not reused.
 - Open: DS-6 only covers Switch — roadmap needs SegmentedControl + TileGroup implementation tasks (or DS-6 widened). Naming (Switch vs Toggle, TileGroup). Help slot needs Tooltip/Popover (none yet).

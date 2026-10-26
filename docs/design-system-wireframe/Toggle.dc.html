@@ -131,7 +131,7 @@ body{margin:0;background:#FFFFFF}
 <span>Toggle · DS-5 · draft</span>
 </div>
 <h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Toggle</h1>
-<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">A small family instead of one overloaded control. <b>Switch</b> is the boolean on/off (Radix Switch). <b>SegmentedControl</b> and <b>TileGroup</b> are single-select choice groups (Radix RadioGroup): a value is always selected, the strip scrolls horizontally when it does not fit, and it never wraps. Square corners, black ink, gray fills; the configurator's orange accent is translated to black (see Token requests in the spec).</p>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">A small family instead of one overloaded control. <b>Switch</b> is the boolean on/off (Radix Switch). <b>SegmentedControl</b> and <b>TileGroup</b> are single-select choice groups (Radix RadioGroup): a value is always selected, the strip scrolls horizontally when it does not fit, and it never wraps. Square corners, black ink, gray fills; a brand accent colour is not used; selection is shown in black (see Token requests in the spec).</p>
 </header>
 
 <!-- 01 FAMILY -->
@@ -141,13 +141,13 @@ body{margin:0;background:#FFFFFF}
 <div class="grid3">
 
 <div class="ab"><div class="ab-h"><span>Switch</span><span>boolean · Radix Switch</span></div><div class="ab-b fam">
-<label class="sw"><span class="trk on"><i></i></span>Back panels</label>
+<label class="sw"><span class="trk on"><i></i></span>Notifications</label>
 <p>One setting that is on or off and takes effect immediately.</p>
 <ul><li>role="switch", aria-checked</li><li>Space / Enter toggles</li><li>Label end (default) or start</li></ul>
 </div></div>
 
 <div class="ab"><div class="ab-h"><span>SegmentedControl</span><span>one of 2–7 text options</span></div><div class="ab-b fam">
-<div class="seg"><span class="it">24 cm</span><span class="it sel">32 cm</span><span class="it">40 cm</span></div>
+<div class="seg"><span class="it">Compact</span><span class="it sel">Cozy</span><span class="it">Comfortable</span></div>
 <p>Pick exactly one short text value. Options are visible at once, so the choice is quick to compare.</p>
 <ul><li>role="radiogroup" / "radio"</li><li>Arrows move and select</li><li>Overflow scrolls on X</li></ul>
 </div></div>
@@ -164,7 +164,7 @@ body{margin:0;background:#FFFFFF}
 
 </div>
 <div class="ab"><div class="ab-h"><span>Out of scope</span><span>related, already specified</span></div><div class="ab-b">
-<p class="note" style="margin:0">The width stepper (− 239 cm +) and the height slider with dots from the configurator are the existing <b>Slider</b> (DS-23, docs/specs/Slider.md: <code>stepper</code>, <code>values</code>, <code>marks="steps"</code>). They are not part of the Toggle family.</p>
+<p class="note" style="margin:0">A numeric stepper (− value +) and a stepped slider with dots are the existing <b>Slider</b> (DS-23, docs/specs/Slider.md: <code>stepper</code>, <code>values</code>, <code>marks="steps"</code>). They are not part of the Toggle family.</p>
 </div></div>
 </section>
 
@@ -187,7 +187,7 @@ body{margin:0;background:#FFFFFF}
 <label class="sw"><span class="trk"><i></i></span>Off</label>
 <label class="sw"><span class="trk on"><i></i></span>On</label>
 </div>
-<div class="ab-f">Forms, configurators, touch. Row = control height (44 px), so it lines up with Input and SegmentedControl md.</div>
+<div class="ab-f">Forms, settings panels, touch. Row = control height (44 px), so it lines up with Input and SegmentedControl md.</div>
 </div>
 </div>
 </section>
@@ -232,24 +232,24 @@ body{margin:0;background:#FFFFFF}
 <!-- 04 SWITCH LABEL -->
 <section class="sec">
 <div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Switch · Label placement</h2></div>
-<p class="sec-d">labelPosition="end" (default) puts the label right of the track, like Checkbox. labelPosition="start" puts the label first and pushes the track to the far edge, for settings lists and configurator rows. Both follow dir (mirrored in RTL). Long labels wrap; the track aligns with the first line. Optional description in caption gray-600.</p>
+<p class="sec-d">labelPosition="end" (default) puts the label right of the track, like Checkbox. labelPosition="start" puts the label first and pushes the track to the far edge, for settings lists and settings rows. Both follow dir (mirrored in RTL). Long labels wrap; the track aligns with the first line. Optional description in caption gray-600.</p>
 <div class="grid3">
 <div class="ab"><div class="ab-h"><span>End (default)</span><span>track · label</span></div><div class="ab-b">
-<label class="sw"><span class="trk on"><i></i></span>Soft-close hinges</label>
-<label class="sw"><span class="trk"><i></i></span>LED strip</label>
+<label class="sw"><span class="trk on"><i></i></span>Autosave</label>
+<label class="sw"><span class="trk"><i></i></span>Sound effects</label>
 </div></div>
 <div class="ab"><div class="ab-h"><span>Start</span><span>label · space · track</span></div><div class="ab-b">
-<label class="sw start"><span>Back panels</span><span class="trk on"><i></i></span></label>
-<label class="sw start"><span>Wall mount</span><span class="trk"><i></i></span></label>
+<label class="sw start"><span>Notifications</span><span class="trk on"><i></i></span></label>
+<label class="sw start"><span>Show hidden files</span><span class="trk"><i></i></span></label>
 </div><div class="ab-f">Same row as a SegmentedControl field with label start, so mixed rows align.</div></div>
 <div class="ab"><div class="ab-h"><span>Wrapping + description</span><span>track on first line</span></div><div class="ab-b">
-<label class="sw top"><span class="trk on"><i></i></span><span style="padding:9px 0">Add back panels to every open compartment<span class="sub">Adds 2 working days.</span></span></label>
+<label class="sw top"><span class="trk on"><i></i></span><span style="padding:9px 0">Sync settings across all your devices<span class="sub">Uses a little more battery.</span></span></label>
 </div></div>
 <div class="ab"><div class="ab-h"><span>sm · end</span><span>gap 8</span></div><div class="ab-b">
-<label class="sw sm"><span class="trk on"><i></i></span>Show dimensions</label>
+<label class="sw sm"><span class="trk on"><i></i></span>Show line numbers</label>
 </div></div>
 <div class="ab"><div class="ab-h"><span>sm · start</span><span>label · space · track</span></div><div class="ab-b">
-<label class="sw sm start"><span>Show dimensions</span><span class="trk on"><i></i></span></label>
+<label class="sw sm start"><span>Show line numbers</span><span class="trk on"><i></i></span></label>
 </div></div>
 <div class="ab"><div class="ab-h"><span>No visible label</span><span>aria-label required</span></div><div class="ab-b">
 <span class="sw"><span class="trk on"><i></i></span></span>
@@ -263,20 +263,20 @@ body{margin:0;background:#FFFFFF}
 <p class="sec-d">A gray-100 strip with 4 px inner padding. The selected segment is white with a 1 px black border and black text; the others are gray-700 text on the strip. Segments size to their text (hug) by default, or share the width equally (fullWidth).</p>
 <div class="grid2">
 <div class="ab"><div class="ab-h"><span>sm</span><span>strip 32 · segment 24 · pad-x 12 · 13/20 500</span></div><div class="ab-b">
-<div><div class="seg sm"><span class="it">24 cm</span><span class="it sel">32 cm</span><span class="it">40 cm</span><span class="it">50 cm</span></div></div>
+<div><div class="seg sm"><span class="it">Compact</span><span class="it sel">Cozy</span><span class="it">Comfortable</span><span class="it">Spacious</span></div></div>
 </div><div class="ab-f">Dense desktop panels. Fine pointers only.</div></div>
 <div class="ab"><div class="ab-h"><span>md (default)</span><span>strip 44 · segment 36 · pad-x 16 · 16/26 500</span></div><div class="ab-b">
-<div><div class="seg"><span class="it">24 cm</span><span class="it sel">32 cm</span><span class="it">40 cm</span><span class="it">50 cm</span></div></div>
+<div><div class="seg"><span class="it">Compact</span><span class="it sel">Cozy</span><span class="it">Comfortable</span><span class="it">Spacious</span></div></div>
 </div><div class="ab-f">Strip = control height (44 px). Configurator default.</div></div>
 <div class="ab" style="grid-column: span 2"><div class="ab-h"><span>md · fullWidth</span><span>segments flex 1, text centered</span></div><div class="ab-b">
-<div class="seg full"><span class="it">Board</span><span class="it sel">Plywood</span><span class="it">Veneer</span></div>
+<div class="seg full"><span class="it">Light</span><span class="it sel">Dark</span><span class="it">Match system</span></div>
 </div><div class="ab-f">fullWidth never scrolls; use it only for 2–4 short options. Hug layout is the one that scrolls.</div></div>
 <div class="ab" style="grid-column: span 2"><div class="ab-h"><span>Selection motion</span><span>indicator slides · transform + width · --ds-motion</span></div><div class="ab-b" style="gap:24px">
-<div><div class="seg slide"><span class="ind" aria-hidden="true"></span><span class="it">Board</span><span class="it">Plywood</span><span class="it">Veneer</span></div></div>
+<div><div class="seg slide"><span class="ind" aria-hidden="true"></span><span class="it">Light</span><span class="it">Dark</span><span class="it">Auto</span></div></div>
 <div class="frames">
-<div class="fr"><div class="seg slide still"><span class="ind" style="transform:translateX(0)"></span><span class="it" style="color:#000">Board</span><span class="it">Plywood</span><span class="it">Veneer</span></div>t = 0 · Board selected, → pressed</div>
-<div class="fr"><div class="seg slide still"><span class="ind" style="transform:translateX(56px)"></span><span class="it" style="color:#595959">Board</span><span class="it" style="color:#595959">Plywood</span><span class="it">Veneer</span></div>t ≈ 60 ms · pill between, text cross-fading</div>
-<div class="fr"><div class="seg slide still"><span class="ind" style="transform:translateX(112px)"></span><span class="it">Board</span><span class="it" style="color:#000">Plywood</span><span class="it">Veneer</span></div>t = 120 ms · Plywood selected</div>
+<div class="fr"><div class="seg slide still"><span class="ind" style="transform:translateX(0)"></span><span class="it" style="color:#000">Light</span><span class="it">Dark</span><span class="it">Auto</span></div>t = 0 · Light selected, → pressed</div>
+<div class="fr"><div class="seg slide still"><span class="ind" style="transform:translateX(56px)"></span><span class="it" style="color:#595959">Light</span><span class="it" style="color:#595959">Dark</span><span class="it">Auto</span></div>t ≈ 60 ms · pill between, text cross-fading</div>
+<div class="fr"><div class="seg slide still"><span class="ind" style="transform:translateX(112px)"></span><span class="it">Light</span><span class="it" style="color:#000">Dark</span><span class="it">Auto</span></div>t = 120 ms · Dark selected</div>
 </div>
 </div><div class="ab-f">One white pill (1 px black border) sits behind the segments and slides to the checked one: translateX + width, measured from the item, --ds-motion (120 ms, cubic-bezier(.2,0,0,1)). Text colour cross-fades in sync. No slide on first render. Reduced motion: it jumps. TileGroup does not slide; tiles cross-fade.</div></div>
 </div>
@@ -289,31 +289,31 @@ body{margin:0;background:#FFFFFF}
 <div class="grid3">
 
 <div class="ab"><div class="ab-h"><span>Default</span><span>selected: white, 1 px black</span></div><div class="ab-b">
-<div><div class="seg"><span class="it">Standard</span><span class="it sel">Plinth</span></div></div>
+<div><div class="seg"><span class="it">List</span><span class="it sel">Cards</span></div></div>
 </div></div>
 
 <div class="ab"><div class="ab-h"><span>Hover (unselected)</span><span>fill gray-200, text black</span></div><div class="ab-b">
-<div><div class="seg"><span class="it hov">Standard</span><span class="it sel">Plinth</span></div></div>
+<div><div class="seg"><span class="it hov">List</span><span class="it sel">Cards</span></div></div>
 </div><div class="ab-f">Hover on the selected segment changes nothing.</div></div>
 
 <div class="ab"><div class="ab-h"><span>Pressed</span><span>= hover until release</span></div><div class="ab-b">
-<div><div class="seg"><span class="it hov">Standard</span><span class="it sel">Plinth</span></div></div>
+<div><div class="seg"><span class="it hov">List</span><span class="it sel">Cards</span></div></div>
 </div><div class="ab-f">Selection moves on click; no separate pressed style.</div></div>
 
 <div class="ab"><div class="ab-h"><span>Focus-visible · selected</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b">
-<div><div class="seg"><span class="it">Standard</span><span class="it sel foc">Plinth</span></div></div>
+<div><div class="seg"><span class="it">List</span><span class="it sel foc">Cards</span></div></div>
 </div><div class="ab-f">Tab lands on the selected segment. The ring fits inside the 4 px strip padding.</div></div>
 
 <div class="ab"><div class="ab-h"><span>Focus-visible · after arrow</span><span>focus and selection move together</span></div><div class="ab-b">
-<div><div class="seg"><span class="it sel foc">Standard</span><span class="it">Plinth</span></div></div>
+<div><div class="seg"><span class="it sel foc">List</span><span class="it">Cards</span></div></div>
 </div><div class="ab-f">Radix RadioGroup selects on arrow key, so the ring is always on the selected segment.</div></div>
 
 <div class="ab"><div class="ab-h"><span>Disabled item</span><span>text gray-500, no hover</span></div><div class="ab-b">
-<div><div class="seg"><span class="it sel">Board</span><span class="it">Plywood</span><span class="it dis">Veneer</span></div></div>
+<div><div class="seg"><span class="it sel">Light</span><span class="it">Dark</span><span class="it dis">Match system</span></div></div>
 </div><div class="ab-f">Skipped by arrow keys. Explain why in the help slot or a hint.</div></div>
 
 <div class="ab"><div class="ab-h"><span>Disabled group</span><span>strip gray-50, text gray-500, selected border gray-400</span></div><div class="ab-b">
-<div><div class="seg gdis"><span class="it">Standard</span><span class="it sel">Plinth</span></div></div>
+<div><div class="seg gdis"><span class="it">List</span><span class="it sel">Cards</span></div></div>
 </div><div class="ab-f">Selection stays visible. Out of the tab order.</div></div>
 
 <div class="ab"><div class="ab-h"><span>sm · selected + focus</span><span>same rules</span></div><div class="ab-b">
@@ -330,19 +330,19 @@ body{margin:0;background:#FFFFFF}
 <!-- 07 SEGMENTED LABEL / HELP / ON-OFF -->
 <section class="sec">
 <div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Choice group · Label, help, on/off</h2></div>
-<p class="sec-d">Applies to SegmentedControl and TileGroup. The group label uses the Field label style. labelPosition="start" (configurator rows): label left, control pushed to the end, optional help button after it. labelPosition="top": label above, control at the start of the line. The help slot is outside the radiogroup and is its own tab stop.</p>
+<p class="sec-d">Applies to SegmentedControl and TileGroup. The group label uses the Field label style. labelPosition="start" (settings rows): label left, control pushed to the end, optional help button after it. labelPosition="top": label above, control at the start of the line. The help slot is outside the radiogroup and is its own tab stop.</p>
 <div class="grid2">
 
-<div class="ab"><div class="ab-h"><span>Label start · configurator</span><span>label · space · control · help</span></div><div class="ab-b" style="gap:16px">
-<div class="frow"><span class="lb">Depth</span><span class="ctl"><span class="seg"><span class="it">24 cm</span><span class="it sel">32 cm</span><span class="it">40 cm</span><span class="it">50 cm</span></span></span></div>
-<div class="frow"><span class="lb">Legs</span><span class="ctl"><span class="seg"><span class="it sel">Standard</span><span class="it">Plinth</span></span><span class="help" aria-label="About legs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5v.7M12 17v.5"/></svg></span></span></div>
-<div class="frow"><span class="lb">Back panels</span><span class="ctl"><span class="seg"><span class="it">Off</span><span class="it sel">On</span></span></span></div>
-<div class="frow"><span class="lb">Finish</span><span class="ctl"><span class="seg"><span class="it">Board</span><span class="it sel">Plywood</span><span class="it">Veneer</span></span><span class="help" aria-label="About finishes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5v.7M12 17v.5"/></svg></span></span></div>
+<div class="ab"><div class="ab-h"><span>Label start · settings rows</span><span>label · space · control · help</span></div><div class="ab-b" style="gap:16px">
+<div class="frow"><span class="lb">Density</span><span class="ctl"><span class="seg"><span class="it">Compact</span><span class="it sel">Cozy</span><span class="it">Comfortable</span><span class="it">Spacious</span></span></span></div>
+<div class="frow"><span class="lb">View</span><span class="ctl"><span class="seg"><span class="it sel">List</span><span class="it">Cards</span></span><span class="help" aria-label="About views"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5v.7M12 17v.5"/></svg></span></span></div>
+<div class="frow"><span class="lb">Notifications</span><span class="ctl"><span class="seg"><span class="it">Off</span><span class="it sel">On</span></span></span></div>
+<div class="frow"><span class="lb">Theme</span><span class="ctl"><span class="seg"><span class="it">Light</span><span class="it sel">Dark</span><span class="it">Match system</span></span><span class="help" aria-label="About themes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5v.7M12 17v.5"/></svg></span></span></div>
 </div><div class="ab-f">Rows are 44 px. Help is an IconButton (44 × 44) passed through the help slot, 8 px after the control. Rows without help keep their control flush right; the help column is not reserved.</div></div>
 
 <div class="ab"><div class="ab-h"><span>Label top</span><span>label · 8 · control</span></div><div class="ab-b" style="gap:24px">
-<div class="fld"><span class="lb">Depth</span><div class="frow" style="min-height:0"><span class="seg"><span class="it">24 cm</span><span class="it sel">32 cm</span><span class="it">40 cm</span><span class="it">50 cm</span></span></div></div>
-<div class="fld"><span class="lb">Style</span>
+<div class="fld"><span class="lb">Density</span><div class="frow" style="min-height:0"><span class="seg"><span class="it">Compact</span><span class="it sel">Cozy</span><span class="it">Comfortable</span><span class="it">Spacious</span></span></div></div>
+<div class="fld"><span class="lb">Quick action</span>
 <div class="tiles">
 <span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Search</span>
 <span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Done</span>
@@ -351,13 +351,13 @@ body{margin:0;background:#FFFFFF}
 </div><div class="ab-f">Default for TileGroup and for narrow containers. A label-top field may also have a hint (caption gray-600) between label and control.</div></div>
 
 <div class="ab"><div class="ab-h"><span>Label start · disabled group</span><span>label gray-500</span></div><div class="ab-b">
-<div class="frow"><span class="lb dtx">Legs</span><span class="ctl"><span class="seg gdis"><span class="it sel">Standard</span><span class="it">Plinth</span></span></span></div>
+<div class="frow"><span class="lb dtx">View</span><span class="ctl"><span class="seg gdis"><span class="it sel">List</span><span class="it">Cards</span></span></span></div>
 </div></div>
 
 <div class="ab"><div class="ab-h"><span>On / off: which one?</span><span>Switch vs 2-option SegmentedControl</span></div><div class="ab-b" style="gap:16px">
-<label class="sw start"><span class="lb">Back panels</span><span class="trk on"><i></i></span></label>
-<div class="frow"><span class="lb">Back panels</span><span class="ctl"><span class="seg"><span class="it">Off</span><span class="it sel">On</span></span></span></div>
-<p class="note" style="margin:0"><b>Default to Switch</b> for a true boolean. Use a 2-option SegmentedControl ("Off / On") only when the row sits in a stack of SegmentedControls and should read the same, or when both states have their own names (Standard / Plinth). Never put a Switch inside a SegmentedControl stack with the labels "Off / On" next to it.</p>
+<label class="sw start"><span class="lb">Notifications</span><span class="trk on"><i></i></span></label>
+<div class="frow"><span class="lb">Notifications</span><span class="ctl"><span class="seg"><span class="it">Off</span><span class="it sel">On</span></span></span></div>
+<p class="note" style="margin:0"><b>Default to Switch</b> for a true boolean. Use a 2-option SegmentedControl ("Off / On") only when the row sits in a stack of SegmentedControls and should read the same, or when both states have their own names (List / Cards). Never put a Switch inside a SegmentedControl stack with the labels "Off / On" next to it.</p>
 </div></div>
 
 </div>
@@ -445,26 +445,26 @@ body{margin:0;background:#FFFFFF}
 
 <div class="ab"><div class="ab-h"><span>Segmented · at start</span><span>fade end</span></div><div class="ab-b">
 <div class="frame" style="width:360px;box-sizing:border-box">
-<div class="vp fade-end"><div class="strip"><span class="seg"><span class="it sel">Gradient</span><span class="it">Grid</span><span class="it">Mosaic</span><span class="it">Frame</span><span class="it">Stripes</span><span class="it">Dots</span></span></div></div>
+<div class="vp fade-end"><div class="strip"><span class="seg"><span class="it sel">Overview</span><span class="it">Logs</span><span class="it">Alerts</span><span class="it">Usage</span><span class="it">Billing</span><span class="it">Team</span></span></div></div>
 <div class="sb"><b style="left:0;width:52%"></b></div>
 </div>
 </div><div class="ab-f">Thin native scrollbar (gray-300 thumb) stays for mouse users; trackpads and touch swipe.</div></div>
 
 <div class="ab"><div class="ab-h"><span>Segmented · middle</span><span>fade both</span></div><div class="ab-b">
 <div class="frame" style="width:360px;box-sizing:border-box">
-<div class="vp fade-both"><div class="strip" style="margin-left:-150px"><span class="seg"><span class="it">Gradient</span><span class="it">Grid</span><span class="it">Mosaic</span><span class="it sel">Frame</span><span class="it">Stripes</span><span class="it">Dots</span></span></div></div>
+<div class="vp fade-both"><div class="strip" style="margin-left:-150px"><span class="seg"><span class="it">Overview</span><span class="it">Logs</span><span class="it">Alerts</span><span class="it sel">Usage</span><span class="it">Billing</span><span class="it">Team</span></span></div></div>
 <div class="sb"><b style="left:24%;width:52%"></b></div>
 </div>
 </div></div>
 
 <div class="ab"><div class="ab-h"><span>Segmented · at end</span><span>fade start</span></div><div class="ab-b">
 <div class="frame" style="width:360px;box-sizing:border-box">
-<div class="vp fade-start"><div class="strip" style="margin-left:-312px"><span class="seg"><span class="it">Gradient</span><span class="it">Grid</span><span class="it">Mosaic</span><span class="it">Frame</span><span class="it">Stripes</span><span class="it sel">Dots</span></span></div></div>
+<div class="vp fade-start"><div class="strip" style="margin-left:-312px"><span class="seg"><span class="it">Overview</span><span class="it">Logs</span><span class="it">Alerts</span><span class="it">Usage</span><span class="it">Billing</span><span class="it sel">Team</span></span></div></div>
 <div class="sb"><b style="left:48%;width:52%"></b></div>
 </div>
 </div></div>
 
-<div class="ab"><div class="ab-h"><span>Tiles · at start</span><span>fade end · screenshot case</span></div><div class="ab-b">
+<div class="ab"><div class="ab-h"><span>Tiles · at start</span><span>fade end · overflowing row</span></div><div class="ab-b">
 <div class="frame" style="width:360px;box-sizing:border-box">
 <div class="vp fade-end" style="padding:4px"><div class="strip" style="gap:8px">
 <span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Search</span>
@@ -492,7 +492,7 @@ body{margin:0;background:#FFFFFF}
 
 <div class="ab"><div class="ab-h"><span>Label start + overflow</span><span>control shrinks, then scrolls</span></div><div class="ab-b">
 <div class="frame" style="width:360px;box-sizing:border-box">
-<div class="frow"><span class="lb">Depth</span><span class="ctl" style="flex:0 1 auto"><span class="vp fade-end"><span class="strip"><span class="seg"><span class="it sel">24 cm</span><span class="it">32 cm</span><span class="it">40 cm</span><span class="it">50 cm</span><span class="it">60 cm</span></span></span></span></span></div>
+<div class="frow"><span class="lb">Density</span><span class="ctl" style="flex:0 1 auto"><span class="vp fade-end"><span class="strip"><span class="seg"><span class="it sel">Compact</span><span class="it">Cozy</span><span class="it">Comfortable</span><span class="it">Spacious</span><span class="it">Extra spacious</span></span></span></span></span></div>
 </div>
 </div><div class="ab-f">Label and help never shrink; only the strip does (min-width: 0). Below ~320 px switch the field to labelPosition="top".</div></div>
 
