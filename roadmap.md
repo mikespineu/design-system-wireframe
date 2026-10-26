@@ -32,6 +32,29 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Theme block matches the approved DS-2 spec in `docs/specs/`
     - Storybook toolbar switches between `default` and the new theme
     - All component stories render and pass `jest-axe` in both themes
+- [ ] **DS-26 Theme token contract — design.** Define the public theming API: the full set of semantic `--ds-*` roles a theme may override, and default values that reproduce today's Wireframe look exactly. Covers color roles that replace direct palette use in components (e.g. `--ds-color-ink` → text/border/icon roles), font roles (`--ds-font-heading`, `--ds-font-body`, `--ds-font-mono`), a type scale (size, weight, line-height, letter-spacing, heading transform), radius (`sm`/`md`/`lg`/`full`), shadows (`sm`/`md`/`lg`, default `none`), and a dark-mode role set.
+  - type: design · has_ui: yes · depends_on: DS-1 · needs_human: yes · status: todo
+  - done_when:
+    - Spec `docs/specs/Theming.md` lists every themeable role with its default value; defaults reproduce the current Wireframe look
+    - Spec maps every hardcoded typography, shadow and text-transform value in `src/components/` to a role
+    - Spec defines the dark-mode role set with a contrast ratio for every text/background pair (≥ 4.5:1 text, ≥ 3:1 UI)
+    - Canvas shows each knob (brand color, fonts, type scale, radius, shadow, dark) changing the same set of components
+    - New raw values listed under Token requests for approval
+- [ ] **DS-27 Theme token foundation — implementation.** Implement the approved token contract in `src/styles/tokens.css` and move every component onto role tokens only. Wrap library CSS in `@layer ds` so consumer overrides always win, and ship the default fonts as an opt-in `fonts.css` instead of bundling them.
+  - type: build · has_ui: yes · depends_on: DS-26 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state; the default theme looks unchanged in every existing story
+    - A test fails if component CSS or classes use palette tokens or hardcoded font-size, font-weight, letter-spacing, text-transform or box-shadow
+    - Library CSS is in `@layer ds`; an unlayered `[data-theme="x"]` block overrides it regardless of import order (tested)
+    - Fonts load only via the opt-in `fonts.css` export; `package.json` `exports` updated
+    - "Theming" story shows every role, keyboard story unaffected, `jest-axe` passes in default and dark, token role list exported from `src/index.ts`
+- [ ] **DS-28 createTheme() — implementation.** Typed theme builder in `src/theme/`: `createTheme({ name, brand, neutral?, fonts, radius, shadow, mode })` returns the `[data-theme]` CSS for every role from DS-26. Generates a 50–900 scale from one brand color in OKLCH, derives a dark variant, and `checkContrast(theme)` reports WCAG failures.
+  - type: build · has_ui: no · depends_on: DS-27 · needs_human: no · status: todo
+  - done_when:
+    - `createTheme()` output sets every role in the DS-26 contract; TypeScript rejects unknown keys and invalid values
+    - One brand color yields a monotonic 50–900 OKLCH scale (tested on ≥ 3 hues)
+    - `checkContrast()` flags every text/background pair under 4.5:1 and UI pair under 3:1, with the role names
+    - `createTheme`, `checkContrast` and their types exported from `src/index.ts`; coverage ≥ 80 % for `src/theme/`
 
 ### Epic: Components
 
