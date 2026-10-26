@@ -67,8 +67,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers checked, unchecked, indeterminate, disabled, focus and invalid
     - Spec defines label placement and a CheckboxGroup with fieldset/legend, hint and error
     - Spec names Radix `Checkbox` and maps every state to `--ds-*` tokens
-- [ ] **DS-14 Checkbox — implementation.** Build `Checkbox` and `CheckboxGroup` in `src/components/Checkbox/` on Radix `Checkbox` (`import { Checkbox } from 'radix-ui'`), styled via `[data-state]` / `[data-disabled]`.
-  - type: build · has_ui: yes · depends_on: DS-13 · needs_human: no · status: todo
+- [x] **DS-14 Checkbox — implementation.** Build `Checkbox` and `CheckboxGroup` in `src/components/Checkbox/` on Radix `Checkbox` (`import { Checkbox } from 'radix-ui'`), styled via `[data-state]` / `[data-disabled]`.
+  - type: build · has_ui: yes · depends_on: DS-13 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state
     - Indeterminate state supported via `checked="indeterminate"`
