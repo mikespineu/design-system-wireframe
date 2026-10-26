@@ -134,6 +134,16 @@ describe('CheckboxGroup', () => {
     screen.getAllByRole('checkbox').forEach((b) => expect(b).toHaveAttribute('aria-invalid', 'true'));
   });
 
+  it('hideLegend hides the legend visually but keeps the group name', () => {
+    render(
+      <CheckboxGroup legend="Consent" hideLegend>
+        <Checkbox label="A" />
+      </CheckboxGroup>,
+    );
+    expect(screen.getByText('Consent')).toHaveClass('sr-only');
+    expect(screen.getByRole('group', { name: 'Consent' })).toBeInTheDocument();
+  });
+
   it('passes size and disabled to children', () => {
     render(
       <CheckboxGroup legend="Topics" size="sm" disabled orientation="horizontal">

@@ -220,7 +220,8 @@ const ContactForm = () => {
 
               <div className="border-t border-divider pt-6">
                 <CheckboxGroup
-                  legend={<span className="sr-only">Consent</span>}
+                  legend="Consent"
+                  hideLegend
                   error={show('consent') && 'consent is required to send'}
                 >
                   <Checkbox

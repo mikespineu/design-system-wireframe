@@ -85,6 +85,8 @@ Checkbox.displayName = 'Checkbox';
 
 export interface CheckboxGroupProps extends Omit<ComponentPropsWithoutRef<'fieldset'>, 'children'> {
   legend: ReactNode;
+  /** Hide the legend visually; it still names the group for assistive tech. */
+  hideLegend?: boolean;
   hint?: ReactNode;
   /** Sets invalid on every child. */
   error?: ReactNode;
@@ -96,7 +98,7 @@ export interface CheckboxGroupProps extends Omit<ComponentPropsWithoutRef<'field
 }
 
 export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
-  ({ legend, hint, error, required, disabled, orientation = 'vertical', size, children, className, id, ...rest }, ref) => {
+  ({ legend, hideLegend, hint, error, required, disabled, orientation = 'vertical', size, children, className, id, ...rest }, ref) => {
     const generated = useId();
     const baseId = id ?? generated;
     const hintId = hint ? `${baseId}-hint` : undefined;
@@ -115,7 +117,7 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
           aria-describedby={describedBy}
           {...rest}
         >
-          <legend className="ds-checkbox-legend">
+          <legend className={cx('ds-checkbox-legend', hideLegend && 'sr-only')}>
             {legend}
             {required && <span aria-hidden="true"> *</span>}
           </legend>
