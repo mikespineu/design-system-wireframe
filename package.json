@@ -14,9 +14,13 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
     "factory:status": "node factory/plugin/skills/status/scripts/status-page.mjs --watch 10 --open",
-    "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json"
+    "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "npm run build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@chromatic-com/storybook": "latest",
     "@eslint/js": "^10.0.1",
     "@storybook/addon-a11y": "^10.6.2",
@@ -79,5 +83,13 @@
   },
   "sideEffects": [
     "**/*.css"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikespineu/design-system-wireframe.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
 }
