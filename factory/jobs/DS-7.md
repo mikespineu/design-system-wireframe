@@ -2,8 +2,8 @@
 task: DS-7
 title: "Library build"
 line: build            # design | build
-status: in-progress    # claimed | in-progress | waiting | blocked | merged
-stage: ci
+status: merged    # claimed | in-progress | waiting | blocked | merged
+stage: merge
 branch: "feat/DS-7-library-build"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-7-library-build"
 pr: "40"
@@ -36,6 +36,8 @@ updated: "2026-10-26T09:19:46Z"
 - 10:22 review: pass, no findings
 - 10:22 pr: opening PR
 - 10:22 pr: opened #40
+- 10:23 ci: merged origin/main (roadmap Done conflict resolved), gates re-run: all pass
+- 10:23 merge: merging #40 once checks green
 
 ## Gate results
 
