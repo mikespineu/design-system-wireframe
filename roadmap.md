@@ -346,6 +346,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-29** Switch — implementation — https://github.com/mikespineu/design-system-wireframe/pull/58
 - **DS-26** Theme token contract — design — https://github.com/mikespineu/design-system-wireframe/pull/55
 - **DS-5** Toggle — design — https://github.com/mikespineu/design-system-wireframe/pull/49
 - **DS-24** Slider — implementation — https://github.com/mikespineu/design-system-wireframe/pull/48
