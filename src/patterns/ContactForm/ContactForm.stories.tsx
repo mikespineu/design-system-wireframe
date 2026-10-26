@@ -9,14 +9,15 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Alert } from '../../components/Alert';
 import { Button } from '../../components/Button';
+import { Checkbox, CheckboxGroup } from '../../components/Checkbox';
 import { Icon } from '../../components/Icon';
 import { Field, TextField, useFieldControl } from '../../components/Input';
 import { TextareaField } from '../../components/Textarea';
 
 /*
  * Example form layout from docs/design-system-wireframe (artboard "Example form").
- * Text fields use the real TextField/Field and the message uses TextareaField. Select, Checkbox
- * and RadioGroup are not built yet (docs/COMPONENTS_TODO.md C3-C9), so those are native elements;
+ * Text fields use the real TextField/Field, the message uses TextareaField and consent uses Checkbox in a
+ * one-item CheckboxGroup. Select and RadioGroup are not built yet (docs/COMPONENTS_TODO.md C3-C9), so those are native elements;
  * the select is wired to Field through useFieldControl so errors and hints behave like Input.
  * Swap them for the real components when those land.
  */
@@ -50,7 +51,6 @@ const controlClass =
   'box-border w-full border border-border bg-surface px-3 text-body text-ink rounded-md ' +
   'placeholder:text-placeholder focus-visible:focus-ring ' +
   'aria-[invalid=true]:border-2 aria-[invalid=true]:border-error';
-const errorClass = 'flex items-center gap-1.5 text-caption font-medium text-error';
 const legendClass = 'mb-6 p-0 font-mono text-h3';
 
 /** Stand-in until Select exists; wired to the surrounding Field. */
@@ -218,21 +218,17 @@ const ContactForm = () => {
                 />
               </fieldset>
 
-              <div className="flex flex-col gap-2 border-t border-divider pt-6">
-                <label className="flex min-h-control items-start gap-3 text-body">
-                  <input
-                    type="checkbox"
+              <div className="border-t border-divider pt-6">
+                <CheckboxGroup
+                  legend={<span className="sr-only">Consent</span>}
+                  error={show('consent') && 'consent is required to send'}
+                >
+                  <Checkbox
+                    label="I agree that my details are stored to answer this request. [LINK TO PRIVACY POLICY]"
                     checked={values.consent}
-                    onChange={(e) => setValues((v) => ({ ...v, consent: e.target.checked }))}
-                    aria-invalid={show('consent')}
-                    aria-describedby="f-consent-e"
-                    className="mt-0.5 size-5 flex-none accent-ink focus-visible:focus-ring"
+                    onCheckedChange={(c) => setValues((v) => ({ ...v, consent: c === true }))}
                   />
-                  I agree that my details are stored to answer this request. [LINK TO PRIVACY POLICY]
-                </label>
-                {show('consent') && (
-                  <span id="f-consent-e" className={`${errorClass} pl-8`}><Icon name="alert" size={14} strokeWidth={2} />Error: consent is required to send</span>
-                )}
+                </CheckboxGroup>
               </div>
 
               <div className="flex flex-wrap items-center gap-4">
