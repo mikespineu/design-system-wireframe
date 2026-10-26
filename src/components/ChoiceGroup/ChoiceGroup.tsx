@@ -191,12 +191,27 @@ function ChoiceGroupInner<V extends string>(
     const el = rootRef.current;
     if (!el) return;
     measureOverflow();
-    const ro = new ResizeObserver(() => {
+    // Layout settled (resize, item size change, web fonts): re-measure and
+    // re-scroll the checked item into view. Never runs on plain scroll events.
+    const settle = () => {
       measureOverflow();
       if (withIndicator) placeIndicator();
-    });
+      getChecked()?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' });
+      measureOverflow();
+    };
+    const ro = new ResizeObserver(settle);
     ro.observe(el);
-    return () => ro.disconnect();
+    Array.from(el.children).forEach((c) => {
+      if ((c as HTMLElement).getAttribute('role') === 'radio') ro.observe(c);
+    });
+    let cancelled = false;
+    document.fonts?.ready?.then(() => {
+      if (!cancelled) settle();
+    });
+    return () => {
+      cancelled = true;
+      ro.disconnect();
+    };
   }, [measureOverflow, placeIndicator, withIndicator, options]);
 
   const handleFocus = (e: FocusEvent<HTMLDivElement>) => {

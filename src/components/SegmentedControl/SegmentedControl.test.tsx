@@ -200,6 +200,34 @@ describe('SegmentedControl', () => {
       window.ResizeObserver = RO;
     });
 
+    it('re-scrolls the checked item into view when layout settles, not on scroll', () => {
+      render(<SegmentedControl label="View" options={many} defaultValue={many.at(-1)!.value} />);
+      const group = screen.getByRole('radiogroup');
+      scrollIntoView.mockClear();
+      fireEvent.scroll(group);
+      expect(scrollIntoView).not.toHaveBeenCalled();
+      act(() => trigger?.());
+      expect(scrollIntoView).toHaveBeenCalledTimes(1);
+      expect(scrollIntoView.mock.contexts[0]).toBe(screen.getByRole('radio', { checked: true }));
+      expect(scrollIntoView).toHaveBeenCalledWith({ block: 'nearest', inline: 'nearest', behavior: 'auto' });
+    });
+
+    it('re-scrolls after web fonts load', async () => {
+      let resolve: () => void = () => {};
+      const ready = new Promise<void>((r) => {
+        resolve = r;
+      });
+      Object.defineProperty(document, 'fonts', { configurable: true, value: { ready } });
+      render(<SegmentedControl label="View" options={many} defaultValue={many.at(-1)!.value} />);
+      scrollIntoView.mockClear();
+      await act(async () => {
+        resolve();
+        await ready;
+      });
+      expect(scrollIntoView).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'auto' }));
+      Object.defineProperty(document, 'fonts', { configurable: true, value: undefined });
+    });
+
     it('sets data-overflow from scroll position', () => {
       render(<SegmentedControl label="View" options={many} />);
       const group = screen.getByRole('radiogroup');
