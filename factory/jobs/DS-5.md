@@ -6,10 +6,10 @@ status: waiting        # claimed | in-progress | waiting | blocked | merged
 stage: pr
 branch: "feat/DS-5-toggle-design"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-5-toggle-design"
-pr: ""
-pr_url: ""
+pr: "49"
+pr_url: "https://github.com/mikespineu/design-system-wireframe/pull/49"
 canvas_url: "https://claude.ai/artifact/UuJ22jU7nJ5m6JBXJbm3uq"
-storybook_url: ""
+storybook_url: "http://localhost:6178"
 model: default
 loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
 needs_you: "approve the design (/factory:approve DS-5) or ask for changes (/factory:design DS-5 <feedback>)"
@@ -28,6 +28,7 @@ updated: "2026-10-26T11:17:58Z"
 - 12:17 publish: canvas at https://claude.ai/artifact/UuJ22jU7nJ5m6JBXJbm3uq
 - 12:17 spec: check passed (header, sections, tokens, canvas)
 - 12:17 pr: waiting for you — approve design or request changes
+- 12:18 pr: draft PR #49 opened
 
 ## Gate results
 
