@@ -187,13 +187,13 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers `ButtonGroup` "Add to cart" + Wishlist heart, attached (shared 1 px border) and spaced, in default, focus-within and disabled
     - Spec defines loading behavior (spinner placement, width stays fixed, `aria-busy`, clicks blocked, not focus-trapping) and the pressed state (`aria-pressed`)
     - Spec defines the typed API (`leadingIcon`, `trailingIcon`, `loading`, `IconButton` `variant` / `pressed`, `ButtonGroup` `attached` / `aria-label`) and maps every state to `--ds-*` tokens
-- [ ] **DS-33 Button icons & loading — implementation.** Extend `Button` (`src/components/Button/`) with `leadingIcon` / `trailingIcon` and `loading`, and `IconButton` (`src/components/IconButton/`) with `variant`, `loading` and `pressed`, per `docs/specs/Button.md`. Add a `heart` icon (outline + filled) to `Icon`. Keep the existing `asChild` (Radix `Slot`) composition working.
-  - type: build · has_ui: yes · depends_on: DS-32 · needs_human: no · status: todo
+- [ ] **DS-33 Button icons & loading — implementation.** Extend `Button` (`src/components/Button/`) with `leadingIcon` / `trailingIcon` (typed `IconComponent`, rendered through `Icon` from DS-47) and `loading`, and `IconButton` (`src/components/IconButton/`) with `variant`, `loading`, `pressed` and an optional `pressedIcon: IconComponent`, per `docs/specs/Button.md`. The design system adds no `heart` glyph: the Wishlist heart (outline + filled) is passed in as components, in stories built with `createIcon`. Keep the existing `asChild` (Radix `Slot`) composition working.
+  - type: build · has_ui: yes · depends_on: DS-32, DS-47 · needs_human: no · status: todo
   - done_when:
     - Matches the approved spec in every state, for every variant
     - `loading` sets `aria-busy`, blocks `onClick`, keeps the button's width, and keeps the accessible name
-    - `IconButton` `pressed` sets `aria-pressed` and swaps heart outline ↔ filled; `aria-label` stays required
-    - Existing `Button` / `IconButton` stories and tests still pass with no API break (new props are optional)
+    - `leadingIcon` / `trailingIcon` accept any `IconComponent` (tested with `createIcon` and one library from DS-49) and render at the spec size with `aria-hidden`
+    - `IconButton` `pressed` sets `aria-pressed` and renders `pressedIcon` when given (heart outline ↔ filled in the story); `aria-label` stays required; no new glyph in `Icon`'s defaults
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
 - [ ] **DS-34 ButtonGroup — implementation.** Build `ButtonGroup` in `src/components/ButtonGroup/` that groups `Button` and `IconButton` children (`role="group"`, `aria-label`), attached or spaced, per `docs/specs/Button.md`. Plain buttons in DOM order with native Tab order, no roving focus.
   - type: build · has_ui: yes · depends_on: DS-32, DS-33 · needs_human: no · status: todo
