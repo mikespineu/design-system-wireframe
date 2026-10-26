@@ -310,6 +310,40 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Screenshots of the Storybook Introduction page, the factory status page and one Claude Design canvas are committed in `docs/images/readme/` (PNG, ≤ 500 KB each) and embedded in their sections, each with descriptive alt text
     - Every skill, path, image and command named in the README exists in the repo (all relative links resolve)
 
+### Epic: Icons
+
+- [ ] **DS-46 Icon system — design.** Define the bring-your-own icon model: the design system ships no public icon set, `Icon` renders any SVG icon component, and components fall back to private default glyphs. Draw the default glyph set in the wireframe style (24 px grid, stroke only, butt caps, miter joins): close, check, alert, info, warning, success, plus, minus, chevron-down / -left / -right. Specify the role map and the override API for every component that renders an internal icon.
+  - type: design · has_ui: yes · depends_on: – · needs_human: yes · status: todo
+  - done_when:
+    - Canvas shows every default glyph at 12, 14, 16, 18, 20 and 24 px with stroke 1.5 and 2, next to Lucide, Tabler, Phosphor and Heroicons equivalents in the same sizes
+    - Spec `docs/specs/Icon.md` defines the `IconComponent` contract (renders `<svg>`, forwards `width`, `height`, `className`, `aria-*`), `createIcon`, `IconProvider`, `useIcon` and the resolution order prop > provider > default
+    - Spec maps every internal icon in `src/components/` to a role, its size and stroke, and the override prop name (Dialog `closeIcon`, Checkbox `checkIcon` / `errorIcon`, Input and Textarea `errorIcon`, Tag `removeIcon`, Alert `icon`, Slider `decrementIcon` / `incrementIcon`)
+    - Spec covers a11y: icons are always decorative inside components, the accessible name stays on the control, `null` is allowed only where hiding the icon is valid (Alert)
+    - New `--ds-icon-size-sm/md/lg` and `--ds-icon-stroke` values listed under Token requests for approval
+- [ ] **DS-47 Icon API & default glyphs — implementation.** Rebuild `Icon` (`src/components/Icon/`) around `icon: IconComponent` per `docs/specs/Icon.md`: add `createIcon`, the private default glyphs built with it, `IconProvider` and `useIcon(role, override)`. Remove the public `name` / `IconName` API, change `IconButton` `icon` to `IconComponent`, move every internal usage to `useIcon`, and add the icon tokens. Breaking change, released with a major changeset.
+  - type: build · has_ui: yes · depends_on: DS-46 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state; every existing story looks unchanged with the default glyphs
+    - `Icon` accepts only an `IconComponent` and always sets size, `currentColor`, `focusable="false"` and `aria-hidden` or `role="img"` + `aria-label`; default glyphs and `IconName` are not exported from `src/index.ts`
+    - `useIcon` resolves prop > `IconProvider` > default (unit-tested for all three levels and partial providers)
+    - Major changeset with a migration note (`name="x"` → `icon={X}`, `IconButton` `icon`)
+    - Story per state, keyboard story for `IconButton`, `jest-axe` test; `Icon`, `IconProvider`, `createIcon`, `useIcon` and `IconComponent` exported from `src/index.ts`
+- [ ] **DS-48 Icon override props in components — implementation.** Add the role-named override props from `docs/specs/Icon.md` to every component that renders an internal icon: Dialog `closeIcon`, Checkbox `checkIcon` / `errorIcon`, Input and Textarea `errorIcon`, Tag `removeIcon`, Alert `icon` (accepts `null`), Slider `decrementIcon` / `incrementIcon` (move its inline SVGs onto default roles).
+  - type: build · has_ui: yes · depends_on: DS-46, DS-47 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state, with default and overridden icons
+    - Each listed component renders its default glyph, the `IconProvider` icon, and the prop icon, and the prop wins over the provider (tested per component)
+    - Overriding an icon never changes the control's accessible name or size (tested)
+    - "Custom icons" story per component (default vs Lucide), keyboard stories still pass, `jest-axe` test per component
+- [ ] **DS-49 Bring your own icons — docs & library examples.** Storybook docs page "Bring your own icons" with live examples for Lucide, Tabler, Phosphor, Heroicons and a custom SVG via `createIcon`, used in `Icon`, `IconButton` and `IconProvider`. The libraries are devDependencies only. Per-library contract tests catch an upgrade that breaks prop forwarding.
+  - type: build · has_ui: yes · depends_on: DS-46, DS-47 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec; `Icon.mdx` explains the contract, `createIcon`, `IconProvider`, override props, sizing and what the wrapper does not normalize (stroke in Phosphor and Heroicons)
+    - Stories show each of the 5 sources in `Icon` and `IconButton`, plus one `IconProvider` story that re-skins Dialog, Checkbox and Alert with Lucide
+    - Jest contract test per library checks size, `currentColor` and `aria-hidden` / `role="img"` through `Icon`
+    - The 5 libraries are in `devDependencies` only; `npm run build` output does not include them (tested on `dist/`)
+    - `jest-axe` test on every example story
+
 ## Done
 
 - **DS-5** Toggle — design — https://github.com/mikespineu/design-system-wireframe/pull/49
