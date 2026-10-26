@@ -77,8 +77,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Counter shows when `maxLength` is set, without native `maxlength`: "n / max", black at ≥ 90 %, error + icon and `aria-invalid` past the limit, polite debounced live region
     - `TextareaField` mirrors `TextField` (label, hint, error); counter ids appended to Field's `aria-describedby`
     - Story per state, size, resize mode and counter state, plus a keyboard story; `userEvent` tests and a `jest-axe` check; exported from `src/index.ts`
-- [ ] **DS-5 Toggle — design.** Define on/off, disabled, focus, sizes, and label placement.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-5 Toggle — design.** Define on/off, disabled, focus, sizes, and label placement.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers on/off, disabled, focus, sizes, and label placement
     - Spec names Radix `Switch` and maps every state to tokens
@@ -244,6 +244,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-5** Toggle — design — https://github.com/mikespineu/design-system-wireframe/pull/49
 - **DS-24** Slider — implementation — https://github.com/mikespineu/design-system-wireframe/pull/48
 - **DS-14** Checkbox — implementation — https://github.com/mikespineu/design-system-wireframe/pull/45
 - **DS-13** Checkbox — design — https://github.com/mikespineu/design-system-wireframe/pull/44

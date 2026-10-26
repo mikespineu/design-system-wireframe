@@ -3,9 +3,9 @@
 - task: DS-5
 - canvas: docs/design-system-wireframe/Toggle.dc.html
 - canvas_url: https://claude.ai/artifact/UuJ22jU7nJ5m6JBXJbm3uq
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-26
 - approval_hash:
 
 "Toggle" is a family of three components, not one. A single component that handles a boolean, a pill row of text values and a row of icon tiles would need a mode prop that changes its role, keyboard model and layout, so the family splits on those lines:

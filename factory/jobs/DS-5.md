@@ -2,8 +2,8 @@
 task: DS-5
 title: "Toggle — design"
 line: design           # design | build
-status: waiting        # claimed | in-progress | waiting | blocked | merged
-stage: pr
+status: in-progress        # claimed | in-progress | waiting | blocked | merged
+stage: ci
 branch: "feat/DS-5-toggle-design"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-5-toggle-design"
 pr: "49"
@@ -12,10 +12,10 @@ canvas_url: "https://claude.ai/artifact/UuJ22jU7nJ5m6JBXJbm3uq"
 storybook_url: "http://localhost:6178"
 model: default
 loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
-needs_you: "approve the design (/factory:approve DS-5) or ask for changes (/factory:design DS-5 <feedback>)"
+needs_you: ""
 blocked_reason: ""
 started: "2026-10-26T11:10:55Z"
-updated: "2026-10-26T11:17:58Z"
+updated: "2026-10-26T12:07:44Z"
 ---
 
 # DS-5 Toggle — design
@@ -33,6 +33,7 @@ updated: "2026-10-26T11:17:58Z"
 - 12:22 design: revised per canvas comment (tile examples use Icon set icons, varied label lengths); canvas republished
 - 12:23 design: revised per canvas comment (SegmentedControl selection slides between segments, --ds-motion); canvas republished
 - 12:24 design: example labels replaced with neutral app-settings copy (no 1:1 labels from reference screenshots); spec check passed; canvas republished
+- 13:07 approve: approved by mikespin
 
 ## Gate results
 
