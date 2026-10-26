@@ -3,9 +3,9 @@
 - task: DS-23
 - canvas: docs/design-system-wireframe/Slider.dc.html
 - canvas_url: https://claude.ai/artifact/NZrzu3r48VEABES7SWacfJ
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-26
 - approval_hash:
 
 Pick one number by dragging a single thumb along a horizontal track. Built on Radix `Slider`. Works with a uniform scale (`min` / `max` / `step`) or with a custom list of allowed values (`values`, e.g. `[1, 2, 3, 5, 8, 10]`). A value bubble shows above the thumb while dragging (on by default); it can instead be always visible, and then it is an editable numeric input. Alternatively an attached numeric input (`showInput`) sits next to the track. Typed values snap to the nearest allowed value on Enter or blur. Optional − / + stepper buttons ride along the track with a value-showing thumb (`stepper`), marks come in three variants (`marks`: every step, none, ends only), and an optional `unit` is appended to every displayed value.
