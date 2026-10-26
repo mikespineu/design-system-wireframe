@@ -19,6 +19,7 @@ import {
   defaultFormat,
   firstAllowed,
   lastAllowed,
+  moveBy,
   neighbour,
   parseTyped,
   positionOf,
@@ -32,8 +33,8 @@ import './Slider.css';
 export type SliderValue = number;
 
 export type SliderScale =
-  | { min?: number; max?: number; step?: number; values?: never }
-  | { values: readonly number[]; min?: never; max?: never; step?: never };
+  | { min?: number; max?: number; step?: number; values?: never; spacing?: never }
+  | { values: readonly number[]; spacing?: 'index' | 'value'; min?: never; max?: never; step?: never };
 
 export type SliderBubble = 'auto' | 'always' | 'off';
 export type SliderMarks = 'none' | 'steps' | 'ends' | readonly number[];
@@ -86,6 +87,7 @@ export type SliderFieldProps = SliderProps & {
 
 type Loose = SliderOwnProps & {
   values?: readonly number[];
+  spacing?: 'index' | 'value';
   min?: number;
   max?: number;
   step?: number;
@@ -153,6 +155,7 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
     id,
     className,
     values,
+    spacing = 'index',
     min = 0,
     max = 100,
     step = 1,
@@ -171,7 +174,8 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
 
   const always = bubble === 'always';
   const showInput = showInputProp && !always;
-  const scale: Scale = values ? { values, min: values[0] ?? 0, max: values[values.length - 1] ?? 0, step: 1 } : { min, max, step };
+  const byValue = Boolean(values) && spacing === 'value';
+  const scale: Scale = values ? { values, spacing, min: values[0] ?? 0, max: values[values.length - 1] ?? 0, step: 1 } : { min, max, step };
   const first = firstAllowed(scale);
   const last = lastAllowed(scale);
 
@@ -198,8 +202,31 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
     if (commit) onValueCommit?.(next);
   };
 
-  const toRadix = (v: number) => (values ? Math.max(0, values.indexOf(v)) : v);
-  const fromRadix = (i: number) => (values ? (values[i] ?? current) : i);
+  // index mode hands Radix indices; value mode hands it real values (it only draws the thumb and tracks the pointer)
+  const radixStep = 10 ** -scaleDecimals(scale);
+  const toRadix = (v: number) => (values && !byValue ? Math.max(0, values.indexOf(v)) : v);
+  const fromRadix = (i: number) => (values ? (byValue ? snapToScale(scale, i) : (values[i] ?? current)) : i);
+
+  // value mode: keys step through allowed values, not through Radix's uniform step
+  const onRootKeyDown = (e: KeyboardEvent<HTMLElement>) => {
+    if (!byValue || isDisabled) return;
+    const rtl = dir === 'rtl';
+    const inc = rtl ? 'ArrowLeft' : 'ArrowRight';
+    const dec = rtl ? 'ArrowRight' : 'ArrowLeft';
+    let next: number | null = null;
+    if (e.key === inc || e.key === 'ArrowUp') next = moveBy(scale, current, e.shiftKey ? 10 : 1);
+    else if (e.key === dec || e.key === 'ArrowDown') next = moveBy(scale, current, e.shiftKey ? -10 : -1);
+    else if (e.key === 'PageUp') next = moveBy(scale, current, 10);
+    else if (e.key === 'PageDown') next = moveBy(scale, current, -10);
+    else if (e.key === 'Home') next = first;
+    else if (e.key === 'End') next = last;
+    if (next === null) return;
+    e.preventDefault(); // Radix skips its own key handling
+    if (next !== current) {
+      attached.discard();
+      change(next, true);
+    }
+  };
 
   const applyTyped = (text: string) => {
     const raw = parseTyped(text, unit);
@@ -270,6 +297,12 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
     if (!dev) return;
     if (stepper && !values && marks !== undefined) console.warn('Slider: `marks` is ignored with `stepper` on a uniform scale.');
   }, [stepper, values, marks]);
+
+  const spacingGiven = (rawProps as Loose).spacing !== undefined;
+  useEffect(() => {
+    if (!dev) return;
+    if (spacingGiven && !values) console.warn('Slider: `spacing` only applies with `values`; it is ignored.');
+  }, [spacingGiven, values]);
 
   useEffect(() => {
     if (!dev) return;
@@ -417,9 +450,10 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
             <RadixSlider.Root
               ref={ref}
               className="ds-slider-root"
-              min={values ? 0 : min}
-              max={values ? values.length - 1 : max}
-              step={values ? 1 : step}
+              min={values ? (byValue ? first : 0) : min}
+              max={values ? (byValue ? last : values.length - 1) : max}
+              step={values ? (byValue ? radixStep : 1) : step}
+              onKeyDown={onRootKeyDown}
               value={[toRadix(current)]}
               onValueChange={([i]) => {
                 if (i === undefined) return;

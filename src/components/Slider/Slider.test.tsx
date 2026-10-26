@@ -1021,6 +1021,137 @@ describe('Slider mixed steps (200, 240, then every cm to 280)', () => {
   });
 });
 
+describe('Slider spacing="value" (real positions for custom values)', () => {
+  const MIXED = [200, 240, ...Array.from({ length: 40 }, (_, i) => 241 + i)];
+  const setup = (props = {}) =>
+    render(<SliderField label="Length" values={MIXED} spacing="value" unit="cm" showInput marks={[200, 240, 280]} defaultValue={240} {...props} />);
+  const posOf = (container: HTMLElement, sel: string) =>
+    Array.from(container.querySelectorAll<HTMLElement>(sel)).map((n) => Number(n.style.getPropertyValue('--slider-p')));
+
+  it('places 240 exactly mid-track, for the thumb, ticks and labels', () => {
+    const { container } = setup();
+    expect(Number((container.querySelector('.ds-slider') as HTMLElement).style.getPropertyValue('--slider-p'))).toBe(0.5);
+    const ps = posOf(container, '.ds-slider-tick');
+    expect(ps).toHaveLength(42);
+    expect(ps[0]).toBe(0);
+    expect(ps[1]).toBe(0.5);
+    expect(ps[2]).toBeCloseTo(41 / 80);
+    expect(ps[41]).toBe(1);
+    expect(posOf(container, '.ds-slider-mark-label')).toEqual([0, 0.5, 1]);
+  });
+
+  it('keeps the real values in ARIA', () => {
+    setup();
+    expect(thumb()).toHaveAttribute('aria-valuemin', '200');
+    expect(thumb()).toHaveAttribute('aria-valuemax', '280');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '240');
+    expect(thumb()).toHaveAttribute('aria-valuetext', `240${nbsp}cm`);
+  });
+
+  it('arrows step to the next and previous allowed value', async () => {
+    const user = userEvent.setup();
+    const onValueChange = jest.fn();
+    const onValueCommit = jest.fn();
+    setup({ defaultValue: 200, onValueChange, onValueCommit });
+    await user.tab();
+    await user.keyboard('{ArrowRight}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '240');
+    await user.keyboard('{ArrowUp}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '241');
+    await user.keyboard('{ArrowLeft}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '240');
+    await user.keyboard('{ArrowDown}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '200');
+    await user.keyboard('{ArrowLeft}');
+    expect(onValueChange).toHaveBeenCalledTimes(4);
+    expect(onValueCommit).toHaveBeenCalledTimes(4);
+  });
+
+  it('Page keys and Shift+arrow move 10 allowed values; Home and End go to the ends', async () => {
+    const user = userEvent.setup();
+    setup({ defaultValue: 240 });
+    await user.tab();
+    await user.keyboard('{PageUp}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '250');
+    await user.keyboard('{Shift>}{ArrowRight}{/Shift}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '260');
+    await user.keyboard('{PageDown}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '250');
+    await user.keyboard('{Shift>}{ArrowLeft}{/Shift}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '240');
+    await user.keyboard('{PageDown}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '200');
+    await user.keyboard('{End}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '280');
+    await user.keyboard('{Home}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '200');
+  });
+
+  it('reverses horizontal arrows in rtl', async () => {
+    const user = userEvent.setup();
+    setup({ dir: 'rtl', defaultValue: 240 });
+    await user.tab();
+    await user.keyboard('{ArrowLeft}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '241');
+  });
+
+  it('keeps the input snapping unchanged', async () => {
+    const user = userEvent.setup();
+    setup({ defaultValue: 250 });
+    const input = screen.getByRole('textbox');
+    for (const [typed, expected] of [['215', '200'], ['220', '240'], ['260.4', '260'], ['300', '280'], ['150', '200']]) {
+      await user.clear(input);
+      await user.type(input, `${typed}{Enter}`);
+      expect(input).toHaveValue(expected);
+    }
+  });
+
+  describe('pointer', () => {
+    const press = (x: number, opts: { move?: number } = {}) => {
+      const rect = { x: 0, y: 0, left: 0, top: 0, right: 400, bottom: 44, width: 400, height: 44, toJSON: () => ({}) };
+      jest.spyOn(Element.prototype, 'getBoundingClientRect').mockReturnValue(rect);
+      jest.spyOn(Element.prototype, 'hasPointerCapture').mockReturnValue(true);
+      const onValueChange = jest.fn();
+      const onValueCommit = jest.fn();
+      const { container } = setup({ defaultValue: 280, onValueChange, onValueCommit });
+      const root = container.querySelector('.ds-slider-root') as HTMLElement;
+      fireEvent.pointerDown(root, { clientX: x, pointerId: 1, button: 0 });
+      if (opts.move !== undefined) fireEvent.pointerMove(root, { clientX: opts.move, pointerId: 1 });
+      fireEvent.pointerUp(root, { clientX: opts.move ?? x, pointerId: 1 });
+      return { onValueChange, onValueCommit };
+    };
+    afterEach(() => jest.restoreAllMocks());
+
+    it('snaps a press to the nearest allowed value by real distance', () => {
+      press(75); // raw 215: closer to 200 than 240
+      expect(thumb()).toHaveAttribute('aria-valuenow', '200');
+    });
+
+    it('breaks a tie between 200 and 240 upward', () => {
+      press(100); // raw 220
+      expect(thumb()).toHaveAttribute('aria-valuenow', '240');
+    });
+
+    it('lands on dense values exactly and reports only allowed values', () => {
+      const { onValueChange } = press(150, { move: 300 }); // 230 -> 240, then 260
+      expect(thumb()).toHaveAttribute('aria-valuenow', '260');
+      for (const [v] of onValueChange.mock.calls) expect(MIXED).toContain(v);
+    });
+  });
+
+  it('default index mode is unchanged: 240 is one slot from 200', () => {
+    const { container } = render(<SliderField label="Length" values={MIXED} defaultValue={240} marks="none" />);
+    expect(Number((container.querySelector('.ds-slider') as HTMLElement).style.getPropertyValue('--slider-p'))).toBeCloseTo(1 / 41);
+  });
+
+  it('warns when spacing is passed without values', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    // @ts-expect-error spacing needs values
+    render(<Slider aria-label="x" spacing="value" />);
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('spacing'));
+  });
+});
+
 describe('Slider layering and reserved space (stylesheet contract)', () => {
   const css = readFileSync(join(__dirname, 'Slider.css'), 'utf8');
 

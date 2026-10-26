@@ -124,7 +124,8 @@ const Configurator = ({ mixedLength = false }: { mixedLength?: boolean }) => {
                 label="Length"
                 values={LENGTHS}
                 unit="cm"
-                marks={[200, 260, 280]}
+                spacing="value"
+                marks={[200, 240, 280]}
                 showInput
                 value={dims.length}
                 onValueChange={set('length')}

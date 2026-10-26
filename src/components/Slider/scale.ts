@@ -3,6 +3,8 @@
 export interface Scale {
   /** Custom list of allowed values (sorted, unique). When set, min / max / step are derived. */
   values?: readonly number[];
+  /** Custom lists only: `index` spaces values equally (default), `value` places them at their real position. */
+  spacing?: 'index' | 'value';
   min: number;
   max: number;
   step: number;
@@ -56,6 +58,11 @@ export const snapToScale = (scale: Scale, raw: number): number => {
 
 /** Position 0..1 of a real value on the track. */
 export const positionOf = (scale: Scale, v: number): number => {
+  if (scale.values && scale.spacing === 'value') {
+    const lo = scale.values[0] ?? 0;
+    const hi = scale.values[scale.values.length - 1] ?? 0;
+    return hi === lo ? 0 : (v - lo) / (hi - lo);
+  }
   if (scale.values) {
     const i = scale.values.indexOf(v);
     return scale.values.length < 2 ? 0 : Math.max(0, i) / (scale.values.length - 1);
@@ -87,4 +94,11 @@ export const defaultFormat = (v: number, unit?: string) => {
   if (!unit) return String(v);
   const sep = unit === '%' || unit === '°' ? '' : '\u00A0';
   return `${v}${sep}${unit}`;
+};
+
+/** Move `n` allowed values (negative = back) from `current` in a custom list, clamped to the ends. */
+export const moveBy = (scale: Scale, current: number, n: number): number => {
+  if (!scale.values) return snapToScale(scale, current + n * scale.step);
+  const i = Math.max(0, scale.values.indexOf(current));
+  return scale.values[Math.min(scale.values.length - 1, Math.max(0, i + n))] ?? current;
 };
