@@ -28,7 +28,8 @@
   flex-direction: column;
   width: 100%;
   max-width: var(--ds-dialog-width-md);
-  max-height: 100%;
+  max-height: calc(100vh - 2 * var(--ds-space-12));
+  max-height: calc(100dvh - 2 * var(--ds-space-12));
   background: var(--ds-color-surface);
   border: var(--ds-border-width) solid var(--ds-color-ink);
   border-radius: var(--ds-radius-md);
