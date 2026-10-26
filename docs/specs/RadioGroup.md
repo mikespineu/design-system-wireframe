@@ -3,9 +3,9 @@
 - task: DS-15
 - canvas: docs/design-system-wireframe/RadioGroup.dc.html
 - canvas_url: https://claude.ai/artifact/F2qAAT8HRmLYmV7r3WjoU8
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-26
 - approval_hash:
 
 Pick exactly one of a list of options. Each item is a square box with a 2 px black border and the label to its right, the same box, row, label, focus, invalid and disabled treatment as `Checkbox`. A selected item keeps the white box and shows a black square dot inset at half the box size. A checked `Checkbox` instead fills black with a white tick, so the two controls differ when on without breaking the system's square-only shape rule. The group label, hint and error look exactly like `CheckboxGroup`. It is built on Radix `RadioGroup`, so the group is one tab stop and arrow keys move focus and selection together.
