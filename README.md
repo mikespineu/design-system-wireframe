@@ -2,11 +2,14 @@
 
 A minimal black / gray / white React design system. White ground, gray accents, black for ink and action, muted green and red for feedback only. Components are designed on a canvas first, built on [Radix UI](https://www.radix-ui.com/primitives) primitives, and shipped with Storybook stories and tests. A Claude-driven software factory plans, designs and builds the roadmap.
 
+**Live preview:** [ds.mikespin.dev](https://ds.mikespin.dev/)
+
 - [Stack](#stack)
 - [Storybook](#storybook)
 - [Claude Design](#claude-design)
 - [Software Factory](#software-factory)
 - [Commands](#commands)
+- [License](#license)
 
 ## Stack
 
@@ -43,7 +46,7 @@ npx storybook dev -p "$PORT" --no-open
 
 If the port is taken, pick the next free one; never kill another process. A static build is `npm run build-storybook`.
 
-Deployed Storybook: [`vercel.json`](vercel.json) does not define a deployed Storybook URL, so none is linked here. The [`storybook-vercel.yml`](.github/workflows/storybook-vercel.yml) workflow publishes branches to Vercel; find the URL in the workflow run or the deployment environment on GitHub.
+Deployed Storybook: [ds.mikespin.dev](https://ds.mikespin.dev/).
 
 ## Claude Design
 
@@ -166,3 +169,7 @@ PRs merge only when all GitHub checks are green, the PR is mergeable, and the ap
 | `npm run factory:status` | Live factory status page |
 
 All feature work happens in a git worktree under `.worktrees/`; see [`CLAUDE.md`](CLAUDE.md).
+
+## License
+
+[MIT](LICENSE) © 2026 mikespin
