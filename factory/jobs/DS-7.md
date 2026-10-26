@@ -43,6 +43,6 @@ updated: "2026-10-26T09:19:46Z"
 
 ## Notes
 
-- Removed ; package name  unscoped, rename before real publish (DS-9).
-- Lib config is  so Storybook keeps auto-loading its own config.
+- Removed `"private": true`; package name `design-system-test` unscoped, rename before real publish (DS-9).
+- Lib config is `vite.lib.config.ts` so Storybook keeps auto-loading its own config.
 
