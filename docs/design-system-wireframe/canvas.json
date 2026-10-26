@@ -72,6 +72,13 @@
       "w": 1440,
       "x": 13680,
       "y": 0
+    },
+    "InfoTip.dc.html": {
+      "h": 8000,
+      "title": "InfoTip, Tooltip & Popover",
+      "w": 1440,
+      "x": 15200,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -102,7 +109,8 @@
     "Checkbox.dc.html",
     "Toggle.dc.html",
     "Theming.dc.html",
-    "RadioGroup.dc.html"
+    "RadioGroup.dc.html",
+    "InfoTip.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
