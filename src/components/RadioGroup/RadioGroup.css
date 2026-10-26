@@ -157,13 +157,13 @@
 .ds-radio-group[data-orientation='horizontal'] .ds-radio-options {
   flex-direction: row;
   flex-wrap: wrap;
-  gap: var(--ds-space-6);
+  column-gap: var(--ds-space-6);
 }
 
 .ds-radio-error {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--ds-space-2);
   color: var(--ds-color-error);
   font-size: 0.8125rem;
   font-weight: 500;
