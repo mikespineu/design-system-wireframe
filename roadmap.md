@@ -36,8 +36,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Themes ship as opt-in CSS exports (e.g. `themes/soft.css`); `package.json` `exports` updated
     - Storybook toolbar switches between `default`, `soft` and `dark`; the choice persists across stories
     - Every component story renders and passes `jest-axe` in all three themes
-- [ ] **DS-26 Theme token contract — design.** Define the public theming API: the full set of semantic `--ds-*` roles a theme may override, and default values that reproduce today's Wireframe look exactly. Covers color roles that replace direct palette use in components (e.g. `--ds-color-ink` → text/border/icon roles), font roles (`--ds-font-heading`, `--ds-font-body`, `--ds-font-mono`), a type scale (size, weight, line-height, letter-spacing, heading transform), radius (`sm`/`md`/`lg`/`full`), shadows (`sm`/`md`/`lg`, default `none`), and a dark-mode role set.
-  - type: design · has_ui: yes · depends_on: DS-1 · needs_human: yes · status: todo
+- [x] **DS-26 Theme token contract — design.** Define the public theming API: the full set of semantic `--ds-*` roles a theme may override, and default values that reproduce today's Wireframe look exactly. Covers color roles that replace direct palette use in components (e.g. `--ds-color-ink` → text/border/icon roles), font roles (`--ds-font-heading`, `--ds-font-body`, `--ds-font-mono`), a type scale (size, weight, line-height, letter-spacing, heading transform), radius (`sm`/`md`/`lg`/`full`), shadows (`sm`/`md`/`lg`, default `none`), and a dark-mode role set.
+  - type: design · has_ui: yes · depends_on: DS-1 · needs_human: yes · status: done
   - done_when:
     - Spec `docs/specs/Theming.md` lists every themeable role with its default value; defaults reproduce the current Wireframe look
     - Spec maps every hardcoded typography, shadow and text-transform value in `src/components/` to a role
@@ -346,6 +346,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-26** Theme token contract — design — https://github.com/mikespineu/design-system-wireframe/pull/55
 - **DS-5** Toggle — design — https://github.com/mikespineu/design-system-wireframe/pull/49
 - **DS-24** Slider — implementation — https://github.com/mikespineu/design-system-wireframe/pull/48
 - **DS-14** Checkbox — implementation — https://github.com/mikespineu/design-system-wireframe/pull/45

@@ -3,9 +3,9 @@
 - task: DS-26
 - canvas: docs/design-system-wireframe/Theming.dc.html
 - canvas_url: https://claude.ai/artifact/ABfGmU24bzv2C7XhNfCwJY
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-26
 - approval_hash:
 
 The public theming API of the design system: a flat set of semantic roles that a theme may override, with defaults that reproduce today's Wireframe look exactly (white ground, gray accents, black ink, Red Hat Mono titles and labels, Red Hat Text body, square corners, no shadows). A consumer changes colors, fonts, type, corners, depth or switches to dark by overriding roles under `[data-theme="<name>"]`; components never read palette steps or raw values directly.
