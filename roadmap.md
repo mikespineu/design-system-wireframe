@@ -158,8 +158,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Touch hit targets ≥ 44 px; `jest.setup.ts` gets `ResizeObserver` / `PointerEvent` stubs if missing
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
     - `userEvent` tests cover arrow/Home/End keys, input snapping and clamping
-- [ ] **DS-29 Switch — implementation.** Build `Switch` in `src/components/Switch/` on Radix `Switch` (`import { Switch } from 'radix-ui'`), styled via `[data-state]` / `[data-disabled]`, per `docs/specs/Toggle.md`.
-  - type: build · has_ui: yes · depends_on: DS-5 · needs_human: no · status: todo
+- [x] **DS-29 Switch — implementation.** Build `Switch` in `src/components/Switch/` on Radix `Switch` (`import { Switch } from 'radix-ui'`), styled via `[data-state]` / `[data-disabled]`, per `docs/specs/Toggle.md`.
+  - type: build · has_ui: yes · depends_on: DS-5 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state (off, on, hover, focus-visible, disabled) at sm and md
     - `labelPosition` end/start and optional description; thumb slides with `--ds-motion`, no motion under `prefers-reduced-motion`
@@ -346,6 +346,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-29** Switch — implementation — https://github.com/mikespineu/design-system-wireframe/pull/58
 - **DS-26** Theme token contract — design — https://github.com/mikespineu/design-system-wireframe/pull/55
 - **DS-5** Toggle — design — https://github.com/mikespineu/design-system-wireframe/pull/49
 - **DS-24** Slider — implementation — https://github.com/mikespineu/design-system-wireframe/pull/48

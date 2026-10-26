@@ -1,6 +1,6 @@
 /* Textarea: visual twin of Input. Tokens only (--ds-*). Spec: docs/specs/Textarea.md */
 .ds-textarea {
-  --ds-textarea-line: 26px;
+  --ds-textarea-line: var(--ds-line-height-lg);
   --ds-textarea-chrome: calc(2 * var(--ds-space-2) + 2 * var(--ds-border-width));
   --ds-textarea-min: calc(var(--ds-textarea-rows, 4) * var(--ds-textarea-line) + var(--ds-textarea-chrome));
   box-sizing: border-box;
@@ -87,7 +87,7 @@
   gap: 6px;
   font-family: var(--ds-font-text);
   font-size: 0.8125rem;
-  line-height: 20px;
+  line-height: var(--ds-line-height-sm);
   font-variant-numeric: tabular-nums;
   font-weight: 400;
   color: var(--ds-color-text-muted);

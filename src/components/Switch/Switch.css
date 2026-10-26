@@ -1,0 +1,151 @@
+/* Switch: Radix Switch, tokens only (--ds-*). Spec: docs/specs/Toggle.md */
+.ds-switch {
+  --ds-switch-w: var(--ds-space-12);
+  --ds-switch-h: var(--ds-space-6);
+  --ds-switch-thumb: var(--ds-space-4);
+  --ds-switch-gap: var(--ds-space-3);
+  --ds-switch-row: var(--ds-control-height);
+  --ds-switch-line: var(--ds-line-height-lg);
+  --ds-switch-pad: calc((var(--ds-switch-row) - var(--ds-switch-line)) / 2);
+  --ds-switch-travel: calc(var(--ds-switch-w) - 2 * 2 * var(--ds-border-width-strong) - var(--ds-switch-thumb));
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-switch-gap);
+  min-height: var(--ds-switch-row);
+  cursor: pointer;
+  font-family: var(--ds-font-text);
+}
+
+.ds-switch[data-size='sm'] {
+  --ds-switch-w: var(--ds-space-8);
+  --ds-switch-h: var(--ds-space-4);
+  --ds-switch-thumb: var(--ds-space-2);
+  --ds-switch-gap: var(--ds-space-2);
+  --ds-switch-row: var(--ds-space-8);
+  --ds-switch-line: var(--ds-line-height-md);
+  --ds-switch-pad: calc((var(--ds-switch-row) - var(--ds-switch-line)) / 2);
+}
+
+.ds-switch[data-label-position='start'] {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.ds-switch[data-disabled] {
+  cursor: not-allowed;
+}
+
+.ds-switch-track {
+  all: unset;
+  box-sizing: border-box;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  width: var(--ds-switch-w);
+  height: var(--ds-switch-h);
+  margin-top: calc((var(--ds-switch-row) - var(--ds-switch-h)) / 2);
+  padding: var(--ds-border-width-strong);
+  border: var(--ds-border-width-strong) solid var(--ds-color-ink);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-surface);
+  cursor: inherit;
+  transition: background-color var(--ds-motion), border-color var(--ds-motion);
+}
+
+.ds-switch-track[data-state='checked'] {
+  background: var(--ds-color-primary);
+}
+
+.ds-switch-thumb {
+  display: block;
+  width: var(--ds-switch-thumb);
+  height: var(--ds-switch-thumb);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-ink);
+  transform: translateX(0);
+  transition: transform var(--ds-motion), background-color var(--ds-motion);
+}
+
+.ds-switch-track[data-state='checked'] .ds-switch-thumb {
+  background: var(--ds-color-primary-contrast);
+  transform: translateX(var(--ds-switch-travel));
+}
+
+[dir='rtl'] .ds-switch-track[data-state='checked'] .ds-switch-thumb {
+  transform: translateX(calc(-1 * var(--ds-switch-travel)));
+}
+
+.ds-switch:hover > .ds-switch-track:not([data-disabled])[data-state='unchecked'] {
+  background: var(--ds-color-fill);
+}
+
+.ds-switch:hover > .ds-switch-track:not([data-disabled])[data-state='checked'] {
+  border-color: var(--ds-color-primary-hover);
+  background: var(--ds-color-primary-hover);
+}
+
+.ds-switch-track:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.ds-switch-track[data-disabled] {
+  border-color: var(--ds-color-disabled);
+  background: var(--ds-color-surface-subtle);
+}
+
+.ds-switch-track[data-disabled] .ds-switch-thumb {
+  background: var(--ds-color-disabled);
+}
+
+.ds-switch-track[data-disabled][data-state='checked'] {
+  background: var(--ds-color-disabled);
+}
+
+.ds-switch-track[data-disabled][data-state='checked'] .ds-switch-thumb {
+  background: var(--ds-color-primary-contrast);
+}
+
+.ds-switch-text {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  min-width: 0;
+}
+
+.ds-switch[data-label-position='end'] .ds-switch-text {
+  flex: 0 1 auto;
+}
+
+.ds-switch-label {
+  padding-block: var(--ds-switch-pad);
+  color: var(--ds-color-ink);
+  font-size: 1rem;
+  line-height: var(--ds-switch-line);
+  cursor: inherit;
+}
+
+.ds-switch[data-size='sm'] .ds-switch-label {
+  font-size: 0.9375rem;
+}
+
+.ds-switch[data-disabled] .ds-switch-label,
+.ds-switch[data-disabled] .ds-switch-description {
+  color: var(--ds-color-placeholder);
+}
+
+.ds-switch-description {
+  margin-top: calc(-1 * var(--ds-switch-pad));
+  padding-bottom: var(--ds-switch-pad);
+  color: var(--ds-color-text-muted);
+  font-size: 0.8125rem;
+  line-height: var(--ds-line-height-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-switch-track,
+  .ds-switch-thumb {
+    transition: none;
+  }
+}

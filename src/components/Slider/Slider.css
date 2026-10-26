@@ -256,7 +256,7 @@
   translate: calc(-50% * var(--slider-dir)) 0;
   font-family: var(--ds-font-mono);
   font-size: 12px;
-  line-height: 16px;
+  line-height: var(--ds-line-height-xs);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: var(--ds-color-text-muted);
@@ -294,7 +294,7 @@
   color: var(--ds-color-primary-contrast);
   font-family: var(--ds-font-mono);
   font-size: 12px;
-  line-height: 16px;
+  line-height: var(--ds-line-height-xs);
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -431,7 +431,7 @@
     align-items: center;
     justify-content: center;
     font-size: 22px;
-    line-height: 29px;
+    line-height: var(--ds-line-height-xl);
   }
 
   .ds-slider:has(.ds-slider-root:active) .ds-slider-above .ds-slider-bubble-input {
