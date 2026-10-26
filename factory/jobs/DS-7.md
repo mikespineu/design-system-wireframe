@@ -3,7 +3,7 @@ task: DS-7
 title: "Library build"
 line: build            # design | build
 status: in-progress    # claimed | in-progress | waiting | blocked | merged
-stage: qa
+stage: review
 branch: "feat/DS-7-library-build"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-7-library-build"
 pr: ""
@@ -31,6 +31,8 @@ updated: "2026-10-26T09:19:46Z"
 - 10:21 gate:test: pass (118 tests)
 - 10:21 gate:storybook: pass
 - 10:21 qa: started
+- 10:22 qa: pass, no findings (note: styles.css keeps Google Fonts @import)
+- 10:22 review: started
 
 ## Gate results
 
