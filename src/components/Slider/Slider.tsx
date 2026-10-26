@@ -22,6 +22,8 @@ import {
   neighbour,
   parseTyped,
   positionOf,
+  scaleDecimals,
+  decimalsOf,
   snapToScale,
   type Scale,
 } from './scale';
@@ -291,9 +293,12 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
 
   // geometry
   const p = positionOf(scale, current);
-  const fmtLengths = all.length > 200 ? [first, last] : all;
-  const pillCh = Math.max(...fmtLengths.map((v) => fmt(v).length));
-  const bareCh = Math.max(...fmtLengths.map((v) => bare(v).length));
+  // Widest possible text, not the current value. Long uniform scales only check the ends, padded to the step's decimals.
+  const longScale = all.length > 200;
+  const fmtLengths = longScale ? [first, last] : all;
+  const pad = (v: number) => (longScale ? Math.max(0, scaleDecimals(scale) - decimalsOf(v)) + (decimalsOf(v) === 0 && scaleDecimals(scale) > 0 ? 1 : 0) : 0);
+  const pillCh = Math.max(...fmtLengths.map((v) => fmt(v).length + pad(v)));
+  const bareCh = Math.max(...fmtLengths.map((v) => bare(v).length + pad(v)));
   const style = {
     '--slider-p': p,
     '--slider-ch': pillCh,
@@ -392,6 +397,7 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
       data-size={size}
       data-bubble={bubble}
       data-stepper={stepper || undefined}
+      data-unit={unit ? '' : undefined}
       data-marks={labels.length ? 'labels' : undefined}
       data-disabled={isDisabled ? '' : undefined}
       data-invalid={isInvalid || undefined}

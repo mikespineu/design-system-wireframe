@@ -10,7 +10,7 @@
   --slider-btn: var(--ds-space-8);
   --slider-pill-h: var(--ds-space-8);
   --slider-pill-font: 16px;
-  --slider-pill-w: max(var(--ds-space-16), calc(var(--slider-ch) * 1ch + 2 * var(--ds-space-2)));
+  --slider-pill-w: max(var(--ds-space-16), calc(var(--slider-ch) * 1ch + 2 * var(--ds-space-2) + 2 * var(--ds-border-width-strong)));
   --slider-dir: 1;
   /* x of a point at position p, in the track box (same mapping Radix uses for the in-bounds thumb) */
   --slider-x: calc(var(--slider-thumb-size) / 2 + var(--slider-p) * (100% - var(--slider-thumb-size)));
@@ -198,6 +198,7 @@
 }
 
 .ds-slider-tick {
+  --slider-x: calc(var(--slider-thumb-size) / 2 + var(--slider-p) * (100% - var(--slider-thumb-size)));
   position: absolute;
   inset-inline-start: var(--slider-x);
   top: calc(var(--slider-root-h) / 2 + var(--ds-border-width-strong) / 2 + var(--ds-space-1));
@@ -226,6 +227,7 @@
 }
 
 .ds-slider-mark-label {
+  --slider-x: calc(var(--slider-thumb-size) / 2 + var(--slider-p) * (100% - var(--slider-thumb-size)));
   position: absolute;
   inset-inline-start: var(--slider-x);
   top: calc(var(--slider-root-h) + var(--ds-space-1));
@@ -300,7 +302,14 @@
 }
 
 .ds-slider-bubble-input {
-  --slider-bubble-w: max(var(--slider-bubble-min), calc(var(--slider-bare-ch) * 1ch + 2 * var(--ds-space-2)));
+  --slider-unit-w: calc(var(--slider-unit-ch) * 1ch + var(--ds-space-1));
+  --slider-bubble-w: max(
+    var(--slider-bubble-min),
+    calc(
+      var(--slider-bare-ch) * 1ch + 2 * var(--ds-space-2) + 2 * var(--ds-border-width-strong) +
+        var(--slider-unit-w)
+    )
+  );
   position: absolute;
   inset-inline-start: clamp(
     calc(var(--slider-bubble-w) / 2),
@@ -357,6 +366,10 @@
   background: var(--ds-color-inverse);
   border-color: var(--ds-color-inverse);
   color: var(--ds-color-primary-contrast);
+}
+
+.ds-slider:not([data-unit]) .ds-slider-bubble-input {
+  --slider-unit-w: 0px;
 }
 
 .ds-slider-bubble-field {

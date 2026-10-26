@@ -902,6 +902,64 @@ describe('Slider auto bubble clamping', () => {
   });
 });
 
+describe('Slider mark positions and input widths', () => {
+  const css = readFileSync(join(__dirname, 'Slider.css'), 'utf8');
+  const rule = (sel: string) => css.slice(css.indexOf(`${sel} {`), css.indexOf('}', css.indexOf(`${sel} {`)));
+
+  it('gives every list mark and label its own position, index based', () => {
+    const { container } = render(<SliderField label="Rating" values={LIST} />);
+    const pos = (sel: string) =>
+      Array.from(container.querySelectorAll<HTMLElement>(sel)).map((n) => n.style.getPropertyValue('--slider-p'));
+    const expected = ['0', '0.2', '0.4', '0.6', '0.8', '1'];
+    expect(pos('.ds-slider-tick')).toEqual(expected);
+    expect(pos('.ds-slider-mark-label')).toEqual(expected);
+    expect(new Set(pos('.ds-slider-mark-label')).size).toBe(6);
+  });
+
+  it('ends marks sit at the track ends', () => {
+    const { container } = render(<SliderField label="Rating" values={LIST} marks="ends" />);
+    const pos = Array.from(container.querySelectorAll<HTMLElement>('.ds-slider-mark-label')).map((n) => n.style.getPropertyValue('--slider-p'));
+    expect(pos).toEqual(['0', '1']);
+  });
+
+  it('uniform marks are placed by value', () => {
+    const { container } = render(<SliderField label="Level" min={0} max={200} marks={[0, 50, 200]} />);
+    const pos = Array.from(container.querySelectorAll<HTMLElement>('.ds-slider-mark-label')).map((n) => n.style.getPropertyValue('--slider-p'));
+    expect(pos).toEqual(['0', '0.25', '1']);
+  });
+
+  it('ticks and labels compute --slider-x from their own --slider-p (custom properties resolve where declared)', () => {
+    for (const sel of ['.ds-slider-tick', '.ds-slider-mark-label']) {
+      expect(rule(sel)).toMatch(/--slider-x: calc\(var\(--slider-thumb-size\) \/ 2 \+ var\(--slider-p\)/);
+    }
+  });
+
+  it('sizes the bubble input from the widest value plus the unit, not the current value', () => {
+    const { container, rerender } = render(<SliderField label="Level" bubble="always" unit="%" defaultValue={5} />);
+    const root = container.querySelector('.ds-slider') as HTMLElement;
+    expect(root.style.getPropertyValue('--slider-bare-ch')).toBe('3');
+    expect(root.style.getPropertyValue('--slider-unit-ch')).toBe('1');
+    expect(root).toHaveAttribute('data-unit');
+    expect(rule('.ds-slider-bubble-input')).toMatch(/--slider-unit-w/);
+    expect(rule('.ds-slider-bubble-input')).toMatch(/var\(--slider-bare-ch\) \* 1ch[^;]*var\(--slider-unit-w\)/);
+    rerender(<SliderField key="b" label="Level" bubble="always" min={-100} max={100} defaultValue={5} />);
+    expect((container.querySelector('.ds-slider') as HTMLElement).style.getPropertyValue('--slider-bare-ch')).toBe('4');
+    expect(container.querySelector('.ds-slider')).not.toHaveAttribute('data-unit');
+  });
+
+  it('counts decimals and the longest list label', () => {
+    const { container } = render(<SliderField label="Level" bubble="always" min={0} max={1} step={0.25} />);
+    expect((container.querySelector('.ds-slider') as HTMLElement).style.getPropertyValue('--slider-bare-ch')).toBe('4');
+  });
+
+  it('pads long scales to the step decimals and sizes the stepper pill from the formatted text', () => {
+    const { container } = render(<SliderField label="Level" stepper min={0} max={100} step={0.01} unit="cm" />);
+    const root = container.querySelector('.ds-slider') as HTMLElement;
+    // "100.00" + nbsp + "cm" = 9 chars at the widest
+    expect(root.style.getPropertyValue('--slider-ch')).toBe('9');
+  });
+});
+
 describe('Slider a11y (axe)', () => {
   const cases: Array<[string, ReactElement]> = [
     ['default', <SliderField key="1" label="Volume" />],
