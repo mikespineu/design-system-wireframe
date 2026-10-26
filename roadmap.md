@@ -183,3 +183,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-4** Textarea — implementation — https://github.com/mikespineu/design-system-wireframe/pull/33
 - [x] **DS-3 Textarea — design.** [PR #27](https://github.com/mikespineu/design-system-wireframe/pull/27)
 - **DS-23** Slider — design — https://github.com/mikespineu/design-system-wireframe/pull/35
+- **DS-25** README — Claude Design & Software Factory — https://github.com/mikespineu/design-system-wireframe/pull/38
