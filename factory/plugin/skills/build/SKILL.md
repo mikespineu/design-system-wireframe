@@ -52,14 +52,14 @@ Run the **reviewer** subagent with the worktree path, the task and (UI) the spec
 
 1. In the worktree's `roadmap.md`, tick the task: `- [x]`, `status: done` (only this task's block; nothing else in the file changes).
 2. Job file: `stage: pr`. Commit, push, open the PR (`DS-<n>: <title>`, body per the rules). Add the PR link to the roadmap's `## Done` section (replace `_Nothing yet._` if it's there): `- **DS-<n>** <title> — <PR url>`. Record `pr`/`pr_url` in the job file. Commit and push.
-3. If approval is required (`needs_human: yes`, `--allow-ui`, or the user asked to approve the PR), add `factory:needs-approval`, set `status: waiting` and `needs_you`. The status page then shows the task as **blocked by human** (Blocked column, human tag).
+3. **Every implementation PR needs the user's approval.** Add `factory:needs-approval`, set `status: waiting` and `needs_you: approve the PR (/factory:approve DS-<n>)`. The status page then shows the task as **blocked by human** (Blocked column, human tag).
 
 ## 7. CI and merge
 
-Follow the merging rules. If approval is required and missing: set the job file to `waiting` with `needs_you: approve the PR (/factory:approve DS-<n>)`, push, and end the run. A red check is a fix loop (max 2). No checks at all: set `waiting` with `needs_you: no CI checks ran; merge the PR yourself or add CI (DS-8), then /factory:merge DS-<n>`, and end.
+Wait for CI. Green checks do **not** merge the PR: approval is always required, so set the job file to `waiting` with `needs_you: approve the PR (/factory:approve DS-<n>)`, push, and end the run. The merge happens in `/factory:approve`. A red check is a fix loop (max 2). No checks at all: set `waiting` with `needs_you: no CI checks ran; merge the PR yourself or add CI (DS-8), then /factory:merge DS-<n>`, and end.
 
 When merged: job file `merged` (committed before the merge, per the rules), clean up the worktree, branch and Storybook.
 
 ## 8. Report
 
-Summarize: PR link, gates, loops used, model(s), what the user needs to do (if anything). End with the Storybook link if the worktree is still there, and refresh the status page (rules).
+Summarize: gates, loops used, model(s). Then hand the PR to the user (rules, "Handing a PR to the user for approval"): the **PR link**, the **local Storybook preview link** (keep it running; check it answers), and `/factory:approve DS-<n>`. Refresh the status page (rules).

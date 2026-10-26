@@ -41,7 +41,7 @@ The status page reads job files from local worktrees first (live), then from tas
 
 | Label | Meaning |
 | --- | --- |
-| `factory:needs-approval` | waiting for the user (design review, `needs_human` task, accepted UI change) |
+| `factory:needs-approval` | waiting for the user (design review, every implementation PR, `needs_human` task, accepted UI change) |
 | `factory:approved` | the user approved via `/factory:approve`; may merge when checks are green |
 | `factory:blocked` | stopped after the loop limit or an error; the reason is the latest PR comment |
 
@@ -103,7 +103,7 @@ Merge only when **all** of these hold:
 
 1. `gh pr checks <n> --json name,bucket` returns **at least one** check and every one is `pass` or `skipping`. Wait with `gh pr checks <n> --watch` (up to 30 min). If there are no checks after 2 minutes, don't merge: tell the user and leave the PR for them.
 2. The PR is mergeable (`gh pr view <n> --json mergeable,mergeStateStatus`). If it's behind or conflicting, merge `origin/main` into the branch in the worktree, re-run the gates, push, and wait again. Real conflicts: block.
-3. If approval is required (design PRs, `needs_human: yes` tasks, accepted UI changes), the PR has `factory:approved`.
+3. If approval is required, the PR has `factory:approved`. Approval is **always** required for design PRs and for **every implementation PR** (`/factory:build`: `build`, `infra` and `docs` tasks), plus `needs_human: yes` tasks and accepted UI changes. The factory never merges these on its own; the user approves with `/factory:approve DS-<n>`.
 
 Before merging, set the job file to `status: merged`, `stage: merge`, add the timeline line, commit and push (so the record lands on `main`; wait for checks again if that push restarts them). Then `gh pr merge <n> --squash`, `git push origin --delete <branch>`, stop that worktree's Storybook, `git worktree remove <worktree>` and `git branch -D <branch>`.
 
@@ -124,6 +124,13 @@ Next: <what the user can do, e.g. /factory:retry DS-n opus>
 ```
 
 Set the job file's `status: blocked`, `blocked_reason`, `needs_you`, add the timeline line, and commit it before pushing. Then tell the user the reason and the next step.
+
+## Handing a PR to the user for approval
+
+When a PR waits for the user's approval, keep its worktree and Storybook running until it's merged or abandoned, and end the run with:
+- the PR link;
+- the local Storybook preview link (`http://localhost:<port>`, checked with `curl -sf` first);
+- the command to approve (`/factory:approve DS-<n>`) or to ask for changes.
 
 ## Ending a run
 
