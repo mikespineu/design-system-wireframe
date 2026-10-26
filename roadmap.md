@@ -202,6 +202,74 @@ Each task carries its fields in an indented line, read by the [software factory]
     - "Add to cart + Wishlist" story: primary `Button` + secondary heart `IconButton` with pressed toggle
     - Tab moves through each button; a `disabled` prop on the group disables every child
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-35 Stack & Grid — design.** Define layout primitives: `Stack` (vertical/horizontal, gap, align, justify, wrap) and `Grid` (columns, gap, responsive column counts), using only the `--ds-space-*` scale.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas shows Stack in both directions with every gap step, align/justify options and wrap
+    - Canvas shows Grid at 1–4 and 12 columns, with responsive counts at mobile/tablet/desktop
+    - Spec defines the typed API (`gap` limited to `--ds-space-*` steps, `as` / `asChild`, responsive props) and the breakpoints used
+- [ ] **DS-36 Stack & Grid — implementation.** Build `Stack` and `Grid` in `src/components/Stack/` and `src/components/Grid/` per `docs/specs/Layout.md`, polymorphic via `asChild` (Radix `Slot`).
+  - type: build · has_ui: yes · depends_on: DS-35 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec for every direction, gap, alignment and column count
+    - `gap` accepts only `--ds-space-*` steps (type-enforced); responsive props apply at the spec's breakpoints
+    - Story per variant, composed example story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-37 Heading & Text — design.** Define the type scale as components: `Heading` (levels 1–6, visual size independent from level) and `Text` (sizes, weights, mono/text family, muted tone, truncate/line-clamp).
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas shows every Heading size and Text size/weight/family/tone, plus truncate and line-clamp
+    - Spec maps every style to `--ds-*` tokens (missing type tokens listed under Token requests)
+    - Spec defines the API (`level` vs `size`, `as` / `asChild`) and heading-order guidance
+- [ ] **DS-38 Heading & Text — implementation.** Build `Heading` and `Text` in `src/components/Heading/` and `src/components/Text/` per `docs/specs/Typography.md`, with `asChild` (Radix `Slot`).
+  - type: build · has_ui: yes · depends_on: DS-37 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every size, weight, family and tone
+    - `Heading` `level` sets the element (`h1`–`h6`), `size` only the look
+    - Story per variant, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-39 Toast — design.** Define toasts: info, success and error, with title, description, optional action (e.g. Undo) and close; stacking, position, enter/exit motion and auto-dismiss timing.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas covers each severity with and without action, a stack of 3, and mobile vs desktop placement
+    - Spec names Radix `Toast`, defines duration, pause on hover/focus, swipe-to-dismiss and the `F8` hotkey region
+    - Spec defines severity by border/fill/icon (not hue), motion with `prefers-reduced-motion`, and the live-region politeness per severity
+- [ ] **DS-40 Toast — implementation.** Build `ToastProvider`, `Toaster` and `useToast()` in `src/components/Toast/` on Radix `Toast`, action slot using `Button`, styled via `[data-state]` / `[data-swipe]`.
+  - type: build · has_ui: yes · depends_on: DS-39 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every severity and state
+    - `useToast()` shows, updates and dismisses toasts; auto-dismiss pauses on hover and focus
+    - Action button runs its callback and closes the toast; tested with `userEvent`
+    - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-41 Tooltip, Popover & InfoTip — design.** Define `Tooltip` (hover/focus, text only), `Popover` (click, any content) and `InfoTip`: one component that is a Popover when the `(pointer: coarse)` media query matches (touch as the primary input) and a Tooltip otherwise.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas covers Tooltip and Popover on all four sides, with arrow, open/closed, and InfoTip in touch vs non-touch mode
+    - Spec names Radix `Tooltip` and `Popover` and defines delays, collision handling and portal layering
+    - Spec defines InfoTip switching only on the `(pointer: coarse)` media query (never on viewport width), its behavior before hydration, and limits its content to non-interactive text
+- [ ] **DS-42 Tooltip & Popover — implementation.** Build `Tooltip` and `Popover` in `src/components/Tooltip/` and `src/components/Popover/` on Radix `Tooltip` and `Popover`, styled via `[data-state]` / `[data-side]`.
+  - type: build · has_ui: yes · depends_on: DS-41 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state and side
+    - Tooltip opens on hover and focus, closes on Escape; Popover opens on click, closes on Escape and outside click, focus returns to trigger
+    - Story per state, keyboard story, open/closed stories, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-43 InfoTip — implementation.** Build `InfoTip` in `src/components/InfoTip/` on `Tooltip` and `Popover` from DS-42, switching on the `(pointer: coarse)` media query via a `useMediaQuery` hook (`matchMedia`).
+  - type: build · has_ui: yes · depends_on: DS-41, DS-42 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in touch and non-touch mode
+    - Renders Popover when `(pointer: coarse)` matches, Tooltip otherwise, and switches live on change; viewport width has no effect
+    - Tests mock `matchMedia` for both modes (stub added to `jest.setup.ts` if missing)
+    - Story per mode, keyboard story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-44 Drawer — design.** Define a side panel sliding in from left, right, top or bottom: sizes, overlay, header/title, body scroll, footer actions, close button and motion, consistent with Dialog.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas covers all four sides in sm/md/lg (and full on mobile), with overlay, title, scrolling body, footer and close
+    - Spec names Radix `Dialog` and defines focus trap, Escape, outside click and slide motion with `prefers-reduced-motion`
+    - Spec maps every part to `--ds-*` tokens, reusing Dialog's overlay and panel tokens
+- [ ] **DS-45 Drawer — implementation.** Build `Drawer` in `src/components/Drawer/` on Radix `Dialog` with a `side` prop (`left` / `right` / `top` / `bottom`), title and description required, styled via `[data-state]`.
+  - type: build · has_ui: yes · depends_on: DS-44 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec on every side and size
+    - Focus moves in on open and back to the trigger on close; Escape and overlay click close
+    - Story per side and state, keyboard story, open/closed stories, `jest-axe` test, exported from `src/index.ts`
 
 ### Epic: Publishing
 
