@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Checkbox</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:32px 24px}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+/* checkbox row */
+.row{display:flex;align-items:center;gap:12px;min-height:44px;font-size:16px;line-height:26px;color:#000000;cursor:pointer}
+.row.sm{min-height:32px;gap:8px;font-size:15px;line-height:24px}
+.row.top{align-items:flex-start}
+.row.top .cb{margin-top:10px}
+.row.sm.top .cb{margin-top:4px}
+.cb{flex:none;box-sizing:border-box;width:24px;height:24px;border:2px solid #000000;background:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;color:#FFFFFF;transition:background-color 120ms cubic-bezier(.2,0,0,1)}
+.sm .cb{width:16px;height:16px}
+.cb svg{width:16px;height:16px}
+.sm .cb svg{width:12px;height:12px}
+.on{background:#000000}
+.hov{background:#EEEEEE}
+.on.hov{background:#262626;border-color:#262626}
+.foc{outline:2px solid #000000;outline-offset:2px}
+.dis{border-color:#A3A3A3;background:#F7F7F7;color:#FFFFFF;cursor:not-allowed}
+.dis.on{background:#A3A3A3}
+.row.dtx{color:#767676;cursor:not-allowed}
+.inv{border-color:#A3302B}
+.inv.on{background:#A3302B}
+.lb{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.hint{font-size:13px;line-height:20px;color:#595959}
+.sub{display:block;font-size:13px;line-height:20px;color:#595959}
+.err{display:flex;align-items:center;gap:6px;font-size:13px;line-height:20px;font-weight:500;color:#A3302B}
+fieldset{margin:0;padding:0;border:0;min-width:0;display:flex;flex-direction:column;gap:8px}
+legend{padding:0;margin-bottom:8px}
+.opts{display:flex;flex-direction:column;gap:0}
+.opts.h{flex-direction:row;gap:24px;flex-wrap:wrap}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:0 16px 0 0;border-bottom:1px solid #E0E0E0;color:#404040}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 4200px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Checkbox · DS-13 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Checkbox</h1>
+<p style="margin: 0; max-width: 720px; font-size: 18px; line-height: 1.6; color: #404040">Square box with a 2 px black border, label to the right. Checked and indeterminate fill black with a white mark. Same focus ring, invalid and disabled treatment as Field controls. A row is 44 px tall at md so it lines up with Input. CheckboxGroup wraps several in a fieldset with a legend, hint and error.</p>
+</header>
+
+<!-- 01 SIZES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Sizes</h2></div>
+<p class="sec-d">Size sets the box and the row (hit area) height. The whole row, box plus label, is the click target.</p>
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>sm</span><span>box 16 · row 32 · gap 8 · text 15/24</span></div>
+<div class="ab-b">
+<label class="row sm"><span class="cb"></span>Unchecked</label>
+<label class="row sm"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Checked</label>
+<label class="row sm"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3.5 8h9"/></svg></span>Indeterminate</label>
+</div>
+<div class="ab-f">Dense desktop tables and filters. Meets WCAG 2.5.8 (24 px), fine pointers only.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>md (default)</span><span>box 24 · row 44 · gap 12 · text 16/26</span></div>
+<div class="ab-b">
+<label class="row"><span class="cb"></span>Unchecked</label>
+<label class="row"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Checked</label>
+<label class="row"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3.5 8h9"/></svg></span>Indeterminate</label>
+</div>
+<div class="ab-f">Forms and touch. Row = control height (44 px).</div>
+</div>
+</div>
+</section>
+
+<!-- 02 STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">States</h2></div>
+<p class="sec-d">Shown at md, one artboard per state. Each artboard shows unchecked, checked and indeterminate. Header right names what changes against Default.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>2 px black border, white</span></div><div class="ab-b">
+<label class="row"><span class="cb"></span>Unchecked</label>
+<label class="row"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Checked</label>
+<label class="row"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.5 8h9"/></svg></span>Indeterminate</label>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hover</span><span>fill gray-100 / gray-800</span></div><div class="ab-b">
+<label class="row"><span class="cb hov"></span>Unchecked</label>
+<label class="row"><span class="cb on hov"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Checked</label>
+<label class="row"><span class="cb on hov"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.5 8h9"/></svg></span>Indeterminate</label>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b">
+<label class="row"><span class="cb foc"></span>Unchecked</label>
+<label class="row"><span class="cb on foc"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Checked</label>
+<label class="row"><span class="cb on foc"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.5 8h9"/></svg></span>Indeterminate</label>
+</div><div class="ab-f">Ring on the box only, keyboard focus only.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled</span><span>gray-400 border, gray-50 / gray-400 fill</span></div><div class="ab-b">
+<label class="row dtx"><span class="cb dis"></span>Unchecked</label>
+<label class="row dtx"><span class="cb dis on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Checked</label>
+<label class="row dtx"><span class="cb dis on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.5 8h9"/></svg></span>Indeterminate</label>
+</div><div class="ab-f">Label gray-500, not-allowed cursor, out of tab order.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Invalid</span><span>error border / fill</span></div><div class="ab-b">
+<label class="row"><span class="cb inv"></span>I accept the terms</label>
+<label class="row"><span class="cb inv on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Checked</label>
+<div class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>You must accept the terms.</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Invalid + focus</span><span>error border kept + black ring</span></div><div class="ab-b">
+<label class="row"><span class="cb inv foc"></span>I accept the terms</label>
+<div class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>You must accept the terms.</div>
+</div></div>
+
+</div>
+</section>
+
+<!-- 03 LABEL -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Label</h2></div>
+<p class="sec-d">Label always sits to the right of the box (left in RTL), body text, not the uppercase Field label. Long labels wrap and the box aligns to the first line. Optional description goes under the label in caption gray-600.</p>
+<div class="grid3">
+<div class="ab"><div class="ab-h"><span>Single line</span><span>box centered on row</span></div><div class="ab-b">
+<label class="row"><span class="cb"></span>Email me updates</label>
+</div></div>
+<div class="ab"><div class="ab-h"><span>Wrapping</span><span>box on first line</span></div><div class="ab-b">
+<label class="row top"><span class="cb"></span><span style="padding:9px 0">Send me occasional emails about new prints, exhibitions and studio sales</span></label>
+</div></div>
+<div class="ab"><div class="ab-h"><span>With description</span><span>caption 13/20 gray-600</span></div><div class="ab-b">
+<label class="row top"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span><span style="padding:9px 0">Archival paper<span class="sub">Adds 3 working days.</span></span></label>
+</div></div>
+</div>
+</section>
+
+<!-- 04 GROUP -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">CheckboxGroup</h2></div>
+<p class="sec-d">fieldset + legend. Legend uses the Field label style; hint below legend; error below the options. Options stack vertically with no extra gap (rows are 44 px). Optional horizontal layout with 24 px gaps for short options.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>legend · hint · options</span></div><div class="ab-b">
+<fieldset><legend class="lb">Formats</legend><span class="hint">Pick all that apply.</span>
+<div class="opts">
+<label class="row"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</label>
+<label class="row"><span class="cb"></span>Digital</label>
+<label class="row"><span class="cb"></span>Framed</label>
+</div></fieldset>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Select all</span><span>parent indeterminate</span></div><div class="ab-b">
+<fieldset><legend class="lb">Regions</legend>
+<div class="opts">
+<label class="row"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.5 8h9"/></svg></span>All regions</label>
+<div class="opts" style="padding-left:36px">
+<label class="row"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Europe</label>
+<label class="row"><span class="cb"></span>Asia</label>
+</div></div></fieldset>
+</div><div class="ab-f">Children indent box width + gap (24 + 12 = 36 px).</div></div>
+
+<div class="ab"><div class="ab-h"><span>Invalid</span><span>error under options</span></div><div class="ab-b">
+<fieldset><legend class="lb">Formats <span aria-hidden="true">*</span></legend><span class="hint">Pick at least one.</span>
+<div class="opts">
+<label class="row"><span class="cb inv"></span>Print</label>
+<label class="row"><span class="cb inv"></span>Digital</label>
+</div>
+<div class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Choose at least one format.</div>
+</fieldset>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled</span><span>whole group</span></div><div class="ab-b">
+<fieldset disabled><legend class="lb" style="color:#767676">Formats</legend>
+<div class="opts">
+<label class="row dtx"><span class="cb dis on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</label>
+<label class="row dtx"><span class="cb dis"></span>Digital</label>
+</div></fieldset>
+</div></div>
+
+<div class="ab" style="grid-column: span 2"><div class="ab-h"><span>Horizontal</span><span>orientation="horizontal" · gap 24</span></div><div class="ab-b">
+<fieldset><legend class="lb">Sizes</legend>
+<div class="opts h">
+<label class="row"><span class="cb"></span>A4</label>
+<label class="row"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>A3</label>
+<label class="row"><span class="cb"></span>A2</label>
+</div></fieldset>
+</div></div>
+
+</div>
+</section>
+
+<!-- 05 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Keyboard</h2></div>
+<table class="tbl">
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Space</span></td><td>Toggle. Indeterminate becomes checked.</td></tr>
+<tr><td><span class="kbd">Enter</span></td><td>No action (Radix prevents it; never submits by toggling).</td></tr>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Next / previous checkbox. Every checkbox in a group is its own tab stop.</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>
