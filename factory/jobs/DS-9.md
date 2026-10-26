@@ -2,8 +2,8 @@
 task: DS-9
 title: "Release pipeline to npm"
 line: build            # design | build
-status: waiting       # claimed | in-progress | waiting | blocked | merged
-stage: ci
+status: merged       # claimed | in-progress | waiting | blocked | merged
+stage: merge
 branch: "feat/DS-9-release-pipeline-to-npm"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-9-release-pipeline-to-npm"
 pr: "43"
@@ -12,7 +12,7 @@ canvas_url: ""
 storybook_url: ""
 model: default
 loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
-needs_you: "approve the PR (/factory:approve DS-9)"
+needs_you: ""
 blocked_reason: ""
 started: "2026-10-26T09:36:36Z"
 updated: "2026-10-26T09:36:36Z"
@@ -36,6 +36,7 @@ updated: "2026-10-26T09:36:36Z"
 - 10:39 pr: opening PR
 - 10:39 pr: opened #43, labeled factory:needs-approval
 - 10:39 ci: waiting for your approval
+- 10:47 merge: approved by user, labeled factory:approved; merging #43
 
 ## Gate results
 
