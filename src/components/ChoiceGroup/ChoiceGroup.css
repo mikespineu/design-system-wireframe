@@ -75,8 +75,7 @@
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
-  scroll-snap-type: x proximity;
-  scroll-padding-inline: var(--ds-space-6);
+  scroll-padding-inline: var(--ds-space-6); /* edge-fade clearance, read by the scroll-to-selected logic */
   scrollbar-width: thin;
   scrollbar-color: var(--ds-color-border) transparent;
 }
@@ -116,7 +115,6 @@
   box-sizing: border-box;
   position: relative;
   flex: none;
-  scroll-snap-align: start;
   cursor: pointer;
   font-family: var(--ds-font-text);
   font-weight: 500;

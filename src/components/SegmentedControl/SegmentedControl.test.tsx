@@ -29,6 +29,7 @@ describe('SegmentedControl', () => {
   beforeEach(() => {
     scrollIntoView = jest.fn();
     Element.prototype.scrollIntoView = scrollIntoView;
+    Element.prototype.scrollTo = scrollIntoView;
   });
 
   it('renders a named radiogroup, forwards ref, selects first enabled option', () => {
@@ -158,10 +159,50 @@ describe('SegmentedControl', () => {
     expect(screen.getByRole('radio', { name: 'Grid' })).toBeChecked();
   });
 
-  it('scrolls the selected item into view on mount, change and focus', async () => {
+  /** Strip is on screen from x=100 to x=400 (24px scroll-padding); a stub places every item. */
+  const rect = (left: number, right: number) =>
+    ({ left, right, top: 0, bottom: 0, width: right - left, height: 0, x: left, y: 0, toJSON: () => ({}) }) as DOMRect;
+  const stubLayout = (place: (el: HTMLElement) => [number, number]) => {
+    const real = window.getComputedStyle.bind(window);
+    jest.spyOn(window, 'getComputedStyle').mockImplementation((el, pseudo) => {
+      const style = real(el, pseudo);
+      if (el.getAttribute('role') !== 'radiogroup') return style;
+      return new Proxy(style, {
+        get: (t, k) =>
+          k === 'scrollPaddingLeft' || k === 'scrollPaddingRight' ? '24px' : (Reflect.get(t, k) as unknown),
+      });
+    });
+    jest.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function (this: Element) {
+      if (this.getAttribute('role') === 'radiogroup') return rect(100, 400);
+      if (this.getAttribute('role') === 'radio') return rect(...place(this as HTMLElement));
+      return rect(0, 0);
+    });
+  };
+  afterEach(() => jest.restoreAllMocks());
+
+  it('scrolls the container so the selected item clears the scroll-padding', () => {
+    stubLayout(() => [380, 480]); // 80px past the padded right edge (376)
+    render(<SegmentedControl label="View" options={options} />);
+    expect(scrollIntoView).toHaveBeenCalledWith({ left: 104, behavior: 'smooth' });
+    expect(scrollIntoView.mock.contexts[0]).toBe(screen.getByRole('radiogroup'));
+  });
+
+  it('scrolls back when the item is hidden before the padded start edge, and rounds outward', () => {
+    stubLayout(() => [110.4, 200]); // padded start edge is 124
+    render(<SegmentedControl label="View" options={options} />);
+    expect(scrollIntoView).toHaveBeenCalledWith({ left: -14, behavior: 'smooth' });
+  });
+
+  it('does not scroll when the item is already inside the padded box', () => {
+    stubLayout(() => [150, 250]);
+    render(<SegmentedControl label="View" options={options} />);
+    expect(scrollIntoView).not.toHaveBeenCalled();
+  });
+
+  it('scrolls on value change and on focus (Home/End)', async () => {
+    stubLayout(() => [380, 480]);
     const user = userEvent.setup();
     render(<SegmentedControl label="View" options={options} />);
-    expect(scrollIntoView).toHaveBeenCalledWith({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
     scrollIntoView.mockClear();
     await user.click(screen.getByRole('radio', { name: 'Grid' }));
     expect(scrollIntoView).toHaveBeenCalled();
@@ -171,11 +212,19 @@ describe('SegmentedControl', () => {
     expect(scrollIntoView).toHaveBeenCalled();
   });
 
+  it('falls back to scrollLeft where scrollTo is missing', () => {
+    stubLayout(() => [380, 480]);
+    Element.prototype.scrollTo = undefined as unknown as typeof Element.prototype.scrollTo;
+    render(<SegmentedControl label="View" options={options} />);
+    expect(screen.getByRole('radiogroup').scrollLeft).toBe(104);
+  });
+
   it('uses auto behaviour under prefers-reduced-motion', () => {
+    stubLayout(() => [380, 480]);
     const mm = window.matchMedia;
     window.matchMedia = ((q: string) => ({ ...mm(q), matches: true })) as typeof window.matchMedia;
     render(<SegmentedControl label="View" options={options} />);
-    expect(scrollIntoView).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'auto' }));
+    expect(scrollIntoView).toHaveBeenCalledWith({ left: 104, behavior: 'auto' });
     window.matchMedia = mm;
   });
 
@@ -203,13 +252,14 @@ describe('SegmentedControl', () => {
     it('re-scrolls the checked item into view when layout settles, not on scroll', () => {
       render(<SegmentedControl label="View" options={many} defaultValue={many.at(-1)!.value} />);
       const group = screen.getByRole('radiogroup');
+      stubLayout(() => [380, 480]);
       scrollIntoView.mockClear();
       fireEvent.scroll(group);
       expect(scrollIntoView).not.toHaveBeenCalled();
       act(() => trigger?.());
       expect(scrollIntoView).toHaveBeenCalledTimes(1);
-      expect(scrollIntoView.mock.contexts[0]).toBe(screen.getByRole('radio', { checked: true }));
-      expect(scrollIntoView).toHaveBeenCalledWith({ block: 'nearest', inline: 'nearest', behavior: 'auto' });
+      expect(scrollIntoView.mock.contexts[0]).toBe(group);
+      expect(scrollIntoView).toHaveBeenCalledWith({ left: 104, behavior: 'auto' });
     });
 
     it('re-scrolls after web fonts load', async () => {
@@ -219,12 +269,13 @@ describe('SegmentedControl', () => {
       });
       Object.defineProperty(document, 'fonts', { configurable: true, value: { ready } });
       render(<SegmentedControl label="View" options={many} defaultValue={many.at(-1)!.value} />);
+      stubLayout(() => [380, 480]);
       scrollIntoView.mockClear();
       await act(async () => {
         resolve();
         await ready;
       });
-      expect(scrollIntoView).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'auto' }));
+      expect(scrollIntoView).toHaveBeenCalledWith({ left: 104, behavior: 'auto' });
       Object.defineProperty(document, 'fonts', { configurable: true, value: undefined });
     });
 

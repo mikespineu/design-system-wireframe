@@ -78,6 +78,31 @@ const prefersReducedMotion = () =>
   typeof window.matchMedia === 'function' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/**
+ * Scroll `container` (not page ancestors) so `item` sits inside the container's
+ * box inset by its scroll-padding (the edge-fade clearance). Works in LTR and RTL
+ * because it uses on-screen rect deltas; the browser clamps to the scroll range.
+ */
+export function scrollItemIntoView(container: HTMLElement, item: HTMLElement, behavior: ScrollBehavior) {
+  const c = container.getBoundingClientRect();
+  const i = item.getBoundingClientRect();
+  const style = window.getComputedStyle(container);
+  const pad = (v: string) => Number.parseFloat(v) || 0;
+  const padStart = pad(style.scrollPaddingLeft);
+  const padEnd = pad(style.scrollPaddingRight);
+  const minLeft = c.left + padStart;
+  const maxRight = c.right - padEnd;
+  let delta = 0;
+  if (i.right - i.left > maxRight - minLeft || i.left < minLeft) delta = i.left - minLeft;
+  else if (i.right > maxRight) delta = i.right - maxRight;
+  if (!delta) return;
+  // Round away from the current position so the item never ends up a sub-pixel short of the clearance.
+  const target = container.scrollLeft + delta;
+  const left = delta > 0 ? Math.ceil(target) : Math.floor(target);
+  if (typeof container.scrollTo === 'function') container.scrollTo({ left, behavior });
+  else container.scrollLeft = left;
+}
+
 function setRef<T>(ref: Ref<T> | undefined, node: T | null) {
   if (typeof ref === 'function') ref(node);
   else if (ref) (ref as { current: T | null }).current = node;
@@ -140,8 +165,9 @@ function ChoiceGroupInner<V extends string>(
   const indicatorRef = useRef<HTMLSpanElement | null>(null);
 
   const getChecked = () => rootRef.current?.querySelector<HTMLElement>('[role="radio"][data-state="checked"]') ?? null;
-  const scrollTo = (el: HTMLElement | null) =>
-    el?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+  const scrollTo = (el: HTMLElement | null, behavior?: ScrollBehavior) => {
+    if (el && rootRef.current) scrollItemIntoView(rootRef.current, el, behavior ?? (prefersReducedMotion() ? 'auto' : 'smooth'));
+  };
 
   // Selected item in view: on mount and whenever the value changes.
   useEffect(() => {
@@ -196,7 +222,7 @@ function ChoiceGroupInner<V extends string>(
     const settle = () => {
       measureOverflow();
       if (withIndicator) placeIndicator();
-      getChecked()?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' });
+      scrollTo(getChecked(), 'auto');
       measureOverflow();
     };
     const ro = new ResizeObserver(settle);
