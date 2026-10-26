@@ -158,7 +158,6 @@
 
 .ds-checkbox-legend {
   padding: 0;
-  margin-bottom: var(--ds-space-2);
   color: var(--ds-color-ink);
   font-family: var(--ds-font-mono);
   font-size: 0.75rem;
