@@ -140,8 +140,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Publishing
 
-- [ ] **DS-7 Library build.** Package is `private` with no build today. Add a Vite library build (ESM + type declarations) and a compiled CSS entry (tokens + Tailwind utilities). Set `name`, `exports`, `files`, `sideEffects`, and `peerDependencies` (`react`, `react-dom`) in `package.json`.
-  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-7 Library build.** Package is `private` with no build today. Add a Vite library build (ESM + type declarations) and a compiled CSS entry (tokens + Tailwind utilities). Set `name`, `exports`, `files`, `sideEffects`, and `peerDependencies` (`react`, `react-dom`) in `package.json`.
+  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - `npm run build` produces ESM + type declarations in `dist/`
     - A compiled CSS entry (tokens + Tailwind utilities) is emitted
