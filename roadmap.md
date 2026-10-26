@@ -179,6 +179,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-24** Slider — implementation — https://github.com/mikespineu/design-system-wireframe/pull/48
 - **DS-14** Checkbox — implementation — https://github.com/mikespineu/design-system-wireframe/pull/45
 - **DS-13** Checkbox — design — https://github.com/mikespineu/design-system-wireframe/pull/44
 - **DS-20** Dialog — implementation — https://github.com/mikespineu/design-system-wireframe/pull/47
