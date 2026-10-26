@@ -51,6 +51,13 @@
       "w": 1440,
       "x": 9120,
       "y": 0
+    },
+    "Toggle.dc.html": {
+      "h": 8200,
+      "title": "Toggle",
+      "w": 1440,
+      "x": 10640,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -78,7 +85,8 @@
     "Textarea.dc.html",
     "Slider.dc.html",
     "Dialog.dc.html",
-    "Checkbox.dc.html"
+    "Checkbox.dc.html",
+    "Toggle.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
