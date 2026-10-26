@@ -129,8 +129,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Spec defines the typed API (`min`/`max`/`step` or `values[]`, `value`/`defaultValue`, `onValueChange`/`onValueCommit`, `showInput`, `marks`, `size`)
     - Spec defines snapping: custom values map to Radix index steps; typed input snaps to nearest allowed value on blur/Enter, with clamping and tie-breaking
     - Spec names Radix `Slider`, maps every state to `--ds-*` tokens (new raw values under Token requests), and defines keyboard (arrows, Page Up/Down, Home/End) and Field wiring (label, hint, error, `aria-valuetext`)
-- [ ] **DS-24 Slider — implementation.** Build `Slider` and `SliderField` in `src/components/Slider/` on Radix `Slider` (`import { Slider } from 'radix-ui'`), styled via `[data-orientation]` / `[data-disabled]`. The numeric input reuses `Input`, is wired through `Field` / `useFieldControl()`, and snaps to the nearest allowed value.
-  - type: build · has_ui: yes · depends_on: DS-23 · needs_human: no · status: todo
+- [x] **DS-24 Slider — implementation.** Build `Slider` and `SliderField` in `src/components/Slider/` on Radix `Slider` (`import { Slider } from 'radix-ui'`), styled via `[data-orientation]` / `[data-disabled]`. The numeric input reuses `Input`, is wired through `Field` / `useFieldControl()`, and snaps to the nearest allowed value.
+  - type: build · has_ui: yes · depends_on: DS-23 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state
     - Uniform `step` and custom `values[]` modes both snap only to allowed values; typing in the numeric input snaps to the nearest allowed value on commit
