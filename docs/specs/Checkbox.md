@@ -3,9 +3,9 @@
 - task: DS-13
 - canvas: docs/design-system-wireframe/Checkbox.dc.html
 - canvas_url: https://claude.ai/artifact/NfoQGsLzyNGC3AtsCDFAKQ
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-26
 - approval_hash:
 
 A square box with a 2 px black border and the label to its right. Checked and indeterminate states fill the box black and show a white mark. Focus, invalid and disabled match the Field controls (`Input`, `Textarea`). It is built on Radix `Checkbox`. It ships as `Checkbox`, a single box with an inline label, and `CheckboxGroup`, a `fieldset` with a `legend`, a hint, an error and several `Checkbox`es.
