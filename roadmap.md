@@ -94,8 +94,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every state
     - Indeterminate state supported via `checked="indeterminate"`
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-15 RadioGroup — design.** Define item states, vertical and horizontal orientation, and the group label, hint and error, consistent with Checkbox.
-  - type: design · has_ui: yes · depends_on: DS-13 · needs_human: no · status: todo
+- [x] **DS-15 RadioGroup — design.** Define item states, vertical and horizontal orientation, and the group label, hint and error, consistent with Checkbox.
+  - type: design · has_ui: yes · depends_on: DS-13 · needs_human: no · status: done
   - done_when:
     - Canvas covers selected, unselected, disabled, focus and invalid, in both orientations
     - Spec names Radix `RadioGroup` and maps every state to tokens
@@ -164,11 +164,11 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every state (off, on, hover, focus-visible, disabled) at sm and md
     - `labelPosition` end/start and optional description; thumb slides with `--ds-motion`, no motion under `prefers-reduced-motion`
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-30 SegmentedControl — implementation.** Build `SegmentedControl` in `src/components/SegmentedControl/` on Radix `RadioGroup`, plus the internal, unexported `ChoiceGroup` base (label row, help slot, horizontal scroll), per `docs/specs/Toggle.md`.
-  - type: build · has_ui: yes · depends_on: DS-5 · needs_human: no · status: todo
+- [x] **DS-30 SegmentedControl — implementation.** Build `SegmentedControl` in `src/components/SegmentedControl/` on Radix `RadioGroup`, plus the internal, unexported `ChoiceGroup` base (label row, help slot, horizontal scroll), per `docs/specs/Toggle.md`.
+  - type: build · has_ui: yes · depends_on: DS-5 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state; a value is always selected (no deselect); track hugs its segments, `fullWidth` stretches
-    - Overflow scrolls on X without wrapping: scroll-snap, selected item scrolled into view on mount/change/focus, edge fade only on the side with hidden items
+    - Overflow scrolls on X without wrapping (no scroll-snap), selected item scrolled into view on mount/change/focus, edge fade only on the side with hidden items
     - Selection indicator slides (transform + width, `--ds-motion`), no slide on first render, jumps under `prefers-reduced-motion`
     - `labelPosition` start/top and `help` slot outside the arrow-key order
     - Story per state, keyboard story, overflow story, `jest-axe` test, exported from `src/index.ts`
@@ -346,6 +346,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-15** RadioGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/61
 - **DS-29** Switch — implementation — https://github.com/mikespineu/design-system-wireframe/pull/58
 - **DS-26** Theme token contract — design — https://github.com/mikespineu/design-system-wireframe/pull/55
 - **DS-5** Toggle — design — https://github.com/mikespineu/design-system-wireframe/pull/49
@@ -362,3 +363,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-19** Dialog — design — https://github.com/mikespineu/design-system-wireframe/pull/39
 - **DS-8** CI pipeline — https://github.com/mikespineu/design-system-wireframe/pull/42
 - **DS-9** Release pipeline to npm — https://github.com/mikespineu/design-system-wireframe/pull/43
+- **DS-30** SegmentedControl — implementation — https://github.com/mikespineu/design-system-wireframe/pull/59

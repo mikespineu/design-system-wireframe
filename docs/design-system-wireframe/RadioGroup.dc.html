@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe RadioGroup</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:32px 24px}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+/* radio row */
+.row{display:flex;align-items:center;gap:12px;min-height:44px;font-size:16px;line-height:26px;color:#000000;cursor:pointer}
+.row.sm{min-height:32px;gap:8px;font-size:15px;line-height:24px}
+.row.top{align-items:flex-start}
+.row.top .rb,.row.top .cb{margin-top:10px}
+.row.sm.top .rb{margin-top:8px}
+.row.top .tx{padding:9px 0}
+.row.sm.top .tx{padding:4px 0}
+.rb{flex:none;box-sizing:border-box;width:24px;height:24px;border:2px solid #000000;background:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;transition:background-color 120ms cubic-bezier(.2,0,0,1),border-color 120ms cubic-bezier(.2,0,0,1)}
+.sm .rb{width:16px;height:16px}
+.rb.on::after{content:"";display:block;width:12px;height:12px;background:#000000}
+.sm .rb.on::after{width:8px;height:8px}
+.hov{background:#EEEEEE}
+.rb.on.hov{background:#FFFFFF;border-color:#262626}
+.rb.on.hov::after{background:#262626}
+.foc{outline:2px solid #000000;outline-offset:2px}
+.dis{border-color:#A3A3A3;background:#F7F7F7;cursor:not-allowed}
+.rb.dis.on::after{background:#A3A3A3}
+.row.dtx{color:#767676;cursor:not-allowed}
+.inv{border-color:#A3302B}
+.rb.inv.on::after{background:#A3302B}
+.rb.inv.on.hov{border-color:#A3302B}
+.rb.inv.on.hov::after{background:#A3302B}
+/* checkbox, for comparison only */
+.cb{flex:none;box-sizing:border-box;width:24px;height:24px;border:2px solid #000000;background:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;color:#FFFFFF}
+.cb.on{background:#000000}
+.cb svg{width:16px;height:16px}
+/* group */
+.lb{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.lb.dtx{color:#767676}
+.hint{font-size:13px;line-height:20px;color:#595959}
+.hint.dtx{color:#767676}
+.sub{display:block;font-size:13px;line-height:20px;color:#595959}
+.dtx .sub{color:#767676}
+.err{display:flex;align-items:center;gap:6px;font-size:13px;line-height:20px;font-weight:500;color:#A3302B}
+.grp{display:flex;flex-direction:column;gap:8px;min-width:0}
+.opts{display:flex;flex-direction:column;gap:0}
+.opts.h{flex-direction:row;gap:24px;flex-wrap:wrap}
+.ti{margin-left:auto;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959;white-space:nowrap}
+.ti.on{color:#000000;font-weight:500}
+.dim{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:0 16px 0 0;border-bottom:1px solid #E0E0E0;color:#404040}
+.alt-dot::after{border-radius:50%}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 6800px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>RadioGroup · DS-15 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">RadioGroup</h1>
+<p style="margin: 0; max-width: 720px; font-size: 18px; line-height: 1.6; color: #404040">Pick exactly one of a list of options. Same row, box, label, focus, invalid and disabled treatment as Checkbox. The box stays square, like every shape in the system; selection is a black square dot inset in a white box, where a checked Checkbox fills black with a white tick. Group label, hint and error match CheckboxGroup. Built on Radix RadioGroup: one tab stop, arrow keys move and select.</p>
+</header>
+
+<!-- 01 SIZES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Sizes</h2></div>
+<p class="sec-d">Size sets the box, the dot and the row (hit area) height. The whole row, box plus label, is the click target. Same sizes as Checkbox.</p>
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>sm</span><span>box 16 · dot 8 · row 32 · gap 8 · text 15/24</span></div>
+<div class="ab-b">
+<div class="row sm"><span class="rb"></span>Unselected</div>
+<div class="row sm"><span class="rb on"></span>Selected</div>
+</div>
+<div class="ab-f">Dense desktop tables and filters. Meets WCAG 2.5.8 (24 px), fine pointers only.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>md (default)</span><span>box 24 · dot 12 · row 44 · gap 12 · text 16/26</span></div>
+<div class="ab-b">
+<div class="row"><span class="rb"></span>Unselected</div>
+<div class="row"><span class="rb on"></span>Selected</div>
+</div>
+<div class="ab-f">Forms and touch. Row = control height (44 px).</div>
+</div>
+</div>
+</section>
+
+<!-- 02 SHAPE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Shape</h2></div>
+<p class="sec-d">Radio and Checkbox share the 2 px black square box. They differ in how "on" is drawn: Checkbox fills the box black with a white tick, Radio keeps the box white and insets a black square dot (half the box). Together with the role, the arrow-key behaviour and the group label, that is enough to tell them apart without a circle.</p>
+<div class="grid3">
+<div class="ab"><div class="ab-h"><span>Anatomy (md)</span><span>box · border · dot</span></div><div class="ab-b">
+<div class="row"><span class="rb on" style="width:48px;height:48px;border-width:4px"></span><span class="dim">box 24 × 24<br>border 2 black<br>dot 12 × 12 black, centered<br>gap box→dot 4 (white)</span></div>
+</div><div class="ab-f">Shown at 2×. sm: box 16, dot 8, gap 2.</div></div>
+<div class="ab"><div class="ab-h"><span>Radio vs Checkbox</span><span>md, on</span></div><div class="ab-b">
+<div class="row"><span class="rb on"></span>Radio, selected</div>
+<div class="row"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Checkbox, checked</div>
+<div class="row"><span class="rb"></span>Radio, unselected</div>
+<div class="row"><span class="cb"></span>Checkbox, unchecked</div>
+</div><div class="ab-f">Off states are identical on purpose; the group context (one tab stop, "1 of 3") tells them apart.</div></div>
+<div class="ab"><div class="ab-h"><span>Alternative · not proposed</span><span>circle</span></div><div class="ab-b">
+<div class="row"><span class="rb" style="border-radius:50%"></span>Unselected</div>
+<div class="row"><span class="rb on alt-dot" style="border-radius:50%"></span>Selected</div>
+</div><div class="ab-f">Conventional round radio. Breaks the square-only rule and needs a new radius token (see spec, Token requests). Shown only for the review decision.</div></div>
+</div>
+</section>
+
+<!-- 03 STATES VERTICAL -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">States · vertical</h2></div>
+<p class="sec-d">orientation="vertical" (default). Shown at md, one artboard per state. Each shows unselected and selected items. Header right names what changes against Default.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>2 px black border, white; black dot</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Delivery</span>
+<div class="opts">
+<div class="row"><span class="rb"></span>Standard</div>
+<div class="row"><span class="rb on"></span>Express</div>
+<div class="row"><span class="rb"></span>Collection</div>
+</div></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hover</span><span>fill gray-100 / border + dot gray-800</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Delivery</span>
+<div class="opts">
+<div class="row"><span class="rb hov"></span>Standard (hovered)</div>
+<div class="row"><span class="rb on hov"></span>Express (hovered)</div>
+<div class="row"><span class="rb"></span>Collection</div>
+</div></div>
+</div><div class="ab-f">Two rows shown hovered for comparison; only one row is hovered at a time.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible, selected</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Delivery</span>
+<div class="opts">
+<div class="row"><span class="rb"></span>Standard</div>
+<div class="row"><span class="rb on foc"></span>Express</div>
+<div class="row"><span class="rb"></span>Collection</div>
+</div></div>
+</div><div class="ab-f">Ring on the box only, keyboard focus only. Tab lands on the selected item.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible, nothing selected</span><span>ring on first enabled item</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Delivery</span>
+<div class="opts">
+<div class="row"><span class="rb foc"></span>Standard</div>
+<div class="row"><span class="rb"></span>Express</div>
+<div class="row"><span class="rb"></span>Collection</div>
+</div></div>
+</div><div class="ab-f">Tab focuses without selecting. Space or an arrow key selects.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled item</span><span>gray-400 border, gray-50 fill, gray-400 dot</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Delivery</span>
+<div class="opts">
+<div class="row"><span class="rb on"></span>Standard</div>
+<div class="row dtx"><span class="rb dis"></span>Express (unavailable)</div>
+<div class="row"><span class="rb"></span>Collection</div>
+</div></div>
+</div><div class="ab-f">Label gray-500, not-allowed cursor, skipped by arrow keys.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled group</span><span>every item + label + hint</span></div><div class="ab-b">
+<div class="grp"><span class="lb dtx">Delivery</span><span class="hint dtx">Ships in 2 to 5 days.</span>
+<div class="opts">
+<div class="row dtx"><span class="rb dis"></span>Standard</div>
+<div class="row dtx"><span class="rb dis on"></span>Express</div>
+<div class="row dtx"><span class="rb dis"></span>Collection</div>
+</div></div>
+</div><div class="ab-f">Selected dot gray-400. Whole group out of the tab order.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Invalid</span><span>error border / error dot</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Delivery <span aria-hidden="true">*</span></span>
+<div class="opts">
+<div class="row"><span class="rb inv"></span>Standard</div>
+<div class="row"><span class="rb inv"></span>Express</div>
+<div class="row"><span class="rb inv"></span>Collection</div>
+</div>
+<div class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg><span><span class="sr">Error: </span>Choose a delivery option.</span></div>
+</div>
+</div><div class="ab-f">Usual case: required and nothing selected.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Invalid, selected + hover</span><span>error kept; unselected hover fill gray-100</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Delivery</span>
+<div class="opts">
+<div class="row"><span class="rb inv hov"></span>Standard (hovered)</div>
+<div class="row"><span class="rb inv on"></span>Express</div>
+<div class="row"><span class="rb inv"></span>Collection</div>
+</div>
+<div class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg><span><span class="sr">Error: </span>Express is not available for this address.</span></div>
+</div>
+</div><div class="ab-f">Rare: a selected value rejected by the server. Dot and border use error.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Invalid + focus</span><span>error border kept + black ring</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Delivery <span aria-hidden="true">*</span></span>
+<div class="opts">
+<div class="row"><span class="rb inv foc"></span>Standard</div>
+<div class="row"><span class="rb inv"></span>Express</div>
+<div class="row"><span class="rb inv"></span>Collection</div>
+</div>
+<div class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg><span><span class="sr">Error: </span>Choose a delivery option.</span></div>
+</div>
+</div></div>
+
+</div>
+</section>
+
+<!-- 04 STATES HORIZONTAL -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">States · horizontal</h2></div>
+<p class="sec-d">orientation="horizontal": short options in a row, 24 px gap, wrapping when out of room. Identical item states; only the layout changes. Arrow keys work on both axes in both orientations.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>gap 24, wraps</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Crop</span>
+<div class="opts h">
+<div class="row"><span class="rb on"></span>4:5</div>
+<div class="row"><span class="rb"></span>1:1</div>
+<div class="row"><span class="rb"></span>16:9</div>
+</div></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hover</span><span>fill gray-100 / border + dot gray-800</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Crop</span>
+<div class="opts h">
+<div class="row"><span class="rb on hov"></span>4:5</div>
+<div class="row"><span class="rb hov"></span>1:1</div>
+<div class="row"><span class="rb"></span>16:9</div>
+</div></div>
+</div><div class="ab-f">Two rows shown hovered for comparison.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible, selected</span><span>+ 2 px black ring</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Crop</span>
+<div class="opts h">
+<div class="row"><span class="rb"></span>4:5</div>
+<div class="row"><span class="rb on foc"></span>1:1</div>
+<div class="row"><span class="rb"></span>16:9</div>
+</div></div>
+</div><div class="ab-f">After Arrow Right from 4:5: focus and selection moved together.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible, nothing selected</span><span>ring on first enabled item</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Crop</span>
+<div class="opts h">
+<div class="row"><span class="rb foc"></span>4:5</div>
+<div class="row"><span class="rb"></span>1:1</div>
+<div class="row"><span class="rb"></span>16:9</div>
+</div></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled item</span><span>gray-400 border, gray-50 fill</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Crop</span>
+<div class="opts h">
+<div class="row"><span class="rb on"></span>4:5</div>
+<div class="row"><span class="rb"></span>1:1</div>
+<div class="row dtx"><span class="rb dis"></span>16:9</div>
+</div></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled group</span><span>every item + label</span></div><div class="ab-b">
+<div class="grp"><span class="lb dtx">Crop</span>
+<div class="opts h">
+<div class="row dtx"><span class="rb dis on"></span>4:5</div>
+<div class="row dtx"><span class="rb dis"></span>1:1</div>
+<div class="row dtx"><span class="rb dis"></span>16:9</div>
+</div></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Invalid</span><span>error border, error under the row</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Crop <span aria-hidden="true">*</span></span>
+<div class="opts h">
+<div class="row"><span class="rb inv"></span>4:5</div>
+<div class="row"><span class="rb inv"></span>1:1</div>
+<div class="row"><span class="rb inv"></span>16:9</div>
+</div>
+<div class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg><span><span class="sr">Error: </span>Choose a crop.</span></div>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Invalid + focus</span><span>error border kept + black ring</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Crop <span aria-hidden="true">*</span></span>
+<div class="opts h">
+<div class="row"><span class="rb inv on foc"></span>4:5</div>
+<div class="row"><span class="rb inv"></span>1:1</div>
+<div class="row"><span class="rb inv"></span>16:9</div>
+</div>
+<div class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg><span><span class="sr">Error: </span>4:5 is not available for this print.</span></div>
+</div>
+</div><div class="ab-f">Invalid, selected and focused: error dot and border, black ring.</div></div>
+
+</div>
+</section>
+
+<!-- 05 LABEL -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Item label</h2></div>
+<p class="sec-d">Same as Checkbox. The label always sits to the right of the box (left in RTL), in body text, not the uppercase Field label. Long labels wrap and the box aligns to the first line. An optional description sits under the label in caption gray-600.</p>
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>Single line</span><span>box centered</span></div><div class="ab-b">
+<div class="row"><span class="rb on"></span>Email</div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>Wrapping</span><span>box on first line</span></div><div class="ab-b">
+<div class="row top"><span class="rb"></span><span class="tx">Collect from the studio during opening hours</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>With description</span><span>caption 13/20</span></div><div class="ab-b">
+<div class="row top"><span class="rb on"></span><span class="tx">Express<span class="sub">Next working day. €12.</span></span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>sm, wrapping</span><span>box top 8, text pad 4</span></div><div class="ab-b">
+<div class="row sm top"><span class="rb"></span><span class="tx">Include archived series in results</span></div>
+</div></div>
+</div>
+</section>
+
+<!-- 06 GROUP -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Group</h2></div>
+<p class="sec-d">Label in the Field label style, hint under the label, options, then the error under the options; 8 px between each. Vertical options stack with no extra gap (rows are 44 px). Same layout as CheckboxGroup, but the label names a role="radiogroup" through aria-labelledby instead of a fieldset legend.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>label · hint · options</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Reply by</span><span class="hint">We reply within one working day.</span>
+<div class="opts">
+<div class="row"><span class="rb on"></span>Email</div>
+<div class="row"><span class="rb"></span>Phone call</div>
+<div class="row"><span class="rb"></span>Post</div>
+</div></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Required</span><span>asterisk, aria-hidden</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Reply by <span aria-hidden="true">*</span></span><span class="hint">Required.</span>
+<div class="opts">
+<div class="row"><span class="rb"></span>Email</div>
+<div class="row"><span class="rb"></span>Phone call</div>
+</div></div>
+</div><div class="ab-f">No preselection. Nothing is selected until the user picks.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Invalid</span><span>hint kept, error under options</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Reply by <span aria-hidden="true">*</span></span><span class="hint">Required.</span>
+<div class="opts">
+<div class="row"><span class="rb inv"></span>Email</div>
+<div class="row"><span class="rb inv"></span>Phone call</div>
+</div>
+<div class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg><span><span class="sr">Error: </span>Choose how we should reply.</span></div>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>With descriptions</span><span>vertical only</span></div><div class="ab-b">
+<div class="grp"><span class="lb">Shipping</span>
+<div class="opts">
+<div class="row top"><span class="rb on"></span><span class="tx">Standard<span class="sub">2 to 5 working days. Free.</span></span></div>
+<div class="row top"><span class="rb"></span><span class="tx">Express<span class="sub">Next working day. €12.</span></span></div>
+</div></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hidden label</span><span>hideLabel, still names the group</span></div><div class="ab-b">
+<div class="grp"><span class="lb sr">Sort by</span>
+<div class="opts">
+<div class="row sm"><span class="rb on"></span>Newest</div>
+<div class="row sm"><span class="rb"></span>Oldest</div>
+<div class="row sm"><span class="rb"></span>Title</div>
+</div></div>
+</div><div class="ab-f">sm, in a filter panel whose heading already says "Sort by".</div></div>
+
+<div class="ab"><div class="ab-h"><span>Horizontal, wrapping</span><span>narrow container</span></div><div class="ab-b">
+<div class="grp" style="max-width:220px"><span class="lb">Paper</span><span class="hint">All papers are archival.</span>
+<div class="opts h">
+<div class="row"><span class="rb on"></span>Matte</div>
+<div class="row"><span class="rb"></span>Gloss</div>
+<div class="row"><span class="rb"></span>Baryta</div>
+</div></div>
+</div><div class="ab-f">Wrapped rows keep the 24 px column gap; no row gap (rows are 44 px).</div></div>
+
+</div>
+</section>
+
+<!-- 07 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Keyboard · roving tabindex</h2></div>
+<p class="sec-d">The group is one tab stop. Only one item has tabindex 0: the selected one, or the first enabled one when nothing is selected. Arrow keys move focus and select in one step, wrap at the ends, and skip disabled items.</p>
+<div class="grid4">
+
+<div class="ab"><div class="ab-h"><span>1 · Tab</span><span>enter the group</span></div><div class="ab-b">
+<div class="opts">
+<div class="row"><span class="rb"></span>Standard<span class="ti">-1</span></div>
+<div class="row"><span class="rb on foc"></span>Express<span class="ti on">0</span></div>
+<div class="row"><span class="rb"></span>Collection<span class="ti">-1</span></div>
+</div>
+</div><div class="ab-f">Focus lands on the selected item.</div></div>
+
+<div class="ab"><div class="ab-h"><span>2 · Arrow Down</span><span>move + select</span></div><div class="ab-b">
+<div class="opts">
+<div class="row"><span class="rb"></span>Standard<span class="ti">-1</span></div>
+<div class="row"><span class="rb"></span>Express<span class="ti">-1</span></div>
+<div class="row"><span class="rb on foc"></span>Collection<span class="ti on">0</span></div>
+</div>
+</div><div class="ab-f">Arrow Right does the same.</div></div>
+
+<div class="ab"><div class="ab-h"><span>3 · Arrow Down</span><span>wraps to first</span></div><div class="ab-b">
+<div class="opts">
+<div class="row"><span class="rb on foc"></span>Standard<span class="ti on">0</span></div>
+<div class="row"><span class="rb"></span>Express<span class="ti">-1</span></div>
+<div class="row"><span class="rb"></span>Collection<span class="ti">-1</span></div>
+</div>
+</div><div class="ab-f">Loop is on. Arrow Up / Left goes back.</div></div>
+
+<div class="ab"><div class="ab-h"><span>4 · Tab</span><span>leave the group</span></div><div class="ab-b">
+<div class="opts">
+<div class="row"><span class="rb on"></span>Standard<span class="ti on">0</span></div>
+<div class="row"><span class="rb"></span>Express<span class="ti">-1</span></div>
+<div class="row"><span class="rb"></span>Collection<span class="ti">-1</span></div>
+</div>
+</div><div class="ab-f">Next field gets focus. Shift+Tab returns to Standard.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled skipped</span><span>Arrow Down from Standard</span></div><div class="ab-b">
+<div class="opts">
+<div class="row"><span class="rb"></span>Standard<span class="ti">-1</span></div>
+<div class="row dtx"><span class="rb dis"></span>Express<span class="ti">-1</span></div>
+<div class="row"><span class="rb on foc"></span>Collection<span class="ti on">0</span></div>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Nothing selected</span><span>Tab, then Space</span></div><div class="ab-b">
+<div class="opts">
+<div class="row"><span class="rb foc"></span>Standard<span class="ti on">0</span></div>
+<div class="row"><span class="rb"></span>Express<span class="ti">-1</span></div>
+<div class="row"><span class="rb"></span>Collection<span class="ti">-1</span></div>
+</div>
+</div><div class="ab-f">Tab focuses the first enabled item without selecting it. Space selects it.</div></div>
+
+<div class="ab"><div class="ab-h"><span>End</span><span>focus only</span></div><div class="ab-b">
+<div class="opts">
+<div class="row"><span class="rb on"></span>Standard<span class="ti">-1</span></div>
+<div class="row"><span class="rb"></span>Express<span class="ti">-1</span></div>
+<div class="row"><span class="rb foc"></span>Collection<span class="ti on">0</span></div>
+</div>
+</div><div class="ab-f">Home / End move focus to the first / last enabled item without selecting. Space selects.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Horizontal, RTL</span><span>Arrow Left = next</span></div><div class="ab-b">
+<div class="opts h" dir="rtl">
+<div class="row"><span class="rb"></span>4:5</div>
+<div class="row"><span class="rb on foc"></span>1:1</div>
+<div class="row"><span class="rb"></span>16:9</div>
+</div>
+</div><div class="ab-f">With dir="rtl", Left and Right swap. Up and Down are unchanged.</div></div>
+
+</div>
+<table class="tbl">
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span></td><td>Enter the group on the selected item (or the first enabled item if none). Next Tab leaves the group.</td></tr>
+<tr><td><span class="kbd">Shift+Tab</span></td><td>Leave the group backwards from whichever item has focus.</td></tr>
+<tr><td><span class="kbd">↓</span> / <span class="kbd">→</span></td><td>Focus and select the next enabled item. Wraps last to first. Both axes in both orientations. → is ← in RTL.</td></tr>
+<tr><td><span class="kbd">↑</span> / <span class="kbd">←</span></td><td>Focus and select the previous enabled item. Wraps first to last.</td></tr>
+<tr><td><span class="kbd">Home</span> / <span class="kbd">End</span></td><td>Focus the first / last enabled item without selecting it.</td></tr>
+<tr><td><span class="kbd">Space</span></td><td>Select the focused item. No action if it is already selected (no deselect).</td></tr>
+<tr><td><span class="kbd">Enter</span></td><td>No action (Radix prevents it; never submits the form).</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>

@@ -6,7 +6,8 @@
 - approved: yes
 - approved_by: mikespin
 - approved_at: 2026-10-26
-- approval_hash:
+- approval_hash: 34398fde1241+b47c835959b5
+- amended: 2026-10-26 by mikespin — dropped scroll-snap (DS-30)
 
 "Toggle" is a family of three components, not one. A single component that handles a boolean, a pill row of text values and a row of icon tiles would need a mode prop that changes its role, keyboard model and layout, so the family splits on those lines:
 
@@ -138,12 +139,12 @@ Overflow (canvas 10), the same for SegmentedControl (hug) and TileGroup:
 
 - The item strip is the scroll container: `overflow-x: auto`, `overflow-y: hidden`, `overscroll-behavior-x: contain`. It never wraps.
 - In a start-label row only the strip shrinks. Label and help are `flex: none`. Below about 320 px of container width, switch the field to `labelPosition="top"`. This is guidance; the component does not do it.
-- Scroll snapping: `scroll-snap-type: x proximity` on the strip and `scroll-snap-align: start` on items. `scroll-padding-inline` is 24 px so a snapped or scrolled-to item clears the fade.
+- No scroll snapping. Snap points re-snapped programmatic scrolls and left the selected item clipped, so the strip scrolls freely. `scroll-padding-inline` is 24 px so a scrolled-to item clears the fade.
 - Focus ring clearance: `overflow: auto` clips outlines.
   - SegmentedControl: the strip's own 4 px padding already holds the 2 px ring plus its 2 px offset.
   - TileGroup: the scroller gets 4 px padding and −4 px margin, so its outer edge does not move.
   - Trailing padding is ignored in overflowing flex rows in some browsers, so add the end padding with an `::after` spacer.
-- Selected item in view: when the component mounts and whenever the value changes, the wrapper calls `item.scrollIntoView({ block: 'nearest', inline: 'nearest' })`. This covers arrow keys and controlled updates. It also runs on focus, which covers Home and End. It uses `behavior: 'smooth'`, except under `prefers-reduced-motion`.
+- Selected item in view: when the component mounts and whenever the value changes, the wrapper scrolls the strip itself (`strip.scrollTo({ left })`, never page ancestors) by the minimum amount that puts the item inside the strip inset by its `scroll-padding-inline`. This covers arrow keys and controlled updates. It also runs on focus, which covers Home and End, and again when the layout settles (resize, `document.fonts.ready`). It uses `behavior: 'smooth'`, except under `prefers-reduced-motion`.
 - Edge fade:
   - A 24 px `mask-image` linear gradient on the strip, applied only on the side that has hidden content: `[data-overflow="end" | "both" | "start"]`.
   - The wrapper sets that attribute from a passive `scroll` listener and a `ResizeObserver`. This is the one piece of JS state, because Radix offers no attribute for overflow. When nothing overflows there is no attribute and no fade.
@@ -361,7 +362,7 @@ Shared (choice-group row, overflow, focus):
   - md: a Switch row, a segment and the help button are 44 px tall, and a tile is 88 px.
   - sm: a Switch row is 32 px and a segment 24 px tall (meets WCAG 2.5.8 minimum 24 × 24). A tile is 64 px.
   - The sm SegmentedControl is for fine pointers only. Say so in the docs.
-- **Motion**: the thumb slide, the SegmentedControl indicator slide, the color transitions and smooth `scrollIntoView` are all dropped under `prefers-reduced-motion`.
+- **Motion**: the thumb slide, the SegmentedControl indicator slide, the color transitions and the smooth scroll-into-view are all dropped under `prefers-reduced-motion`.
 - **`jest-axe`** should find no violations for:
   - Switch: off, on, disabled off/on, `labelPosition` start and end, with description, `aria-label` only.
   - SegmentedControl: sm, md, `fullWidth`, label start and top, with hint, with help, a disabled item, a disabled group, overflowing (8 options in a narrow container).
@@ -381,7 +382,7 @@ Shared (choice-group row, overflow, focus):
     - With no `defaultValue`, the first enabled option is selected.
     - Enter does not submit the form.
     - Tab from the group goes to the help button.
-    - `scrollIntoView` is called on value change (stubbed in `jest.setup.ts`, together with `ResizeObserver`).
+    - The strip is scrolled to the selected item on value change (`scrollTo` / `ResizeObserver` stubbed in tests).
     - `data-overflow` is set correctly when the stubbed `scrollWidth` exceeds `clientWidth`.
 
 ## Token requests
