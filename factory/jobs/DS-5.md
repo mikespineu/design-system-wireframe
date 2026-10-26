@@ -31,6 +31,7 @@ updated: "2026-10-26T11:17:58Z"
 - 12:18 pr: draft PR #49 opened
 - 12:21 design: revised per canvas comment (segmented track hugs its items, no stretch to container width); canvas republished
 - 12:22 design: revised per canvas comment (tile examples use Icon set icons, varied label lengths); canvas republished
+- 12:23 design: revised per canvas comment (SegmentedControl selection slides between segments, --ds-motion); canvas republished
 
 ## Gate results
 

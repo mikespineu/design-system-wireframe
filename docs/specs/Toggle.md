@@ -106,6 +106,19 @@ SegmentedControl (canvas 05):
 - The grey track hugs its segments: it ends where the last segment ends and never stretches to the container width (`display: inline-flex`, `width: fit-content`, `align-self: flex-start` inside flex parents). Only `fullWidth` stretches it.
 - Segments hug their text by default (`flex: none`, `white-space: nowrap`), with no gap between them. `fullWidth` makes the strip 100 % wide and gives every segment `flex: 1 1 0` with centred text. A `fullWidth` control never scrolls, so use it only for 2–4 short options.
 
+### Selection motion (SegmentedControl)
+
+When the value changes, the selected "pill" slides from the old segment to the new one instead of jumping (canvas 05, "Selection motion").
+
+- One indicator element (`<span aria-hidden="true" data-indicator>`) sits inside the strip, behind the segments (`position: absolute`, segments above it with `position: relative`). It carries the selected look: white fill and a 1 px black border. Segments themselves stay transparent.
+- The indicator is placed on the checked segment with `transform: translateX(<offsetLeft>)` and `width: <offsetWidth>`, both measured from the checked item in `useLayoutEffect` and re-measured with a `ResizeObserver` on the strip (font load, resize, label change). It lives inside the scrolling strip, so it scrolls with the segments.
+- It animates `transform` and `width` with `--ds-motion`. The text colour of the old and new segment cross-fades with the same token, so the text turns black as the pill arrives.
+- No slide on first render: the indicator is placed without a transition on mount (and when it was hidden), then transitions are enabled.
+- Works the same for click, arrow keys and controlled value changes. With `fullWidth`, segments have equal widths, so only `transform` changes.
+- `prefers-reduced-motion: reduce`: no transition, the indicator jumps.
+- Fallback before measurement (SSR / no JS): the checked segment gets the selected fill and border itself via `[data-state="checked"]`, and the indicator is hidden until it has been measured.
+- TileGroup does not slide: tiles have gaps and are larger, so the selected look cross-fades on the tiles (`background-color`, `border-color`, `color` with `--ds-motion`).
+
 TileGroup (canvas 08):
 
 | Size | Tile min width × height | Padding-x | Icon | Icon to label | Tile gap | Text |
@@ -280,6 +293,7 @@ SegmentedControl:
 | Hover fill, unselected | `--ds-color-gray-200` (palette; no semantic hover-on-fill role exists) |
 | Hover text | `--ds-color-ink` |
 | Disabled text | `--ds-color-placeholder` |
+| Indicator slide | `--ds-motion` (transform, width); text colour cross-fade `--ds-motion` |
 | Disabled selected border | `--ds-color-disabled` |
 | Text md / sm | `--ds-font-text` 500, body 16/26 / caption 13/20 |
 
@@ -347,7 +361,7 @@ Shared (choice-group row, overflow, focus):
   - md: a Switch row, a segment and the help button are 44 px tall, and a tile is 88 px.
   - sm: a Switch row is 32 px and a segment 24 px tall (meets WCAG 2.5.8 minimum 24 × 24). A tile is 64 px.
   - The sm SegmentedControl is for fine pointers only. Say so in the docs.
-- **Motion**: the thumb slide, the color transitions and smooth `scrollIntoView` are all dropped under `prefers-reduced-motion`.
+- **Motion**: the thumb slide, the SegmentedControl indicator slide, the color transitions and smooth `scrollIntoView` are all dropped under `prefers-reduced-motion`.
 - **`jest-axe`** should find no violations for:
   - Switch: off, on, disabled off/on, `labelPosition` start and end, with description, `aria-label` only.
   - SegmentedControl: sm, md, `fullWidth`, label start and top, with hint, with help, a disabled item, a disabled group, overflowing (8 options in a narrow container).

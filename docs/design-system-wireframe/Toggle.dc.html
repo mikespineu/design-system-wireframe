@@ -75,6 +75,21 @@ body{margin:0;background:#FFFFFF}
 .seg.gdis .it.sel{border-color:#A3A3A3;background:#FFFFFF}
 .seg.full{display:flex;width:100%;align-self:stretch}
 .seg.full .it{flex:1 1 0;justify-content:center}
+/* selection motion demo */
+.seg.slide{position:relative}
+.seg.slide .it{position:relative;z-index:1;width:112px;justify-content:center;color:#404040}
+.seg.slide .ind{position:absolute;z-index:0;top:4px;left:4px;width:112px;height:36px;box-sizing:border-box;background:#FFFFFF;border:1px solid #000000;animation:segInd 4.8s cubic-bezier(.2,0,0,1) infinite}
+.seg.slide .it:nth-of-type(1){animation:segT1 4.8s infinite}
+.seg.slide .it:nth-of-type(2){animation:segT2 4.8s infinite}
+.seg.slide .it:nth-of-type(3){animation:segT3 4.8s infinite}
+@keyframes segInd{0%,28%{transform:translateX(0)}33%,61%{transform:translateX(112px)}66%,94%{transform:translateX(224px)}100%{transform:translateX(0)}}
+@keyframes segT1{0%,28%{color:#000}33%,94%{color:#404040}100%{color:#000}}
+@keyframes segT2{0%,28%{color:#404040}33%,61%{color:#000}66%,100%{color:#404040}}
+@keyframes segT3{0%,61%{color:#404040}66%,94%{color:#000}100%{color:#404040}}
+.frames{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end}
+.frames .fr{display:flex;flex-direction:column;gap:8px;font-family:'Red Hat Mono',monospace;font-size:12px;color:#595959}
+.seg.slide.still .ind,.seg.slide.still .it{animation:none}
+@media (prefers-reduced-motion: reduce){.seg.slide .ind{animation-timing-function:steps(1,end)}}
 
 /* ---------- TileGroup ---------- */
 .tiles{display:flex;gap:8px;padding:4px;margin:-4px;min-width:0}
@@ -256,6 +271,14 @@ body{margin:0;background:#FFFFFF}
 <div class="ab" style="grid-column: span 2"><div class="ab-h"><span>md · fullWidth</span><span>segments flex 1, text centered</span></div><div class="ab-b">
 <div class="seg full"><span class="it">Board</span><span class="it sel">Plywood</span><span class="it">Veneer</span></div>
 </div><div class="ab-f">fullWidth never scrolls; use it only for 2–4 short options. Hug layout is the one that scrolls.</div></div>
+<div class="ab" style="grid-column: span 2"><div class="ab-h"><span>Selection motion</span><span>indicator slides · transform + width · --ds-motion</span></div><div class="ab-b" style="gap:24px">
+<div><div class="seg slide"><span class="ind" aria-hidden="true"></span><span class="it">Board</span><span class="it">Plywood</span><span class="it">Veneer</span></div></div>
+<div class="frames">
+<div class="fr"><div class="seg slide still"><span class="ind" style="transform:translateX(0)"></span><span class="it" style="color:#000">Board</span><span class="it">Plywood</span><span class="it">Veneer</span></div>t = 0 · Board selected, → pressed</div>
+<div class="fr"><div class="seg slide still"><span class="ind" style="transform:translateX(56px)"></span><span class="it" style="color:#595959">Board</span><span class="it" style="color:#595959">Plywood</span><span class="it">Veneer</span></div>t ≈ 60 ms · pill between, text cross-fading</div>
+<div class="fr"><div class="seg slide still"><span class="ind" style="transform:translateX(112px)"></span><span class="it">Board</span><span class="it" style="color:#000">Plywood</span><span class="it">Veneer</span></div>t = 120 ms · Plywood selected</div>
+</div>
+</div><div class="ab-f">One white pill (1 px black border) sits behind the segments and slides to the checked one: translateX + width, measured from the item, --ds-motion (120 ms, cubic-bezier(.2,0,0,1)). Text colour cross-fades in sync. No slide on first render. Reduced motion: it jumps. TileGroup does not slide; tiles cross-fade.</div></div>
 </div>
 </section>
 
