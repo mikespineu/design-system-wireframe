@@ -72,6 +72,13 @@
       "w": 1440,
       "x": 13680,
       "y": 0
+    },
+    "Select.dc.html": {
+      "h": 8600,
+      "title": "Select",
+      "w": 1440,
+      "x": 15200,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -102,7 +109,8 @@
     "Checkbox.dc.html",
     "Toggle.dc.html",
     "Theming.dc.html",
-    "RadioGroup.dc.html"
+    "RadioGroup.dc.html",
+    "Select.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
