@@ -3,11 +3,11 @@ task: DS-7
 title: "Library build"
 line: build            # design | build
 status: in-progress    # claimed | in-progress | waiting | blocked | merged
-stage: pr
+stage: ci
 branch: "feat/DS-7-library-build"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-7-library-build"
-pr: ""
-pr_url: ""
+pr: "40"
+pr_url: "https://github.com/mikespineu/design-system-wireframe/pull/40"
 canvas_url: ""
 storybook_url: ""
 model: default
@@ -35,6 +35,7 @@ updated: "2026-10-26T09:19:46Z"
 - 10:22 review: started
 - 10:22 review: pass, no findings
 - 10:22 pr: opening PR
+- 10:22 pr: opened #40
 
 ## Gate results
 
