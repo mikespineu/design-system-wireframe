@@ -26,8 +26,6 @@ export const Indeterminate: Story = {
     await expect(within(canvasElement).getByRole('checkbox')).toHaveAttribute('aria-checked', 'mixed');
   },
 };
-/** Hover shows a gray fill (use the Hover pseudo-state addon). */
-export const Hover: Story = {};
 export const WithDescription: Story = { args: { description: 'One email a week. Unsubscribe any time.' } };
 export const Small: Story = { args: { size: 'sm', defaultChecked: true } };
 export const Disabled: Story = { args: { disabled: true } };

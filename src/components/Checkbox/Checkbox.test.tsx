@@ -43,6 +43,32 @@ describe('Checkbox', () => {
     expect(screen.getByRole('checkbox')).toHaveAttribute('data-state', 'checked');
   });
 
+  it('the whole row toggles exactly once: box, gap, label and description', async () => {
+    const user = userEvent.setup();
+    const onCheckedChange = jest.fn();
+    const { container } = render(<Checkbox label="Accept" description="Caption" onCheckedChange={onCheckedChange} />);
+    const row = container.querySelector('.ds-checkbox') as HTMLElement;
+    const targets = [row, screen.getByRole('checkbox'), screen.getByText('Accept'), screen.getByText('Caption')];
+    for (const [i, target] of targets.entries()) {
+      await user.click(target);
+      expect(onCheckedChange).toHaveBeenCalledTimes(i + 1);
+    }
+  });
+
+  it('clicking the row of a disabled checkbox does nothing', async () => {
+    const user = userEvent.setup();
+    const onCheckedChange = jest.fn();
+    const { container } = render(<Checkbox label="Accept" disabled onCheckedChange={onCheckedChange} />);
+    await user.click(container.querySelector('.ds-checkbox') as HTMLElement);
+    expect(onCheckedChange).not.toHaveBeenCalled();
+  });
+
+  it('forwards a callback ref', () => {
+    const ref = jest.fn();
+    render(<Checkbox ref={ref} label="Accept" />);
+    expect(ref).toHaveBeenCalledWith(screen.getByRole('checkbox'));
+  });
+
   it('indeterminate is mixed and a click makes it checked', async () => {
     const user = userEvent.setup();
     render(<Checkbox label="All" defaultChecked="indeterminate" />);

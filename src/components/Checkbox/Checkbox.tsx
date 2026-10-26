@@ -1,10 +1,13 @@
 import {
   createContext,
+  useCallback,
   forwardRef,
   useContext,
   useId,
+  useRef,
   type ComponentPropsWithoutRef,
   type ElementRef,
+  type MouseEvent,
   type ReactNode,
 } from 'react';
 import { Checkbox as RadixCheckbox, Label } from 'radix-ui';
@@ -37,6 +40,20 @@ export interface CheckboxProps
 export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, CheckboxProps>(
   ({ label, description, size, invalid, disabled, id, className, 'aria-describedby': describedBy, ...rest }, ref) => {
     const group = useContext(GroupContext);
+    const boxRef = useRef<HTMLButtonElement | null>(null);
+    const setRefs = useCallback(
+      (node: HTMLButtonElement | null) => {
+        boxRef.current = node;
+        if (typeof ref === 'function') ref(node);
+        else if (ref) ref.current = node;
+      },
+      [ref],
+    );
+    /** Clicks on the row's empty area (gap, padding) toggle the box; the box and label already do. */
+    const handleRowClick = (e: MouseEvent<HTMLDivElement>) => {
+      if (isDisabled || (e.target as HTMLElement).closest('.ds-checkbox-box, .ds-checkbox-label, input')) return;
+      boxRef.current?.click();
+    };
     const generated = useId();
     const boxId = id ?? generated;
     const descId = description ? `${boxId}-description` : undefined;
@@ -45,9 +62,9 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Checkb
     const describedIds = [describedBy, descId, group?.describedBy].filter(Boolean).join(' ') || undefined;
 
     return (
-      <div className={cx('ds-checkbox', className)} data-size={size ?? group?.size ?? 'md'} data-disabled={isDisabled ? '' : undefined}>
+      <div onClick={handleRowClick} className={cx('ds-checkbox', className)} data-size={size ?? group?.size ?? 'md'} data-disabled={isDisabled ? '' : undefined}>
         <RadixCheckbox.Root
-          ref={ref}
+          ref={setRefs}
           id={boxId}
           className="ds-checkbox-box"
           data-size={size ?? group?.size ?? 'md'}
