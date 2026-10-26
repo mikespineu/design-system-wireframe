@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Typography</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.grid1{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.span2{grid-column:span 2}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column;min-width:0}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-b{display:flex;flex-direction:column;gap:16px;padding:32px 24px;min-width:0}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.note{margin:0;font-size:13px;line-height:20px;color:#595959}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:8px 16px 8px 0;border-bottom:1px solid #E0E0E0;color:#404040;vertical-align:middle}
+.code{margin:0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959;white-space:pre-wrap}
+.chip{display:inline-flex;align-items:center;flex:none;height:20px;padding:0 8px;border:1px solid #C7C7C7;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959;white-space:nowrap}
+.chip.ink{border-color:#000000;color:#000000}
+.ex{display:flex;flex-direction:column;gap:8px;padding-bottom:16px;border-bottom:1px solid #E0E0E0;min-width:0}
+.ex:last-child{padding-bottom:0;border-bottom:0}
+.ex-top{display:flex;justify-content:space-between;align-items:center;gap:16px;min-width:0}
+.meta{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.wrow{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:baseline;min-width:0}
+.frame{border:1px dashed #C7C7C7;padding:8px;box-sizing:border-box;width:280px;max-width:100%}
+.foc{outline:2px solid #000000;outline-offset:2px}
+.panel{border:1px solid #000000;padding:24px;display:flex;flex-direction:column;gap:8px}
+.inv{background:#000000;color:#FFFFFF;padding:0 24px;height:44px;display:inline-flex;align-items:center;align-self:flex-start}
+.err{display:flex;align-items:center;gap:8px;color:#A3302B}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tree{display:flex;flex-direction:column;gap:12px}
+.tree .n{display:flex;align-items:baseline;gap:12px;min-width:0}
+.tree .l2{padding-left:24px}
+.tree .l3{padding-left:48px}
+.tree .l4{padding-left:72px}
+.mark{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000;display:flex;align-items:center;gap:8px}
+.surf{padding:16px;display:flex;flex-direction:column;gap:4px}
+.surf.s50{background:#F7F7F7}
+.surf.s100{background:#EEEEEE}
+
+/* ---------- Heading ---------- */
+.h{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;color:#000000;text-wrap:balance}
+.h-2xl{font-size:72px;line-height:1;letter-spacing:-0.04em}
+.h-xl{font-size:48px;line-height:1.1;letter-spacing:-0.03em}
+.h-lg{font-size:32px;line-height:1.2;letter-spacing:-0.02em}
+.h-md{font-size:22px;line-height:29px;letter-spacing:0}
+.h-sm{font-size:18px;line-height:26px;letter-spacing:0}
+.h-xs{font-size:16px;line-height:24px;letter-spacing:0}
+
+/* ---------- Text ---------- */
+.t{margin:0;font-family:'Red Hat Text',sans-serif;font-weight:400;color:#404040}
+.t-lg{font-size:18px;line-height:1.6}
+.t-md{font-size:16px;line-height:26px}
+.t-sm{font-size:15px;line-height:24px}
+.t-xs{font-size:13px;line-height:20px}
+.t-2xs{font-size:12px;line-height:16px}
+.mono{font-family:'Red Hat Mono',monospace}
+.w4{font-weight:400}.w5{font-weight:500}.w7{font-weight:700}
+.muted{color:#595959}
+.emph{color:#000000}
+.inherit{color:inherit}
+
+/* ---------- Truncate / clamp ---------- */
+.trunc{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-wrap:nowrap}
+.clamp2,.clamp3{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;text-wrap:wrap}
+.clamp2{-webkit-line-clamp:2;line-clamp:2}
+.clamp3{-webkit-line-clamp:3;line-clamp:3}
+.frow{display:flex;align-items:center;gap:12px;min-width:0;height:44px}
+.frow svg{flex:none}
+
+/* ---------- Links (owned by the link, shown for composition) ---------- */
+.lk{color:inherit;text-decoration:none}
+.lk.hov{text-decoration:underline;text-underline-offset:4px}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 9400px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Typography · DS-37 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Typography</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">The type scale as two components. <b>Heading</b> is Red Hat Mono 500 in black: <code>level</code> (1–6) picks the element for the document outline, <code>size</code> picks the look, and the two are independent. <b>Text</b> is everything else: five sizes, three weights, Red Hat Text or Mono, four tones, and single-line truncate or multi-line clamp. Neither is interactive; both compose through <code>asChild</code> (Radix Slot).</p>
+</header>
+
+<!-- 01 API -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">API · level vs size, as vs asChild</h2></div>
+<p class="sec-d">Choose <code>level</code> from where the heading sits in the page outline; choose <code>size</code> from how loud it should look. Every level has a default size, so most headings need only <code>level</code>. The chip on the right of each example is the element that is rendered.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>Heading</span><span>level → element · size → look</span></div><div class="ab-b">
+<div class="ex"><div class="ex-top"><p class="code">&lt;Heading level={1}&gt;</p><span class="chip ink">h1 · xl (default)</span></div><div class="h h-xl">Account settings</div></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;Heading level={2}&gt;</p><span class="chip ink">h2 · lg (default)</span></div><div class="h h-lg">Billing</div></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;Heading level={2} size="md"&gt;</p><span class="chip ink">h2 · md</span></div><div class="h h-md">Payment method</div></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;Heading level={1} size="2xl"&gt;</p><span class="chip ink">h1 · 2xl</span></div><div class="h h-2xl" style="font-size:56px">Less, but better</div><p class="note">Shown at reduced scale; 2xl is 72 px (section 02).</p></div>
+</div><div class="ab-f">level is required (1–6). size is optional: 2xl · xl · lg · md · sm · xs. size never changes the element; level never changes the look once size is set.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Text</span><span>as for HTML tags · asChild for anything else</span></div><div class="ab-b">
+<div class="ex"><div class="ex-top"><p class="code">&lt;Text&gt;</p><span class="chip ink">span (default)</span></div><span class="t t-md">Inline by default, so it is valid inside buttons, labels and headings.</span></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;Text as="p" size="lg"&gt;</p><span class="chip ink">p</span></div><p class="t t-lg">Body large for introductions. Generous leading keeps long passages calm.</p></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;Text as="label" weight="medium" htmlFor="…"&gt;</p><span class="chip ink">label</span></div><span class="t t-md w5 emph">Display name</span></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;Text asChild size="xs" tone="muted"&gt;&lt;time dateTime="2026-10-26"&gt;</p><span class="chip ink">time</span></div><span class="t t-xs muted">26 Oct 2026</span></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;Text asChild family="mono" size="sm"&gt;&lt;a href="…"&gt;</p><span class="chip ink">a</span></div><span class="t t-sm mono"><a class="lk hov" href="#">docs/specs/Typography.md</a></span></div>
+</div><div class="ab-f">as accepts span · p · div · label · legend · figcaption. Links, time, router links and other components go through asChild. as and asChild are mutually exclusive (typed).</div></div>
+
+</div>
+</section>
+
+<!-- 02 HEADING SIZES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Heading · Sizes</h2></div>
+<p class="sec-d">Six sizes, all Red Hat Mono 500, black, no margin, balanced wrapping. 2xl to md are the existing display, h1, h2 and h3 styles; sm and xs are new steps (18 and 16 px, already in the scale as body sizes) so that h4 to h6 have a heading look. Each artboard shows one line and a wrapped line to show the leading.</p>
+<div class="grid1">
+<div class="ab"><div class="ab-h"><span>2xl · display</span><span>Mono 500 · 72 / 72 · −4% tracking</span></div><div class="ab-b">
+<div class="h h-2xl">Less, but better</div>
+<div class="h h-2xl" style="max-width:760px">Quiet interfaces for loud products</div>
+</div><div class="ab-f">Hero and marketing only. Never a default; set it explicitly, usually on level 1.</div></div>
+<div class="ab"><div class="ab-h"><span>xl · h1</span><span>Mono 500 · 48 / 53 · −3% tracking</span></div><div class="ab-b">
+<div class="h h-xl">Account settings</div>
+<div class="h h-xl" style="max-width:560px">Quiet interfaces for loud products</div>
+</div><div class="ab-f">Default for level 1. Page titles.</div></div>
+</div>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>lg · h2</span><span>Mono 500 · 32 / 38 · −2% tracking</span></div><div class="ab-b">
+<div class="h h-lg">Section heading</div>
+<div class="h h-lg" style="max-width:360px">Shipping and returns for every order</div>
+</div><div class="ab-f">Default for level 2. Page sections.</div></div>
+<div class="ab"><div class="ab-h"><span>md · h3</span><span>Mono 500 · 22 / 29 · 0</span></div><div class="ab-b">
+<div class="h h-md">Card title</div>
+<div class="h h-md" style="max-width:260px">Shipping and returns for every order</div>
+</div><div class="ab-f">Default for level 3. Cards, dialog titles, subsections.</div></div>
+<div class="ab"><div class="ab-h"><span>sm · h4 (new step)</span><span>Mono 500 · 18 / 26 · 0</span></div><div class="ab-b">
+<div class="h h-sm">Group title</div>
+<div class="h h-sm" style="max-width:220px">Shipping and returns for every order</div>
+</div><div class="ab-f">Default for level 4. Groups inside a card, side panels.</div></div>
+<div class="ab"><div class="ab-h"><span>xs · h5 (new step)</span><span>Mono 500 · 16 / 24 · 0</span></div><div class="ab-b">
+<div class="h h-xs">List heading</div>
+<div class="h h-xs" style="max-width:200px">Shipping and returns for every order</div>
+</div><div class="ab-f">Default for levels 5 and 6. Smallest heading; below this, use Text weight="medium".</div></div>
+</div>
+</section>
+
+<!-- 03 LEVEL DEFAULTS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Heading · Level defaults and overrides</h2></div>
+<p class="sec-d">Without <code>size</code>, each level maps to one step. Levels 5 and 6 share xs: deep outlines are rare and a seventh step would be too close to body text. Override <code>size</code> when the outline and the visual hierarchy disagree, which is common in cards, sidebars and dialogs.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>Defaults</span><span>no size prop</span></div><div class="ab-b" style="padding-top:8px">
+<table class="tbl">
+<thead><tr><th>Level</th><th>Element</th><th>Size</th><th>Looks like</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><span class="chip">h1</span></td><td>xl</td><td><span class="h h-xl" style="font-size:48px">Aa</span></td></tr>
+<tr><td>2</td><td><span class="chip">h2</span></td><td>lg</td><td><span class="h h-lg">Aa</span></td></tr>
+<tr><td>3</td><td><span class="chip">h3</span></td><td>md</td><td><span class="h h-md">Aa</span></td></tr>
+<tr><td>4</td><td><span class="chip">h4</span></td><td>sm</td><td><span class="h h-sm">Aa</span></td></tr>
+<tr><td>5</td><td><span class="chip">h5</span></td><td>xs</td><td><span class="h h-xs">Aa</span></td></tr>
+<tr><td>6</td><td><span class="chip">h6</span></td><td>xs</td><td><span class="h h-xs">Aa</span></td></tr>
+</tbody>
+</table>
+</div><div class="ab-f">2xl is never a default.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Level ≠ size</span><span>outline from the page, look from the layout</span></div><div class="ab-b">
+<div style="display:flex;align-items:center;gap:12px"><div class="h h-xl">Account</div><span class="chip ink">h1 · xl</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><div class="h h-lg">Profile</div><span class="chip ink">h2 · lg</span></div>
+<p class="t t-md">Your name and photo appear on invoices and shared projects.</p>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><div class="h h-md">Avatar</div><span class="chip ink">h3 · md</span></div>
+</div>
+<div class="panel" style="border-color:#E0E0E0">
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><div class="h h-sm">Plan</div><span class="chip ink">h2 · sm</span></div>
+<p class="t t-sm">Team · 12 seats</p>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><div class="h h-xs">Usage</div><span class="chip ink">h3 · xs</span></div>
+<p class="t t-xs muted">8 of 12 seats used</p>
+</div>
+</div>
+</div><div class="ab-f">The sidebar card is a sibling section of Profile, so its title is level 2 even though it is set at sm. Skipping to h4 to get the small look would break the outline (section 09).</div></div>
+
+<div class="ab span2"><div class="ab-h"><span>asChild</span><span>the child decides the element; level only picks the default size</span></div><div class="ab-b">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px">
+<div class="ex" style="border:0;padding:0">
+<p class="code">&lt;Heading asChild size="md"&gt;
+  &lt;Dialog.Title&gt;Delete project?&lt;/Dialog.Title&gt;
+&lt;/Heading&gt;</p>
+<div class="panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div class="h h-md">Delete project?</div><span class="chip ink">h2 (from Dialog.Title)</span></div><p class="t t-md">This removes 24 files for everyone on the team.</p></div>
+</div>
+<div class="ex" style="border:0;padding:0">
+<p class="code">&lt;Heading asChild level={2}&gt;
+  &lt;RouterOutletTitle /&gt;   // renders its own &lt;h2&gt;
+&lt;/Heading&gt;</p>
+<div class="panel" style="border-color:#E0E0E0"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div class="h h-lg">Invoices</div><span class="chip ink">h2 (child) · lg</span></div></div>
+<p class="note">Use asChild only when the child is itself a heading element (or has role="heading" with aria-level). For a link in a heading, nest the link instead (section 08).</p>
+</div>
+</div>
+</div></div>
+
+</div>
+</section>
+
+<!-- 04 TEXT SIZES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Text · Sizes</h2></div>
+<p class="sec-d">Five sizes, shown at the defaults: Red Hat Text 400, tone default (gray-700). Sizes are the existing body-lg, body, body-sm, caption and ui-sm styles, so Text lines up with the labels and descriptions inside existing controls.</p>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>lg · body-lg</span><span>18 / 29</span></div><div class="ab-b">
+<p class="t t-lg">Body large for introductions and lead paragraphs. Generous leading keeps long passages calm and readable.</p>
+</div><div class="ab-f">Page intros, empty states, marketing body.</div></div>
+<div class="ab"><div class="ab-h"><span>md · body (default)</span><span>16 / 26</span></div><div class="ab-b">
+<p class="t t-md">Default body copy for interface text, descriptions and form help. Same size and leading as Input, Checkbox md label and Dialog body.</p>
+</div><div class="ab-f">Default. Paragraphs and interface copy.</div></div>
+<div class="ab"><div class="ab-h"><span>sm · body-sm</span><span>15 / 24</span></div><div class="ab-b">
+<p class="t t-sm">Dense body for tables, side panels and compact lists. Matches the Checkbox sm label.</p>
+</div><div class="ab-f">Dense desktop layouts.</div></div>
+<div class="ab"><div class="ab-h"><span>xs · caption</span><span>13 / 20</span></div><div class="ab-b">
+<p class="t t-xs">Caption text for photos, metadata, hints and footnotes. Matches field hints and checkbox descriptions.</p>
+</div><div class="ab-f">Captions, metadata, footnotes. Usually with tone="muted".</div></div>
+<div class="ab"><div class="ab-h"><span>2xs · ui-sm</span><span>12 / 16</span></div><div class="ab-b">
+<p class="t t-2xs">Smallest text: tags, marks, counters and timestamps. Usually set in mono.</p>
+<p class="t t-2xs mono muted">01 — Landscape · 4:5</p>
+</div><div class="ab-f">Meta and numerals only, never paragraphs.</div></div>
+<div class="ab"><div class="ab-h"><span>Scale at a glance</span><span>same sentence, every size</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">lg</span><span class="t t-lg">Quiet interfaces</span></div>
+<div class="wrow"><span class="meta">md</span><span class="t t-md">Quiet interfaces</span></div>
+<div class="wrow"><span class="meta">sm</span><span class="t t-sm">Quiet interfaces</span></div>
+<div class="wrow"><span class="meta">xs</span><span class="t t-xs">Quiet interfaces</span></div>
+<div class="wrow"><span class="meta">2xs</span><span class="t t-2xs">Quiet interfaces</span></div>
+</div></div>
+</div>
+</section>
+
+<!-- 05 WEIGHT x FAMILY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Text · Weight × family</h2></div>
+<p class="sec-d">Three weights (regular 400, medium 500, bold 700) in two families (text: Red Hat Text, mono: Red Hat Mono). One artboard per combination, every size in each. Sizes and line heights do not change with family. Mono is for numerals, code, paths, IDs and meta; text is for reading.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>text · regular</span><span>Red Hat Text 400 (default)</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">lg</span><span class="t t-lg w4">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">md</span><span class="t t-md w4">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">sm</span><span class="t t-sm w4">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">xs</span><span class="t t-xs w4">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">2xs</span><span class="t t-2xs w4">Order 1284 shipped</span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>text · medium</span><span>Red Hat Text 500</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">lg</span><span class="t t-lg w5">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">md</span><span class="t t-md w5">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">sm</span><span class="t t-sm w5">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">xs</span><span class="t t-xs w5">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">2xs</span><span class="t t-2xs w5">Order 1284 shipped</span></div>
+</div><div class="ab-f">Inline emphasis, list item titles, values next to labels.</div></div>
+
+<div class="ab"><div class="ab-h"><span>text · bold</span><span>Red Hat Text 700</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">lg</span><span class="t t-lg w7">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">md</span><span class="t t-md w7">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">sm</span><span class="t t-sm w7">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">xs</span><span class="t t-xs w7">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">2xs</span><span class="t t-2xs w7">Order 1284 shipped</span></div>
+</div><div class="ab-f">Sparingly: a key figure or warning word inside a paragraph.</div></div>
+
+<div class="ab"><div class="ab-h"><span>mono · regular</span><span>Red Hat Mono 400</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">lg</span><span class="t t-lg mono w4">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">md</span><span class="t t-md mono w4">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">sm</span><span class="t t-sm mono w4">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">xs</span><span class="t t-xs mono w4">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">2xs</span><span class="t t-2xs mono w4">Order 1284 shipped</span></div>
+</div><div class="ab-f">Code, file paths, IDs, timestamps.</div></div>
+
+<div class="ab"><div class="ab-h"><span>mono · medium</span><span>Red Hat Mono 500</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">lg</span><span class="t t-lg mono w5">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">md</span><span class="t t-md mono w5">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">sm</span><span class="t t-sm mono w5">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">xs</span><span class="t t-xs mono w5">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">2xs</span><span class="t t-2xs mono w5">Order 1284 shipped</span></div>
+</div><div class="ab-f">Prices, counters, values (like the Slider pill).</div></div>
+
+<div class="ab"><div class="ab-h"><span>mono · bold</span><span>Red Hat Mono 700</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">lg</span><span class="t t-lg mono w7">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">md</span><span class="t t-md mono w7">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">sm</span><span class="t t-sm mono w7">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">xs</span><span class="t t-xs mono w7">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">2xs</span><span class="t t-2xs mono w7">Order 1284 shipped</span></div>
+</div><div class="ab-f">Rare. Heading weight is 500; bold mono competes with headings.</div></div>
+
+</div>
+</section>
+
+<!-- 06 TONE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Text · Tone</h2></div>
+<p class="sec-d">Four tones, all gray scale. Header right gives the colour and its contrast on white. Status colours are not tones: feedback text belongs to Field errors and Alert, which pair the colour with an icon and a label. Use tone="inherit" to sit inside those, or inside any coloured parent.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>default</span><span>gray-700 · 10.4:1</span></div><div class="ab-b">
+<p class="t t-md">Body copy. Readable for long passages without the full weight of black.</p>
+<p class="t t-xs">Caption in default tone.</p>
+</div><div class="ab-f">Default for Text.</div></div>
+
+<div class="ab"><div class="ab-h"><span>muted</span><span>gray-600 · 7:1</span></div><div class="ab-b">
+<p class="t t-md muted">Secondary copy: descriptions, metadata, helper text.</p>
+<p class="t t-xs muted">Updated 2 hours ago</p>
+</div><div class="ab-f">The only lighter tone. Never lighter than gray-600 for text.</div></div>
+
+<div class="ab"><div class="ab-h"><span>emphasis</span><span>black · 21:1</span></div><div class="ab-b">
+<p class="t t-md emph">Ink. Values, selected items and labels that must read as strongly as a heading.</p>
+<p class="t t-xs emph w5">Due today</p>
+</div><div class="ab-f">Same colour as Heading. Combine with weight="medium" for inline labels.</div></div>
+
+<div class="ab"><div class="ab-h"><span>inherit</span><span>parent colour</span></div><div class="ab-b">
+<span class="inv"><span class="t t-sm mono w5 inherit">Continue</span></span>
+<div class="err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.5"/></svg><span class="t t-xs w5 inherit"><span class="sr">Error: </span>Enter a valid email address.</span></div>
+</div><div class="ab-f">Takes the parent's colour: white on a primary button, error inside a field error row (icon and "Error:" prefix come from the parent).</div></div>
+
+<div class="ab"><div class="ab-h"><span>On fills</span><span>gray-50 / gray-100</span></div><div class="ab-b" style="gap:8px">
+<div class="surf s50"><span class="t t-md">default on gray-50 · 9.7:1</span><span class="t t-xs muted">muted on gray-50 · 6.5:1</span></div>
+<div class="surf s100"><span class="t t-md">default on gray-100 · 8.9:1</span><span class="t t-xs muted">muted on gray-100 · 6.0:1</span></div>
+</div><div class="ab-f">Every tone passes 4.5:1 on every surface fill, at every size.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Not offered</span><span>by design</span></div><div class="ab-b">
+<p class="note">No success / error / info tones: colour alone must never carry status. No placeholder or disabled tone: disabled text is set by the disabled control. No custom colours: there are none in the system.</p>
+</div></div>
+
+</div>
+</section>
+
+<!-- 07 TRUNCATE / CLAMP -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Truncate · Line clamp</h2></div>
+<p class="sec-d">Text wraps by default. <code>truncate</code> keeps one line and ends it with an ellipsis. <code>lineClamp={n}</code> keeps n lines and ends the last with an ellipsis. Both are on Text and Heading and are mutually exclusive. The dashed frame is the container (280 px). The full string stays in the DOM, so it is copied, found and read by screen readers in full.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Wrap (default)</span><span>no prop</span></div><div class="ab-b">
+<div class="frame"><p class="t t-md">Quarterly report for the north-east region, including returns and refunds</p></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Text · truncate</span><span>1 line · ellipsis</span></div><div class="ab-b">
+<div class="frame"><p class="t t-md trunc">Quarterly report for the north-east region, including returns and refunds</p></div>
+</div><div class="ab-f">nowrap, overflow hidden, text-overflow ellipsis, display block.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Text · lineClamp={2}</span><span>2 lines · ellipsis</span></div><div class="ab-b">
+<div class="frame"><p class="t t-md clamp2">Quarterly report for the north-east region, including returns, refunds, exchanges and the carrier delays from October.</p></div>
+</div><div class="ab-f">Card descriptions, list previews.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Text · lineClamp={3}</span><span>3 lines · xs muted</span></div><div class="ab-b">
+<div class="frame"><p class="t t-xs muted clamp3">Quarterly report for the north-east region, including returns, refunds, exchanges and the carrier delays from October. Figures are provisional until the audit closes at the end of the month.</p></div>
+</div><div class="ab-f">Any tone, size and family can clamp.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Heading · truncate</span><span>md · 1 line</span></div><div class="ab-b">
+<div class="frame"><div class="h h-md trunc">North-east quarterly report and returns</div></div>
+</div><div class="ab-f">Balanced wrapping is turned off when truncating or clamping.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Heading · lineClamp={2}</span><span>lg · 2 lines</span></div><div class="ab-b">
+<div class="frame"><div class="h h-lg clamp2">North-east quarterly report and every return this year</div></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Truncate in a flex row</span><span>min-width 0 · meta never shrinks</span></div><div class="ab-b">
+<div class="frame"><div class="frow">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>
+<span class="t t-sm emph trunc" style="flex:1 1 auto">quarterly-report-north-east-final-v3.pdf</span>
+<span class="t t-xs muted" style="flex:none">2.4 MB</span>
+</div></div>
+</div><div class="ab-f">Text sets min-width: 0 when truncating, so it shrinks inside flex and grid rows.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Mono · truncate</span><span>end ellipsis only</span></div><div class="ab-b">
+<div class="frame"><span class="t t-sm mono trunc">src/components/Heading/Heading.stories.tsx</span></div>
+</div><div class="ab-f">Middle truncation (keeping the file name) is not supported; it needs JS measuring.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Fits</span><span>no ellipsis</span></div><div class="ab-b">
+<div class="frame"><p class="t t-md trunc">Quarterly report</p></div>
+<div class="frame"><p class="t t-md clamp2">Quarterly report for the north-east region.</p></div>
+</div><div class="ab-f">When the text fits, truncate and lineClamp change nothing visible.</div></div>
+
+</div>
+</section>
+
+<!-- 08 STATES / FOCUS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">States · Focus</h2></div>
+<p class="sec-d">Heading and Text are static: no hover, pressed, selected, disabled or invalid state, and they are not in the tab order. The only focus they show is as the target of a skip link or of focus management (tabIndex={-1}). Interactive children such as links own their own hover and focus styles; the artboards show how they compose.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Static</span><span>no interaction state</span></div><div class="ab-b">
+<div class="h h-md">Recent orders</div>
+<p class="t t-md">Hovering or clicking changes nothing. The cursor stays the text cursor.</p>
+</div><div class="ab-f">Tab skips both components.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus target · focus-visible</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b">
+<div class="h h-lg foc" style="align-self:flex-start">Main content</div>
+<p class="t t-md">Reached with a skip link or focused after a keyboard-driven route change.</p>
+</div><div class="ab-f">Only with tabIndex={-1}. The ring fits the text box, same ring as every control.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus target · pointer</span><span>no ring</span></div><div class="ab-b">
+<div class="h h-lg" style="align-self:flex-start">Main content</div>
+<p class="t t-md">Focused by script after a mouse click: :focus without :focus-visible shows nothing.</p>
+</div><div class="ab-f">Screen readers still announce the heading.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Link in heading · rest</span><span>link inherits the heading look</span></div><div class="ab-b">
+<div class="h h-md"><a class="lk" href="#">Spring collection</a></div>
+<p class="code">&lt;Heading level={3}&gt;&lt;a href="…"&gt;…&lt;/a&gt;&lt;/Heading&gt;</p>
+</div><div class="ab-f">Nest the link. The element stays h3 and the link is named by its text.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Link in heading · hover</span><span>underline, 4 px offset</span></div><div class="ab-b">
+<div class="h h-md"><a class="lk hov" href="#">Spring collection</a></div>
+</div><div class="ab-f">Hover belongs to the link (same underline as the ghost button), not to Heading.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Link in heading · focus-visible</span><span>ring on the link</span></div><div class="ab-b">
+<div class="h h-md"><a class="lk foc" href="#">Spring collection</a></div>
+</div><div class="ab-f">One tab stop: the link. The heading itself is not focusable.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Text asChild link · focus-visible</span><span>ring on the link</span></div><div class="ab-b">
+<p class="t t-md">Read the <span class="t t-md w5 emph"><a class="lk foc" href="#">return policy</a></span> before you send it back.</p>
+</div><div class="ab-f">Text adds size, weight and tone to the a; the link component (or the global focus-ring utility) adds the ring.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Don't · Heading asChild on a link</span><span>heading role lost</span></div><div class="ab-b">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div class="h h-md"><a class="lk" href="#">Spring collection</a></div><span class="chip ink">a · not a heading</span></div>
+<p class="code">&lt;Heading asChild level={3}&gt;&lt;a href="…"&gt;</p>
+</div><div class="ab-f">asChild replaces the h3 with the a, so it disappears from heading navigation. Nest the link instead.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Inside a disabled control</span><span>parent sets the colour</span></div><div class="ab-b">
+<div style="display:flex;align-items:center;gap:12px;color:#767676"><span style="box-sizing:border-box;width:24px;height:24px;border:2px solid #A3A3A3;background:#F7F7F7;flex:none"></span><span class="t t-md inherit">Email me a copy</span></div>
+</div><div class="ab-f">Text has no disabled state. Use tone="inherit" inside controls so the control's disabled colour (gray-500) wins.</div></div>
+
+</div>
+</section>
+
+<!-- 09 HEADING ORDER -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">Heading order</h2></div>
+<p class="sec-d">Screen-reader users move through a page by heading level, so the levels must describe the structure. Pick the level from the outline and the size from the design; never pick a level to get a look.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>Do · levels follow the outline</span><span>one h1, no skipped levels</span></div><div class="ab-b">
+<div class="tree">
+<div class="n"><span class="chip ink">h1</span><span class="h h-xl" style="font-size:32px;line-height:38px">Account settings</span><span class="meta">xl</span></div>
+<div class="n l2"><span class="chip ink">h2</span><span class="h h-lg" style="font-size:22px;line-height:29px">Profile</span><span class="meta">lg</span></div>
+<div class="n l3"><span class="chip ink">h3</span><span class="h h-md" style="font-size:18px;line-height:26px">Avatar</span><span class="meta">md</span></div>
+<div class="n l2"><span class="chip ink">h2</span><span class="h h-lg" style="font-size:22px;line-height:29px">Billing</span><span class="meta">lg</span></div>
+<div class="n l3"><span class="chip ink">h3</span><span class="h h-sm">Plan</span><span class="meta">sm (override)</span></div>
+<div class="n l3"><span class="chip ink">h3</span><span class="h h-sm">Invoices</span><span class="meta">sm (override)</span></div>
+</div>
+</div><div class="ab-f">Sizes shown reduced. Going down, add one level at a time; going back up, any level is fine.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Don't · skip a level for a smaller look</span><span>h2 → h4</span></div><div class="ab-b">
+<div class="tree">
+<div class="n"><span class="chip">h2</span><span class="h h-lg" style="font-size:22px;line-height:29px">Billing</span></div>
+<div class="n l3"><span class="chip ink">h4</span><span class="h h-sm">Plan</span><span class="meta">✕ level chosen for its look</span></div>
+</div>
+<p class="code">✕ &lt;Heading level={4}&gt;Plan&lt;/Heading&gt;
+✓ &lt;Heading level={3} size="sm"&gt;Plan&lt;/Heading&gt;</p>
+</div><div class="ab-f">Same pixels, correct outline. jest-axe flags this with the heading-order rule.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Do · dialogs and reusable parts</span><span>level comes from the caller</span></div><div class="ab-b">
+<p class="t t-md">A dialog title is h2 (Radix Dialog.Title); its sections start at h3. A reusable card or section takes the level as a prop instead of hardcoding it, because it may sit under an h1 on one page and an h2 on another.</p>
+<p class="code">&lt;ProductCard headingLevel={3} /&gt;
+  → &lt;Heading level={headingLevel} size="md"&gt;</p>
+</div><div class="ab-f">One h1 per page, the page title. Visually hidden h1 is fine when the design has no visible title.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Don't · Heading for non-headings</span><span>use Text</span></div><div class="ab-b">
+<div style="display:flex;flex-direction:column;gap:4px">
+<span class="t t-2xs mono w5 muted">SERIES 04</span>
+<span class="t t-lg mono w5 emph">1,284</span>
+<span class="t t-xs muted">orders this month</span>
+</div>
+<p class="code">&lt;Text family="mono" size="2xs" weight="medium" tone="muted"&gt;
+&lt;Text family="mono" size="lg" weight="medium" tone="emphasis"&gt;</p>
+</div><div class="ab-f">Eyebrows, big numbers, bold labels and table cells are not headings. A heading must introduce content and must never be empty.</div></div>
+
+</div>
+</section>
+
+<!-- 10 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Keyboard</h2></div>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>Heading · Text</span><span>non-interactive · no Radix behaviour</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Skips Heading and Text. Focus goes to the next / previous control, including links nested inside them.</td></tr>
+<tr><td><span class="kbd">Enter</span> on a skip link</td><td>Moves focus to the target heading (tabIndex={-1}); it shows the focus ring. The next Tab continues from there.</td></tr>
+<tr><td>Any other key</td><td>No action.</td></tr>
+</tbody>
+</table>
+</div></div>
+<div class="ab"><div class="ab-h"><span>Screen reader navigation</span><span>why level matters</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Reader</th><th>Heading navigation</th></tr></thead>
+<tbody>
+<tr><td>NVDA / JAWS</td><td><span class="kbd">H</span> next heading · <span class="kbd">1</span>–<span class="kbd">6</span> next heading at that level</td></tr>
+<tr><td>VoiceOver</td><td>Rotor ▸ Headings, grouped by level</td></tr>
+<tr><td>TalkBack</td><td>Reading controls ▸ Headings</td></tr>
+</tbody>
+</table>
+</div><div class="ab-f">These keys belong to the reader, not the component. They only work when level follows the outline (section 09).</div></div>
+</div>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>
