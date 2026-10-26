@@ -100,8 +100,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers selected, unselected, disabled, focus and invalid, in both orientations
     - Spec names Radix `RadioGroup` and maps every state to tokens
     - Spec documents arrow-key and roving-tabindex behavior
-- [ ] **DS-16 RadioGroup — implementation.** Build `RadioGroup` in `src/components/RadioGroup/` on Radix `RadioGroup`, styled via `[data-state]` / `[data-disabled]`.
-  - type: build · has_ui: yes · depends_on: DS-15 · needs_human: no · status: todo
+- [x] **DS-16 RadioGroup — implementation.** Build `RadioGroup` in `src/components/RadioGroup/` on Radix `RadioGroup`, styled via `[data-state]` / `[data-disabled]`.
+  - type: build · has_ui: yes · depends_on: DS-15 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state
     - Arrow keys move selection; Tab enters and leaves the group once
