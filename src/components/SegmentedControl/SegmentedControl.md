@@ -5,8 +5,8 @@ Pick exactly one of 2–7 short text options in a horizontal strip. Built on Rad
 ## Which one to use
 
 - `SegmentedControl`: one of a few short text values (density, view, theme, sort order). A value is always selected.
-- One on/off setting: use `Switch` (planned, DS-29), not a two-option SegmentedControl.
-- Options led by an icon or picture (layout picker, quick actions): use `TileGroup` (planned, DS-31).
+- One on/off setting: use `Switch`, not a two-option SegmentedControl.
+- Options led by an icon or picture (layout picker, quick actions): use `TileGroup`.
 - More than 7 options, long labels, or options that can be empty: use a select or a radio list instead (the system has no `Select` component yet).
 - Picking a number: use `Slider` (see `../Slider/Slider.md`).
 - `ChoiceGroup` is internal. Never import it.

@@ -172,8 +172,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Selection indicator slides (transform + width, `--ds-motion`), no slide on first render, jumps under `prefers-reduced-motion`
     - `labelPosition` start/top and `help` slot outside the arrow-key order
     - Story per state, keyboard story, overflow story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-31 TileGroup — implementation.** Build `TileGroup` in `src/components/TileGroup/` on the `ChoiceGroup` base from DS-30 (Radix `RadioGroup`): icon + label tiles using `Icon`, per `docs/specs/Toggle.md`.
-  - type: build · has_ui: yes · depends_on: DS-30 · needs_human: no · status: todo
+- [x] **DS-31 TileGroup — implementation.** Build `TileGroup` in `src/components/TileGroup/` on the `ChoiceGroup` base from DS-30 (Radix `RadioGroup`): icon + label tiles using `Icon`, per `docs/specs/Toggle.md`.
+  - type: build · has_ui: yes · depends_on: DS-30 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state at sm and md; labels never wrap or truncate, tile grows to fit
     - Reuses `ChoiceGroup` scrolling, label and help behaviour (no duplicated scroll logic)
@@ -364,3 +364,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-8** CI pipeline — https://github.com/mikespineu/design-system-wireframe/pull/42
 - **DS-9** Release pipeline to npm — https://github.com/mikespineu/design-system-wireframe/pull/43
 - **DS-30** SegmentedControl — implementation — https://github.com/mikespineu/design-system-wireframe/pull/59
+- **DS-31** TileGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/63
