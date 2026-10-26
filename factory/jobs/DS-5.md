@@ -2,8 +2,8 @@
 task: DS-5
 title: "Toggle — design"
 line: design           # design | build
-status: waiting
-stage: publish
+status: in-progress
+stage: ci
 branch: "feat/DS-5-reapprove-toggle-spec"
 worktree: ".worktrees/feat-DS-5-reapprove-toggle-spec"
 pr: "49"
@@ -12,10 +12,10 @@ canvas_url: "https://claude.ai/artifact/UuJ22jU7nJ5m6JBXJbm3uq"
 storybook_url: "http://localhost:6178"
 model: default
 loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
-needs_you: "re-approve the amended Toggle spec (/factory:approve DS-5)"
+needs_you: ""
 blocked_reason: ""
 started: "2026-10-26T11:10:55Z"
-updated: "2026-10-26T18:02:46Z"
+updated: "2026-10-26T18:05:23Z"
 ---
 
 # DS-5 Toggle — design
@@ -37,6 +37,7 @@ updated: "2026-10-26T18:02:46Z"
 - 13:09 ci: checks green (ci, claude-review, deploy)
 - 13:09 merge: squash-merged PR #49
 - 19:02 publish: re-approval requested — spec amended in DS-30 (#59, scroll-snap dropped); approval reset
+- 19:05 approve: approved by mikespin (amended spec)
 
 ## Gate results
 
