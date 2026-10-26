@@ -146,8 +146,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `npm run build` produces ESM + type declarations in `dist/`
     - A compiled CSS entry (tokens + Tailwind utilities) is emitted
     - `package.json` sets `name`, `exports`, `files`, `sideEffects`, `peerDependencies`
-- [ ] **DS-8 CI pipeline.** GitHub Actions workflow on every PR and push to `main`: `npm ci`, lint, typecheck, test with coverage, library build. Only `claude-code-review.yml` and `storybook-vercel.yml` exist now.
-  - type: infra · has_ui: no · depends_on: DS-7 · needs_human: no · status: todo
+- [x] **DS-8 CI pipeline.** GitHub Actions workflow on every PR and push to `main`: `npm ci`, lint, typecheck, test with coverage, library build. Only `claude-code-review.yml` and `storybook-vercel.yml` exist now.
+  - type: infra · has_ui: no · depends_on: DS-7 · needs_human: no · status: done
   - done_when:
     - Workflow runs on every PR and push to `main`
     - Runs `npm ci`, lint, typecheck, test with coverage, and the library build
