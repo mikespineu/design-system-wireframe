@@ -3,7 +3,7 @@ task: DS-8
 title: "CI pipeline"
 line: build            # design | build
 status: in-progress       # claimed | in-progress | waiting | blocked | merged
-stage: qa
+stage: review
 branch: "feat/DS-8-ci-pipeline"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-8-ci-pipeline"
 pr: ""
@@ -30,6 +30,8 @@ updated: "2026-10-26T09:31:35Z"
 - 10:32 gate:test: pass
 - 10:32 gate:storybook: pass
 - 10:32 qa: started
+- 10:32 qa: pass, no findings
+- 10:32 review: started
 
 ## Gate results
 
