@@ -55,7 +55,7 @@
 }
 
 .ds-textarea[aria-invalid='true'] {
-  border-width: 2px;
+  border-width: var(--ds-border-width-strong);
   border-color: var(--ds-color-error);
 }
 

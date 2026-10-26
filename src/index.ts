@@ -6,4 +6,5 @@ export * from './components/Tag';
 export * from './components/Input';
 export * from './components/IconButton';
 export * from './components/Textarea';
+export * from './components/Checkbox';
 export * from './components/Dialog';

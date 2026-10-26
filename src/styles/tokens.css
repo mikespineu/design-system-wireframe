@@ -65,6 +65,7 @@
   --ds-radius: 0;
   --ds-radius-md: var(--ds-radius);
   --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
   --ds-focus-width: 2px;
   --ds-focus-offset: 2px;
   --ds-control-height: 44px;
