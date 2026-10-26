@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Drawer</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:32px 24px}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+/* stage = viewport; page behind; 50 % black overlay (same as Dialog) */
+.stage{position:relative;overflow:hidden;background:#F7F7F7}
+.page{position:absolute;inset:0;padding:24px;display:flex;flex-direction:column;gap:12px}
+.page i{display:block;height:12px;background:#C7C7C7}
+.ov{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+/* drawer panel: white, radius 0, no shadow, 1 px black border on the inner edge only */
+.drw{position:absolute;box-sizing:border-box;display:flex;flex-direction:column;background:#FFFFFF;border:0 solid #000000;border-radius:0;box-shadow:none;color:#404040}
+.drw.right{top:0;bottom:0;right:0;border-left-width:1px;max-width:calc(100% - 48px)}
+.drw.left{top:0;bottom:0;left:0;border-right-width:1px;max-width:calc(100% - 48px)}
+.drw.top{top:0;left:0;right:0;border-bottom-width:1px;max-height:calc(100% - 48px)}
+.drw.bottom{bottom:0;left:0;right:0;border-top-width:1px;max-height:calc(100% - 48px)}
+.right.sm,.left.sm{width:320px}.right.md,.left.md{width:480px}.right.lg,.left.lg{width:640px}
+.top.sm,.bottom.sm{height:320px}.top.md,.bottom.md{height:480px}.top.lg,.bottom.lg{height:640px}
+.drw.full{inset:0;width:auto;height:auto;max-width:none;max-height:none;border-width:0}
+.hd{flex:none;display:flex;align-items:flex-start;gap:16px;padding:24px 24px 0}
+.hd>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.ttl{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:22px;line-height:29px;color:#000000}
+.desc{margin:0;font-size:16px;line-height:26px;color:#595959}
+.bd{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding:16px 24px 24px;font-size:16px;line-height:26px;color:#404040}
+.bd p{margin:0}
+.ft{flex:none;display:flex;justify-content:flex-end;gap:12px;padding:16px 24px;border-top:1px solid #E0E0E0}
+.ft.stack{flex-direction:column-reverse}
+.ft.stack .btn{width:100%}
+.x{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:-4px -8px 0 0;padding:0;border:1px solid transparent;background:#FFFFFF;color:#000000;cursor:pointer}
+.x.hover{background:#EEEEEE}
+.x.focus{border-color:#000000;outline:2px solid #000000;outline-offset:2px}
+.x.press{background:#000000;color:#FFFFFF}
+.btn{height:44px;padding:0 16px;border:1px solid #000000;background:#FFFFFF;font-family:'Red Hat Text',sans-serif;font-weight:500;font-size:16px;color:#000000}
+.btn.pri{background:#000000;color:#FFFFFF}
+.btn.focus{outline:2px solid #000000;outline-offset:2px}
+.lb{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.in{height:44px;box-sizing:border-box;width:100%;padding:0 12px;border:1px solid #C7C7C7;background:#FFFFFF;font-family:'Red Hat Text',sans-serif;font-size:16px;color:#404040}
+.in.focus{border-color:#000000;outline:2px solid #000000;outline-offset:2px}
+.fld{display:flex;flex-direction:column;gap:8px}
+.nv{display:flex;align-items:center;height:44px;padding:0 12px;border-bottom:1px solid #E0E0E0;color:#000000;text-decoration:none}
+.nv:first-child{border-top:1px solid #E0E0E0}
+.cap{margin:0;font-size:13px;line-height:20px;color:#595959}
+.thumbs{display:flex;flex-wrap:wrap;gap:12px}
+.thumbs svg{display:block;width:96px;height:96px}
+.phone{position:relative;width:375px;height:667px;overflow:hidden;border:1px solid #C7C7C7;align-self:center}
+/* motion schematics */
+.mini{position:relative;height:200px;overflow:hidden;background:#F7F7F7}
+.mini .page{padding:12px;gap:8px}
+.mini .page i{height:8px}
+.mp{position:absolute;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;padding:12px;background:#FFFFFF;border:0 solid #000000}
+.mp i{display:block;height:8px;background:#E0E0E0}
+.mp i:first-child{width:50%;background:#000000}
+.ghost{position:absolute;box-sizing:border-box;border:1px dashed #767676}
+.arw{position:absolute;padding:2px 8px;border:1px solid #000000;background:#FFFFFF;font-family:'Red Hat Mono',monospace;font-size:16px;line-height:20px;color:#000000}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:0 16px 0 0;border-bottom:1px solid #E0E0E0;color:#404040}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 16400px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Drawer · DS-44 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Drawer</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">Modal side panel that slides in from the right (default), left, top or bottom over the same 50 % black overlay as Dialog. Square corners, no shadow: a 1 px black border on the inner edge separates it from the page. Header, body and footer are Dialog's parts with Dialog's spacing; only the body scrolls. Under 480 px every drawer fills the screen. Built on Radix Dialog.</p>
+</header>
+
+<!-- 01 RIGHT -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Side · right (default)</h2></div>
+<p class="sec-d">Size sets the panel's extent along the slide axis: width for left and right, height for top and bottom. sm 320 px, md 480 px, lg 640 px. The panel is pinned to its edge and spans the full cross axis. It never takes more than the viewport minus 48 px, so a strip of overlay stays visible to click. Stages below are drawn at 1:1.</p>
+
+<div class="ab">
+<div class="ab-h"><span>right · sm</span><span>width 320 px · quick details, filters</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<div class="ov"></div>
+<div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-r-sm" aria-describedby="d-r-sm">
+<div class="hd"><div><h2 class="ttl" id="t-r-sm">Photo details</h2><p class="desc" id="d-r-sm">Edit the metadata for this photo.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="r-sm-1">Title</label><input id="r-sm-1" class="in" value="Harbour, winter"></div><div class="fld"><label class="lb" for="r-sm-2">Place</label><input id="r-sm-2" class="in" value="Gdynia"></div><div class="fld"><label class="lb" for="r-sm-3">Year</label><input id="r-sm-3" class="in" value="2019"></div></div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri">Save</button></div>
+</div>
+</div>
+<div class="ab-f">Slides in from the right edge. Border on the left (inner) edge only.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>right · md (default)</span><span>width 480 px · forms, record details</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<div class="ov"></div>
+<div class="drw right md" role="dialog" aria-modal="true" aria-labelledby="t-r-md" aria-describedby="d-r-md">
+<div class="hd"><div><h2 class="ttl" id="t-r-md">Photo details</h2><p class="desc" id="d-r-md">Edit the metadata for this photo.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="r-md-1">Title</label><input id="r-md-1" class="in focus" value="Harbour, winter"></div><div class="fld"><label class="lb" for="r-md-2">Place</label><input id="r-md-2" class="in" value="Gdynia"></div><div class="fld"><label class="lb" for="r-md-3">Year</label><input id="r-md-3" class="in" value="2019"></div></div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri">Save</button></div>
+</div>
+</div>
+<div class="ab-f">Opened: focus moves to the first focusable element in the body (Title), not the close button, as in Dialog.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>right · lg</span><span>width 640 px · rich content, previews</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<div class="ov"></div>
+<div class="drw right lg" role="dialog" aria-modal="true" aria-labelledby="t-r-lg" aria-describedby="d-r-lg">
+<div class="hd"><div><h2 class="ttl" id="t-r-lg">Photo details</h2><p class="desc" id="d-r-lg">Edit the metadata for this photo.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="r-lg-1">Title</label><input id="r-lg-1" class="in" value="Harbour, winter"></div><div class="fld"><label class="lb" for="r-lg-2">Place</label><input id="r-lg-2" class="in" value="Gdynia"></div><div class="fld"><label class="lb" for="r-lg-3">Year</label><input id="r-lg-3" class="in" value="2019"></div></div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri">Save</button></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 02 LEFT -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Side · left</h2></div>
+<p class="sec-d">Mirror of right: pinned to the left edge, border on the right (inner) edge. The header keeps the close button top-right, the footer keeps actions right-aligned, so parts never flip with the side. Typical use: navigation.</p>
+
+<div class="ab">
+<div class="ab-h"><span>left · sm</span><span>width 320 px · navigation</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%;align-self:flex-end"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<div class="ov"></div>
+<div class="drw left sm" role="dialog" aria-modal="true" aria-labelledby="t-l-sm" aria-describedby="d-l-sm">
+<div class="hd"><div><h2 class="ttl" id="t-l-sm">Series</h2><p class="desc" id="d-l-sm">Pick a series to browse.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><nav aria-label="Series list"><a class="nv" href="#">Harbour, winter</a><a class="nv" href="#">Quarry</a><a class="nv" href="#">Night trains</a><a class="nv" href="#">Dunes</a></nav></div>
+<div class="ft"><button class="btn">Manage</button><button class="btn pri">New series</button></div>
+</div>
+</div>
+<div class="ab-f">Slides in from the left edge.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>left · md (default)</span><span>width 480 px</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%;align-self:flex-end"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<div class="ov"></div>
+<div class="drw left md" role="dialog" aria-modal="true" aria-labelledby="t-l-md" aria-describedby="d-l-md">
+<div class="hd"><div><h2 class="ttl" id="t-l-md">Series</h2><p class="desc" id="d-l-md">Pick a series to browse.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><nav aria-label="Series list md"><a class="nv" href="#">Harbour, winter</a><a class="nv" href="#">Quarry</a><a class="nv" href="#">Night trains</a><a class="nv" href="#">Dunes</a></nav></div>
+<div class="ft"><button class="btn">Manage</button><button class="btn pri">New series</button></div>
+</div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>left · lg</span><span>width 640 px</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%;align-self:flex-end"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<div class="ov"></div>
+<div class="drw left lg" role="dialog" aria-modal="true" aria-labelledby="t-l-lg" aria-describedby="d-l-lg">
+<div class="hd"><div><h2 class="ttl" id="t-l-lg">Series</h2><p class="desc" id="d-l-lg">Pick a series to browse.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><nav aria-label="Series list lg"><a class="nv" href="#">Harbour, winter</a><a class="nv" href="#">Quarry</a><a class="nv" href="#">Night trains</a><a class="nv" href="#">Dunes</a></nav></div>
+<div class="ft"><button class="btn">Manage</button><button class="btn pri">New series</button></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 03 TOP -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Side · top</h2></div>
+<p class="sec-d">Pinned to the top edge, full width, border on the bottom (inner) edge. Size sets a fixed height (320 / 480 / 640 px, capped at viewport minus 48 px); the body fills what the header and footer leave and scrolls past that.</p>
+
+<div class="ab">
+<div class="ab-h"><span>top · sm</span><span>height 320 px · search, short tasks</span></div>
+<div class="stage" style="height: 384px">
+<div class="page" style="justify-content:flex-end"><i style="width:30%"></i><i></i><i style="width:80%"></i></div>
+<div class="ov"></div>
+<div class="drw top sm" role="dialog" aria-modal="true" aria-labelledby="t-t-sm" aria-describedby="d-t-sm">
+<div class="hd"><div><h2 class="ttl" id="t-t-sm">Search the archive</h2><p class="desc" id="d-t-sm">Search titles, captions and places.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="t-sm-1">Search</label><input id="t-sm-1" class="in" placeholder="e.g. harbour"></div></div>
+<div class="ft"><button class="btn">Clear</button><button class="btn pri">Search</button></div>
+</div>
+</div>
+<div class="ab-f">Slides down from the top edge.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>top · md (default)</span><span>height 480 px</span></div>
+<div class="stage" style="height: 544px">
+<div class="page" style="justify-content:flex-end"><i style="width:30%"></i><i></i><i style="width:80%"></i></div>
+<div class="ov"></div>
+<div class="drw top md" role="dialog" aria-modal="true" aria-labelledby="t-t-md" aria-describedby="d-t-md">
+<div class="hd"><div><h2 class="ttl" id="t-t-md">Search the archive</h2><p class="desc" id="d-t-md">Search titles, captions and places.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="t-md-1">Search</label><input id="t-md-1" class="in" placeholder="e.g. harbour"></div><p class="cap">Recent: harbour · quarry · 2019 · night trains</p></div>
+<div class="ft"><button class="btn">Clear</button><button class="btn pri">Search</button></div>
+</div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>top · lg</span><span>height 640 px</span></div>
+<div class="stage" style="height: 704px">
+<div class="page" style="justify-content:flex-end"><i style="width:30%"></i><i></i><i style="width:80%"></i></div>
+<div class="ov"></div>
+<div class="drw top lg" role="dialog" aria-modal="true" aria-labelledby="t-t-lg" aria-describedby="d-t-lg">
+<div class="hd"><div><h2 class="ttl" id="t-t-lg">Search the archive</h2><p class="desc" id="d-t-lg">Search titles, captions and places.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="t-lg-1">Search</label><input id="t-lg-1" class="in" placeholder="e.g. harbour"></div><p class="cap">Recent: harbour · quarry · 2019 · night trains</p></div>
+<div class="ft"><button class="btn">Clear</button><button class="btn pri">Search</button></div>
+</div>
+</div>
+<div class="ab-f">Fixed height: short content leaves white space above the footer; the footer stays on the panel's bottom edge.</div>
+</div>
+</section>
+
+<!-- 04 BOTTOM -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Side · bottom</h2></div>
+<p class="sec-d">Pinned to the bottom edge, full width, border on the top (inner) edge. Same heights as top. No drag handle: there is no swipe-to-dismiss, so a grabber would promise a gesture that does not exist.</p>
+
+<div class="ab">
+<div class="ab-h"><span>bottom · sm</span><span>height 320 px · selection actions</span></div>
+<div class="stage" style="height: 384px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i></div>
+<div class="ov"></div>
+<div class="drw bottom sm" role="dialog" aria-modal="true" aria-labelledby="t-b-sm" aria-describedby="d-b-sm">
+<div class="hd"><div><h2 class="ttl" id="t-b-sm">3 photos selected</h2><p class="desc" id="d-b-sm">Choose what to do with the selection.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="thumbs">
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#C7C7C7"/><path d="M0 70L30 45L55 62L75 40L96 58V96H0Z" fill="#767676"/><circle cx="70" cy="24" r="10" fill="#EEEEEE"/></svg>
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#A3A3A3"/><path d="M0 60H96V96H0Z" fill="#404040"/><rect x="20" y="30" width="24" height="30" fill="#E0E0E0"/></svg>
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#E0E0E0"/><path d="M0 80Q48 30 96 80V96H0Z" fill="#595959"/></svg>
+</div></div>
+<div class="ft"><button class="btn">Download</button><button class="btn pri">Add to series</button></div>
+</div>
+</div>
+<div class="ab-f">Slides up from the bottom edge.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>bottom · md (default)</span><span>height 480 px</span></div>
+<div class="stage" style="height: 544px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i></div>
+<div class="ov"></div>
+<div class="drw bottom md" role="dialog" aria-modal="true" aria-labelledby="t-b-md" aria-describedby="d-b-md">
+<div class="hd"><div><h2 class="ttl" id="t-b-md">3 photos selected</h2><p class="desc" id="d-b-md">Choose what to do with the selection.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="thumbs">
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#C7C7C7"/><path d="M0 70L30 45L55 62L75 40L96 58V96H0Z" fill="#767676"/><circle cx="70" cy="24" r="10" fill="#EEEEEE"/></svg>
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#A3A3A3"/><path d="M0 60H96V96H0Z" fill="#404040"/><rect x="20" y="30" width="24" height="30" fill="#E0E0E0"/></svg>
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#E0E0E0"/><path d="M0 80Q48 30 96 80V96H0Z" fill="#595959"/></svg>
+</div><p class="cap">Harbour, winter · Quarry · Dunes</p></div>
+<div class="ft"><button class="btn">Download</button><button class="btn pri">Add to series</button></div>
+</div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>bottom · lg</span><span>height 640 px</span></div>
+<div class="stage" style="height: 704px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i></div>
+<div class="ov"></div>
+<div class="drw bottom lg" role="dialog" aria-modal="true" aria-labelledby="t-b-lg" aria-describedby="d-b-lg">
+<div class="hd"><div><h2 class="ttl" id="t-b-lg">3 photos selected</h2><p class="desc" id="d-b-lg">Choose what to do with the selection.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="thumbs">
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#C7C7C7"/><path d="M0 70L30 45L55 62L75 40L96 58V96H0Z" fill="#767676"/><circle cx="70" cy="24" r="10" fill="#EEEEEE"/></svg>
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#A3A3A3"/><path d="M0 60H96V96H0Z" fill="#404040"/><rect x="20" y="30" width="24" height="30" fill="#E0E0E0"/></svg>
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#E0E0E0"/><path d="M0 80Q48 30 96 80V96H0Z" fill="#595959"/></svg>
+</div><p class="cap">Harbour, winter · Quarry · Dunes</p></div>
+<div class="ft"><button class="btn">Download</button><button class="btn pri">Add to series</button></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 05 MOBILE FULL -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Mobile · full</h2></div>
+<p class="sec-d">Under 480 px viewport width the size is ignored and every drawer fills the screen (100vw × 100dvh), with no border. It still slides in from its own side. Footer actions stack full width, primary first, exactly as Dialog's footer does at this breakpoint. Phones drawn at 375 × 667.</p>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>full · right</span><span>slides in from the right</span></div>
+<div class="ab-b" style="background:#F7F7F7">
+<div class="phone">
+<div class="drw full" role="dialog" aria-modal="true" aria-labelledby="t-m-r" aria-describedby="d-m-r">
+<div class="hd"><div><h2 class="ttl" id="t-m-r">Photo details</h2><p class="desc" id="d-m-r">Edit the metadata for this photo.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="m-r-1">Title</label><input id="m-r-1" class="in focus" value="Harbour, winter"></div><div class="fld"><label class="lb" for="m-r-2">Place</label><input id="m-r-2" class="in" value="Gdynia"></div><div class="fld"><label class="lb" for="m-r-3">Year</label><input id="m-r-3" class="in" value="2019"></div></div>
+<div class="ft stack"><button class="btn">Cancel</button><button class="btn pri">Save</button></div>
+</div>
+</div>
+</div>
+<div class="ab-f">No overlay strip is left to tap: close with the close button, Cancel or Esc.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>full · left</span><span>slides in from the left</span></div>
+<div class="ab-b" style="background:#F7F7F7">
+<div class="phone">
+<div class="drw full" role="dialog" aria-modal="true" aria-labelledby="t-m-l" aria-describedby="d-m-l">
+<div class="hd"><div><h2 class="ttl" id="t-m-l">Series</h2><p class="desc" id="d-m-l">Pick a series to browse.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><nav aria-label="Series list mobile"><a class="nv" href="#">Harbour, winter</a><a class="nv" href="#">Quarry</a><a class="nv" href="#">Night trains</a><a class="nv" href="#">Dunes</a></nav></div>
+<div class="ft stack"><button class="btn">Manage</button><button class="btn pri">New series</button></div>
+</div>
+</div>
+</div>
+<div class="ab-f">Footer bottom padding adds the device safe-area inset.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>full · top</span><span>slides down from the top</span></div>
+<div class="ab-b" style="background:#F7F7F7">
+<div class="phone">
+<div class="drw full" role="dialog" aria-modal="true" aria-labelledby="t-m-t" aria-describedby="d-m-t">
+<div class="hd"><div><h2 class="ttl" id="t-m-t">Search the archive</h2><p class="desc" id="d-m-t">Search titles, captions and places.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="m-t-1">Search</label><input id="m-t-1" class="in" placeholder="e.g. harbour"></div><p class="cap">Recent: harbour · quarry · 2019</p></div>
+<div class="ft stack"><button class="btn">Clear</button><button class="btn pri">Search</button></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>full · bottom</span><span>slides up from the bottom</span></div>
+<div class="ab-b" style="background:#F7F7F7">
+<div class="phone">
+<div class="drw full" role="dialog" aria-modal="true" aria-labelledby="t-m-b" aria-describedby="d-m-b">
+<div class="hd"><div><h2 class="ttl" id="t-m-b">3 photos selected</h2><p class="desc" id="d-m-b">Choose what to do with the selection.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="thumbs">
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#C7C7C7"/><path d="M0 70L30 45L55 62L75 40L96 58V96H0Z" fill="#767676"/><circle cx="70" cy="24" r="10" fill="#EEEEEE"/></svg>
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#A3A3A3"/><path d="M0 60H96V96H0Z" fill="#404040"/><rect x="20" y="30" width="24" height="30" fill="#E0E0E0"/></svg>
+<svg viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" fill="#E0E0E0"/><path d="M0 80Q48 30 96 80V96H0Z" fill="#595959"/></svg>
+</div></div>
+<div class="ft stack"><button class="btn">Download</button><button class="btn pri">Add to series</button></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 06 ANATOMY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Anatomy</h2></div>
+<p class="sec-d">Every part except the panel's position, extent and border edge is shared with Dialog, token for token.</p>
+<table class="tbl">
+<thead><tr><th>Part</th><th>Spec</th><th>vs Dialog</th></tr></thead>
+<tbody>
+<tr><td>Overlay</td><td>fixed, inset 0, black at 50 % (color-mix of --ds-color-ink); no blur</td><td>same</td></tr>
+<tr><td>Panel</td><td>white surface, radius 0, no shadow; fixed to one edge, full cross axis</td><td>position differs</td></tr>
+<tr><td>Panel border</td><td>1 px black on the inner edge only (left for right, right for left, bottom for top, top for bottom); none when full</td><td>one edge instead of four</td></tr>
+<tr><td>Panel extent</td><td>sm 320 / md 480 / lg 640 px; width for left/right, height for top/bottom; max viewport − 48 px</td><td>new scale</td></tr>
+<tr><td>Header</td><td>padding 24 / 24 / 0; title + description column, gap 8; close button top-right</td><td>same</td></tr>
+<tr><td>Title</td><td>Red Hat Mono 500, h3 22/29, black; required</td><td>same</td></tr>
+<tr><td>Description</td><td>body 16/26, gray-600; required</td><td>required here (optional in Dialog)</td></tr>
+<tr><td>Body</td><td>padding 16 / 24 / 24, body 16/26 gray-700; fills remaining space, scrolls; overscroll contained</td><td>same, plus flex fill</td></tr>
+<tr><td>Footer</td><td>1 px gray-200 top divider, padding 16 / 24, actions right-aligned, gap 12, primary last; pinned to panel bottom</td><td>same</td></tr>
+<tr><td>Close button</td><td>32 × 32, 16 px X icon (2 px stroke), transparent border; aria-label "Close"</td><td>same</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- 07 MOTION -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Motion</h2></div>
+<p class="sec-d">The panel slides from its edge (translate 100 % of its own size to 0) while the overlay fades 0 → 1, both over --ds-motion (120 ms, cubic-bezier(.2, 0, 0, 1)). Closing plays the same in reverse. With prefers-reduced-motion: reduce there is no slide and no fade. Schematics, not to scale: dashed outline = resting position, overlay shown mid-fade.</p>
+
+<div class="grid4">
+<div class="ab">
+<div class="ab-h"><span>Opening · right</span><span>translateX(100%) → 0</span></div>
+<div class="mini">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:70%"></i></div>
+<div class="ov" style="opacity:.5"></div>
+<div class="ghost" style="top:0;bottom:0;right:0;width:40%"></div>
+<div class="mp" style="top:0;bottom:0;right:0;width:40%;border-left-width:1px;transform:translateX(50%)"><i></i><i></i><i></i></div>
+<span class="arw" style="top:88px;right:calc(20% + 12px)">←</span>
+</div>
+<div class="ab-f">data-state="open", mid-animation</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Opening · left</span><span>translateX(-100%) → 0</span></div>
+<div class="mini">
+<div class="page"><i style="width:40%;align-self:flex-end"></i><i></i><i style="width:70%"></i></div>
+<div class="ov" style="opacity:.5"></div>
+<div class="ghost" style="top:0;bottom:0;left:0;width:40%"></div>
+<div class="mp" style="top:0;bottom:0;left:0;width:40%;border-right-width:1px;transform:translateX(-50%)"><i></i><i></i><i></i></div>
+<span class="arw" style="top:88px;left:calc(20% + 12px)">→</span>
+</div>
+<div class="ab-f">data-state="open", mid-animation</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Opening · top</span><span>translateY(-100%) → 0</span></div>
+<div class="mini">
+<div class="page" style="justify-content:flex-end"><i style="width:40%"></i><i></i><i style="width:70%"></i></div>
+<div class="ov" style="opacity:.5"></div>
+<div class="ghost" style="top:0;left:0;right:0;height:50%"></div>
+<div class="mp" style="top:0;left:0;right:0;height:50%;border-bottom-width:1px;transform:translateY(-50%)"><i></i><i></i></div>
+<span class="arw" style="top:calc(25% + 12px);left:calc(50% - 16px)">↓</span>
+</div>
+<div class="ab-f">data-state="open", mid-animation</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Opening · bottom</span><span>translateY(100%) → 0</span></div>
+<div class="mini">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:70%"></i></div>
+<div class="ov" style="opacity:.5"></div>
+<div class="ghost" style="bottom:0;left:0;right:0;height:50%"></div>
+<div class="mp" style="bottom:0;left:0;right:0;height:50%;border-top-width:1px;transform:translateY(50%)"><i></i><i></i></div>
+<span class="arw" style="bottom:calc(25% + 12px);left:calc(50% - 16px)">↑</span>
+</div>
+<div class="ab-f">data-state="open", mid-animation</div>
+</div>
+</div>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Closing · right</span><span>0 → translateX(100%)</span></div>
+<div class="mini">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:70%"></i><i></i></div>
+<div class="ov" style="opacity:.5"></div>
+<div class="ghost" style="top:0;bottom:0;right:0;width:40%"></div>
+<div class="mp" style="top:0;bottom:0;right:0;width:40%;border-left-width:1px;transform:translateX(50%)"><i></i><i></i><i></i></div>
+<span class="arw" style="top:88px;right:calc(20% - 40px)">→</span>
+</div>
+<div class="ab-f">data-state="closed". Uses a CSS keyframe animation so Radix Presence keeps the panel mounted until it ends; focus returns to the trigger.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Reduced motion · any side</span><span>prefers-reduced-motion: reduce</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#E0E0E0">
+<div class="mini">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:70%"></i><i></i></div>
+<span class="arw" style="bottom:12px;left:12px;font-size:12px">frame 0 · closed</span>
+</div>
+<div class="mini">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:70%"></i><i></i></div>
+<div class="ov"></div>
+<div class="mp" style="top:0;bottom:0;right:0;width:40%;border-left-width:1px"><i></i><i></i><i></i></div>
+<span class="arw" style="bottom:12px;left:12px;font-size:12px">frame 1 · open</span>
+</div>
+</div>
+<div class="ab-f">animation: none on overlay and panel. The drawer appears and disappears in one frame; no in-between.</div>
+</div>
+</div>
+</section>
+
+<!-- 08 STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">States</h2></div>
+<p class="sec-d">Close button states in isolation (identical to Dialog), then panel states on a right · sm drawer in a 1:1 stage. Focus rings are 2 px black at 2 px offset.</p>
+
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>Close · default</span><span>fill white</span></div><div class="ab-b" style="align-items:center"><button class="x" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>Close · hover</span><span>fill gray-100</span></div><div class="ab-b" style="align-items:center"><button class="x hover" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>Close · focus-visible</span><span>black border + ring</span></div><div class="ab-b" style="align-items:center"><button class="x focus" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>Close · pressed</span><span>fill black, icon white</span></div><div class="ab-b" style="align-items:center"><button class="x press" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+</div>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Closed</span><span>data-state="closed"</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i><button class="btn" style="align-self:flex-start;margin-top:12px">Photo details</button></div>
+</div>
+<div class="ab-f">No overlay, no panel in the DOM. Trigger gets aria-haspopup="dialog", aria-expanded="false".</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Closed · focus returned</span><span>after Esc / close / Cancel</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i><button class="btn focus" style="align-self:flex-start;margin-top:12px">Photo details</button></div>
+</div>
+<div class="ab-f">Focus is back on the trigger with a visible ring.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · initial focus</span><span>first body field</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-s1" aria-describedby="d-s1">
+<div class="hd"><div><h2 class="ttl" id="t-s1">Photo details</h2><p class="desc" id="d-s1">Edit the metadata for this photo.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="s1-1">Title</label><input id="s1-1" class="in focus" value="Harbour, winter"></div><div class="fld"><label class="lb" for="s1-2">Place</label><input id="s1-2" class="in" value="Gdynia"></div></div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri">Save</button></div>
+</div>
+</div>
+<div class="ab-f">data-state="open". Page scroll locked; outside content inert to assistive tech.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · focus on close button</span><span>body has no focusables</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-s2" aria-describedby="d-s2">
+<div class="hd"><div><h2 class="ttl" id="t-s2">About this series</h2><p class="desc" id="d-s2">Harbour, winter · 24 photos.</p></div>
+<button class="x focus" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><p>Shot over four mornings on the Gdynia breakwater, in fog and light snow.</p></div>
+</div>
+</div>
+<div class="ab-f">No footer: footer and divider not rendered; body runs to the bottom edge. Focus falls back to the close button.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · focus on primary action</span><span>Tab wraps inside panel</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-s3" aria-describedby="d-s3">
+<div class="hd"><div><h2 class="ttl" id="t-s3">Photo details</h2><p class="desc" id="d-s3">Edit the metadata for this photo.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="s3-1">Title</label><input id="s3-1" class="in" value="Harbour, winter"></div><div class="fld"><label class="lb" for="s3-2">Place</label><input id="s3-2" class="in" value="Gdynia"></div></div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri focus">Save</button></div>
+</div>
+</div>
+<div class="ab-f">Next Tab goes back to the close button (focus trap).</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · scrolling body</span><span>header and footer fixed</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-s4" aria-describedby="d-s4">
+<div class="hd"><div><h2 class="ttl" id="t-s4">Licence terms</h2><p class="desc" id="d-s4">Read before publishing.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><p>Photos are licensed for editorial use only. Commercial use requires written permission from the author.</p><p>Credit the author on every use. Crops are allowed; colour changes are not, because the archive is monochrome.</p><p>Licences end after five years unless renewed. Archive prints need a separate agreement.</p></div>
+<div class="ft"><button class="btn">Decline</button><button class="btn pri">Accept</button></div>
+</div>
+</div>
+<div class="ab-f">Only the body scrolls; the footer divider marks the cut. Page behind does not scroll (Radix scroll lock); overscroll does not chain.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · capped extent</span><span>lg on a 612 px viewport</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw right lg" role="dialog" aria-modal="true" aria-labelledby="t-s5" aria-describedby="d-s5">
+<div class="hd"><div><h2 class="ttl" id="t-s5">Photo details</h2><p class="desc" id="d-s5">Edit the metadata for this photo.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="s5-1">Title</label><input id="s5-1" class="in" value="Harbour, winter"></div><div class="fld"><label class="lb" for="s5-2">Place</label><input id="s5-2" class="in" value="Gdynia"></div></div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri">Save</button></div>
+</div>
+</div>
+<div class="ab-f">640 px requested, viewport too narrow: width = viewport − 48 px, leaving a 48 px overlay strip to click.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · not dismissible</span><span>dismissible={false}</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-s6" aria-describedby="d-s6">
+<div class="hd"><div><h2 class="ttl" id="t-s6">Photo details</h2><p class="desc" id="d-s6">Unsaved changes.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd"><div class="fld"><label class="lb" for="s6-1">Title</label><input id="s6-1" class="in" value="Harbour, winter (edited)"></div></div>
+<div class="ft"><button class="btn">Cancel</button><button class="btn pri">Save</button></div>
+</div>
+</div>
+<div class="ab-f">Looks identical to Open. Overlay click does nothing; Esc, close button and Cancel still close.</div>
+</div>
+</div>
+</section>
+
+<!-- 09 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">Keyboard and dismissal</h2></div>
+<table class="tbl">
+<thead><tr><th>Input</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Enter</span> / <span class="kbd">Space</span> on trigger</td><td>Open; focus first focusable in body, else first in panel (close button)</td></tr>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Cycle inside panel only (focus trap): close, body controls, footer actions; wraps</td></tr>
+<tr><td><span class="kbd">Esc</span></td><td>Close (slide out); focus returns to trigger</td></tr>
+<tr><td>Pointer down on overlay</td><td>Close (default); disabled with dismissible={false}</td></tr>
+<tr><td>Close button / Cancel (DrawerClose)</td><td>Close; focus returns to trigger</td></tr>
+<tr><td>Swipe / drag</td><td>Nothing. No gesture dismissal in this version</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":16400}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

@@ -72,6 +72,13 @@
       "w": 1440,
       "x": 13680,
       "y": 0
+    },
+    "Drawer.dc.html": {
+      "h": 16400,
+      "title": "Drawer",
+      "w": 1440,
+      "x": 15200,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -102,7 +109,8 @@
     "Checkbox.dc.html",
     "Toggle.dc.html",
     "Theming.dc.html",
-    "RadioGroup.dc.html"
+    "RadioGroup.dc.html",
+    "Drawer.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
