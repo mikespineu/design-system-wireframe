@@ -229,7 +229,8 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
 
   // marks
   const all = allowedValues(scale);
-  let markMode: 'none' | 'steps' | 'ends' | 'list' = Array.isArray(marks) ? 'list' : ((marks as string | undefined) as 'none' | 'steps' | 'ends') ?? (values ? 'steps' : 'none');
+  // User-requested deviation from the spec: a stepper on a uniform scale never draws marks (a custom list keeps them).
+  let markMode: 'none' | 'steps' | 'ends' | 'list' = stepper && !values ? 'none' : Array.isArray(marks) ? 'list' : ((marks as string | undefined) as 'none' | 'steps' | 'ends') ?? (values ? 'steps' : 'none');
   const tooMany = markMode === 'steps' && all.length > MAX_STEP_MARKS;
   if (tooMany) markMode = 'ends';
   const listed = Array.isArray(marks) ? (marks as readonly number[]).map((m) => snapToScale(scale, m)) : [];
@@ -264,6 +265,11 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
     if (tooMany) console.warn(`Slider: more than ${MAX_STEP_MARKS} allowed values, \`marks="steps"\` falls back to \`"ends"\`.`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valuesKey, min, max, step, marksKey, tooMany]);
+
+  useEffect(() => {
+    if (!dev) return;
+    if (stepper && !values && marks !== undefined) console.warn('Slider: `marks` is ignored with `stepper` on a uniform scale.');
+  }, [stepper, values, marks]);
 
   useEffect(() => {
     if (!dev) return;

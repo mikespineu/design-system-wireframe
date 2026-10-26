@@ -904,7 +904,10 @@ describe('Slider auto bubble clamping', () => {
 
 describe('Slider mark positions and input widths', () => {
   const css = readFileSync(join(__dirname, 'Slider.css'), 'utf8');
-  const rule = (sel: string) => css.slice(css.indexOf(`${sel} {`), css.indexOf('}', css.indexOf(`${sel} {`)));
+  const rule = (sel: string) => {
+    const start = css.indexOf(`\n${sel} {`) + 1;
+    return css.slice(start, css.indexOf('}', start));
+  };
 
   it('gives every list mark and label its own position, index based', () => {
     const { container } = render(<SliderField label="Rating" values={LIST} />);
@@ -957,6 +960,51 @@ describe('Slider mark positions and input widths', () => {
     const root = container.querySelector('.ds-slider') as HTMLElement;
     // "100.00" + nbsp + "cm" = 9 chars at the widest
     expect(root.style.getPropertyValue('--slider-ch')).toBe('9');
+  });
+});
+
+describe('Slider layering and reserved space (stylesheet contract)', () => {
+  const css = readFileSync(join(__dirname, 'Slider.css'), 'utf8');
+
+  it('reserves room above the track for the auto bubble so the label stays readable', () => {
+    expect(css).toMatch(/\.ds-slider\[data-bubble='auto'\]:not\(\[data-stepper\]\) \.ds-slider-main \{\s*padding-top: var\(--slider-auto-reserve\)/);
+    expect(css).toMatch(/\.ds-slider\[data-bubble='auto'\]:not\(\[data-stepper\]\) \.ds-slider-input \{\s*margin-top: var\(--slider-auto-reserve\)/);
+    const { container } = render(<SliderField label="Level" />);
+    expect(container.querySelector('.ds-slider')).toHaveAttribute('data-bubble', 'auto');
+  });
+
+  it('draws the stepper pill and buttons above the track', () => {
+    expect(css).toMatch(/\.ds-slider\[data-stepper\] \.ds-slider-root > span:has\(> \.ds-slider-thumb\),\s*\.ds-slider\[data-stepper\] \.ds-slider-step \{\s*z-index: 2/);
+    expect(css).toMatch(/\.ds-slider-step \{[^}]*background: var\(--ds-color-surface\)/);
+  });
+});
+
+describe('Slider stepper marks (user-requested deviation)', () => {
+  it.each(['steps', 'ends', [0, 5]] as const)('uniform stepper renders no ticks or labels with marks=%s', (marks) => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const { container } = render(<SliderField label="Height" stepper max={10} marks={marks} />);
+    expect(ticks(container)).toHaveLength(0);
+    expect(markLabels(container)).toEqual([]);
+    expect(container.querySelector('.ds-slider')).not.toHaveAttribute('data-marks');
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('stepper'));
+  });
+
+  it('a list stepper keeps its ticks and labels, drawn across the track', () => {
+    const { container } = render(<SliderField label="Shoe" stepper values={LIST} />);
+    expect(ticks(container)).toHaveLength(6);
+    expect(markLabels(container)).toEqual(['1', '2', '3', '5', '8', '10']);
+    const css = readFileSync(join(__dirname, 'Slider.css'), 'utf8');
+    expect(css).toMatch(/\.ds-slider\[data-stepper\] \.ds-slider-ticks \{\s*z-index: 1/);
+  });
+
+  it('both buttons contain a visible sized icon, minus and plus alike', () => {
+    render(<SliderField label="Height" stepper defaultValue={5} />);
+    const minus = screen.getByRole('button', { name: /^Decrease/ }).querySelector('svg');
+    const plus = screen.getByRole('button', { name: /^Increase/ }).querySelector('svg');
+    expect(minus).toHaveAttribute('width', '16');
+    expect(minus).toHaveAttribute('stroke', 'currentColor');
+    expect(minus?.querySelector('path')).toHaveAttribute('d', 'M2 8h12');
+    expect(plus?.querySelector('path')).toHaveAttribute('d', 'M2 8h12M8 2v12');
   });
 });
 

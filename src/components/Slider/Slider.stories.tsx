@@ -64,7 +64,7 @@ export const UniformEnds: Story = { args: { marks: 'ends', unit: '%' } };
 export const MarksDisabled: Story = { args: { marks: 'steps', step: 25, disabled: true, defaultValue: 50 } };
 
 export const Stepper: Story = {
-  args: { label: 'Height', stepper: true, unit: 'cm', min: 100, max: 250, step: 10, defaultValue: 180, marks: 'steps' },
+  args: { label: 'Height', stepper: true, unit: 'cm', min: 100, max: 250, step: 10, defaultValue: 180 },
 };
 export const StepperAtMin: Story = { args: { label: 'Height', stepper: true, unit: 'cm', min: 100, max: 250, step: 10, defaultValue: 100 } };
 export const StepperDisabled: Story = { args: { label: 'Height', stepper: true, unit: 'cm', disabled: true } };
