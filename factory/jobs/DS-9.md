@@ -3,7 +3,7 @@ task: DS-9
 title: "Release pipeline to npm"
 line: build            # design | build
 status: in-progress       # claimed | in-progress | waiting | blocked | merged
-stage: review
+stage: pr
 branch: "feat/DS-9-release-pipeline-to-npm"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-9-release-pipeline-to-npm"
 pr: ""
@@ -32,6 +32,8 @@ updated: "2026-10-26T09:36:36Z"
 - 10:38 qa: started
 - 10:38 qa: pass, no findings (changeset version dry-run 0.1.0→0.2.0 in .qa)
 - 10:38 review: started
+- 10:39 review: pass, no findings (optional hardening: pin npm@11, SHA-pin actions, split test job)
+- 10:39 pr: opening PR
 
 ## Gate results
 
