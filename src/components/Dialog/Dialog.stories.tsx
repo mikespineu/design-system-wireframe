@@ -11,7 +11,7 @@ const meta = {
   title: 'Components/Dialog',
   component: Dialog,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
+  parameters: { layout: 'centered', docs: { story: { inline: false, iframeHeight: 640 } } },
   args: {
     trigger: <Button>Open dialog</Button>,
     title: 'Edit profile',
