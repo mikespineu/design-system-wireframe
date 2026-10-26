@@ -346,6 +346,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-16** RadioGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/64
 - **DS-15** RadioGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/61
 - **DS-29** Switch — implementation — https://github.com/mikespineu/design-system-wireframe/pull/58
 - **DS-26** Theme token contract — design — https://github.com/mikespineu/design-system-wireframe/pull/55
