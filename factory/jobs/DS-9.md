@@ -3,7 +3,7 @@ task: DS-9
 title: "Release pipeline to npm"
 line: build            # design | build
 status: in-progress       # claimed | in-progress | waiting | blocked | merged
-stage: build
+stage: qa
 branch: "feat/DS-9-release-pipeline-to-npm"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-9-release-pipeline-to-npm"
 pr: ""
@@ -24,18 +24,25 @@ updated: "2026-10-26T09:36:36Z"
 
 - 10:36 claim: claimed feat/DS-9-release-pipeline-to-npm (needs_human: yes)
 - 10:36 build: builder started
+- 10:38 build: builder done (4 tool uses, default model; empty final report, diff inspected directly); scope + UI guard ok
+- 10:38 gate:lint: pass
+- 10:38 gate:typecheck: pass
+- 10:38 gate:test: pass
+- 10:38 gate:storybook: pass
+- 10:38 qa: started
 
 ## Gate results
 
 | Gate | Result |
 | --- | --- |
-| lint | – |
-| typecheck | – |
-| test | – |
-| storybook | – |
+| lint | pass |
+| typecheck | pass |
+| test | pass |
+| storybook | pass |
 
 ## Notes
 
 
 - needs_human: yes — PR needs your approval (/factory:approve DS-9) before merge.
 - Open: npm name `design-system-test` is taken; pick a scope before first publish.
+- Publish gated on repo variable NPM_PUBLISH_ENABLED; setup steps in RELEASING.md.
