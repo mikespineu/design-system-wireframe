@@ -28,6 +28,14 @@ const FieldContext = createContext<FieldControlProps | null>(null);
  */
 export const useFieldControl = () => useContext(FieldContext);
 
+const FieldLabelContext = createContext<string | null>(null);
+
+/**
+ * Id of the Field's label element, for controls that cannot be labelled with `htmlFor`
+ * (e.g. a Slider thumb uses `aria-labelledby`). Returns `null` outside a Field.
+ */
+export const useFieldLabelId = () => useContext(FieldLabelContext);
+
 export interface FieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** Visible label text (rendered uppercase mono). */
   label: ReactNode;
@@ -63,8 +71,10 @@ export const Field = ({ label, hint, error, disabled, required, id, className, c
 
   return (
     <FieldContext.Provider value={control}>
+      <FieldLabelContext.Provider value={`${controlId}-label`}>
       <div className={cx('flex flex-col gap-2', className)} {...rest}>
         <Label.Root
+          id={`${controlId}-label`}
           htmlFor={controlId}
           className={cx('font-mono text-label font-medium uppercase', disabled ? 'text-placeholder' : 'text-ink')}
         >
@@ -98,6 +108,7 @@ export const Field = ({ label, hint, error, disabled, required, id, className, c
           </span>
         )}
       </div>
+      </FieldLabelContext.Provider>
     </FieldContext.Provider>
   );
 };

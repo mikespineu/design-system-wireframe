@@ -1,0 +1,552 @@
+/* Slider: Radix Slider, direction A Hairline, tokens only (--ds-*). Spec: docs/specs/Slider.md */
+.ds-slider {
+  --slider-root-h: var(--ds-control-height);
+  --slider-thumb-size: var(--ds-space-4);
+  --slider-fill: var(--ds-space-1);
+  --slider-tick: var(--ds-space-2);
+  --slider-input-h: var(--ds-control-height);
+  --slider-bubble-h: var(--ds-space-8);
+  --slider-bubble-min: var(--ds-space-12);
+  --slider-btn: var(--ds-space-8);
+  --slider-pill-h: var(--ds-space-8);
+  --slider-pill-font: 16px;
+  --slider-pill-w: max(var(--ds-space-16), calc(var(--slider-ch) * 1ch + 2 * var(--ds-space-2) + 2 * var(--ds-border-width-strong)));
+  --slider-dir: 1;
+  /* x of a point at position p, in the track box (same mapping Radix uses for the in-bounds thumb) */
+  --slider-x: calc(var(--slider-thumb-size) / 2 + var(--slider-p) * (100% - var(--slider-thumb-size)));
+  /* room above the root for the auto bubble on fine pointers: bubble height + gap + border, minus what the thumb already leaves free */
+  --slider-auto-reserve: calc(
+    var(--ds-space-6) + var(--ds-space-2) + var(--ds-border-width-strong) - (var(--slider-root-h) - var(--slider-thumb-size)) / 2
+  );
+  position: relative;
+  width: 100%;
+  font-family: var(--ds-font-text);
+}
+
+.ds-slider[data-dir='rtl'] {
+  --slider-dir: -1;
+}
+
+.ds-slider[data-size='sm'] {
+  --slider-root-h: var(--ds-space-8);
+  --slider-thumb-size: var(--ds-space-3);
+  --slider-fill: 2px;
+  --slider-tick: var(--ds-space-1);
+  --slider-input-h: var(--ds-space-8);
+  --slider-btn: var(--ds-space-6);
+  --slider-pill-h: var(--ds-space-6);
+  --slider-pill-font: 12px;
+}
+
+.ds-slider[data-size='lg'] {
+  --slider-root-h: var(--ds-space-12);
+  --slider-thumb-size: var(--ds-space-6);
+  --slider-fill: var(--ds-space-2);
+  --slider-input-h: var(--ds-space-12);
+  --slider-bubble-h: var(--ds-control-height);
+  --slider-bubble-min: var(--ds-space-16);
+  --slider-btn: var(--ds-control-height);
+  --slider-pill-h: var(--ds-control-height);
+}
+
+.ds-slider[data-stepper] {
+  --slider-thumb-size: var(--slider-pill-w);
+}
+
+.ds-slider-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-4);
+}
+
+.ds-slider-main {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-slider[data-bubble='auto']:not([data-stepper]) .ds-slider-main {
+  padding-top: var(--slider-auto-reserve);
+}
+
+.ds-slider[data-bubble='auto']:not([data-stepper]) .ds-slider-input {
+  margin-top: var(--slider-auto-reserve);
+}
+
+.ds-slider[data-bubble='always']:not([data-stepper]) .ds-slider-main {
+  padding-top: calc(var(--slider-bubble-h) + var(--ds-space-2));
+}
+
+.ds-slider-box {
+  position: relative;
+  /* lets the auto bubble (inside the thumb) read the track width as 100cqw to clamp itself */
+  container-type: inline-size;
+}
+
+.ds-slider[data-stepper] .ds-slider-box {
+  margin-inline: calc(var(--slider-btn) + var(--ds-space-1) + var(--slider-pill-w) / 2);
+}
+
+.ds-slider[data-marks] .ds-slider-box {
+  margin-bottom: calc(var(--ds-space-4) + var(--ds-space-1));
+}
+
+/* Root: the hit area */
+.ds-slider-root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--slider-root-h);
+  touch-action: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.ds-slider-root[data-disabled] {
+  cursor: not-allowed;
+}
+
+.ds-slider-track {
+  position: relative;
+  flex-grow: 1;
+  height: var(--ds-border-width-strong);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-placeholder);
+}
+
+.ds-slider-range {
+  position: absolute;
+  height: var(--slider-fill);
+  top: 50%;
+  translate: 0 -50%;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-ink);
+}
+
+.ds-slider[data-invalid] .ds-slider-range {
+  background: var(--ds-color-error);
+}
+
+.ds-slider-root[data-disabled] .ds-slider-track {
+  background: var(--ds-color-divider);
+}
+
+.ds-slider-root[data-disabled] .ds-slider-range {
+  background: var(--ds-color-disabled);
+}
+
+/* Thumb */
+.ds-slider-thumb {
+  all: unset;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: var(--slider-thumb-size);
+  height: var(--slider-thumb-size);
+  border: var(--ds-border-width-strong) solid var(--ds-color-ink);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-surface);
+  cursor: grab;
+  transition: background-color var(--ds-motion), border-color var(--ds-motion);
+}
+
+.ds-slider-root:hover > .ds-slider-thumb:not([data-disabled]) {
+  background: var(--ds-color-fill);
+}
+
+.ds-slider-root:active > .ds-slider-thumb:not([data-disabled]),
+.ds-slider-root:active .ds-slider-thumb:not([data-disabled]) {
+  background: var(--ds-color-ink);
+  cursor: grabbing;
+}
+
+.ds-slider-thumb:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.ds-slider[data-invalid] .ds-slider-thumb {
+  border-color: var(--ds-color-error);
+}
+
+.ds-slider-thumb[data-disabled] {
+  border-color: var(--ds-color-disabled);
+  background: var(--ds-color-surface-subtle);
+  cursor: not-allowed;
+}
+
+/* Stepper pill is the thumb */
+.ds-slider[data-stepper] .ds-slider-thumb {
+  height: var(--slider-pill-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-mono);
+  font-size: var(--slider-pill-font);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-color-ink);
+}
+
+.ds-slider[data-stepper] .ds-slider-root:active .ds-slider-thumb:not([data-disabled]) {
+  color: var(--ds-color-primary-contrast);
+}
+
+.ds-slider[data-stepper] .ds-slider-thumb[data-disabled] {
+  color: var(--ds-color-placeholder);
+}
+
+.ds-slider-thumb[data-editing] {
+  opacity: 0;
+}
+
+/* Stepper ticks (custom lists only) run across the track */
+.ds-slider[data-stepper] .ds-slider-tick {
+  top: calc(var(--slider-root-h) / 2);
+  translate: calc(-50% * var(--slider-dir)) -50%;
+}
+
+/* Stepper: the pill and buttons are opaque and sit above the track, its fill and the list ticks drawn across it */
+.ds-slider[data-stepper] .ds-slider-ticks {
+  z-index: 1;
+}
+
+.ds-slider[data-stepper] .ds-slider-root > span:has(> .ds-slider-thumb),
+.ds-slider[data-stepper] .ds-slider-step {
+  z-index: 2;
+}
+
+/* Marks */
+.ds-slider-ticks,
+.ds-slider-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ds-slider-tick {
+  --slider-x: calc(var(--slider-thumb-size) / 2 + var(--slider-p) * (100% - var(--slider-thumb-size)));
+  position: absolute;
+  inset-inline-start: var(--slider-x);
+  top: calc(var(--slider-root-h) / 2 + var(--ds-border-width-strong) / 2 + var(--ds-space-1));
+  width: var(--ds-border-width);
+  height: var(--slider-tick);
+  translate: calc(-50% * var(--slider-dir)) 0;
+  background: var(--ds-color-placeholder);
+}
+
+.ds-slider-tick[data-filled] {
+  background: var(--ds-color-ink);
+}
+
+.ds-slider[data-invalid] .ds-slider-tick[data-filled] {
+  background: var(--ds-color-error);
+}
+
+.ds-slider[data-disabled] .ds-slider-tick {
+  background: var(--ds-color-border);
+}
+
+.ds-slider-mark-label {
+  --slider-x: calc(var(--slider-thumb-size) / 2 + var(--slider-p) * (100% - var(--slider-thumb-size)));
+  position: absolute;
+  inset-inline-start: var(--slider-x);
+  top: calc(var(--slider-root-h) + var(--ds-space-1));
+  translate: calc(-50% * var(--slider-dir)) 0;
+  font-family: var(--ds-font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ds-color-text-muted);
+}
+
+.ds-slider-mark-label[data-current] {
+  color: var(--ds-color-ink);
+  font-weight: 500;
+}
+
+.ds-slider[data-disabled] .ds-slider-mark-label {
+  color: var(--ds-color-placeholder);
+}
+
+/* Auto bubble (inside the thumb, shown by CSS only) */
+.ds-slider-bubble {
+  position: absolute;
+  bottom: calc(100% + var(--ds-space-2) + var(--ds-border-width-strong));
+  inset-inline-start: 50%;
+  /* centered over the thumb, then slid inward so it stops flush with the root edge */
+  --slider-bubble-auto-w: calc(var(--slider-ch) * 1ch + 2 * var(--ds-space-2));
+  --slider-bubble-auto-x: calc(var(--slider-thumb-size) / 2 + var(--slider-p) * (100cqw - var(--slider-thumb-size)));
+  --slider-bubble-shift: calc(
+    max(0px, var(--slider-bubble-auto-w) / 2 - var(--slider-bubble-auto-x)) +
+      min(0px, 100cqw - var(--slider-bubble-auto-w) / 2 - var(--slider-bubble-auto-x))
+  );
+  translate: calc((-50% + var(--slider-bubble-shift)) * var(--slider-dir)) 0;
+  box-sizing: border-box;
+  min-width: var(--slider-bubble-auto-w);
+  text-align: center;
+  display: none;
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-inverse);
+  color: var(--ds-color-primary-contrast);
+  font-family: var(--ds-font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+  transition: translate var(--ds-motion), bottom var(--ds-motion), padding var(--ds-motion);
+}
+
+.ds-slider-root:active .ds-slider-thumb:not([data-disabled]) .ds-slider-bubble,
+.ds-slider-thumb:focus-visible:not([data-disabled]) .ds-slider-bubble {
+  display: block;
+}
+
+/* Stepper: the pill already shows the value, so the bubble is for touch drags only */
+.ds-slider[data-stepper] .ds-slider-root .ds-slider-thumb .ds-slider-bubble {
+  display: none;
+}
+
+/* Bubble input (always) */
+.ds-slider-above {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  height: var(--slider-bubble-h);
+  pointer-events: none;
+}
+
+.ds-slider-bubble-input {
+  --slider-unit-w: calc(var(--slider-unit-ch) * 1ch + var(--ds-space-1));
+  --slider-bubble-w: max(
+    var(--slider-bubble-min),
+    calc(
+      var(--slider-bare-ch) * 1ch + 2 * var(--ds-space-2) + 2 * var(--ds-border-width-strong) +
+        var(--slider-unit-w)
+    )
+  );
+  position: absolute;
+  inset-inline-start: clamp(
+    calc(var(--slider-bubble-w) / 2),
+    var(--slider-x),
+    calc(100% - var(--slider-bubble-w) / 2)
+  );
+  top: 0;
+  translate: calc(-50% * var(--slider-dir)) 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-1);
+  width: var(--slider-bubble-w);
+  height: var(--slider-bubble-h);
+  padding: 0 var(--ds-space-2);
+  border: var(--ds-border-width) solid var(--ds-color-ink);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-surface);
+  color: var(--ds-color-ink);
+  font-family: var(--ds-font-mono);
+  font-size: 16px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  cursor: text;
+  pointer-events: auto;
+  transition: background-color var(--ds-motion), border-color var(--ds-motion), color var(--ds-motion),
+    translate var(--ds-motion), top var(--ds-motion), height var(--ds-motion);
+}
+
+.ds-slider-bubble-input:hover {
+  background: var(--ds-color-fill);
+}
+
+.ds-slider-bubble-input:has(input:focus-visible) {
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+  background: var(--ds-color-surface);
+}
+
+.ds-slider-bubble-input:has(input[aria-invalid='true']) {
+  border-width: var(--ds-border-width-strong);
+  border-color: var(--ds-color-error);
+}
+
+.ds-slider-bubble-input:has(input:disabled) {
+  background: var(--ds-color-surface-subtle);
+  border-color: var(--ds-color-divider);
+  color: var(--ds-color-placeholder);
+  cursor: not-allowed;
+}
+
+.ds-slider:has(.ds-slider-root:active) .ds-slider-bubble-input:not(:has(input:disabled)) {
+  background: var(--ds-color-inverse);
+  border-color: var(--ds-color-inverse);
+  color: var(--ds-color-primary-contrast);
+}
+
+.ds-slider:not([data-unit]) .ds-slider-bubble-input {
+  --slider-unit-w: 0px;
+}
+
+.ds-slider-bubble-field {
+  all: unset;
+  box-sizing: content-box;
+  width: calc(var(--slider-bare-ch) * 1ch);
+  min-width: 0;
+  text-align: center;
+  cursor: inherit;
+  color: inherit;
+}
+
+.ds-slider-bubble-field:disabled {
+  cursor: not-allowed;
+}
+
+/* Edit-mode input replaces the stepper pill */
+.ds-slider-edit .ds-slider-bubble-input {
+  top: calc(var(--slider-root-h) / 2);
+  translate: calc(-50% * var(--slider-dir)) -50%;
+  width: var(--slider-pill-w);
+  height: var(--slider-pill-h);
+  border-width: var(--ds-border-width-strong);
+  inset-inline-start: var(--slider-x);
+}
+
+/* Touch lift: the bubble moves clear of the fingertip while dragging */
+@media (pointer: coarse) {
+  .ds-slider:has(.ds-slider-root:active) .ds-slider-bubble {
+    display: block;
+    bottom: calc(100% + var(--ds-space-12));
+    height: var(--ds-space-12);
+    min-width: var(--ds-space-16);
+    padding: 0 var(--ds-space-3);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    line-height: 29px;
+  }
+
+  .ds-slider:has(.ds-slider-root:active) .ds-slider-above .ds-slider-bubble-input {
+    top: calc(-1 * var(--ds-space-12) + var(--slider-bubble-h) - var(--ds-space-8));
+    height: var(--ds-space-12);
+    min-width: var(--ds-space-16);
+    padding: 0 var(--ds-space-3);
+    font-size: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-slider *,
+  .ds-slider-bubble-input {
+    transition: none !important;
+  }
+}
+
+/* Stepper buttons */
+.ds-slider-step {
+  all: unset;
+  box-sizing: border-box;
+  position: absolute;
+  top: calc(var(--slider-root-h) / 2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--slider-btn);
+  height: var(--slider-btn);
+  border: var(--ds-border-width) solid var(--ds-color-ink);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-surface);
+  color: var(--ds-color-ink);
+  cursor: pointer;
+  transition: background-color var(--ds-motion), border-color var(--ds-motion), color var(--ds-motion);
+}
+
+.ds-slider-step[data-dir='dec'] {
+  inset-inline-start: calc(var(--slider-x) - var(--slider-pill-w) / 2 - var(--ds-space-1) - var(--slider-btn));
+  translate: calc(0% * var(--slider-dir)) -50%;
+}
+
+.ds-slider-step[data-dir='inc'] {
+  inset-inline-start: calc(var(--slider-x) + var(--slider-pill-w) / 2 + var(--ds-space-1));
+  translate: calc(0% * var(--slider-dir)) -50%;
+}
+
+.ds-slider-step:hover:not(:disabled) {
+  background: var(--ds-color-fill);
+}
+
+.ds-slider-step:active:not(:disabled) {
+  background: var(--ds-color-ink);
+  color: var(--ds-color-primary-contrast);
+}
+
+.ds-slider-step:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.ds-slider-step:disabled {
+  background: var(--ds-color-surface-subtle);
+  border-color: var(--ds-color-divider);
+  color: var(--ds-color-disabled);
+  cursor: not-allowed;
+}
+
+/* Attached input (reuses Input; size and alignment only) */
+.ds-slider-input {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ds-slider-input .ds-slider-input-field {
+  width: var(--ds-space-16);
+  height: var(--slider-input-h);
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-slider-input:has(.ds-slider-unit) .ds-slider-input-field {
+  width: calc(var(--ds-space-16) + var(--slider-unit-ch) * 1ch);
+  padding-inline-end: calc(var(--ds-space-3) + var(--slider-unit-ch) * 1ch + var(--ds-space-1));
+}
+
+.ds-slider[data-size='sm'] .ds-slider-input .ds-slider-input-field {
+  padding-inline-start: var(--ds-space-2);
+}
+
+.ds-slider-input .ds-slider-unit {
+  position: absolute;
+  inset-inline-end: var(--ds-space-3);
+}
+
+.ds-slider-unit {
+  font-family: var(--ds-font-mono);
+  color: var(--ds-color-text-muted);
+}
+
+.ds-slider[data-disabled] .ds-slider-unit {
+  color: var(--ds-color-placeholder);
+}
+
+/* Visually hidden helper text and live region */
+.ds-slider-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
