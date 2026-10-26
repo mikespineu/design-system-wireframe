@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Theming</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+/* house chrome (not themed) */
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:820px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:24px}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.knob{display:grid;grid-template-columns:300px minmax(0,1fr)}
+.knob-l{display:flex;flex-direction:column;gap:16px;padding:24px;border-right:1px solid #E0E0E0}
+.knob-l h4{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.kv{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#404040}
+.kv li{display:flex;flex-direction:column;gap:2px;padding-bottom:6px;border-bottom:1px solid #EEEEEE}
+.kv b{font-weight:500;color:#000000;word-break:break-all}
+.note{margin:0;font-size:13px;line-height:20px;color:#595959}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #C7C7C7;font-family:'Red Hat Mono',monospace;font-size:11px;color:#262626}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:left;height:40px;padding:0 12px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:40px;padding:0 12px 0 0;border-bottom:1px solid #E0E0E0;color:#404040;vertical-align:middle}
+.tbl td.m{font-family:'Red Hat Mono',monospace;font-size:12px}
+.sw{display:inline-block;width:14px;height:14px;border:1px solid #C7C7C7;vertical-align:-3px;margin-right:4px}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+
+/* ===== Theme contract: default role values (Wireframe). Every themed panel reads only these. ===== */
+.th{
+  --ds-color-background:#FFFFFF;--ds-color-surface:#FFFFFF;--ds-color-surface-subtle:#F7F7F7;--ds-color-fill:#EEEEEE;
+  --ds-color-divider:#E0E0E0;--ds-color-border:#C7C7C7;--ds-color-disabled:#A3A3A3;--ds-color-placeholder:#767676;
+  --ds-color-text-muted:#595959;--ds-color-text:#404040;--ds-color-text-strong:#262626;--ds-color-text-emphasis:#000000;
+  --ds-color-text-inverse:#FFFFFF;--ds-color-border-strong:#000000;--ds-color-icon:#000000;--ds-color-focus:#000000;
+  --ds-color-overlay:rgb(0 0 0 / 0.5);--ds-color-inverse:#141414;
+  --ds-color-primary:#000000;--ds-color-primary-hover:#262626;--ds-color-primary-contrast:#FFFFFF;
+  --ds-color-info:#404040;--ds-color-info-border:#C7C7C7;--ds-color-info-bg:#F7F7F7;
+  --ds-color-success:#2E6B45;--ds-color-success-border:#9CC7AB;--ds-color-success-bg:#EDF5EF;
+  --ds-color-error:#A3302B;--ds-color-error-border:#E3AAA6;--ds-color-error-bg:#FBEDEC;
+  --ds-font-mono:'Red Hat Mono',ui-monospace,monospace;
+  --ds-font-heading:var(--ds-font-mono);--ds-font-body:'Red Hat Text',system-ui,sans-serif;--ds-font-label:var(--ds-font-mono);
+  --ds-font-weight-regular:400;--ds-font-weight-medium:500;--ds-font-weight-bold:700;
+  --ds-text-display-size:4.5rem;--ds-text-display-line-height:1;--ds-text-display-tracking:-0.04em;
+  --ds-text-h1-size:3rem;--ds-text-h1-line-height:1.1;--ds-text-h1-tracking:-0.03em;
+  --ds-text-h2-size:2rem;--ds-text-h2-line-height:1.2;--ds-text-h2-tracking:-0.02em;
+  --ds-text-h3-size:1.375rem;--ds-text-h3-line-height:29px;--ds-text-h3-tracking:0;
+  --ds-text-heading-weight:var(--ds-font-weight-medium);--ds-text-heading-transform:none;
+  --ds-text-body-lg-size:1.125rem;--ds-text-body-lg-line-height:1.6;
+  --ds-text-body-size:1rem;--ds-text-body-line-height:26px;
+  --ds-text-body-sm-size:0.9375rem;--ds-text-body-sm-line-height:24px;
+  --ds-text-body-xs-size:0.875rem;--ds-text-body-xs-line-height:1.5;
+  --ds-text-caption-size:0.8125rem;--ds-text-caption-line-height:20px;
+  --ds-text-label-size:0.75rem;--ds-text-label-line-height:16px;--ds-text-label-weight:var(--ds-font-weight-medium);--ds-text-label-tracking:0.08em;--ds-text-label-transform:uppercase;
+  --ds-text-ui-size:0.875rem;--ds-text-ui-line-height:20px;--ds-text-ui-weight:var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size:0.75rem;--ds-text-ui-sm-line-height:16px;
+  --ds-text-ui-xs-size:0.6875rem;--ds-text-ui-xs-line-height:16px;
+  --ds-radius-sm:0;--ds-radius-md:0;--ds-radius-lg:0;--ds-radius-full:0;
+  --ds-shadow-sm:none;--ds-shadow-md:none;--ds-shadow-lg:none;
+  --ds-border-width:1px;--ds-border-width-strong:2px;--ds-focus-width:2px;--ds-focus-offset:2px;--ds-control-height:44px;
+  background:var(--ds-color-background);color:var(--ds-color-text);font-family:var(--ds-font-body);
+  padding:32px;box-sizing:border-box;
+}
+
+/* ===== Knob overrides: each panel sets roles only ===== */
+.t-brand{--ds-color-primary:#3730A3;--ds-color-primary-hover:#312E81;--ds-color-primary-contrast:#FFFFFF;--ds-color-focus:#3730A3}
+.t-font{--ds-font-heading:Georgia,'Times New Roman',serif;--ds-font-body:system-ui,-apple-system,'Segoe UI',sans-serif;--ds-font-label:system-ui,-apple-system,'Segoe UI',sans-serif}
+.t-type{--ds-text-heading-weight:var(--ds-font-weight-bold);--ds-text-h3-size:1.5rem;--ds-text-h3-line-height:32px;--ds-text-h3-tracking:-0.01em;
+  --ds-text-label-transform:none;--ds-text-label-tracking:0;--ds-text-label-size:0.8125rem;--ds-text-label-line-height:20px;
+  --ds-text-ui-weight:var(--ds-font-weight-bold);--ds-text-ui-size:0.9375rem;--ds-text-body-line-height:24px}
+.t-radius{--ds-radius-sm:4px;--ds-radius-md:8px;--ds-radius-lg:12px;--ds-radius-full:9999px}
+.t-shadow{--ds-shadow-sm:0 1px 2px rgb(0 0 0 / 0.12);--ds-shadow-md:0 4px 12px rgb(0 0 0 / 0.14);--ds-shadow-lg:0 16px 40px rgb(0 0 0 / 0.2)}
+.t-dark{color-scheme:dark;
+  --ds-color-background:#141414;--ds-color-surface:#141414;--ds-color-surface-subtle:#1F1F1F;--ds-color-fill:#262626;
+  --ds-color-divider:#333333;--ds-color-border:#737373;--ds-color-disabled:#595959;--ds-color-placeholder:#8F8F8F;
+  --ds-color-text-muted:#A3A3A3;--ds-color-text:#C7C7C7;--ds-color-text-strong:#E0E0E0;--ds-color-text-emphasis:#F7F7F7;
+  --ds-color-text-inverse:#141414;--ds-color-border-strong:#F7F7F7;--ds-color-icon:#F7F7F7;--ds-color-focus:#F7F7F7;
+  --ds-color-overlay:rgb(0 0 0 / 0.7);--ds-color-inverse:#EEEEEE;
+  --ds-color-primary:#F7F7F7;--ds-color-primary-hover:#E0E0E0;--ds-color-primary-contrast:#141414;
+  --ds-color-info:#C7C7C7;--ds-color-info-border:#595959;--ds-color-info-bg:#1F1F1F;
+  --ds-color-success:#9CC7AB;--ds-color-success-border:#2E6B45;--ds-color-success-bg:#13261A;
+  --ds-color-error:#E3AAA6;--ds-color-error-border:#A3302B;--ds-color-error-bg:#2D1414}
+
+/* ===== Components, styled through roles only ===== */
+.set{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.col{display:flex;flex-direction:column;gap:20px;min-width:0}
+.stk{display:flex;flex-direction:column;gap:8px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.h3{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:var(--ds-text-h3-size);line-height:var(--ds-text-h3-line-height);letter-spacing:var(--ds-text-h3-tracking);text-transform:var(--ds-text-heading-transform);color:var(--ds-color-text-emphasis)}
+.p{margin:0;font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text)}
+.btn{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;height:var(--ds-control-height);padding:0 24px;border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-md);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);white-space:nowrap;cursor:pointer}
+.pri{background:var(--ds-color-primary);border-color:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.pri.hov{background:var(--ds-color-primary-hover);border-color:var(--ds-color-primary-hover)}
+.pri.dis{background:var(--ds-color-divider);border-color:var(--ds-color-divider);color:var(--ds-color-placeholder);cursor:not-allowed}
+.sec2{background:var(--ds-color-surface);border-color:var(--ds-color-border-strong);color:var(--ds-color-text-emphasis)}
+.sec2.hov{background:var(--ds-color-fill)}
+.sec2.dis{border-color:var(--ds-color-border);color:var(--ds-color-placeholder);cursor:not-allowed}
+.gh{padding:0 16px;background:transparent;color:var(--ds-color-text-emphasis);text-decoration:underline;text-underline-offset:4px}
+.foc{outline:var(--ds-focus-width) solid var(--ds-color-focus);outline-offset:var(--ds-focus-offset)}
+.fld{display:flex;flex-direction:column;gap:8px}
+.lbl{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-emphasis)}
+.in{box-sizing:border-box;display:flex;align-items:center;width:100%;height:var(--ds-control-height);padding:0 12px;border:var(--ds-border-width) solid var(--ds-color-border);border-radius:var(--ds-radius-md);background:var(--ds-color-surface);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text-emphasis)}
+.in .ph{color:var(--ds-color-placeholder)}
+.in.inv{border-width:var(--ds-border-width-strong);border-color:var(--ds-color-error)}
+.in.dis{border-color:var(--ds-color-divider);background:var(--ds-color-surface-subtle);color:var(--ds-color-placeholder)}
+.in.hov{border-color:var(--ds-color-border-strong)}
+.hint{font-family:var(--ds-font-body);font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);color:var(--ds-color-text-muted)}
+.err{display:flex;align-items:center;gap:6px;font-family:var(--ds-font-body);font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);font-weight:var(--ds-font-weight-medium);color:var(--ds-color-error)}
+.cbr{display:inline-flex;align-items:center;gap:12px;min-height:var(--ds-control-height);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text-emphasis)}
+.cbr.dtx{color:var(--ds-color-placeholder)}
+.cb{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border:var(--ds-border-width-strong) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-sm);background:var(--ds-color-surface);color:var(--ds-color-primary-contrast)}
+.cb svg{width:16px;height:16px}
+.cb.on{background:var(--ds-color-primary);border-color:var(--ds-color-primary)}
+.cb.hov{background:var(--ds-color-fill)}
+.cb.on.hov{background:var(--ds-color-primary-hover);border-color:var(--ds-color-primary-hover)}
+.cb.inv{border-color:var(--ds-color-error)}
+.cb.inv.on{background:var(--ds-color-error)}
+.cb.dis{border-color:var(--ds-color-disabled);background:var(--ds-color-surface-subtle)}
+.cb.dis.on{background:var(--ds-color-disabled)}
+.tag{box-sizing:border-box;display:inline-flex;align-items:center;height:28px;padding:0 10px;border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-sm);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);font-weight:var(--ds-font-weight-regular)}
+.tag.so{background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.tag.su{background:var(--ds-color-fill);color:var(--ds-color-text-strong)}
+.tag.ou{border-color:var(--ds-color-border-strong);color:var(--ds-color-text-emphasis)}
+.badge{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;height:22px;min-width:22px;padding:0 6px;border-radius:var(--ds-radius-full);background:var(--ds-color-primary);color:var(--ds-color-primary-contrast);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-xs-size);line-height:var(--ds-text-ui-xs-line-height);font-weight:var(--ds-font-weight-medium)}
+.al{display:flex;gap:12px;padding:16px;border:var(--ds-border-width) solid;border-radius:var(--ds-radius-lg)}
+.al svg{flex:none}
+.al.ok{border-color:var(--ds-color-success-border);background:var(--ds-color-success-bg);color:var(--ds-color-success)}
+.al.er{border-color:var(--ds-color-error-border);background:var(--ds-color-error-bg);color:var(--ds-color-error)}
+.al-c{display:flex;flex-direction:column;gap:4px}
+.al-t{font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight)}
+.al.er .al-t{font-weight:var(--ds-font-weight-bold)}
+.al-b{font-family:var(--ds-font-body);font-size:var(--ds-text-body-xs-size);line-height:var(--ds-text-body-xs-line-height);color:var(--ds-color-text)}
+.al.er .al-b{color:var(--ds-color-text-strong)}
+.sl{display:flex;align-items:center;height:var(--ds-control-height);margin-top:28px}
+.sl-tr{position:relative;flex:1;height:var(--ds-border-width-strong);border-radius:var(--ds-radius-full);background:var(--ds-color-placeholder)}
+.sl-rg{position:absolute;left:0;top:50%;width:60%;height:4px;transform:translateY(-50%);border-radius:var(--ds-radius-full);background:var(--ds-color-primary)}
+.sl-th{position:absolute;left:60%;top:50%;box-sizing:border-box;width:16px;height:16px;transform:translate(-50%,-50%);border:var(--ds-border-width-strong) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-full);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-sm)}
+.sl-bub{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);padding:4px 8px;border-radius:var(--ds-radius-sm);background:var(--ds-color-inverse);color:var(--ds-color-text-inverse);font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);font-weight:var(--ds-font-weight-medium);white-space:nowrap;box-shadow:var(--ds-shadow-md)}
+.scr{padding:20px;background:var(--ds-color-overlay)}
+.dlg{background:var(--ds-color-surface);border:var(--ds-border-width) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-lg);box-shadow:var(--ds-shadow-lg);overflow:hidden}
+.dlg-h{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:24px 24px 0}
+.dlg-hd{display:flex;flex-direction:column;gap:8px;min-width:0}
+.dlg-d{margin:0;font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text-muted)}
+.dlg-x{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:-4px -8px 0 0;border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-sm);background:var(--ds-color-surface);color:var(--ds-color-icon)}
+.dlg-b{padding:16px 24px 24px;font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text)}
+.dlg-f{display:flex;justify-content:flex-end;gap:12px;padding:16px 24px;border-top:var(--ds-border-width) solid var(--ds-color-divider)}
+.cap{font-family:var(--ds-font-mono);font-size:11px;line-height:16px;color:var(--ds-color-text-muted)}
+.cell{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.sgrid{display:grid;grid-template-columns:120px repeat(4,minmax(0,1fr));gap:16px 16px;align-items:center}
+.sgrid .rh{font-family:var(--ds-font-mono);font-size:11px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-emphasis)}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 10600px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Theming · DS-26 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Theming</h1>
+<p style="margin: 0; max-width: 820px; font-size: 18px; line-height: 1.6; color: #404040">The theme contract: 87 flat roles a theme may override (color, font, weight, type scale, radius, shadow, shape). Defaults reproduce today's Wireframe exactly. Every panel below renders the same components from the same CSS; the only difference between panels is a block of role overrides on the panel root. That is the whole API.</p>
+</header>
+
+<!-- 01 CONTRACT -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">The contract at a glance</h2></div>
+<p class="sec-d">Seven groups. Components read roles only; primitives (palette, spacing) and component-local properties are not themeable. New roles are marked; their definitions are under Token requests in the spec.</p>
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>Color</span><span>30 · 6 new</span></div><div class="ab-b"><div class="chips">
+<span class="chip">background</span><span class="chip">surface</span><span class="chip">surface-subtle</span><span class="chip">fill</span><span class="chip">divider</span><span class="chip">border</span><span class="chip">disabled</span><span class="chip">placeholder</span><span class="chip">text-muted</span><span class="chip">text</span><span class="chip">text-strong</span><span class="chip" style="border-color:#000">text-emphasis · new</span><span class="chip" style="border-color:#000">text-inverse · new</span><span class="chip" style="border-color:#000">border-strong · new</span><span class="chip" style="border-color:#000">icon · new</span><span class="chip" style="border-color:#000">focus · new</span><span class="chip" style="border-color:#000">overlay · new</span><span class="chip">inverse</span><span class="chip">primary</span><span class="chip">primary-hover</span><span class="chip">primary-contrast</span><span class="chip">info ×3</span><span class="chip">success ×3</span><span class="chip">error ×3</span>
+</div></div><div class="ab-f">ink is retired from the contract: it splits into text-emphasis, border-strong, icon and focus.</div></div>
+<div class="ab"><div class="ab-h"><span>Font + weight</span><span>7 · 6 new</span></div><div class="ab-b"><div class="chips">
+<span class="chip" style="border-color:#000">font-heading · new</span><span class="chip" style="border-color:#000">font-body · new</span><span class="chip" style="border-color:#000">font-label · new</span><span class="chip">font-mono</span><span class="chip" style="border-color:#000">weight-regular · new</span><span class="chip" style="border-color:#000">weight-medium · new</span><span class="chip" style="border-color:#000">weight-bold · new</span>
+</div></div><div class="ab-f">Heading, body, UI label and numerals can each take their own family.</div></div>
+<div class="ab"><div class="ab-h"><span>Type scale</span><span>36 new</span></div><div class="ab-b"><div class="chips">
+<span class="chip">display</span><span class="chip">h1</span><span class="chip">h2</span><span class="chip">h3</span><span class="chip">heading weight · transform</span><span class="chip">body-lg</span><span class="chip">body</span><span class="chip">body-sm</span><span class="chip">body-xs</span><span class="chip">caption</span><span class="chip">label (+ weight, tracking, transform)</span><span class="chip">ui (+ weight)</span><span class="chip">ui-sm</span><span class="chip">ui-xs</span>
+</div></div><div class="ab-f">Each style: size + line-height; headings add tracking.</div></div>
+<div class="ab"><div class="ab-h"><span>Radius · shadow · shape</span><span>14 · 6 new</span></div><div class="ab-b"><div class="chips">
+<span class="chip" style="border-color:#000">radius-sm · new</span><span class="chip">radius-md</span><span class="chip" style="border-color:#000">radius-lg · new</span><span class="chip" style="border-color:#000">radius-full · new</span><span class="chip" style="border-color:#000">shadow-sm · new</span><span class="chip" style="border-color:#000">shadow-md · new</span><span class="chip" style="border-color:#000">shadow-lg · new</span><span class="chip">border-width</span><span class="chip">border-width-strong</span><span class="chip">focus-width</span><span class="chip">focus-offset</span><span class="chip">control-height</span><span class="chip">motion</span><span class="chip">photo-filter</span>
+</div></div><div class="ab-f">Defaults: radius 0, shadow none, 44 px controls.</div></div>
+</div>
+</section>
+
+<!-- 02 DEFAULT -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Default · Wireframe</h2></div>
+<p class="sec-d">No overrides. Defaults reproduce today's components: black ink and action, gray accents, Red Hat Mono titles and labels (labels uppercase), square corners, flat. Focus-visible is shown on the Cancel button, the Framed checkbox and the slider thumb.</p>
+<div class="ab knob">
+<div class="knob-l"><h4>Overrides</h4><p class="note">None. This panel is the reference every other knob is compared against.</p><h4>Component set</h4><p class="note">Heading + body, Button (primary, secondary focus-visible, ghost), TextField (default, invalid), Checkbox (checked, focus-visible), Tag (solid, subtle, outline) + Badge, Alert (success, error), Slider (thumb focus-visible with value bubble), Dialog panel on overlay.</p></div>
+<div class="th">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 03 BRAND -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Knob · Brand color</h2></div>
+<p class="sec-d">Four color roles. Everything that means "action" or "selected" follows: primary button, checked box, slider range, solid tag, badge, focus ring, pressed fills. Text, borders and feedback stay neutral. The indigo is an illustrative value for this canvas, not a token.</p>
+<div class="ab knob">
+<div class="knob-l"><h4>Overrides</h4><ul class="kv">
+<li><b>--ds-color-primary</b>#3730A3 · white on it 9.9:1</li>
+<li><b>--ds-color-primary-hover</b>#312E81 · 11.4:1</li>
+<li><b>--ds-color-primary-contrast</b>#FFFFFF</li>
+<li><b>--ds-color-focus</b>#3730A3 · 9.9:1 on white</li>
+</ul><p class="note">createTheme() derives these from one brand color (50–900 scale) and checks the pairs.</p></div>
+<div class="th t-brand">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 04 FONTS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Knob · Fonts</h2></div>
+<p class="sec-d">Three family roles. Headings (h3, dialog title) take a serif, body and UI labels take the system sans. Numerals in the slider bubble stay on font-mono, which this panel does not override.</p>
+<div class="ab knob">
+<div class="knob-l"><h4>Overrides</h4><ul class="kv">
+<li><b>--ds-font-heading</b>Georgia, 'Times New Roman', serif</li>
+<li><b>--ds-font-body</b>system-ui, -apple-system, 'Segoe UI', sans-serif</li>
+<li><b>--ds-font-label</b>system-ui, -apple-system, 'Segoe UI', sans-serif</li>
+</ul><p class="note">Label case and tracking are type-scale roles, not font roles: the field label stays uppercase here.</p></div>
+<div class="th t-font">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 05 TYPE SCALE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Knob · Type scale</h2></div>
+<p class="sec-d">Size, line-height, weight, tracking and transform per style. Here: bolder, larger headings with slight negative tracking; sentence-case labels; bolder, slightly larger buttons; tighter body leading. Families are untouched.</p>
+<div class="ab knob">
+<div class="knob-l"><h4>Overrides</h4><ul class="kv">
+<li><b>--ds-text-heading-weight</b>var(--ds-font-weight-bold)</li>
+<li><b>--ds-text-h3-size / -line-height / -tracking</b>1.5rem / 32px / -0.01em</li>
+<li><b>--ds-text-label-transform</b>none</li>
+<li><b>--ds-text-label-tracking</b>0</li>
+<li><b>--ds-text-label-size / -line-height</b>0.8125rem / 20px</li>
+<li><b>--ds-text-ui-weight</b>var(--ds-font-weight-bold)</li>
+<li><b>--ds-text-ui-size</b>0.9375rem</li>
+<li><b>--ds-text-body-line-height</b>24px</li>
+</ul></div>
+<div class="th t-type">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 06 RADIUS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Knob · Radius</h2></div>
+<p class="sec-d">Four steps. sm: checkbox box, tag, close button, value bubble. md: buttons and fields. lg: alert and dialog. full: badge, slider track, range and thumb. Focus rings follow the corner because they are outlines.</p>
+<div class="ab knob">
+<div class="knob-l"><h4>Overrides</h4><ul class="kv">
+<li><b>--ds-radius-sm</b>4px</li>
+<li><b>--ds-radius-md</b>8px</li>
+<li><b>--ds-radius-lg</b>12px</li>
+<li><b>--ds-radius-full</b>9999px</li>
+</ul></div>
+<div class="th t-radius">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 07 SHADOW -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Knob · Shadow</h2></div>
+<p class="sec-d">Three steps, default none. sm lifts the slider thumb, md the floating value bubble, lg the dialog panel. Buttons, fields, alerts and tags stay flat in every theme; borders still carry the edge, so contrast does not depend on shadow.</p>
+<div class="ab knob">
+<div class="knob-l"><h4>Overrides</h4><ul class="kv">
+<li><b>--ds-shadow-sm</b>0 1px 2px rgb(0 0 0 / 0.12)</li>
+<li><b>--ds-shadow-md</b>0 4px 12px rgb(0 0 0 / 0.14)</li>
+<li><b>--ds-shadow-lg</b>0 16px 40px rgb(0 0 0 / 0.2)</li>
+</ul><p class="note">Illustrative values; Wireframe keeps none.</p></div>
+<div class="th t-shadow">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 08 DARK -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Knob · Dark</h2></div>
+<p class="sec-d">data-theme="dark" overrides the 30 color roles and sets color-scheme: dark. Fonts, type, radius and shadow stay default. Ground gray-900, ink gray-50, light primary with dark text, the same muted green and red with their light-mode fg and border swapped and new deep backgrounds. Overlay rises to 70 %.</p>
+<div class="ab knob">
+<div class="knob-l"><h4>Overrides (30)</h4><ul class="kv">
+<li><b>background / surface</b>#141414</li>
+<li><b>surface-subtle</b>#1F1F1F · new raw</li>
+<li><b>fill</b>#262626</li>
+<li><b>divider</b>#333333 · new raw</li>
+<li><b>border</b>#737373 · new raw · 3.9:1</li>
+<li><b>disabled</b>#595959</li>
+<li><b>placeholder</b>#8F8F8F · new raw · 5.7:1</li>
+<li><b>text-muted / text / text-strong</b>#A3A3A3 / #C7C7C7 / #E0E0E0</li>
+<li><b>text-emphasis, border-strong, icon, focus, primary</b>#F7F7F7 · 17.2:1</li>
+<li><b>primary-hover</b>#E0E0E0</li>
+<li><b>primary-contrast, text-inverse</b>#141414</li>
+<li><b>inverse</b>#EEEEEE</li>
+<li><b>overlay</b>rgb(0 0 0 / 0.7) · new raw</li>
+<li><b>info · border · bg</b>#C7C7C7 · #595959 · #1F1F1F</li>
+<li><b>success · border · bg</b>#9CC7AB · #2E6B45 · #13261A new</li>
+<li><b>error · border · bg</b>#E3AAA6 · #A3302B · #2D1414 new</li>
+</ul></div>
+<div class="th t-dark">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 09 SCALES (SIZES) -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">Scales · defaults</h2></div>
+<p class="sec-d">The sizing knobs at their Wireframe defaults: 13 type styles, 4 radius steps (all 0), 3 shadow steps (all none), 44 px control height. Radius and shadow are also drawn at the example values from sections 06 and 07 for comparison.</p>
+<div class="ab"><div class="ab-h"><span>Type scale</span><span>style · font role · size / line-height · weight · tracking · transform</span></div>
+<div class="th" style="padding:24px">
+<table class="tbl">
+<thead><tr><th style="width:110px">Style</th><th style="width:330px">Sample</th><th>Font role</th><th>Size / LH</th><th>Weight</th><th>Tracking</th><th>Transform</th></tr></thead>
+<tbody>
+<tr><td class="m">display</td><td><span style="font-family:var(--ds-font-heading);font-size:var(--ds-text-display-size);line-height:var(--ds-text-display-line-height);letter-spacing:var(--ds-text-display-tracking);font-weight:var(--ds-text-heading-weight);color:var(--ds-color-text-emphasis)">Aa</span></td><td class="m">font-heading</td><td class="m">72 / 72</td><td class="m">heading 500</td><td class="m">-0.04em</td><td class="m">heading none</td></tr>
+<tr><td class="m">h1</td><td><span style="font-family:var(--ds-font-heading);font-size:var(--ds-text-h1-size);line-height:var(--ds-text-h1-line-height);letter-spacing:var(--ds-text-h1-tracking);font-weight:var(--ds-text-heading-weight);color:var(--ds-color-text-emphasis)">Prints</span></td><td class="m">font-heading</td><td class="m">48 / 52.8</td><td class="m">500</td><td class="m">-0.03em</td><td class="m">none</td></tr>
+<tr><td class="m">h2</td><td><span style="font-family:var(--ds-font-heading);font-size:var(--ds-text-h2-size);line-height:var(--ds-text-h2-line-height);letter-spacing:var(--ds-text-h2-tracking);font-weight:var(--ds-text-heading-weight);color:var(--ds-color-text-emphasis)">Prints</span></td><td class="m">font-heading</td><td class="m">32 / 38.4</td><td class="m">500</td><td class="m">-0.02em</td><td class="m">none</td></tr>
+<tr><td class="m">h3</td><td><span class="h3">Delete print?</span></td><td class="m">font-heading</td><td class="m">22 / 29</td><td class="m">500</td><td class="m">0</td><td class="m">none</td></tr>
+<tr><td class="m">body-lg</td><td><span style="font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height)">Archival paper, shipped flat.</span></td><td class="m">font-body</td><td class="m">18 / 28.8</td><td class="m">regular 400</td><td class="m">—</td><td class="m">—</td></tr>
+<tr><td class="m">body</td><td><span class="p">Archival paper, shipped flat.</span></td><td class="m">font-body</td><td class="m">16 / 26</td><td class="m">400</td><td class="m">—</td><td class="m">—</td></tr>
+<tr><td class="m">body-sm</td><td><span style="font-size:var(--ds-text-body-sm-size);line-height:var(--ds-text-body-sm-line-height)">Checkbox sm label</span></td><td class="m">font-body</td><td class="m">15 / 24</td><td class="m">400</td><td class="m">—</td><td class="m">—</td></tr>
+<tr><td class="m">body-xs</td><td><span style="font-size:var(--ds-text-body-xs-size);line-height:var(--ds-text-body-xs-line-height)">Alert body text</span></td><td class="m">font-body</td><td class="m">14 / 21</td><td class="m">400</td><td class="m">—</td><td class="m">—</td></tr>
+<tr><td class="m">caption</td><td><span class="hint">Only used for the receipt.</span></td><td class="m">font-body</td><td class="m">13 / 20</td><td class="m">400 (error 500)</td><td class="m">—</td><td class="m">—</td></tr>
+<tr><td class="m">label</td><td><span class="lbl">Email address</span></td><td class="m">font-label</td><td class="m">12 / 16</td><td class="m">label 500</td><td class="m">0.08em</td><td class="m">uppercase</td></tr>
+<tr><td class="m">ui</td><td><span style="font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);color:var(--ds-color-text-emphasis)">Continue</span></td><td class="m">font-label</td><td class="m">14 / 20</td><td class="m">ui 500</td><td class="m">—</td><td class="m">—</td></tr>
+<tr><td class="m">ui-sm</td><td><span class="tag su">Draft</span></td><td class="m">font-label / font-mono</td><td class="m">12 / 16</td><td class="m">per use</td><td class="m">—</td><td class="m">—</td></tr>
+<tr><td class="m">ui-xs</td><td><span class="badge">12</span></td><td class="m">font-label</td><td class="m">11 / 16</td><td class="m">per use</td><td class="m">—</td><td class="m">—</td></tr>
+</tbody>
+</table>
+</div></div>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>Radius</span><span>default 0 · example 4 / 8 / 12 / full</span></div>
+<div class="ab-b" style="flex-direction:row;gap:0;padding:0">
+<div class="th" style="flex:1;display:flex;gap:16px;align-items:flex-end;padding:24px">
+<div class="cell"><span style="display:block;width:56px;height:56px;border:2px solid var(--ds-color-border-strong);border-radius:var(--ds-radius-sm)"></span><span class="cap">sm 0</span></div>
+<div class="cell"><span style="display:block;width:56px;height:56px;border:2px solid var(--ds-color-border-strong);border-radius:var(--ds-radius-md)"></span><span class="cap">md 0</span></div>
+<div class="cell"><span style="display:block;width:56px;height:56px;border:2px solid var(--ds-color-border-strong);border-radius:var(--ds-radius-lg)"></span><span class="cap">lg 0</span></div>
+<div class="cell"><span style="display:block;width:56px;height:56px;border:2px solid var(--ds-color-border-strong);border-radius:var(--ds-radius-full)"></span><span class="cap">full 0</span></div>
+</div>
+<div class="th t-radius" style="flex:1;display:flex;gap:16px;align-items:flex-end;padding:24px;border-left:1px solid #E0E0E0">
+<div class="cell"><span style="display:block;width:56px;height:56px;border:2px solid var(--ds-color-border-strong);border-radius:var(--ds-radius-sm)"></span><span class="cap">sm 4</span></div>
+<div class="cell"><span style="display:block;width:56px;height:56px;border:2px solid var(--ds-color-border-strong);border-radius:var(--ds-radius-md)"></span><span class="cap">md 8</span></div>
+<div class="cell"><span style="display:block;width:56px;height:56px;border:2px solid var(--ds-color-border-strong);border-radius:var(--ds-radius-lg)"></span><span class="cap">lg 12</span></div>
+<div class="cell"><span style="display:block;width:56px;height:56px;border:2px solid var(--ds-color-border-strong);border-radius:var(--ds-radius-full)"></span><span class="cap">full</span></div>
+</div>
+</div><div class="ab-f">Left: Wireframe default. Right: example override.</div></div>
+<div class="ab"><div class="ab-h"><span>Shadow</span><span>default none · example sm / md / lg</span></div>
+<div class="ab-b" style="flex-direction:row;gap:0;padding:0">
+<div class="th" style="flex:1;display:flex;gap:16px;align-items:flex-end;padding:24px">
+<div class="cell"><span style="display:block;width:56px;height:56px;border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-sm)"></span><span class="cap">sm none</span></div>
+<div class="cell"><span style="display:block;width:56px;height:56px;border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-md)"></span><span class="cap">md none</span></div>
+<div class="cell"><span style="display:block;width:56px;height:56px;border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-lg)"></span><span class="cap">lg none</span></div>
+</div>
+<div class="th t-shadow" style="flex:1;display:flex;gap:24px;align-items:flex-end;padding:24px 24px 40px;border-left:1px solid #E0E0E0">
+<div class="cell"><span style="display:block;width:56px;height:56px;border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-sm)"></span><span class="cap">sm</span></div>
+<div class="cell"><span style="display:block;width:56px;height:56px;border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-md)"></span><span class="cap">md</span></div>
+<div class="cell"><span style="display:block;width:56px;height:56px;border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-lg)"></span><span class="cap">lg</span></div>
+</div>
+</div><div class="ab-f">Edges always come from borders; shadow only adds depth.</div></div>
+</div>
+</section>
+
+<!-- 10 STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Interaction states · default and dark</h2></div>
+<p class="sec-d">Every interaction state reads a role, so it survives any theme. Same markup in both artboards; the right one only adds data-theme="dark". Focus-visible: outline in color-focus, focus-width, focus-offset.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>data-theme="default"</span></div>
+<div class="th"><div class="sgrid">
+<span class="rh">Primary</span>
+<div class="cell"><span class="btn pri">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn pri hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn pri foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn pri dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Secondary</span>
+<div class="cell"><span class="btn sec2">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn sec2 hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn sec2 foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn sec2 dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Input</span>
+<div class="cell" style="align-items:stretch"><div class="in"><span class="ph">Name</span></div><span class="cap">rest</span></div>
+<div class="cell" style="align-items:stretch"><div class="in foc">Ada</div><span class="cap">focus-visible</span></div>
+<div class="cell" style="align-items:stretch"><div class="in inv">Ad</div><span class="cap">invalid</span></div>
+<div class="cell" style="align-items:stretch"><div class="in dis">Ada</div><span class="cap">disabled</span></div>
+<span class="rh">Checkbox</span>
+<div class="cell"><span class="row"><span class="cb"></span><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">rest · checked</span></div>
+<div class="cell"><span class="row"><span class="cb hov"></span><span class="cb on hov"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">hover</span></div>
+<div class="cell"><span class="row"><span class="cb foc"></span><span class="cb inv on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">focus · invalid</span></div>
+<div class="cell"><span class="row"><span class="cb dis"></span><span class="cb dis on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">disabled</span></div>
+</div></div></div>
+
+<div class="ab"><div class="ab-h"><span>Dark</span><span>data-theme="dark"</span></div>
+<div class="th t-dark"><div class="sgrid">
+<span class="rh">Primary</span>
+<div class="cell"><span class="btn pri">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn pri hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn pri foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn pri dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Secondary</span>
+<div class="cell"><span class="btn sec2">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn sec2 hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn sec2 foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn sec2 dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Input</span>
+<div class="cell" style="align-items:stretch"><div class="in"><span class="ph">Name</span></div><span class="cap">rest</span></div>
+<div class="cell" style="align-items:stretch"><div class="in foc">Ada</div><span class="cap">focus-visible</span></div>
+<div class="cell" style="align-items:stretch"><div class="in inv">Ad</div><span class="cap">invalid</span></div>
+<div class="cell" style="align-items:stretch"><div class="in dis">Ada</div><span class="cap">disabled</span></div>
+<span class="rh">Checkbox</span>
+<div class="cell"><span class="row"><span class="cb"></span><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">rest · checked</span></div>
+<div class="cell"><span class="row"><span class="cb hov"></span><span class="cb on hov"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">hover</span></div>
+<div class="cell"><span class="row"><span class="cb foc"></span><span class="cb inv on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">focus · invalid</span></div>
+<div class="cell"><span class="row"><span class="cb dis"></span><span class="cb dis on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">disabled</span></div>
+</div></div></div>
+
+</div>
+<div class="ab"><div class="ab-h"><span>Keyboard</span><span>theming adds no keys</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th style="width:260px">Rule</th><th>What a theme must keep</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Focus order and every key binding come from components and Radix. Themes change values only, never display, order or tabindex.</td></tr>
+<tr><td>Focus ring</td><td>Always visible: focus-width at least 2 px, color-focus at least 3:1 against background and adjacent surface. Outline, not box-shadow, so it survives forced-colors mode and follows radius.</td></tr>
+<tr><td>Theme switch</td><td>Changing data-theme at runtime is pure CSS: no re-mount, focus stays where it is.</td></tr>
+</tbody>
+</table>
+</div></div>
+</section>
+
+<!-- 11 CONTRAST -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">11</span><h2 class="sec-t">Contrast · light and dark</h2></div>
+<p class="sec-d">WCAG 2.x relative luminance from the hex values. Text pairs need 4.5:1, UI pairs 3:1. Disabled and decorative pairs are listed for completeness and are exempt.</p>
+<div class="ab"><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Pair (fg / bg)</th><th style="width:90px">Kind</th><th>Light</th><th style="width:80px">Ratio</th><th>Dark</th><th style="width:80px">Ratio</th></tr></thead>
+<tbody>
+<tr><td class="m">text-emphasis / background</td><td>text</td><td class="m"><span class="sw" style="background:#000"></span>#000000 / #FFFFFF</td><td class="m">21.00</td><td class="m"><span class="sw" style="background:#F7F7F7"></span>#F7F7F7 / #141414</td><td class="m">17.20</td></tr>
+<tr><td class="m">text-strong / background</td><td>text</td><td class="m"><span class="sw" style="background:#262626"></span>#262626 / #FFFFFF</td><td class="m">15.13</td><td class="m"><span class="sw" style="background:#E0E0E0"></span>#E0E0E0 / #141414</td><td class="m">13.96</td></tr>
+<tr><td class="m">text / background</td><td>text</td><td class="m"><span class="sw" style="background:#404040"></span>#404040 / #FFFFFF</td><td class="m">10.37</td><td class="m"><span class="sw" style="background:#C7C7C7"></span>#C7C7C7 / #141414</td><td class="m">10.90</td></tr>
+<tr><td class="m">text-muted / background</td><td>text</td><td class="m"><span class="sw" style="background:#595959"></span>#595959 / #FFFFFF</td><td class="m">7.00</td><td class="m"><span class="sw" style="background:#A3A3A3"></span>#A3A3A3 / #141414</td><td class="m">7.30</td></tr>
+<tr><td class="m">placeholder / background</td><td>text</td><td class="m"><span class="sw" style="background:#767676"></span>#767676 / #FFFFFF</td><td class="m">4.54</td><td class="m"><span class="sw" style="background:#8F8F8F"></span>#8F8F8F / #141414</td><td class="m">5.70</td></tr>
+<tr><td class="m">text-emphasis / fill</td><td>text</td><td class="m">#000000 / #EEEEEE</td><td class="m">18.10</td><td class="m">#F7F7F7 / #262626</td><td class="m">14.13</td></tr>
+<tr><td class="m">text-strong / fill</td><td>text</td><td class="m">#262626 / #EEEEEE</td><td class="m">13.04</td><td class="m">#E0E0E0 / #262626</td><td class="m">11.46</td></tr>
+<tr><td class="m">primary-contrast / primary</td><td>text</td><td class="m">#FFFFFF / #000000</td><td class="m">21.00</td><td class="m">#141414 / #F7F7F7</td><td class="m">17.20</td></tr>
+<tr><td class="m">primary-contrast / primary-hover</td><td>text</td><td class="m">#FFFFFF / #262626</td><td class="m">15.13</td><td class="m">#141414 / #E0E0E0</td><td class="m">13.96</td></tr>
+<tr><td class="m">text-inverse / inverse</td><td>text</td><td class="m">#FFFFFF / #141414</td><td class="m">18.42</td><td class="m">#141414 / #EEEEEE</td><td class="m">15.88</td></tr>
+<tr><td class="m">info / info-bg · text / info-bg</td><td>text</td><td class="m">#404040 / #F7F7F7</td><td class="m">9.68</td><td class="m">#C7C7C7 / #1F1F1F</td><td class="m">9.75</td></tr>
+<tr><td class="m">success / success-bg</td><td>text</td><td class="m"><span class="sw" style="background:#2E6B45"></span>#2E6B45 / #EDF5EF</td><td class="m">5.72</td><td class="m"><span class="sw" style="background:#9CC7AB"></span>#9CC7AB / #13261A</td><td class="m">8.46</td></tr>
+<tr><td class="m">text / success-bg</td><td>text</td><td class="m">#404040 / #EDF5EF</td><td class="m">9.34</td><td class="m">#C7C7C7 / #13261A</td><td class="m">9.41</td></tr>
+<tr><td class="m">success / background</td><td>text</td><td class="m">#2E6B45 / #FFFFFF</td><td class="m">6.35</td><td class="m">#9CC7AB / #141414</td><td class="m">9.80</td></tr>
+<tr><td class="m">error / error-bg</td><td>text</td><td class="m"><span class="sw" style="background:#A3302B"></span>#A3302B / #FBEDEC</td><td class="m">6.11</td><td class="m"><span class="sw" style="background:#E3AAA6"></span>#E3AAA6 / #2D1414</td><td class="m">8.65</td></tr>
+<tr><td class="m">text-strong / error-bg</td><td>text</td><td class="m">#262626 / #FBEDEC</td><td class="m">13.28</td><td class="m">#E0E0E0 / #2D1414</td><td class="m">13.02</td></tr>
+<tr><td class="m">error / background</td><td>text</td><td class="m">#A3302B / #FFFFFF</td><td class="m">6.97</td><td class="m">#E3AAA6 / #141414</td><td class="m">9.27</td></tr>
+<tr><td class="m">border-strong · icon · focus · primary / background</td><td>UI</td><td class="m">#000000 / #FFFFFF</td><td class="m">21.00</td><td class="m">#F7F7F7 / #141414</td><td class="m">17.20</td></tr>
+<tr><td class="m">error / surface (invalid border)</td><td>UI</td><td class="m">#A3302B / #FFFFFF</td><td class="m">6.97</td><td class="m">#E3AAA6 / #141414</td><td class="m">9.27</td></tr>
+<tr><td class="m">primary-contrast / error (invalid checked mark)</td><td>UI</td><td class="m">#FFFFFF / #A3302B</td><td class="m">6.97</td><td class="m">#141414 / #E3AAA6</td><td class="m">9.27</td></tr>
+<tr><td class="m">placeholder / background (slider track)</td><td>UI</td><td class="m">#767676 / #FFFFFF</td><td class="m">4.54</td><td class="m">#8F8F8F / #141414</td><td class="m">5.70</td></tr>
+<tr><td class="m">text-muted / background (tag remove icon)</td><td>UI</td><td class="m">#595959 / #FFFFFF</td><td class="m">7.00</td><td class="m">#A3A3A3 / #141414</td><td class="m">7.30</td></tr>
+<tr><td class="m">border / surface (field rest border)</td><td>UI</td><td class="m"><span class="sw" style="background:#C7C7C7"></span>#C7C7C7 / #FFFFFF</td><td class="m" style="color:#A3302B">1.69 known gap</td><td class="m"><span class="sw" style="background:#737373"></span>#737373 / #141414</td><td class="m">3.89</td></tr>
+<tr><td class="m">placeholder / surface-subtle (disabled text)</td><td>exempt</td><td class="m">#767676 / #F7F7F7</td><td class="m">4.24</td><td class="m">#8F8F8F / #1F1F1F</td><td class="m">5.10</td></tr>
+<tr><td class="m">placeholder / divider (disabled primary)</td><td>exempt</td><td class="m">#767676 / #E0E0E0</td><td class="m">3.44</td><td class="m">#8F8F8F / #333333</td><td class="m">3.91</td></tr>
+<tr><td class="m">disabled / background</td><td>exempt</td><td class="m">#A3A3A3 / #FFFFFF</td><td class="m">2.52</td><td class="m">#595959 / #141414</td><td class="m">2.63</td></tr>
+<tr><td class="m">divider / background</td><td>decorative</td><td class="m">#E0E0E0 / #FFFFFF</td><td class="m">1.32</td><td class="m">#333333 / #141414</td><td class="m">1.46</td></tr>
+<tr><td class="m">status border / status bg</td><td>decorative</td><td class="m">#9CC7AB / #EDF5EF</td><td class="m">1.69</td><td class="m">#2E6B45 / #13261A · #A3302B / #2D1414 · #595959 / #1F1F1F</td><td class="m">2.50 · 2.47 · 2.35</td></tr>
+</tbody>
+</table>
+</div><div class="ab-f">The light field rest border is kept for Wireframe parity (open question 2 in the spec). Fields remain identified by their visible label and hover / focus border.</div></div>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>
