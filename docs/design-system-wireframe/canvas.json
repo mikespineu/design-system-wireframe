@@ -65,6 +65,13 @@
       "w": 1440,
       "x": 12160,
       "y": 0
+    },
+    "Icon.dc.html": {
+      "h": 11600,
+      "title": "Icon",
+      "w": 1440,
+      "x": 13680,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -94,7 +101,8 @@
     "Dialog.dc.html",
     "Checkbox.dc.html",
     "Toggle.dc.html",
-    "Theming.dc.html"
+    "Theming.dc.html",
+    "Icon.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
