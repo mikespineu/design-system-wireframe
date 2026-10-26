@@ -192,7 +192,13 @@ for (const t of tasks) {
   const design = t.dependsOn.map((d) => byId.get(d)).find((d) => d?.type === 'design');
   if (t.type === 'build' && t.hasUi && !(design && specs.has(design.id))) t.waitingOn.push(design ? `approved spec from ${design.id}` : 'a design task');
 
+  // Waiting for the user's approval or input counts as blocked by a human.
+  const approved = t.pr?.labels.includes('factory:approved');
+  t.blockedByHuman = t.roadmapStatus !== 'done' && t.job?.status !== 'merged' && !approved
+    && (t.job?.status === 'waiting' || !!t.pr?.labels.includes('factory:needs-approval'));
+
   if (t.roadmapStatus === 'done') t.status = 'done';
+  else if (t.blockedByHuman) t.status = 'blocked';
   else if (t.job?.status === 'blocked' || t.pr?.labels.includes('factory:blocked')) t.status = 'blocked';
   else if (t.job?.status === 'waiting' || t.job?.status === 'merged' || t.pr) t.status = 'review';
   else if (t.job || t.branch) t.status = 'in-progress';
@@ -203,7 +209,10 @@ for (const t of tasks) {
 const needsYou = [];
 for (const t of tasks) {
   if (t.status === 'done') continue;
-  if (t.status === 'blocked') needsYou.push({ task: t.id, kind: 'blocked', text: t.job?.blocked_reason || t.blockedReason || 'blocked', action: t.job?.needs_you || `/factory:retry ${t.id}`, url: t.pr?.url });
+  if (t.blockedByHuman) {
+    if (t.job?.needs_you) needsYou.push({ task: t.id, kind: t.type === 'design' ? 'approve design' : 'needs you', text: t.job.needs_you, action: '', url: t.pr?.url, canvas: t.job.canvas_url });
+    else needsYou.push({ task: t.id, kind: 'approve', text: 'PR needs your approval', action: `/factory:approve ${t.id}`, url: t.pr?.url });
+  } else if (t.status === 'blocked') needsYou.push({ task: t.id, kind: 'blocked', text: t.job?.blocked_reason || t.blockedReason || 'blocked', action: t.job?.needs_you || `/factory:retry ${t.id}`, url: t.pr?.url });
   else if (t.job?.needs_you) needsYou.push({ task: t.id, kind: t.type === 'design' ? 'approve design' : 'needs you', text: t.job.needs_you, action: '', url: t.pr?.url, canvas: t.job.canvas_url });
   else if (t.pr?.labels.includes('factory:needs-approval')) needsYou.push({ task: t.id, kind: 'approve', text: 'PR needs your approval', action: `/factory:approve ${t.id}`, url: t.pr.url });
 }
@@ -230,12 +239,12 @@ const tokens = fs.existsSync(tokensFile) ? fs.readFileSync(tokensFile, 'utf8') :
 const STATUSES = ['todo', 'ready', 'in-progress', 'review', 'blocked', 'done'];
 
 const badge = (text, tone = '') => `<span class="badge" data-tone="${esc(tone)}">${esc(text)}</span>`;
-const badges = (t) => `${badge(t.line, t.line)}${t.hasUi ? badge('ui') : ''}${t.needsHuman ? badge('human', 'human') : ''}${t.job?.stage && t.status !== 'done' ? badge(t.job.stage) : ''}`;
+const badges = (t) => `${badge(t.line, t.line)}${t.hasUi ? badge('ui') : ''}${t.needsHuman || t.blockedByHuman ? badge('human', 'human') : ''}${t.job?.stage && t.status !== 'done' ? badge(t.job.stage) : ''}`;
 // Compact card on the board; details open in a dialog (see the script at the end of the page).
 const taskCard = (t) => `<button type="button" class="task" data-task="${esc(t.id)}" aria-haspopup="dialog"><span><strong class="mono">${esc(t.id)}</strong> ${esc(t.title)}</span><span class="row">${badges(t)}</span></button>`;
 const taskDetail = (t) => `<template id="detail-${esc(t.id)}">
 <h3 id="detail-title"><span class="mono">${esc(t.id)}</span> ${esc(t.title)}</h3>
-<div class="row">${badge(t.status, t.status === 'blocked' ? 'error' : '')}${badges(t)}</div>
+<div class="row">${badge(t.blockedByHuman ? 'blocked by human' : t.status, t.status === 'blocked' ? 'error' : '')}${badges(t)}</div>
 ${t.description ? `<p>${esc(t.description)}</p>` : ''}
 <dl>
 <dt>Epic</dt><dd>${esc(t.epic || '–')}</dd>
