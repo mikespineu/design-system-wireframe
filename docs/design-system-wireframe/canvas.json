@@ -30,6 +30,13 @@
       "w": 1440,
       "x": 4560,
       "y": 0
+    },
+    "Slider.dc.html": {
+      "h": 11200,
+      "title": "Slider",
+      "w": 1440,
+      "x": 6080,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -54,7 +61,8 @@
     "Main.dc.html",
     "Components.dc.html",
     "Form.dc.html",
-    "Textarea.dc.html"
+    "Textarea.dc.html",
+    "Slider.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
