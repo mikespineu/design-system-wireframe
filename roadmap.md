@@ -152,8 +152,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Workflow runs on every PR and push to `main`
     - Runs `npm ci`, lint, typecheck, test with coverage, and the library build
     - Shows up as a GitHub check on PRs
-- [ ] **DS-9 Release pipeline to npm.** Versioning and changelog (e.g. Changesets), plus a workflow that publishes to npm on release, preferably with npm trusted publishing (OIDC) and provenance rather than a long-lived token.
-  - type: infra · has_ui: no · depends_on: DS-7, DS-8 · needs_human: yes · status: todo
+- [x] **DS-9 Release pipeline to npm.** Versioning and changelog (e.g. Changesets), plus a workflow that publishes to npm on release, preferably with npm trusted publishing (OIDC) and provenance rather than a long-lived token.
+  - type: infra · has_ui: no · depends_on: DS-7, DS-8 · needs_human: yes · status: done
   - done_when:
     - Changesets (or similar) handles versions and changelog
     - Publish workflow uses npm trusted publishing (OIDC) with provenance
@@ -188,3 +188,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-7** Library build — https://github.com/mikespineu/design-system-wireframe/pull/40
 - **DS-19** Dialog — design — https://github.com/mikespineu/design-system-wireframe/pull/39
 - **DS-8** CI pipeline — https://github.com/mikespineu/design-system-wireframe/pull/42
+- **DS-9** Release pipeline to npm — https://github.com/mikespineu/design-system-wireframe/pull/43
