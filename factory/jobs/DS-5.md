@@ -2,8 +2,8 @@
 task: DS-5
 title: "Toggle — design"
 line: design           # design | build
-status: in-progress        # claimed | in-progress | waiting | blocked | merged
-stage: ci
+status: merged        # claimed | in-progress | waiting | blocked | merged
+stage: merge
 branch: "feat/DS-5-toggle-design"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-5-toggle-design"
 pr: "49"
@@ -15,7 +15,7 @@ loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
 needs_you: ""
 blocked_reason: ""
 started: "2026-10-26T11:10:55Z"
-updated: "2026-10-26T12:07:44Z"
+updated: "2026-10-26T12:09:00Z"
 ---
 
 # DS-5 Toggle — design
@@ -34,6 +34,8 @@ updated: "2026-10-26T12:07:44Z"
 - 12:23 design: revised per canvas comment (SegmentedControl selection slides between segments, --ds-motion); canvas republished
 - 12:24 design: example labels replaced with neutral app-settings copy (no 1:1 labels from reference screenshots); spec check passed; canvas republished
 - 13:07 approve: approved by mikespin
+- 13:09 ci: checks green (ci, claude-review, deploy)
+- 13:09 merge: squash-merged PR #49
 
 ## Gate results
 
