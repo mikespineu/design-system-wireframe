@@ -140,8 +140,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Publishing
 
-- [ ] **DS-7 Library build.** Package is `private` with no build today. Add a Vite library build (ESM + type declarations) and a compiled CSS entry (tokens + Tailwind utilities). Set `name`, `exports`, `files`, `sideEffects`, and `peerDependencies` (`react`, `react-dom`) in `package.json`.
-  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-7 Library build.** Package is `private` with no build today. Add a Vite library build (ESM + type declarations) and a compiled CSS entry (tokens + Tailwind utilities). Set `name`, `exports`, `files`, `sideEffects`, and `peerDependencies` (`react`, `react-dom`) in `package.json`.
+  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - `npm run build` produces ESM + type declarations in `dist/`
     - A compiled CSS entry (tokens + Tailwind utilities) is emitted
@@ -168,8 +168,8 @@ Each task carries its fields in an indented line, read by the [software factory]
   - done_when:
     - Install and usage guide covers importing CSS, using components, applying a theme
     - Linked from the README and the Storybook Introduction page
-- [ ] **DS-25 README — Claude Design & Software Factory.** Create the root `README.md` (the repo has none yet) with two sections. **Claude Design**: how components are designed before they're built: canvases in `docs/design-system-wireframe/*.dc.html`, specs in `docs/specs/<Name>.md`, the design → approved spec → build handoff, and how `--ds-*` tokens connect the design to code. **Software Factory**: how the roadmap works: `roadmap.md` task format, the `/factory:*` skills (`add`, `plan`, `next`, `design`, `build`, `approve`, `status`…), the agent pipeline (planner → designer → builder → QA → reviewer), the hard gates (lint, typecheck, test, Storybook build), job files in `factory/jobs/`, and the steps that need human approval. Also links Storybook and the stack overview so the README reads as one page. Add screenshots to illustrate: the Storybook Introduction page, the factory status page (`/factory:status` / `npm run factory:status`), and one Claude Design canvas. Store them as PNGs in `docs/images/readme/`.
-  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-25 README — Claude Design & Software Factory.** Create the root `README.md` (the repo has none yet) with two sections. **Claude Design**: how components are designed before they're built: canvases in `docs/design-system-wireframe/*.dc.html`, specs in `docs/specs/<Name>.md`, the design → approved spec → build handoff, and how `--ds-*` tokens connect the design to code. **Software Factory**: how the roadmap works: `roadmap.md` task format, the `/factory:*` skills (`add`, `plan`, `next`, `design`, `build`, `approve`, `status`…), the agent pipeline (planner → designer → builder → QA → reviewer), the hard gates (lint, typecheck, test, Storybook build), job files in `factory/jobs/`, and the steps that need human approval. Also links Storybook and the stack overview so the README reads as one page. Add screenshots to illustrate: the Storybook Introduction page, the factory status page (`/factory:status` / `npm run factory:status`), and one Claude Design canvas. Store them as PNGs in `docs/images/readme/`.
+  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - `README.md` has a "Claude Design" section covering canvases (`*.dc.html`), specs (`docs/specs/`), and the design → spec → build handoff
     - `README.md` has a "Software Factory" section listing every skill in `factory/plugin/skills/`, the agent pipeline, the gates, job files, and the human-approval points
@@ -183,4 +183,6 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-4** Textarea — implementation — https://github.com/mikespineu/design-system-wireframe/pull/33
 - [x] **DS-3 Textarea — design.** [PR #27](https://github.com/mikespineu/design-system-wireframe/pull/27)
 - **DS-23** Slider — design — https://github.com/mikespineu/design-system-wireframe/pull/35
+- **DS-25** README — Claude Design & Software Factory — https://github.com/mikespineu/design-system-wireframe/pull/38
+- **DS-7** Library build — https://github.com/mikespineu/design-system-wireframe/pull/40
 - **DS-19** Dialog — design — https://github.com/mikespineu/design-system-wireframe/pull/39
