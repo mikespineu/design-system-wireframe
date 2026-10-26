@@ -175,6 +175,14 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Every `npm run` script listed matches `package.json`
     - Commands and conventions match `CLAUDE.md` (worktrees, ports, tokens-only styling, Radix)
     - All relative links in the README resolve to existing files
+- [ ] **DS-25 README — Claude Design & Software Factory.** Extend the root `README.md` with two sections. **Claude Design**: how components are designed before they're built: canvases in `docs/design-system-wireframe/*.dc.html`, specs in `docs/specs/<Name>.md`, the design → approved spec → build handoff, and how `--ds-*` tokens connect the design to code. **Software Factory**: how the roadmap works: `roadmap.md` task format, the `/factory:*` skills (`add`, `plan`, `next`, `design`, `build`, `approve`, `status`…), the agent pipeline (planner → designer → builder → QA → reviewer), the hard gates (lint, typecheck, test, Storybook build), job files in `factory/jobs/`, and the steps that need human approval. Also links Storybook and the stack overview so the README reads as one page. Add screenshots to illustrate: the Storybook Introduction page, the factory status page (`/factory:status` / `npm run factory:status`), and one Claude Design canvas. Store them as PNGs in `docs/images/readme/`.
+  - type: docs · has_ui: no · depends_on: DS-12 · needs_human: no · status: todo
+  - done_when:
+    - `README.md` has a "Claude Design" section covering canvases (`*.dc.html`), specs (`docs/specs/`), and the design → spec → build handoff
+    - `README.md` has a "Software Factory" section listing every skill in `factory/plugin/skills/`, the agent pipeline, the gates, job files, and the human-approval points
+    - The Storybook section explains how to run it locally (`npm run storybook`, per-worktree port) and links the deployed Storybook if `vercel.json` defines one
+    - Screenshots of the Storybook Introduction page, the factory status page and one Claude Design canvas are committed in `docs/images/readme/` (PNG, ≤ 500 KB each) and embedded in their sections, each with descriptive alt text
+    - Every skill, path, image and command named in the README exists in the repo (all relative links resolve)
 
 ## Done
 
