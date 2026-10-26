@@ -1,0 +1,109 @@
+/* SegmentedControl look. Layout, scroll and fade come from ../ChoiceGroup/ChoiceGroup.css. Spec: docs/specs/Toggle.md */
+.ds-choice-control[data-variant='segmented'] {
+  --ds-segment-height: calc(var(--ds-control-height) - 2 * var(--ds-space-1));
+  --ds-segment-pad: var(--ds-space-4);
+  --ds-segment-font: 1rem;
+  --ds-segment-line: 26px;
+  align-self: flex-start;
+  width: fit-content;
+  height: var(--ds-control-height);
+  padding: var(--ds-space-1);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-fill);
+}
+
+.ds-choice-control[data-variant='segmented'][data-size='sm'] {
+  --ds-segment-height: calc(var(--ds-space-8) - 2 * var(--ds-space-1));
+  --ds-segment-pad: var(--ds-space-3);
+  --ds-segment-font: 0.8125rem;
+  --ds-segment-line: 20px;
+  height: var(--ds-space-8);
+}
+
+.ds-choice-control[data-variant='segmented'][data-full-width] {
+  display: flex;
+  width: 100%;
+}
+
+.ds-choice-control[data-variant='segmented'][data-disabled] {
+  background: var(--ds-color-surface-subtle);
+}
+
+.ds-choice-control[data-variant='segmented'] .ds-choice-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--ds-segment-height);
+  padding-inline: var(--ds-segment-pad);
+  border: var(--ds-border-width) solid transparent;
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-color-text);
+  font-size: var(--ds-segment-font);
+  line-height: var(--ds-segment-line);
+}
+
+.ds-choice-control[data-variant='segmented'][data-full-width] .ds-choice-item {
+  flex: 1 1 0;
+}
+
+.ds-choice-control[data-variant='segmented'] .ds-choice-item[data-state='checked'] {
+  border-color: var(--ds-color-ink);
+  background: var(--ds-color-surface);
+  color: var(--ds-color-ink);
+}
+
+/* Once measured, the indicator carries the selected look. */
+.ds-choice-control[data-indicator-ready] .ds-choice-item[data-state='checked'] {
+  border-color: transparent;
+  background: none;
+}
+
+.ds-choice-control[data-variant='segmented'] .ds-choice-item[data-state='unchecked']:not([data-disabled]):hover {
+  background: var(--ds-color-divider); /* gray-200: hover on the gray-100 strip */
+  color: var(--ds-color-ink);
+}
+
+.ds-choice-control[data-variant='segmented'] .ds-choice-item[data-disabled] {
+  color: var(--ds-color-placeholder);
+}
+
+.ds-choice-control[data-variant='segmented'][data-disabled] .ds-choice-item[data-state='checked'] {
+  border-color: var(--ds-color-disabled);
+  background: var(--ds-color-surface);
+}
+
+.ds-choice-control[data-indicator-ready][data-disabled] .ds-choice-item[data-state='checked'] {
+  border-color: transparent;
+  background: none;
+}
+
+.ds-choice-indicator {
+  position: absolute;
+  top: var(--ds-space-1);
+  bottom: var(--ds-space-1);
+  left: 0;
+  box-sizing: border-box;
+  display: none;
+  border: var(--ds-border-width) solid var(--ds-color-ink);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-surface);
+  pointer-events: none;
+}
+
+.ds-choice-control[data-indicator-ready] .ds-choice-indicator {
+  display: block;
+}
+
+.ds-choice-control[data-disabled] .ds-choice-indicator {
+  border-color: var(--ds-color-disabled);
+}
+
+.ds-choice-indicator[data-animate] {
+  transition: transform var(--ds-motion), width var(--ds-motion);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-choice-indicator[data-animate] {
+    transition: none;
+  }
+}

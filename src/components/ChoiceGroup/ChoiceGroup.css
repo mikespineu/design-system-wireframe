@@ -1,0 +1,141 @@
+/* ChoiceGroup (internal base of SegmentedControl / TileGroup). Spec: docs/specs/Toggle.md */
+.ds-choice {
+  --ds-choice-row: var(--ds-control-height);
+  --ds-choice-label-gap: var(--ds-space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-choice-label-gap);
+  min-height: var(--ds-choice-row);
+  font-family: var(--ds-font-text);
+}
+
+.ds-choice[data-size='sm'] {
+  --ds-choice-row: var(--ds-space-8);
+  --ds-choice-label-gap: var(--ds-space-3);
+}
+
+.ds-choice[data-label-position='top'] {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--ds-space-2);
+  min-height: 0;
+}
+
+.ds-choice-heading {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+}
+
+.ds-choice-label {
+  color: var(--ds-color-ink);
+  font-family: var(--ds-font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ds-choice-hint {
+  color: var(--ds-color-text-muted);
+  font-size: 0.8125rem;
+  line-height: 20px;
+}
+
+.ds-choice[data-disabled] .ds-choice-label,
+.ds-choice[data-disabled] .ds-choice-hint {
+  color: var(--ds-color-placeholder);
+}
+
+/* Control + help on one line. */
+.ds-choice-field {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  min-width: 0;
+}
+
+.ds-choice[data-label-position='start'] .ds-choice-field {
+  margin-inline-start: auto;
+}
+
+.ds-choice-help {
+  flex: none;
+}
+
+/* The strip is the scroll container. */
+.ds-choice-control {
+  --ds-choice-pad: var(--ds-space-1);
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--ds-space-6);
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-color-border) transparent;
+}
+
+.ds-choice-control[data-overflow] {
+  padding-inline-end: 0;
+}
+
+/* Trailing padding is ignored in overflowing flex rows in some browsers. */
+.ds-choice-control[data-overflow]::after {
+  content: '';
+  flex: none;
+  width: var(--ds-choice-pad);
+}
+
+.ds-choice-control[data-overflow='end'] {
+  mask-image: linear-gradient(to right, black calc(100% - var(--ds-space-6)), transparent);
+}
+.ds-choice-control[data-overflow='start'] {
+  mask-image: linear-gradient(to right, transparent, black var(--ds-space-6));
+}
+.ds-choice-control[data-overflow='both'] {
+  mask-image: linear-gradient(to right, transparent, black var(--ds-space-6), black calc(100% - var(--ds-space-6)), transparent);
+}
+.ds-choice-control:dir(rtl)[data-overflow='end'] {
+  mask-image: linear-gradient(to left, black calc(100% - var(--ds-space-6)), transparent);
+}
+.ds-choice-control:dir(rtl)[data-overflow='start'] {
+  mask-image: linear-gradient(to left, transparent, black var(--ds-space-6));
+}
+.ds-choice-control:dir(rtl)[data-overflow='both'] {
+  mask-image: linear-gradient(to left, transparent, black var(--ds-space-6), black calc(100% - var(--ds-space-6)), transparent);
+}
+
+.ds-choice-item {
+  all: unset;
+  box-sizing: border-box;
+  position: relative;
+  flex: none;
+  scroll-snap-align: start;
+  cursor: pointer;
+  font-family: var(--ds-font-text);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color var(--ds-motion), border-color var(--ds-motion), color var(--ds-motion);
+}
+
+.ds-choice-item[data-disabled] {
+  cursor: not-allowed;
+}
+
+.ds-choice-item:focus-visible {
+  z-index: 1;
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-choice-item {
+    transition: none;
+  }
+}

@@ -9,3 +9,4 @@ export * from './components/Textarea';
 export * from './components/Checkbox';
 export * from './components/Dialog';
 export * from './components/Slider';
+export * from './components/SegmentedControl';
