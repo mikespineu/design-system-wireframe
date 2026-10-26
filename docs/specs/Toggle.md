@@ -3,9 +3,9 @@
 - task: DS-5
 - canvas: docs/design-system-wireframe/Toggle.dc.html
 - canvas_url: https://claude.ai/artifact/UuJ22jU7nJ5m6JBXJbm3uq
-- approved: yes
-- approved_by: mikespin
-- approved_at: 2026-10-26
+- approved: no
+- approved_by:
+- approved_at:
 - approval_hash:
 - amended: 2026-10-26 by mikespin — dropped scroll-snap (DS-30)
 

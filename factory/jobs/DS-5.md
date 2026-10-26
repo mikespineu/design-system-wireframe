@@ -2,20 +2,20 @@
 task: DS-5
 title: "Toggle — design"
 line: design           # design | build
-status: merged        # claimed | in-progress | waiting | blocked | merged
-stage: merge
-branch: "feat/DS-5-toggle-design"
-worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-5-toggle-design"
+status: waiting
+stage: publish
+branch: "feat/DS-5-reapprove-toggle-spec"
+worktree: ".worktrees/feat-DS-5-reapprove-toggle-spec"
 pr: "49"
 pr_url: "https://github.com/mikespineu/design-system-wireframe/pull/49"
 canvas_url: "https://claude.ai/artifact/UuJ22jU7nJ5m6JBXJbm3uq"
 storybook_url: "http://localhost:6178"
 model: default
 loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
-needs_you: ""
+needs_you: "re-approve the amended Toggle spec (/factory:approve DS-5)"
 blocked_reason: ""
 started: "2026-10-26T11:10:55Z"
-updated: "2026-10-26T12:09:00Z"
+updated: "2026-10-26T18:02:46Z"
 ---
 
 # DS-5 Toggle — design
@@ -36,6 +36,7 @@ updated: "2026-10-26T12:09:00Z"
 - 13:07 approve: approved by mikespin
 - 13:09 ci: checks green (ci, claude-review, deploy)
 - 13:09 merge: squash-merged PR #49
+- 19:02 publish: re-approval requested — spec amended in DS-30 (#59, scroll-snap dropped); approval reset
 
 ## Gate results
 
