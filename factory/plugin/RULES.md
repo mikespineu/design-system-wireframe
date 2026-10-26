@@ -31,7 +31,8 @@ Every task the factory touches has a job file: its status, stage and notes. The 
 - Put decisions, open questions and anything the user should know under `## Notes`. Subagents report notes in their final message; you copy the useful ones here.
 - `needs_you`: one line describing what the user must do (empty when nothing). `blocked_reason`: set when blocked, cleared on retry.
 - Commit it with the work (`DS-<n>: job update` when it's the only change). It's pushed with the branch, so it's in the PR and lands on `main` on merge, where it stays as the task's history.
-- `status` values: `claimed` → `in-progress` → `waiting` (needs you) / `blocked` → `merged`. `stage`: `claim`, `design`, `publish`, `build`, `ui-guard`, `gate:lint`, `gate:typecheck`, `gate:test`, `gate:storybook`, `qa`, `review`, `pr`, `ci`, `merge`.
+- `status` values: `claimed` → `in-progress` → `waiting` (needs you) / `blocked` → `merged`.
+- **Blocked by human:** whenever a task waits for the user (job `status: waiting`, or its PR has `factory:needs-approval` without `factory:approved`), it is shown in the board's **Blocked** column with the **human** tag, and listed under "Needs you". This applies to design approvals, `needs_human` tasks, PRs the user asked to approve, and accepted UI changes. Always set `status: waiting` and `needs_you` in the job file and add `factory:needs-approval` to the PR in those cases, so the status page can show it. `stage`: `claim`, `design`, `publish`, `build`, `ui-guard`, `gate:lint`, `gate:typecheck`, `gate:test`, `gate:storybook`, `qa`, `review`, `pr`, `ci`, `merge`.
 - Never write secrets, tokens or full environment dumps into a job file.
 
 The status page reads job files from local worktrees first (live), then from task branches on origin, then from `main`.

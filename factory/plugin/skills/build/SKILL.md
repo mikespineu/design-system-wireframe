@@ -52,7 +52,7 @@ Run the **reviewer** subagent with the worktree path, the task and (UI) the spec
 
 1. In the worktree's `roadmap.md`, tick the task: `- [x]`, `status: done` (only this task's block; nothing else in the file changes).
 2. Job file: `stage: pr`. Commit, push, open the PR (`DS-<n>: <title>`, body per the rules). Add the PR link to the roadmap's `## Done` section (replace `_Nothing yet._` if it's there): `- **DS-<n>** <title> — <PR url>`. Record `pr`/`pr_url` in the job file. Commit and push.
-3. If approval is required (`needs_human: yes`, or `--allow-ui`), add `factory:needs-approval` and set `needs_you`.
+3. If approval is required (`needs_human: yes`, `--allow-ui`, or the user asked to approve the PR), add `factory:needs-approval`, set `status: waiting` and `needs_you`. The status page then shows the task as **blocked by human** (Blocked column, human tag).
 
 ## 7. CI and merge
 
