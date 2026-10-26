@@ -963,6 +963,64 @@ describe('Slider mark positions and input widths', () => {
   });
 });
 
+describe('Slider mixed steps (200, 240, then every cm to 280)', () => {
+  const MIXED = [200, 240, ...Array.from({ length: 40 }, (_, i) => 241 + i)];
+  const setup = (props = {}) =>
+    render(<SliderField label="Length" values={MIXED} unit="cm" showInput marks={[200, 240, 280]} defaultValue={240} {...props} />);
+
+  it('arrow keys move one allowed value', async () => {
+    const user = userEvent.setup();
+    setup({ defaultValue: 200 });
+    await user.tab();
+    await user.keyboard('{ArrowRight}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '240');
+    await user.keyboard('{ArrowRight}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '241');
+    await user.keyboard('{ArrowLeft}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '240');
+    await user.keyboard('{ArrowLeft}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '200');
+    expect(thumb()).toHaveAttribute('aria-valuetext', `200${nbsp}cm`);
+  });
+
+  it('Home and End go to 200 and 280', async () => {
+    const user = userEvent.setup();
+    setup();
+    await user.tab();
+    await user.keyboard('{End}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '280');
+    await user.keyboard('{Home}');
+    expect(thumb()).toHaveAttribute('aria-valuenow', '200');
+  });
+
+  it.each([
+    ['215', '200'],
+    ['220', '240'],
+    ['225', '240'],
+    ['260.4', '260'],
+    ['300', '280'],
+    ['150', '200'],
+    ['241 cm', '241'],
+  ])('typing %s snaps to %s', async (typed, expected) => {
+    const user = userEvent.setup();
+    setup({ defaultValue: 250 });
+    const input = screen.getByRole('textbox');
+    await user.clear(input);
+    await user.type(input, `${typed}{Enter}`);
+    expect(input).toHaveValue(expected);
+    expect(thumb()).toHaveAttribute('aria-valuenow', expected);
+  });
+
+  it('labels only 200, 240 and 280, with a tick at every value and index spacing', () => {
+    const { container } = setup();
+    expect(markLabels(container)).toEqual([`200${nbsp}cm`, `240${nbsp}cm`, `280${nbsp}cm`]);
+    expect(ticks(container)).toHaveLength(42);
+    const p = (n: number) => (container.querySelectorAll('.ds-slider-mark-label')[n] as HTMLElement).style.getPropertyValue('--slider-p');
+    expect(Number(p(1))).toBeCloseTo(1 / 41);
+    expect(p(2)).toBe('1');
+  });
+});
+
 describe('Slider layering and reserved space (stylesheet contract)', () => {
   const css = readFileSync(join(__dirname, 'Slider.css'), 'utf8');
 

@@ -59,6 +59,11 @@ export const CustomValues: Story = {
 export const CustomValuesNoMarks: Story = { args: { label: 'Rating', values: [1, 2, 3, 5, 8, 10], marks: 'none' } };
 export const CustomValuesEnds: Story = { args: { label: 'Rating', values: [1, 2, 3, 5, 8, 10], marks: 'ends' } };
 export const CustomValuesSomeLabels: Story = { args: { label: 'Rating', values: [1, 2, 3, 5, 8, 10], marks: [1, 5, 10] } };
+/** Mixed steps: 200, 240, then every cm from 241 to 280. Spacing is index based, so 200 and 240 sit one slot apart; their labels would collide, so only 200, 260 and 280 are labelled. */
+const MIXED_STEP_VALUES = [200, 240, ...Array.from({ length: 40 }, (_, i) => 241 + i)];
+export const MixedSteps: Story = {
+  args: { label: 'Length', values: MIXED_STEP_VALUES, unit: 'cm', showInput: true, marks: [200, 260, 280], defaultValue: 240 },
+};
 export const UniformSteps: Story = { args: { marks: 'steps', step: 25, unit: '%', defaultValue: 50 } };
 export const UniformEnds: Story = { args: { marks: 'ends', unit: '%' } };
 export const MarksDisabled: Story = { args: { marks: 'steps', step: 25, disabled: true, defaultValue: 50 } };

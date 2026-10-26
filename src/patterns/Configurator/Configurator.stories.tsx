@@ -10,10 +10,13 @@ import { SliderField } from '../../components/Slider';
  * Depth is a custom list (3 stops), height a uniform step of 10, width a step of 1 with a typed input that snaps.
  */
 
-type Dims = { width: number; height: number; depth: number };
+type Dims = { width: number; height: number; depth: number; length: number };
+
+/** Mixed steps: 200, 240, then every cm from 241 to 280. */
+const LENGTHS = [200, 240, ...Array.from({ length: 40 }, (_, i) => 241 + i)];
 
 const DEPTHS = [20, 32, 40] as const;
-const initial = (): Dims => ({ width: 120, height: 180, depth: 32 });
+const initial = (): Dims => ({ width: 120, height: 180, depth: 32, length: 240 });
 
 const Shelf = ({ width, height, depth }: Dims) => {
   const scale = 1.2;
@@ -47,7 +50,7 @@ const Shelf = ({ width, height, depth }: Dims) => {
   );
 };
 
-const Configurator = () => {
+const Configurator = ({ mixedLength = false }: { mixedLength?: boolean }) => {
   const [dims, setDims] = useState<Dims>(initial);
   const [ordered, setOrdered] = useState(false);
   const set = (key: keyof Dims) => (v: number) => {
@@ -60,7 +63,7 @@ const Configurator = () => {
     setOrdered(true);
   };
 
-  const summary = `${dims.width} × ${dims.height} × ${dims.depth} cm`;
+  const summary = `${dims.width} × ${dims.height} × ${dims.depth} cm${mixedLength ? `, length ${dims.length} cm` : ''}`;
 
   return (
     <div className="mx-auto flex w-full max-w-360 flex-col gap-16 p-6 lg:p-24">
@@ -116,6 +119,18 @@ const Configurator = () => {
               onValueChange={set('width')}
               hint="Type a width; it snaps to the nearest centimetre between 40 and 200."
             />
+            {mixedLength && (
+              <SliderField
+                label="Length"
+                values={LENGTHS}
+                unit="cm"
+                marks={[200, 260, 280]}
+                showInput
+                value={dims.length}
+                onValueChange={set('length')}
+                hint="Two standard lengths, then every centimetre from 241 to 280."
+              />
+            )}
           </fieldset>
 
           {ordered && (
@@ -176,6 +191,21 @@ export const DepthByKeyboard: Story = {
     await expect(depth).toHaveAttribute('aria-valuenow', '40');
     await userEvent.keyboard('{ArrowRight}');
     await expect(depth).toHaveAttribute('aria-valuenow', '40');
+  },
+};
+
+/** A fourth slider on a mixed scale: 200, 240, then every cm up to 280. */
+export const WithMixedLength: Story = {
+  args: { mixedLength: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole('textbox', { name: /Length/ });
+    await userEvent.clear(input);
+    await userEvent.type(input, '225{Enter}');
+    await expect(input).toHaveValue('240');
+    await userEvent.clear(input);
+    await userEvent.type(input, '300{Enter}');
+    await expect(input).toHaveValue('280');
   },
 };
 
