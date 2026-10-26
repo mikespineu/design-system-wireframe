@@ -12,8 +12,8 @@ Pick one number with a single thumb along a horizontal track. Built on Radix `Sl
 ## Import
 
 ```ts
-import { Slider, SliderField } from '<package>'; // exported from src/index.ts
-import type { SliderProps, SliderFieldProps, SliderValue, SliderMarks, SliderBubble } from '<package>';
+import { Slider, SliderField } from 'design-system-test'; // exported from src/index.ts
+import type { SliderProps, SliderFieldProps, SliderValue, SliderMarks, SliderBubble } from 'design-system-test';
 ```
 
 ## Props
@@ -78,7 +78,7 @@ Exclusions and rules:
 
 ```tsx
 import { useState, type FormEvent } from 'react';
-import { Button, Slider, SliderField } from '<package>';
+import { Button, Slider, SliderField } from 'design-system-test';
 
 // Basic
 <SliderField label="Volume" defaultValue={40} unit="%" hint="Applies to all rooms." />
