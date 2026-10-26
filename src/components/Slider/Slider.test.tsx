@@ -2,6 +2,8 @@ import { createRef, useState, type ReactElement } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { Slider, SliderField } from './Slider';
 
 const LIST = [1, 2, 3, 5, 8, 10];
@@ -872,6 +874,31 @@ describe('Slider structure', () => {
   it('works with a single-value list', () => {
     render(<Slider aria-label="One" values={[7]} />);
     expect(thumb()).toHaveAttribute('aria-valuenow', '7');
+  });
+});
+
+describe('Slider auto bubble clamping', () => {
+  // jsdom has no layout, so assert the stylesheet contract: the box is a size container and the
+  // bubble shifts inward by comparing its half width with the thumb position in 100cqw units.
+  const css = readFileSync(join(__dirname, 'Slider.css'), 'utf8');
+  const bubbleRule = css.slice(css.indexOf('.ds-slider-bubble {'), css.indexOf('}', css.indexOf('.ds-slider-bubble {')));
+
+  it('makes the track box a container so the bubble can read its width', () => {
+    expect(css).toMatch(/\.ds-slider-box \{[^}]*container-type: inline-size/);
+  });
+
+  it('clamps the bubble to both root edges', () => {
+    expect(bubbleRule).toMatch(/--slider-bubble-shift/);
+    expect(bubbleRule).toMatch(/max\(0px, var\(--slider-bubble-auto-w\) \/ 2 - var\(--slider-bubble-auto-x\)\)/);
+    expect(bubbleRule).toMatch(/min\(0px, 100cqw - var\(--slider-bubble-auto-w\) \/ 2 - var\(--slider-bubble-auto-x\)\)/);
+    expect(bubbleRule).toMatch(/translate: calc\(\(-50% \+ var\(--slider-bubble-shift\)\)/);
+  });
+
+  it('sizes the bubble from the longest formatted value and exposes position', () => {
+    const { container } = render(<SliderField label="Level" unit="%" defaultValue={100} />);
+    const root = container.querySelector('.ds-slider') as HTMLElement;
+    expect(root.style.getPropertyValue('--slider-ch')).toBe('4');
+    expect(root.style.getPropertyValue('--slider-p')).toBe('1');
   });
 });
 

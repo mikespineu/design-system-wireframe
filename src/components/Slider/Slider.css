@@ -67,6 +67,8 @@
 
 .ds-slider-box {
   position: relative;
+  /* lets the auto bubble (inside the thumb) read the track width as 100cqw to clamp itself */
+  container-type: inline-size;
 }
 
 .ds-slider[data-stepper] .ds-slider-box {
@@ -250,7 +252,17 @@
   position: absolute;
   bottom: calc(100% + var(--ds-space-2) + var(--ds-border-width-strong));
   inset-inline-start: 50%;
-  translate: calc(-50% * var(--slider-dir)) 0;
+  /* centered over the thumb, then slid inward so it stops flush with the root edge */
+  --slider-bubble-auto-w: calc(var(--slider-ch) * 1ch + 2 * var(--ds-space-2));
+  --slider-bubble-auto-x: calc(var(--slider-thumb-size) / 2 + var(--slider-p) * (100cqw - var(--slider-thumb-size)));
+  --slider-bubble-shift: calc(
+    max(0px, var(--slider-bubble-auto-w) / 2 - var(--slider-bubble-auto-x)) +
+      min(0px, 100cqw - var(--slider-bubble-auto-w) / 2 - var(--slider-bubble-auto-x))
+  );
+  translate: calc((-50% + var(--slider-bubble-shift)) * var(--slider-dir)) 0;
+  box-sizing: border-box;
+  min-width: var(--slider-bubble-auto-w);
+  text-align: center;
   display: none;
   padding: var(--ds-space-1) var(--ds-space-2);
   border-radius: var(--ds-radius-md);
