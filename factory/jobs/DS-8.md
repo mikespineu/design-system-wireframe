@@ -2,12 +2,12 @@
 task: DS-8
 title: "CI pipeline"
 line: build            # design | build
-status: in-progress       # claimed | in-progress | waiting | blocked | merged
-stage: pr
+status: merged       # claimed | in-progress | waiting | blocked | merged
+stage: merge
 branch: "feat/DS-8-ci-pipeline"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-8-ci-pipeline"
-pr: ""
-pr_url: ""
+pr: "42"
+pr_url: "https://github.com/mikespineu/design-system-wireframe/pull/42"
 canvas_url: ""
 storybook_url: ""
 model: default
@@ -34,6 +34,8 @@ updated: "2026-10-26T09:31:35Z"
 - 10:32 review: started
 - 10:33 review: pass, no findings
 - 10:33 pr: opening PR
+- 10:33 pr: opened #42
+- 10:33 merge: merging #42 once checks green
 
 ## Gate results
 
