@@ -6,7 +6,7 @@
 - approved: yes
 - approved_by: mikespin
 - approved_at: 2026-10-26
-- approval_hash:
+- approval_hash: 34398fde1241+b47c835959b5
 - amended: 2026-10-26 by mikespin — dropped scroll-snap (DS-30)
 
 "Toggle" is a family of three components, not one. A single component that handles a boolean, a pill row of text values and a row of icon tiles would need a mode prop that changes its role, keyboard model and layout, so the family splits on those lines:
