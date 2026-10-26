@@ -78,12 +78,6 @@ Each task carries its fields in an indented line, read by the [software factory]
   - done_when:
     - Canvas covers on/off, disabled, focus, sizes, and label placement
     - Spec names Radix `Switch` and maps every state to tokens
-- [ ] **DS-6 Toggle — implementation.** Build on Radix `Switch` (`import { Switch } from 'radix-ui'`), style via `[data-state]` / `[data-disabled]`. Stories cover keyboard and on/off states; tests use `userEvent` and `jest-axe`.
-  - type: build · has_ui: yes · depends_on: DS-5 · needs_human: no · status: todo
-  - done_when:
-    - Built on Radix `Switch`, styled via `[data-state]` / `[data-disabled]`
-    - Matches approved spec `docs/specs/Toggle.md` in every state
-    - Stories cover keyboard and on/off; tests use `userEvent` and `jest-axe`
 - [x] **DS-13 Checkbox — design.** Define checked, unchecked, indeterminate, disabled, focus and invalid states, the label, and a group with a legend, all matched to Field tokens.
   - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
@@ -160,6 +154,27 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Touch hit targets ≥ 44 px; `jest.setup.ts` gets `ResizeObserver` / `PointerEvent` stubs if missing
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
     - `userEvent` tests cover arrow/Home/End keys, input snapping and clamping
+- [ ] **DS-29 Switch — implementation.** Build `Switch` in `src/components/Switch/` on Radix `Switch` (`import { Switch } from 'radix-ui'`), styled via `[data-state]` / `[data-disabled]`, per `docs/specs/Toggle.md`.
+  - type: build · has_ui: yes · depends_on: DS-5 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state (off, on, hover, focus-visible, disabled) at sm and md
+    - `labelPosition` end/start and optional description; thumb slides with `--ds-motion`, no motion under `prefers-reduced-motion`
+    - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-30 SegmentedControl — implementation.** Build `SegmentedControl` in `src/components/SegmentedControl/` on Radix `RadioGroup`, plus the internal, unexported `ChoiceGroup` base (label row, help slot, horizontal scroll), per `docs/specs/Toggle.md`.
+  - type: build · has_ui: yes · depends_on: DS-5 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state; a value is always selected (no deselect); track hugs its segments, `fullWidth` stretches
+    - Overflow scrolls on X without wrapping: scroll-snap, selected item scrolled into view on mount/change/focus, edge fade only on the side with hidden items
+    - Selection indicator slides (transform + width, `--ds-motion`), no slide on first render, jumps under `prefers-reduced-motion`
+    - `labelPosition` start/top and `help` slot outside the arrow-key order
+    - Story per state, keyboard story, overflow story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-31 TileGroup — implementation.** Build `TileGroup` in `src/components/TileGroup/` on the `ChoiceGroup` base from DS-30 (Radix `RadioGroup`): icon + label tiles using `Icon`, per `docs/specs/Toggle.md`.
+  - type: build · has_ui: yes · depends_on: DS-30 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state at sm and md; labels never wrap or truncate, tile grows to fit
+    - Reuses `ChoiceGroup` scrolling, label and help behaviour (no duplicated scroll logic)
+    - Selected look cross-fades with `--ds-motion`; icon is decorative (`aria-hidden`), label is the accessible name
+    - Story per state, keyboard story, overflow story, `jest-axe` test, exported from `src/index.ts`
 
 ### Epic: Publishing
 
