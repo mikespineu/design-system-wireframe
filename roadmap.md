@@ -187,3 +187,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-7** Library build — https://github.com/mikespineu/design-system-wireframe/pull/40
 - **DS-19** Dialog — design — https://github.com/mikespineu/design-system-wireframe/pull/39
 - **DS-8** CI pipeline — https://github.com/mikespineu/design-system-wireframe/pull/42
+- **DS-9** Release pipeline to npm — https://github.com/mikespineu/design-system-wireframe/pull/43
