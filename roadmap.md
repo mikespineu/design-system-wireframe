@@ -61,8 +61,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Built on Radix `Switch`, styled via `[data-state]` / `[data-disabled]`
     - Matches approved spec `docs/specs/Toggle.md` in every state
     - Stories cover keyboard and on/off; tests use `userEvent` and `jest-axe`
-- [ ] **DS-13 Checkbox — design.** Define checked, unchecked, indeterminate, disabled, focus and invalid states, the label, and a group with a legend, all matched to Field tokens.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-13 Checkbox — design.** Define checked, unchecked, indeterminate, disabled, focus and invalid states, the label, and a group with a legend, all matched to Field tokens.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers checked, unchecked, indeterminate, disabled, focus and invalid
     - Spec defines label placement and a CheckboxGroup with fieldset/legend, hint and error
@@ -179,6 +179,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-13** Checkbox — design — https://github.com/mikespineu/design-system-wireframe/pull/44
 - **DS-1** Theming infrastructure with a default theme — https://github.com/mikespineu/design-system-wireframe/pull/31
 - **DS-4** Textarea — implementation — https://github.com/mikespineu/design-system-wireframe/pull/33
 - [x] **DS-3 Textarea — design.** [PR #27](https://github.com/mikespineu/design-system-wireframe/pull/27)

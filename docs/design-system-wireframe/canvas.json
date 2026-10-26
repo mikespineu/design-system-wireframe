@@ -44,6 +44,13 @@
       "w": 1440,
       "x": 7600,
       "y": 0
+    },
+    "Checkbox.dc.html": {
+      "h": 4200,
+      "title": "Checkbox",
+      "w": 1440,
+      "x": 9120,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -70,7 +77,8 @@
     "Form.dc.html",
     "Textarea.dc.html",
     "Slider.dc.html",
-    "Dialog.dc.html"
+    "Dialog.dc.html",
+    "Checkbox.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
