@@ -97,8 +97,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every state
     - Keyboard typeahead, arrow navigation and Escape-to-close covered by `userEvent` tests
     - Story per state, keyboard story, open/closed stories, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-19 Dialog — design.** Define overlay, panel sizes, header/title, body, footer actions and close button, within the 0-radius, no-shadow wireframe rules.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-19 Dialog — design.** Define overlay, panel sizes, header/title, body, footer actions and close button, within the 0-radius, no-shadow wireframe rules.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers open dialog in sm, md and lg, with overlay, title, description, actions and close button
     - Spec names Radix `Dialog` and defines focus trap, Escape and outside-click behavior
@@ -183,3 +183,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-4** Textarea — implementation — https://github.com/mikespineu/design-system-wireframe/pull/33
 - [x] **DS-3 Textarea — design.** [PR #27](https://github.com/mikespineu/design-system-wireframe/pull/27)
 - **DS-23** Slider — design — https://github.com/mikespineu/design-system-wireframe/pull/35
+- **DS-19** Dialog — design — https://github.com/mikespineu/design-system-wireframe/pull/39

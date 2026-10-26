@@ -3,9 +3,9 @@
 - task: DS-19
 - canvas: docs/design-system-wireframe/Dialog.dc.html
 - canvas_url: https://claude.ai/artifact/WALKLKSPFMwmnqLpdHsJ4X
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-26
 - approval_hash:
 
 Modal panel over a dimmed overlay, built on Radix `Dialog`. Square corners, no shadow: the panel separates from the page by a 1 px black border and the 50 % black overlay. Parts: overlay, panel, header (title, optional description, close button), body, footer (actions).
