@@ -179,6 +179,29 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Reuses `ChoiceGroup` scrolling, label and help behaviour (no duplicated scroll logic)
     - Selected look cross-fades with `--ds-motion`; icon is decorative (`aria-hidden`), label is the accessible name
     - Story per state, keyboard story, overflow story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-32 Button icons, loading & ButtonGroup — design.** Extend the Button family: leading and trailing icon slots on `Button`, an icon-only button (extend the existing `IconButton` with the `primary` / `secondary` / `ghost` variants instead of adding a second component), a loading state for both, a pressed/toggle state for icon buttons (e.g. Wishlist heart outline → filled), and a `ButtonGroup` that joins buttons into one unit, e.g. "Add to cart" (primary `Button`) + Wishlist (secondary heart `IconButton`).
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas covers `Button` with leading icon, trailing icon and both, in primary, secondary and ghost, each in default, hover, focus, disabled and loading
+    - Canvas covers `IconButton` in all three variants, with default, hover, focus, disabled, loading, and pressed / unpressed (heart outline vs filled)
+    - Canvas covers `ButtonGroup` "Add to cart" + Wishlist heart, attached (shared 1 px border) and spaced, in default, focus-within and disabled
+    - Spec defines loading behavior (spinner placement, width stays fixed, `aria-busy`, clicks blocked, not focus-trapping) and the pressed state (`aria-pressed`)
+    - Spec defines the typed API (`leadingIcon`, `trailingIcon`, `loading`, `IconButton` `variant` / `pressed`, `ButtonGroup` `attached` / `aria-label`) and maps every state to `--ds-*` tokens
+- [ ] **DS-33 Button icons & loading — implementation.** Extend `Button` (`src/components/Button/`) with `leadingIcon` / `trailingIcon` and `loading`, and `IconButton` (`src/components/IconButton/`) with `variant`, `loading` and `pressed`, per `docs/specs/Button.md`. Add a `heart` icon (outline + filled) to `Icon`. Keep the existing `asChild` (Radix `Slot`) composition working.
+  - type: build · has_ui: yes · depends_on: DS-32 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state, for every variant
+    - `loading` sets `aria-busy`, blocks `onClick`, keeps the button's width, and keeps the accessible name
+    - `IconButton` `pressed` sets `aria-pressed` and swaps heart outline ↔ filled; `aria-label` stays required
+    - Existing `Button` / `IconButton` stories and tests still pass with no API break (new props are optional)
+    - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-34 ButtonGroup — implementation.** Build `ButtonGroup` in `src/components/ButtonGroup/` that groups `Button` and `IconButton` children (`role="group"`, `aria-label`), attached or spaced, per `docs/specs/Button.md`. Plain buttons in DOM order with native Tab order, no roving focus.
+  - type: build · has_ui: yes · depends_on: DS-32, DS-33 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state, attached and spaced
+    - "Add to cart + Wishlist" story: primary `Button` + secondary heart `IconButton` with pressed toggle
+    - Tab moves through each button; a `disabled` prop on the group disables every child
+    - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
 
 ### Epic: Publishing
 
