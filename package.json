@@ -2,7 +2,6 @@
   "name": "design-system-test",
   "version": "0.1.0",
   "license": "MIT",
-  "private": true,
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006",
@@ -14,7 +13,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
-    "factory:status": "node factory/plugin/skills/status/scripts/status-page.mjs --watch 10 --open"
+    "factory:status": "node factory/plugin/skills/status/scripts/status-page.mjs --watch 10 --open",
+    "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "latest",
@@ -57,5 +57,27 @@
   },
   "dependencies": {
     "radix-ui": "^1.8.1"
-  }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ]
 }

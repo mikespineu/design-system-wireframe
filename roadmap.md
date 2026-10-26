@@ -140,8 +140,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Publishing
 
-- [ ] **DS-7 Library build.** Package is `private` with no build today. Add a Vite library build (ESM + type declarations) and a compiled CSS entry (tokens + Tailwind utilities). Set `name`, `exports`, `files`, `sideEffects`, and `peerDependencies` (`react`, `react-dom`) in `package.json`.
-  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-7 Library build.** Package is `private` with no build today. Add a Vite library build (ESM + type declarations) and a compiled CSS entry (tokens + Tailwind utilities). Set `name`, `exports`, `files`, `sideEffects`, and `peerDependencies` (`react`, `react-dom`) in `package.json`.
+  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - `npm run build` produces ESM + type declarations in `dist/`
     - A compiled CSS entry (tokens + Tailwind utilities) is emitted
@@ -184,3 +184,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - [x] **DS-3 Textarea — design.** [PR #27](https://github.com/mikespineu/design-system-wireframe/pull/27)
 - **DS-23** Slider — design — https://github.com/mikespineu/design-system-wireframe/pull/35
 - **DS-25** README — Claude Design & Software Factory — https://github.com/mikespineu/design-system-wireframe/pull/38
+- **DS-7** Library build — https://github.com/mikespineu/design-system-wireframe/pull/40
