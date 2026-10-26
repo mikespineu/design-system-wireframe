@@ -168,7 +168,7 @@ Each task carries its fields in an indented line, read by the [software factory]
   - type: build · has_ui: yes · depends_on: DS-5 · needs_human: no · status: todo
   - done_when:
     - Matches the approved spec in every state; a value is always selected (no deselect); track hugs its segments, `fullWidth` stretches
-    - Overflow scrolls on X without wrapping: scroll-snap, selected item scrolled into view on mount/change/focus, edge fade only on the side with hidden items
+    - Overflow scrolls on X without wrapping (no scroll-snap), selected item scrolled into view on mount/change/focus, edge fade only on the side with hidden items
     - Selection indicator slides (transform + width, `--ds-motion`), no slide on first render, jumps under `prefers-reduced-motion`
     - `labelPosition` start/top and `help` slot outside the arrow-key order
     - Story per state, keyboard story, overflow story, `jest-axe` test, exported from `src/index.ts`
