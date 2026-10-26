@@ -3,9 +3,9 @@
 - task: DS-41
 - canvas: docs/design-system-wireframe/InfoTip.dc.html
 - canvas_url: https://claude.ai/artifact/YCBKiW7d5SMHrWhnekSH5b
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-26
 - approval_hash:
 
 This spec covers three components. DS-42 builds `Tooltip` and `Popover`. DS-43 builds `InfoTip` on top of them.

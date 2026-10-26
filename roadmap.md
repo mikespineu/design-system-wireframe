@@ -241,8 +241,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `useToast()` shows, updates and dismisses toasts; auto-dismiss pauses on hover and focus
     - Action button runs its callback and closes the toast; tested with `userEvent`
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-41 Tooltip, Popover & InfoTip — design.** Define `Tooltip` (hover/focus, text only), `Popover` (click, any content) and `InfoTip`: one component that is a Popover when the `(pointer: coarse)` media query matches (touch as the primary input) and a Tooltip otherwise.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-41 Tooltip, Popover & InfoTip — design.** Define `Tooltip` (hover/focus, text only), `Popover` (click, any content) and `InfoTip`: one component that is a Popover when the `(pointer: coarse)` media query matches (touch as the primary input) and a Tooltip otherwise.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers Tooltip and Popover on all four sides, with arrow, open/closed, and InfoTip in touch vs non-touch mode
     - Spec names Radix `Tooltip` and `Popover` and defines delays, collision handling and portal layering
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-41** Tooltip, Popover & InfoTip — design — https://github.com/mikespineu/design-system-wireframe/pull/71
 - **DS-15** RadioGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/61
 - **DS-29** Switch — implementation — https://github.com/mikespineu/design-system-wireframe/pull/58
 - **DS-26** Theme token contract — design — https://github.com/mikespineu/design-system-wireframe/pull/55
