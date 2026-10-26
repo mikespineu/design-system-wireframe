@@ -3,7 +3,7 @@ task: DS-8
 title: "CI pipeline"
 line: build            # design | build
 status: in-progress       # claimed | in-progress | waiting | blocked | merged
-stage: build
+stage: qa
 branch: "feat/DS-8-ci-pipeline"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-8-ci-pipeline"
 pr: ""
@@ -24,15 +24,24 @@ updated: "2026-10-26T09:31:35Z"
 
 - 10:31 claim: claimed feat/DS-8-ci-pipeline
 - 10:31 build: builder started
+- 10:32 build: builder done (4 tool uses, default model); scope + UI guard ok
+- 10:32 gate:lint: pass
+- 10:32 gate:typecheck: pass
+- 10:32 gate:test: pass
+- 10:32 gate:storybook: pass
+- 10:32 qa: started
 
 ## Gate results
 
 | Gate | Result |
 | --- | --- |
-| lint | – |
-| typecheck | – |
-| test | – |
-| storybook | – |
+| lint | pass |
+| typecheck | pass |
+| test | pass |
+| storybook | pass |
 
 ## Notes
+
+- Node 22 to match storybook-vercel.yml (no .nvmrc/engines).
+- Check name CI / ci; make it required in branch protection if wanted.
 
