@@ -179,6 +179,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-14** Checkbox — implementation — https://github.com/mikespineu/design-system-wireframe/pull/45
 - **DS-13** Checkbox — design — https://github.com/mikespineu/design-system-wireframe/pull/44
 - **DS-1** Theming infrastructure with a default theme — https://github.com/mikespineu/design-system-wireframe/pull/31
 - **DS-4** Textarea — implementation — https://github.com/mikespineu/design-system-wireframe/pull/33
