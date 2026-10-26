@@ -52,11 +52,18 @@
       "x": 9120,
       "y": 0
     },
+    "Toggle.dc.html": {
+      "h": 8200,
+      "title": "Toggle",
+      "w": 1440,
+      "x": 10640,
+      "y": 0
+    },
     "Theming.dc.html": {
       "h": 13000,
       "title": "Theming",
       "w": 1440,
-      "x": 10640,
+      "x": 12160,
       "y": 0
     }
   },
@@ -86,6 +93,7 @@
     "Slider.dc.html",
     "Dialog.dc.html",
     "Checkbox.dc.html",
+    "Toggle.dc.html",
     "Theming.dc.html"
   ],
   "pages": [],
