@@ -103,6 +103,7 @@ SegmentedControl (canvas 05):
 | `sm` | 32 | 4 | 24 | 12 | caption 13/20, weight 500 |
 | `md` (default) | 44 (= control height) | 4 | 36 | 16 | body 16/26, weight 500 |
 
+- The grey track hugs its segments: it ends where the last segment ends and never stretches to the container width (`display: inline-flex`, `width: fit-content`, `align-self: flex-start` inside flex parents). Only `fullWidth` stretches it.
 - Segments hug their text by default (`flex: none`, `white-space: nowrap`), with no gap between them. `fullWidth` makes the strip 100 % wide and gives every segment `flex: 1 1 0` with centred text. A `fullWidth` control never scrolls, so use it only for 2–4 short options.
 
 TileGroup (canvas 08):

@@ -29,6 +29,7 @@ updated: "2026-10-26T11:17:58Z"
 - 12:17 spec: check passed (header, sections, tokens, canvas)
 - 12:17 pr: waiting for you — approve design or request changes
 - 12:18 pr: draft PR #49 opened
+- 12:21 design: revised per canvas comment (segmented track hugs its items, no stretch to container width); canvas republished
 
 ## Gate results
 

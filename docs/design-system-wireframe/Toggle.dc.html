@@ -63,7 +63,7 @@ body{margin:0;background:#FFFFFF}
 .help{flex:none;box-sizing:border-box;width:44px;height:44px;border:1px solid #000000;background:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;color:#000000}
 
 /* ---------- SegmentedControl ---------- */
-.seg{display:inline-flex;box-sizing:border-box;height:44px;padding:4px;background:#EEEEEE;max-width:100%;min-width:0}
+.seg{display:inline-flex;box-sizing:border-box;height:44px;padding:4px;background:#EEEEEE;max-width:100%;min-width:0;width:fit-content;align-self:flex-start}
 .seg .it{flex:none;box-sizing:border-box;height:36px;padding:0 16px;display:inline-flex;align-items:center;border:1px solid transparent;background:transparent;font-family:'Red Hat Text',sans-serif;font-weight:500;font-size:16px;line-height:26px;color:#404040;white-space:nowrap;cursor:pointer}
 .seg .it.sel{background:#FFFFFF;border-color:#000000;color:#000000}
 .seg .it.hov{background:#E0E0E0;color:#000000}
@@ -73,7 +73,7 @@ body{margin:0;background:#FFFFFF}
 .seg.gdis{background:#F7F7F7}
 .seg.gdis .it{color:#767676;cursor:not-allowed}
 .seg.gdis .it.sel{border-color:#A3A3A3;background:#FFFFFF}
-.seg.full{display:flex;width:100%}
+.seg.full{display:flex;width:100%;align-self:stretch}
 .seg.full .it{flex:1 1 0;justify-content:center}
 
 /* ---------- TileGroup ---------- */
