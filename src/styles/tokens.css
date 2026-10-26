@@ -50,6 +50,13 @@
   --ds-font-text: 'Red Hat Text', system-ui, sans-serif;
   --ds-font-family: var(--ds-font-text);
 
+  /* Line heights */
+  --ds-line-height-xs: 16px;
+  --ds-line-height-sm: 20px;
+  --ds-line-height-md: 24px;
+  --ds-line-height-lg: 26px;
+  --ds-line-height-xl: 29px;
+
   /* Spacing: 4 px base */
   --ds-space-1: 4px;
   --ds-space-2: 8px;
