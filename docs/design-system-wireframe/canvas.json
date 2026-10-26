@@ -58,6 +58,13 @@
       "w": 1440,
       "x": 10640,
       "y": 0
+    },
+    "Theming.dc.html": {
+      "h": 13000,
+      "title": "Theming",
+      "w": 1440,
+      "x": 12160,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -86,7 +93,8 @@
     "Slider.dc.html",
     "Dialog.dc.html",
     "Checkbox.dc.html",
-    "Toggle.dc.html"
+    "Toggle.dc.html",
+    "Theming.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
