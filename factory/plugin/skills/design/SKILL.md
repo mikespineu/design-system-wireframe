@@ -12,6 +12,8 @@ Arguments: `$ARGUMENTS` (task ID, then optional feedback text; a trailing `opus`
 
 First read the rules: `${CLAUDE_PLUGIN_ROOT}/RULES.md` (in this repo: `factory/plugin/RULES.md`). Follow them exactly.
 
+This session's id is `${CLAUDE_SESSION_ID}`. Write it to the job file's `session_id` (rules: Job files) so the user can return with `claude --resume ${CLAUDE_SESSION_ID}`.
+
 ## 0. Decide: new design or revision
 
 - Look for an open PR for this task: `gh pr list --state open --search "head:feat/DS-<n>-" --json number,headRefName,url,labels`.

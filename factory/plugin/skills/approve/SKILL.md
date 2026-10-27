@@ -12,6 +12,8 @@ Arguments: `$ARGUMENTS` (task ID). This is the user's decision. Only run it beca
 
 Read `${CLAUDE_PLUGIN_ROOT}/RULES.md` (in this repo: `factory/plugin/RULES.md`) and follow it.
 
+This session's id is `${CLAUDE_SESSION_ID}`. Write it to the job file's `session_id` (rules: Job files) so the user can return with `claude --resume ${CLAUDE_SESSION_ID}`.
+
 1. Find the task's open PR (`gh pr list --state open --search "head:feat/DS-<n>-"`) and its worktree (`.worktrees/feat-DS-<n>-…`; recreate it from the remote branch and `npm ci` if it's gone). No open PR → tell the user there's nothing to approve.
 2. **Design task:**
    - In the spec (`docs/specs/<Component>.md`) set `approved: yes`, `approved_by: <git config user.name>`, `approved_at: <YYYY-MM-DD>`.

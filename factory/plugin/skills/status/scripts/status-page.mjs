@@ -256,6 +256,7 @@ ${t.pr ? `<dt>PR</dt><dd>${link(t.pr.url, `#${t.pr.number}`)}${t.pr.draft ? ' (d
 ${t.job?.canvas_url ? `<dt>Canvas</dt><dd>${link(t.job.canvas_url, 'open canvas')}</dd>` : ''}
 ${t.job?.storybook_url ? `<dt>Storybook</dt><dd>${link(t.job.storybook_url, t.job.storybook_url)}</dd>` : ''}
 ${t.job ? `<dt>Job</dt><dd class="mono">${esc(t.job.status)} · ${esc(t.job.stage)} · model ${esc(t.job.model || 'default')} · loops ${esc(t.job.loops || '')} (from ${esc(t.job.source)})</dd>` : ''}
+${t.job?.session_id ? `<dt>Session</dt><dd class="mono">${esc(t.job.session_id)}<br>cd ${esc(ROOT)} && claude --resume ${esc(t.job.session_id)}</dd>` : ''}
 ${t.job?.blocked_reason ? `<dt>Blocked</dt><dd>${esc(t.job.blocked_reason)}</dd>` : ''}
 ${t.job?.needs_you ? `<dt>Needs you</dt><dd>${esc(t.job.needs_you)}</dd>` : ''}
 </dl>
