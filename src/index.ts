@@ -26,4 +26,6 @@ export type {
   LayoutElementProps,
 } from './lib/layout';
 export * from './components/Tabs';
+export * from './components/InfoTip';
+export * from './hooks';
 export * from './components/Drawer';

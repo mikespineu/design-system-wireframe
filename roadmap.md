@@ -253,8 +253,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every state and side
     - Tooltip opens on hover and focus, closes on Escape; Popover opens on click, closes on Escape and outside click, focus returns to trigger
     - Story per state, keyboard story, open/closed stories, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-43 InfoTip — implementation.** Build `InfoTip` in `src/components/InfoTip/` on `Tooltip` and `Popover` from DS-42, switching on the `(pointer: coarse)` media query via a `useMediaQuery` hook (`matchMedia`).
-  - type: build · has_ui: yes · depends_on: DS-41, DS-42 · needs_human: no · status: todo
+- [x] **DS-43 InfoTip — implementation.** Build `InfoTip` in `src/components/InfoTip/` on `Tooltip` and `Popover` from DS-42, switching on the `(pointer: coarse)` media query via a `useMediaQuery` hook (`matchMedia`).
+  - type: build · has_ui: yes · depends_on: DS-41, DS-42 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in touch and non-touch mode
     - Renders Popover when `(pointer: coarse)` matches, Tooltip otherwise, and switches live on change; viewport width has no effect
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-43** InfoTip — implementation — https://github.com/mikespineu/design-system-wireframe/pull/80
 - **DS-42** Tooltip & Popover — implementation — https://github.com/mikespineu/design-system-wireframe/pull/77
 - **DS-36** Stack & Grid — implementation — https://github.com/mikespineu/design-system-wireframe/pull/75
 - **DS-22** Tabs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/76
