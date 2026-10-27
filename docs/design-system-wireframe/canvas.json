@@ -73,11 +73,18 @@
       "x": 13680,
       "y": 0
     },
+    "InfoTip.dc.html": {
+      "h": 8000,
+      "title": "InfoTip, Tooltip & Popover",
+      "w": 1440,
+      "x": 15200,
+      "y": 0
+    },
     "Tabs.dc.html": {
       "h": 7600,
       "title": "Tabs",
       "w": 1440,
-      "x": 15200,
+      "x": 16720,
       "y": 0
     }
   },
@@ -110,6 +117,7 @@
     "Toggle.dc.html",
     "Theming.dc.html",
     "RadioGroup.dc.html",
+    "InfoTip.dc.html",
     "Tabs.dc.html"
   ],
   "pages": [],
