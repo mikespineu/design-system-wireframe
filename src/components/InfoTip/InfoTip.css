@@ -1,0 +1,59 @@
+/* InfoTip trigger. Tokens only (--ds-*). Spec: docs/specs/InfoTip.md */
+.ds-infotip {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--ds-space-8);
+  height: var(--ds-space-8);
+  padding: 0;
+  background: transparent;
+  border: var(--ds-border-width) solid transparent;
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-color-text-muted);
+  cursor: pointer;
+  transition: background-color var(--ds-motion), color var(--ds-motion), border-color var(--ds-motion);
+  --ds-infotip-inset: calc((var(--ds-space-8) - var(--ds-control-height)) / 2);
+}
+.ds-infotip[data-size='sm'] {
+  width: var(--ds-space-6);
+  height: var(--ds-space-6);
+  --ds-infotip-inset: calc((var(--ds-space-6) - var(--ds-control-height)) / 2);
+}
+@media (hover: hover) {
+  .ds-infotip:hover {
+    background: var(--ds-color-fill);
+    color: var(--ds-color-ink);
+  }
+}
+.ds-infotip:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+  color: var(--ds-color-ink);
+}
+.ds-infotip[data-state='delayed-open'],
+.ds-infotip[data-state='instant-open'],
+.ds-infotip[data-state='open'] {
+  background: var(--ds-color-fill);
+  border-color: var(--ds-color-ink);
+  color: var(--ds-color-ink);
+}
+.ds-infotip:active {
+  background: var(--ds-color-ink);
+  border-color: var(--ds-color-ink);
+  color: var(--ds-color-primary-contrast);
+}
+@media (pointer: coarse) {
+  .ds-infotip::after {
+    content: '';
+    position: absolute;
+    inset: var(--ds-infotip-inset);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-infotip {
+    transition: none;
+  }
+}
