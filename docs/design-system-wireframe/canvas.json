@@ -87,11 +87,18 @@
       "x": 16720,
       "y": 0
     },
+    "Tabs.dc.html": {
+      "h": 7600,
+      "title": "Tabs",
+      "w": 1440,
+      "x": 18240,
+      "y": 0
+    },
     "Toast.dc.html": {
       "h": 10400,
       "title": "Toast",
       "w": 1440,
-      "x": 18240,
+      "x": 19760,
       "y": 0
     }
   },
@@ -126,6 +133,7 @@
     "RadioGroup.dc.html",
     "InfoTip.dc.html",
     "Icon.dc.html",
+    "Tabs.dc.html",
     "Toast.dc.html"
   ],
   "pages": [],

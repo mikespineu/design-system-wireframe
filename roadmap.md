@@ -132,8 +132,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every state
     - Focus moves into the dialog on open and returns to the trigger on close; Escape closes
     - Story per state, keyboard story, open/closed stories, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-21 Tabs — design.** Define the tab list and triggers (default, hover, focus, active, disabled), the active underline/ink treatment, and the panel spacing.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-21 Tabs — design.** Define the tab list and triggers (default, hover, focus, active, disabled), the active underline/ink treatment, and the panel spacing.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers trigger default, hover, focus, active and disabled
     - Spec names Radix `Tabs` and defines automatic vs manual activation
@@ -349,6 +349,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 ## Done
 
 - **DS-39** Toast — design — https://github.com/mikespineu/design-system-wireframe/pull/70
+- **DS-21** Tabs — design — https://github.com/mikespineu/design-system-wireframe/pull/66
 - **DS-46** Icon system — design — https://github.com/mikespineu/design-system-wireframe/pull/62
 - **DS-16** RadioGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/64
 - **DS-41** Tooltip, Popover & InfoTip — design — https://github.com/mikespineu/design-system-wireframe/pull/71
