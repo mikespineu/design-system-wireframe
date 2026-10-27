@@ -216,8 +216,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec for every direction, gap, alignment and column count
     - `gap` accepts only `--ds-space-*` steps (type-enforced); responsive props apply at the spec's breakpoints
     - Story per variant, composed example story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-37 Heading & Text — design.** Define the type scale as components: `Heading` (levels 1–6, visual size independent from level) and `Text` (sizes, weights, mono/text family, muted tone, truncate/line-clamp).
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-37 Heading & Text — design.** Define the type scale as components: `Heading` (levels 1–6, visual size independent from level) and `Text` (sizes, weights, mono/text family, muted tone, truncate/line-clamp).
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas shows every Heading size and Text size/weight/family/tone, plus truncate and line-clamp
     - Spec maps every style to `--ds-*` tokens (missing type tokens listed under Token requests)
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-37** Heading & Text — design — https://github.com/mikespineu/design-system-wireframe/pull/68
 - **DS-39** Toast — design — https://github.com/mikespineu/design-system-wireframe/pull/70
 - **DS-32** Button icons, loading & ButtonGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/72
 - **DS-17** Select — design — https://github.com/mikespineu/design-system-wireframe/pull/73

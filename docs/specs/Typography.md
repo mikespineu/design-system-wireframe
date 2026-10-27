@@ -3,9 +3,9 @@
 - task: DS-37
 - canvas: docs/design-system-wireframe/Typography.dc.html
 - canvas_url: https://claude.ai/artifact/Pc7fkxmB8rdMZscZG1W44x
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-27
 - approval_hash:
 
 Typography has no React components: no `Heading`, no `Text`, nothing under `src/components/`. It is a set of eleven named Tailwind v4 utilities, defined with `@utility` in `src/styles/tailwind.css`. Each one uses `@apply` to compose existing theme utilities: family, a type-scale size (with its leading, tracking and weight), and a colour. There are six heading styles (`heading-2xl` … `heading-xs`) and five body styles (`body-lg` … `body-2xs`). Weight, family, tone, truncation and line clamp are stock Tailwind utilities that the author adds to the same element. The class sets only the look. The author picks the element (`h1`–`h6`, `p`, `span`, `label`, `a`, …), so semantics stay in the markup.
