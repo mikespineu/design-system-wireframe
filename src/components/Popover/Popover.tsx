@@ -1,4 +1,4 @@
-import { forwardRef, useId, type ComponentPropsWithoutRef, type ReactElement, type ReactNode } from 'react';
+import { forwardRef, useCallback, useEffect, useId, useState, type ComponentPropsWithoutRef, type ReactElement, type ReactNode } from 'react';
 import { Popover as RadixPopover } from 'radix-ui';
 import { cx } from '../../lib/cx';
 import { Icon } from '../Icon';
@@ -42,11 +42,26 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       defaultOpen,
       onOpenChange,
       className,
+      'aria-label': ariaLabel,
       ...rest
     },
     ref,
   ) => {
     const titleId = useId();
+    const [bodyEl, setBodyEl] = useState<HTMLDivElement | null>(null);
+    const [scrollable, setScrollable] = useState(false);
+    const measure = useCallback(() => {
+      if (bodyEl) setScrollable(bodyEl.scrollHeight > bodyEl.clientHeight);
+    }, [bodyEl]);
+    // A scrolling region must be keyboard reachable (WCAG 2.1.1).
+    useEffect(() => {
+      if (!bodyEl) return;
+      measure();
+      if (typeof ResizeObserver === 'undefined') return;
+      const ro = new ResizeObserver(measure);
+      ro.observe(bodyEl);
+      return () => ro.disconnect();
+    }, [bodyEl, measure]);
     return (
     <RadixPopover.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <RadixPopover.Trigger asChild>{trigger}</RadixPopover.Trigger>
@@ -63,6 +78,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           hideWhenDetached={false}
           data-show-close={showClose ? '' : undefined}
           aria-labelledby={title !== undefined ? titleId : undefined}
+          aria-label={ariaLabel}
           {...rest}
         >
           {title !== undefined && (
@@ -70,7 +86,19 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               {title}
             </h2>
           )}
-          <div className="ds-popover-body">{children}</div>
+          <div
+            ref={setBodyEl}
+            className="ds-popover-body"
+            {...(scrollable
+              ? {
+                  tabIndex: 0,
+                  role: 'region',
+                  ...(title !== undefined ? { 'aria-labelledby': titleId } : { 'aria-label': ariaLabel }),
+                }
+              : {})}
+          >
+            {children}
+          </div>
           {showClose && (
             <RadixPopover.Close asChild>
               <button type="button" className="ds-popover-close" aria-label="Close">

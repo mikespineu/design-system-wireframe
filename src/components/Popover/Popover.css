@@ -89,3 +89,8 @@
   stroke: var(--ds-color-ink);
   stroke-width: var(--ds-border-width);
 }
+
+.ds-popover-body:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: calc(-1 * var(--ds-focus-width));
+}

@@ -102,4 +102,35 @@ describe('Popover', () => {
     );
     expect(await axe(c.baseElement)).toHaveNoViolations();
   });
+
+  describe('height-limited body', () => {
+    afterEach(() => jest.restoreAllMocks());
+    const mockOverflow = () => {
+      jest.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockReturnValue(780);
+      jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(192);
+    };
+
+    it('makes an overflowing body a focusable named region reachable by keyboard', async () => {
+      mockOverflow();
+      const user = userEvent.setup();
+      render(<Popover trigger={<Button>Open</Button>} title="Long">Lots of text</Popover>);
+      await user.click(screen.getByRole('button', { name: 'Open' }));
+      const region = await screen.findByRole('region', { name: 'Long' });
+      expect(region).toHaveAttribute('tabindex', '0');
+      await user.tab();
+      expect(region).toHaveFocus();
+      expect(await axe(document.body)).toHaveNoViolations();
+    });
+
+    it('uses aria-label for the region when there is no title', async () => {
+      mockOverflow();
+      render(<Popover trigger={<Button>Open</Button>} aria-label="Notes" defaultOpen>Text</Popover>);
+      expect(await screen.findByRole('region', { name: 'Notes' })).toHaveAttribute('tabindex', '0');
+    });
+
+    it('stays out of the tab order when nothing overflows', async () => {
+      render(<Popover trigger={<Button>Open</Button>} aria-label="Notes" defaultOpen>Text</Popover>);
+      expect(screen.queryByRole('region')).not.toBeInTheDocument();
+    });
+  });
 });
