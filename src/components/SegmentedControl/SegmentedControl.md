@@ -58,7 +58,7 @@ const VIEWS = [{ value: 'list', label: 'List' }, { value: 'grid', label: 'Grid' 
 
 - The root is a `radiogroup` named by `label`; each segment is a `radio` named by its option `label`.
 - `hint` (top labels only) is the group description.
-- `help` must have its own accessible name, for example `<IconButton icon="info" aria-label="About views" />`.
+- `help` must have its own accessible name, for example `<IconButton icon={InfoIcon} aria-label="About views" />`.
 - The sliding indicator is `aria-hidden`.
 
 ## Recipes
@@ -85,7 +85,7 @@ const [view, setView] = useState<'list' | 'grid' | 'board'>('grid');
   options={[{ value: 'compact', label: 'Compact' }, { value: 'cozy', label: 'Cozy' }]} />
 
 // Help button outside the arrow-key order
-<SegmentedControl label="View" options={VIEWS} help={<IconButton icon="info" aria-label="About views" />} />
+<SegmentedControl label="View" options={VIEWS} help={<IconButton icon={InfoIcon} aria-label="About views" />} />
 
 // A disabled option
 <SegmentedControl label="Plan" options={[

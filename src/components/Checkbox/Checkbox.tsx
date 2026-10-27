@@ -12,7 +12,7 @@ import {
 } from 'react';
 import { Checkbox as RadixCheckbox, Label } from 'radix-ui';
 import { cx } from '../../lib/cx';
-import { Icon } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
 import './Checkbox.css';
 
 export type CheckboxSize = 'sm' | 'md';
@@ -75,12 +75,10 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Checkb
         >
           <RadixCheckbox.Indicator className="ds-checkbox-indicator">
             <span className="ds-checkbox-mark ds-checkbox-mark-check">
-              <Icon name="check" size={16} strokeWidth={2} />
+              <RoleIcon role="check" size="md" />
             </span>
             <span className="ds-checkbox-mark ds-checkbox-mark-dash">
-              <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true" focusable="false">
-                <path d="M5 12h14" />
-              </svg>
+              <RoleIcon role="minus" size="md" />
             </span>
           </RadixCheckbox.Indicator>
         </RadixCheckbox.Root>
@@ -146,7 +144,7 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
           <div className="ds-checkbox-options">{children}</div>
           {error && (
             <span id={errorId} className="ds-checkbox-error">
-              <Icon name="alert" size={14} strokeWidth={2} />
+              <RoleIcon role="alert" size={14} />
               <span>
                 <span className="sr-only">Error: </span>
                 {error}

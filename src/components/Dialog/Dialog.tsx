@@ -1,7 +1,7 @@
 import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { Dialog as RadixDialog } from 'radix-ui';
 import { cx } from '../../lib/cx';
-import { Icon } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
 import './Dialog.css';
 
 export type DialogSize = 'sm' | 'md' | 'lg';
@@ -97,7 +97,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
               {!hideCloseButton && (
                 <RadixDialog.Close asChild>
                   <button type="button" className="ds-dialog-close" aria-label="Close">
-                    <Icon name="close" size={16} strokeWidth={2} aria-hidden="true" />
+                    <RoleIcon role="close" size="md" />
                   </button>
                 </RadixDialog.Close>
               )}

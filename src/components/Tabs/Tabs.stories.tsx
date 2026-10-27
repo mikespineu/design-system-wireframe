@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Tabs } from './Tabs';
 import { Icon } from '../Icon';
+import { InfoIcon, PlusIcon, SearchIcon } from '../../lib/sampleIcons';
 
 /**
  * Switch which panel is shown below a tab list, built on Radix `Tabs` (tablist / tab / tabpanel).
@@ -28,15 +29,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const tileItems = [
-  { value: 'add', label: 'Add', icon: <Icon name="plus" size={24} />, panel: <p>Add content.</p> },
-  { value: 'search', label: 'Search', icon: <Icon name="search" size={24} />, panel: <p>Search content.</p> },
-  { value: 'info', label: 'Details', icon: <Icon name="info" size={24} />, panel: <p>Details content.</p> },
+  { value: 'add', label: 'Add', icon: <Icon icon={PlusIcon} size={24} />, panel: <p>Add content.</p> },
+  { value: 'search', label: 'Search', icon: <Icon icon={SearchIcon} size={24} />, panel: <p>Search content.</p> },
+  { value: 'info', label: 'Details', icon: <Icon icon={InfoIcon} size={24} />, panel: <p>Details content.</p> },
 ];
 
 const eight = Array.from({ length: 8 }, (_, i) => ({
   value: `o${i + 1}`,
   label: `Option ${i + 1}`,
-  icon: <Icon name="plus" size={24} />,
+  icon: <Icon icon={PlusIcon} size={24} />,
   panel: <p>Option {i + 1} content.</p>,
 }));
 

@@ -1,7 +1,7 @@
 import { forwardRef, useCallback, useEffect, useId, useState, type ComponentPropsWithoutRef, type ReactElement, type ReactNode } from 'react';
 import { Popover as RadixPopover } from 'radix-ui';
 import { cx } from '../../lib/cx';
-import { Icon } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
 import './Popover.css';
 
 export type PopoverSide = 'top' | 'right' | 'bottom' | 'left';
@@ -102,7 +102,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           {showClose && (
             <RadixPopover.Close asChild>
               <button type="button" className="ds-popover-close" aria-label="Close">
-                <Icon name="close" size={16} strokeWidth={2} aria-hidden="true" />
+                <RoleIcon role="close" size="md" />
               </button>
             </RadixPopover.Close>
           )}

@@ -4,7 +4,7 @@ import './TileGroup.css';
 import { ChoiceGroup, type ChoiceGroupProps, type ChoiceOption } from '../ChoiceGroup/ChoiceGroup';
 
 export interface TileOption<V extends string = string> extends ChoiceOption<V> {
-  /** Decorative icon (for example `<Icon name="plus" />`); rendered `aria-hidden` and sized by the tile (24 px md, 16 px sm). */
+  /** Decorative icon (for example `<Icon icon={PlusIcon} />`); rendered `aria-hidden` and sized by the tile (24 px md, 16 px sm). */
   icon: ReactNode;
 }
 

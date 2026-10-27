@@ -4,6 +4,7 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Button } from '../../components/Button';
 import { Icon } from '../../components/Icon';
 import { SliderField } from '../../components/Slider';
+import { CheckIcon } from '../../lib/sampleIcons';
 
 /*
  * Shelf configurator: dimensions picked with SliderField, all in cm.
@@ -136,7 +137,7 @@ const Configurator = ({ mixedLength = false }: { mixedLength?: boolean }) => {
 
           {ordered && (
             <div role="status" className="flex items-center gap-3 border border-divider bg-surface-subtle p-6">
-              <Icon name="check" size={24} />
+              <Icon icon={CheckIcon} size={24} />
               <span className="text-body">Saved: {summary}</span>
             </div>
           )}

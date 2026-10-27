@@ -11,9 +11,9 @@ describe("Alert", () => {
   });
 
   it.each([
-    ["info", "status", "bg-info-bg", "font-medium", "M12 7.5v.5"],
-    ["success", "status", "bg-success-bg", "font-medium", "M5 12l5 5 9-10"],
-    ["error", "alert", "bg-error-bg", "font-bold", "M12 3l10 18H2z"],
+    ["info", "status", "bg-info-bg", "font-medium", "M12 6.5v2"],
+    ["success", "status", "bg-success-bg", "font-medium", "M7.5 12.5l3 3 6-7"],
+    ["error", "alert", "bg-error-bg", "font-bold", "M12 3.5l9.5 17h-19z"],
   ] as const)(
     "%s uses role %s with distinct weight and icon",
     (severity, role, cls, weight, path) => {
@@ -30,11 +30,11 @@ describe("Alert", () => {
     },
   );
 
-  it("uses 1.75 icon stroke for error, 1.5 for info", () => {
+  it("uses 2 icon stroke for error, 1.5 for info", () => {
     const { container, rerender } = render(
       <Alert severity="error" title="T" />,
     );
-    expect(container.querySelector("svg")).toHaveAttribute("stroke-width", "1.75");
+    expect(container.querySelector("svg")).toHaveAttribute("stroke-width", "2");
     rerender(<Alert severity="info" title="T" />);
     expect(container.querySelector("svg")).toHaveAttribute(
       "stroke-width",

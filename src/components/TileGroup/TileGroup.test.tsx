@@ -5,18 +5,19 @@ import { axe } from 'jest-axe';
 import { TileGroup } from './TileGroup';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
+import { AlertIcon, InfoIcon, PlusIcon, SearchIcon } from '../../lib/sampleIcons';
 
 const options = [
-  { value: 'add', label: 'Add', icon: <Icon name="plus" /> },
-  { value: 'search', label: 'Search', icon: <Icon name="search" /> },
-  { value: 'info', label: 'Details', icon: <Icon name="info" />, disabled: true },
-  { value: 'alert', label: 'Alerts', icon: <Icon name="alert" /> },
+  { value: 'add', label: 'Add', icon: <Icon icon={PlusIcon} /> },
+  { value: 'search', label: 'Search', icon: <Icon icon={SearchIcon} /> },
+  { value: 'info', label: 'Details', icon: <Icon icon={InfoIcon} />, disabled: true },
+  { value: 'alert', label: 'Alerts', icon: <Icon icon={AlertIcon} /> },
 ] as const;
 
 const many = Array.from({ length: 8 }, (_, i) => ({
   value: `v${i}`,
   label: `Option ${i}`,
-  icon: <Icon name="plus" />,
+  icon: <Icon icon={PlusIcon} />,
 }));
 
 type User = ReturnType<typeof userEvent.setup>;
@@ -47,7 +48,7 @@ describe('TileGroup', () => {
 
   it('defaults the label to the top and supports start, hint and help', () => {
     const { rerender } = render(
-      <TileGroup label="Action" options={options} hint="Pick one" help={<IconButton icon="info" aria-label="About actions" />} />,
+      <TileGroup label="Action" options={options} hint="Pick one" help={<IconButton icon={InfoIcon} aria-label="About actions" />} />,
     );
     expect(document.querySelector('.ds-choice')).toHaveAttribute('data-label-position', 'top');
     expect(screen.getByRole('radiogroup')).toHaveAccessibleDescription('Pick one');
@@ -152,7 +153,7 @@ describe('TileGroup', () => {
     it('has no violations with help and when overflowing', async () => {
       const { container } = render(
         <div style={{ width: 200 }}>
-          <TileGroup label="Action" options={many} help={<IconButton icon="info" aria-label="About actions" />} />
+          <TileGroup label="Action" options={many} help={<IconButton icon={InfoIcon} aria-label="About actions" />} />
         </div>,
       );
       expect(await axe(container)).toHaveNoViolations();

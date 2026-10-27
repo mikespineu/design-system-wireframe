@@ -12,6 +12,7 @@ import {
   type ReactNode,
 } from 'react';
 import { Slider as RadixSlider } from 'radix-ui';
+import { RoleIcon } from '../Icon/RoleIcon';
 import { cx } from '../../lib/cx';
 import { Field, Input, useFieldControl, useFieldLabelId } from '../Input';
 import {
@@ -415,17 +416,7 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
         {...(dir2 === -1 ? buttonNaming(verbDownId, 'Decrease') : buttonNaming(verbUpId, 'Increase'))}
         onClick={() => stepBy(dir2)}
       >
-        <svg
-          width={size === 'sm' ? 12 : 16}
-          height={size === 'sm' ? 12 : 16}
-          viewBox="0 0 16 16"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          aria-hidden="true"
-        >
-          <path d={dir2 === -1 ? 'M2 8h12' : 'M2 8h12M8 2v12'} />
-        </svg>
+        <RoleIcon role={dir2 === -1 ? 'minus' : 'plus'} size={size === 'sm' ? 'sm' : 'md'} />
       </button>
     );
   };

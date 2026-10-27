@@ -1192,8 +1192,8 @@ describe('Slider stepper marks (user-requested deviation)', () => {
     const plus = screen.getByRole('button', { name: /^Increase/ }).querySelector('svg');
     expect(minus).toHaveAttribute('width', '16');
     expect(minus).toHaveAttribute('stroke', 'currentColor');
-    expect(minus?.querySelector('path')).toHaveAttribute('d', 'M2 8h12');
-    expect(plus?.querySelector('path')).toHaveAttribute('d', 'M2 8h12M8 2v12');
+    expect(minus?.querySelector('path')).toHaveAttribute('d', 'M5 12h14');
+    expect(plus?.querySelector('path')).toHaveAttribute('d', 'M12 5v14M5 12h14');
   });
 });
 

@@ -1,14 +1,14 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { Slot } from 'radix-ui';
 import { cx } from '../../lib/cx';
-import { Icon, type IconName } from '../Icon';
+import { Icon, type IconComponent } from '../Icon';
 
 export interface IconButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'aria-label'> {
   /** Accessible name. Required because the button has no visible text. */
   'aria-label': string;
   /** Icon rendered inside the button. */
-  icon: IconName;
+  icon: IconComponent;
   /** Render the child element (e.g. an anchor) with icon button styling instead of a <button>. */
   asChild?: boolean;
   /** Only used with `asChild`: the element (e.g. <a>) that receives the styling and the icon. */
@@ -32,7 +32,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         {...rest}
       >
         {asChild ? <Slot.Slottable>{children}</Slot.Slottable> : null}
-        <Icon name={icon} size={18} />
+        <Icon icon={icon} size={18} />
       </Comp>
     );
   },

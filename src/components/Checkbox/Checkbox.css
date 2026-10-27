@@ -97,13 +97,13 @@
 }
 
 .ds-checkbox-mark svg {
-  width: var(--ds-space-4);
-  height: var(--ds-space-4);
+  width: var(--ds-icon-size-md);
+  height: var(--ds-icon-size-md);
 }
 
 .ds-checkbox[data-size='sm'] .ds-checkbox-mark svg {
-  width: var(--ds-space-3);
-  height: var(--ds-space-3);
+  width: var(--ds-icon-size-sm);
+  height: var(--ds-icon-size-sm);
 }
 
 .ds-checkbox-box[data-state='checked'] .ds-checkbox-mark-check,

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { SegmentedControl } from './SegmentedControl';
 import { IconButton } from '../IconButton';
+import { InfoIcon } from '../../lib/sampleIcons';
 
 /**
  * Pick exactly one of 2-7 short text options, built on Radix `RadioGroup`.
@@ -35,7 +36,7 @@ export const Small: Story = { args: { size: 'sm' } };
 export const FullWidth: Story = { args: { fullWidth: true, labelPosition: 'top' } };
 export const LabelTop: Story = { args: { labelPosition: 'top', hint: 'How the items are laid out.' } };
 export const WithHelp: Story = {
-  args: { help: <IconButton icon="info" aria-label="About views" /> },
+  args: { help: <IconButton icon={InfoIcon} aria-label="About views" /> },
 };
 export const DisabledItem: Story = {
   args: {
