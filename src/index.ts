@@ -13,6 +13,7 @@ export * from './components/SegmentedControl';
 export * from './components/Switch';
 export * from './components/TileGroup';
 export * from './components/RadioGroup';
+export * from './components/Toast';
 export * from './components/Stack';
 export * from './components/Grid';
 export type {
