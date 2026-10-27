@@ -46,9 +46,9 @@ import type { TileGroupProps, TileOption } from 'design-system-test';
 import { Icon, TileGroup } from 'design-system-test';
 
 const ACTIONS = [
-  { value: 'add', label: 'Add', icon: <Icon name="plus" /> },
-  { value: 'search', label: 'Search', icon: <Icon name="search" /> },
-  { value: 'info', label: 'Details', icon: <Icon name="info" />, disabled: true },
+  { value: 'add', label: 'Add', icon: <Icon icon={PlusIcon} /> },
+  { value: 'search', label: 'Search', icon: <Icon icon={SearchIcon} /> },
+  { value: 'info', label: 'Details', icon: <Icon icon={InfoIcon} />, disabled: true },
 ] as const;
 
 <TileGroup label="Quick action" options={ACTIONS} />

@@ -13,6 +13,7 @@ import { Checkbox, CheckboxGroup } from '../../components/Checkbox';
 import { Icon } from '../../components/Icon';
 import { Field, TextField, useFieldControl } from '../../components/Input';
 import { TextareaField } from '../../components/Textarea';
+import { CheckIcon } from '../../lib/sampleIcons';
 
 /*
  * Example form layout from docs/design-system-wireframe (artboard "Example form").
@@ -128,7 +129,7 @@ const ContactForm = () => {
         <div className="flex flex-col gap-8">
           {sent ? (
             <div role="status" className="flex flex-col gap-6 border border-divider bg-surface-subtle p-12">
-              <Icon name="check" size={32} />
+              <Icon icon={CheckIcon} size={32} />
               <h2 className="m-0 text-h2">Message sent</h2>
               <p className="m-0 text-body text-text">
                 Thanks, {values.first}. We will reply to {values.email}.

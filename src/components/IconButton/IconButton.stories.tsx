@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { IconButton } from './IconButton';
+import { PlusIcon } from '../../lib/sampleIcons';
 
 const meta = {
   title: 'Components/IconButton',
   component: IconButton,
   tags: ['autodocs'],
-  args: { icon: 'plus', 'aria-label': 'Add', onClick: fn() },
+  args: { icon: PlusIcon, 'aria-label': 'Add', onClick: fn() },
 } satisfies Meta<typeof IconButton>;
 
 export default meta;

@@ -1,6 +1,7 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cx } from "../../lib/cx";
-import { Icon, type IconName } from "../Icon";
+import { RoleIcon } from "../Icon/RoleIcon";
+import type { IconRole } from "../Icon";
 
 export type AlertSeverity = "info" | "success" | "error";
 
@@ -18,7 +19,7 @@ export interface AlertProps extends Omit<
 const config: Record<
   AlertSeverity,
   {
-    icon: IconName;
+    icon: IconRole;
     strokeWidth: number;
     box: string;
     titleWeight: string;
@@ -35,8 +36,8 @@ const config: Record<
     role: "status",
   },
   success: {
-    icon: "check",
-    strokeWidth: 1.75,
+    icon: "success",
+    strokeWidth: 2,
     box: "border border-success-border bg-success-bg text-success",
     titleWeight: "font-medium",
     body: "text-text",
@@ -44,7 +45,7 @@ const config: Record<
   },
   error: {
     icon: "warning",
-    strokeWidth: 1.75,
+    strokeWidth: 2,
     box: "border border-error-border bg-error-bg text-error",
     titleWeight: "font-bold",
     body: "text-text-strong",
@@ -63,12 +64,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         className={cx("flex gap-3 p-4", c.box, className)}
         {...rest}
       >
-        <Icon
-          name={c.icon}
-          size={20}
-          strokeWidth={c.strokeWidth}
-          className="flex-none"
-        />
+        <RoleIcon role={c.icon} size="lg" strokeWidth={c.strokeWidth} className="flex-none" />
         <div className="flex flex-col gap-1">
           <strong className={cx("font-mono text-sm", c.titleWeight)}>
             {title}

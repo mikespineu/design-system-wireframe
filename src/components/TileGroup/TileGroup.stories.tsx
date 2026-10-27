@@ -4,6 +4,7 @@ import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { TileGroup } from './TileGroup';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
+import { AlertIcon, InfoIcon, PlusIcon, SearchIcon, WarningIcon, CheckIcon, CloseIcon, ChevronDownIcon } from '../../lib/sampleIcons';
 
 /**
  * Pick exactly one of several options shown as icon + label tiles, built on Radix `RadioGroup`.
@@ -19,9 +20,9 @@ const meta = {
   args: {
     label: 'Quick action',
     options: [
-      { value: 'add', label: 'Add', icon: <Icon name="plus" size={24} /> },
-      { value: 'search', label: 'Search', icon: <Icon name="search" size={24} /> },
-      { value: 'info', label: 'Details', icon: <Icon name="info" size={24} /> },
+      { value: 'add', label: 'Add', icon: <Icon icon={PlusIcon} size={24} /> },
+      { value: 'search', label: 'Search', icon: <Icon icon={SearchIcon} size={24} /> },
+      { value: 'info', label: 'Details', icon: <Icon icon={InfoIcon} size={24} /> },
     ],
   },
 } satisfies Meta<typeof TileGroup>;
@@ -29,23 +30,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const icons = ['plus', 'search', 'info', 'alert', 'warning', 'check', 'close', 'chevron-down'] as const;
-const eight = icons.map((name, i) => ({ value: `o${i + 1}`, label: `Option ${i + 1}`, icon: <Icon name={name} /> }));
+const icons = [PlusIcon, SearchIcon, InfoIcon, AlertIcon, WarningIcon, CheckIcon, CloseIcon, ChevronDownIcon];
+const eight = icons.map((glyph, i) => ({ value: `o${i + 1}`, label: `Option ${i + 1}`, icon: <Icon icon={glyph} /> }));
 
 export const Default: Story = {};
 export const Small: Story = { args: { size: 'sm' } };
 export const LabelStart: Story = { args: { labelPosition: 'start' } };
 export const WithHint: Story = { args: { hint: 'What the button does.' } };
 export const WithHelp: Story = {
-  args: { help: <IconButton icon="info" aria-label="About quick actions" /> },
+  args: { help: <IconButton icon={InfoIcon} aria-label="About quick actions" /> },
 };
 export const Selected: Story = { args: { defaultValue: 'search' } };
 export const DisabledItem: Story = {
   args: {
     options: [
-      { value: 'add', label: 'Add', icon: <Icon name="plus" /> },
-      { value: 'search', label: 'Search', icon: <Icon name="search" />, disabled: true },
-      { value: 'info', label: 'Details', icon: <Icon name="info" /> },
+      { value: 'add', label: 'Add', icon: <Icon icon={PlusIcon} /> },
+      { value: 'search', label: 'Search', icon: <Icon icon={SearchIcon} />, disabled: true },
+      { value: 'info', label: 'Details', icon: <Icon icon={InfoIcon} /> },
     ],
   },
 };
@@ -55,8 +56,8 @@ export const DisabledGroup: Story = { args: { disabled: true, defaultValue: 'sea
 export const LongLabel: Story = {
   args: {
     options: [
-      { value: 'add', label: 'Add', icon: <Icon name="plus" /> },
-      { value: 'long', label: 'Notifications', icon: <Icon name="alert" /> },
+      { value: 'add', label: 'Add', icon: <Icon icon={PlusIcon} /> },
+      { value: 'long', label: 'Notifications', icon: <Icon icon={AlertIcon} /> },
     ],
   },
 };

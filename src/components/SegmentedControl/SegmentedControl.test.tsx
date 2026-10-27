@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { SegmentedControl } from './SegmentedControl';
 import { IconButton } from '../IconButton';
+import { InfoIcon } from '../../lib/sampleIcons';
 
 const options = [
   { value: 'list', label: 'List' },
@@ -149,7 +150,7 @@ describe('SegmentedControl', () => {
 
   it('help slot is outside the arrow-key order; Tab goes there', async () => {
     const user = userEvent.setup();
-    render(<SegmentedControl label="View" options={options} help={<IconButton icon="info" aria-label="About views" />} />);
+    render(<SegmentedControl label="View" options={options} help={<IconButton icon={InfoIcon} aria-label="About views" />} />);
     expect(screen.getByRole('radiogroup')).not.toContainElement(screen.getByRole('button', { name: 'About views' }));
     await user.tab();
     await user.tab();
@@ -366,7 +367,7 @@ describe('SegmentedControl', () => {
     it('has no violations with help and when overflowing', async () => {
       const { container } = render(
         <div style={{ width: 200 }}>
-          <SegmentedControl label="View" options={many} help={<IconButton icon="info" aria-label="About views" />} />
+          <SegmentedControl label="View" options={many} help={<IconButton icon={InfoIcon} aria-label="About views" />} />
         </div>,
       );
       expect(await axe(container)).toHaveNoViolations();

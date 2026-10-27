@@ -13,7 +13,8 @@ import {
 import { Toast as RadixToast, VisuallyHidden } from 'radix-ui';
 import { cx } from '../../lib/cx';
 import { Button } from '../Button';
-import { Icon, type IconName } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
+import type { IconRole } from '../Icon';
 import './Toast.css';
 
 export type ToastSeverity = 'info' | 'success' | 'error';
@@ -63,10 +64,10 @@ interface Entry {
 const MAX_VISIBLE = 3;
 const PRUNE_DELAY = 400;
 
-const config: Record<ToastSeverity, { icon: IconName; strokeWidth: number; prefix?: string; type: 'foreground' | 'background' }> = {
+const config: Record<ToastSeverity, { icon: IconRole; strokeWidth: number; prefix?: string; type: 'foreground' | 'background' }> = {
   info: { icon: 'info', strokeWidth: 1.5, type: 'background' },
-  success: { icon: 'check', strokeWidth: 1.75, prefix: 'Success: ', type: 'background' },
-  error: { icon: 'warning', strokeWidth: 1.75, prefix: 'Error: ', type: 'foreground' },
+  success: { icon: 'success', strokeWidth: 2, prefix: 'Success: ', type: 'background' },
+  error: { icon: 'warning', strokeWidth: 2, prefix: 'Error: ', type: 'foreground' },
 };
 
 const defaultDuration = (o: ToastOptions) =>
@@ -167,7 +168,7 @@ const ToastItem = ({ entry, onOpenChange }: { entry: Entry; onOpenChange: (open:
       open={open}
       onOpenChange={onOpenChange}
     >
-      <Icon name={c.icon} size={20} strokeWidth={c.strokeWidth} aria-hidden="true" className="ds-toast-icon" />
+      <RoleIcon role={c.icon} size="lg" strokeWidth={c.strokeWidth} className="ds-toast-icon" />
       <div className="ds-toast-content">
         <RadixToast.Title className="ds-toast-title">
           {c.prefix && <VisuallyHidden.Root>{c.prefix}</VisuallyHidden.Root>}
@@ -188,7 +189,7 @@ const ToastItem = ({ entry, onOpenChange }: { entry: Entry; onOpenChange: (open:
       </div>
       <RadixToast.Close asChild>
         <button type="button" className="ds-toast-close" aria-label="Close">
-          <Icon name="close" size={16} strokeWidth={2} aria-hidden="true" />
+          <RoleIcon role="close" size="md" />
         </button>
       </RadixToast.Close>
     </RadixToast.Root>

@@ -8,9 +8,10 @@ const axe = configureAxe({ rules: { region: { enabled: false } } });
 
 import { Tooltip, TooltipProvider } from './Tooltip';
 import { IconButton } from '../IconButton';
+import { InfoIcon } from '../../lib/sampleIcons';
 
 // jsdom has no layout, so Radix marks the tip detached (hideWhenDetached): query with hidden: true.
-const trigger = <IconButton icon="info" aria-label="Add photo" />;
+const trigger = <IconButton icon={InfoIcon} aria-label="Add photo" />;
 
 describe('Tooltip', () => {
   it('is closed by default with no description', () => {

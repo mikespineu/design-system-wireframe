@@ -1,6 +1,6 @@
 import { forwardRef, type HTMLAttributes } from 'react';
 import { cx } from '../../lib/cx';
-import { Icon } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
 
 export type TagVariant = 'solid' | 'subtle' | 'outline' | 'neutral';
 export type TagSize = 'md' | 'sm';
@@ -48,7 +48,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
             onClick={onRemove}
             className="flex size-5.5 cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-muted focus-visible:focus-ring"
           >
-            <Icon name="close" size={12} strokeWidth={2} />
+            <RoleIcon role="close" size="sm" />
           </button>
         )}
       </span>

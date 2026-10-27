@@ -10,7 +10,7 @@ import {
   type TextareaHTMLAttributes,
 } from 'react';
 import { cx } from '../../lib/cx';
-import { Icon } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
 import { Field, useFieldControl } from '../Input';
 import './Textarea.css';
 
@@ -86,7 +86,7 @@ export const TextareaCounter = ({ id, count, max, className }: TextareaCounterPr
         You can enter up to {max} characters
       </span>
       <span className={cx('ds-textarea-counter', className)} data-state={state} aria-hidden="true">
-        {state === 'over' && <Icon name="alert" size={14} strokeWidth={2} />}
+        {state === 'over' && <RoleIcon role="alert" size={14} />}
         <span>
           {count} / {max}
         </span>

@@ -15,6 +15,8 @@ import { Popover, Select as RadixSelect } from 'radix-ui';
 import { cx } from '../../lib/cx';
 import { Field, useFieldControl, useFieldLabelId } from '../Input';
 import { Icon } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
+import { SearchIcon } from './SearchIcon';
 import './Select.css';
 
 export interface SelectOption {
@@ -165,7 +167,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, Common & Pick<OwnProps, 'valu
             );
           })}
         </select>
-        <Icon name="chevron-down" size={16} className="ds-select-chevron ds-select-native-chevron" />
+        <RoleIcon role="chevron-down" size={16} strokeWidth={1.5} className="ds-select-chevron ds-select-native-chevron" />
       </span>
     );
   },
@@ -187,7 +189,7 @@ const ListSelect = forwardRef<
         <span className="ds-select-label">{o.label}</span>
       </RadixSelect.ItemText>
       <RadixSelect.ItemIndicator className="ds-select-check">
-        <Icon name="check" size={16} strokeWidth={2} />
+        <RoleIcon role="check" size={16} strokeWidth={2} />
       </RadixSelect.ItemIndicator>
     </RadixSelect.Item>
   );
@@ -229,7 +231,7 @@ const ListSelect = forwardRef<
           }
         />
         <RadixSelect.Icon asChild>
-          <Icon name="chevron-down" size={16} className="ds-select-chevron" />
+          <RoleIcon role="chevron-down" size={16} strokeWidth={1.5} className="ds-select-chevron" />
         </RadixSelect.Icon>
       </RadixSelect.Trigger>
       <RadixSelect.Portal>
@@ -242,7 +244,7 @@ const ListSelect = forwardRef<
           collisionPadding={8}
         >
           <RadixSelect.ScrollUpButton className="ds-select-scroll ds-select-scroll-up">
-            <Icon name="chevron-down" size={16} />
+            <RoleIcon role="chevron-down" size={16} strokeWidth={1.5} />
           </RadixSelect.ScrollUpButton>
           <RadixSelect.Viewport className="ds-select-viewport">
             {groups.map((g, i) => {
@@ -259,7 +261,7 @@ const ListSelect = forwardRef<
             })}
           </RadixSelect.Viewport>
           <RadixSelect.ScrollDownButton className="ds-select-scroll ds-select-scroll-down">
-            <Icon name="chevron-down" size={16} />
+            <RoleIcon role="chevron-down" size={16} strokeWidth={1.5} />
           </RadixSelect.ScrollDownButton>
         </RadixSelect.Content>
       </RadixSelect.Portal>
@@ -401,7 +403,7 @@ const SearchSelect = forwardRef<HTMLButtonElement, SearchProps>(
         >
           {hasEmoji && <EmojiSlot emoji={o.emoji} />}
           <span className="ds-select-label">{o.label}</span>
-          <span className="ds-select-check">{isSelected && <Icon name="check" size={16} strokeWidth={2} />}</span>
+          <span className="ds-select-check">{isSelected && <RoleIcon role="check" size={16} strokeWidth={2} />}</span>
         </div>
       );
     };
@@ -432,7 +434,7 @@ const SearchSelect = forwardRef<HTMLButtonElement, SearchProps>(
               {hasEmoji && <EmojiSlot emoji={selected?.emoji} />}
               <span className="ds-select-label">{selected ? selected.label : placeholder}</span>
             </span>
-            <Icon name="chevron-down" size={16} className="ds-select-chevron" />
+            <RoleIcon role="chevron-down" size={16} strokeWidth={1.5} className="ds-select-chevron" />
           </button>
         </Popover.Trigger>
         {name && <input type="hidden" name={name} value={current} />}
@@ -451,7 +453,7 @@ const SearchSelect = forwardRef<HTMLButtonElement, SearchProps>(
             }}
           >
             <div className="ds-select-search">
-              <Icon name="search" size={16} />
+              <Icon icon={SearchIcon} size={16} strokeWidth={1.5} />
               <input
                 ref={inputRef}
                 type="text"

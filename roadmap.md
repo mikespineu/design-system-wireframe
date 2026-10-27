@@ -322,8 +322,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Spec maps every internal icon in `src/components/` to a role, its size and stroke, and the override prop name (Dialog `closeIcon`, Checkbox `checkIcon` / `errorIcon`, Input and Textarea `errorIcon`, Tag `removeIcon`, Alert `icon`, Slider `decrementIcon` / `incrementIcon`)
     - Spec covers a11y: icons are always decorative inside components, the accessible name stays on the control, `null` is allowed only where hiding the icon is valid (Alert)
     - New `--ds-icon-size-sm/md/lg` and `--ds-icon-stroke` values listed under Token requests for approval
-- [ ] **DS-47 Icon API & default glyphs — implementation.** Rebuild `Icon` (`src/components/Icon/`) around `icon: IconComponent` per `docs/specs/Icon.md`: add `createIcon`, the private default glyphs built with it, `IconProvider` and `useIcon(role, override)`. Remove the public `name` / `IconName` API, change `IconButton` `icon` to `IconComponent`, move every internal usage to `useIcon`, and add the icon tokens. Breaking change, released with a major changeset.
-  - type: build · has_ui: yes · depends_on: DS-46 · needs_human: no · status: todo
+- [x] **DS-47 Icon API & default glyphs — implementation.** Rebuild `Icon` (`src/components/Icon/`) around `icon: IconComponent` per `docs/specs/Icon.md`: add `createIcon`, the private default glyphs built with it, `IconProvider` and `useIcon(role, override)`. Remove the public `name` / `IconName` API, change `IconButton` `icon` to `IconComponent`, move every internal usage to `useIcon`, and add the icon tokens. Breaking change, released with a major changeset.
+  - type: build · has_ui: yes · depends_on: DS-46 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state; every existing story looks unchanged with the default glyphs
     - `Icon` accepts only an `IconComponent` and always sets size, `currentColor`, `focusable="false"` and `aria-hidden` or `role="img"` + `aria-label`; default glyphs and `IconName` are not exported from `src/index.ts`
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-47** Icon API & default glyphs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/82
 - **DS-18** Select — implementation — https://github.com/mikespineu/design-system-wireframe/pull/81
 - **DS-43** InfoTip — implementation — https://github.com/mikespineu/design-system-wireframe/pull/80
 - **DS-42** Tooltip & Popover — implementation — https://github.com/mikespineu/design-system-wireframe/pull/77

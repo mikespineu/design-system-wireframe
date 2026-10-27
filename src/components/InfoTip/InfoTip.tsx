@@ -11,7 +11,7 @@ import {
 } from 'react';
 import { cx } from '../../lib/cx';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { Icon } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
 import { Tooltip } from '../Tooltip';
 import { Popover } from '../Popover';
 import './InfoTip.css';
@@ -102,7 +102,7 @@ export const InfoTip = forwardRef<HTMLButtonElement, InfoTipProps>(
           }
         }}
       >
-        <Icon name="info" size={size === 'sm' ? 16 : 18} strokeWidth={size === 'sm' ? 2 : 1.5} aria-hidden="true" />
+        <RoleIcon role="info" size={size === 'sm' ? 16 : 18} strokeWidth={size === 'sm' ? 2 : 1.5} aria-hidden="true" />
       </button>
     );
 

@@ -3,6 +3,7 @@ import { expect, userEvent, waitFor, screen } from 'storybook/test';
 import { Tooltip } from './Tooltip';
 import { Button } from '../Button';
 import { IconButton } from '../IconButton';
+import { InfoIcon } from '../../lib/sampleIcons';
 
 /**
  * Short plain-text hint on Radix `Tooltip`. Opens on hover (400 ms) and on keyboard focus,
@@ -16,7 +17,7 @@ const meta = {
   decorators: [(Story) => <div style={{ padding: 80 }}><Story /></div>],
   args: {
     content: 'Add a photo',
-    children: <IconButton icon="info" aria-label="Add photo" />,
+    children: <IconButton icon={InfoIcon} aria-label="Add photo" />,
   },
 } satisfies Meta<typeof Tooltip>;
 

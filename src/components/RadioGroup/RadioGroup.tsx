@@ -12,7 +12,7 @@ import {
 } from 'react';
 import { RadioGroup as RadixRadioGroup, Label } from 'radix-ui';
 import { cx } from '../../lib/cx';
-import { Icon } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
 import './RadioGroup.css';
 
 export type RadioGroupSize = 'sm' | 'md';
@@ -149,7 +149,7 @@ export const RadioGroup = forwardRef<ElementRef<typeof RadixRadioGroup.Root>, Ra
           </RadixRadioGroup.Root>
           {error && (
             <span id={errorId} className="ds-radio-error">
-              <Icon name="alert" size={14} strokeWidth={2} />
+              <RoleIcon role="alert" size={14} />
               <span>
                 <span className="sr-only">Error: </span>
                 {error}

@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { Label } from 'radix-ui';
 import { cx } from '../../lib/cx';
-import { Icon } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
 
 /** Wiring that Field hands to the control inside it. */
 export interface FieldControlProps {
@@ -100,7 +100,7 @@ export const Field = ({ label, hint, error, disabled, required, id, className, c
         )}
         {error && (
           <span id={errorId} className="flex items-center gap-1.5 text-caption font-medium text-error">
-            <Icon name="alert" size={14} strokeWidth={2} />
+            <RoleIcon role="alert" size={14} />
             <span>
               <span className="sr-only">Error: </span>
               {error}

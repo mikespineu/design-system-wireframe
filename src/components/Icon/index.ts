@@ -1,2 +1,4 @@
 export * from './Icon';
-export type { IconName } from './icons';
+export { createIcon } from './createIcon';
+export { IconProvider, useIcon, type IconProviderProps } from './IconProvider';
+export type { IconComponent, IconComponentProps, IconRole, IconSet } from './types';

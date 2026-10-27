@@ -76,6 +76,14 @@
   --ds-focus-width: 2px;
   --ds-focus-offset: 2px;
   --ds-control-height: 44px;
+
+  /* Icons: fixed system constants, not part of the theme contract */
+  --ds-icon-size-sm: 12px;
+  --ds-icon-size-md: 16px;
+  --ds-icon-size-lg: 20px;
+  --ds-icon-stroke: 1.5;
+  --ds-icon-stroke-strong: 2;
+
   --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
 
   /* Photography: always monochrome */
