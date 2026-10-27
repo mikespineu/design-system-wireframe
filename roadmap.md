@@ -189,8 +189,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers `ButtonGroup` "Add to cart" + Wishlist heart, attached (shared 1 px border) and spaced, in default, focus-within and disabled
     - Spec defines loading behavior (spinner placement, width stays fixed, `aria-busy`, clicks blocked, not focus-trapping) and the pressed state (`aria-pressed`)
     - Spec defines the typed API (`leadingIcon`, `trailingIcon`, `loading`, `IconButton` `variant` / `pressed`, `ButtonGroup` `attached` / `aria-label`) and maps every state to `--ds-*` tokens
-- [ ] **DS-33 Button icons & loading — implementation.** Extend `Button` (`src/components/Button/`) with `leadingIcon` / `trailingIcon` (typed `IconComponent`, rendered through `Icon` from DS-47) and `loading`, and `IconButton` (`src/components/IconButton/`) with `variant`, `loading`, `pressed` and an optional `pressedIcon: IconComponent`, per `docs/specs/Button.md`. The design system adds no `heart` glyph: the Wishlist heart (outline + filled) is passed in as components, in stories built with `createIcon`. Keep the existing `asChild` (Radix `Slot`) composition working.
-  - type: build · has_ui: yes · depends_on: DS-32, DS-47 · needs_human: no · status: todo
+- [x] **DS-33 Button icons & loading — implementation.** Extend `Button` (`src/components/Button/`) with `leadingIcon` / `trailingIcon` (typed `IconComponent`, rendered through `Icon` from DS-47) and `loading`, and `IconButton` (`src/components/IconButton/`) with `variant`, `loading`, `pressed` and an optional `pressedIcon: IconComponent`, per `docs/specs/Button.md`. The design system adds no `heart` glyph: the Wishlist heart (outline + filled) is passed in as components, in stories built with `createIcon`. Keep the existing `asChild` (Radix `Slot`) composition working.
+  - type: build · has_ui: yes · depends_on: DS-32, DS-47 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state, for every variant
     - `loading` sets `aria-busy`, blocks `onClick`, keeps the button's width, and keeps the accessible name
