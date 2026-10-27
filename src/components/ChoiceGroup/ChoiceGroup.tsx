@@ -3,7 +3,6 @@ import {
   useCallback,
   useEffect,
   useId,
-  useLayoutEffect,
   useRef,
   useState,
   type ComponentPropsWithoutRef,
@@ -15,6 +14,9 @@ import {
 import { RadioGroup } from 'radix-ui';
 import { cx } from '../../lib/cx';
 import './ChoiceGroup.css';
+import { useChoiceStrip, scrollItemIntoView } from './useChoiceStrip';
+
+export { scrollItemIntoView };
 
 /**
  * Internal base for SegmentedControl and TileGroup (not exported from the package).
@@ -69,38 +71,6 @@ export interface ChoiceGroupProps<V extends string = string>
   renderContent: (option: ChoiceOption<V>) => ReactNode;
   /** Segments share the width equally; never scrolls. */
   fullWidth?: boolean;
-}
-
-type Overflow = 'start' | 'end' | 'both' | undefined;
-
-const prefersReducedMotion = () =>
-  typeof window !== 'undefined' &&
-  typeof window.matchMedia === 'function' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/**
- * Scroll `container` (not page ancestors) so `item` sits inside the container's
- * box inset by its scroll-padding (the edge-fade clearance). Works in LTR and RTL
- * because it uses on-screen rect deltas; the browser clamps to the scroll range.
- */
-export function scrollItemIntoView(container: HTMLElement, item: HTMLElement, behavior: ScrollBehavior) {
-  const c = container.getBoundingClientRect();
-  const i = item.getBoundingClientRect();
-  const style = window.getComputedStyle(container);
-  const pad = (v: string) => Number.parseFloat(v) || 0;
-  const padStart = pad(style.scrollPaddingLeft);
-  const padEnd = pad(style.scrollPaddingRight);
-  const minLeft = c.left + padStart;
-  const maxRight = c.right - padEnd;
-  let delta = 0;
-  if (i.right - i.left > maxRight - minLeft || i.left < minLeft) delta = i.left - minLeft;
-  else if (i.right > maxRight) delta = i.right - maxRight;
-  if (!delta) return;
-  // Round away from the current position so the item never ends up a sub-pixel short of the clearance.
-  const target = container.scrollLeft + delta;
-  const left = delta > 0 ? Math.ceil(target) : Math.floor(target);
-  if (typeof container.scrollTo === 'function') container.scrollTo({ left, behavior });
-  else container.scrollLeft = left;
 }
 
 function setRef<T>(ref: Ref<T> | undefined, node: T | null) {
@@ -162,88 +132,19 @@ function ChoiceGroupInner<V extends string>(
     },
     [ref],
   );
-  const indicatorRef = useRef<HTMLSpanElement | null>(null);
-
-  const getChecked = () => rootRef.current?.querySelector<HTMLElement>('[role="radio"][data-state="checked"]') ?? null;
-  const scrollTo = (el: HTMLElement | null, behavior?: ScrollBehavior) => {
-    if (el && rootRef.current) scrollItemIntoView(rootRef.current, el, behavior ?? (prefersReducedMotion() ? 'auto' : 'smooth'));
-  };
-
-  // Selected item in view: on mount and whenever the value changes.
-  useEffect(() => {
-    scrollTo(getChecked());
-  }, [value]);
-
-  // Overflow attribute (the one piece of JS state).
-  const [overflow, setOverflow] = useState<Overflow>(undefined);
-  const measureOverflow = useCallback(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    const pos = Math.abs(el.scrollLeft);
-    const atStart = pos <= 1;
-    const atEnd = pos + el.clientWidth >= el.scrollWidth - 1;
-    setOverflow(atStart && atEnd ? undefined : atStart ? 'end' : atEnd ? 'start' : 'both');
-  }, []);
-
-  // Sliding indicator (segmented only).
-  const [indicatorReady, setIndicatorReady] = useState(false);
-  const placeIndicator = useCallback(() => {
-    const ind = indicatorRef.current;
-    const item = getChecked();
-    if (!ind || !item) {
-      setIndicatorReady(false);
-      return;
-    }
-    ind.style.transform = `translateX(${item.offsetLeft}px)`;
-    ind.style.width = `${item.offsetWidth}px`;
-    setIndicatorReady(true);
-  }, []);
-
+  const { indicatorRef, overflow, indicatorReady, measureOverflow, onFocus } = useChoiceStrip({
+    rootRef,
+    selectedSelector: '[role="radio"][data-state="checked"]',
+    itemRole: 'radio',
+    withIndicator: variant === 'segmented',
+    value,
+    layoutDeps: [options, size, fullWidth],
+  });
   const withIndicator = variant === 'segmented';
-
-  useLayoutEffect(() => {
-    if (withIndicator) placeIndicator();
-  }, [withIndicator, placeIndicator, value, options, size, fullWidth]);
-
-  // Enable transitions only after the first placement has painted.
-  useEffect(() => {
-    const ind = indicatorRef.current;
-    if (!indicatorReady || !ind || ind.hasAttribute('data-animate')) return;
-    const raf = requestAnimationFrame(() => ind.setAttribute('data-animate', ''));
-    return () => cancelAnimationFrame(raf);
-  }, [indicatorReady]);
-
-  useEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    measureOverflow();
-    // Layout settled (resize, item size change, web fonts): re-measure and
-    // re-scroll the checked item into view. Never runs on plain scroll events.
-    const settle = () => {
-      measureOverflow();
-      if (withIndicator) placeIndicator();
-      scrollTo(getChecked(), 'auto');
-      measureOverflow();
-    };
-    const ro = new ResizeObserver(settle);
-    ro.observe(el);
-    Array.from(el.children).forEach((c) => {
-      if ((c as HTMLElement).getAttribute('role') === 'radio') ro.observe(c);
-    });
-    let cancelled = false;
-    document.fonts?.ready?.then(() => {
-      if (!cancelled) settle();
-    });
-    return () => {
-      cancelled = true;
-      ro.disconnect();
-    };
-  }, [measureOverflow, placeIndicator, withIndicator, options]);
 
   const handleFocus = (e: FocusEvent<HTMLDivElement>) => {
     rest.onFocus?.(e);
-    const target = e.target as HTMLElement;
-    if (target.getAttribute('role') === 'radio') scrollTo(target);
+    onFocus(e);
   };
 
   const control = (
