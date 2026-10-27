@@ -73,11 +73,32 @@
       "x": 13680,
       "y": 0
     },
+    "InfoTip.dc.html": {
+      "h": 8000,
+      "title": "InfoTip, Tooltip & Popover",
+      "w": 1440,
+      "x": 15200,
+      "y": 0
+    },
+    "Icon.dc.html": {
+      "h": 11600,
+      "title": "Icon",
+      "w": 1440,
+      "x": 16720,
+      "y": 0
+    },
+    "Tabs.dc.html": {
+      "h": 7600,
+      "title": "Tabs",
+      "w": 1440,
+      "x": 18240,
+      "y": 0
+    },
     "Select.dc.html": {
       "h": 8600,
       "title": "Select",
       "w": 1440,
-      "x": 15200,
+      "x": 19760,
       "y": 0
     }
   },
@@ -110,6 +131,9 @@
     "Toggle.dc.html",
     "Theming.dc.html",
     "RadioGroup.dc.html",
+    "InfoTip.dc.html",
+    "Icon.dc.html",
+    "Tabs.dc.html",
     "Select.dc.html"
   ],
   "pages": [],

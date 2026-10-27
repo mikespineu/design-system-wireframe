@@ -11,6 +11,7 @@ pr_url: ""
 canvas_url: ""
 storybook_url: ""
 model: default
+session_id: ""     # Claude Code session that last ran this job (${CLAUDE_SESSION_ID})
 loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
 needs_you: ""
 blocked_reason: ""

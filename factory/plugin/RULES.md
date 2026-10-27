@@ -33,6 +33,7 @@ Every task the factory touches has a job file: its status, stage and notes. The 
 - Commit it with the work (`DS-<n>: job update` when it's the only change). It's pushed with the branch, so it's in the PR and lands on `main` on merge, where it stays as the task's history.
 - `status` values: `claimed` → `in-progress` → `waiting` (needs you) / `blocked` → `merged`.
 - **Blocked by human:** whenever a task waits for the user (job `status: waiting`, or its PR has `factory:needs-approval` without `factory:approved`), it is shown in the board's **Blocked** column with the **human** tag, and listed under "Needs you". This applies to design approvals, `needs_human` tasks, PRs the user asked to approve, and accepted UI changes. Always set `status: waiting` and `needs_you` in the job file and add `factory:needs-approval` to the PR in those cases, so the status page can show it. `stage`: `claim`, `design`, `publish`, `build`, `ui-guard`, `gate:lint`, `gate:typecheck`, `gate:test`, `gate:storybook`, `qa`, `review`, `pr`, `ci`, `merge`.
+- `session_id`: the Claude Code session running the job. Set it to `${CLAUDE_SESSION_ID}` when the job file is created, and again whenever a later skill run (`/factory:design` revision, `/factory:retry`, `/factory:approve`, `/factory:merge`) picks the job up in a different session; add a timeline line `session: <id>` when it changes. The status page shows `claude --resume <id>` so the user can return to that conversation.
 - Never write secrets, tokens or full environment dumps into a job file.
 
 The status page reads job files from local worktrees first (live), then from task branches on origin, then from `main`.
@@ -52,7 +53,7 @@ The status page reads job files from local worktrees first (live), then from tas
    `gh api repos/{owner}/{repo}/git/refs -f ref=refs/heads/<branch> -f sha=$(git rev-parse origin/main)`.
    If it fails with "Reference already exists", someone else has the task: stop and tell the user.
 3. Worktree: `git fetch -q origin <branch> && git worktree add .worktrees/<branch with / → -> -B <branch> origin/<branch>`, then `git -C <worktree> branch --set-upstream-to origin/<branch>`, then `npm ci` inside it.
-4. Create `factory/jobs/DS-<n>.md` from the template (status `claimed`, stage `claim`).
+4. Create `factory/jobs/DS-<n>.md` from the template (status `claimed`, stage `claim`, `session_id: ${CLAUDE_SESSION_ID}`).
 5. Work only inside the worktree, with absolute paths. Pass the absolute worktree path to every subagent.
 
 ## Ports (from `CLAUDE.md`)

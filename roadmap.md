@@ -100,8 +100,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers selected, unselected, disabled, focus and invalid, in both orientations
     - Spec names Radix `RadioGroup` and maps every state to tokens
     - Spec documents arrow-key and roving-tabindex behavior
-- [ ] **DS-16 RadioGroup — implementation.** Build `RadioGroup` in `src/components/RadioGroup/` on Radix `RadioGroup`, styled via `[data-state]` / `[data-disabled]`.
-  - type: build · has_ui: yes · depends_on: DS-15 · needs_human: no · status: todo
+- [x] **DS-16 RadioGroup — implementation.** Build `RadioGroup` in `src/components/RadioGroup/` on Radix `RadioGroup`, styled via `[data-state]` / `[data-disabled]`.
+  - type: build · has_ui: yes · depends_on: DS-15 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state
     - Arrow keys move selection; Tab enters and leaves the group once
@@ -132,8 +132,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every state
     - Focus moves into the dialog on open and returns to the trigger on close; Escape closes
     - Story per state, keyboard story, open/closed stories, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-21 Tabs — design.** Define the tab list and triggers (default, hover, focus, active, disabled), the active underline/ink treatment, and the panel spacing.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-21 Tabs — design.** Define the tab list and triggers (default, hover, focus, active, disabled), the active underline/ink treatment, and the panel spacing.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers trigger default, hover, focus, active and disabled
     - Spec names Radix `Tabs` and defines automatic vs manual activation
@@ -241,8 +241,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `useToast()` shows, updates and dismisses toasts; auto-dismiss pauses on hover and focus
     - Action button runs its callback and closes the toast; tested with `userEvent`
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-41 Tooltip, Popover & InfoTip — design.** Define `Tooltip` (hover/focus, text only), `Popover` (click, any content) and `InfoTip`: one component that is a Popover when the `(pointer: coarse)` media query matches (touch as the primary input) and a Tooltip otherwise.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-41 Tooltip, Popover & InfoTip — design.** Define `Tooltip` (hover/focus, text only), `Popover` (click, any content) and `InfoTip`: one component that is a Popover when the `(pointer: coarse)` media query matches (touch as the primary input) and a Tooltip otherwise.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers Tooltip and Popover on all four sides, with arrow, open/closed, and InfoTip in touch vs non-touch mode
     - Spec names Radix `Tooltip` and `Popover` and defines delays, collision handling and portal layering
@@ -314,8 +314,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Icons
 
-- [ ] **DS-46 Icon system — design.** Define the bring-your-own icon model: the design system ships no public icon set, `Icon` renders any SVG icon component, and components fall back to private default glyphs. Draw the default glyph set in the wireframe style (24 px grid, stroke only, butt caps, miter joins): close, check, alert, info, warning, success, plus, minus, chevron-down / -left / -right. Specify the role map and the override API for every component that renders an internal icon.
-  - type: design · has_ui: yes · depends_on: – · needs_human: yes · status: todo
+- [x] **DS-46 Icon system — design.** Define the bring-your-own icon model: the design system ships no public icon set, `Icon` renders any SVG icon component, and components fall back to private default glyphs. Draw the default glyph set in the wireframe style (24 px grid, stroke only, butt caps, miter joins): close, check, alert, info, warning, success, plus, minus, chevron-down / -left / -right. Specify the role map and the override API for every component that renders an internal icon.
+  - type: design · has_ui: yes · depends_on: – · needs_human: yes · status: done
   - done_when:
     - Canvas shows every default glyph at 12, 14, 16, 18, 20 and 24 px with stroke 1.5 and 2, next to Lucide, Tabler, Phosphor and Heroicons equivalents in the same sizes
     - Spec `docs/specs/Icon.md` defines the `IconComponent` contract (renders `<svg>`, forwards `width`, `height`, `className`, `aria-*`), `createIcon`, `IconProvider`, `useIcon` and the resolution order prop > provider > default
@@ -349,6 +349,10 @@ Each task carries its fields in an indented line, read by the [software factory]
 ## Done
 
 - **DS-17** Select — design — https://github.com/mikespineu/design-system-wireframe/pull/73
+- **DS-21** Tabs — design — https://github.com/mikespineu/design-system-wireframe/pull/66
+- **DS-46** Icon system — design — https://github.com/mikespineu/design-system-wireframe/pull/62
+- **DS-16** RadioGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/64
+- **DS-41** Tooltip, Popover & InfoTip — design — https://github.com/mikespineu/design-system-wireframe/pull/71
 - **DS-15** RadioGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/61
 - **DS-29** Switch — implementation — https://github.com/mikespineu/design-system-wireframe/pull/58
 - **DS-26** Theme token contract — design — https://github.com/mikespineu/design-system-wireframe/pull/55

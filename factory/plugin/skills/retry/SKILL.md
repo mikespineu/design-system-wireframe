@@ -12,6 +12,8 @@ Arguments: `$ARGUMENTS`. "Better model", "stronger model" or "with opus" means m
 
 Read `${CLAUDE_PLUGIN_ROOT}/RULES.md` (in this repo: `factory/plugin/RULES.md`).
 
+This session's id is `${CLAUDE_SESSION_ID}`. Write it to the job file's `session_id` (rules: Job files) so the user can return with `claude --resume ${CLAUDE_SESSION_ID}`.
+
 1. Find the task's branch, worktree and job file (worktree first, else `git show origin/<branch>:factory/jobs/DS-<n>.md`). Recreate the worktree from the remote branch and `npm ci` if it's gone. No branch → tell the user to start it with `/factory:design` or `/factory:build`.
 2. Read the job file: `stage`, `blocked_reason`, and the last failure (timeline, Notes, or the latest `factory: blocked` PR comment).
 3. Reset: `loops` all to 0, `blocked_reason: ""`, `needs_you: ""`, `status: in-progress`, `model: <model or default>`. Timeline: `retry: from <stage>[ with <model>][, UI change accepted]`. Remove `factory:blocked` from the PR. With `--allow-ui`, add `factory:needs-approval` to the PR (the user approves before merge).
