@@ -222,12 +222,12 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas shows every Heading size and Text size/weight/family/tone, plus truncate and line-clamp
     - Spec maps every style to `--ds-*` tokens (missing type tokens listed under Token requests)
     - Spec defines the API (`level` vs `size`, `as` / `asChild`) and heading-order guidance
-- [ ] **DS-38 Heading & Text — implementation.** Build `Heading` and `Text` in `src/components/Heading/` and `src/components/Text/` per `docs/specs/Typography.md`, with `asChild` (Radix `Slot`).
+- [ ] **DS-38 Typography utilities — implementation.** Add the heading and body type styles as Tailwind `@utility` classes in `src/styles/tailwind.css` per `docs/specs/Typography.md` (no React components; the author picks the element).
   - type: build · has_ui: yes · depends_on: DS-37 · needs_human: no · status: todo
   - done_when:
-    - Matches the approved spec in every size, weight, family and tone
-    - `Heading` `level` sets the element (`h1`–`h6`), `size` only the look
-    - Story per variant, `jest-axe` test, exported from `src/index.ts`
+    - Theme entries and the 11 utilities (`heading-2xl`…`heading-xs`, `body-lg`…`body-2xs`) from the spec's Token requests exist in `src/styles/tailwind.css`
+    - Each utility matches the approved spec in size, leading, tracking, weight, family and colour; weight/family/tone/truncate/line-clamp stay stock Tailwind utilities
+    - `src/foundations/Typography.stories.tsx` shows every style with semantic elements, plus a `jest-axe` test of the story markup
 - [x] **DS-39 Toast — design.** Define toasts: info, success and error, with title, description, optional action (e.g. Undo) and close; stacking, position, enter/exit motion and auto-dismiss timing.
   - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
