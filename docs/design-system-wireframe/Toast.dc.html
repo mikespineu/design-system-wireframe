@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Toast</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column;overflow:hidden}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-b{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:32px 24px}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* toast */
+.toast{position:relative;box-sizing:border-box;width:384px;max-width:100%;display:flex;align-items:flex-start;gap:12px;padding:16px;border:1px solid #000000;border-radius:0;box-shadow:none;background:#FFFFFF;color:#404040;font-family:'Red Hat Text',sans-serif;list-style:none}
+.toast.success{border-color:#2E6B45;background:#EDF5EF}
+.toast.error{border:2px solid #A3302B;padding:15px;background:#FBEDEC}
+.toast.focus{outline:2px solid #000000;outline-offset:2px}
+.t-ic{flex:none;width:20px;height:20px}
+.info .t-ic{color:#404040}.success .t-ic{color:#2E6B45}.error .t-ic{color:#A3302B}
+.t-c{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.t-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:14px;line-height:20px}
+.info .t-t{color:#404040}.success .t-t{color:#2E6B45}.error .t-t{color:#A3302B;font-weight:700}
+.t-d{margin:0;font-size:14px;line-height:20px;color:#404040}
+.error .t-d{color:#262626}
+.t-a{display:flex;padding-top:8px}
+.btn{box-sizing:border-box;height:44px;padding:0 24px;border:1px solid #000000;border-radius:0;background:#FFFFFF;color:#000000;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:14px;cursor:pointer}
+.btn.hover{background:#EEEEEE}
+.btn.focus{outline:2px solid #000000;outline-offset:2px}
+.tx{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:-6px -8px -6px 0;padding:0;border:1px solid transparent;border-radius:0;background:transparent;color:#000000;cursor:pointer}
+.tx.hover{background:#FFFFFF;border-color:#000000}
+.tx.focus{border-color:#000000;outline:2px solid #000000;outline-offset:2px}
+.tx.press{background:#000000;border-color:#000000;color:#FFFFFF}
+/* viewport / stage */
+.stage{position:relative;width:100%;background:#FFFFFF;overflow:hidden}
+.page{position:absolute;inset:0;padding:24px;display:flex;flex-direction:column;gap:12px}
+.page i{display:block;height:12px;background:#EEEEEE}
+.vp{position:absolute;right:24px;bottom:24px;width:384px;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.vp.m{left:16px;right:16px;bottom:16px;width:auto}
+.vp.m .toast{width:100%}
+.vp.focus{outline:2px solid #000000;outline-offset:2px}
+.ghost{position:absolute;box-sizing:border-box;border:1px dashed #A3A3A3}
+.sw{display:flex;align-items:center;justify-content:center;width:72px;height:72px;box-sizing:border-box}
+.cap{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:8px 16px 8px 0;border-bottom:1px solid #E0E0E0;color:#404040;vertical-align:middle}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.phone{position:relative;width:375px;height:720px;border:1px solid #000000;background:#FFFFFF;overflow:hidden}
+.phone .bar{position:absolute;left:50%;bottom:8px;width:134px;height:4px;margin-left:-67px;background:#000000}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 10400px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Toast · DS-39 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Toast</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">Short, non-modal message that appears in a fixed region, then leaves by itself. Info, success and error. Each has a title, an optional description, an optional action (Undo, Retry) and a close button. Square corners and no shadow. A toast is separated from the page by its border. Severity shows in the fill (none or tinted), the border weight (1 or 2 px), the icon shape (circle, tick, triangle) and the title weight. Hue is never the only cue. Built on Radix Toast.</p>
+</header>
+
+<!-- 01 SEVERITIES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Severities</h2></div>
+<p class="sec-d">One size. 384 px wide on desktop and full width minus 16 px gutters on mobile (section 06). Every severity is shown without and with an action. The action is the existing secondary <code>Button</code> and sits under the text, aligned with the title. The close button is always present.</p>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Info · no action</span><span>white fill · 1 px black · circle-i</span></div>
+<div class="ab-b">
+<div class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><p class="t-d">Find it under Archive › Coastline.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+<div class="ab-f">type="background" · aria-live polite · 5000 ms</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Info · with action</span><span>Undo · secondary Button</span></div>
+<div class="ab-b">
+<div class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><p class="t-d">Find it under Archive › Coastline.</p><div class="t-a"><button class="btn">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+<div class="ab-f">type="background" · aria-live polite · 8000 ms (action adds time) · altText "Undo from Archive › Coastline"</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Success · no action</span><span>tinted fill · 1 px success · tick</span></div>
+<div class="ab-b">
+<div class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><p class="t-d">12 frames in Coastline were updated.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+<div class="ab-f">type="background" · aria-live polite · 5000 ms · hidden "Success: " prefix</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Success · with action</span><span>Undo · secondary Button</span></div>
+<div class="ab-b">
+<div class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><p class="t-d">12 frames in Coastline were updated.</p><div class="t-a"><button class="btn">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+<div class="ab-f">type="background" · aria-live polite · 8000 ms</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Error · no action</span><span>tinted fill · 2 px error · triangle · bold title</span></div>
+<div class="ab-b">
+<div class="toast error"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg><div class="t-c"><p class="t-t"><span class="sr">Error: </span>Upload failed</p><p class="t-d">harbour-04.tif is over the 50 MB limit.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+<div class="ab-f">type="foreground" · aria-live assertive · no auto-dismiss (duration Infinity) · hidden "Error: " prefix</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Error · with action</span><span>Retry · secondary Button</span></div>
+<div class="ab-b">
+<div class="toast error"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg><div class="t-c"><p class="t-t"><span class="sr">Error: </span>Upload failed</p><p class="t-d">The connection dropped at 64 %.</p><div class="t-a"><button class="btn">Retry</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+<div class="ab-f">type="foreground" · aria-live assertive · no auto-dismiss · padding 15 px so content lines up with 1 px toasts in a stack</div>
+</div>
+</div>
+</section>
+
+<!-- 02 ANATOMY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Anatomy</h2></div>
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Parts</span><span>1:1</span></div>
+<div class="ab-b" style="padding:48px 24px">
+<div class="toast success" style="outline:1px dashed #A3A3A3;outline-offset:-17px"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><p class="t-d">12 frames in Coastline were updated.</p><div class="t-a"><button class="btn">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<span class="cap">Dashed line = 16 px padding edge. Close icon aligns with the right padding edge (−8 px margin) and is centred on the title line (−6 px vertical margin).</span>
+</div>
+</div>
+<table class="tbl">
+<thead><tr><th>Part</th><th>Spec</th></tr></thead>
+<tbody>
+<tr><td>Viewport</td><td>Radix Toast.Viewport: fixed <code>ol</code> in a labelled region. No fill, no padding. Column, gap 8. Takes no space when empty.</td></tr>
+<tr><td>Toast</td><td>Radix Toast.Root (<code>li</code>). Row with gap 12 and padding 16 (15 for error). Radius 0, no shadow. Width 384 (4 × 96) or the full mobile width.</td></tr>
+<tr><td>Icon</td><td>20 px, severity fg colour. Shapes: info circle-i (1.5 stroke), success tick (1.75), error triangle (1.75). <code>aria-hidden</code>.</td></tr>
+<tr><td>Title</td><td>Toast.Title, required. Red Hat Mono 14/20, weight 500 (error 700), severity fg colour.</td></tr>
+<tr><td>Description</td><td>Toast.Description, optional. Red Hat Text 14/20 in gray-700 (error gray-800). 4 px under the title.</td></tr>
+<tr><td>Action</td><td>Toast.Action asChild with a secondary <code>Button</code>, 44 px high, optional. 12 px under the text (4 gap + 8 padding). One action at most.</td></tr>
+<tr><td>Close</td><td>Toast.Close, always present. 32 × 32 with a 16 px X icon. Transparent fill and border. aria-label "Close".</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- 03 STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">States</h2></div>
+<p class="sec-d">A toast has no hover look of its own, because hovering only pauses the timer. Focus rings are 2 px black with a 2 px offset on the toast, the action and the close button. All states are driven by <code>[data-state]</code>, <code>[data-swipe]</code> and pseudo-classes.</p>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Open · idle</span><span>data-state="open"</span></div>
+<div class="ab-b"><div class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><p class="t-d">Find it under Archive › Coastline.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab-f">The timer runs.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · hover (paused)</span><span>pointer over viewport</span></div>
+<div class="ab-b"><div class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><p class="t-d">Find it under Archive › Coastline.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button>
+<svg width="16" height="22" viewBox="0 0 16 22" aria-hidden="true" style="position:absolute;left:200px;top:30px"><path d="M1 1v17l4.5-4.5 3 7 2.5-1-3-7H14z" fill="#FFFFFF" stroke="#000000" stroke-width="1.25"/></svg></div></div>
+<div class="ab-f">Looks the same as idle. All toasts in the viewport pause and resume with the time they had left (Radix onPause / onResume).</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Toast · focus-visible</span><span>Toast.Root :focus-visible</span></div>
+<div class="ab-b"><div class="toast success focus"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><p class="t-d">12 frames in Coastline were updated.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab-f">The ring goes outside the border. The timer is paused while focus is in the viewport. Esc closes this toast.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Title only</span><span>no description</span></div>
+<div class="ab-b"><div class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Link copied</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab-f">Minimum height 52 px (16 + 20 + 16). Close stays centred on the title line.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Long content</span><span>wraps, never truncates</span></div>
+<div class="ab-b"><div class="toast error"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg><div class="t-c"><p class="t-t"><span class="sr">Error: </span>Three frames could not be published to Coastline</p><p class="t-d">harbour-04.tif, harbour-07.tif and pier-12.tif are missing a licence. Add one in Series settings and publish again.</p><div class="t-a"><button class="btn">Open settings</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab-f">Title and description wrap. Icon and close stay top-aligned. Keep the description to 2 lines; longer content belongs in an Alert or Dialog.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Action · hover</span><span>Button secondary :hover</span></div>
+<div class="ab-b"><div class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><p class="t-d">Find it under Archive › Coastline.</p><div class="t-a"><button class="btn hover">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab-f">Fill gray-100, the same as Button. Pausing is a side effect of the pointer being over the viewport.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Action · focus-visible</span><span>Button :focus-visible</span></div>
+<div class="ab-b"><div class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><p class="t-d">12 frames in Coastline were updated.</p><div class="t-a"><button class="btn focus">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab-f">Enter or Space runs the callback and closes the toast.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Close · focus-visible</span><span>Toast.Close :focus-visible</span></div>
+<div class="ab-b"><div class="toast error"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg><div class="t-c"><p class="t-t"><span class="sr">Error: </span>Upload failed</p><p class="t-d">harbour-04.tif is over the 50 MB limit.</p></div><button class="tx focus" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div></div>
+<div class="ab-f">Black 1 px border plus the ring. Enter or Space closes.</div>
+</div>
+</div>
+
+<p class="sec-d">Close button states, each shown on all three fills. The default is transparent so it takes the toast's fill. Hover adds a white fill and a black border, because a gray-100 fill would not show on the tinted fills.</p>
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>Close · default</span><span>transparent</span></div><div class="ab-b" style="flex-direction:row;gap:0;padding:24px">
+<div class="sw" style="background:#FFFFFF;border:1px solid #000000"><button class="tx" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="sw" style="background:#EDF5EF;border:1px solid #2E6B45"><button class="tx" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="sw" style="background:#FBEDEC;border:2px solid #A3302B"><button class="tx" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div><div class="ab-f">Icon black (ink)</div></div>
+<div class="ab"><div class="ab-h"><span>Close · hover</span><span>white + black border</span></div><div class="ab-b" style="flex-direction:row;gap:0;padding:24px">
+<div class="sw" style="background:#FFFFFF;border:1px solid #000000"><button class="tx hover" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="sw" style="background:#EDF5EF;border:1px solid #2E6B45"><button class="tx hover" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="sw" style="background:#FBEDEC;border:2px solid #A3302B"><button class="tx hover" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div><div class="ab-f">Transition --ds-motion</div></div>
+<div class="ab"><div class="ab-h"><span>Close · focus-visible</span><span>border + ring</span></div><div class="ab-b" style="flex-direction:row;gap:0;padding:24px">
+<div class="sw" style="background:#FFFFFF;border:1px solid #000000"><button class="tx focus" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="sw" style="background:#EDF5EF;border:1px solid #2E6B45"><button class="tx focus" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="sw" style="background:#FBEDEC;border:2px solid #A3302B"><button class="tx focus" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div><div class="ab-f">2 px black, 2 px offset</div></div>
+<div class="ab"><div class="ab-h"><span>Close · pressed</span><span>black fill, white icon</span></div><div class="ab-b" style="flex-direction:row;gap:0;padding:24px">
+<div class="sw" style="background:#FFFFFF;border:1px solid #000000"><button class="tx press" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="sw" style="background:#EDF5EF;border:1px solid #2E6B45"><button class="tx press" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="sw" style="background:#FBEDEC;border:2px solid #A3302B"><button class="tx press" style="margin:0" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div><div class="ab-f">:active</div></div>
+</div>
+</section>
+
+<!-- 04 SWIPE AND DISMISSAL -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Swipe and dismissal</h2></div>
+<p class="sec-d">Swipe right to dismiss, on desktop and mobile alike (Radix <code>swipeDirection="right"</code>, threshold 50 px). Touch, pen and mouse drag all work. The dashed outline marks where the toast rests.</p>
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Swipe · move</span><span>data-swipe="move"</span></div>
+<div class="ab-b" style="height:120px;justify-content:center">
+<div class="ghost" style="left:24px;top:32px;width:384px;height:94px"></div>
+<div class="toast info" style="transform:translateX(96px)"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><p class="t-d">Find it under Archive › Coastline.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+<div class="ab-f">translateX(var(--radix-toast-swipe-move-x)). Follows the pointer with no transition and no fade. Timers are paused.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Swipe · cancel</span><span>data-swipe="cancel" · &lt; 50 px</span></div>
+<div class="ab-b" style="height:120px;justify-content:center">
+<div class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><p class="t-d">Find it under Archive › Coastline.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+<div class="ab-f">Released before the threshold: snaps back to translateX(0) with a transform transition of --ds-motion (instant under reduced motion).</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Swipe · end</span><span>data-swipe="end" · ≥ 50 px</span></div>
+<div class="ab-b" style="height:120px;justify-content:center">
+<div class="ghost" style="left:24px;top:32px;width:384px;height:94px"></div>
+<div class="toast info" style="transform:translateX(260px);opacity:.35"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><p class="t-d">Find it under Archive › Coastline.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+<div class="ab-f">Keyframes from translateX(var(--radix-toast-swipe-end-x)) to translateX(100%) and opacity 0, over --ds-motion. Then data-state="closed" and the toast unmounts.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Closed</span><span>data-state="closed"</span></div>
+<div class="ab-b" style="height:120px;justify-content:center">
+<div class="ghost" style="left:24px;top:32px;width:384px;height:94px"></div>
+<span class="cap" style="padding-left:16px">Not in the DOM</span>
+</div>
+<div class="ab-f">Reached by timeout, the close button, the action, Esc, swipe, or a fourth toast pushing out the oldest. Toasts below move up at once, with no height animation.</div>
+</div>
+</div>
+</section>
+
+<!-- 05 STACK -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Stack</h2></div>
+<p class="sec-d">Up to 3 toasts are visible, in a plain column with 8 px gaps and no overlap. The system has no shadows, so cards stacked on top of each other would have nothing to separate them. The newest toast is nearest the screen edge, at the bottom. A fourth toast closes the oldest one.</p>
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Stack of 3 · desktop</span><span>bottom-right · gap 8</span></div>
+<div class="stage" style="height:520px;background:#F7F7F7">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<ol class="vp" aria-label="Notifications (F8)">
+<li class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><div class="t-a" style="padding-top:8px"><button class="btn">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><p class="t-d">12 frames in Coastline were updated.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast error"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg><div class="t-c"><p class="t-t"><span class="sr">Error: </span>Upload failed</p><p class="t-d">harbour-04.tif is over the 50 MB limit.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+</div>
+<div class="ab-f">Oldest at the top, newest at the bottom. DOM order is oldest to newest. Keyboard order starts at the newest (Radix).</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>4th toast arrives</span><span>oldest closes</span></div>
+<div class="stage" style="height:520px;background:#F7F7F7">
+<div class="page"><i style="width:40%"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<ol class="vp" aria-label="Notifications (F8)">
+<li class="toast info" style="opacity:.35;transform:translateX(16px)"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><p class="t-d">12 frames in Coastline were updated.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast error"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg><div class="t-c"><p class="t-t"><span class="sr">Error: </span>Upload failed</p><p class="t-d">harbour-04.tif is over the 50 MB limit.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast success" style="opacity:.6;transform:translateX(8px)"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Link copied</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+</div>
+<div class="ab-f">The oldest toast (top) plays its exit. The new one (bottom) plays its enter. The limit is 3, whatever the severity or timers.</div>
+</div>
+</div>
+</section>
+
+<!-- 06 PLACEMENT -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Placement</h2></div>
+<p class="sec-d">Desktop (≥ 480 px): bottom-right, 24 px from both edges, 384 px wide. Mobile (&lt; 480 px, the same breakpoint as the Dialog footer): bottom, full width minus 16 px gutters, raised by the safe-area inset. The change comes from a CSS media query only. Swipe direction stays right on both.</p>
+
+<div class="ab">
+<div class="ab-h"><span>Desktop · 1248 px viewport</span><span>right 24 · bottom 24 · width 384</span></div>
+<div class="stage" style="height:560px;background:#F7F7F7">
+<div class="page"><i style="width:30%;height:24px;background:#E0E0E0"></i><i style="width:55%"></i><i></i><i style="width:80%"></i><i></i><i style="width:65%"></i><i style="width:90%"></i><i></i></div>
+<div class="ghost" style="right:0;bottom:0;width:24px;height:24px;border:0;border-left:1px dashed #A3A3A3;border-top:1px dashed #A3A3A3"></div>
+<span class="cap" style="position:absolute;right:4px;bottom:4px">24</span>
+<ol class="vp" aria-label="Notifications (F8)">
+<li class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Series published</p><p class="t-d">Coastline is now public.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><p class="t-d">Find it under Archive › Coastline.</p><div class="t-a"><button class="btn">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+</div>
+<div class="ab-f">position: fixed; right / bottom --ds-space-6. Sits above Dialog (z-index 60, above the Dialog's 50 / 51), so a toast fired from inside a dialog stays visible and clickable.</div>
+</div>
+
+<div class="grid3">
+<div class="ab">
+<div class="ab-h"><span>Mobile · single</span><span>375 × 720</span></div>
+<div class="ab-b" style="align-items:center">
+<div class="phone">
+<div class="page"><i style="width:50%;height:24px;background:#E0E0E0"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<ol class="vp m" style="bottom:calc(16px + 21px)" aria-label="Notifications (F8)">
+<li class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p><p class="t-d">Find it under Archive › Coastline.</p><div class="t-a"><button class="btn">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+<div class="bar"></div>
+</div>
+</div>
+<div class="ab-f">left / right / bottom 16 px. Bottom is calc(16px + env(safe-area-inset-bottom)), shown here with a 21 px inset. Width 343.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Mobile · stack of 3</span><span>gap 8</span></div>
+<div class="ab-b" style="align-items:center">
+<div class="phone">
+<div class="page"><i style="width:50%;height:24px;background:#E0E0E0"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<ol class="vp m" style="bottom:calc(16px + 21px)" aria-label="Notifications (F8)">
+<li class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><p class="t-d">12 frames were updated.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast error"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg><div class="t-c"><p class="t-t"><span class="sr">Error: </span>Upload failed</p><p class="t-d">The connection dropped at 64 %.</p><div class="t-a"><button class="btn">Retry</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+<div class="bar"></div>
+</div>
+</div>
+<div class="ab-f">Three toasts can cover about half of a small screen, which is one reason the limit is 3.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Mobile · swipe</span><span>right, same as desktop</span></div>
+<div class="ab-b" style="align-items:center">
+<div class="phone">
+<div class="page"><i style="width:50%;height:24px;background:#E0E0E0"></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>
+<div class="ghost" style="left:16px;right:16px;bottom:37px;height:94px"></div>
+<ol class="vp m" style="bottom:calc(16px + 21px)" aria-label="Notifications (F8)">
+<li class="toast success" style="transform:translateX(120px)"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><p class="t-d">12 frames were updated.</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+<div class="bar"></div>
+</div>
+</div>
+<div class="ab-f">A horizontal swipe doesn't clash with vertical page scrolling. The toast leaves past the right edge.</div>
+</div>
+</div>
+</section>
+
+<!-- 07 MOTION -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Motion</h2></div>
+<p class="sec-d">There is one axis. Toasts come in from the right and leave to the right, the same direction as the swipe. Every animation is a CSS keyframe of --ds-motion (120 ms, cubic-bezier(.2, 0, 0, 1)). They are keyframes and not transitions because Radix Presence waits for animationend before it unmounts. Under prefers-reduced-motion: reduce, every animation is removed.</p>
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>Enter · 0 ms</span><span>data-state="open"</span></div><div class="ab-b" style="padding:32px 16px;height:96px;justify-content:center"><div class="toast success" style="width:100%;opacity:0.08;transform:translateX(16px)"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t">Changes saved</p></div></div></div><div class="ab-f">opacity 0, translateX(16 px)</div></div>
+<div class="ab"><div class="ab-h"><span>Enter · 120 ms</span><span>at rest</span></div><div class="ab-b" style="padding:32px 16px;height:96px;justify-content:center"><div class="toast success" style="width:100%"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t">Changes saved</p></div></div></div><div class="ab-f">opacity 1, translateX(0)</div></div>
+<div class="ab"><div class="ab-h"><span>Exit · 120 ms</span><span>data-state="closed"</span></div><div class="ab-b" style="padding:32px 16px;height:96px;justify-content:center"><div class="toast success" style="width:100%;opacity:0.3;transform:translateX(12px)"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t">Changes saved</p></div></div></div><div class="ab-f">Timeout, close, action or Esc: to opacity 0, translateX(16 px)</div></div>
+<div class="ab"><div class="ab-h"><span>Reduced motion</span><span>prefers-reduced-motion</span></div><div class="ab-b" style="padding:32px 16px;height:96px;justify-content:center"><div class="toast success" style="width:100%"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t">Changes saved</p></div></div></div><div class="ab-f">Appears and disappears at once. Swipe still tracks the finger, then cancel snaps back and end unmounts with no animation.</div></div>
+</div>
+<table class="tbl">
+<thead><tr><th>Trigger</th><th>Selector</th><th>Animation</th><th>Reduced motion</th></tr></thead>
+<tbody>
+<tr><td>Open</td><td>[data-state="open"]</td><td>keyframes: opacity 0 → 1, translateX(--ds-space-4) → 0 · --ds-motion</td><td>none</td></tr>
+<tr><td>Close (timeout, close, action, Esc, 4th toast)</td><td>[data-state="closed"]</td><td>keyframes: opacity 1 → 0, translateX(0) → translateX(--ds-space-4) · --ds-motion</td><td>none</td></tr>
+<tr><td>Swipe move</td><td>[data-swipe="move"]</td><td>transform: translateX(var(--radix-toast-swipe-move-x)), no transition</td><td>same: user-driven</td></tr>
+<tr><td>Swipe cancel</td><td>[data-swipe="cancel"]</td><td>transform: translateX(0), transition transform --ds-motion</td><td>no transition</td></tr>
+<tr><td>Swipe end</td><td>[data-swipe="end"]</td><td>keyframes: translateX(var(--radix-toast-swipe-end-x)) → translateX(100%), opacity → 0 · --ds-motion</td><td>none</td></tr>
+<tr><td>Siblings reflow</td><td>—</td><td>none: the remaining toasts move at once</td><td>none</td></tr>
+<tr><td>Close button, action hover</td><td>:hover</td><td>background-color / border-color transition --ds-motion</td><td>none</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- 08 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Keyboard and F8 region</h2></div>
+<p class="sec-d">The viewport is a landmark region named "Notifications (F8)". Toasts never take focus on their own. F8 moves focus to the region from anywhere. Tab then starts at the newest toast (Radix). Focus anywhere in the region pauses every timer. On macOS the key may be fn + F8.</p>
+<div class="grid3">
+<div class="ab">
+<div class="ab-h"><span>1 · F8</span><span>viewport focused</span></div>
+<div class="stage" style="height:300px;background:#F7F7F7">
+<ol class="vp focus" aria-label="Notifications (F8)">
+<li class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><div class="t-a"><button class="btn">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+</div>
+<div class="ab-f">The ring wraps the whole stack (viewport :focus-visible). Timers pause.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>2 · Tab</span><span>newest toast</span></div>
+<div class="stage" style="height:300px;background:#F7F7F7">
+<ol class="vp" aria-label="Notifications (F8)">
+<li class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast success focus"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><div class="t-a"><button class="btn">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+</div>
+<div class="ab-f">Toast.Root (tabindex 0). Esc here closes it.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>3 · Tab</span><span>action</span></div>
+<div class="stage" style="height:300px;background:#F7F7F7">
+<ol class="vp" aria-label="Notifications (F8)">
+<li class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><div class="t-a"><button class="btn focus">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+</div>
+<div class="ab-f">Enter or Space: runs Undo, closes the toast. Focus goes to the viewport.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>4 · Tab</span><span>close</span></div>
+<div class="stage" style="height:300px;background:#F7F7F7">
+<ol class="vp" aria-label="Notifications (F8)">
+<li class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><div class="t-a"><button class="btn">Undo</button></div></div><button class="tx focus" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+</div>
+<div class="ab-f">Enter or Space closes.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>5 · Tab</span><span>next older toast</span></div>
+<div class="stage" style="height:300px;background:#F7F7F7">
+<ol class="vp" aria-label="Notifications (F8)">
+<li class="toast info focus"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+<li class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><div class="t-a"><button class="btn">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+</div>
+<div class="ab-f">Focus moves upward, newest to oldest. After the last focusable, Tab leaves the region and returns to the page.</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>6 · Esc</span><span>focused toast closed</span></div>
+<div class="stage" style="height:300px;background:#F7F7F7">
+<ol class="vp focus" aria-label="Notifications (F8)">
+<li class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p><div class="t-a"><button class="btn">Undo</button></div></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></li>
+</ol>
+</div>
+<div class="ab-f">The info toast closed. Focus falls back to the viewport, never to &lt;body&gt;, and timers stay paused.</div>
+</div>
+</div>
+<table class="tbl">
+<thead><tr><th>Key</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">F8</span></td><td>Focus the viewport region from anywhere on the page (Radix <code>hotkey={['F8']}</code>)</td></tr>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>In the region: toast, action, close for each toast, newest first. Past the end, focus leaves the region.</td></tr>
+<tr><td><span class="kbd">Enter</span> / <span class="kbd">Space</span> on action</td><td>Run the action callback, close the toast</td></tr>
+<tr><td><span class="kbd">Enter</span> / <span class="kbd">Space</span> on close</td><td>Close the toast</td></tr>
+<tr><td><span class="kbd">Esc</span></td><td>With focus in a toast: close that toast</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- 09 TIMING AND ANNOUNCEMENTS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">Timing and announcements</h2></div>
+<table class="tbl">
+<thead><tr><th>Severity</th><th>Radix type</th><th>aria-live</th><th>Duration, no action</th><th>Duration, with action</th><th>Announced as</th></tr></thead>
+<tbody>
+<tr><td>info</td><td>background</td><td>polite</td><td>5000 ms</td><td>8000 ms</td><td>"Notification Frame moved to Archive Find it under Archive › Coastline. Undo from Archive › Coastline"</td></tr>
+<tr><td>success</td><td>background</td><td>polite</td><td>5000 ms</td><td>8000 ms</td><td>"Notification Success: Changes saved 12 frames in Coastline were updated."</td></tr>
+<tr><td>error</td><td>foreground</td><td>assertive</td><td>none (Infinity)</td><td>none (Infinity)</td><td>"Notification Error: Upload failed harbour-04.tif is over the 50 MB limit."</td></tr>
+</tbody>
+</table>
+<p class="sec-d">Timers pause while the pointer is over the viewport, while focus is inside it, and while the window is blurred. On resume they continue with the time left; they do not restart. A per-toast <code>duration</code> may lengthen these values, but never set it below 5000 ms.</p>
+</section>
+
+<!-- 10 SEVERITY WITHOUT HUE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Severity without hue</h2></div>
+<p class="sec-d">The same three toasts with filter: grayscale(1). The severities stay distinct with no colour: info has no fill and a hairline border, success has a tinted fill and a tick, and error has a 2 px border, a triangle and a bold title. Screen readers also hear a hidden "Success: " / "Error: " prefix.</p>
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Colour</span><span>as shipped</span></div>
+<div class="ab-b" style="gap:8px">
+<div class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="toast error"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg><div class="t-c"><p class="t-t"><span class="sr">Error: </span>Upload failed</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>Grayscale</span><span>filter: grayscale(1)</span></div>
+<div class="ab-b" style="gap:8px;filter:grayscale(1)">
+<div class="toast info"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg><div class="t-c"><p class="t-t">Frame moved to Archive</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="toast success"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><div class="t-c"><p class="t-t"><span class="sr">Success: </span>Changes saved</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="toast error"><svg class="t-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg><div class="t-c"><p class="t-t"><span class="sr">Error: </span>Upload failed</p></div><button class="tx" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+</div>
+</div>
+</div>
+<table class="tbl">
+<thead><tr><th>Cue</th><th>info</th><th>success</th><th>error</th></tr></thead>
+<tbody>
+<tr><td>Fill</td><td>none (surface white)</td><td>tinted (success-bg)</td><td>tinted (error-bg)</td></tr>
+<tr><td>Border</td><td>1 px black</td><td>1 px success fg</td><td>2 px error fg</td></tr>
+<tr><td>Icon shape</td><td>circle with i</td><td>open tick</td><td>triangle with !</td></tr>
+<tr><td>Title weight</td><td>500</td><td>500</td><td>700</td></tr>
+<tr><td>Text prefix (hidden)</td><td>—</td><td>"Success: "</td><td>"Error: "</td></tr>
+<tr><td>Persistence</td><td>auto-dismiss</td><td>auto-dismiss</td><td>stays until closed</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":10400}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

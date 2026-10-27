@@ -100,18 +100,20 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers selected, unselected, disabled, focus and invalid, in both orientations
     - Spec names Radix `RadioGroup` and maps every state to tokens
     - Spec documents arrow-key and roving-tabindex behavior
-- [ ] **DS-16 RadioGroup — implementation.** Build `RadioGroup` in `src/components/RadioGroup/` on Radix `RadioGroup`, styled via `[data-state]` / `[data-disabled]`.
-  - type: build · has_ui: yes · depends_on: DS-15 · needs_human: no · status: todo
+- [x] **DS-16 RadioGroup — implementation.** Build `RadioGroup` in `src/components/RadioGroup/` on Radix `RadioGroup`, styled via `[data-state]` / `[data-disabled]`.
+  - type: build · has_ui: yes · depends_on: DS-15 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state
     - Arrow keys move selection; Tab enters and leaves the group once
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-17 Select — design.** Define a trigger styled as Input, the open listbox, item states (highlighted, selected, disabled), groups, and the placeholder, inside Field.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-17 Select — design.** Define a trigger styled as Input, the open listbox, item states (highlighted, selected, disabled), groups, and the placeholder, inside Field. Options can be preselected (`value` / `defaultValue`) and can carry a leading emoji such as a country flag. The list can be split into two groups, top choices first and then all other options. An optional search field filters the list. On mobile/touch it renders a native `<select>`.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers trigger default, hover, focus, open, disabled and invalid, plus item highlighted, selected and disabled
-    - Spec names Radix `Select` and defines portal layering and max height
-    - Spec matches `Input` / `TextField` tokens and the 44 px height
+    - Canvas shows a preselected value, options with leading emoji (flags), and the open list split into "Top choices" then the other options with a separator
+    - Canvas shows the optional search field in the open list, a filtered result and the no-results state
+    - Spec names the Radix primitive(s) (Radix `Select` without search; for search it states the approach, since Radix `Select` can't filter) and defines portal layering, max height, the `value` / `defaultValue` API, and `Input` / `TextField` tokens with the 44 px height
+    - Spec defines the native `<select>` on mobile/touch: the detection rule, top choices as an `<optgroup>`, emoji in the `<option>` text, and no search there
 - [ ] **DS-18 Select — implementation.** Build `Select` and `SelectField` in `src/components/Select/` on Radix `Select`, wired to `Field` via `useFieldControl()`, styled via `[data-state]` / `[data-highlighted]`.
   - type: build · has_ui: yes · depends_on: DS-17 · needs_human: no · status: todo
   - done_when:
@@ -130,8 +132,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every state
     - Focus moves into the dialog on open and returns to the trigger on close; Escape closes
     - Story per state, keyboard story, open/closed stories, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-21 Tabs — design.** Define the tab list and triggers (default, hover, focus, active, disabled), the active underline/ink treatment, and the panel spacing.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-21 Tabs — design.** Define the tab list and triggers (default, hover, focus, active, disabled), the active underline/ink treatment, and the panel spacing.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers trigger default, hover, focus, active and disabled
     - Spec names Radix `Tabs` and defines automatic vs manual activation
@@ -179,8 +181,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Reuses `ChoiceGroup` scrolling, label and help behaviour (no duplicated scroll logic)
     - Selected look cross-fades with `--ds-motion`; icon is decorative (`aria-hidden`), label is the accessible name
     - Story per state, keyboard story, overflow story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-32 Button icons, loading & ButtonGroup — design.** Extend the Button family: leading and trailing icon slots on `Button`, an icon-only button (extend the existing `IconButton` with the `primary` / `secondary` / `ghost` variants instead of adding a second component), a loading state for both, a pressed/toggle state for icon buttons (e.g. Wishlist heart outline → filled), and a `ButtonGroup` that joins buttons into one unit, e.g. "Add to cart" (primary `Button`) + Wishlist (secondary heart `IconButton`).
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-32 Button icons, loading & ButtonGroup — design.** Extend the Button family: leading and trailing icon slots on `Button`, an icon-only button (extend the existing `IconButton` with the `primary` / `secondary` / `ghost` variants instead of adding a second component), a loading state for both, a pressed/toggle state for icon buttons (e.g. Wishlist heart outline → filled), and a `ButtonGroup` that joins buttons into one unit, e.g. "Add to cart" (primary `Button`) + Wishlist (secondary heart `IconButton`).
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers `Button` with leading icon, trailing icon and both, in primary, secondary and ghost, each in default, hover, focus, disabled and loading
     - Canvas covers `IconButton` in all three variants, with default, hover, focus, disabled, loading, and pressed / unpressed (heart outline vs filled)
@@ -202,8 +204,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - "Add to cart + Wishlist" story: primary `Button` + secondary heart `IconButton` with pressed toggle
     - Tab moves through each button; a `disabled` prop on the group disables every child
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-35 Stack & Grid — design.** Define layout primitives: `Stack` (vertical/horizontal, gap, align, justify, wrap) and `Grid` (columns, gap, responsive column counts), using only the `--ds-space-*` scale.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-35 Stack & Grid — design.** Define layout primitives: `Stack` (vertical/horizontal, gap, align, justify, wrap) and `Grid` (columns, gap, responsive column counts), using only the `--ds-space-*` scale.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas shows Stack in both directions with every gap step, align/justify options and wrap
     - Canvas shows Grid at 1–4 and 12 columns, with responsive counts at mobile/tablet/desktop
@@ -226,8 +228,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every size, weight, family and tone
     - `Heading` `level` sets the element (`h1`–`h6`), `size` only the look
     - Story per variant, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-39 Toast — design.** Define toasts: info, success and error, with title, description, optional action (e.g. Undo) and close; stacking, position, enter/exit motion and auto-dismiss timing.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-39 Toast — design.** Define toasts: info, success and error, with title, description, optional action (e.g. Undo) and close; stacking, position, enter/exit motion and auto-dismiss timing.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers each severity with and without action, a stack of 3, and mobile vs desktop placement
     - Spec names Radix `Toast`, defines duration, pause on hover/focus, swipe-to-dismiss and the `F8` hotkey region
@@ -239,8 +241,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `useToast()` shows, updates and dismisses toasts; auto-dismiss pauses on hover and focus
     - Action button runs its callback and closes the toast; tested with `userEvent`
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-41 Tooltip, Popover & InfoTip — design.** Define `Tooltip` (hover/focus, text only), `Popover` (click, any content) and `InfoTip`: one component that is a Popover when the `(pointer: coarse)` media query matches (touch as the primary input) and a Tooltip otherwise.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-41 Tooltip, Popover & InfoTip — design.** Define `Tooltip` (hover/focus, text only), `Popover` (click, any content) and `InfoTip`: one component that is a Popover when the `(pointer: coarse)` media query matches (touch as the primary input) and a Tooltip otherwise.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers Tooltip and Popover on all four sides, with arrow, open/closed, and InfoTip in touch vs non-touch mode
     - Spec names Radix `Tooltip` and `Popover` and defines delays, collision handling and portal layering
@@ -312,8 +314,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Icons
 
-- [ ] **DS-46 Icon system — design.** Define the bring-your-own icon model: the design system ships no public icon set, `Icon` renders any SVG icon component, and components fall back to private default glyphs. Draw the default glyph set in the wireframe style (24 px grid, stroke only, butt caps, miter joins): close, check, alert, info, warning, success, plus, minus, chevron-down / -left / -right. Specify the role map and the override API for every component that renders an internal icon.
-  - type: design · has_ui: yes · depends_on: – · needs_human: yes · status: todo
+- [x] **DS-46 Icon system — design.** Define the bring-your-own icon model: the design system ships no public icon set, `Icon` renders any SVG icon component, and components fall back to private default glyphs. Draw the default glyph set in the wireframe style (24 px grid, stroke only, butt caps, miter joins): close, check, alert, info, warning, success, plus, minus, chevron-down / -left / -right. Specify the role map and the override API for every component that renders an internal icon.
+  - type: design · has_ui: yes · depends_on: – · needs_human: yes · status: done
   - done_when:
     - Canvas shows every default glyph at 12, 14, 16, 18, 20 and 24 px with stroke 1.5 and 2, next to Lucide, Tabler, Phosphor and Heroicons equivalents in the same sizes
     - Spec `docs/specs/Icon.md` defines the `IconComponent` contract (renders `<svg>`, forwards `width`, `height`, `className`, `aria-*`), `createIcon`, `IconProvider`, `useIcon` and the resolution order prop > provider > default
@@ -346,6 +348,14 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-39** Toast — design — https://github.com/mikespineu/design-system-wireframe/pull/70
+- **DS-32** Button icons, loading & ButtonGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/72
+- **DS-17** Select — design — https://github.com/mikespineu/design-system-wireframe/pull/73
+- **DS-35** Stack & Grid — design — https://github.com/mikespineu/design-system-wireframe/pull/67
+- **DS-21** Tabs — design — https://github.com/mikespineu/design-system-wireframe/pull/66
+- **DS-46** Icon system — design — https://github.com/mikespineu/design-system-wireframe/pull/62
+- **DS-16** RadioGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/64
+- **DS-41** Tooltip, Popover & InfoTip — design — https://github.com/mikespineu/design-system-wireframe/pull/71
 - **DS-15** RadioGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/61
 - **DS-29** Switch — implementation — https://github.com/mikespineu/design-system-wireframe/pull/58
 - **DS-26** Theme token contract — design — https://github.com/mikespineu/design-system-wireframe/pull/55

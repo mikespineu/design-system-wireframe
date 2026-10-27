@@ -73,11 +73,60 @@
       "x": 13680,
       "y": 0
     },
+    "InfoTip.dc.html": {
+      "h": 8000,
+      "title": "InfoTip, Tooltip & Popover",
+      "w": 1440,
+      "x": 15200,
+      "y": 0
+    },
+    "Icon.dc.html": {
+      "h": 11600,
+      "title": "Icon",
+      "w": 1440,
+      "x": 16720,
+      "y": 0
+    },
+    "Tabs.dc.html": {
+      "h": 7600,
+      "title": "Tabs",
+      "w": 1440,
+      "x": 18240,
+      "y": 0
+    },
+    "Layout.dc.html": {
+      "h": 11200,
+      "title": "Layout · Stack & Grid",
+      "w": 1440,
+      "x": 19760,
+      "y": 0
+    },
+    "Select.dc.html": {
+      "h": 8600,
+      "title": "Select",
+      "w": 1440,
+      "x": 21280,
+      "y": 0
+    },
+    "Button.dc.html": {
+      "h": 11200,
+      "title": "Button",
+      "w": 1440,
+      "x": 22800,
+      "y": 0
+    },
+    "Toast.dc.html": {
+      "h": 10400,
+      "title": "Toast",
+      "w": 1440,
+      "x": 24320,
+      "y": 0
+    },
     "Typography.dc.html": {
       "h": 11600,
       "title": "Typography",
       "w": 1440,
-      "x": 15200,
+      "x": 25840,
       "y": 0
     }
   },
@@ -110,6 +159,13 @@
     "Toggle.dc.html",
     "Theming.dc.html",
     "RadioGroup.dc.html",
+    "InfoTip.dc.html",
+    "Icon.dc.html",
+    "Tabs.dc.html",
+    "Layout.dc.html",
+    "Select.dc.html",
+    "Button.dc.html",
+    "Toast.dc.html",
     "Typography.dc.html"
   ],
   "pages": [],
