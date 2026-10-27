@@ -3,9 +3,9 @@
 - task: DS-17
 - canvas: docs/design-system-wireframe/Select.dc.html
 - canvas_url: https://claude.ai/artifact/GYZS1Eqf7wtJGW1ZB8tCSg
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-27
 - approval_hash:
 
 Pick one value from a list. The closed trigger looks exactly like `Input`: 44 px, 1 px gray-300 border, body 16/26, and the same hover, focus, invalid and disabled treatment. It is wired to `Field` (label, hint, error) through `useFieldControl()`. It opens a square listbox with a 1 px black border and no shadow, 4 px below the trigger, in a portal. Options are plain data, so the same props drive three renderers:
