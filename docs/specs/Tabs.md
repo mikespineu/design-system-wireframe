@@ -3,9 +3,9 @@
 - task: DS-21
 - canvas: docs/design-system-wireframe/Tabs.dc.html
 - canvas_url: https://claude.ai/artifact/RnXFvckipEqi6fCiVh2rS5
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-27
 - approval_hash:
 
 Tabs is a mechanism, not a new visual style. It switches which panel is shown below a tab list, using Radix `Tabs` semantics (`tablist` / `tab` / `tabpanel`, `aria-controls`, roving focus). The tab list wears one of the two existing switcher looks (canvas 01–05):
