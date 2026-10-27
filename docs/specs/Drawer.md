@@ -3,9 +3,9 @@
 - task: DS-44
 - canvas: docs/design-system-wireframe/Drawer.dc.html
 - canvas_url: https://claude.ai/artifact/KBHcafYnw3U2BRtRR3bZwH
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-27
 - approval_hash:
 
 Modal side panel built on Radix `Dialog`. It slides in from the right (default), left, top or bottom over the same 50 % black overlay as `Dialog`. Square corners, no shadow: a 1 px black border on the panel's inner edge (the edge that faces the page) separates it from the page. The parts are Dialog's parts with Dialog's spacing and tokens: overlay, panel, header (title, description, close button), body, footer (actions). Only position, extent, border edge and motion are new.
