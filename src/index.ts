@@ -27,3 +27,4 @@ export type {
 } from './lib/layout';
 export * from './components/Tabs';
 export * from './components/Select';
+export * from './components/Drawer';
