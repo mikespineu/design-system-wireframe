@@ -94,11 +94,18 @@
       "x": 18240,
       "y": 0
     },
+    "Layout.dc.html": {
+      "h": 11200,
+      "title": "Layout · Stack & Grid",
+      "w": 1440,
+      "x": 19760,
+      "y": 0
+    },
     "Select.dc.html": {
       "h": 8600,
       "title": "Select",
       "w": 1440,
-      "x": 19760,
+      "x": 21280,
       "y": 0
     }
   },
@@ -134,6 +141,7 @@
     "InfoTip.dc.html",
     "Icon.dc.html",
     "Tabs.dc.html",
+    "Layout.dc.html",
     "Select.dc.html"
   ],
   "pages": [],
