@@ -314,8 +314,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Icons
 
-- [ ] **DS-46 Icon system — design.** Define the bring-your-own icon model: the design system ships no public icon set, `Icon` renders any SVG icon component, and components fall back to private default glyphs. Draw the default glyph set in the wireframe style (24 px grid, stroke only, butt caps, miter joins): close, check, alert, info, warning, success, plus, minus, chevron-down / -left / -right. Specify the role map and the override API for every component that renders an internal icon.
-  - type: design · has_ui: yes · depends_on: – · needs_human: yes · status: todo
+- [x] **DS-46 Icon system — design.** Define the bring-your-own icon model: the design system ships no public icon set, `Icon` renders any SVG icon component, and components fall back to private default glyphs. Draw the default glyph set in the wireframe style (24 px grid, stroke only, butt caps, miter joins): close, check, alert, info, warning, success, plus, minus, chevron-down / -left / -right. Specify the role map and the override API for every component that renders an internal icon.
+  - type: design · has_ui: yes · depends_on: – · needs_human: yes · status: done
   - done_when:
     - Canvas shows every default glyph at 12, 14, 16, 18, 20 and 24 px with stroke 1.5 and 2, next to Lucide, Tabler, Phosphor and Heroicons equivalents in the same sizes
     - Spec `docs/specs/Icon.md` defines the `IconComponent` contract (renders `<svg>`, forwards `width`, `height`, `className`, `aria-*`), `createIcon`, `IconProvider`, `useIcon` and the resolution order prop > provider > default
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-46** Icon system — design — https://github.com/mikespineu/design-system-wireframe/pull/62
 - **DS-16** RadioGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/64
 - **DS-41** Tooltip, Popover & InfoTip — design — https://github.com/mikespineu/design-system-wireframe/pull/71
 - **DS-15** RadioGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/61

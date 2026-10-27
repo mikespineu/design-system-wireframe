@@ -3,9 +3,9 @@
 - task: DS-46
 - canvas: docs/design-system-wireframe/Icon.dc.html
 - canvas_url: https://claude.ai/artifact/SvP8RwEpiPbN58PeDFRctP
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-27
 - approval_hash:
 
 The icon system works on a bring-your-own model. The design system ships no public icon set. `Icon` renders any SVG icon component that meets the `IconComponent` contract, and every component that draws an icon inside itself falls back to a small private set of default glyphs. A consumer can replace a glyph for one instance (an override prop), for a subtree (`IconProvider`), or not at all (default glyph). Lucide, Tabler, Phosphor and Heroicons components meet the contract as they are. `createIcon` turns a hand-drawn SVG into one.
