@@ -73,11 +73,18 @@
       "x": 13680,
       "y": 0
     },
+    "InfoTip.dc.html": {
+      "h": 8000,
+      "title": "InfoTip, Tooltip & Popover",
+      "w": 1440,
+      "x": 15200,
+      "y": 0
+    },
     "Layout.dc.html": {
       "h": 11200,
       "title": "Layout · Stack & Grid",
       "w": 1440,
-      "x": 15200,
+      "x": 16720,
       "y": 0
     }
   },
@@ -110,6 +117,7 @@
     "Toggle.dc.html",
     "Theming.dc.html",
     "RadioGroup.dc.html",
+    "InfoTip.dc.html",
     "Layout.dc.html"
   ],
   "pages": [],
