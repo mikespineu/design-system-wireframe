@@ -107,6 +107,13 @@
       "w": 1440,
       "x": 21280,
       "y": 0
+    },
+    "Button.dc.html": {
+      "h": 11200,
+      "title": "Button",
+      "w": 1440,
+      "x": 22800,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -142,7 +149,8 @@
     "Icon.dc.html",
     "Tabs.dc.html",
     "Layout.dc.html",
-    "Select.dc.html"
+    "Select.dc.html",
+    "Button.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"

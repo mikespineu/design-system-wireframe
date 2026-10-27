@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Button</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:820px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column;min-width:0}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-b{display:flex;flex-direction:column;gap:12px;padding:32px 24px;min-width:0}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:44px;padding:8px 16px 8px 0;border-bottom:1px solid #E0E0E0;color:#404040;vertical-align:middle}
+.tbl code,.note code,.ab-f code,.sec-d code{font-family:'Red Hat Mono',monospace;font-size:13px}
+.note{margin:0;font-size:13px;line-height:20px;color:#595959}
+.cap{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+
+/* rows inside artboards */
+.r{display:flex;align-items:center;gap:16px;min-height:44px}
+.r .k{flex:none;width:72px;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.trio{display:flex;gap:32px;align-items:flex-start}
+.trio > div{display:flex;flex-direction:column;align-items:center;gap:8px}
+
+/* ---------- Button ---------- */
+.b{box-sizing:border-box;position:relative;display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 24px;border:1px solid #000000;background:#000000;color:#FFFFFF;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:14px;line-height:20px;white-space:nowrap;cursor:pointer;transition:background-color 120ms cubic-bezier(.2,0,0,1),border-color 120ms cubic-bezier(.2,0,0,1)}
+.b .c{display:inline-flex;align-items:center;gap:8px}
+.b .c svg{flex:none;width:16px;height:16px}
+.b.hov{background:#262626;border-color:#262626}
+.b.dis{background:#E0E0E0;border-color:#E0E0E0;color:#767676;cursor:not-allowed}
+.b.sec{background:#FFFFFF;border-color:#000000;color:#000000}
+.b.sec.hov{background:#EEEEEE}
+.b.sec.dis{background:#FFFFFF;border-color:#C7C7C7;color:#767676}
+.b.gho{padding:0 16px;background:transparent;border-color:transparent;color:#000000}
+.b.gho .t{text-decoration:underline;text-underline-offset:4px}
+.b.gho.hov{background:#EEEEEE}
+.b.gho.dis{background:transparent;color:#767676}
+.b.ld{cursor:progress}
+.b.ld .c{opacity:0}
+
+/* ---------- IconButton ---------- */
+.ib{box-sizing:border-box;position:relative;flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid #000000;background:#FFFFFF;color:#000000;cursor:pointer;transition:background-color 120ms cubic-bezier(.2,0,0,1),border-color 120ms cubic-bezier(.2,0,0,1)}
+.ib > svg{width:18px;height:18px}
+.ib.hov{background:#EEEEEE}
+.ib.dis{border-color:#C7C7C7;color:#A3A3A3;cursor:not-allowed;background:#FFFFFF}
+.ib.pri{background:#000000;border-color:#000000;color:#FFFFFF}
+.ib.pri.hov{background:#262626;border-color:#262626}
+.ib.pri.dis{background:#E0E0E0;border-color:#E0E0E0;color:#767676}
+.ib.gho{background:transparent;border-color:transparent}
+.ib.gho.hov{background:#EEEEEE}
+.ib.gho.dis{background:transparent;border-color:transparent;color:#A3A3A3}
+.ib.on.sec,.ib.on.gho{border-width:2px;border-color:#000000}
+.ib.on.sec.dis,.ib.on.gho.dis{border-color:#A3A3A3}
+.ib.ld{cursor:progress}
+.ib.ld > svg{opacity:0}
+
+/* ---------- Spinner (shared) ---------- */
+.sp{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.sp svg{width:16px;height:16px;animation:dsSpin 800ms linear infinite}
+.ib .sp svg{width:18px;height:18px}
+.sp.still svg{animation:none}
+@keyframes dsSpin{to{transform:rotate(360deg)}}
+@keyframes dsPulse{0%,100%{opacity:1}50%{opacity:.4}}
+@media (prefers-reduced-motion: reduce){.sp svg{animation:dsPulse 1600ms ease-in-out infinite}}
+.sp.pulse svg{animation:dsPulse 1600ms ease-in-out infinite}
+
+/* ---------- Focus ---------- */
+.foc{outline:2px solid #000000;outline-offset:2px;z-index:2}
+
+/* ---------- ButtonGroup ---------- */
+.grp{display:inline-flex;align-items:center}
+.grp.gap{gap:8px}
+.grp.at > * + *{margin-left:-1px}
+.grp.at > .hov,.grp.at > .on{z-index:1}
+.grp.at > .foc{z-index:2}
+.gframe{display:inline-flex;padding:8px;border:1px dashed #A3A3A3;position:relative}
+.gframe::before{content:'role="group"';position:absolute;top:-9px;left:8px;padding:0 4px;background:#FFFFFF;font-family:'Red Hat Mono',monospace;font-size:11px;line-height:16px;color:#595959}
+
+/* ---------- Anatomy ---------- */
+.anat{display:inline-flex;align-items:stretch;height:44px;border:1px dashed #A3A3A3}
+.anat > span{box-sizing:border-box;display:flex;align-items:center;justify-content:center;border-right:1px dashed #C7C7C7;font-family:'Red Hat Mono',monospace;font-size:11px;color:#595959;background:#F7F7F7}
+.anat > span:last-child{border-right:0}
+.anat > span.ico{background:#E0E0E0;color:#000000}
+.anat > span.lbl{background:#FFFFFF;color:#000000;padding:0 12px}
+.dim{position:relative;height:16px;border-left:1px solid #595959;border-right:1px solid #595959;display:flex;align-items:center;justify-content:center;font-family:'Red Hat Mono',monospace;font-size:11px;color:#595959;box-sizing:border-box}
+.dim::before{content:'';position:absolute;left:0;right:0;top:50%;border-top:1px solid #595959}
+.dim span{position:relative;background:#FFFFFF;padding:0 6px}
+.zoom{transform:scale(2);transform-origin:left top;margin-bottom:44px}
+.dont{border-color:#A3302B}
+.dont .ab-h span:first-child{color:#A3302B}
+
+/* ---------- family cards ---------- */
+.fam{display:flex;flex-direction:column;gap:16px}
+.fam p{margin:0;font-size:15px;line-height:24px;color:#404040}
+.fam ul{margin:0;padding-left:18px;font-size:13px;line-height:20px;color:#595959}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 11200px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Button · DS-32 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Button</h1>
+<p style="margin: 0; max-width: 820px; font-size: 18px; line-height: 1.6; color: #404040">The Button family grows by three things: <b>icon slots</b> on Button (leading, trailing or both), <b>variants, loading and a pressed state</b> on the existing IconButton, and a <b>ButtonGroup</b> that joins a Button and an IconButton into one unit (Add to cart + Wishlist). Same height (44 px), same square corners, same 2 px black focus ring. No new tokens. Icons are passed in as components; the heart is a consumer icon, not a system glyph.</p>
+</header>
+
+<!-- 01 FAMILY & API -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Family &amp; API</h2></div>
+<p class="sec-d">Three components. Button and IconButton share variants, colours and the loading behaviour. ButtonGroup is layout and semantics only: it adds <code>role="group"</code>, a name, the attached seam and a group-wide <code>disabled</code>. It has no keyboard model of its own.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Button</span><span>text, optional icons</span></div><div class="ab-b fam">
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="b sec"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span>
+</div>
+<ul><li><code>leadingIcon</code>, <code>trailingIcon</code>: IconComponent</li><li><code>loading</code>: spinner, width kept, aria-busy</li><li><code>variant</code>: primary (default) · secondary · ghost</li></ul>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>IconButton</span><span>icon only, can toggle</span></div><div class="ab-b fam">
+<div style="display:flex;gap:12px">
+<span class="ib pri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+<span class="ib sec on"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+<span class="ib gho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+</div>
+<ul><li><code>variant</code>: primary · secondary (default, today's look) · ghost</li><li><code>pressed</code> / <code>pressedIcon</code>: aria-pressed toggle</li><li><code>loading</code>; <code>aria-label</code> stays required</li></ul>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>ButtonGroup</span><span>role="group"</span></div><div class="ab-b fam">
+<span class="grp at">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+<ul><li><code>attached</code>: shared 1 px border, or spaced 8 px (default)</li><li><code>aria-label</code> or <code>aria-labelledby</code> required</li><li><code>disabled</code> disables every child; native Tab order</li></ul>
+</div></div>
+
+</div>
+
+<div class="ab"><div class="ab-h"><span>Typed API</span><span>additions in bold · IconComponent comes from DS-47</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th style="width:150px">Component</th><th style="width:220px">Prop</th><th style="width:300px">Type · default</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Button</td><td><code>variant</code></td><td><code>'primary' | 'secondary' | 'ghost'</code> · primary</td><td>Unchanged.</td></tr>
+<tr><td>Button</td><td><b><code>leadingIcon</code></b> / <b><code>trailingIcon</code></b></td><td><code>IconComponent</code> · none</td><td>Rendered through <code>Icon</code> at 16 px, aria-hidden, currentColor. Either, both or neither.</td></tr>
+<tr><td>Button · IconButton</td><td><b><code>loading</code></b></td><td><code>boolean</code> · false</td><td>Spinner centred, content kept at opacity 0 (width fixed), <code>aria-busy="true"</code>, <code>aria-disabled="true"</code>, clicks blocked, stays focusable.</td></tr>
+<tr><td>IconButton</td><td><code>icon</code></td><td><code>IconComponent</code> (DS-47)</td><td>18 px. Was <code>IconName</code>; DS-47 changes the type.</td></tr>
+<tr><td>IconButton</td><td><code>aria-label</code></td><td><code>string</code> · required</td><td>Unchanged; never changes with <code>pressed</code>.</td></tr>
+<tr><td>IconButton</td><td><b><code>variant</code></b></td><td><code>'primary' | 'secondary' | 'ghost'</code> · secondary</td><td>Default keeps today's IconButton look.</td></tr>
+<tr><td>IconButton</td><td><b><code>pressed</code></b> / <b><code>defaultPressed</code></b> / <b><code>onPressedChange</code></b></td><td><code>boolean</code> / <code>boolean</code> / <code>(pressed) =&gt; void</code></td><td>Setting either turns the button into a toggle (Radix Toggle): <code>aria-pressed</code>, <code>data-state="on|off"</code>.</td></tr>
+<tr><td>IconButton</td><td><b><code>pressedIcon</code></b></td><td><code>IconComponent</code> · none</td><td>Shown instead of <code>icon</code> while pressed (heart outline → filled).</td></tr>
+<tr><td>ButtonGroup</td><td><b><code>aria-label</code></b> | <b><code>aria-labelledby</code></b></td><td><code>string</code> · one required</td><td>Names the group ("Product actions").</td></tr>
+<tr><td>ButtonGroup</td><td><b><code>attached</code></b></td><td><code>boolean</code> · false</td><td>true: children touch and share one 1 px border. false: 8 px gap.</td></tr>
+<tr><td>ButtonGroup</td><td><b><code>disabled</code></b></td><td><code>boolean</code> · false</td><td>Disables every Button / IconButton inside (context), overriding their own prop.</td></tr>
+</tbody>
+</table>
+</div></div>
+</section>
+
+<!-- 02 ANATOMY & SIZES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Anatomy &amp; size</h2></div>
+<p class="sec-d">One size, 44 px, as today. Icons sit inside the existing padding with an 8 px gap to the label, so adding an icon makes a button 24 px wider and never taller. Button icons are 16 px (they sit next to 14 px mono text); IconButton keeps its 18 px icon. The spinner takes the icon size of its host.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>Button · primary / secondary</span><span>pad 24 · icon 16 · gap 8 · text 14/20</span></div><div class="ab-b" style="gap:16px">
+<div class="anat"><span style="width:24px">24</span><span class="ico" style="width:16px">16</span><span style="width:8px"></span><span class="lbl">Label</span><span style="width:8px"></span><span class="ico" style="width:16px">16</span><span style="width:24px">24</span></div>
+<div class="r"><span class="k">leading</span><span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div><div class="ab-f">Padding does not shrink on the icon side. Icons are vertically centred on the 44 px box, not on the text baseline.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Button · ghost</span><span>pad 16 · icon 16 · gap 8 · underline on label only</span></div><div class="ab-b" style="gap:16px">
+<div class="anat"><span style="width:16px">16</span><span class="ico" style="width:16px">16</span><span style="width:8px"></span><span class="lbl"><u style="text-underline-offset:4px">Label</u></span><span style="width:8px"></span><span class="ico" style="width:16px">16</span><span style="width:16px">16</span></div>
+<div class="r"><span class="k">leading</span><span class="b gho"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b gho"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b gho"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div><div class="ab-f">The underline is on the label span, so it does not run under the icons or the gaps.</div></div>
+
+<div class="ab"><div class="ab-h"><span>IconButton</span><span>44 × 44 · icon 18 · all variants</span></div><div class="ab-b" style="gap:16px">
+<div class="trio">
+<div><span class="ib pri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">primary</span></div>
+<div><span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">secondary</span></div>
+<div><span class="ib gho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">ghost</span></div>
+</div>
+<div class="dim" style="width:44px"><span>44</span></div>
+</div><div class="ab-f">Square, width = control height. Hit target 44 × 44 in every variant, including ghost (transparent border keeps the box).</div></div>
+
+<div class="ab"><div class="ab-h"><span>Spinner</span><span>270° arc · stroke 2 · currentColor</span></div><div class="ab-b" style="gap:16px">
+<div class="trio">
+<div><span class="b ld" style="width:80px;padding:0"><span class="c"></span><span class="sp still"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">16 in Button</span></div>
+<div><span class="ib sec ld"><span class="sp still"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">18 in IconButton</span></div>
+<div><span class="ib sec ld"><span class="sp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">rotates 800 ms</span></div>
+<div><span class="ib sec ld"><span class="sp pulse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">reduced motion</span></div>
+</div>
+</div><div class="ab-f">Linear, infinite rotation. Under prefers-reduced-motion it does not rotate; it pulses opacity 1 → 0.4 → 1 over 1600 ms. Internal SVG, aria-hidden; not overridable in v1.</div></div>
+
+</div>
+</section>
+
+<!-- 03 BUTTON PRIMARY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Button · Primary · States</h2></div>
+<p class="sec-d">Each artboard is one state with leading, trailing and both icons. Icons are <code>currentColor</code>, so they always match the label. Header right names what changes against Default.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>black fill · white label + icons</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hover</span><span>fill + border gray-800</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b hov"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b hov"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b hov"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b foc"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div><div class="ab-f">Keyboard focus only (:focus-visible). Fill unchanged.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled</span><span>fill + border gray-200 · label + icons gray-500</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b dis"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b dis"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b dis"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div><div class="ab-f">Native disabled: not-allowed cursor, no hover, out of tab order.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Loading</span><span>content opacity 0 · white spinner centred</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b ld"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b ld"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b ld"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+</div><div class="ab-f">Same width as Default. Fill stays black (not the disabled look); no hover change; cursor progress.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Loading + focus</span><span>still focusable · ring shown</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b ld foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b ld foc"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b ld foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+</div><div class="ab-f">Focus is not moved or trapped. Enter / Space do nothing; Tab moves on.</div></div>
+
+</div>
+</section>
+
+<!-- 04 BUTTON SECONDARY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Button · Secondary · States</h2></div>
+<p class="sec-d">White fill, 1 px black border, black label and icons.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>white fill · 1 px black border</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b sec"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b sec"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b sec"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hover</span><span>fill gray-100</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b sec hov"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b sec hov"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b sec hov"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b sec foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b sec foc"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b sec foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled</span><span>border gray-300 · label + icons gray-500</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b sec dis"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b sec dis"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b sec dis"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Loading</span><span>content opacity 0 · black spinner centred</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b sec ld"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b sec ld"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b sec ld"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+</div><div class="ab-f">Border and fill stay as Default.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Loading + focus</span><span>still focusable · ring shown</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b sec ld foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b sec ld foc"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b sec ld foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- 05 BUTTON GHOST -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Button · Ghost · States</h2></div>
+<p class="sec-d">Transparent, no visible border, 16 px padding, underlined label. Icons are not underlined.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>transparent · underlined label</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b gho"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b gho"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b gho"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hover</span><span>fill gray-100</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b gho hov"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b gho hov"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b gho hov"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b gho foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b gho foc"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b gho foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div><div class="ab-f">The ring traces the full 44 px box, not the text.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled</span><span>label + icons gray-500</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b gho dis"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b gho dis"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b gho dis"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Loading</span><span>content opacity 0 · black spinner centred</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b gho ld"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b gho ld"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b gho ld"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+</div><div class="ab-f">The underline hides with the label. The empty box keeps its width.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Loading + focus</span><span>still focusable · ring shown</span></div><div class="ab-b">
+<div class="r"><span class="k">leading</span><span class="b gho ld foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">trailing</span><span class="b gho ld foc"><span class="c"><span class="t">Continue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">both</span><span class="b gho ld foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span class="t">New list</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- 06 LOADING BEHAVIOUR -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Loading behaviour</h2></div>
+<p class="sec-d">Loading is a busy action, not a disabled one. The button keeps its colours, width, name and place in the tab order; only activation is blocked. It uses <code>aria-disabled</code>, never the native <code>disabled</code> attribute, so focus is not thrown to <code>&lt;body&gt;</code> when loading starts on a focused button.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Width stays fixed</span><span>content kept in flow at opacity 0</span></div><div class="ab-b" style="gap:8px">
+<span class="b" style="align-self:flex-start"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="b ld" style="align-self:flex-start"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span>
+<div class="dim" style="width:170px"><span>same width</span></div>
+</div><div class="ab-f">Spinner is an absolutely positioned overlay centred on the whole button, whatever the icon layout. The label is not swapped for "Loading…", so the width cannot jump.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Sequence</span><span>idle → busy → idle</span></div><div class="ab-b" style="gap:16px">
+<div class="r"><span class="k">idle</span><span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+<div class="r"><span class="k">loading</span><span class="b ld"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span></div>
+<div class="r"><span class="k">done</span><span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+</div><div class="ab-f">No transition on the swap; the content is hidden instantly so the spinner never overlaps text. The result ("Added to cart") is announced by the app, e.g. a Toast, not by the button.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Attributes</span><span>while loading</span></div><div class="ab-b">
+<table class="tbl">
+<tbody>
+<tr><td><code>aria-busy</code></td><td>"true"</td></tr>
+<tr><td><code>aria-disabled</code></td><td>"true" (not native disabled)</td></tr>
+<tr><td><code>data-loading</code></td><td>"" (style hook)</td></tr>
+<tr><td>accessible name</td><td>unchanged ("Add to cart")</td></tr>
+<tr><td>tabindex / focus</td><td>unchanged, not trapped</td></tr>
+<tr><td>click, Enter, Space</td><td>blocked, no submit, no toggle</td></tr>
+<tr><td>hover style</td><td>none</td></tr>
+<tr><td>cursor</td><td>progress</td></tr>
+</tbody>
+</table>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>IconButton loading</span><span>icon opacity 0 · spinner 18</span></div><div class="ab-b">
+<div class="trio">
+<div><span class="ib pri ld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">primary</span></div>
+<div><span class="ib sec ld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">secondary</span></div>
+<div><span class="ib gho ld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">ghost</span></div>
+</div>
+</div><div class="ab-f">Same rules as Button. aria-label and aria-pressed stay as they are while loading.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled wins</span><span>disabled + loading = disabled</span></div><div class="ab-b">
+<div class="r"><span class="k">result</span><span class="b dis"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span></div>
+</div><div class="ab-f">When both are set (or the ButtonGroup is disabled), the button is natively disabled, shows no spinner and has no aria-busy.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Loading in a group</span><span>only that child is busy</span></div><div class="ab-b">
+<span class="grp at" style="align-self:flex-start">
+<span class="b ld"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div><div class="ab-f">Wishlist stays usable while Add to cart is busy. The group has no loading prop.</div></div>
+
+</div>
+</section>
+
+<!-- 07 ICONBUTTON STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">IconButton · States</h2></div>
+<p class="sec-d">All three variants per artboard, shown with the Wishlist toggle unpressed (heart outline, <code>aria-pressed="false"</code>). Colours match Button, except the disabled icon on secondary and ghost, which keeps today's gray-400 (icons are non-text).</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default · unpressed</span><span>heart outline</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">primary</span></div>
+<div><span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">secondary</span></div>
+<div><span class="ib gho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">ghost</span></div>
+</div></div><div class="ab-f">primary: black fill, white icon · secondary: white, 1 px black border · ghost: transparent.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hover</span><span>gray-800 / gray-100 / gray-100</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri hov"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">primary</span></div>
+<div><span class="ib sec hov"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">secondary</span></div>
+<div><span class="ib gho hov"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">ghost</span></div>
+</div></div><div class="ab-f">Hover never previews the pressed icon; the icon changes only on activation.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri foc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">primary</span></div>
+<div><span class="ib sec foc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">secondary</span></div>
+<div><span class="ib gho foc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">ghost</span></div>
+</div></div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled</span><span>see footer</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri dis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">primary</span></div>
+<div><span class="ib sec dis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">secondary</span></div>
+<div><span class="ib gho dis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">ghost</span></div>
+</div></div><div class="ab-f">primary: gray-200 fill + border, icon gray-500 (as Button primary) · secondary: border gray-300, icon gray-400 (unchanged) · ghost: icon gray-400.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Loading</span><span>icon opacity 0 · spinner 18</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri ld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">primary</span></div>
+<div><span class="ib sec ld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">secondary</span></div>
+<div><span class="ib gho ld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">ghost</span></div>
+</div></div><div class="ab-f">aria-busy="true", aria-disabled="true", focusable, clicks and toggling blocked.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Plain action</span><span>no pressed prop · no aria-pressed</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></span><span class="cap">Add</span></div>
+<div><span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span><span class="cap">Search</span></div>
+<div><span class="ib gho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="cap">Close</span></div>
+</div></div><div class="ab-f">Without pressed / defaultPressed it is a normal button. Same hover, focus, disabled and loading as above.</div></div>
+
+</div>
+</section>
+
+<!-- 08 ICONBUTTON PRESSED -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">IconButton · Pressed</h2></div>
+<p class="sec-d">A toggle IconButton (<code>pressed</code> or <code>defaultPressed</code> set) shows <code>pressedIcon</code> while pressed: heart outline → heart filled. Secondary and ghost also get a 2 px black border, so the state never depends on the glyph alone. Primary keeps its black fill and relies on <code>pressedIcon</code> (a black border cannot show on black). <code>aria-label</code> stays "Add to wishlist"; <code>aria-pressed</code> carries the state.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Pressed</span><span>filled heart · 2 px border (sec, ghost)</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri on"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">primary</span></div>
+<div><span class="ib sec on"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">secondary</span></div>
+<div><span class="ib gho on"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">ghost</span></div>
+</div></div><div class="ab-f">aria-pressed="true", data-state="on". The border grows inward (box-sizing: border-box), so the box stays 44 × 44.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Pressed + hover</span><span>gray-800 / gray-100 / gray-100</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri on hov"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">primary</span></div>
+<div><span class="ib sec on hov"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">secondary</span></div>
+<div><span class="ib gho on hov"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">ghost</span></div>
+</div></div><div class="ab-f">Same hover fill as unpressed; the 2 px border stays.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Pressed + focus</span><span>+ 2 px ring, 2 px offset</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri on foc"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">primary</span></div>
+<div><span class="ib sec on foc"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">secondary</span></div>
+<div><span class="ib gho on foc"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">ghost</span></div>
+</div></div><div class="ab-f">The 2 px white gap keeps the ring apart from the 2 px pressed border.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Pressed + disabled</span><span>state stays visible</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri on dis"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">primary</span></div>
+<div><span class="ib sec on dis"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">secondary</span></div>
+<div><span class="ib gho on dis"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="cap">ghost</span></div>
+</div></div><div class="ab-f">Filled icon in the disabled colour; secondary and ghost border 2 px gray-400 (as disabled selected in Toggle).</div></div>
+
+<div class="ab"><div class="ab-h"><span>Pressed + loading</span><span>spinner · border kept</span></div><div class="ab-b"><div class="trio">
+<div><span class="ib pri on ld"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">primary</span></div>
+<div><span class="ib sec on ld"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">secondary</span></div>
+<div><span class="ib gho on ld"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg><span class="sp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 1-9 9"/></svg></span></span><span class="cap">ghost</span></div>
+</div></div><div class="ab-f">aria-pressed keeps its value while busy; another click does not toggle.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Toggle sequence</span><span>secondary · Wishlist</span></div><div class="ab-b" style="gap:16px">
+<div class="r"><span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="note">aria-pressed="false" · icon</span></div>
+<div class="r"><span class="ib sec on"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="note">click / Enter / Space → aria-pressed="true" · pressedIcon</span></div>
+<div class="r"><span class="ib sec on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span><span class="note">no pressedIcon: same glyph, border alone shows the state</span></div>
+</div><div class="ab-f">Icon swap and border change are instant (no cross-fade). Primary without pressedIcon would show no change: dev-mode warning.</div></div>
+
+</div>
+</section>
+
+<!-- 09 BUTTONGROUP ATTACHED -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">ButtonGroup · Attached</h2></div>
+<p class="sec-d"><code>attached</code>: children touch and every child after the first is pulled back 1 px (<code>margin-inline-start: -1px</code>), so neighbouring borders collapse into one shared 1 px line. A hovered or pressed child is raised (<code>z-index: 1</code>) and a focused child higher still (<code>z-index: 2</code>), so its border and ring are never covered by a neighbour. The group itself draws nothing.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>shared 1 px black seam</span></div><div class="ab-b">
+<span class="gframe" style="align-self:flex-start"><span class="grp at">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span></span>
+</div><div class="ab-f">aria-label="Product actions". Dashed frame = group bounds, for annotation only.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-within · Add to cart</span><span>ring on the focused child</span></div><div class="ab-b">
+<span class="grp at" style="align-self:flex-start">
+<span class="b foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div><div class="ab-f">The ring overlaps the neighbour by its 4 px and is drawn above it. No ring on the group.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-within · Wishlist</span><span>Tab moved to the heart</span></div><div class="ab-b">
+<span class="grp at" style="align-self:flex-start">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec foc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div><div class="ab-f">Each child is its own tab stop, in DOM order.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled</span><span>group disabled → every child</span></div><div class="ab-b">
+<span class="grp at" style="align-self:flex-start">
+<span class="b dis"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec dis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div><div class="ab-f">Seam is the later child's gray-300 border (drawn on top). Both out of tab order. Example: out of stock.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hover · Add to cart</span><span>hovered child raised</span></div><div class="ab-b">
+<span class="grp at" style="align-self:flex-start">
+<span class="b hov" style="z-index:1"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div><div class="ab-f">The seam takes the hovered child's gray-800 border.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Wishlist pressed</span><span>2 px border wins the seam</span></div><div class="ab-b">
+<span class="grp at" style="align-self:flex-start">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec on"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div><div class="ab-f">Filled heart, aria-pressed="true". Seam reads 2 px on the heart side.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Seam · zoom 2×</span><span>−1 px overlap</span></div><div class="ab-b">
+<div class="zoom" style="align-self:flex-start"><span class="grp at">
+<span class="b" style="padding:0 16px"><span class="c"><span class="t">Add</span></span></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span></div>
+</div><div class="ab-f">One 1 px line between black fill and white fill, never 2 px. Total width = sum of children − 1 px per seam.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Secondary + secondary</span><span>same rules</span></div><div class="ab-b">
+<span class="grp at" style="align-self:flex-start">
+<span class="b sec"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div><div class="ab-f">Any mix of primary and secondary children works.</div></div>
+
+<div class="ab dont"><div class="ab-h"><span>Don't · ghost attached</span><span>no border to share</span></div><div class="ab-b">
+<span class="grp at" style="align-self:flex-start">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib gho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div><div class="ab-f">Ghost children float with no visible joint. Use ghost only in a spaced group (docs guidance; not enforced).</div></div>
+
+</div>
+</section>
+
+<!-- 10 BUTTONGROUP SPACED -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">ButtonGroup · Spaced</h2></div>
+<p class="sec-d">Default (<code>attached</code> false): 8 px gap, every child keeps its full border. Same semantics, same Tab order, same group-wide <code>disabled</code>.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>gap 8</span></div><div class="ab-b">
+<span class="gframe" style="align-self:flex-start"><span class="grp gap">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span></span>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-within · Add to cart</span><span>ring fits in the 8 px gap</span></div><div class="ab-b">
+<span class="grp gap" style="align-self:flex-start">
+<span class="b foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div><div class="ab-f">Ring (2 + 2 px) uses half the gap; it never touches the neighbour.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-within · Wishlist</span><span>ring on the heart</span></div><div class="ab-b">
+<span class="grp gap" style="align-self:flex-start">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec foc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled</span><span>group disabled → every child</span></div><div class="ab-b">
+<span class="grp gap" style="align-self:flex-start">
+<span class="b dis"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec dis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Wishlist pressed</span><span>filled heart · 2 px border</span></div><div class="ab-b">
+<span class="grp gap" style="align-self:flex-start">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec on"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>With ghost</span><span>allowed when spaced</span></div><div class="ab-b">
+<span class="grp gap" style="align-self:flex-start">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib gho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div><div class="ab-f">Lighter secondary action next to the main one.</div></div>
+
+</div>
+</section>
+
+<!-- 11 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">11</span><h2 class="sec-t">Keyboard &amp; focus order</h2></div>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>Button · IconButton (action)</span><span>native button</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Next / previous focusable. Loading buttons stay in the order; disabled ones are skipped.</td></tr>
+<tr><td><span class="kbd">Enter</span></td><td>Activate (fires onClick). No-op while loading.</td></tr>
+<tr><td><span class="kbd">Space</span></td><td>Activate on key up. No-op while loading.</td></tr>
+</tbody>
+</table>
+</div></div>
+<div class="ab"><div class="ab-h"><span>IconButton (toggle)</span><span>Radix Toggle</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Enter</span> / <span class="kbd">Space</span></td><td>Toggle pressed; onPressedChange(next). No-op while loading or disabled.</td></tr>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Next / previous focusable. Focus stays on the button after toggling.</td></tr>
+</tbody>
+</table>
+</div></div>
+<div class="ab"><div class="ab-h"><span>ButtonGroup</span><span>no roving focus</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span></td><td>Into the group: first enabled child. Next Tab: next child, then out of the group.</td></tr>
+<tr><td><span class="kbd">Shift+Tab</span></td><td>Reverse of the above.</td></tr>
+<tr><td><span class="kbd">←</span> <span class="kbd">→</span></td><td>No action (not a toolbar).</td></tr>
+</tbody>
+</table>
+</div></div>
+<div class="ab"><div class="ab-h"><span>Focus order</span><span>DOM order</span></div><div class="ab-b" style="gap:24px">
+<div style="display:flex;align-items:center;gap:16px">
+<span class="cap">1</span>
+<span class="grp at">
+<span class="b foc"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div>
+<div style="display:flex;align-items:center;gap:16px">
+<span class="cap">2</span>
+<span class="grp at">
+<span class="b"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Add to cart</span></span></span>
+<span class="ib sec foc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20l-1.3-1.2C6 14.6 3 11.9 3 8.6 3 6 5 4 7.6 4c1.6 0 3.3.8 4.4 2.1C13.1 4.8 14.8 4 16.4 4 19 4 21 6 21 8.6c0 3.3-3 6-7.7 10.2z"/></svg></span>
+</span>
+</div>
+<p class="note">Add to cart → Wishlist → next control after the group. If Add to cart is loading, it is still stop 1.</p>
+</div></div>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":11200}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
