@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-42** Tooltip & Popover — implementation — https://github.com/mikespineu/design-system-wireframe/pull/77
 - **DS-39** Toast — design — https://github.com/mikespineu/design-system-wireframe/pull/70
 - **DS-32** Button icons, loading & ButtonGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/72
 - **DS-17** Select — design — https://github.com/mikespineu/design-system-wireframe/pull/73
