@@ -22,3 +22,4 @@ export type {
   LayoutElement,
   LayoutElementProps,
 } from './lib/layout';
+export * from './components/Tabs';
