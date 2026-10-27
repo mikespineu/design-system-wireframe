@@ -108,11 +108,18 @@
       "x": 21280,
       "y": 0
     },
+    "Button.dc.html": {
+      "h": 11200,
+      "title": "Button",
+      "w": 1440,
+      "x": 22800,
+      "y": 0
+    },
     "Toast.dc.html": {
       "h": 10400,
       "title": "Toast",
       "w": 1440,
-      "x": 22800,
+      "x": 24320,
       "y": 0
     }
   },
@@ -150,6 +157,7 @@
     "Tabs.dc.html",
     "Layout.dc.html",
     "Select.dc.html",
+    "Button.dc.html",
     "Toast.dc.html"
   ],
   "pages": [],

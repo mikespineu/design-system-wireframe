@@ -181,8 +181,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Reuses `ChoiceGroup` scrolling, label and help behaviour (no duplicated scroll logic)
     - Selected look cross-fades with `--ds-motion`; icon is decorative (`aria-hidden`), label is the accessible name
     - Story per state, keyboard story, overflow story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-32 Button icons, loading & ButtonGroup — design.** Extend the Button family: leading and trailing icon slots on `Button`, an icon-only button (extend the existing `IconButton` with the `primary` / `secondary` / `ghost` variants instead of adding a second component), a loading state for both, a pressed/toggle state for icon buttons (e.g. Wishlist heart outline → filled), and a `ButtonGroup` that joins buttons into one unit, e.g. "Add to cart" (primary `Button`) + Wishlist (secondary heart `IconButton`).
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-32 Button icons, loading & ButtonGroup — design.** Extend the Button family: leading and trailing icon slots on `Button`, an icon-only button (extend the existing `IconButton` with the `primary` / `secondary` / `ghost` variants instead of adding a second component), a loading state for both, a pressed/toggle state for icon buttons (e.g. Wishlist heart outline → filled), and a `ButtonGroup` that joins buttons into one unit, e.g. "Add to cart" (primary `Button`) + Wishlist (secondary heart `IconButton`).
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers `Button` with leading icon, trailing icon and both, in primary, secondary and ghost, each in default, hover, focus, disabled and loading
     - Canvas covers `IconButton` in all three variants, with default, hover, focus, disabled, loading, and pressed / unpressed (heart outline vs filled)
@@ -349,6 +349,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 ## Done
 
 - **DS-39** Toast — design — https://github.com/mikespineu/design-system-wireframe/pull/70
+- **DS-32** Button icons, loading & ButtonGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/72
 - **DS-17** Select — design — https://github.com/mikespineu/design-system-wireframe/pull/73
 - **DS-35** Stack & Grid — design — https://github.com/mikespineu/design-system-wireframe/pull/67
 - **DS-21** Tabs — design — https://github.com/mikespineu/design-system-wireframe/pull/66
