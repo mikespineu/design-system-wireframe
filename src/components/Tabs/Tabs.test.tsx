@@ -211,6 +211,16 @@ describe('Tabs', () => {
       ['manual', <Tabs key="6" aria-label="S" items={items} activationMode="manual" />],
       ['keepMounted', <Tabs key="7" aria-label="S" items={items} keepMounted />],
       ['overflow', <Tabs key="8" aria-label="S" items={many} />],
+      ['disabled tab (segmented)', <Tabs key="9" aria-label="S" items={items} defaultValue="d" />],
+      ['disabled tab (tile)', <Tabs key="10" aria-label="S" variant="tile" items={tiles} defaultValue="d" />],
+      ['keepMounted tile manual', <Tabs key="11" aria-label="S" variant="tile" items={tiles} keepMounted activationMode="manual" />],
+      [
+        'aria-labelledby heading',
+        <div key="12">
+          <h2 id="qa-heading">Account</h2>
+          <Tabs aria-labelledby="qa-heading" items={items} />
+        </div>,
+      ],
     ])('has no violations: %s', async (_n, ui) => {
       const { container } = render(ui);
       expect(await axe(container)).toHaveNoViolations();
