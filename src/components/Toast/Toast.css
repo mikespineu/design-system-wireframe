@@ -1,0 +1,159 @@
+/* Toast: non-modal message on Radix Toast. Tokens only (--ds-*). Spec: docs/specs/Toast.md */
+.ds-toaster {
+  position: fixed;
+  right: var(--ds-space-6);
+  bottom: var(--ds-space-6);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+  max-width: calc(100vw - 2 * var(--ds-space-6));
+}
+.ds-toaster:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.ds-toast {
+  --ds-toast-border-color: var(--ds-color-ink);
+  --ds-toast-border-width: var(--ds-border-width);
+  --ds-toast-fg: var(--ds-color-info);
+  --ds-toast-bg: var(--ds-color-surface);
+  --ds-toast-desc: var(--ds-color-text);
+  --ds-toast-title-weight: 500;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  width: calc(var(--ds-space-24) * 4);
+  max-width: 100%;
+  padding: calc(var(--ds-space-4) - (var(--ds-toast-border-width) - var(--ds-border-width)));
+  background: var(--ds-toast-bg);
+  border: var(--ds-toast-border-width) solid var(--ds-toast-border-color);
+  border-radius: var(--ds-radius-md);
+  box-shadow: none;
+  color: var(--ds-toast-fg);
+}
+.ds-toast[data-severity='success'] {
+  --ds-toast-border-color: var(--ds-color-success);
+  --ds-toast-fg: var(--ds-color-success);
+  --ds-toast-bg: var(--ds-color-success-bg);
+}
+.ds-toast[data-severity='error'] {
+  --ds-toast-border-color: var(--ds-color-error);
+  --ds-toast-border-width: var(--ds-border-width-strong);
+  --ds-toast-fg: var(--ds-color-error);
+  --ds-toast-bg: var(--ds-color-error-bg);
+  --ds-toast-desc: var(--ds-color-text-strong);
+  --ds-toast-title-weight: 700;
+}
+.ds-toast:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+}
+
+.ds-toast-icon { flex: none; }
+.ds-toast-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-1);
+}
+.ds-toast-title {
+  margin: 0;
+  font-family: var(--ds-font-mono);
+  font-size: 14px;
+  line-height: var(--ds-line-height-sm);
+  font-weight: var(--ds-toast-title-weight);
+  color: var(--ds-toast-fg);
+  overflow-wrap: anywhere;
+}
+.ds-toast-description {
+  margin: 0;
+  font-family: var(--ds-font-text);
+  font-size: 14px;
+  line-height: var(--ds-line-height-sm);
+  color: var(--ds-toast-desc);
+  overflow-wrap: anywhere;
+}
+.ds-toast-action { padding-top: var(--ds-space-2); }
+
+.ds-toast-close {
+  flex: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ds-space-8);
+  height: var(--ds-space-8);
+  margin: calc((var(--ds-space-8) - var(--ds-line-height-sm)) / -2) calc(-1 * var(--ds-space-2));
+  padding: 0;
+  border: var(--ds-border-width) solid transparent;
+  border-radius: var(--ds-radius-md);
+  background: transparent;
+  color: var(--ds-color-ink);
+  cursor: pointer;
+  transition: background-color var(--ds-motion), border-color var(--ds-motion), color var(--ds-motion);
+}
+.ds-toast-close:hover {
+  background: var(--ds-color-surface);
+  border-color: var(--ds-color-ink);
+}
+.ds-toast-close:focus-visible {
+  border-color: var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+}
+.ds-toast-close:active {
+  background: var(--ds-color-ink);
+  border-color: var(--ds-color-ink);
+  color: var(--ds-color-primary-contrast);
+}
+
+/* Motion: keyframes (Radix Presence waits for animationend). */
+.ds-toast[data-state='open'] { animation: ds-toast-in var(--ds-motion); }
+.ds-toast[data-state='closed'] { animation: ds-toast-out var(--ds-motion) forwards; }
+.ds-toast[data-swipe='move'],
+.ds-toast[data-swipe='start'] { transform: translateX(var(--radix-toast-swipe-move-x)); }
+.ds-toast[data-swipe='cancel'] {
+  transform: translateX(0);
+  transition: transform var(--ds-motion);
+}
+.ds-toast[data-swipe='end'] { animation: ds-toast-swipe-out var(--ds-motion) forwards; }
+
+@keyframes ds-toast-in {
+  from { opacity: 0; transform: translateX(var(--ds-space-4)); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes ds-toast-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(var(--ds-space-4)); }
+}
+@keyframes ds-toast-swipe-out {
+  from { opacity: 1; transform: translateX(var(--radix-toast-swipe-end-x)); }
+  to { opacity: 0; transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-toast[data-state='open'],
+  .ds-toast[data-state='closed'],
+  .ds-toast[data-swipe='end'] { animation: none; }
+  .ds-toast[data-swipe='cancel'],
+  .ds-toast-close { transition: none; }
+}
+
+@media (max-width: 479px) {
+  .ds-toaster {
+    left: var(--ds-space-4);
+    right: var(--ds-space-4);
+    bottom: calc(var(--ds-space-4) + env(safe-area-inset-bottom));
+    max-width: none;
+  }
+  .ds-toast { width: 100%; }
+}

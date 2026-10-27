@@ -15,6 +15,7 @@ export * from './components/TileGroup';
 export * from './components/RadioGroup';
 export * from './components/Tooltip';
 export * from './components/Popover';
+export * from './components/Toast';
 export * from './components/Stack';
 export * from './components/Grid';
 export type {
