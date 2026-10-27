@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe InfoTip, Tooltip and Popover</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.sub-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#595959}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.grid5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.stage{position:relative;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:24px;background:#FFFFFF;overflow:hidden}
+.stage.gray{background:#F7F7F7}
+.anc{position:relative;display:inline-flex}
+
+/* labels and fields */
+.lb{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.row{display:flex;align-items:center;gap:4px}
+.in{box-sizing:border-box;display:flex;align-items:center;height:44px;width:100%;padding:0 12px;border:1px solid #C7C7C7;background:#FFFFFF;font-size:16px;color:#000000}
+.fld{display:flex;flex-direction:column;gap:8px;width:280px}
+
+/* buttons */
+.btn{box-sizing:border-box;height:44px;padding:0 16px;border:1px solid #000000;background:#FFFFFF;font-family:'Red Hat Text',sans-serif;font-weight:500;font-size:16px;color:#000000;cursor:pointer}
+.btn.pri{background:#000000;color:#FFFFFF}
+.btn.focus{outline:2px solid #000000;outline-offset:2px}
+.ib{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid #000000;background:#FFFFFF;color:#000000;cursor:pointer}
+.ib.hover{background:#EEEEEE}
+.ib.focus{outline:2px solid #000000;outline-offset:2px}
+
+/* InfoTip trigger */
+.it{position:relative;box-sizing:border-box;flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:0;padding:0;border:1px solid transparent;border-radius:0;background:transparent;color:#595959;cursor:pointer}
+.it.sm{width:24px;height:24px}
+.it.hover{background:#EEEEEE;color:#000000}
+.it.focus{color:#000000;outline:2px solid #000000;outline-offset:2px}
+.it.open{background:#EEEEEE;border-color:#000000;color:#000000}
+.it.press{background:#000000;border-color:#000000;color:#FFFFFF}
+.hit{position:absolute;inset:-6px;outline:1px dashed #A3A3A3;pointer-events:none}
+.it.sm .hit{inset:-10px}
+
+/* Tooltip */
+.tt{position:absolute;z-index:3;box-sizing:border-box;width:max-content;max-width:240px;padding:4px 8px;background:#141414;color:#FFFFFF;border-radius:0;font-family:'Red Hat Text',sans-serif;font-size:13px;line-height:20px;text-align:left;text-transform:none;letter-spacing:0;font-weight:400}
+.tt.top{bottom:calc(100% + 10px);left:50%;transform:translateX(-50%)}
+.tt.bottom{top:calc(100% + 10px);left:50%;transform:translateX(-50%)}
+.tt.right{left:calc(100% + 10px);top:50%;transform:translateY(-50%)}
+.tt.left{right:calc(100% + 10px);top:50%;transform:translateY(-50%)}
+.aw{position:absolute;display:block;overflow:visible}
+.tt.top .aw{top:100%;left:50%;margin-left:-6px}
+.tt.bottom .aw{bottom:100%;left:50%;margin-left:-6px}
+.tt.right .aw{right:100%;top:50%;margin-top:-6px}
+.tt.left .aw{left:100%;top:50%;margin-top:-6px}
+
+/* Popover */
+.pp{position:absolute;z-index:3;box-sizing:border-box;width:240px;max-width:320px;padding:16px;background:#FFFFFF;border:1px solid #000000;border-radius:0;box-shadow:none;color:#404040;font-family:'Red Hat Text',sans-serif;font-size:16px;line-height:26px;text-align:left;text-transform:none;letter-spacing:0;font-weight:400;display:flex;flex-direction:column;gap:12px}
+.pp p{margin:0}
+.pp.top{bottom:calc(100% + 11px);left:50%;transform:translateX(-50%)}
+.pp.bottom{top:calc(100% + 11px);left:50%;transform:translateX(-50%)}
+.pp.right{left:calc(100% + 11px);top:50%;transform:translateY(-50%)}
+.pp.left{right:calc(100% + 11px);top:50%;transform:translateY(-50%)}
+.pp.top .aw{top:100%;left:50%;margin-left:-8px}
+.pp.bottom .aw{bottom:100%;left:50%;margin-left:-8px}
+.pp.right .aw{right:100%;top:50%;margin-top:-8px}
+.pp.left .aw{left:100%;top:50%;margin-top:-8px}
+.pp-h{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:-4px}
+.pp-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:16px;line-height:24px;color:#000000}
+.x{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:-4px -8px 0 0;padding:0;border:1px solid transparent;background:#FFFFFF;color:#000000;cursor:pointer}
+.x.focus{border-color:#000000;outline:2px solid #000000;outline-offset:2px}
+
+/* pointers and frames */
+.cur{position:absolute;z-index:4;pointer-events:none}
+.fng{position:absolute;z-index:4;width:40px;height:52px;box-sizing:border-box;border:1px dashed #767676;border-radius:20px;background:rgba(238,238,238,.8);pointer-events:none}
+.phone{position:relative;box-sizing:border-box;width:320px;height:460px;padding:56px 20px 20px;border:1px solid #000000;background:#FFFFFF;display:flex;flex-direction:column;gap:24px}
+.phone .bar{position:absolute;top:0;left:0;right:0;height:32px;border-bottom:1px solid #E0E0E0;display:flex;align-items:center;padding:0 16px;font-family:'Red Hat Mono',monospace;font-size:12px;color:#595959}
+.edge{position:absolute;left:0;right:0;border-top:1px dashed #767676}
+.edge-v{position:absolute;top:0;bottom:0;border-left:1px dashed #767676}
+.edge-l{position:absolute;font-family:'Red Hat Mono',monospace;font-size:11px;line-height:16px;color:#595959;background:#F7F7F7;padding:0 4px}
+.ghost{opacity:.35}
+.tag{display:inline-flex;align-items:center;height:20px;padding:0 6px;border:1px solid #000000;background:#FFFFFF;font-family:'Red Hat Mono',monospace;font-size:11px;line-height:16px;color:#000000;white-space:nowrap}
+.ov{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.dlg{position:relative;box-sizing:border-box;width:420px;background:#FFFFFF;border:1px solid #000000;color:#404040;display:flex;flex-direction:column}
+.dlg .hd{padding:24px 24px 0}
+.dlg .ttl{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:22px;line-height:29px;color:#000000}
+.dlg .bd{padding:16px 24px 24px;font-size:16px;line-height:26px}
+.dlg .ft{display:flex;justify-content:flex-end;gap:12px;padding:16px 24px;border-top:1px solid #E0E0E0}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:8px 16px 8px 0;border-bottom:1px solid #E0E0E0;color:#404040;vertical-align:middle}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.mono{font-family:'Red Hat Mono',monospace;font-size:13px}
+
+/* timeline */
+.tl{position:relative;height:56px;border-bottom:1px solid #000000}
+.tl i{position:absolute;bottom:0;height:24px;box-sizing:border-box}
+.tl .wait{border:1px dashed #767676;background:#FFFFFF}
+.tl .on{background:#141414}
+.tl .pop{background:#FFFFFF;border:1px solid #000000}
+.tl b{position:absolute;bottom:28px;font-family:'Red Hat Mono',monospace;font-weight:400;font-size:11px;line-height:16px;color:#595959;white-space:nowrap}
+.tl .tick{position:absolute;bottom:-6px;width:1px;height:12px;background:#000000}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 8000px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>InfoTip · Tooltip · Popover · DS-41 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">InfoTip</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">An info icon button that explains a field or setting in plain text. With a mouse or trackpad (<span class="mono">(pointer: fine)</span>) it is a Tooltip: dark, compact, opens on hover or keyboard focus. When touch is the primary input (<span class="mono">(pointer: coarse)</span>) it is a Popover: white panel with a black border, opens on tap. The switch reads only that media query, never the viewport width. Tooltip (text only) and Popover (any content) are also public components, built on Radix Tooltip and Radix Popover.</p>
+</header>
+
+<!-- 01 INFOTIP MODES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">InfoTip: touch vs non-touch</h2></div>
+<p class="sec-d">Same trigger, same text, two behaviours. The trigger is a borderless 32 × 32 info icon button placed right after the label it explains. Its content is always non-interactive text: in Tooltip mode the content can never take focus, so links or buttons in it would be unreachable by keyboard.</p>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Non-touch · Tooltip mode</span><span>(pointer: coarse) = false · data-state="delayed-open"</span></div>
+<div class="stage" style="height: 460px; align-items: flex-end; padding-bottom: 96px">
+<div class="fld">
+<div class="row"><span class="lb" id="m1-l">Billing period</span>
+<span class="anc"><button class="it open" aria-label="About billing period"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button>
+<span class="tt top" role="tooltip">Charges renew on the same day each month. You can change the day in Settings.<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span>
+<svg class="cur" style="left: 18px; top: 18px" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 3-1-3-7h6z" fill="#000000" stroke="#FFFFFF"/></svg>
+</span></div>
+<div class="in">Monthly</div>
+</div>
+</div>
+<div class="ab-f">Radix Tooltip. Opens 400 ms after the pointer rests on the trigger, or at once on keyboard focus or click. Closes on pointer leave (the pointer may move onto the tip), blur or Esc. Dark gray-900 panel, white caption 13/20, max width 240 px, side top by default.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Touch · Popover mode</span><span>(pointer: coarse) = true · data-state="open"</span></div>
+<div class="stage gray" style="height: 560px">
+<div class="phone">
+<div class="bar">9:41 · Billing</div>
+<div class="fld" style="width: 100%">
+<div class="row"><span class="lb">Billing period</span>
+<span class="anc"><button class="it open" aria-label="About billing period" aria-expanded="true" aria-haspopup="dialog"><span class="hit"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button>
+<span class="pp bottom" role="dialog" aria-label="About billing period" style="width: 264px; transform: translateX(-55%)"><p>Charges renew on the same day each month. You can change the day in Settings.</p><svg class="aw" style="left: 55%" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span>
+<span class="fng" style="left: 4px; top: 12px"></span>
+</span></div>
+<div class="in">Monthly</div>
+</div>
+<div class="fld" style="width: 100%"><span class="lb">Card</span><div class="in">•••• 4242</div></div>
+</div>
+</div>
+<div class="ab-f">Radix Popover (non-modal). Opens on tap; closes on a second tap of the trigger, a tap outside or Esc. Focus moves to the panel so screen readers read it. White panel, 1 px black border, body 16/26. No title, no close button. Shown on the bottom side here because the requested top side does not fit (collision flip). Dashed square: 44 × 44 touch hit area.</div>
+</div>
+</div>
+
+<div class="grid3">
+<div class="ab">
+<div class="ab-h"><span>Before hydration</span><span>server render · no JS yet</span></div>
+<div class="stage" style="height: 200px">
+<div class="fld"><div class="row"><span class="lb">Billing period</span><button class="it" aria-label="About billing period"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div><div class="in">Monthly</div></div>
+</div>
+<div class="ab-f">Server and first client render use Tooltip mode (closed). Nothing is portaled while closed, and the trigger button is identical in both modes, so switching to Popover after hydration on a touch device causes no layout shift. A tap before hydration does nothing.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Wide touch screen</span><span>tablet 1366 px · coarse</span></div>
+<div class="stage gray" style="height: 200px">
+<div style="display: flex; flex-direction: column; gap: 12px; align-items: center">
+<span class="tag">(pointer: coarse) → Popover</span>
+<span class="tag">(min-width: 1024px) → ignored</span>
+</div>
+</div>
+<div class="ab-f">A large touch screen still gets the Popover. Width says nothing about how the user points.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Narrow mouse window</span><span>desktop 360 px · fine</span></div>
+<div class="stage gray" style="height: 200px">
+<div style="display: flex; flex-direction: column; gap: 12px; align-items: center">
+<span class="tag">(pointer: fine) → Tooltip</span>
+<span class="tag">(max-width: 480px) → ignored</span>
+</div>
+</div>
+<div class="ab-f">A narrow desktop window still gets the Tooltip. No <span class="mono">min-width</span> / <span class="mono">max-width</span> query, no <span class="mono">innerWidth</span>, no container query.</div>
+</div>
+</div>
+
+<table class="tbl">
+<thead><tr><th>Input</th><th>(pointer: coarse)</th><th>Mode</th><th>Opens on</th></tr></thead>
+<tbody>
+<tr><td>Mouse, trackpad, stylus as primary</td><td>false</td><td>Tooltip</td><td>hover (400 ms), keyboard focus, click</td></tr>
+<tr><td>Touch as primary (phone, tablet)</td><td>true</td><td>Popover</td><td>tap, Enter, Space</td></tr>
+<tr><td>Server render / before hydration</td><td>unknown, treated as false</td><td>Tooltip (closed)</td><td>nothing until hydrated</td></tr>
+<tr><td>Primary input changes while mounted (tablet docked to keyboard and trackpad, devtools emulation)</td><td>change event</td><td>switches live; an open tip closes</td><td>focus stays on the trigger</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- 02 INFOTIP TRIGGER -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">InfoTip trigger: sizes and states</h2></div>
+<p class="sec-d">Borderless square icon button with the existing info icon in gray-600. md (32 × 32, 18 px icon) is the default, next to field labels and in help slots. sm (24 × 24, 16 px icon) sits inline with caption or label text. On coarse pointers the hit area grows to 44 × 44 with an invisible pseudo-element; the visible size and the layout do not change. Hover styles only apply under <span class="mono">(hover: hover)</span>, so a tap never leaves a stuck hover fill.</p>
+
+<p class="sub-t">md · 32 × 32 · icon 18</p>
+<div class="grid5">
+<div class="ab"><div class="ab-h"><span>md · default</span><span>icon gray-600</span></div><div class="stage" style="height: 120px"><button class="it" aria-label="About billing period"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>md · hover</span><span>fill gray-100, icon black</span></div><div class="stage" style="height: 120px"><button class="it hover" aria-label="About billing period"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>md · focus-visible</span><span>2 px ring, offset 2</span></div><div class="stage" style="height: 120px"><button class="it focus" aria-label="About billing period"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>md · open</span><span>fill gray-100, 1 px black</span></div><div class="stage" style="height: 120px"><button class="it open" aria-label="About billing period"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>md · pressed</span><span>fill black, icon white</span></div><div class="stage" style="height: 120px"><button class="it press" aria-label="About billing period"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div>
+</div>
+
+<p class="sub-t">sm · 24 × 24 · icon 16</p>
+<div class="grid5">
+<div class="ab"><div class="ab-h"><span>sm · default</span><span>icon gray-600</span></div><div class="stage" style="height: 120px"><button class="it sm" aria-label="About billing period"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>sm · hover</span><span>fill gray-100, icon black</span></div><div class="stage" style="height: 120px"><button class="it sm hover" aria-label="About billing period"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>sm · focus-visible</span><span>2 px ring, offset 2</span></div><div class="stage" style="height: 120px"><button class="it sm focus" aria-label="About billing period"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>sm · open</span><span>fill gray-100, 1 px black</span></div><div class="stage" style="height: 120px"><button class="it sm open" aria-label="About billing period"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div>
+<div class="ab"><div class="ab-h"><span>sm · pressed</span><span>fill black, icon white</span></div><div class="stage" style="height: 120px"><button class="it sm press" aria-label="About billing period"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div>
+</div>
+
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>md · coarse hit area</span><span>44 × 44, dashed</span></div><div class="stage gray" style="height: 140px"><button class="it" aria-label="About billing period"><span class="hit"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div><div class="ab-f">::after, inset −6 px. Only under (pointer: coarse).</div></div>
+<div class="ab"><div class="ab-h"><span>sm · coarse hit area</span><span>44 × 44, dashed</span></div><div class="stage gray" style="height: 140px"><button class="it sm" aria-label="About billing period"><span class="hit"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div><div class="ab-f">::after, inset −10 px. Overlaps neighbours invisibly; keep 8 px clear of other targets.</div></div>
+<div class="ab"><div class="ab-h"><span>sm · inline in text</span><span>caption row</span></div><div class="stage" style="height: 140px"><div class="row" style="font-size: 13px; line-height: 20px; color: #595959">Includes VAT<button class="it sm" aria-label="About VAT"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div><div class="ab-f">4 px gap after the text. Trigger is centred on the line.</div></div>
+<div class="ab"><div class="ab-h"><span>md · help slot</span><span>after a control</span></div><div class="stage" style="height: 140px"><div class="row" style="gap: 8px"><div class="in" style="width: 160px">Monthly</div><button class="it" aria-label="About billing period"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div><div class="ab-f">8 px after a 44 px control, centred. Fits the SegmentedControl / TileGroup help slot.</div></div>
+</div>
+</section>
+
+<!-- 03 TOOLTIP -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Tooltip</h2></div>
+<p class="sec-d">Short plain-text label or hint for any focusable trigger, here an IconButton. gray-900 fill, white caption 13/20, padding 4 / 8, max width 240 px, square corners, no shadow. The 12 × 6 arrow is the same gray-900 and points at the trigger centre. The tip edge sits 4 px from the trigger (side offset), plus the arrow.</p>
+
+<p class="sub-t">Sides · open · arrow</p>
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>side top (default)</span><span>data-side="top"</span></div><div class="stage" style="height: 200px">
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span></span>
+</div></div>
+<div class="ab"><div class="ab-h"><span>side right</span><span>data-side="right"</span></div><div class="stage" style="height: 200px; justify-content: flex-start">
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt right" role="tooltip">Add photo<svg class="aw" width="6" height="12" viewBox="0 0 6 12" aria-hidden="true"><path d="M6 0v12L0 6z" fill="#141414"/></svg></span></span>
+</div></div>
+<div class="ab"><div class="ab-h"><span>side bottom</span><span>data-side="bottom"</span></div><div class="stage" style="height: 200px">
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt bottom" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 6h12L6 0z" fill="#141414"/></svg></span></span>
+</div></div>
+<div class="ab"><div class="ab-h"><span>side left</span><span>data-side="left"</span></div><div class="stage" style="height: 200px; justify-content: flex-end">
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt left" role="tooltip">Add photo<svg class="aw" width="6" height="12" viewBox="0 0 6 12" aria-hidden="true"><path d="M0 0v12l6-6z" fill="#141414"/></svg></span></span>
+</div></div>
+</div>
+
+<p class="sub-t">States</p>
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>Closed</span><span>data-state="closed"</span></div><div class="stage" style="height: 200px">
+<span class="anc"><button class="ib" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button></span>
+</div><div class="ab-f">Nothing portaled. No aria-describedby on the trigger.</div></div>
+<div class="ab"><div class="ab-h"><span>Hover, waiting</span><span>0–400 ms</span></div><div class="stage" style="height: 200px">
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><svg class="cur" style="left: 24px; top: 24px" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 3-1-3-7h6z" fill="#000000" stroke="#FFFFFF"/></svg></span>
+</div><div class="ab-f">Trigger shows its own hover. Tip not yet shown; leaving now cancels it.</div></div>
+<div class="ab"><div class="ab-h"><span>Open by hover</span><span>data-state="delayed-open"</span></div><div class="stage" style="height: 200px">
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span><svg class="cur" style="left: 24px; top: 24px" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 3-1-3-7h6z" fill="#000000" stroke="#FFFFFF"/></svg></span>
+</div><div class="ab-f">After 400 ms. 120 ms fade in.</div></div>
+<div class="ab"><div class="ab-h"><span>Open by keyboard focus</span><span>data-state="instant-open"</span></div><div class="stage" style="height: 200px">
+<span class="anc"><button class="ib focus" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" style="bottom: calc(100% + 10px)" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span></span>
+</div><div class="ab-f">No delay on focus. Trigger keeps its focus ring; tip clears the ring (4 px offset ≥ 2 + 2).</div></div>
+</div>
+
+<p class="sub-t">Long text and collisions</p>
+<div class="grid3">
+<div class="ab"><div class="ab-h"><span>Wraps at 240 px</span><span>max 2–3 lines</span></div><div class="stage" style="height: 240px; align-items: flex-end; padding-bottom: 48px">
+<span class="anc"><button class="ib hover" aria-label="Sync"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" role="tooltip">Uploads every photo in this series to the shared archive. Large series may take a few minutes.<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span></span>
+</div><div class="ab-f">Left-aligned text. Longer content belongs in a Popover or on the page.</div></div>
+<div class="ab"><div class="ab-h"><span>Flip</span><span>side="top" → data-side="bottom"</span></div><div class="stage gray" style="height: 240px; align-items: flex-start; padding-top: 24px">
+<span class="edge" style="top: 16px"></span><span class="edge-l" style="top: 0; right: 8px">viewport edge + 8 px padding</span>
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt bottom" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 6h12L6 0z" fill="#141414"/></svg></span></span>
+</div><div class="ab-f">Not enough room above, so Radix flips to the opposite side. The arrow follows data-side.</div></div>
+<div class="ab"><div class="ab-h"><span>Shift</span><span>align="center" kept inside edge</span></div><div class="stage gray" style="height: 240px; justify-content: flex-end; padding-right: 20px">
+<span class="edge-v" style="right: 8px"></span><span class="edge-l" style="top: 8px; right: 12px">edge + 8</span>
+<span class="anc"><button class="ib hover" aria-label="Download"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" style="left: auto; right: -12px; transform: none" role="tooltip">Download all originals<svg class="aw" style="left: auto; right: 28px; margin-left: 0" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span></span>
+</div><div class="ab-f">The tip slides along its side to stay 8 px inside the viewport; the arrow stays on the trigger centre, at least 8 px from the tip's corners.</div></div>
+</div>
+</section>
+
+<!-- 04 POPOVER -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Popover</h2></div>
+<p class="sec-d">Non-modal panel opened by clicking a button; holds any content, including links, fields and buttons. Same look as the Dialog panel: white, 1 px black border, square corners, no shadow, padding 16. The 16 × 8 arrow is white with black edges and overlaps the panel border by 1 px, so the border opens where the arrow joins. Width 240–320 px from content, max 320.</p>
+
+<p class="sub-t">Sides · open · arrow</p>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>side bottom (default)</span><span>data-side="bottom"</span></div><div class="stage" style="height: 300px; align-items: flex-start; padding-top: 40px">
+<span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
+<span class="pp bottom" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span></span>
+</div></div>
+<div class="ab"><div class="ab-h"><span>side top</span><span>data-side="top"</span></div><div class="stage" style="height: 300px; align-items: flex-end; padding-bottom: 40px">
+<span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
+<span class="pp top" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 0h16L8 8z" fill="#FFFFFF"/><path d="M0 0L8 8L16 0" fill="none" stroke="#000000"/></svg></span></span>
+</div></div>
+<div class="ab"><div class="ab-h"><span>side right</span><span>data-side="right"</span></div><div class="stage" style="height: 260px; justify-content: flex-start; padding-left: 96px">
+<span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
+<span class="pp right" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="8" height="16" viewBox="0 0 8 16" aria-hidden="true"><path d="M8 0v16L0 8z" fill="#FFFFFF"/><path d="M8 0L0 8L8 16" fill="none" stroke="#000000"/></svg></span></span>
+</div></div>
+<div class="ab"><div class="ab-h"><span>side left</span><span>data-side="left"</span></div><div class="stage" style="height: 260px; justify-content: flex-end; padding-right: 96px">
+<span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
+<span class="pp left" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="8" height="16" viewBox="0 0 8 16" aria-hidden="true"><path d="M0 0v16l8-8z" fill="#FFFFFF"/><path d="M0 0L8 8L0 16" fill="none" stroke="#000000"/></svg></span></span>
+</div></div>
+</div>
+
+<p class="sub-t">States</p>
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>Closed</span><span>data-state="closed"</span></div><div class="stage" style="height: 300px; align-items: flex-start; padding-top: 40px">
+<span class="anc"><button class="btn" aria-expanded="false" aria-haspopup="dialog">Share</button></span>
+</div><div class="ab-f">Content unmounted. Trigger has aria-expanded="false". Popover does not restyle the trigger.</div></div>
+<div class="ab"><div class="ab-h"><span>Open · focus inside</span><span>data-state="open"</span></div><div class="stage" style="height: 300px; align-items: flex-start; padding-top: 40px">
+<span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
+<span class="pp bottom" style="width: 232px" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri focus">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span></span>
+</div><div class="ab-f">Opened with Enter: focus moves to the first focusable inside. Tab loops inside; Esc returns focus to Share.</div></div>
+<div class="ab"><div class="ab-h"><span>Open · title + close</span><span>close focus-visible</span></div><div class="stage" style="height: 300px; align-items: flex-start; padding-top: 40px">
+<span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
+<span class="pp bottom" style="width: 232px" role="dialog" aria-labelledby="pp-t1"><span class="pp-h"><h3 class="pp-t" id="pp-t1">Share link</h3><button class="x focus" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></span><p>Anyone with the link can view.</p><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span></span>
+</div><div class="ab-f">Optional title (mono 16/24) names the dialog. Optional close button: same 32 × 32 button and states as Dialog close.</div></div>
+<div class="ab"><div class="ab-h"><span>Open · text only</span><span>focus on panel</span></div><div class="stage" style="height: 300px; align-items: flex-start; padding-top: 40px">
+<span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Terms</button>
+<span class="pp bottom" style="width: 232px" role="dialog" aria-label="Terms" tabindex="-1"><p>Editorial use only. Credit the author on every use.</p><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span></span>
+</div><div class="ab-f">Nothing focusable inside: Radix focuses the panel itself. No extra ring; the black border already marks it. This is InfoTip's Popover mode.</div></div>
+</div>
+
+<p class="sub-t">Collisions</p>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>Flip</span><span>side="bottom" → data-side="top"</span></div><div class="stage gray" style="height: 300px; align-items: flex-end; padding-bottom: 28px">
+<span class="edge" style="bottom: 16px"></span><span class="edge-l" style="bottom: 0; right: 8px">viewport edge + 8 px padding</span>
+<span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
+<span class="pp top" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 0h16L8 8z" fill="#FFFFFF"/><path d="M0 0L8 8L16 0" fill="none" stroke="#000000"/></svg></span></span>
+</div><div class="ab-f">No room below, so it opens on top. Arrow and fade origin follow data-side.</div></div>
+<div class="ab"><div class="ab-h"><span>Available height</span><span>content scrolls</span></div><div class="stage gray" style="height: 300px; align-items: flex-start; padding-top: 24px">
+<span class="edge" style="bottom: 16px"></span><span class="edge-l" style="bottom: 0; right: 8px">viewport edge + 8 px padding</span>
+<span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Licence</button>
+<span class="pp bottom" style="width: 320px; height: 196px; padding-right: 8px" role="dialog" aria-label="Licence"><div style="flex: 1; min-height: 0; overflow-y: auto; padding-right: 8px"><p>Photos are licensed for editorial use only. Commercial use requires written permission from the author. Credit the author on every use. Crops are allowed; colour changes are not.</p></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span></span>
+</div><div class="ab-f">Neither side fits the whole panel: max height is the Radix available height, and the panel scrolls. Max width 320 px.</div></div>
+</div>
+</section>
+
+<!-- 05 LAYERING -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Portal and layering</h2></div>
+<p class="sec-d">Tooltip and Popover content is portaled to document.body, so it escapes overflow clipping and stacking contexts. Fixed layer order: page, then Dialog overlay and panel, then Popover, then Tooltip. A Popover opened inside a Dialog sits above it; a Tooltip is always on top.</p>
+
+<div class="ab">
+<div class="ab-h"><span>Popover and Tooltip over a Dialog</span><span>all portaled to body</span></div>
+<div class="stage gray" style="height: 520px; justify-content: flex-start; padding-left: 240px">
+<span class="ov"></span>
+<div class="dlg" role="dialog" aria-modal="true" aria-labelledby="ly-t">
+<div class="hd"><h2 class="ttl" id="ly-t">Share series</h2></div>
+<div class="bd">Choose who can see the photos in this series.</div>
+<div class="ft"><span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Permissions</button>
+<span class="pp right" style="width: 260px" role="dialog" aria-label="Permissions"><p>Viewers can see and download. Editors can also reorder.</p><div style="display: flex; gap: 12px; align-items: center"><span class="anc"><button class="ib focus" aria-label="Copy link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt bottom" role="tooltip">Copy link<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 6h12L6 0z" fill="#141414"/></svg></span></span></div><svg class="aw" width="8" height="16" viewBox="0 0 8 16" aria-hidden="true"><path d="M8 0v16L0 8z" fill="#FFFFFF"/><path d="M8 0L0 8L8 16" fill="none" stroke="#000000"/></svg></span></span>
+<button class="btn pri">Done</button></div>
+</div>
+<div style="position: absolute; left: 24px; top: 24px; display: flex; flex-direction: column; gap: 8px">
+<span class="tag">page · auto</span>
+<span class="tag">Dialog overlay · 50</span>
+<span class="tag">Dialog panel · 51</span>
+<span class="tag">Popover · 60</span>
+<span class="tag">Tooltip · 70</span>
+</div>
+</div>
+<div class="ab-f">The Popover overflows the Dialog panel without clipping because it is portaled. Radix keeps it interactive above the modal Dialog and closes one layer per Esc (Tooltip, then Popover, then Dialog).</div>
+</div>
+</section>
+
+<!-- 06 TIMING -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Delays and motion</h2></div>
+<p class="sec-d">Tooltip opens after 400 ms of hover, at once on keyboard focus. After one tip closes, the next one opens at once if the pointer reaches its trigger within 300 ms (scanning a toolbar). Popover has no delay. Both fade in and out over 120 ms (--ds-motion), no slide or scale, none under prefers-reduced-motion.</p>
+<div class="ab">
+<div class="ab-h"><span>Timeline</span><span>1 px = 4 ms</span></div>
+<div style="display: flex; flex-direction: column; gap: 24px; padding: 32px 24px">
+<div><p class="sub-t" style="margin-bottom: 8px">Tooltip · hover</p>
+<div class="tl"><span class="tick" style="left: 0"></span><b style="left: 0">pointer enters</b><i class="wait" style="left: 0; width: 100px"></i><span class="tick" style="left: 100px"></span><b style="left: 104px">400 ms · delayed-open</b><i class="on" style="left: 100px; width: 300px"></i><span class="tick" style="left: 400px"></span><b style="left: 404px">pointer leaves · closes, 120 ms fade</b></div></div>
+<div><p class="sub-t" style="margin-bottom: 8px">Tooltip · next trigger within 300 ms</p>
+<div class="tl"><i class="on" style="left: 0; width: 160px"></i><span class="tick" style="left: 160px"></span><b style="left: 164px">leaves A</b><i class="wait" style="left: 160px; width: 40px"></i><span class="tick" style="left: 200px"></span><b style="left: 236px">enters B after 160 ms · instant-open</b><i class="on" style="left: 200px; width: 200px"></i></div></div>
+<div><p class="sub-t" style="margin-bottom: 8px">Tooltip · keyboard focus</p>
+<div class="tl"><span class="tick" style="left: 0"></span><b style="left: 0">Tab to trigger · instant-open</b><i class="on" style="left: 0; width: 300px"></i><span class="tick" style="left: 300px"></span><b style="left: 304px">Esc or blur · closes</b></div></div>
+<div><p class="sub-t" style="margin-bottom: 8px">Popover · click</p>
+<div class="tl"><span class="tick" style="left: 0"></span><b style="left: 0">click / tap / Enter · open</b><i class="pop" style="left: 0; width: 360px"></i><span class="tick" style="left: 360px"></span><b style="left: 364px">click trigger, outside, or Esc · closes</b></div></div>
+</div>
+</div>
+</section>
+
+<!-- 07 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Keyboard and dismissal</h2></div>
+<table class="tbl">
+<thead><tr><th>Input</th><th>Tooltip (and InfoTip, non-touch)</th><th>Popover (and InfoTip, touch)</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span> to trigger</td><td>Opens at once (instant-open)</td><td>Focus ring only; stays closed</td></tr>
+<tr><td><span class="kbd">Enter</span> / <span class="kbd">Space</span> on trigger</td><td>Runs the trigger's own action and closes the tip. InfoTip: opens / keeps it open</td><td>Toggles; on open, focus moves to first focusable inside, else the panel</td></tr>
+<tr><td><span class="kbd">Esc</span></td><td>Closes; focus stays on trigger</td><td>Closes; focus returns to trigger</td></tr>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span> while open</td><td>Moves on; blur closes the tip</td><td>Loops inside the panel; with nothing focusable, stays on the panel</td></tr>
+<tr><td>Pointer leaves trigger</td><td>Closes, unless the pointer moves onto the tip</td><td>No effect</td></tr>
+<tr><td>Click / tap outside</td><td>Closes</td><td>Closes; focus is not pulled back to the trigger</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- 08 ANATOMY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Anatomy</h2></div>
+<table class="tbl">
+<thead><tr><th>Part</th><th>Spec</th></tr></thead>
+<tbody>
+<tr><td>Tooltip panel</td><td>fill gray-900, text white, caption 13/20, padding 4 / 8, max width 240, radius 0, no shadow, no border</td></tr>
+<tr><td>Tooltip arrow</td><td>12 × 6, gray-900, arrow padding 8</td></tr>
+<tr><td>Popover panel</td><td>fill white, 1 px black border, body 16/26 gray-700, padding 16, max width 320, max height = available height, radius 0, no shadow</td></tr>
+<tr><td>Popover title</td><td>optional; Red Hat Mono 500 16/24 black; 8 px to body</td></tr>
+<tr><td>Popover close</td><td>optional; 32 × 32 as Dialog close; aria-label "Close"</td></tr>
+<tr><td>Popover arrow</td><td>16 × 8, white fill, 1 px black edges, overlaps the border by 1 px, arrow padding 8</td></tr>
+<tr><td>Offsets</td><td>side offset 4 (trigger to arrow tip); collision padding 8 from the viewport</td></tr>
+<tr><td>InfoTip trigger</td><td>md 32 × 32 (icon 18), sm 24 × 24 (icon 16); info icon gray-600; transparent border; 44 × 44 hit area under (pointer: coarse)</td></tr>
+<tr><td>Layers</td><td>portal to body; Popover 60, Tooltip 70 (Dialog 50 / 51)</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":8000}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

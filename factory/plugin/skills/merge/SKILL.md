@@ -12,6 +12,8 @@ Arguments: `$ARGUMENTS` (task ID).
 
 Read `${CLAUDE_PLUGIN_ROOT}/RULES.md` (in this repo: `factory/plugin/RULES.md`) and apply its **Merging** section exactly. Don't bend any condition: no green check, no merge; approval required and no `factory:approved`, no merge.
 
+This session's id is `${CLAUDE_SESSION_ID}`. Write it to the job file's `session_id` (rules: Job files) so the user can return with `claude --resume ${CLAUDE_SESSION_ID}`.
+
 1. Find the open PR for `feat/DS-<n>-*` and the worktree (recreate from the remote branch + `npm ci` if needed).
 2. Wait for checks (`gh pr checks <n> --watch`, up to 30 min).
 3. Red check → don't merge. Set the job file to `blocked` with the failing check and suggest `/factory:retry DS-<n>` (which feeds the CI log to the Builder).

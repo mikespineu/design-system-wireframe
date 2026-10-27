@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Select</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:32px 24px}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+/* field */
+.lb{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.lb.dtx{color:#767676}
+.hint{font-size:13px;line-height:20px;color:#595959}
+.err{display:flex;align-items:center;gap:6px;font-size:13px;line-height:20px;font-weight:500;color:#A3302B}
+.in{display:block;height:44px;box-sizing:border-box;width:100%;margin:0;padding:0 12px;border:1px solid #C7C7C7;border-radius:0;background:#FFFFFF;font-family:'Red Hat Text',sans-serif;font-size:16px;color:#000000}
+.in::placeholder{color:#767676;opacity:1}
+/* trigger: Input look */
+.trg{box-sizing:border-box;display:flex;align-items:center;gap:8px;width:100%;height:44px;margin:0;padding:0 12px;border:1px solid #C7C7C7;border-radius:0;background:#FFFFFF;font-family:'Red Hat Text',sans-serif;font-size:16px;line-height:26px;color:#000000;text-align:left;cursor:pointer;transition:border-color 120ms cubic-bezier(.2,0,0,1)}
+.trg .v{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trg .ph{color:#767676}
+.chev{flex:none;width:16px;height:16px;color:#000000;transition:transform 120ms cubic-bezier(.2,0,0,1)}
+.trg.hover,.trg.open,.trg.focus{border-color:#000000}
+.trg.focus{outline:2px solid #000000;outline-offset:2px}
+.trg.open .chev{transform:rotate(180deg)}
+.trg.invalid{border:2px solid #A3302B}
+.trg.dis{border-color:#E0E0E0;background:#F7F7F7;color:#767676;cursor:not-allowed}
+.trg.dis .chev{color:#A3A3A3}
+.trg.dis .emo{filter:grayscale(1) contrast(1.1)}
+/* leading emoji slot */
+.emo{flex:none;display:inline-block;width:24px;text-align:center;font-size:16px;line-height:26px;font-weight:400}
+.emo.gray{filter:grayscale(1) contrast(1.1)}
+/* listbox panel */
+.pop{margin-top:-4px}
+.lst{box-sizing:border-box;width:100%;border:1px solid #000000;border-radius:0;background:#FFFFFF;box-shadow:none;display:flex;flex-direction:column}
+.vp{padding:4px 0;display:flex;flex-direction:column}
+.capped{max-height:330px;overflow:hidden}
+.capped .vp{flex:1;min-height:0;overflow:hidden}
+.it{box-sizing:border-box;display:flex;align-items:center;gap:8px;min-height:44px;padding:9px 12px;font-size:16px;line-height:26px;color:#000000;cursor:pointer;transition:background-color 120ms cubic-bezier(.2,0,0,1)}
+.it .lab{flex:1;min-width:0}
+.ind{flex:none;width:16px;height:16px;color:#000000}
+.it.hl{background:#EEEEEE;outline:2px solid #000000;outline-offset:-2px}
+.it.sel{font-weight:500}
+.it.dis{color:#767676;cursor:not-allowed}
+.it.dis .emo{filter:grayscale(1) contrast(1.1)}
+.glb{padding:12px 12px 4px;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#595959}
+.sepr{height:1px;margin:4px 0;background:#E0E0E0}
+.scb{flex:none;display:flex;align-items:center;justify-content:center;height:24px;background:#FFFFFF;color:#000000}
+.scb.up{border-bottom:1px solid #E0E0E0}
+.scb.dn{border-top:1px solid #E0E0E0}
+/* search row */
+.srch{flex:none;box-sizing:border-box;display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-bottom:1px solid #E0E0E0;color:#595959}
+.srch.foc{border-bottom-color:#000000}
+.srch .q{flex:1;min-width:0;font-size:16px;line-height:26px;color:#000000;white-space:nowrap;overflow:hidden}
+.srch .q.ph{color:#767676}
+.caret{display:inline-block;width:1px;height:20px;margin-left:1px;vertical-align:-4px;background:#000000}
+.empty{box-sizing:border-box;min-height:44px;padding:9px 12px;font-size:16px;line-height:26px;color:#595959}
+/* misc */
+.rel{position:relative}
+.dim{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.tag{display:inline-block;padding:0 6px;border:1px solid #C7C7C7;font-family:'Red Hat Mono',monospace;font-size:11px;line-height:18px;color:#595959;text-transform:uppercase;letter-spacing:0.08em}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:8px 16px 8px 0;border-bottom:1px solid #E0E0E0;color:#404040;line-height:22px}
+.tbl td:first-child{white-space:nowrap}
+.code{margin:0;padding:16px;background:#F7F7F7;border:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:20px;color:#000000;white-space:pre;overflow:hidden}
+/* native select: same box, OS list */
+.nwrap{position:relative}
+.nsel{-webkit-appearance:none;appearance:none;box-sizing:border-box;display:block;width:100%;height:44px;margin:0;padding:0 36px 0 12px;border:1px solid #C7C7C7;border-radius:0;background:#FFFFFF;font-family:'Red Hat Text',sans-serif;font-size:16px;line-height:26px;color:#000000}
+.nwrap .chev{position:absolute;right:12px;top:14px;pointer-events:none}
+/* stages */
+.stage{position:relative;height:480px;background:#F7F7F7;border:1px solid #E0E0E0}
+.page{position:absolute;inset:0;padding:24px;display:flex;flex-direction:column;gap:12px}
+.page i{display:block;height:12px;background:#C7C7C7}
+.ov{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.dlg{position:absolute;left:40px;right:40px;top:40px;height:236px;box-sizing:border-box;background:#FFFFFF;border:1px solid #000000;display:flex;flex-direction:column}
+.dlg-h{padding:24px 24px 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:22px;line-height:29px;color:#000000}
+.dlg-b{padding:16px 24px 24px;display:flex;flex-direction:column;gap:8px}
+.float{position:absolute;left:0;right:0;z-index:2}
+.vpline{position:absolute;left:0;right:0;bottom:0;height:0;border-top:1px dashed #000000}
+.phone{position:relative;width:300px;height:560px;margin:0 auto;box-sizing:border-box;border:1px solid #C7C7C7;background:#FFFFFF;overflow:hidden}
+.phone-b{padding:24px 16px;display:flex;flex-direction:column;gap:8px}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#F7F7F7;border-top:1px solid #C7C7C7;padding:8px 0 16px;font-family:system-ui,sans-serif}
+.sheet .og{padding:10px 16px 4px;font-size:12px;line-height:16px;font-weight:600;color:#595959}
+.sheet .op{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:40px;font-size:16px;color:#000000;border-bottom:1px solid #E0E0E0}
+.sheet .op.on{font-weight:600}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 8600px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Select · DS-17 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Select</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">Pick one value from a list. The closed trigger is an Input: 44 px, gray-300 border, body 16/26, same hover, focus, invalid and disabled treatment, wired by Field (label, hint, error). It opens a square listbox with a 1 px black border, no shadow, below the trigger. Options can carry a leading emoji (flags), can be split into "Top choices" and the rest, and can be filtered by an optional search field. Built on Radix Select; the search variant uses Radix Popover with an ARIA combobox. On touch-first devices it renders a native &lt;select&gt; from the same props.</p>
+</header>
+
+<!-- 01 ANATOMY & SIZE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Anatomy &amp; size</h2></div>
+<p class="sec-d">One size, md, like Input: the trigger is 44 px tall at every width and fills its container. The open list matches the trigger width (wider only if an option needs it, up to the viewport), opens 4 px below it, and is capped at 7.5 rows (330 px). The half row at the cut tells the user the list scrolls.</p>
+<div class="grid3">
+
+<div class="ab">
+<div class="ab-h"><span>Trigger · md (only size)</span><span>44 px · padding 0 12 · gap 8 · chevron 16</span></div>
+<div class="ab-b">
+<span class="lb">Plan</span>
+<div class="trg"><span class="v ph">Select a plan</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="hint">You can change plans at any time.</span>
+</div>
+<div class="ab-f">Value or placeholder (one line, ellipsis), then the chevron-down Icon, 16 px, 1.5 stroke, black. With an emoji, a 24 px emoji slot comes first.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Alignment with Input</span><span>same height, border, type</span></div>
+<div class="ab-b" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px">
+<span class="lb">City (Input)</span>
+<span class="lb">Country (Select)</span>
+<input class="in" type="text" placeholder="Porto" aria-label="City (Input)">
+<div class="trg"><span class="v ph">Select</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+</div>
+<div class="ab-f">Side by side in a form row they share top, bottom and text baseline. Text starts 12 px in on both.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Listbox anatomy</span><span>panel · group label · item · separator</span></div>
+<div class="ab-b">
+<div class="lst">
+<div class="vp">
+<div class="glb">Top choices</div>
+<div class="it"><span class="emo" aria-hidden="true">🇵🇱</span><span class="lab">Poland</span><span class="ind"></span></div>
+<div class="it sel"><span class="emo" aria-hidden="true">🇩🇪</span><span class="lab">Germany</span><svg class="ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+<div class="sepr"></div>
+<div class="glb">All countries</div>
+<div class="it"><span class="emo" aria-hidden="true">🇦🇱</span><span class="lab">Albania</span><span class="ind"></span></div>
+</div>
+</div>
+<span class="dim">panel: 1 px black border, white, 4 px top/bottom padding<br>group label: mono 12/16 uppercase, gray-600, padding 12 · 12 · 4<br>item: min 44 px, padding 9 × 12, emoji 24 · gap 8 · label · check 16<br>separator: 1 px gray-200, 4 px above and below</span>
+</div>
+<div class="ab-f">Item text starts 12 px in, like the trigger, so a value lines up with its option. The check slot is always reserved so labels never shift.</div>
+</div>
+
+</div>
+</section>
+
+<!-- 02 TRIGGER STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Trigger states</h2></div>
+<p class="sec-d">One artboard per state, inside Field. Header right names what changes against Default. The trigger never shows a fill change on hover, exactly like Input.</p>
+<div class="grid3">
+
+<div class="ab">
+<div class="ab-h"><span>Default · placeholder</span><span>border gray-300 · text gray-500</span></div>
+<div class="ab-b">
+<span class="lb">Country</span>
+<div class="trg"><span class="v ph">Select a country</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="hint">Where the prints ship to.</span>
+</div>
+<div class="ab-f">No value. <code>[data-placeholder]</code> on the trigger.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Filled · preselected</span><span>text black · emoji shown</span></div>
+<div class="ab-b">
+<span class="lb">Country</span>
+<div class="trg"><span class="emo" aria-hidden="true">🇵🇱</span><span class="v">Poland</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="hint">Where the prints ship to.</span>
+</div>
+<div class="ab-f"><code>defaultValue="PL"</code> (or controlled <code>value</code>). The option's emoji shows in front of the value.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Hover</span><span>border black</span></div>
+<div class="ab-b">
+<span class="lb">Country</span>
+<div class="trg hover"><span class="emo" aria-hidden="true">🇵🇱</span><span class="v">Poland</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="hint">Where the prints ship to.</span>
+</div>
+<div class="ab-f">Transition <code>--ds-motion</code>. Not on disabled or invalid.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Focus (keyboard)</span><span>border black + 2 px ring, 2 px offset</span></div>
+<div class="ab-b">
+<span class="lb">Country</span>
+<div class="trg focus"><span class="emo" aria-hidden="true">🇵🇱</span><span class="v">Poland</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="hint">Where the prints ship to.</span>
+</div>
+<div class="ab-f"><code>:focus-visible</code>. Also seen after the list closes, when focus returns to the trigger.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open</span><span>border black · chevron up · list below</span></div>
+<div class="ab-b">
+<span class="lb">Plan</span>
+<div class="trg open"><span class="v">Team</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<div class="pop"><div class="lst"><div class="vp">
+<div class="it"><span class="lab">Studio</span><span class="ind"></span></div>
+<div class="it sel hl"><span class="lab">Team</span><svg class="ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+<div class="it dis"><span class="lab">Enterprise · contact sales</span><span class="ind"></span></div>
+</div></div></div>
+</div>
+<div class="ab-f"><code>[data-state="open"]</code>. No ring on the trigger: focus is on the highlighted item, which opens on the current value.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Disabled</span><span>border gray-200 · fill gray-50 · text gray-500 · chevron gray-400</span></div>
+<div class="ab-b">
+<span class="lb dtx">Country</span>
+<div class="trg dis"><span class="v">Select a country</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="hint">Where the prints ship to.</span>
+</div>
+<div class="ab-f"><code>[data-disabled]</code>. Not focusable, <code>cursor: not-allowed</code>, no hover.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Disabled · filled</span><span>value gray-500 · emoji monochrome</span></div>
+<div class="ab-b">
+<span class="lb dtx">Country</span>
+<div class="trg dis"><span class="emo" aria-hidden="true">🇵🇱</span><span class="v">Poland</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="hint">Set by your account region.</span>
+</div>
+<div class="ab-f">The emoji gets the monochrome filter so the whole control reads as off.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Invalid</span><span>2 px error border + message</span></div>
+<div class="ab-b">
+<span class="lb">Country *</span>
+<div class="trg invalid"><span class="v ph">Select a country</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Error: select a country</span>
+</div>
+<div class="ab-f"><code>[aria-invalid="true"]</code> from Field <code>error</code>. Hover keeps the error border.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Invalid + focus</span><span>error border kept + black ring</span></div>
+<div class="ab-b">
+<span class="lb">Country *</span>
+<div class="trg invalid focus" style="border-color: #A3302B"><span class="v ph">Select a country</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Error: select a country</span>
+</div>
+<div class="ab-f">Open + invalid also keeps the error border; the error colour is never replaced by black.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Long value</span><span>one line · ellipsis</span></div>
+<div class="ab-b">
+<span class="lb">Country</span>
+<div class="trg"><span class="emo" aria-hidden="true">🇬🇸</span><span class="v">South Georgia and the South Sandwich Islands</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="hint">Where the prints ship to.</span>
+</div>
+<div class="ab-f">The trigger never grows. The full label is in the list (items wrap) and in the accessible value.</div>
+</div>
+
+</div>
+</section>
+
+<!-- 03 ITEM STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Item states</h2></div>
+<p class="sec-d">Each artboard shows the open list with the state on the middle item. Highlighted is the one active item (pointer hover or arrow keys): gray-100 fill plus a 2 px black inset ring, so the keyboard position is as visible as any focus ring in the system. Selected is a black check and weight 500, never colour alone.</p>
+<div class="grid3">
+
+<div class="ab">
+<div class="ab-h"><span>Default</span><span>white · text black</span></div>
+<div class="ab-b"><div class="lst"><div class="vp">
+<div class="it"><span class="lab">Studio</span><span class="ind"></span></div>
+<div class="it"><span class="lab">Team</span><span class="ind"></span></div>
+<div class="it"><span class="lab">Agency</span><span class="ind"></span></div>
+</div></div></div>
+<div class="ab-f">Whole row is the target, <code>cursor: pointer</code>.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Highlighted</span><span>fill gray-100 + 2 px black inset ring</span></div>
+<div class="ab-b"><div class="lst"><div class="vp">
+<div class="it"><span class="lab">Studio</span><span class="ind"></span></div>
+<div class="it hl"><span class="lab">Team</span><span class="ind"></span></div>
+<div class="it"><span class="lab">Agency</span><span class="ind"></span></div>
+</div></div></div>
+<div class="ab-f"><code>[data-highlighted]</code>. Same for pointer and keyboard: Radix moves focus with the pointer, so there is only ever one active item.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Selected</span><span>check black · weight 500</span></div>
+<div class="ab-b"><div class="lst"><div class="vp">
+<div class="it"><span class="lab">Studio</span><span class="ind"></span></div>
+<div class="it sel"><span class="lab">Team</span><svg class="ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+<div class="it"><span class="lab">Agency</span><span class="ind"></span></div>
+</div></div></div>
+<div class="ab-f"><code>[data-state="checked"]</code>. Check is <code>Select.ItemIndicator</code>, 16 px, 2 px stroke, at the end of the row.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Selected + highlighted</span><span>both treatments</span></div>
+<div class="ab-b"><div class="lst"><div class="vp">
+<div class="it"><span class="lab">Studio</span><span class="ind"></span></div>
+<div class="it sel hl"><span class="lab">Team</span><svg class="ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+<div class="it"><span class="lab">Agency</span><span class="ind"></span></div>
+</div></div></div>
+<div class="ab-f">The state right after opening: the list opens on the current value.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Disabled</span><span>text gray-500 · emoji monochrome · skipped</span></div>
+<div class="ab-b"><div class="lst"><div class="vp">
+<div class="it hl"><span class="emo" aria-hidden="true">🇵🇱</span><span class="lab">Poland</span><span class="ind"></span></div>
+<div class="it dis"><span class="emo" aria-hidden="true">🇷🇺</span><span class="lab">Russia · not shipping</span><span class="ind"></span></div>
+<div class="it"><span class="emo" aria-hidden="true">🇸🇰</span><span class="lab">Slovakia</span><span class="ind"></span></div>
+</div></div></div>
+<div class="ab-f"><code>[data-disabled]</code>. <code>cursor: not-allowed</code>, never highlighted; arrow keys and typeahead jump from Poland to Slovakia.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Long label</span><span>wraps · first line centred on emoji and check</span></div>
+<div class="ab-b"><div class="lst"><div class="vp">
+<div class="it"><span class="emo" aria-hidden="true">🇸🇪</span><span class="lab">Sweden</span><span class="ind"></span></div>
+<div class="it" style="align-items: flex-start"><span class="emo" aria-hidden="true">🇬🇸</span><span class="lab">South Georgia and the South Sandwich Islands</span><span class="ind" style="margin-top: 5px"></span></div>
+<div class="it"><span class="emo" aria-hidden="true">🇨🇭</span><span class="lab">Switzerland</span><span class="ind"></span></div>
+</div></div></div>
+<div class="ab-f">Items wrap instead of truncating. The row grows in 26 px lines; padding stays 9 px.</div>
+</div>
+
+</div>
+</section>
+
+<!-- 04 PRESELECTED, EMOJI, TOP CHOICES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Preselected, emoji &amp; top choices</h2></div>
+<p class="sec-d">topValues lists a few options first under "Top choices", then a separator, then every other option under a second label. An option appears once only, in the top group if it is listed there. The emoji is decorative: it is shown in the item and in the trigger, but the accessible name is the label.</p>
+<div class="grid2">
+
+<div class="ab">
+<div class="ab-h"><span>Closed · preselected</span><span>defaultValue="DE"</span></div>
+<div class="ab-b">
+<span class="lb">Ship to</span>
+<div class="trg"><span class="emo" aria-hidden="true">🇩🇪</span><span class="v">Germany</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="hint">We ship to 42 countries.</span>
+</div>
+<div class="ab-f">Announced as "Ship to, Germany, combobox, collapsed". The flag is <code>aria-hidden</code>.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · top choices + all</span><span>capped at 7.5 rows · scroll button</span></div>
+<div class="ab-b">
+<span class="lb">Ship to</span>
+<div class="trg open"><span class="emo" aria-hidden="true">🇩🇪</span><span class="v">Germany</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<div class="pop"><div class="lst capped">
+<div class="vp">
+<div class="glb">Top choices</div>
+<div class="it"><span class="emo" aria-hidden="true">🇵🇱</span><span class="lab">Poland</span><span class="ind"></span></div>
+<div class="it sel hl"><span class="emo" aria-hidden="true">🇩🇪</span><span class="lab">Germany</span><svg class="ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+<div class="it"><span class="emo" aria-hidden="true">🇬🇧</span><span class="lab">United Kingdom</span><span class="ind"></span></div>
+<div class="sepr"></div>
+<div class="glb">All countries</div>
+<div class="it"><span class="emo" aria-hidden="true">🇦🇱</span><span class="lab">Albania</span><span class="ind"></span></div>
+<div class="it"><span class="emo" aria-hidden="true">🇩🇿</span><span class="lab">Algeria</span><span class="ind"></span></div>
+<div class="it"><span class="emo" aria-hidden="true">🇦🇹</span><span class="lab">Austria</span><span class="ind"></span></div>
+<div class="it"><span class="emo" aria-hidden="true">🇧🇪</span><span class="lab">Belgium</span><span class="ind"></span></div>
+</div>
+<div class="scb dn" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></div>
+</div></div>
+</div>
+<div class="ab-f">Group labels are <code>Select.Label</code> inside <code>Select.Group</code>. Scroll up / down buttons (24 px, chevron) appear only when there is more in that direction. The list scrolls to the selected item on open.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Emoji slot alignment</span><span>slot reserved when any option has one</span></div>
+<div class="ab-b"><div class="lst"><div class="vp">
+<div class="it"><span class="emo" aria-hidden="true">🇪🇺</span><span class="lab">European Union</span><span class="ind"></span></div>
+<div class="it"><span class="emo" aria-hidden="true">🇺🇳</span><span class="lab">United Nations</span><span class="ind"></span></div>
+<div class="it sel"><span class="emo" aria-hidden="true"></span><span class="lab">Other / not listed</span><svg class="ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+</div></div>
+<div class="trg" style="margin-top: 16px"><span class="emo" aria-hidden="true"></span><span class="v">Other / not listed</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+</div>
+<div class="ab-f">An option without an emoji keeps the empty 24 px slot so labels line up, in the list and in the trigger. When no option has an emoji, there is no slot at all.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Alternative · not proposed</span><span>monochrome emoji</span></div>
+<div class="ab-b"><div class="lst"><div class="vp">
+<div class="it"><span class="emo gray" aria-hidden="true">🇵🇱</span><span class="lab">Poland</span><span class="ind"></span></div>
+<div class="it hl"><span class="emo gray" aria-hidden="true">🇩🇪</span><span class="lab">Germany</span><span class="ind"></span></div>
+<div class="it"><span class="emo gray" aria-hidden="true">🇬🇧</span><span class="lab">United Kingdom</span><span class="ind"></span></div>
+</div></div></div>
+<div class="ab-f">Grayscale like the photo rule. Not proposed: emoji are content, flags lose recognition in gray, and the native picker on touch cannot be filtered, so the two renderers would differ. Proposed: full-colour emoji; monochrome only when disabled. Shown for the review decision.</div>
+</div>
+
+</div>
+</section>
+
+<!-- 05 SEARCH -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Search (optional)</h2></div>
+<p class="sec-d">searchable adds a search field at the top of the open list. It is a 44 px row with a search icon and a gray-200 bottom divider that turns black while the field has focus; it stays put while the list scrolls. Typing filters by label (and keywords), ignoring case and accents. While a query is typed, group labels and the separator are hidden and matches are listed flat, top choices first. The first match is highlighted.</p>
+<div class="grid3">
+
+<div class="ab">
+<div class="ab-h"><span>Open · empty query</span><span>focus in field · groups shown</span></div>
+<div class="ab-b">
+<span class="lb">Ship to</span>
+<div class="trg open"><span class="emo" aria-hidden="true">🇩🇪</span><span class="v">Germany</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<div class="pop"><div class="lst">
+<div class="srch foc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="q ph"><span class="caret"></span>Search countries</span></div>
+<div class="vp">
+<div class="glb">Top choices</div>
+<div class="it"><span class="emo" aria-hidden="true">🇵🇱</span><span class="lab">Poland</span><span class="ind"></span></div>
+<div class="it sel hl"><span class="emo" aria-hidden="true">🇩🇪</span><span class="lab">Germany</span><svg class="ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+<div class="it"><span class="emo" aria-hidden="true">🇬🇧</span><span class="lab">United Kingdom</span><span class="ind"></span></div>
+<div class="sepr"></div>
+<div class="glb">All countries</div>
+<div class="it"><span class="emo" aria-hidden="true">🇦🇱</span><span class="lab">Albania</span><span class="ind"></span></div>
+</div>
+</div></div>
+</div>
+<div class="ab-f">DOM focus stays in the field; the active option is pointed to by <code>aria-activedescendant</code> and drawn with the same highlighted treatment.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Filtered · "ger"</span><span>flat list · first match active</span></div>
+<div class="ab-b">
+<span class="lb">Ship to</span>
+<div class="trg open"><span class="emo" aria-hidden="true">🇩🇪</span><span class="v">Germany</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<div class="pop"><div class="lst">
+<div class="srch foc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="q">ger<span class="caret"></span></span></div>
+<div class="vp">
+<div class="it sel hl"><span class="emo" aria-hidden="true">🇩🇪</span><span class="lab">Germany</span><svg class="ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+<div class="it"><span class="emo" aria-hidden="true">🇩🇿</span><span class="lab">Algeria</span><span class="ind"></span></div>
+<div class="it"><span class="emo" aria-hidden="true">🇳🇪</span><span class="lab">Niger</span><span class="ind"></span></div>
+<div class="it"><span class="emo" aria-hidden="true">🇳🇬</span><span class="lab">Nigeria</span><span class="ind"></span></div>
+</div>
+</div></div>
+<span class="sr" role="status">4 results</span>
+</div>
+<div class="ab-f">Substring match, so "ger" also finds Algeria and Niger. A polite live region says "4 results". The list shrinks to fit; it never jumps above the trigger while typing.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>No results · "atlantis"</span><span>muted message · nothing active</span></div>
+<div class="ab-b">
+<span class="lb">Ship to</span>
+<div class="trg open"><span class="emo" aria-hidden="true">🇩🇪</span><span class="v">Germany</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<div class="pop"><div class="lst">
+<div class="srch foc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="q">atlantis<span class="caret"></span></span></div>
+<div class="vp">
+<div class="empty">No results for “atlantis”</div>
+</div>
+</div></div>
+<span class="sr" role="status">No results</span>
+</div>
+<div class="ab-f">The message is not an option (not in the listbox) and is announced by the live region. Enter does nothing; Esc closes and keeps Germany.</div>
+</div>
+
+</div>
+</section>
+
+<!-- 06 NATIVE ON TOUCH -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Native on touch</h2></div>
+<p class="sec-d">On touch-first devices, matched by <code>(hover: none) and (pointer: coarse)</code>, Select renders a native &lt;select&gt; from the same props. The closed control looks identical (appearance none, same border, padding, chevron). The open list is the OS picker: top choices become an &lt;optgroup&gt;, the emoji is part of the option text, and there is no search field.</p>
+<div class="grid3">
+
+<div class="ab">
+<div class="ab-h"><span>Closed · native</span><span>identical to the custom trigger</span></div>
+<div class="ab-b">
+<label class="lb" for="nat-1">Ship to</label>
+<div class="nwrap">
+<select id="nat-1" class="nsel">
+<option value="" disabled hidden>Select a country</option>
+<optgroup label="Top choices">
+<option value="PL">🇵🇱 Poland</option>
+<option value="DE" selected>🇩🇪 Germany</option>
+<option value="GB">🇬🇧 United Kingdom</option>
+</optgroup>
+<optgroup label="All countries">
+<option value="AL">🇦🇱 Albania</option>
+<option value="DZ">🇩🇿 Algeria</option>
+<option value="AT">🇦🇹 Austria</option>
+</optgroup>
+</select>
+<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+</div>
+<span class="hint">We ship to 42 countries.</span>
+<div class="trg focus" style="margin-top: 24px"><span class="v">🇩🇪 Germany</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<span class="dim">focus · same ring</span>
+</div>
+<div class="ab-f">Right padding 36 px leaves room for the chevron, which is an Icon over the select (<code>pointer-events: none</code>). The emoji sits in the text, with a normal space, so there is no 24 px slot.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Open · OS picker</span><span>illustrative · not styled by us</span></div>
+<div class="ab-b">
+<div class="phone">
+<div class="phone-b">
+<span class="lb">Ship to</span>
+<div class="trg focus"><span class="v">🇩🇪 Germany</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+</div>
+<div class="sheet" aria-hidden="true">
+<div class="og">Top choices</div>
+<div class="op">🇵🇱 Poland</div>
+<div class="op on">🇩🇪 Germany <span>✓</span></div>
+<div class="op">🇬🇧 United Kingdom</div>
+<div class="og">All countries</div>
+<div class="op">🇦🇱 Albania</div>
+<div class="op">🇩🇿 Algeria</div>
+<div class="op">🇦🇹 Austria</div>
+</div>
+</div>
+</div>
+<div class="ab-f">iOS shows a wheel or menu, Android a dialog. Both show optgroup labels, disabled options and the emoji. No search, no scroll buttons, no 7.5-row cap.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Markup from the same props</span><span>options · topValues · value</span></div>
+<div class="ab-b">
+<pre class="code">&lt;select id="ship" name="country"
+  aria-describedby="ship-hint"
+  data-ds-select&gt;
+  &lt;option value="" disabled hidden&gt;
+    Select a country&lt;/option&gt;
+  &lt;optgroup label="Top choices"&gt;
+    &lt;option value="PL"&gt;🇵🇱 Poland&lt;/option&gt;
+    &lt;option value="DE"&gt;🇩🇪 Germany&lt;/option&gt;
+    &lt;option value="GB"&gt;🇬🇧 United Kingdom&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="All countries"&gt;
+    &lt;option value="AL"&gt;🇦🇱 Albania&lt;/option&gt;
+    …
+    &lt;option value="RU" disabled&gt;
+      🇷🇺 Russia · not shipping&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</pre>
+<table class="tbl" style="font-size: 13px">
+<thead><tr><th scope="col">native</th><th scope="col">renders</th></tr></thead>
+<tbody>
+<tr><td>"auto" (default)</td><td>native when the media query matches, after mount</td></tr>
+<tr><td>true</td><td>always native, also on the server</td></tr>
+<tr><td>false</td><td>never native</td></tr>
+</tbody>
+</table>
+</div>
+<div class="ab-f">Without topValues there are no optgroups. <code>searchable</code> is ignored. SSR and first client render use the custom trigger; it looks the same, so the swap is invisible.</div>
+</div>
+
+</div>
+</section>
+
+<!-- 07 LAYERING -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Layering &amp; position</h2></div>
+<p class="sec-d">The list renders in a portal at the end of body, so a scrolling or clipped parent (a Dialog body, a table cell) never cuts it. It sits above Dialog (overlay 50, panel 51) at z-index 60. It opens below the trigger, start-aligned, 4 px gap, and flips above when there is not enough room below; it keeps 8 px from the viewport edges.</p>
+<div class="grid2">
+
+<div class="ab">
+<div class="ab-h"><span>Inside a Dialog</span><span>portal · escapes the panel · above overlay</span></div>
+<div class="ab-b">
+<div class="stage">
+<div class="page"><i style="width:40%"></i><i style="width:70%"></i><i style="width:55%"></i><i style="width:65%"></i></div>
+<div class="ov"></div>
+<div class="dlg">
+<div class="dlg-h">Shipping address</div>
+<div class="dlg-b">
+<span class="lb">Country</span>
+<div class="rel">
+<div class="trg open"><span class="emo" aria-hidden="true">🇵🇱</span><span class="v">Poland</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+<div class="float lst" style="top: calc(100% + 4px)"><div class="vp">
+<div class="glb">Top choices</div>
+<div class="it sel hl"><span class="emo" aria-hidden="true">🇵🇱</span><span class="lab">Poland</span><svg class="ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+<div class="it"><span class="emo" aria-hidden="true">🇩🇪</span><span class="lab">Germany</span><span class="ind"></span></div>
+<div class="sepr"></div>
+<div class="glb">All countries</div>
+<div class="it"><span class="emo" aria-hidden="true">🇦🇱</span><span class="lab">Albania</span><span class="ind"></span></div>
+<div class="it"><span class="emo" aria-hidden="true">🇩🇿</span><span class="lab">Algeria</span><span class="ind"></span></div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ab-f">The list crosses the panel's bottom border. Esc closes the list only; a second Esc closes the Dialog.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>Near the viewport bottom</span><span>flips above · same 4 px gap</span></div>
+<div class="ab-b">
+<div class="stage" style="background: #FFFFFF">
+<div style="position: absolute; left: 40px; right: 40px; bottom: 32px; display: flex; flex-direction: column; gap: 8px">
+<span class="lb">Plan</span>
+<div class="rel">
+<div class="float lst" style="bottom: calc(100% + 4px)"><div class="vp">
+<div class="it"><span class="lab">Studio</span><span class="ind"></span></div>
+<div class="it sel hl"><span class="lab">Team</span><svg class="ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+<div class="it"><span class="lab">Agency</span><span class="ind"></span></div>
+<div class="it dis"><span class="lab">Enterprise · contact sales</span><span class="ind"></span></div>
+</div></div>
+<div class="trg open"><span class="v">Team</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+</div>
+</div>
+<div class="vpline"></div>
+</div>
+</div>
+<div class="ab-f">Dashed line = viewport bottom. Max height is the smaller of 7.5 rows and the space Radix reports as available on the chosen side.</div>
+</div>
+
+</div>
+</section>
+
+<!-- 08 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Keyboard</h2></div>
+<p class="sec-d">The trigger is one tab stop. While the list is open, focus stays in the list (Tab does nothing) until a choice is made or Esc is pressed; focus then returns to the trigger.</p>
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>Default · Radix Select</span><span>focus moves onto items</span></div>
+<div class="ab-b">
+<table class="tbl">
+<thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift</span> <span class="kbd">Tab</span></td><td>Closed: focus in / out of the trigger. Open: no action.</td></tr>
+<tr><td><span class="kbd">Enter</span> <span class="kbd">Space</span> <span class="kbd">↓</span> <span class="kbd">↑</span></td><td>Closed: open, highlight the selected item, or the first enabled one.</td></tr>
+<tr><td>Letters (closed)</td><td>Typeahead: select the next option whose label starts with the typed text, without opening.</td></tr>
+<tr><td><span class="kbd">↓</span> / <span class="kbd">↑</span></td><td>Open: next / previous enabled item. Stops at the ends (no wrap). Scrolls into view.</td></tr>
+<tr><td><span class="kbd">Home</span> / <span class="kbd">End</span></td><td>Open: first / last enabled item.</td></tr>
+<tr><td>Letters (open)</td><td>Typeahead: highlight the next match. The emoji is ignored.</td></tr>
+<tr><td><span class="kbd">Enter</span> / <span class="kbd">Space</span></td><td>Open: select the highlighted item, close, focus the trigger.</td></tr>
+<tr><td><span class="kbd">Esc</span></td><td>Open: close without changing the value, focus the trigger. Does not reach a parent Dialog.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="ab">
+<div class="ab-h"><span>searchable · Popover + combobox</span><span>focus stays in the search field</span></div>
+<div class="ab-b">
+<table class="tbl">
+<thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift</span> <span class="kbd">Tab</span></td><td>Closed: focus in / out of the trigger. Open: no action (focus is trapped in the field).</td></tr>
+<tr><td><span class="kbd">Enter</span> <span class="kbd">Space</span> <span class="kbd">↓</span> <span class="kbd">↑</span></td><td>Closed: open, focus the search field, activate the selected option or the first enabled one.</td></tr>
+<tr><td>Letters (closed)</td><td>Open and start the query with that character.</td></tr>
+<tr><td>Letters, <span class="kbd">Space</span>, <span class="kbd">⌫</span></td><td>Open: edit the query; the list filters and the first match becomes active.</td></tr>
+<tr><td><span class="kbd">↓</span> / <span class="kbd">↑</span></td><td>Open: next / previous enabled match via <code>aria-activedescendant</code>. No wrap.</td></tr>
+<tr><td><span class="kbd">Home</span> / <span class="kbd">End</span> <span class="kbd">←</span> <span class="kbd">→</span></td><td>Move the caret in the field (native text editing).</td></tr>
+<tr><td><span class="kbd">Enter</span></td><td>Select the active option, close, focus the trigger. No action with no results; never submits the form.</td></tr>
+<tr><td><span class="kbd">Esc</span></td><td>Close without changing the value, clear the query, focus the trigger.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":8600}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
