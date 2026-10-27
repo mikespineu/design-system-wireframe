@@ -266,8 +266,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers all four sides in sm/md/lg (and full on mobile), with overlay, title, scrolling body, footer and close
     - Spec names Radix `Dialog` and defines focus trap, Escape, outside click and slide motion with `prefers-reduced-motion`
     - Spec maps every part to `--ds-*` tokens, reusing Dialog's overlay and panel tokens
-- [ ] **DS-45 Drawer — implementation.** Build `Drawer` in `src/components/Drawer/` on Radix `Dialog` with a `side` prop (`left` / `right` / `top` / `bottom`), title and description required, styled via `[data-state]`.
-  - type: build · has_ui: yes · depends_on: DS-44 · needs_human: no · status: todo
+- [x] **DS-45 Drawer — implementation.** Build `Drawer` in `src/components/Drawer/` on Radix `Dialog` with a `side` prop (`left` / `right` / `top` / `bottom`), title and description required, styled via `[data-state]`.
+  - type: build · has_ui: yes · depends_on: DS-44 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec on every side and size
     - Focus moves in on open and back to the trigger on close; Escape and overlay click close
@@ -382,3 +382,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-30** SegmentedControl — implementation — https://github.com/mikespineu/design-system-wireframe/pull/59
 - **DS-31** TileGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/63
 - **DS-40** Toast — implementation — https://github.com/mikespineu/design-system-wireframe/pull/78
+- **DS-45** Drawer — implementation — https://github.com/mikespineu/design-system-wireframe/pull/79
