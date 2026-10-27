@@ -1,9 +1,11 @@
 import type { Preview } from '@storybook/react-vite'
 import '../src/styles/tailwind.css'
+import { TooltipProvider } from '../src/components/Tooltip'
 
 document.documentElement.setAttribute('data-theme', 'default')
 
 const preview: Preview = {
+  decorators: [(Story) => <TooltipProvider><Story /></TooltipProvider>],
   parameters: {
     options: { storySort: { order: ['Introduction', 'Foundations', 'Components', 'Patterns'] } },
     controls: {
