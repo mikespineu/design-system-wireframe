@@ -73,11 +73,25 @@
       "x": 13680,
       "y": 0
     },
+    "InfoTip.dc.html": {
+      "h": 8000,
+      "title": "InfoTip, Tooltip & Popover",
+      "w": 1440,
+      "x": 15200,
+      "y": 0
+    },
+    "Icon.dc.html": {
+      "h": 11600,
+      "title": "Icon",
+      "w": 1440,
+      "x": 16720,
+      "y": 0
+    },
     "Button.dc.html": {
       "h": 11200,
       "title": "Button",
       "w": 1440,
-      "x": 15200,
+      "x": 18240,
       "y": 0
     }
   },
@@ -110,6 +124,8 @@
     "Toggle.dc.html",
     "Theming.dc.html",
     "RadioGroup.dc.html",
+    "InfoTip.dc.html",
+    "Icon.dc.html",
     "Button.dc.html"
   ],
   "pages": [],

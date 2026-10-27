@@ -100,18 +100,20 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers selected, unselected, disabled, focus and invalid, in both orientations
     - Spec names Radix `RadioGroup` and maps every state to tokens
     - Spec documents arrow-key and roving-tabindex behavior
-- [ ] **DS-16 RadioGroup — implementation.** Build `RadioGroup` in `src/components/RadioGroup/` on Radix `RadioGroup`, styled via `[data-state]` / `[data-disabled]`.
-  - type: build · has_ui: yes · depends_on: DS-15 · needs_human: no · status: todo
+- [x] **DS-16 RadioGroup — implementation.** Build `RadioGroup` in `src/components/RadioGroup/` on Radix `RadioGroup`, styled via `[data-state]` / `[data-disabled]`.
+  - type: build · has_ui: yes · depends_on: DS-15 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state
     - Arrow keys move selection; Tab enters and leaves the group once
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-17 Select — design.** Define a trigger styled as Input, the open listbox, item states (highlighted, selected, disabled), groups, and the placeholder, inside Field.
+- [ ] **DS-17 Select — design.** Define a trigger styled as Input, the open listbox, item states (highlighted, selected, disabled), groups, and the placeholder, inside Field. Options can be preselected (`value` / `defaultValue`) and can carry a leading emoji such as a country flag. The list can be split into two groups, top choices first and then all other options. An optional search field filters the list. On mobile/touch it renders a native `<select>`.
   - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
   - done_when:
     - Canvas covers trigger default, hover, focus, open, disabled and invalid, plus item highlighted, selected and disabled
-    - Spec names Radix `Select` and defines portal layering and max height
-    - Spec matches `Input` / `TextField` tokens and the 44 px height
+    - Canvas shows a preselected value, options with leading emoji (flags), and the open list split into "Top choices" then the other options with a separator
+    - Canvas shows the optional search field in the open list, a filtered result and the no-results state
+    - Spec names the Radix primitive(s) (Radix `Select` without search; for search it states the approach, since Radix `Select` can't filter) and defines portal layering, max height, the `value` / `defaultValue` API, and `Input` / `TextField` tokens with the 44 px height
+    - Spec defines the native `<select>` on mobile/touch: the detection rule, top choices as an `<optgroup>`, emoji in the `<option>` text, and no search there
 - [ ] **DS-18 Select — implementation.** Build `Select` and `SelectField` in `src/components/Select/` on Radix `Select`, wired to `Field` via `useFieldControl()`, styled via `[data-state]` / `[data-highlighted]`.
   - type: build · has_ui: yes · depends_on: DS-17 · needs_human: no · status: todo
   - done_when:
@@ -239,8 +241,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `useToast()` shows, updates and dismisses toasts; auto-dismiss pauses on hover and focus
     - Action button runs its callback and closes the toast; tested with `userEvent`
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-41 Tooltip, Popover & InfoTip — design.** Define `Tooltip` (hover/focus, text only), `Popover` (click, any content) and `InfoTip`: one component that is a Popover when the `(pointer: coarse)` media query matches (touch as the primary input) and a Tooltip otherwise.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-41 Tooltip, Popover & InfoTip — design.** Define `Tooltip` (hover/focus, text only), `Popover` (click, any content) and `InfoTip`: one component that is a Popover when the `(pointer: coarse)` media query matches (touch as the primary input) and a Tooltip otherwise.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers Tooltip and Popover on all four sides, with arrow, open/closed, and InfoTip in touch vs non-touch mode
     - Spec names Radix `Tooltip` and `Popover` and defines delays, collision handling and portal layering
@@ -312,8 +314,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Icons
 
-- [ ] **DS-46 Icon system — design.** Define the bring-your-own icon model: the design system ships no public icon set, `Icon` renders any SVG icon component, and components fall back to private default glyphs. Draw the default glyph set in the wireframe style (24 px grid, stroke only, butt caps, miter joins): close, check, alert, info, warning, success, plus, minus, chevron-down / -left / -right. Specify the role map and the override API for every component that renders an internal icon.
-  - type: design · has_ui: yes · depends_on: – · needs_human: yes · status: todo
+- [x] **DS-46 Icon system — design.** Define the bring-your-own icon model: the design system ships no public icon set, `Icon` renders any SVG icon component, and components fall back to private default glyphs. Draw the default glyph set in the wireframe style (24 px grid, stroke only, butt caps, miter joins): close, check, alert, info, warning, success, plus, minus, chevron-down / -left / -right. Specify the role map and the override API for every component that renders an internal icon.
+  - type: design · has_ui: yes · depends_on: – · needs_human: yes · status: done
   - done_when:
     - Canvas shows every default glyph at 12, 14, 16, 18, 20 and 24 px with stroke 1.5 and 2, next to Lucide, Tabler, Phosphor and Heroicons equivalents in the same sizes
     - Spec `docs/specs/Icon.md` defines the `IconComponent` contract (renders `<svg>`, forwards `width`, `height`, `className`, `aria-*`), `createIcon`, `IconProvider`, `useIcon` and the resolution order prop > provider > default
@@ -346,6 +348,9 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-46** Icon system — design — https://github.com/mikespineu/design-system-wireframe/pull/62
+- **DS-16** RadioGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/64
+- **DS-41** Tooltip, Popover & InfoTip — design — https://github.com/mikespineu/design-system-wireframe/pull/71
 - **DS-15** RadioGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/61
 - **DS-29** Switch — implementation — https://github.com/mikespineu/design-system-wireframe/pull/58
 - **DS-26** Theme token contract — design — https://github.com/mikespineu/design-system-wireframe/pull/55
