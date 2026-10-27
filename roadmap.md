@@ -228,8 +228,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every size, weight, family and tone
     - `Heading` `level` sets the element (`h1`–`h6`), `size` only the look
     - Story per variant, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-39 Toast — design.** Define toasts: info, success and error, with title, description, optional action (e.g. Undo) and close; stacking, position, enter/exit motion and auto-dismiss timing.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-39 Toast — design.** Define toasts: info, success and error, with title, description, optional action (e.g. Undo) and close; stacking, position, enter/exit motion and auto-dismiss timing.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers each severity with and without action, a stack of 3, and mobile vs desktop placement
     - Spec names Radix `Toast`, defines duration, pause on hover/focus, swipe-to-dismiss and the `F8` hotkey region
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-39** Toast — design — https://github.com/mikespineu/design-system-wireframe/pull/70
 - **DS-15** RadioGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/61
 - **DS-29** Switch — implementation — https://github.com/mikespineu/design-system-wireframe/pull/58
 - **DS-26** Theme token contract — design — https://github.com/mikespineu/design-system-wireframe/pull/55
