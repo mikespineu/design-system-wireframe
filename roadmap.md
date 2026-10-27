@@ -138,8 +138,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers trigger default, hover, focus, active and disabled
     - Spec names Radix `Tabs` and defines automatic vs manual activation
     - Spec maps every state to `--ds-*` tokens
-- [ ] **DS-22 Tabs — implementation.** Build `Tabs` in `src/components/Tabs/` on Radix `Tabs`, styled via `[data-state="active"]` / `[data-disabled]`.
-  - type: build · has_ui: yes · depends_on: DS-21 · needs_human: no · status: todo
+- [x] **DS-22 Tabs — implementation.** Build `Tabs` in `src/components/Tabs/` on Radix `Tabs`, styled via `[data-state="active"]` / `[data-disabled]`.
+  - type: build · has_ui: yes · depends_on: DS-21 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state
     - Arrow keys move between tabs, Home/End jump; tested with `userEvent`
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-22** Tabs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/76
 - **DS-37** Heading & Text — design — https://github.com/mikespineu/design-system-wireframe/pull/68
 - **DS-44** Drawer — design — https://github.com/mikespineu/design-system-wireframe/pull/69
 - **DS-39** Toast — design — https://github.com/mikespineu/design-system-wireframe/pull/70
