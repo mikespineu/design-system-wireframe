@@ -106,8 +106,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec in every state
     - Arrow keys move selection; Tab enters and leaves the group once
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-17 Select — design.** Define a trigger styled as Input, the open listbox, item states (highlighted, selected, disabled), groups, and the placeholder, inside Field. Options can be preselected (`value` / `defaultValue`) and can carry a leading emoji such as a country flag. The list can be split into two groups, top choices first and then all other options. An optional search field filters the list. On mobile/touch it renders a native `<select>`.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-17 Select — design.** Define a trigger styled as Input, the open listbox, item states (highlighted, selected, disabled), groups, and the placeholder, inside Field. Options can be preselected (`value` / `defaultValue`) and can carry a leading emoji such as a country flag. The list can be split into two groups, top choices first and then all other options. An optional search field filters the list. On mobile/touch it renders a native `<select>`.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers trigger default, hover, focus, open, disabled and invalid, plus item highlighted, selected and disabled
     - Canvas shows a preselected value, options with leading emoji (flags), and the open list split into "Top choices" then the other options with a separator
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-17** Select — design — https://github.com/mikespineu/design-system-wireframe/pull/73
 - **DS-35** Stack & Grid — design — https://github.com/mikespineu/design-system-wireframe/pull/67
 - **DS-21** Tabs — design — https://github.com/mikespineu/design-system-wireframe/pull/66
 - **DS-46** Icon system — design — https://github.com/mikespineu/design-system-wireframe/pull/62
