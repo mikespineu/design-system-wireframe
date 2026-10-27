@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Layout</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.sec-d code,.ab-f code{font-family:'Red Hat Mono',monospace;font-size:0.9em;color:#000000}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.grid5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column;min-width:0}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:32px 24px;min-width:0}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+/* layout demo: hatch = gap / free space inside the Stack or Grid; boxes = children */
+.hatch{background:repeating-linear-gradient(45deg,#E0E0E0 0 1px,transparent 1px 6px);outline:1px dashed #C7C7C7}
+.stk{display:flex;flex-direction:row;flex-wrap:nowrap}
+.stk.v{flex-direction:column}
+.stk.wrap{flex-wrap:wrap}
+.fit{width:max-content}
+.it{box-sizing:border-box;display:flex;align-items:center;justify-content:center;min-width:48px;min-height:32px;padding:0 8px;background:#FFFFFF;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#000000;white-space:nowrap}
+.stk.v .it{min-height:24px}
+.it.tall{min-height:48px}
+.it.taller{min-height:72px}
+.it.fill{background:#EEEEEE}
+.gd{display:grid}
+.gd .it{min-height:48px;min-width:0}
+.c1{grid-template-columns:repeat(1,minmax(0,1fr))}
+.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.c12{grid-template-columns:repeat(12,minmax(0,1fr))}
+.s3{grid-column:span 3}.s4{grid-column:span 4}.s6{grid-column:span 6}.s8{grid-column:span 8}.s12{grid-column:span 12}
+.g0{gap:0}.g1{gap:4px}.g2{gap:8px}.g3{gap:12px}.g4{gap:16px}.g6{gap:24px}.g8{gap:32px}.g12{gap:48px}.g16{gap:64px}.g24{gap:96px}
+.dim{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.code{margin:0;padding:12px;background:#F7F7F7;border:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:20px;color:#000000;white-space:pre;overflow:hidden}
+/* viewport frames */
+.frames{display:flex;gap:24px;align-items:flex-start}
+.frame{box-sizing:border-box;border:1px solid #C7C7C7;background:#FFFFFF;flex:none}
+.frame-h{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.frame-h b{font-weight:500;color:#000000;letter-spacing:0.08em;text-transform:uppercase}
+.frame-b{padding:16px}
+.w-mobile{width:375px}
+.w-tablet{width:768px}
+.w-desktop{width:100%}
+/* focusable sample content */
+.btn{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 24px;border:1px solid #000000;background:#FFFFFF;font-family:'Red Hat Mono',monospace;font-size:14px;font-weight:500;color:#000000;white-space:nowrap}
+.btn.pri{background:#000000;color:#FFFFFF}
+.card{box-sizing:border-box;display:flex;align-items:center;gap:8px;min-height:56px;padding:12px 16px;border:1px solid #E0E0E0;background:#FFFFFF;font-size:15px;line-height:24px;color:#000000;text-decoration:underline;text-underline-offset:4px}
+.tn{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 4px;box-sizing:border-box;border:1px solid #C7C7C7;background:#F7F7F7;font-family:'Red Hat Mono',monospace;font-size:11px;font-weight:500;color:#404040;text-decoration:none}
+.btn.pri .tn{border-color:#595959;background:#262626;color:#FFFFFF}
+.foc{outline:2px solid #000000;outline-offset:2px}
+.no{opacity:1;border-style:dashed}
+.tag{display:inline-flex;align-items:center;height:28px;padding:0 10px;border:1px solid #C7C7C7;background:#F7F7F7;font-family:'Red Hat Mono',monospace;font-size:12px;color:#000000;white-space:nowrap}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:0 16px 0 0;border-bottom:1px solid #E0E0E0;color:#404040}
+.tbl td code{font-family:'Red Hat Mono',monospace;font-size:13px;color:#000000}
+.legend{display:flex;gap:24px;align-items:center;font-size:13px;line-height:20px;color:#595959}
+.legend .sw{display:inline-block;width:24px;height:16px;vertical-align:middle;margin-right:8px}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 11200px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Layout · Stack &amp; Grid · DS-35 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Layout</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">Two invisible layout primitives. Stack puts children in a line, vertical or horizontal, with a gap from the spacing scale. Grid puts children in 1, 2, 3, 4, 6 or 12 equal columns. Both draw nothing themselves: no color, border, padding or radius. Gap only takes <code style="font-family:'Red Hat Mono',monospace">--ds-space-*</code> steps. Every layout prop can change at the sm / md / lg breakpoints. Both render a div by default, take <code style="font-family:'Red Hat Mono',monospace">as</code> for another element, or <code style="font-family:'Red Hat Mono',monospace">asChild</code> to style their only child (Radix Slot).</p>
+<div class="legend"><span><span class="sw hatch"></span>Gap and free space inside the Stack or Grid (canvas only)</span><span><span class="sw" style="border:1px solid #000000;background:#FFFFFF"></span>A child</span><span><span class="sw" style="border:1px dashed #C7C7C7"></span>Stack or Grid bounds (canvas only)</span></div>
+</header>
+
+<!-- 01 STACK GAP HORIZONTAL -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Stack · gap · horizontal</h2></div>
+<p class="sec-d"><code>direction="horizontal"</code>. Every gap step. The value is the token suffix: <code>gap={4}</code> is <code>--ds-space-4</code>, 16 px. Steps that are not tokens (5, 7, 10 …) are type errors. Stacks here are shown at content width to isolate the gap; a real Stack is block-level and fills its parent.</p>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>gap 0</span><span>0 · no token, literal 0</span></div><div class="ab-b">
+<div class="stk g0 hatch fit"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">For children that bring their own spacing, such as 44 px rows.</div></div>
+<div class="ab"><div class="ab-h"><span>gap 1</span><span>4 px · --ds-space-1</span></div><div class="ab-b">
+<div class="stk g1 hatch fit"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 2</span><span>8 px · --ds-space-2</span></div><div class="ab-b">
+<div class="stk g2 hatch fit"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">Tags, icon + text, button groups.</div></div>
+<div class="ab"><div class="ab-h"><span>gap 3</span><span>12 px · --ds-space-3</span></div><div class="ab-b">
+<div class="stk g3 hatch fit"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 4 (default)</span><span>16 px · --ds-space-4</span></div><div class="ab-b">
+<div class="stk g4 hatch fit"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">Stack default.</div></div>
+<div class="ab"><div class="ab-h"><span>gap 6</span><span>24 px · --ds-space-6</span></div><div class="ab-b">
+<div class="stk g6 hatch fit"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">Field to field, card to card.</div></div>
+<div class="ab"><div class="ab-h"><span>gap 8</span><span>32 px · --ds-space-8</span></div><div class="ab-b">
+<div class="stk g8 hatch fit"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 12</span><span>48 px · --ds-space-12</span></div><div class="ab-b">
+<div class="stk g12 hatch fit"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">Between groups inside a section.</div></div>
+<div class="ab"><div class="ab-h"><span>gap 16</span><span>64 px · --ds-space-16</span></div><div class="ab-b">
+<div class="stk g16 hatch fit"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 24</span><span>96 px · --ds-space-24</span></div><div class="ab-b">
+<div class="stk g24 hatch fit"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">Between page sections.</div></div>
+</div>
+</section>
+
+<!-- 02 STACK GAP VERTICAL -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Stack · gap · vertical</h2></div>
+<p class="sec-d"><code>direction="vertical"</code> (default). Same ten steps. Children stretch to the Stack's width by default (<code>align="stretch"</code>).</p>
+<div class="grid5">
+<div class="ab"><div class="ab-h"><span>gap 0</span><span>0</span></div><div class="ab-b">
+<div class="stk v g0 hatch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 1</span><span>4 px</span></div><div class="ab-b">
+<div class="stk v g1 hatch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 2</span><span>8 px</span></div><div class="ab-b">
+<div class="stk v g2 hatch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 3</span><span>12 px</span></div><div class="ab-b">
+<div class="stk v g3 hatch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 4 (default)</span><span>16 px</span></div><div class="ab-b">
+<div class="stk v g4 hatch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 6</span><span>24 px</span></div><div class="ab-b">
+<div class="stk v g6 hatch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 8</span><span>32 px</span></div><div class="ab-b">
+<div class="stk v g8 hatch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 12</span><span>48 px</span></div><div class="ab-b">
+<div class="stk v g12 hatch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 16</span><span>64 px</span></div><div class="ab-b">
+<div class="stk v g16 hatch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 24</span><span>96 px</span></div><div class="ab-b">
+<div class="stk v g24 hatch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+</div>
+</section>
+
+<!-- 03 STACK ALIGN -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Stack · align</h2></div>
+<p class="sec-d"><code>align</code> places children on the cross axis: vertically in a horizontal Stack, horizontally in a vertical one. Default <code>stretch</code>. <code>baseline</code> lines up the first text line of children with different type sizes; in a vertical Stack it behaves like <code>start</code>.</p>
+<div class="grid5">
+<div class="ab"><div class="ab-h"><span>start</span><span>horizontal</span></div><div class="ab-b">
+<div class="stk g2 hatch" style="align-items:flex-start;height:88px"><span class="it">A</span><span class="it tall">B</span><span class="it taller">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>center</span><span>horizontal</span></div><div class="ab-b">
+<div class="stk g2 hatch" style="align-items:center;height:88px"><span class="it">A</span><span class="it tall">B</span><span class="it taller">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>end</span><span>horizontal</span></div><div class="ab-b">
+<div class="stk g2 hatch" style="align-items:flex-end;height:88px"><span class="it">A</span><span class="it tall">B</span><span class="it taller">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>stretch (default)</span><span>horizontal</span></div><div class="ab-b">
+<div class="stk g2 hatch" style="align-items:stretch;height:88px"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">Children fill the line's height. Stack height here is set by its tallest child.</div></div>
+<div class="ab"><div class="ab-h"><span>baseline</span><span>horizontal</span></div><div class="ab-b">
+<div class="stk g2 hatch" style="align-items:baseline;height:88px"><span class="it" style="font-size:22px;line-height:29px;padding-top:12px">Aa</span><span class="it" style="font-size:12px">Aa</span><span class="it" style="font-size:16px;padding-top:20px">Aa</span></div>
+</div><div class="ab-f">Heading next to a caption or a count.</div></div>
+</div>
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>start</span><span>vertical</span></div><div class="ab-b">
+<div class="stk v g2 hatch" style="align-items:flex-start"><span class="it" style="width:48px">A</span><span class="it" style="width:96px">B</span><span class="it" style="width:144px">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>center</span><span>vertical</span></div><div class="ab-b">
+<div class="stk v g2 hatch" style="align-items:center"><span class="it" style="width:48px">A</span><span class="it" style="width:96px">B</span><span class="it" style="width:144px">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>end</span><span>vertical</span></div><div class="ab-b">
+<div class="stk v g2 hatch" style="align-items:flex-end"><span class="it" style="width:48px">A</span><span class="it" style="width:96px">B</span><span class="it" style="width:144px">C</span></div>
+</div><div class="ab-f">In RTL, end is the left edge.</div></div>
+<div class="ab"><div class="ab-h"><span>stretch (default)</span><span>vertical</span></div><div class="ab-b">
+<div class="stk v g2 hatch" style="align-items:stretch"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">A child with its own width keeps it; only auto widths stretch.</div></div>
+</div>
+</section>
+
+<!-- 04 STACK JUSTIFY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Stack · justify</h2></div>
+<p class="sec-d"><code>justify</code> distributes free space on the main axis. Default <code>start</code>. <code>between</code> puts the first and last child on the edges and shares the rest; the gap stays the minimum distance. A vertical Stack only has free space when something gives it a height (a parent Grid row, a fixed-height panel).</p>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>start (default)</span><span>horizontal</span></div><div class="ab-b">
+<div class="stk g2 hatch" style="justify-content:flex-start"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>center</span><span>horizontal</span></div><div class="ab-b">
+<div class="stk g2 hatch" style="justify-content:center"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>end</span><span>horizontal</span></div><div class="ab-b">
+<div class="stk g2 hatch" style="justify-content:flex-end"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">Dialog and form actions. In RTL, end is the left edge.</div></div>
+<div class="ab"><div class="ab-h"><span>between</span><span>horizontal</span></div><div class="ab-b">
+<div class="stk g2 hatch" style="justify-content:space-between"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">Title left, action right.</div></div>
+</div>
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>start (default)</span><span>vertical, height 200</span></div><div class="ab-b">
+<div class="stk v g2 hatch" style="justify-content:flex-start;height:200px"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>center</span><span>vertical, height 200</span></div><div class="ab-b">
+<div class="stk v g2 hatch" style="justify-content:center;height:200px"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>end</span><span>vertical, height 200</span></div><div class="ab-b">
+<div class="stk v g2 hatch" style="justify-content:flex-end;height:200px"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>between</span><span>vertical, height 200</span></div><div class="ab-b">
+<div class="stk v g2 hatch" style="justify-content:space-between;height:200px"><span class="it">A</span><span class="it">B</span><span class="it">C</span></div>
+</div><div class="ab-f">Card body top, card footer bottom.</div></div>
+</div>
+</section>
+
+<!-- 05 STACK WRAP -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Stack · wrap</h2></div>
+<p class="sec-d"><code>wrap</code> (boolean, default <code>false</code>). Off: one line, and children that don't fit overflow the Stack. On: children move to a new line; the gap applies between lines too (row gap = column gap). Only has an effect when the Stack is horizontal. Shown in a 280 px wide Stack.</p>
+<div class="grid3">
+<div class="ab"><div class="ab-h"><span>nowrap (default)</span><span>overflows</span></div><div class="ab-b">
+<div class="stk g2 hatch" style="width:280px"><span class="tag">Archive</span><span class="tag">Monochrome</span><span class="tag">Grain</span><span class="tag">Series 04</span><span class="tag">Print</span></div>
+</div><div class="ab-f">Children shrink to their content, then spill past the dashed edge. Use wrap, or let the parent scroll.</div></div>
+<div class="ab"><div class="ab-h"><span>wrap · gap 2</span><span>8 px between lines</span></div><div class="ab-b">
+<div class="stk g2 hatch wrap" style="width:280px"><span class="tag">Archive</span><span class="tag">Monochrome</span><span class="tag">Grain</span><span class="tag">Series 04</span><span class="tag">Print</span></div>
+</div><div class="ab-f">Tag lists, filter chips.</div></div>
+<div class="ab"><div class="ab-h"><span>wrap · gap 4 · justify end</span><span>16 px between lines</span></div><div class="ab-b">
+<div class="stk g4 hatch wrap" style="width:280px;justify-content:flex-end"><span class="btn">Back</span><span class="btn">Save draft</span><span class="btn pri">Publish</span></div>
+</div><div class="ab-f">Action row that drops to two lines in a narrow panel. Order stays Back, Save draft, Publish.</div></div>
+</div>
+</section>
+
+<!-- 06 STACK RESPONSIVE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Stack · responsive</h2></div>
+<p class="sec-d">Every Stack prop except <code>wrap</code> takes a value or <code>{ base, sm, md, lg }</code>. Mobile first: a key applies from its breakpoint up until a larger key overrides it. Changing direction never changes the order; align and justify follow the current axis.</p>
+<div class="ab"><div class="ab-h"><span>direction · justify</span><span>direction={{ base: 'vertical', md: 'horizontal' }} justify={{ md: 'end' }} gap={3}</span></div><div class="ab-b">
+<div class="frames">
+<div class="frame w-mobile"><div class="frame-h"><b>Mobile · base</b><span>375 px · &lt; 640</span></div><div class="frame-b">
+<div class="stk v g3 hatch"><span class="btn">Cancel</span><span class="btn pri">Save</span></div>
+</div></div>
+<div class="frame w-tablet"><div class="frame-h"><b>Tablet · md</b><span>768 px · ≥ 768</span></div><div class="frame-b">
+<div class="stk g3 hatch" style="justify-content:flex-end"><span class="btn">Cancel</span><span class="btn pri">Save</span></div>
+</div></div>
+</div>
+</div><div class="ab-f">Base: full-width buttons, stacked (align stretch). md and up: one row, right-aligned. lg inherits md. Cancel stays first in both, so Tab order is the same at every width.</div></div>
+<div class="ab"><div class="ab-h"><span>gap</span><span>gap={{ base: 2, md: 4, lg: 6 }} wrap</span></div><div class="ab-b">
+<div class="frames">
+<div class="frame w-mobile"><div class="frame-h"><b>Mobile · base</b><span>8 px</span></div><div class="frame-b">
+<div class="stk g2 hatch wrap"><span class="tag">Archive</span><span class="tag">Monochrome</span><span class="tag">Grain</span><span class="tag">Series 04</span><span class="tag">Print</span><span class="tag">Studio</span></div>
+</div></div>
+<div class="frame w-tablet"><div class="frame-h"><b>Tablet · md</b><span>16 px</span></div><div class="frame-b">
+<div class="stk g4 hatch wrap"><span class="tag">Archive</span><span class="tag">Monochrome</span><span class="tag">Grain</span><span class="tag">Series 04</span><span class="tag">Print</span><span class="tag">Studio</span></div>
+</div></div>
+</div>
+<div class="frame w-desktop"><div class="frame-h"><b>Desktop · lg</b><span>≥ 1024 · 24 px</span></div><div class="frame-b">
+<div class="stk g6 hatch wrap"><span class="tag">Archive</span><span class="tag">Monochrome</span><span class="tag">Grain</span><span class="tag">Series 04</span><span class="tag">Print</span><span class="tag">Studio</span></div>
+</div></div>
+</div></div>
+</section>
+
+<!-- 07 GRID COLUMNS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Grid · columns</h2></div>
+<p class="sec-d"><code>columns</code>: 1, 2, 3, 4, 6 or 12 equal tracks (<code>repeat(n, minmax(0, 1fr))</code>), so long content never widens a column. Default 1. Rows are created as needed and fill row by row. Default gap 6 (24 px), the gutter used on every canvas. Shown at desktop width.</p>
+<div class="ab"><div class="ab-h"><span>columns 1 (default)</span><span>gap 6</span></div><div class="ab-b">
+<div class="gd c1 g6 hatch"><span class="it">1</span><span class="it">2</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>columns 2</span><span>gap 6</span></div><div class="ab-b">
+<div class="gd c2 g6 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>columns 3</span><span>gap 6</span></div><div class="ab-b">
+<div class="gd c3 g6 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span><span class="it">5</span></div>
+</div><div class="ab-f">An incomplete last row leaves its cells empty; the Grid does not stretch the remaining children.</div></div>
+<div class="ab"><div class="ab-h"><span>columns 4</span><span>gap 6</span></div><div class="ab-b">
+<div class="gd c4 g6 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span><span class="it">5</span><span class="it">6</span><span class="it">7</span><span class="it">8</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>columns 6</span><span>gap 6</span></div><div class="ab-b">
+<div class="gd g6 hatch" style="grid-template-columns:repeat(6,minmax(0,1fr))"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span><span class="it">5</span><span class="it">6</span></div>
+</div><div class="ab-f">Thumbnails, contact sheets.</div></div>
+<div class="ab"><div class="ab-h"><span>columns 12</span><span>gap 6</span></div><div class="ab-b">
+<div class="gd c12 g6 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span><span class="it">5</span><span class="it">6</span><span class="it">7</span><span class="it">8</span><span class="it">9</span><span class="it">10</span><span class="it">11</span><span class="it">12</span></div>
+</div><div class="ab-f">Page layout grid. On its own it is twelve narrow cells; children span tracks (next artboard).</div></div>
+<div class="ab"><div class="ab-h"><span>columns 12 · spans</span><span>children use col-span-* utilities</span></div><div class="ab-b">
+<div class="gd c12 g6 hatch">
+<span class="it s12">col-span-12</span>
+<span class="it s8">col-span-8</span><span class="it s4">col-span-4</span>
+<span class="it s6">col-span-6</span><span class="it s6">col-span-6</span>
+<span class="it s4">col-span-4</span><span class="it s4">col-span-4</span><span class="it s4">col-span-4</span>
+<span class="it s3">col-span-3</span><span class="it s3">col-span-3</span><span class="it s3">col-span-3</span><span class="it s3">col-span-3</span>
+</div>
+</div><div class="ab-f">Spanning is not a Grid prop. Children take Tailwind's <code>col-span-*</code> (and <code>md:col-span-*</code>), which use the same breakpoints. A GridItem is out of scope for this task.</div></div>
+</section>
+
+<!-- 08 GRID GAP -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Grid · gap</h2></div>
+<p class="sec-d">Same <code>gap</code> scale as Stack (0, 1, 2, 3, 4, 6, 8, 12, 16, 24); one value sets both row and column gap. A selection of steps, three columns each.</p>
+<div class="grid3">
+<div class="ab"><div class="ab-h"><span>gap 2</span><span>8 px · --ds-space-2</span></div><div class="ab-b">
+<div class="gd c3 g2 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span><span class="it">5</span><span class="it">6</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 4</span><span>16 px · --ds-space-4</span></div><div class="ab-b">
+<div class="gd c3 g4 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span><span class="it">5</span><span class="it">6</span></div>
+</div><div class="ab-f">Mobile gutter.</div></div>
+<div class="ab"><div class="ab-h"><span>gap 6 (default)</span><span>24 px · --ds-space-6</span></div><div class="ab-b">
+<div class="gd c3 g6 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span><span class="it">5</span><span class="it">6</span></div>
+</div><div class="ab-f">Grid default.</div></div>
+<div class="ab"><div class="ab-h"><span>gap 8</span><span>32 px · --ds-space-8</span></div><div class="ab-b">
+<div class="gd c3 g8 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span><span class="it">5</span><span class="it">6</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 12</span><span>48 px · --ds-space-12</span></div><div class="ab-b">
+<div class="gd c3 g12 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span><span class="it">5</span><span class="it">6</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>gap 0</span><span>0</span></div><div class="ab-b">
+<div class="gd c3 g0 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span><span class="it">5</span><span class="it">6</span></div>
+</div><div class="ab-f">Touching cells, for example a contact sheet with shared 1 px borders drawn by the children.</div></div>
+</div>
+</section>
+
+<!-- 09 BREAKPOINTS + GRID RESPONSIVE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">Breakpoints · Grid responsive</h2></div>
+<p class="sec-d">Four keys, mobile first, viewport width (<code>min-width</code> media queries). The values equal Tailwind's default sm / md / lg, which the theme keeps, so a child's <code>md:col-span-8</code> switches at the same width as the Grid's <code>md</code>. No breakpoint tokens exist yet; see the spec's Token requests.</p>
+<div class="ab"><div class="ab-h"><span>Breakpoints</span><span>used by every responsive prop</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Key</th><th>Applies from</th><th>Range</th><th>Device</th><th>Tailwind prefix</th></tr></thead>
+<tbody>
+<tr><td><code>base</code></td><td>0</td><td>0 to 639 px</td><td>Mobile</td><td>none</td></tr>
+<tr><td><code>sm</code></td><td>640 px</td><td>640 to 767 px</td><td>Large phone, small tablet portrait</td><td><code>sm:</code></td></tr>
+<tr><td><code>md</code></td><td>768 px</td><td>768 to 1023 px</td><td>Tablet</td><td><code>md:</code></td></tr>
+<tr><td><code>lg</code></td><td>1024 px</td><td>1024 px and up</td><td>Desktop</td><td><code>lg:</code></td></tr>
+</tbody>
+</table>
+</div><div class="ab-f">Tailwind's xl (1280) and 2xl (1536) still exist as utilities but are not keys of the Stack / Grid API.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Card grid</span><span>columns={{ base: 1, md: 2, lg: 4 }} gap={{ base: 4, lg: 6 }}</span></div><div class="ab-b">
+<div class="frames">
+<div class="frame w-mobile"><div class="frame-h"><b>Mobile · base</b><span>1 col · gap 16</span></div><div class="frame-b">
+<div class="gd c1 g4 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span></div>
+</div></div>
+<div class="frame w-tablet"><div class="frame-h"><b>Tablet · md</b><span>2 col · gap 16</span></div><div class="frame-b">
+<div class="gd c2 g4 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span></div>
+</div></div>
+</div>
+<div class="frame w-desktop"><div class="frame-h"><b>Desktop · lg</b><span>≥ 1024 · 4 col · gap 24</span></div><div class="frame-b">
+<div class="gd c4 g6 hatch"><span class="it">1</span><span class="it">2</span><span class="it">3</span><span class="it">4</span></div>
+</div></div>
+</div><div class="ab-f">sm (640 to 767) inherits base here: still one column. Reading order 1, 2, 3, 4 at every width.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Page layout</span><span>columns={12} gap={{ base: 4, md: 6 }}, children span</span></div><div class="ab-b">
+<div class="frames">
+<div class="frame w-mobile"><div class="frame-h"><b>Mobile · base</b><span>all span 12</span></div><div class="frame-b">
+<div class="gd c12 g4 hatch">
+<span class="it s12 fill">header</span>
+<span class="it s12">main</span>
+<span class="it s12">aside</span>
+<span class="it s12">card 1</span><span class="it s12">card 2</span><span class="it s12">card 3</span>
+</div>
+</div></div>
+<div class="frame w-tablet"><div class="frame-h"><b>Tablet · md</b><span>8 + 4, cards 6 + 6</span></div><div class="frame-b">
+<div class="gd c12 g6 hatch">
+<span class="it s12 fill">header · col-span-12</span>
+<span class="it s8">main · md:col-span-8</span>
+<span class="it s4">aside · md:col-span-4</span>
+<span class="it s6">card 1 · sm:col-span-6</span><span class="it s6">card 2</span><span class="it s6">card 3</span>
+</div>
+</div></div>
+</div>
+<div class="frame w-desktop"><div class="frame-h"><b>Desktop · lg</b><span>≥ 1024 · 8 + 4, cards 4 + 4 + 4</span></div><div class="frame-b">
+<div class="gd c12 g6 hatch">
+<span class="it s12 fill">header · col-span-12</span>
+<span class="it s8">main · md:col-span-8</span>
+<span class="it s4">aside · md:col-span-4</span>
+<span class="it s4">card 1 · lg:col-span-4</span><span class="it s4">card 2</span><span class="it s4">card 3</span>
+</div>
+</div></div>
+</div><div class="ab-f">Card classes: <code>col-span-12 sm:col-span-6 lg:col-span-4</code>. The 12 tracks stay at every width; only the spans change. Main stays before aside in the DOM, so it is read and tabbed first everywhere.</div></div>
+</section>
+
+<!-- 10 GRID ALIGN -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Grid · align</h2></div>
+<p class="sec-d"><code>align</code> places each child vertically inside its row. Default <code>stretch</code>: every child in a row is as tall as the tallest, so card borders line up. The row height is the same in all four.</p>
+<div class="grid4">
+<div class="ab"><div class="ab-h"><span>stretch (default)</span><span>align-items</span></div><div class="ab-b">
+<div class="gd c3 g2 hatch" style="align-items:stretch"><span class="it">A</span><span class="it" style="min-height:96px">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>start</span><span>align-items</span></div><div class="ab-b">
+<div class="gd c3 g2 hatch" style="align-items:start"><span class="it">A</span><span class="it" style="min-height:96px">B</span><span class="it">C</span></div>
+</div><div class="ab-f">Artboards on this canvas use start.</div></div>
+<div class="ab"><div class="ab-h"><span>center</span><span>align-items</span></div><div class="ab-b">
+<div class="gd c3 g2 hatch" style="align-items:center"><span class="it">A</span><span class="it" style="min-height:96px">B</span><span class="it">C</span></div>
+</div></div>
+<div class="ab"><div class="ab-h"><span>end</span><span>align-items</span></div><div class="ab-b">
+<div class="gd c3 g2 hatch" style="align-items:end"><span class="it">A</span><span class="it" style="min-height:96px">B</span><span class="it">C</span></div>
+</div></div>
+</div>
+</section>
+
+<!-- 11 FOCUS ORDER -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">11</span><h2 class="sec-t">Keyboard · focus order</h2></div>
+<p class="sec-d">Stack and Grid are never focusable and handle no keys. Tab moves through their focusable children in DOM order, which is always the visual order: there is no reverse direction, no <code>order</code> prop and no dense grid packing. Badges show the Tab sequence; the ring is the standard 2 px black focus ring on the child, 2 px offset.</p>
+<div class="grid3">
+<div class="ab"><div class="ab-h"><span>Horizontal Stack</span><span>focus on 2</span></div><div class="ab-b">
+<div class="stk g3"><span class="btn"><span class="tn">1</span>Back</span><span class="btn foc"><span class="tn">2</span>Save draft</span><span class="btn pri"><span class="tn">3</span>Publish</span></div>
+</div><div class="ab-f">Left to right (right to left in RTL, still DOM order).</div></div>
+<div class="ab"><div class="ab-h"><span>Vertical at base</span><span>same Stack, mobile</span></div><div class="ab-b">
+<div class="stk v g3"><span class="btn"><span class="tn">1</span>Back</span><span class="btn foc"><span class="tn">2</span>Save draft</span><span class="btn pri"><span class="tn">3</span>Publish</span></div>
+</div><div class="ab-f">Responsive direction changes the axis, not the sequence: top to bottom 1, 2, 3.</div></div>
+<div class="ab"><div class="ab-h"><span>Wrapped Stack</span><span>line by line</span></div><div class="ab-b">
+<div class="stk g2 wrap" style="width:260px"><span class="btn"><span class="tn">1</span>Archive</span><span class="btn"><span class="tn">2</span>Grain</span><span class="btn foc"><span class="tn">3</span>Monochrome</span><span class="btn"><span class="tn">4</span>Print</span></div>
+</div><div class="ab-f">After the last child on a line, focus goes to the first child on the next.</div></div>
+<div class="ab"><div class="ab-h"><span>Grid · 3 columns</span><span>row by row, focus on 4</span></div><div class="ab-b">
+<div class="gd c3 g3"><a class="card"><span class="tn">1</span>Series 01</a><a class="card"><span class="tn">2</span>Series 02</a><a class="card"><span class="tn">3</span>Series 03</a><a class="card foc"><span class="tn">4</span>Series 04</a><a class="card"><span class="tn">5</span>Series 05</a><a class="card"><span class="tn">6</span>Series 06</a></div>
+</div><div class="ab-f">Tab goes across the row, then to the next row. No arrow-key navigation: a Grid is layout, not an ARIA grid.</div></div>
+<div class="ab"><div class="ab-h"><span>Grid · 12 with spans</span><span>main before aside</span></div><div class="ab-b">
+<div class="gd c12 g3"><a class="card s8"><span class="tn">1</span>Main</a><a class="card s4 foc"><span class="tn">2</span>Aside</a><a class="card s12"><span class="tn">3</span>Footer</a></div>
+</div><div class="ab-f">Put content in the DOM in reading order; the spans only size it.</div></div>
+<div class="ab" style="border-style:dashed;border-color:#C7C7C7"><div class="ab-h"><span>Not offered</span><span>reverse / order</span></div><div class="ab-b">
+<div class="stk g3"><span class="btn no"><span class="tn">3</span>Publish</span><span class="btn no"><span class="tn">2</span>Save draft</span><span class="btn no foc"><span class="tn">1</span>Back</span></div>
+</div><div class="ab-f">row-reverse would show 3, 2, 1 while Tab still goes 1, 2, 3 (WCAG 1.3.2, 2.4.3). Not part of the API; reorder the JSX instead.</div></div>
+</div>
+</section>
+
+<!-- 12 ELEMENT -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">12</span><h2 class="sec-t">Element · as / asChild</h2></div>
+<p class="sec-d">Both render a <code>div</code> by default. <code>as</code> picks another element from a short list of layout tags. <code>asChild</code> renders no element of its own and puts the layout class and data attributes on its only child (Radix <code>Slot</code>). <code>as</code> and <code>asChild</code> cannot be combined.</p>
+<div class="grid3">
+<div class="ab"><div class="ab-h"><span>Default</span><span>div</span></div><div class="ab-b">
+<pre class="code">&lt;Stack gap={6}&gt;…&lt;/Stack&gt;
+
+&lt;div class="ds-stack"
+  data-direction="vertical"
+  data-gap="6" data-align="stretch"
+  data-justify="start"&gt;</pre>
+</div><div class="ab-f">Generic element, no role. Base values always render as data attributes.</div></div>
+<div class="ab"><div class="ab-h"><span>as="ul"</span><span>list semantics kept</span></div><div class="ab-b">
+<pre class="code">&lt;Stack as="ul" direction="horizontal"
+  gap={2} wrap&gt;
+  &lt;li&gt;&lt;Tag&gt;Grain&lt;/Tag&gt;&lt;/li&gt; …
+
+&lt;ul class="ds-stack" role="list"
+  data-direction="horizontal"
+  data-gap="2" data-wrap=""&gt;</pre>
+<div class="stk g2 wrap"><span class="tag">Archive</span><span class="tag">Grain</span><span class="tag">Print</span></div>
+</div><div class="ab-f">Bullets, margin and padding reset. role="list" is added for ul / ol so Safari still announces a list.</div></div>
+<div class="ab"><div class="ab-h"><span>asChild</span><span>child is the Grid</span></div><div class="ab-b">
+<pre class="code">&lt;Grid asChild columns={{ base: 1, md: 3 }}&gt;
+  &lt;section aria-labelledby="s-h"&gt;…&lt;/section&gt;
+&lt;/Grid&gt;
+
+&lt;section aria-labelledby="s-h"
+  class="ds-grid" data-columns="1"
+  data-columns-md="3" data-gap="6"
+  data-align="stretch"&gt;</pre>
+</div><div class="ab-f">Child's own className, style, ref and handlers are merged, not replaced. One element child only.</div></div>
+</div>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>
