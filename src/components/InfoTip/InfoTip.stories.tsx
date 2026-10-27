@@ -30,9 +30,17 @@ export const PopoverMode: Story = {
       useEffect(() => {
         const original = window.matchMedia;
         window.matchMedia = ((q: string) => {
-          const mql = original.call(window, q);
-          if (q !== '(pointer: coarse)') return mql;
-          return Object.create(mql, { matches: { value: true } });
+          if (q !== '(pointer: coarse)') return original.call(window, q);
+          return {
+            matches: true,
+            media: q,
+            onchange: null,
+            addEventListener: () => {},
+            removeEventListener: () => {},
+            addListener: () => {},
+            removeListener: () => {},
+            dispatchEvent: () => false,
+          };
         }) as typeof window.matchMedia;
         setReady(true);
         return () => {
