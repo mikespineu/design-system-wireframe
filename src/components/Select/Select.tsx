@@ -178,6 +178,8 @@ const ListSelect = forwardRef<
   HTMLButtonElement,
   Common & Pick<OwnProps, 'value' | 'defaultValue' | 'onValueChange' | 'open' | 'defaultOpen' | 'onOpenChange'>
 >(({ groups, hasEmoji, placeholder, className, rest, controlProps, name, required, disabled, value, defaultValue, onValueChange, open, defaultOpen, onOpenChange }, ref) => {
+  const [innerOpen, setInnerOpen] = useState(defaultOpen ?? false);
+  const isOpen = open ?? innerOpen;
   const renderItem = (o: SelectOption) => (
     <RadixSelect.Item key={o.value} value={o.value} textValue={o.label} disabled={o.disabled} className="ds-select-item">
       <RadixSelect.ItemText className="ds-select-item-text">
@@ -196,12 +198,28 @@ const ListSelect = forwardRef<
       onValueChange={onValueChange}
       open={open}
       defaultOpen={defaultOpen}
-      onOpenChange={onOpenChange}
+      onOpenChange={(next) => {
+        setInnerOpen(next);
+        onOpenChange?.(next);
+      }}
       name={name}
       required={required}
       disabled={disabled}
     >
-      <RadixSelect.Trigger ref={ref} className={cx('ds-select-trigger', className)} {...rest} {...controlProps}>
+      {/*
+        While open, Radix marks everything outside the list aria-hidden (incl. the trigger) and
+        traps focus in the list. The trigger is still focusable, which axe reports as
+        `aria-hidden-focus` (Radix Select's content has no role="dialog", so axe's
+        "modal open" exemption does not apply). Taking it out of the tab order while open
+        fixes that; Radix restores focus to it programmatically on close.
+      */}
+      <RadixSelect.Trigger
+        ref={ref}
+        className={cx('ds-select-trigger', className)}
+        {...rest}
+        {...controlProps}
+        tabIndex={isOpen ? -1 : (rest.tabIndex as number | undefined)}
+      >
         <RadixSelect.Value
           placeholder={
             <>

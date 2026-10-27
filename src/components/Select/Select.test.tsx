@@ -191,6 +191,25 @@ describe('Select (list)', () => {
   });
 });
 
+describe('Select (list) aria-hidden-focus', () => {
+  const hiddenTrigger = () => screen.getByRole('combobox', { hidden: true });
+  it('takes the trigger out of the tab order while open and restores it on close', async () => {
+    const user = userEvent.setup();
+    render(<Select aria-label="Fruit" options={fruit} />);
+    expect(hiddenTrigger()).not.toHaveAttribute('tabindex');
+    await user.click(trigger());
+    expect(hiddenTrigger()).toHaveAttribute('tabindex', '-1');
+    expect(await axe(document.body, { ...noRegion, rules: { ...noRegion.rules, 'aria-hidden-focus': { enabled: true } } })).toHaveNoViolations();
+    await user.keyboard('{Escape}');
+    expect(hiddenTrigger()).not.toHaveAttribute('tabindex');
+  });
+
+  it('starts without a tab stop when defaultOpen', () => {
+    render(<Select aria-label="Fruit" options={fruit} defaultOpen />);
+    expect(hiddenTrigger()).toHaveAttribute('tabindex', '-1');
+  });
+});
+
 describe('Select (searchable)', () => {
   const setup = (props = {}) => {
     const user = userEvent.setup();
