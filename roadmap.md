@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-43** InfoTip — implementation — https://github.com/mikespineu/design-system-wireframe/pull/80
 - **DS-42** Tooltip & Popover — implementation — https://github.com/mikespineu/design-system-wireframe/pull/77
 - **DS-36** Stack & Grid — implementation — https://github.com/mikespineu/design-system-wireframe/pull/75
 - **DS-22** Tabs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/76
