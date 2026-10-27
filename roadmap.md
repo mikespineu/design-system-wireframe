@@ -204,8 +204,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - "Add to cart + Wishlist" story: primary `Button` + secondary heart `IconButton` with pressed toggle
     - Tab moves through each button; a `disabled` prop on the group disables every child
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-35 Stack & Grid — design.** Define layout primitives: `Stack` (vertical/horizontal, gap, align, justify, wrap) and `Grid` (columns, gap, responsive column counts), using only the `--ds-space-*` scale.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-35 Stack & Grid — design.** Define layout primitives: `Stack` (vertical/horizontal, gap, align, justify, wrap) and `Grid` (columns, gap, responsive column counts), using only the `--ds-space-*` scale.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas shows Stack in both directions with every gap step, align/justify options and wrap
     - Canvas shows Grid at 1–4 and 12 columns, with responsive counts at mobile/tablet/desktop
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-35** Stack & Grid — design — https://github.com/mikespineu/design-system-wireframe/pull/67
 - **DS-16** RadioGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/64
 - **DS-41** Tooltip, Popover & InfoTip — design — https://github.com/mikespineu/design-system-wireframe/pull/71
 - **DS-15** RadioGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/61

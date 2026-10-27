@@ -3,9 +3,9 @@
 - task: DS-35
 - canvas: docs/design-system-wireframe/Layout.dc.html
 - canvas_url: https://claude.ai/artifact/4mecTuqFqJMihn34gorMVD
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-27
 - approval_hash:
 
 Two layout primitives, `Stack` and `Grid`, built in DS-36 as `src/components/Stack/` and `src/components/Grid/`. Neither draws anything: no color, border, padding, margin, radius or type. They only arrange their children. `Stack` is a flex line, vertical (default) or horizontal, with a gap, cross-axis `align`, main-axis `justify` and an optional `wrap`. `Grid` is a CSS grid of 1, 2, 3, 4, 6 or 12 equal columns with a gap and `align`. Gaps only take steps of the `--ds-space-*` scale. Every layout prop except `wrap` accepts a single value or a per-breakpoint object, mobile first. Both render a `div` by default, accept `as` for a different layout element, or `asChild` to put the layout on their only child through Radix `Slot`.
