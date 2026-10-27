@@ -114,6 +114,13 @@
       "w": 1440,
       "x": 22800,
       "y": 0
+    },
+    "Toast.dc.html": {
+      "h": 10400,
+      "title": "Toast",
+      "w": 1440,
+      "x": 24320,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -150,7 +157,8 @@
     "Tabs.dc.html",
     "Layout.dc.html",
     "Select.dc.html",
-    "Button.dc.html"
+    "Button.dc.html",
+    "Toast.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
