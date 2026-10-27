@@ -114,8 +114,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas shows the optional search field in the open list, a filtered result and the no-results state
     - Spec names the Radix primitive(s) (Radix `Select` without search; for search it states the approach, since Radix `Select` can't filter) and defines portal layering, max height, the `value` / `defaultValue` API, and `Input` / `TextField` tokens with the 44 px height
     - Spec defines the native `<select>` on mobile/touch: the detection rule, top choices as an `<optgroup>`, emoji in the `<option>` text, and no search there
-- [ ] **DS-18 Select — implementation.** Build `Select` and `SelectField` in `src/components/Select/` on Radix `Select`, wired to `Field` via `useFieldControl()`, styled via `[data-state]` / `[data-highlighted]`.
-  - type: build · has_ui: yes · depends_on: DS-17 · needs_human: no · status: todo
+- [x] **DS-18 Select — implementation.** Build `Select` and `SelectField` in `src/components/Select/` on Radix `Select`, wired to `Field` via `useFieldControl()`, styled via `[data-state]` / `[data-highlighted]`.
+  - type: build · has_ui: yes · depends_on: DS-17 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state
     - Keyboard typeahead, arrow navigation and Escape-to-close covered by `userEvent` tests
@@ -349,6 +349,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 ## Done
 
 - **DS-47** Icon API & default glyphs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/82
+- **DS-18** Select — implementation — https://github.com/mikespineu/design-system-wireframe/pull/81
 - **DS-43** InfoTip — implementation — https://github.com/mikespineu/design-system-wireframe/pull/80
 - **DS-42** Tooltip & Popover — implementation — https://github.com/mikespineu/design-system-wireframe/pull/77
 - **DS-36** Stack & Grid — implementation — https://github.com/mikespineu/design-system-wireframe/pull/75
