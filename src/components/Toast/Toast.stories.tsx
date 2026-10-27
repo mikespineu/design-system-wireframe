@@ -1,6 +1,6 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, waitFor, within } from 'storybook/test';
+import { expect, fireEvent, userEvent, waitFor, within } from 'storybook/test';
 import { ToastProvider, Toaster, useToast, type ToastOptions } from './Toast';
 import { Button } from '../Button';
 import { Dialog, DialogClose } from '../Dialog';
@@ -86,6 +86,52 @@ export const Mobile: Story = {
 /** The toast follows the pointer; drag right more than 50 px to dismiss. Under `prefers-reduced-motion` all enter and exit motion is removed. */
 export const Swipe: Story = {
   render: render([{ ...sticky, title: 'Drag me to the right', description: 'Past 50 px dismisses; less snaps back.' }]),
+  play: async ({ canvasElement }) => {
+    const body = within(canvasElement.ownerDocument.body);
+    const item = await body.findByRole('listitem');
+    // Synthetic pointer ids have no active pointer to capture.
+    item.setPointerCapture = () => {};
+    item.releasePointerCapture = () => {};
+    const drag = (dx: number) => {
+      const init = { pointerId: 1, button: 0, bubbles: true, clientY: 10 };
+      fireEvent.pointerDown(item, { ...init, clientX: 10 });
+      fireEvent.pointerMove(item, { ...init, clientX: 10 + dx });
+      fireEvent.pointerUp(item, { ...init, clientX: 10 + dx });
+    };
+    drag(20); // below threshold: snaps back
+    await new Promise((r) => setTimeout(r, 300));
+    await expect(body.getByRole('listitem')).toBeInTheDocument();
+    drag(90); // past 50 px: dismissed
+    await waitFor(() => expect(body.queryByRole('listitem')).not.toBeInTheDocument(), { timeout: 3000 });
+  },
+};
+
+/**
+ * Under `prefers-reduced-motion: reduce` enter, exit and swipe animations and the close
+ * transition are removed. The play function checks the stylesheet rule and, when the browser
+ * reports the preference, the computed style.
+ */
+export const ReducedMotion: Story = {
+  render: render([{ ...sticky, title: 'No motion', description: 'Appears and leaves without animation.' }]),
+  play: async ({ canvasElement }) => {
+    const doc = canvasElement.ownerDocument;
+    const body = within(doc.body);
+    const item = await body.findByRole('listitem');
+    const rules: CSSStyleRule[] = [];
+    for (const sheet of Array.from(doc.styleSheets)) {
+      let list: CSSRuleList;
+      try { list = sheet.cssRules; } catch { continue; }
+      for (const r of Array.from(list)) {
+        if (r instanceof CSSMediaRule && r.conditionText.includes('prefers-reduced-motion')) {
+          rules.push(...(Array.from(r.cssRules) as CSSStyleRule[]).filter((x) => x.selectorText?.includes('.ds-toast')));
+        }
+      }
+    }
+    await expect(rules.some((r) => r.style.animationName === 'none' || r.style.animation === 'none')).toBe(true);
+    if (doc.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      await expect(getComputedStyle(item).animationName).toBe('none');
+    }
+  },
 };
 
 export const Interactive: Story = {
