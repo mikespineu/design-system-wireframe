@@ -93,6 +93,13 @@
       "w": 1440,
       "x": 18240,
       "y": 0
+    },
+    "Layout.dc.html": {
+      "h": 11200,
+      "title": "Layout · Stack & Grid",
+      "w": 1440,
+      "x": 19760,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -126,7 +133,8 @@
     "RadioGroup.dc.html",
     "InfoTip.dc.html",
     "Icon.dc.html",
-    "Tabs.dc.html"
+    "Tabs.dc.html",
+    "Layout.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
