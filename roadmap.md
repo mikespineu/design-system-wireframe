@@ -385,3 +385,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-31** TileGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/63
 - **DS-40** Toast — implementation — https://github.com/mikespineu/design-system-wireframe/pull/78
 - **DS-45** Drawer — implementation — https://github.com/mikespineu/design-system-wireframe/pull/79
+- **DS-33** Button icons & loading — implementation — https://github.com/mikespineu/design-system-wireframe/pull/84
