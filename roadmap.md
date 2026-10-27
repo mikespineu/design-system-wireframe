@@ -260,8 +260,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Renders Popover when `(pointer: coarse)` matches, Tooltip otherwise, and switches live on change; viewport width has no effect
     - Tests mock `matchMedia` for both modes (stub added to `jest.setup.ts` if missing)
     - Story per mode, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-44 Drawer — design.** Define a side panel sliding in from left, right, top or bottom: sizes, overlay, header/title, body scroll, footer actions, close button and motion, consistent with Dialog.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-44 Drawer — design.** Define a side panel sliding in from left, right, top or bottom: sizes, overlay, header/title, body scroll, footer actions, close button and motion, consistent with Dialog.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers all four sides in sm/md/lg (and full on mobile), with overlay, title, scrolling body, footer and close
     - Spec names Radix `Dialog` and defines focus trap, Escape, outside click and slide motion with `prefers-reduced-motion`
@@ -349,6 +349,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 ## Done
 
 - **DS-37** Heading & Text — design — https://github.com/mikespineu/design-system-wireframe/pull/68
+- **DS-44** Drawer — design — https://github.com/mikespineu/design-system-wireframe/pull/69
 - **DS-39** Toast — design — https://github.com/mikespineu/design-system-wireframe/pull/70
 - **DS-32** Button icons, loading & ButtonGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/72
 - **DS-17** Select — design — https://github.com/mikespineu/design-system-wireframe/pull/73
