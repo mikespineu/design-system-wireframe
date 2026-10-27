@@ -247,8 +247,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers Tooltip and Popover on all four sides, with arrow, open/closed, and InfoTip in touch vs non-touch mode
     - Spec names Radix `Tooltip` and `Popover` and defines delays, collision handling and portal layering
     - Spec defines InfoTip switching only on the `(pointer: coarse)` media query (never on viewport width), its behavior before hydration, and limits its content to non-interactive text
-- [ ] **DS-42 Tooltip & Popover — implementation.** Build `Tooltip` and `Popover` in `src/components/Tooltip/` and `src/components/Popover/` on Radix `Tooltip` and `Popover`, styled via `[data-state]` / `[data-side]`.
-  - type: build · has_ui: yes · depends_on: DS-41 · needs_human: no · status: todo
+- [x] **DS-42 Tooltip & Popover — implementation.** Build `Tooltip` and `Popover` in `src/components/Tooltip/` and `src/components/Popover/` on Radix `Tooltip` and `Popover`, styled via `[data-state]` / `[data-side]`.
+  - type: build · has_ui: yes · depends_on: DS-41 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state and side
     - Tooltip opens on hover and focus, closes on Escape; Popover opens on click, closes on Escape and outside click, focus returns to trigger
