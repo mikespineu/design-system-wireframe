@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Typography</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.grid1{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.span2{grid-column:span 2}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column;min-width:0}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-b{display:flex;flex-direction:column;gap:16px;padding:32px 24px;min-width:0}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.note{margin:0;font-size:13px;line-height:20px;color:#595959}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:44px;padding:8px 16px 8px 0;border-bottom:1px solid #E0E0E0;color:#404040;vertical-align:middle}
+.tbl td code,.ab-f code,.sec-d code,.note code{font-family:'Red Hat Mono',monospace;font-size:0.9em;color:#000000}
+.code{margin:0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959;white-space:pre-wrap}
+.code b{font-weight:500;color:#000000}
+.chip{display:inline-flex;align-items:center;flex:none;height:20px;padding:0 8px;border:1px solid #C7C7C7;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959;white-space:nowrap}
+.chip.ink{border-color:#000000;color:#000000}
+.ex{display:flex;flex-direction:column;gap:8px;padding-bottom:16px;border-bottom:1px solid #E0E0E0;min-width:0}
+.ex:last-child{padding-bottom:0;border-bottom:0}
+.ex-top{display:flex;justify-content:space-between;align-items:center;gap:16px;min-width:0}
+.meta{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.wrow{display:grid;grid-template-columns:268px minmax(0,1fr);gap:16px;align-items:baseline;min-width:0}
+.wrow.n{grid-template-columns:56px minmax(0,1fr)}
+.frame{border:1px dashed #C7C7C7;padding:8px;box-sizing:border-box;width:280px;max-width:100%}
+.panel{border:1px solid #000000;padding:24px;display:flex;flex-direction:column;gap:8px}
+.inv{background:#000000;color:#FFFFFF;padding:0 24px;height:44px;display:inline-flex;align-items:center;align-self:flex-start}
+.err{display:flex;align-items:center;gap:8px;color:#A3302B}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tree{display:flex;flex-direction:column;gap:12px}
+.tree .n{display:flex;align-items:baseline;gap:12px;min-width:0}
+.tree .l2{padding-left:24px}
+.tree .l3{padding-left:48px}
+.tree .l4{padding-left:72px}
+.surf{padding:16px;display:flex;flex-direction:column;gap:4px}
+.surf.s50{background:#F7F7F7}
+.surf.s100{background:#EEEEEE}
+.order{display:flex;flex-direction:column;gap:0;border:1px solid #E0E0E0}
+.order div{display:grid;grid-template-columns:32px 220px minmax(0,1fr);gap:12px;align-items:center;min-height:40px;padding:4px 12px;border-bottom:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#404040}
+.order div:last-child{border-bottom:0}
+.order .k{font-family:'Red Hat Mono',monospace;font-size:12px;color:#000000}
+.order .c{background:#F7F7F7}
+.bare{margin:0;font-family:'Red Hat Mono',monospace;font-size:16px;line-height:26px;font-weight:400;color:#000000}
+.lbl{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase}
+
+/* =====================================================================
+   The proposed utilities, applied literally. Class names below are the
+   real class names; rule order mirrors what Tailwind v4 emits:
+   overflow-first utilities, then composed styles, then 1-property
+   modifiers (so modifiers win whatever the order in the markup).
+   ===================================================================== */
+
+/* -- emitted before the composed styles (start at display / overflow) -- */
+.block{display:block}
+.inline-block{display:inline-block}
+.max-w-full{max-width:100%}
+.min-w-0{min-width:0}
+.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.line-clamp-2,.line-clamp-3{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical}
+.line-clamp-2{-webkit-line-clamp:2;line-clamp:2}
+.line-clamp-3{-webkit-line-clamp:3;line-clamp:3}
+
+/* -- composed heading styles: font-mono + text-{step} + text-ink + balance (longhand) --
+   margin:0 here stands in for Tailwind preflight; the real utilities set no margin. */
+.heading-2xl,.heading-xl,.heading-lg,.heading-md,.heading-sm,.heading-xs{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;color:#000000;text-wrap-style:balance}
+.heading-2xl{font-size:72px;line-height:1;letter-spacing:-0.04em}
+.heading-xl{font-size:48px;line-height:1.1;letter-spacing:-0.03em}
+.heading-lg{font-size:32px;line-height:1.2;letter-spacing:-0.02em}
+.heading-md{font-size:22px;line-height:29px;letter-spacing:0}
+.heading-sm{font-size:18px;line-height:26px;letter-spacing:0}
+.heading-xs{font-size:16px;line-height:24px;letter-spacing:0}
+
+/* -- composed body styles: font-sans + text-{step} + font-normal + tracking-normal + text-text -- */
+.body-lg,.body-md,.body-sm,.body-xs,.body-2xs{margin:0;font-family:'Red Hat Text',sans-serif;font-weight:400;letter-spacing:0;color:#404040}
+.body-lg{font-size:18px;line-height:1.6}
+.body-md{font-size:16px;line-height:26px}
+.body-sm{font-size:15px;line-height:24px}
+.body-xs{font-size:13px;line-height:20px}
+.body-2xs{font-size:12px;line-height:16px}
+
+/* -- Don't demo only: text-balance emits the text-wrap shorthand after truncate -- */
+.text-balance{text-wrap:balance}
+
+/* -- 1-property modifiers: emitted after the composed styles -- */
+.font-sans{font-family:'Red Hat Text',sans-serif}
+.font-mono{font-family:'Red Hat Mono',monospace}
+.font-normal{font-weight:400}
+.font-medium{font-weight:500}
+.font-bold{font-weight:700}
+.text-text{color:#404040}
+.text-muted{color:#595959}
+.text-ink{color:#000000}
+.text-inherit{color:inherit}
+
+/* -- focus-visible:focus-ring, shown as a static state -- */
+.focus-ring{outline:2px solid #000000;outline-offset:2px}
+
+/* -- links (owned by the link, shown for composition) -- */
+.lk{color:inherit;text-decoration:none}
+.lk.hov{text-decoration:underline;text-underline-offset:4px}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 11600px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Typography · DS-37 · draft · revision 2</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Typography</h1>
+<p style="margin: 0; max-width: 820px; font-size: 18px; line-height: 1.6; color: #404040">The type scale as Tailwind utility classes, with no components. Eleven composed classes, <code>heading-2xl</code> … <code>heading-xs</code> and <code>body-lg</code> … <code>body-2xs</code>, are each built from existing theme utilities with <code>@apply</code>. Weight, family, tone, truncate and line clamp are stock utilities you add to the same element. The class sets the look; you choose the element. Every sample on this canvas is rendered by the class string shown next to it.</p>
+</header>
+
+<!-- 01 APPROACH -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Approach · classes, not components</h2></div>
+<p class="sec-d">One composed class per element gives the full style. Modifiers change one property at a time. The chip on the right is the element the author wrote: the class never changes it.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>In markup</span><span>class string → element</span></div><div class="ab-b">
+<div class="ex"><div class="ex-top"><p class="code">&lt;h1 class="<b>heading-xl</b>"&gt;</p><span class="chip ink">h1</span></div><h1 class="heading-xl">Account settings</h1></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;h2 class="<b>heading-sm</b>"&gt;</p><span class="chip ink">h2</span></div><h2 class="heading-sm">Plan</h2></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;p class="<b>body-md</b>"&gt;</p><span class="chip ink">p</span></div><p class="body-md">Your name and photo appear on invoices and shared projects.</p></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;label class="<b>body-md font-medium text-ink</b>"&gt;</p><span class="chip ink">label</span></div><span class="body-md font-medium text-ink">Display name</span></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;time class="<b>body-xs font-mono text-muted</b>"&gt;</p><span class="chip ink">time</span></div><span class="body-xs font-mono text-muted">26 Oct 2026 · 14:02</span></div>
+<div class="ex"><div class="ex-top"><p class="code">&lt;a class="<b>body-sm font-mono</b>"&gt;</p><span class="chip ink">a</span></div><span class="body-sm font-mono"><a class="lk hov" href="#">docs/specs/Typography.md</a></span></div>
+</div><div class="ab-f">No wrapper, no <code>as</code>, no <code>asChild</code>: the class goes directly on <code>Dialog.Title</code>, a router link, <code>time</code> or a table cell.</div></div>
+
+<div style="display:flex;flex-direction:column;gap:24px;min-width:0">
+<div class="ab"><div class="ab-h"><span>Naming</span><span>three kinds of class</span></div><div class="ab-b" style="padding-top:8px">
+<table class="tbl">
+<thead><tr><th>Kind</th><th>Classes</th><th>Sets</th></tr></thead>
+<tbody>
+<tr><td>Heading style</td><td><code>heading-2xl</code> … <code>heading-xs</code></td><td>full look: family, size, leading, weight, tracking, colour, balance</td></tr>
+<tr><td>Body style</td><td><code>body-lg</code> … <code>body-2xs</code></td><td>full look: family, size, leading, weight, tracking, colour</td></tr>
+<tr><td>Modifier</td><td><code>font-medium</code>, <code>font-mono</code>, <code>text-muted</code>, <code>truncate</code>, <code>line-clamp-2</code> …</td><td>one concern, on top of a style</td></tr>
+<tr><td>Atomic size (internal)</td><td><code>text-h1</code>, <code>text-body</code>, <code>text-caption</code> …</td><td>size + leading only; used by components and by the composed classes</td></tr>
+</tbody>
+</table>
+</div><div class="ab-f">Same t-shirt steps for both prefixes. Neither <code>heading-</code> nor <code>body-</code> exists in Tailwind, and both stay out of <code>text-*</code>, which already means size (<code>text-h1</code>, <code>text-sm</code>) and colour (<code>text-muted</code>).</div></div>
+
+<div class="ab"><div class="ab-h"><span>Anatomy</span><span>@utility in tailwind.css</span></div><div class="ab-b">
+<p class="code"><b>@utility heading-lg</b> {
+  @apply font-mono text-h2 text-ink;
+  text-wrap-style: balance;   /* longhand, see 07 */
+}
+<b>@utility body-md</b> {
+  @apply font-sans text-body font-normal tracking-normal text-text;
+}</p>
+</div><div class="ab-f">Sets only family, size, leading, weight, tracking and colour (plus balance on headings). Never margin, display, overflow or white-space.</div></div>
+</div>
+
+</div>
+</section>
+
+<!-- 02 HEADING STYLES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Heading styles</h2></div>
+<p class="sec-d">Six styles, all Red Hat Mono 500 in black, balanced wrapping, no margin. <code>heading-2xl</code> to <code>heading-md</code> compose the existing display, h1, h2 and h3 steps. <code>heading-sm</code> and <code>heading-xs</code> use the new <code>text-h4</code> and <code>text-h5</code> steps. Each artboard shows one line and a wrapped line, so you can see the leading.</p>
+<div class="grid1">
+<div class="ab"><div class="ab-h"><span>heading-2xl · display</span><span>font-mono text-display text-ink · 72 / 72 · −4%</span></div><div class="ab-b">
+<p class="code">&lt;h1 class="<b>heading-2xl</b>"&gt;</p>
+<h1 class="heading-2xl">Less, but better</h1>
+<h1 class="heading-2xl" style="max-width:760px">Quiet interfaces for loud products</h1>
+</div><div class="ab-f">Hero and marketing only. It is never a level default; set it explicitly, usually on an h1.</div></div>
+<div class="ab"><div class="ab-h"><span>heading-xl · h1</span><span>font-mono text-h1 text-ink · 48 / 53 · −3%</span></div><div class="ab-b">
+<p class="code">&lt;h1 class="<b>heading-xl</b>"&gt;</p>
+<h1 class="heading-xl">Account settings</h1>
+<h1 class="heading-xl" style="max-width:560px">Quiet interfaces for loud products</h1>
+</div><div class="ab-f">Default for h1. Page titles.</div></div>
+</div>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>heading-lg · h2</span><span>font-mono text-h2 · 32 / 38 · −2%</span></div><div class="ab-b">
+<p class="code">&lt;h2 class="<b>heading-lg</b>"&gt;</p>
+<h2 class="heading-lg">Section heading</h2>
+<h2 class="heading-lg" style="max-width:360px">Shipping and returns for every order</h2>
+</div><div class="ab-f">Default for h2. Page sections.</div></div>
+<div class="ab"><div class="ab-h"><span>heading-md · h3</span><span>font-mono text-h3 · 22 / 29 · 0</span></div><div class="ab-b">
+<p class="code">&lt;h3 class="<b>heading-md</b>"&gt;</p>
+<h3 class="heading-md">Card title</h3>
+<h3 class="heading-md" style="max-width:260px">Shipping and returns for every order</h3>
+</div><div class="ab-f">Default for h3. Cards, dialog titles, subsections. 29 px needs the text-h3 alignment (spec, Token requests C).</div></div>
+<div class="ab"><div class="ab-h"><span>heading-sm · h4 (new step)</span><span>font-mono text-h4 · 18 / 26 · 0</span></div><div class="ab-b">
+<p class="code">&lt;h4 class="<b>heading-sm</b>"&gt;</p>
+<h4 class="heading-sm">Group title</h4>
+<h4 class="heading-sm" style="max-width:220px">Shipping and returns for every order</h4>
+</div><div class="ab-f">Default for h4. Groups inside a card, side panels.</div></div>
+<div class="ab"><div class="ab-h"><span>heading-xs · h5 (new step)</span><span>font-mono text-h5 · 16 / 24 · 0</span></div><div class="ab-b">
+<p class="code">&lt;h5 class="<b>heading-xs</b>"&gt;</p>
+<h5 class="heading-xs">List heading</h5>
+<h5 class="heading-xs" style="max-width:200px">Shipping and returns for every order</h5>
+</div><div class="ab-f">Default for h5 and h6. The smallest heading; below this, use a body style with <code>font-medium text-ink</code>.</div></div>
+</div>
+</section>
+
+<!-- 03 LEVEL DEFAULTS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Heading · Level defaults and overrides</h2></div>
+<p class="sec-d">Each level has a default class, so the same level looks the same everywhere. When the outline and the visual hierarchy disagree, which is common in cards, sidebars and dialogs, keep the element and change the class. h5 and h6 share <code>heading-xs</code>.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>Default class per level</span><span>use unless the design says otherwise</span></div><div class="ab-b" style="padding-top:8px">
+<table class="tbl">
+<thead><tr><th>Element</th><th>Default class</th><th>Looks like</th></tr></thead>
+<tbody>
+<tr><td><span class="chip">h1</span></td><td><code>heading-xl</code></td><td><span class="heading-xl">Aa</span></td></tr>
+<tr><td><span class="chip">h2</span></td><td><code>heading-lg</code></td><td><span class="heading-lg">Aa</span></td></tr>
+<tr><td><span class="chip">h3</span></td><td><code>heading-md</code></td><td><span class="heading-md">Aa</span></td></tr>
+<tr><td><span class="chip">h4</span></td><td><code>heading-sm</code></td><td><span class="heading-sm">Aa</span></td></tr>
+<tr><td><span class="chip">h5</span></td><td><code>heading-xs</code></td><td><span class="heading-xs">Aa</span></td></tr>
+<tr><td><span class="chip">h6</span></td><td><code>heading-xs</code></td><td><span class="heading-xs">Aa</span></td></tr>
+</tbody>
+</table>
+</div><div class="ab-f"><code>heading-2xl</code> is never a default. The mapping is a convention, not CSS; the spec asks whether base styles should apply it.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Element ≠ class</span><span>outline from the page, look from the layout</span></div><div class="ab-b">
+<div style="display:flex;align-items:center;gap:12px"><h1 class="heading-xl">Account</h1><span class="chip ink">h1 · heading-xl</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h2 class="heading-lg">Profile</h2><span class="chip ink">h2 · heading-lg</span></div>
+<p class="body-md">Your name and photo appear on invoices and shared projects.</p>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h3 class="heading-md">Avatar</h3><span class="chip ink">h3 · heading-md</span></div>
+</div>
+<div class="panel" style="border-color:#E0E0E0">
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><h2 class="heading-sm">Plan</h2><span class="chip ink">h2 · heading-sm</span></div>
+<p class="body-sm">Team · 12 seats</p>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><h3 class="heading-xs">Usage</h3><span class="chip ink">h3 · heading-xs</span></div>
+<p class="body-xs text-muted">8 of 12 seats used</p>
+</div>
+</div>
+</div><div class="ab-f">The sidebar card is a sibling section of Profile, so its title stays h2 even though it uses <code>heading-sm</code>. Skipping to h4 to get the small look would break the outline (section 10).</div></div>
+
+<div class="ab span2"><div class="ab-h"><span>Base h1–h6 today</span><span>unchanged by this spec · every heading needs a class</span></div><div class="ab-b">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px">
+<div class="ex" style="border:0;padding:0">
+<p class="code">&lt;h2&gt;Billing&lt;/h2&gt;   <b>no class</b>
+/* @layer base: font-family mono; preflight: font-size and font-weight inherit, margin 0 */</p>
+<div class="panel" style="border-color:#E0E0E0"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div class="bare">Billing</div><span class="chip">h2 · mono 16 / 400</span></div></div>
+<p class="note">A bare heading picks up the surrounding body size and weight, so it reads as mono body text. This is today's base, not a style to use.</p>
+</div>
+<div class="ex" style="border:0;padding:0">
+<p class="code">&lt;h2 class="<b>heading-lg</b>"&gt;Billing&lt;/h2&gt;</p>
+<div class="panel" style="border-color:#E0E0E0"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><h2 class="heading-lg">Billing</h2><span class="chip ink">h2 · heading-lg</span></div></div>
+<p class="note">Always add the class. Utilities sit above <code>@layer base</code>, so the class wins over any base rule.</p>
+</div>
+</div>
+</div></div>
+
+</div>
+</section>
+
+<!-- 04 BODY SIZES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Body styles</h2></div>
+<p class="sec-d">Five styles, shown with no modifiers: Red Hat Text 400 in the default text colour (gray-700). They are the existing body-lg, body, body-sm, caption and ui-sm steps, so text lines up with the labels and descriptions inside existing controls.</p>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>body-lg</span><span>text-body-lg · 18 / 29</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-lg</b>"&gt;</p>
+<p class="body-lg">Body large for introductions and lead paragraphs. Generous leading keeps long passages calm and readable.</p>
+</div><div class="ab-f">Page intros, empty states, marketing body.</div></div>
+<div class="ab"><div class="ab-h"><span>body-md</span><span>text-body · 16 / 26</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-md</b>"&gt;</p>
+<p class="body-md">Default body copy for interface text, descriptions and form help. Same size and leading as Input, the Checkbox md label and the Dialog body.</p>
+</div><div class="ab-f">Paragraphs and interface copy.</div></div>
+<div class="ab"><div class="ab-h"><span>body-sm (new step)</span><span>text-body-sm · 15 / 24</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-sm</b>"&gt;</p>
+<p class="body-sm">Dense body for tables, side panels and compact lists. Matches the Checkbox sm label.</p>
+</div><div class="ab-f">Dense desktop layouts.</div></div>
+<div class="ab"><div class="ab-h"><span>body-xs</span><span>text-caption · 13 / 20</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-xs</b>"&gt;</p>
+<p class="body-xs">Caption text for photos, metadata, hints and footnotes. Matches field hints and checkbox descriptions.</p>
+</div><div class="ab-f">Captions, metadata, footnotes. Usually with <code>text-muted</code>.</div></div>
+<div class="ab"><div class="ab-h"><span>body-2xs (new step)</span><span>text-ui-sm · 12 / 16</span></div><div class="ab-b">
+<p class="code">&lt;span class="<b>body-2xs</b>"&gt;   &lt;span class="<b>body-2xs font-mono text-muted</b>"&gt;</p>
+<p class="body-2xs">Smallest text: tags, counters and timestamps. Usually set in mono.</p>
+<p class="body-2xs font-mono text-muted">01 — Landscape · 4:5</p>
+</div><div class="ab-f">Meta and numerals only, never paragraphs.</div></div>
+<div class="ab"><div class="ab-h"><span>Scale at a glance</span><span>same words, every style</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow n"><span class="meta">body-lg</span><span class="body-lg">Quiet interfaces</span></div>
+<div class="wrow n"><span class="meta">body-md</span><span class="body-md">Quiet interfaces</span></div>
+<div class="wrow n"><span class="meta">body-sm</span><span class="body-sm">Quiet interfaces</span></div>
+<div class="wrow n"><span class="meta">body-xs</span><span class="body-xs">Quiet interfaces</span></div>
+<div class="wrow n"><span class="meta">body-2xs</span><span class="body-2xs">Quiet interfaces</span></div>
+</div></div>
+</div>
+</section>
+
+<!-- 05 WEIGHT x FAMILY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Body · Weight × family modifiers</h2></div>
+<p class="sec-d">Three on-system weights (<code>font-normal</code> 400, <code>font-medium</code> 500, <code>font-bold</code> 700) and two families (<code>font-sans</code> Red Hat Text, the default; <code>font-mono</code> Red Hat Mono). There is one artboard per combination, with every body style in each, and each row shows its full class string. Family never changes size or leading.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>sans · normal</span><span>default, no modifier</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">body-lg</span><span class="body-lg">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-md</span><span class="body-md">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-sm</span><span class="body-sm">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-xs</span><span class="body-xs">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-2xs</span><span class="body-2xs">Order 1284 shipped</span></div>
+</div><div class="ab-f">Reading text.</div></div>
+
+<div class="ab"><div class="ab-h"><span>mono · normal</span><span>+ font-mono</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">body-lg font-mono</span><span class="body-lg font-mono">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-md font-mono</span><span class="body-md font-mono">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-sm font-mono</span><span class="body-sm font-mono">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-xs font-mono</span><span class="body-xs font-mono">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-2xs font-mono</span><span class="body-2xs font-mono">Order 1284 shipped</span></div>
+</div><div class="ab-f">Code, file paths, IDs, timestamps.</div></div>
+
+<div class="ab"><div class="ab-h"><span>sans · medium</span><span>+ font-medium</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">body-lg font-medium</span><span class="body-lg font-medium">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-md font-medium</span><span class="body-md font-medium">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-sm font-medium</span><span class="body-sm font-medium">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-xs font-medium</span><span class="body-xs font-medium">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-2xs font-medium</span><span class="body-2xs font-medium">Order 1284 shipped</span></div>
+</div><div class="ab-f">Inline emphasis, list item titles, values next to labels.</div></div>
+
+<div class="ab"><div class="ab-h"><span>mono · medium</span><span>+ font-mono font-medium</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">body-lg font-mono font-medium</span><span class="body-lg font-mono font-medium">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-md font-mono font-medium</span><span class="body-md font-mono font-medium">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-sm font-mono font-medium</span><span class="body-sm font-mono font-medium">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-xs font-mono font-medium</span><span class="body-xs font-mono font-medium">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-2xs font-mono font-medium</span><span class="body-2xs font-mono font-medium">Order 1284 shipped</span></div>
+</div><div class="ab-f">Prices, counters, values (like the Slider pill).</div></div>
+
+<div class="ab"><div class="ab-h"><span>sans · bold</span><span>+ font-bold</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">body-lg font-bold</span><span class="body-lg font-bold">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-md font-bold</span><span class="body-md font-bold">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-sm font-bold</span><span class="body-sm font-bold">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-xs font-bold</span><span class="body-xs font-bold">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-2xs font-bold</span><span class="body-2xs font-bold">Order 1284 shipped</span></div>
+</div><div class="ab-f">Sparingly: a key figure or warning word inside a paragraph. A <code>&lt;strong&gt;</code> child also gives 700.</div></div>
+
+<div class="ab"><div class="ab-h"><span>mono · bold</span><span>+ font-mono font-bold</span></div><div class="ab-b" style="gap:12px">
+<div class="wrow"><span class="meta">body-lg font-mono font-bold</span><span class="body-lg font-mono font-bold">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-md font-mono font-bold</span><span class="body-md font-mono font-bold">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-sm font-mono font-bold</span><span class="body-sm font-mono font-bold">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-xs font-mono font-bold</span><span class="body-xs font-mono font-bold">Order 1284 shipped</span></div>
+<div class="wrow"><span class="meta">body-2xs font-mono font-bold</span><span class="body-2xs font-mono font-bold">Order 1284 shipped</span></div>
+</div><div class="ab-f">Rare. Headings are 500, and bold mono competes with them.</div></div>
+
+</div>
+</section>
+
+<!-- 06 TONE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Tone modifiers</h2></div>
+<p class="sec-d">Four on-system tones, all gray scale. The header gives each colour and its contrast on white. Body styles default to <code>text-text</code> and headings to <code>text-ink</code>. Status colours are not tones: feedback text belongs to Field errors and Alert, which pair the colour with an icon and a label. Use <code>text-inherit</code> to sit inside those, or inside any coloured parent.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>text-text</span><span>gray-700 · 10.4:1</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-md</b>"&gt;   (default; text-text is implied)</p>
+<p class="body-md">Body copy. Readable for long passages without the full weight of black.</p>
+<p class="body-xs">Caption in the default tone.</p>
+</div><div class="ab-f">Default for body styles. Write <code>text-text</code> only to undo another tone at a breakpoint.</div></div>
+
+<div class="ab"><div class="ab-h"><span>text-muted</span><span>gray-600 · 7:1</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-md text-muted</b>"&gt;</p>
+<p class="body-md text-muted">Secondary copy: descriptions, metadata, helper text.</p>
+<p class="body-xs text-muted">Updated 2 hours ago</p>
+</div><div class="ab-f">The only lighter tone. Text is never lighter than gray-600.</div></div>
+
+<div class="ab"><div class="ab-h"><span>text-ink</span><span>black · 21:1</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-md text-ink</b>"&gt;   &lt;span class="<b>body-xs font-medium text-ink</b>"&gt;</p>
+<p class="body-md text-ink">Ink. Values, selected items and labels that must read as strongly as a heading.</p>
+<p class="body-xs font-medium text-ink">Due today</p>
+</div><div class="ab-f">Same colour as headings. Combine it with <code>font-medium</code> for inline labels.</div></div>
+
+<div class="ab"><div class="ab-h"><span>text-inherit</span><span>parent colour</span></div><div class="ab-b">
+<p class="code">&lt;span class="<b>body-sm font-mono font-medium text-inherit</b>"&gt;</p>
+<span class="inv"><span class="body-sm font-mono font-medium text-inherit">Continue</span></span>
+<div class="err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.5"/></svg><span class="body-xs font-medium text-inherit"><span class="sr">Error: </span>Enter a valid email address.</span></div>
+</div><div class="ab-f">Takes the parent's colour: white on a primary button, error inside a field error row (the parent supplies the icon and the "Error:" prefix).</div></div>
+
+<div class="ab"><div class="ab-h"><span>On fills</span><span>gray-50 / gray-100</span></div><div class="ab-b" style="gap:8px">
+<div class="surf s50"><span class="body-md">body-md on gray-50 · 9.7:1</span><span class="body-xs text-muted">body-xs text-muted on gray-50 · 6.5:1</span></div>
+<div class="surf s100"><span class="body-md">body-md on gray-100 · 8.9:1</span><span class="body-xs text-muted">body-xs text-muted on gray-100 · 6.0:1</span></div>
+</div><div class="ab-f">Every tone passes 4.5:1 on every surface fill, at every size.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Off-system colour classes</span><span>don't use on text</span></div><div class="ab-b">
+<p class="code">✕ text-gray-400 · text-gray-500     lighter than gray-600
+✕ text-gray-* · text-black · text-white   use the semantic tones
+✕ text-text-strong · text-placeholder · text-disabled   control colours
+✕ text-error · text-success · text-info   only in Field error / Alert, with icon + label</p>
+</div><div class="ab-f">These generate CSS today, so review has to catch them. Disabled text gets its colour from the disabled control; use <code>text-inherit</code> inside it.</div></div>
+
+</div>
+</section>
+
+<!-- 07 MODIFIERS + CASCADE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Modifiers · cascade contract</h2></div>
+<p class="sec-d">All typography classes are single-class utilities in <code>@layer utilities</code>. Tailwind v4 orders utilities by variant, then by each one's first property, then puts utilities with more properties first. Composed classes start at <code>font-family</code>, so every one-property modifier comes after them and wins, whatever the order in the markup. <code>truncate</code> and <code>line-clamp-*</code> come earlier but share no property with the composed classes.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>On-system modifiers</span><span>add to the same element</span></div><div class="ab-b" style="padding-top:8px">
+<table class="tbl">
+<thead><tr><th>Need</th><th>Classes</th></tr></thead>
+<tbody>
+<tr><td>Weight</td><td><code>font-normal</code> · <code>font-medium</code> · <code>font-bold</code></td></tr>
+<tr><td>Family</td><td><code>font-sans</code> · <code>font-mono</code></td></tr>
+<tr><td>Tone</td><td><code>text-text</code> · <code>text-muted</code> · <code>text-ink</code> · <code>text-inherit</code></td></tr>
+<tr><td>Truncate</td><td><code>truncate</code> (+ <code>block</code> on inline elements, + <code>min-w-0</code> in flex / grid)</td></tr>
+<tr><td>Line clamp</td><td><code>line-clamp-2</code>, <code>line-clamp-3</code> … · <code>line-clamp-none</code></td></tr>
+<tr><td>Responsive</td><td><code>md:heading-xl</code> and other variants (no responsive scale is defined)</td></tr>
+<tr><td>Layout</td><td>margins, padding, <code>text-center</code>, <code>max-w-prose</code>: not typography, free to combine</td></tr>
+</tbody>
+</table>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Off-system</span><span>generate CSS · must not be used on text</span></div><div class="ab-b" style="padding-top:8px">
+<table class="tbl">
+<thead><tr><th>Classes</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td><code>font-thin</code> · <code>font-light</code> · <code>font-semibold</code> · <code>font-extrabold</code> · <code>font-black</code></td><td>The fonts are loaded at 400 / 500 / 700 only</td></tr>
+<tr><td><code>font-serif</code></td><td>not a system family</td></tr>
+<tr><td><code>text-xs</code> · <code>text-sm</code> · <code>text-base</code> · <code>text-lg</code> … <code>text-9xl</code></td><td>Tailwind's default sizes are not the type scale</td></tr>
+<tr><td><code>text-h1</code> … <code>text-caption</code> next to a composed class</td><td>pick another composed class</td></tr>
+<tr><td><code>leading-*</code> · <code>tracking-*</code></td><td>the composed class owns them</td></tr>
+<tr><td><code>text-balance</code> · <code>text-pretty</code> · <code>text-nowrap</code> · <code>whitespace-*</code></td><td>fight <code>truncate</code>, see below</td></tr>
+<tr><td><code>uppercase</code> on a composed class</td><td>label style only</td></tr>
+</tbody>
+</table>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Emitted order</span><span>what Tailwind writes to the stylesheet</span></div><div class="ab-b">
+<div class="order">
+<div><span class="meta">1</span><span class="k">block · min-w-0</span><span>layout first</span></div>
+<div><span class="meta">2</span><span class="k">truncate · line-clamp-2</span><span>start at overflow / display; no shared property</span></div>
+<div class="c"><span class="meta">3</span><span class="k">heading-* · body-*</span><span>start at font-family; 5–7 properties</span></div>
+<div><span class="meta">4</span><span class="k">font-mono · font-sans</span><span>font-family only → after 3, wins</span></div>
+<div><span class="meta">5</span><span class="k">font-medium · font-bold</span><span>font-weight → wins</span></div>
+<div><span class="meta">6</span><span class="k">text-muted · text-ink · text-inherit</span><span>color → wins</span></div>
+<div><span class="meta">7</span><span class="k">md:heading-xl</span><span>variants after all base utilities</span></div>
+</div>
+</div><div class="ab-f">DS-38 locks this order in with a compiled-CSS test. If a Tailwind upgrade breaks it, the fallback is <code>@layer components</code>, at the cost of variants.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Markup order doesn't matter</span><span>modifier always wins</span></div><div class="ab-b">
+<div class="ex"><p class="code">&lt;p class="<b>body-md text-muted</b>"&gt;</p><p class="body-md text-muted">Updated 2 hours ago</p></div>
+<div class="ex"><p class="code">&lt;p class="<b>text-muted body-md</b>"&gt;</p><p class="text-muted body-md">Updated 2 hours ago</p></div>
+<div class="ex"><p class="code">&lt;h3 class="<b>font-sans heading-md</b>"&gt;   renders sans (rare; shown for the rule)</p><h3 class="font-sans heading-md">Card title</h3></div>
+</div><div class="ab-f">Both paragraphs render gray-600. The composed class never blocks a modifier.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Do · balance as longhand</span><span>heading-md truncate</span></div><div class="ab-b">
+<p class="code">@utility heading-md { …; <b>text-wrap-style: balance</b>; }
+&lt;h3 class="<b>heading-md truncate</b>"&gt;</p>
+<div class="frame"><h3 class="heading-md truncate">North-east quarterly report and returns</h3></div>
+</div><div class="ab-f"><code>text-wrap-style</code> leaves <code>text-wrap-mode</code> alone, so the <code>white-space: nowrap</code> from <code>truncate</code> holds: one line, ellipsis.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Don't · @apply text-balance</span><span>truncate undone</span></div><div class="ab-b">
+<p class="code">✕ @utility heading-md { @apply … <b>text-balance</b>; }   /* emits text-wrap: balance */
+&lt;h3 class="heading-md truncate"&gt;</p>
+<div class="frame"><h3 class="heading-md truncate text-balance">North-east quarterly report and returns</h3></div>
+</div><div class="ab-f">The shorthand resets <code>text-wrap-mode</code> to wrap. Because it is emitted after <code>truncate</code>, the heading wraps again and is clipped. The same happens with <code>text-pretty</code> or <code>text-wrap</code> next to <code>truncate</code>.</div></div>
+
+</div>
+</section>
+
+<!-- 08 TRUNCATE / CLAMP -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Truncate · Line clamp</h2></div>
+<p class="sec-d">Text wraps by default. <code>truncate</code> keeps one line and ends it with an ellipsis. <code>line-clamp-{n}</code> keeps n lines and ends the last one with an ellipsis. Both work with every heading and body style; use one or the other. The dashed frame is the container (280 px). The full string stays in the DOM, so it is copied, found and read in full by screen readers.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Wrap (default)</span><span>no modifier</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-md</b>"&gt;</p>
+<div class="frame"><p class="body-md">Quarterly report for the north-east region, including returns and refunds</p></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>truncate</span><span>1 line · ellipsis</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-md truncate</b>"&gt;</p>
+<div class="frame"><p class="body-md truncate">Quarterly report for the north-east region, including returns and refunds</p></div>
+</div><div class="ab-f">Sets overflow hidden, text-overflow ellipsis and nowrap. A <code>p</code> is a block, so nothing else is needed.</div></div>
+
+<div class="ab"><div class="ab-h"><span>line-clamp-2</span><span>2 lines · ellipsis</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-md line-clamp-2</b>"&gt;</p>
+<div class="frame"><p class="body-md line-clamp-2">Quarterly report for the north-east region, including returns, refunds, exchanges and the carrier delays from October.</p></div>
+</div><div class="ab-f">Card descriptions, list previews.</div></div>
+
+<div class="ab"><div class="ab-h"><span>line-clamp-3 · muted</span><span>3 lines</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-xs text-muted line-clamp-3</b>"&gt;</p>
+<div class="frame"><p class="body-xs text-muted line-clamp-3">Quarterly report for the north-east region, including returns, refunds, exchanges and the carrier delays from October. Figures are provisional until the audit closes at the end of the month.</p></div>
+</div><div class="ab-f">Any style, tone and family can clamp.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Heading · truncate</span><span>heading-md · 1 line</span></div><div class="ab-b">
+<p class="code">&lt;h3 class="<b>heading-md truncate</b>"&gt;</p>
+<div class="frame"><h3 class="heading-md truncate">North-east quarterly report and returns</h3></div>
+</div><div class="ab-f">Balance has no effect on a single non-wrapping line.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Heading · line-clamp-2</span><span>heading-lg · 2 lines</span></div><div class="ab-b">
+<p class="code">&lt;h2 class="<b>heading-lg line-clamp-2</b>"&gt;</p>
+<div class="frame"><h2 class="heading-lg line-clamp-2">North-east quarterly report and every return this year</h2></div>
+</div><div class="ab-f">Check this sample in the docs story on each browser.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Truncate in a flex row</span><span>+ min-w-0 · meta never shrinks</span></div><div class="ab-b">
+<p class="code">&lt;span class="<b>body-sm text-ink min-w-0 truncate</b>"&gt;
+&lt;span class="<b>body-xs text-muted</b>"&gt;</p>
+<div class="frame"><div style="display:flex;align-items:center;gap:12px;min-width:0;height:44px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" aria-hidden="true" style="flex:none"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>
+<span class="body-sm text-ink min-w-0 truncate" style="flex:1 1 auto">quarterly-report-north-east-final-v3.pdf</span>
+<span class="body-xs text-muted" style="flex:none">2.4 MB</span>
+</div></div>
+</div><div class="ab-f">Flex children don't shrink below their content by default; <code>min-w-0</code> lets the name shrink.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Inline element · truncate</span><span>+ block</span></div><div class="ab-b">
+<p class="code">&lt;span class="<b>body-sm font-mono block truncate</b>"&gt;</p>
+<div class="frame"><span class="body-sm font-mono block truncate">src/styles/tailwind.css#typography-utilities</span></div>
+</div><div class="ab-f"><code>overflow</code> doesn't apply to inline boxes, so add <code>block</code> (or <code>inline-block max-w-full</code>). The ellipsis is always at the end; middle truncation is not supported.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Fits</span><span>no ellipsis</span></div><div class="ab-b">
+<p class="code">&lt;p class="<b>body-md truncate</b>"&gt;   &lt;p class="<b>body-md line-clamp-2</b>"&gt;</p>
+<div class="frame"><p class="body-md truncate">Quarterly report</p></div>
+<div class="frame"><p class="body-md line-clamp-2">Quarterly report for the north-east region.</p></div>
+</div><div class="ab-f">When the text fits, truncate and line clamp change nothing visible.</div></div>
+
+</div>
+</section>
+
+<!-- 09 STATES / FOCUS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">States · Focus</h2></div>
+<p class="sec-d">Typography is static. There is no hover, pressed, selected, disabled or invalid state, and nothing is in the tab order. A heading shows focus only when it is the target of a skip link or of focus management (<code>tabIndex={-1}</code>), and then only if <code>focus-visible:focus-ring</code> is on it. Interactive children such as links own their hover and focus styles.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Static</span><span>no interaction state</span></div><div class="ab-b">
+<h3 class="heading-md">Recent orders</h3>
+<p class="body-md">Hovering or clicking changes nothing. The cursor stays the text cursor.</p>
+</div><div class="ab-f">Tab skips headings and text.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus target · focus-visible</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b">
+<p class="code">&lt;h2 id="main" tabIndex={-1}
+    class="<b>heading-lg focus-visible:focus-ring</b>"&gt;</p>
+<h2 class="heading-lg focus-ring" style="align-self:flex-start">Main content</h2>
+<p class="body-md">Reached with a skip link, or focused after a keyboard-driven route change.</p>
+</div><div class="ab-f">The existing <code>focus-ring</code> utility, the same ring as every control. Heading classes don't include it; add it on each focus target.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus target · pointer</span><span>no ring</span></div><div class="ab-b">
+<h2 class="heading-lg" style="align-self:flex-start">Main content</h2>
+<p class="body-md">Focused by script after a mouse click: <code>:focus</code> without <code>:focus-visible</code> shows nothing.</p>
+</div><div class="ab-f">Screen readers still announce the heading.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Link in heading · rest</span><span>link inherits the heading look</span></div><div class="ab-b">
+<h3 class="heading-md"><a class="lk" href="#">Spring collection</a></h3>
+<p class="code">&lt;h3 class="<b>heading-md</b>"&gt;&lt;a href="…"&gt;…&lt;/a&gt;&lt;/h3&gt;</p>
+</div><div class="ab-f">Nest the link. The element stays h3 and the link is named by its text.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Link in heading · hover</span><span>underline, 4 px offset</span></div><div class="ab-b">
+<h3 class="heading-md"><a class="lk hov" href="#">Spring collection</a></h3>
+</div><div class="ab-f">Hover belongs to the link (the same underline as the ghost button), not to the heading class.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Link in heading · focus-visible</span><span>ring on the link</span></div><div class="ab-b">
+<h3 class="heading-md"><a class="lk focus-ring" href="#">Spring collection</a></h3>
+<p class="code">&lt;a class="<b>focus-visible:focus-ring</b>" href="…"&gt;</p>
+</div><div class="ab-f">One tab stop: the link. The heading itself isn't focusable.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Classed link · focus-visible</span><span>ring on the link</span></div><div class="ab-b">
+<p class="body-md">Read the <a class="body-md font-medium text-ink lk focus-ring" href="#">return policy</a> before you send it back.</p>
+<p class="code">&lt;a class="<b>body-md font-medium text-ink focus-visible:focus-ring</b>"&gt;</p>
+</div><div class="ab-f">The body class gives the link its size, weight and tone directly. No wrapper is needed.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Don't · heading look on a link</span><span>not a heading</span></div><div class="ab-b">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><a class="heading-md lk" href="#">Spring collection</a><span class="chip ink">a · not a heading</span></div>
+<p class="code">✕ &lt;a class="heading-md"&gt;     ✓ &lt;h3 class="heading-md"&gt;&lt;a&gt;</p>
+</div><div class="ab-f">It looks like a section title but is missing from heading navigation. If it acts as a heading, make it an h*.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Inside a disabled control</span><span>parent sets the colour</span></div><div class="ab-b">
+<div style="display:flex;align-items:center;gap:12px;color:#767676"><span style="box-sizing:border-box;width:24px;height:24px;border:2px solid #A3A3A3;background:#F7F7F7;flex:none"></span><span class="body-md text-inherit">Email me a copy</span></div>
+<p class="code">&lt;span class="<b>body-md text-inherit</b>"&gt;</p>
+</div><div class="ab-f">Typography has no disabled state. Inside controls, <code>text-inherit</code> lets the control's disabled colour (gray-500) win.</div></div>
+
+</div>
+</section>
+
+<!-- 10 HEADING ORDER -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Heading order</h2></div>
+<p class="sec-d">Screen-reader users move through a page by heading level, so the levels must describe the structure. Pick the element from the outline and the class from the design. Never pick an element to get a look.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>Do · elements follow the outline</span><span>one h1, no skipped levels</span></div><div class="ab-b">
+<div class="tree">
+<div class="n"><span class="chip ink">h1</span><span class="heading-xl" style="font-size:32px;line-height:38px">Account settings</span><span class="meta">heading-xl</span></div>
+<div class="n l2"><span class="chip ink">h2</span><span class="heading-lg" style="font-size:22px;line-height:29px">Profile</span><span class="meta">heading-lg</span></div>
+<div class="n l3"><span class="chip ink">h3</span><span class="heading-md" style="font-size:18px;line-height:26px">Avatar</span><span class="meta">heading-md</span></div>
+<div class="n l2"><span class="chip ink">h2</span><span class="heading-lg" style="font-size:22px;line-height:29px">Billing</span><span class="meta">heading-lg</span></div>
+<div class="n l3"><span class="chip ink">h3</span><span class="heading-sm">Plan</span><span class="meta">heading-sm (override)</span></div>
+<div class="n l3"><span class="chip ink">h3</span><span class="heading-sm">Invoices</span><span class="meta">heading-sm (override)</span></div>
+</div>
+</div><div class="ab-f">Sizes are shown reduced. Going down, add one level at a time; going back up, any level is fine.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Don't · skip a level for a smaller look</span><span>h2 → h4</span></div><div class="ab-b">
+<div class="tree">
+<div class="n"><span class="chip">h2</span><span class="heading-lg" style="font-size:22px;line-height:29px">Billing</span></div>
+<div class="n l3"><span class="chip ink">h4</span><span class="heading-sm">Plan</span><span class="meta">✕ element chosen for its look</span></div>
+</div>
+<p class="code">✕ &lt;h4 class="heading-sm"&gt;Plan&lt;/h4&gt;
+✓ &lt;h3 class="heading-sm"&gt;Plan&lt;/h3&gt;</p>
+</div><div class="ab-f">Same pixels, correct outline. jest-axe flags the first version with the heading-order rule.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Do · dialogs and reusable parts</span><span>level comes from the caller</span></div><div class="ab-b">
+<p class="body-md">A dialog title is an h2 (Radix Dialog.Title), and the dialog's sections start at h3. A reusable card or section takes the level as a prop instead of hardcoding it, because it may sit under an h1 on one page and an h2 on another. The class stays fixed.</p>
+<p class="code">&lt;ProductCard headingLevel={3} /&gt;
+  const H = `h${headingLevel}`;
+  → &lt;H className="<b>heading-md</b>"&gt;
+
+&lt;Dialog.Title className="<b>heading-md</b>"&gt;   // stays h2</p>
+</div><div class="ab-f">One h1 per page: the page title. A visually hidden h1 (<code>sr-only</code>) is fine when the design shows no visible title.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Don't · h* for non-headings</span><span>use a body style + modifiers</span></div><div class="ab-b">
+<div style="display:flex;flex-direction:column;gap:4px">
+<span class="body-2xs font-mono font-medium text-muted">SERIES 04</span>
+<span class="body-lg font-mono font-medium text-ink">1,284</span>
+<span class="body-xs text-muted">orders this month</span>
+</div>
+<p class="code">&lt;span class="<b>body-2xs font-mono font-medium text-muted</b>"&gt;
+&lt;span class="<b>body-lg font-mono font-medium text-ink</b>"&gt;
+&lt;span class="<b>body-xs text-muted</b>"&gt;</p>
+</div><div class="ab-f">Eyebrows, big numbers, bold labels and table cells are not headings. A heading must introduce content and must never be empty.</div></div>
+
+</div>
+</section>
+
+<!-- 11 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">11</span><h2 class="sec-t">Keyboard</h2></div>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>Typography classes</span><span>non-interactive · no Radix</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Skips headings and text. Focus goes to the next or previous control, including links nested inside them.</td></tr>
+<tr><td><span class="kbd">Enter</span> on a skip link</td><td>Moves focus to the target heading (<code>tabIndex={-1}</code>, <code>focus-visible:focus-ring</code>), which shows the ring. The next Tab continues from there.</td></tr>
+<tr><td>Any other key</td><td>No action.</td></tr>
+</tbody>
+</table>
+</div></div>
+<div class="ab"><div class="ab-h"><span>Screen reader navigation</span><span>why the element matters</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Reader</th><th>Heading navigation</th></tr></thead>
+<tbody>
+<tr><td>NVDA / JAWS</td><td><span class="kbd">H</span> next heading · <span class="kbd">1</span>–<span class="kbd">6</span> next heading at that level</td></tr>
+<tr><td>VoiceOver</td><td>Rotor ▸ Headings, grouped by level</td></tr>
+<tr><td>TalkBack</td><td>Reading controls ▸ Headings</td></tr>
+</tbody>
+</table>
+</div><div class="ab-f">These keys belong to the reader. They work from the h1–h6 elements; the classes can't help or hurt (section 10).</div></div>
+</div>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>

@@ -14,3 +14,4 @@ export * from './components/Switch';
 export * from './components/TileGroup';
 export * from './components/RadioGroup';
 export * from './components/Toast';
+export * from './components/Tabs';
