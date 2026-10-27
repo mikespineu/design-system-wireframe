@@ -210,8 +210,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas shows Stack in both directions with every gap step, align/justify options and wrap
     - Canvas shows Grid at 1–4 and 12 columns, with responsive counts at mobile/tablet/desktop
     - Spec defines the typed API (`gap` limited to `--ds-space-*` steps, `as` / `asChild`, responsive props) and the breakpoints used
-- [ ] **DS-36 Stack & Grid — implementation.** Build `Stack` and `Grid` in `src/components/Stack/` and `src/components/Grid/` per `docs/specs/Layout.md`, polymorphic via `asChild` (Radix `Slot`).
-  - type: build · has_ui: yes · depends_on: DS-35 · needs_human: no · status: todo
+- [x] **DS-36 Stack & Grid — implementation.** Build `Stack` and `Grid` in `src/components/Stack/` and `src/components/Grid/` per `docs/specs/Layout.md`, polymorphic via `asChild` (Radix `Slot`).
+  - type: build · has_ui: yes · depends_on: DS-35 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec for every direction, gap, alignment and column count
     - `gap` accepts only `--ds-space-*` steps (type-enforced); responsive props apply at the spec's breakpoints
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-36** Stack & Grid — implementation — https://github.com/mikespineu/design-system-wireframe/pull/75
 - **DS-22** Tabs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/76
 - **DS-37** Heading & Text — design — https://github.com/mikespineu/design-system-wireframe/pull/68
 - **DS-44** Drawer — design — https://github.com/mikespineu/design-system-wireframe/pull/69

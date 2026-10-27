@@ -1,0 +1,97 @@
+/*
+ * Breakpoints are literal px values (640 / 768 / 1024): custom properties cannot be used in
+ * media queries and no --ds-breakpoint-* tokens exist. See docs/specs/Layout.md, "Breakpoints".
+ * Source order matters: larger breakpoints come last at equal specificity and win.
+ */
+.ds-grid { display: grid; grid-auto-flow: row; }
+.ds-grid:is(ul, ol) { list-style: none; margin: 0; padding: 0; }
+
+.ds-grid[data-columns='1'] { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.ds-grid[data-columns='2'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ds-grid[data-columns='3'] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ds-grid[data-columns='4'] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ds-grid[data-columns='6'] { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.ds-grid[data-columns='12'] { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+.ds-grid[data-gap='0'] { gap: 0; }
+.ds-grid[data-gap='1'] { gap: var(--ds-space-1); }
+.ds-grid[data-gap='2'] { gap: var(--ds-space-2); }
+.ds-grid[data-gap='3'] { gap: var(--ds-space-3); }
+.ds-grid[data-gap='4'] { gap: var(--ds-space-4); }
+.ds-grid[data-gap='6'] { gap: var(--ds-space-6); }
+.ds-grid[data-gap='8'] { gap: var(--ds-space-8); }
+.ds-grid[data-gap='12'] { gap: var(--ds-space-12); }
+.ds-grid[data-gap='16'] { gap: var(--ds-space-16); }
+.ds-grid[data-gap='24'] { gap: var(--ds-space-24); }
+.ds-grid[data-align='start'] { align-items: flex-start; }
+.ds-grid[data-align='center'] { align-items: center; }
+.ds-grid[data-align='end'] { align-items: flex-end; }
+.ds-grid[data-align='stretch'] { align-items: stretch; }
+
+@media (min-width: 640px) {
+  .ds-grid[data-columns-sm='1'] { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .ds-grid[data-columns-sm='2'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-grid[data-columns-sm='3'] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ds-grid[data-columns-sm='4'] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ds-grid[data-columns-sm='6'] { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .ds-grid[data-columns-sm='12'] { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .ds-grid[data-gap-sm='0'] { gap: 0; }
+  .ds-grid[data-gap-sm='1'] { gap: var(--ds-space-1); }
+  .ds-grid[data-gap-sm='2'] { gap: var(--ds-space-2); }
+  .ds-grid[data-gap-sm='3'] { gap: var(--ds-space-3); }
+  .ds-grid[data-gap-sm='4'] { gap: var(--ds-space-4); }
+  .ds-grid[data-gap-sm='6'] { gap: var(--ds-space-6); }
+  .ds-grid[data-gap-sm='8'] { gap: var(--ds-space-8); }
+  .ds-grid[data-gap-sm='12'] { gap: var(--ds-space-12); }
+  .ds-grid[data-gap-sm='16'] { gap: var(--ds-space-16); }
+  .ds-grid[data-gap-sm='24'] { gap: var(--ds-space-24); }
+  .ds-grid[data-align-sm='start'] { align-items: flex-start; }
+  .ds-grid[data-align-sm='center'] { align-items: center; }
+  .ds-grid[data-align-sm='end'] { align-items: flex-end; }
+  .ds-grid[data-align-sm='stretch'] { align-items: stretch; }
+}
+
+@media (min-width: 768px) {
+  .ds-grid[data-columns-md='1'] { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .ds-grid[data-columns-md='2'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-grid[data-columns-md='3'] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ds-grid[data-columns-md='4'] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ds-grid[data-columns-md='6'] { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .ds-grid[data-columns-md='12'] { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .ds-grid[data-gap-md='0'] { gap: 0; }
+  .ds-grid[data-gap-md='1'] { gap: var(--ds-space-1); }
+  .ds-grid[data-gap-md='2'] { gap: var(--ds-space-2); }
+  .ds-grid[data-gap-md='3'] { gap: var(--ds-space-3); }
+  .ds-grid[data-gap-md='4'] { gap: var(--ds-space-4); }
+  .ds-grid[data-gap-md='6'] { gap: var(--ds-space-6); }
+  .ds-grid[data-gap-md='8'] { gap: var(--ds-space-8); }
+  .ds-grid[data-gap-md='12'] { gap: var(--ds-space-12); }
+  .ds-grid[data-gap-md='16'] { gap: var(--ds-space-16); }
+  .ds-grid[data-gap-md='24'] { gap: var(--ds-space-24); }
+  .ds-grid[data-align-md='start'] { align-items: flex-start; }
+  .ds-grid[data-align-md='center'] { align-items: center; }
+  .ds-grid[data-align-md='end'] { align-items: flex-end; }
+  .ds-grid[data-align-md='stretch'] { align-items: stretch; }
+}
+
+@media (min-width: 1024px) {
+  .ds-grid[data-columns-lg='1'] { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .ds-grid[data-columns-lg='2'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-grid[data-columns-lg='3'] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ds-grid[data-columns-lg='4'] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ds-grid[data-columns-lg='6'] { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .ds-grid[data-columns-lg='12'] { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .ds-grid[data-gap-lg='0'] { gap: 0; }
+  .ds-grid[data-gap-lg='1'] { gap: var(--ds-space-1); }
+  .ds-grid[data-gap-lg='2'] { gap: var(--ds-space-2); }
+  .ds-grid[data-gap-lg='3'] { gap: var(--ds-space-3); }
+  .ds-grid[data-gap-lg='4'] { gap: var(--ds-space-4); }
+  .ds-grid[data-gap-lg='6'] { gap: var(--ds-space-6); }
+  .ds-grid[data-gap-lg='8'] { gap: var(--ds-space-8); }
+  .ds-grid[data-gap-lg='12'] { gap: var(--ds-space-12); }
+  .ds-grid[data-gap-lg='16'] { gap: var(--ds-space-16); }
+  .ds-grid[data-gap-lg='24'] { gap: var(--ds-space-24); }
+  .ds-grid[data-align-lg='start'] { align-items: flex-start; }
+  .ds-grid[data-align-lg='center'] { align-items: center; }
+  .ds-grid[data-align-lg='end'] { align-items: flex-end; }
+  .ds-grid[data-align-lg='stretch'] { align-items: stretch; }
+}
