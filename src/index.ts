@@ -11,3 +11,5 @@ export * from './components/Dialog';
 export * from './components/Slider';
 export * from './components/SegmentedControl';
 export * from './components/Switch';
+export * from './components/TileGroup';
+export * from './components/RadioGroup';
