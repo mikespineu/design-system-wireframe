@@ -3,9 +3,9 @@
 - task: DS-32
 - canvas: docs/design-system-wireframe/Button.dc.html
 - canvas_url: https://claude.ai/artifact/PKujodLxbUcDyTWeRPKmGX
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-10-27
 - approval_hash:
 
 This spec covers the whole Button family. It extends the two existing components and adds one new one:
