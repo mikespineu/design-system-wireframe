@@ -133,4 +133,11 @@ describe('Popover', () => {
       expect(screen.queryByRole('region')).not.toBeInTheDocument();
     });
   });
+
+  it('draws the arrow tip-down (Radix rotates it per side)', () => {
+    render(<Popover trigger={<Button>Open</Button>} aria-label="x" defaultOpen>Body</Popover>);
+    const edge = document.querySelector('.ds-popover-arrow-edge');
+    expect(edge).toHaveAttribute('d', 'M0 0 L8 8 L16 0');
+    expect(document.querySelector('.ds-popover-arrow-fill')).toHaveAttribute('d', 'M0 0 L8 8 L16 0 Z');
+  });
 });

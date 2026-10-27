@@ -107,9 +107,10 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             </RadixPopover.Close>
           )}
           <RadixPopover.Arrow asChild>
+            {/* Drawn in the side=top frame (tip down); Radix rotates it for the other sides. */}
             <svg className="ds-popover-arrow" width={16} height={8} viewBox="0 0 16 8" aria-hidden="true">
-              <path d="M0 8 L8 0 L16 8 Z" className="ds-popover-arrow-fill" />
-              <path d="M0 8 L8 0 L16 8" className="ds-popover-arrow-edge" />
+              <path d="M0 0 L8 8 L16 0 Z" className="ds-popover-arrow-fill" />
+              <path d="M0 0 L8 8 L16 0" className="ds-popover-arrow-edge" />
             </svg>
           </RadixPopover.Arrow>
         </RadixPopover.Content>
