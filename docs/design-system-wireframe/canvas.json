@@ -79,6 +79,13 @@
       "w": 1440,
       "x": 15200,
       "y": 0
+    },
+    "Icon.dc.html": {
+      "h": 11600,
+      "title": "Icon",
+      "w": 1440,
+      "x": 16720,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -110,7 +117,8 @@
     "Toggle.dc.html",
     "Theming.dc.html",
     "RadioGroup.dc.html",
-    "InfoTip.dc.html"
+    "InfoTip.dc.html",
+    "Icon.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
