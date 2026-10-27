@@ -149,6 +149,14 @@ describe('InfoTip, touch', () => {
   });
 });
 
+describe('InfoTip stylesheet', () => {
+  it('compensates the coarse hit-area inset for the border', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const css = require('fs').readFileSync(require('path').join(__dirname, 'InfoTip.css'), 'utf8') as string;
+    expect(css).toMatch(/inset:\s*calc\(var\(--ds-infotip-inset\) - var\(--ds-border-width\)\)/);
+  });
+});
+
 describe('InfoTip live switching', () => {
   it('switches mode on change, closes an open tip and keeps focus', async () => {
     const user = userEvent.setup();

@@ -49,7 +49,8 @@
   .ds-infotip::after {
     content: '';
     position: absolute;
-    inset: var(--ds-infotip-inset);
+    /* inset is measured from the padding box, so compensate for the 1px border */
+    inset: calc(var(--ds-infotip-inset) - var(--ds-border-width));
   }
 }
 @media (prefers-reduced-motion: reduce) {

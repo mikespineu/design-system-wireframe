@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, screen } from 'storybook/test';
 import { InfoTip } from './InfoTip';
@@ -21,8 +22,27 @@ type Story = StoryObj<typeof meta>;
 
 /** Non-touch (Tooltip mode): hover or focus the icon. */
 export const TooltipMode: Story = {};
-/** Touch (Popover mode): emulate a coarse pointer in devtools, then tap the icon. */
-export const PopoverMode: Story = {};
+/** Touch (Popover mode): this story stubs `(pointer: coarse)` to match, so click the icon. */
+export const PopoverMode: Story = {
+  decorators: [
+    (Story) => {
+      const [ready, setReady] = useState(false);
+      useEffect(() => {
+        const original = window.matchMedia;
+        window.matchMedia = ((q: string) => {
+          const mql = original.call(window, q);
+          if (q !== '(pointer: coarse)') return mql;
+          return Object.create(mql, { matches: { value: true } });
+        }) as typeof window.matchMedia;
+        setReady(true);
+        return () => {
+          window.matchMedia = original;
+        };
+      }, []);
+      return ready ? <Story /> : <span />;
+    },
+  ],
+};
 export const Small: Story = { args: { size: 'sm' } };
 export const Medium: Story = { args: { size: 'md' } };
 export const SideBottom: Story = { args: { side: 'bottom' } };
