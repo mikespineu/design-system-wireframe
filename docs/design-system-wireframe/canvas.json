@@ -128,6 +128,13 @@
       "w": 1440,
       "x": 25840,
       "y": 0
+    },
+    "Typography.dc.html": {
+      "h": 11600,
+      "title": "Typography",
+      "w": 1440,
+      "x": 27360,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -166,7 +173,8 @@
     "Select.dc.html",
     "Button.dc.html",
     "Toast.dc.html",
-    "Drawer.dc.html"
+    "Drawer.dc.html",
+    "Typography.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
