@@ -12,6 +12,8 @@ Arguments: `$ARGUMENTS` (task ID, optional model `opus`/`sonnet`/`haiku`, option
 
 First read the rules: `${CLAUDE_PLUGIN_ROOT}/RULES.md` (in this repo: `factory/plugin/RULES.md`). Follow them exactly, including the job file updates at every stage.
 
+This session's id is `${CLAUDE_SESSION_ID}`. Write it to the job file's `session_id` (rules: Job files) so the user can return with `claude --resume ${CLAUDE_SESSION_ID}`.
+
 ## 1. Check and claim
 
 1. Read the task from `origin/main:roadmap.md`. **Refuse** with the exact reason if:
