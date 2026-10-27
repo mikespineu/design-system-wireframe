@@ -234,8 +234,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers each severity with and without action, a stack of 3, and mobile vs desktop placement
     - Spec names Radix `Toast`, defines duration, pause on hover/focus, swipe-to-dismiss and the `F8` hotkey region
     - Spec defines severity by border/fill/icon (not hue), motion with `prefers-reduced-motion`, and the live-region politeness per severity
-- [ ] **DS-40 Toast — implementation.** Build `ToastProvider`, `Toaster` and `useToast()` in `src/components/Toast/` on Radix `Toast`, action slot using `Button`, styled via `[data-state]` / `[data-swipe]`.
-  - type: build · has_ui: yes · depends_on: DS-39 · needs_human: no · status: todo
+- [x] **DS-40 Toast — implementation.** Build `ToastProvider`, `Toaster` and `useToast()` in `src/components/Toast/` on Radix `Toast`, action slot using `Button`, styled via `[data-state]` / `[data-swipe]`.
+  - type: build · has_ui: yes · depends_on: DS-39 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every severity and state
     - `useToast()` shows, updates and dismisses toasts; auto-dismiss pauses on hover and focus
