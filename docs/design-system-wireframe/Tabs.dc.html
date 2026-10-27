@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Tabs</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column;min-width:0}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:32px 24px;min-width:0}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:52px;padding:8px 16px 8px 0;border-bottom:1px solid #E0E0E0;color:#404040;vertical-align:middle}
+.note{font-size:13px;line-height:20px;color:#595959}
+.foc{outline:2px solid #000000;outline-offset:2px;position:relative;z-index:1}
+.cap{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+code{font-family:'Red Hat Mono',monospace;font-size:0.92em}
+
+/* ---------- Tab list, segmented look (= SegmentedControl, reused) ---------- */
+.seg{display:inline-flex;box-sizing:border-box;height:44px;padding:4px;background:#EEEEEE;max-width:100%;min-width:0;width:fit-content;align-self:flex-start}
+.seg .it{flex:none;box-sizing:border-box;height:36px;padding:0 16px;display:inline-flex;align-items:center;border:1px solid transparent;background:transparent;font-family:'Red Hat Text',sans-serif;font-weight:500;font-size:16px;line-height:26px;color:#404040;white-space:nowrap;cursor:pointer}
+.seg .it.sel{background:#FFFFFF;border-color:#000000;color:#000000}
+.seg .it.hov{background:#E0E0E0;color:#000000}
+.seg .it.dis{color:#767676;cursor:not-allowed}
+.seg.sm{height:32px}
+.seg.sm .it{height:24px;padding:0 12px;font-size:13px;line-height:20px}
+.seg.full{display:flex;width:100%;align-self:stretch}
+.seg.full .it{flex:1 1 0;justify-content:center}
+
+/* ---------- Tab list, tile look (= TileGroup, reused) ---------- */
+.tiles{display:flex;gap:8px;padding:4px;margin:-4px;min-width:0}
+.tile{flex:none;box-sizing:border-box;min-width:96px;height:88px;padding:0 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#EEEEEE;border:2px solid transparent;color:#404040;font-family:'Red Hat Text',sans-serif;font-weight:500;font-size:13px;line-height:20px;white-space:nowrap;cursor:pointer}
+.tile svg{width:24px;height:24px}
+.tile.sel{background:#FFFFFF;border-color:#000000;color:#000000}
+.tile.hov{background:#E0E0E0;color:#000000}
+.tile.dis{background:#F7F7F7;color:#767676;cursor:not-allowed}
+.tile.dis svg{color:#A3A3A3}
+.tiles.sm .tile{min-width:72px;height:64px;padding:0 8px;gap:4px}
+.tiles.sm .tile svg{width:16px;height:16px}
+
+/* ---------- Tabs: list + gap + panel ---------- */
+.tabs{display:flex;flex-direction:column;gap:24px;min-width:0}
+.tabs.sm{gap:16px}
+.pnl{min-width:0;font-size:15px;line-height:24px;color:#404040}
+.pnl .pt{display:block;margin-bottom:4px;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:16px;line-height:24px;color:#000000}
+.pnl.sm{font-size:13px;line-height:20px}
+.pnl.sm .pt{font-size:13px;line-height:20px}
+.pnl .ln{display:block;height:8px;margin-top:8px;background:#EEEEEE}
+.pnl .ln.s{width:60%}
+/* annotations (canvas only, not part of the component) */
+.ann{gap:0}
+.gm{position:relative;height:24px;border-left:1px dashed #A3A3A3;margin-left:8px}
+.gm.sm{height:16px}
+.gm span{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-family:'Red Hat Mono',monospace;font-size:11px;line-height:12px;color:#595959;white-space:nowrap}
+.bnd{outline:1px dashed #C7C7C7;outline-offset:4px}
+.tag{display:inline-block;padding:0 6px;border:1px solid #C7C7C7;font-family:'Red Hat Mono',monospace;font-size:11px;line-height:18px;color:#595959}
+
+/* ---------- Overflow ---------- */
+.vp{position:relative;overflow:hidden;min-width:0}
+.vp > .strip{display:flex;width:max-content}
+.fade-end{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent)}
+.fade-both{-webkit-mask-image:linear-gradient(to right,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to right,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+.fade-start{-webkit-mask-image:linear-gradient(to right,transparent,#000 24px);mask-image:linear-gradient(to right,transparent,#000 24px)}
+.sb{position:relative;height:4px;background:transparent;margin-top:4px}
+.sb b{position:absolute;top:0;height:4px;background:#C7C7C7}
+.frame{border:1px dashed #C7C7C7;padding:8px}
+
+/* ---------- activation sequences ---------- */
+.frames{display:flex;flex-direction:column;gap:24px}
+.frames .fr{display:flex;flex-direction:column;gap:12px}
+.step{display:flex;gap:12px;align-items:baseline}
+.step b{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;color:#000}
+
+/* ---------- comparison cards ---------- */
+.fam{display:flex;flex-direction:column;gap:16px}
+.fam h3{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:22px;line-height:29px}
+.fam p{margin:0;font-size:15px;line-height:24px;color:#404040}
+.fam ul{margin:0;padding-left:18px;font-size:13px;line-height:20px;color:#595959}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 7600px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Tabs · DS-21 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Tabs</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">Tabs is a mechanism, not a new look. It switches which panel is shown (Radix <b>Tabs</b>: tablist, tab, tabpanel). The tab list wears the existing switcher looks: <b>segmented</b> (the SegmentedControl strip with its sliding indicator) or <b>tile</b> (the TileGroup icon + label tiles). There is no underline or ink-bar style. Under the list sits the active panel, 24 px below at md.</p>
+</header>
+
+<!-- 01 MECHANISM VS CHOICE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Same look, different job</h2></div>
+<p class="sec-d">SegmentedControl and TileGroup pick a value (a form field, role radio). Tabs pick which content is visible (navigation inside a view, role tab). They share CSS and tokens, never the primitive. Rule of thumb: if the choice is saved or submitted, it is a SegmentedControl or TileGroup. If it only changes what is on screen below, it is Tabs.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>SegmentedControl</span><span>value · Radix RadioGroup</span></div><div class="ab-b fam">
+<div class="seg"><span class="it">List</span><span class="it sel">Cards</span></div>
+<p>Sets a value: density, view mode, theme. Submits with a form.</p>
+<ul><li>role="radiogroup" / "radio"</li><li>Has a visible field label, hint, help</li><li>Nothing below it is controlled</li></ul>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>TileGroup</span><span>value · Radix RadioGroup</span></div><div class="ab-b fam">
+<div class="tiles sm" style="margin:0;padding:0">
+<span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Search</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Done</span>
+</div>
+<p>Sets a value shown as a picture: layout, quick action.</p>
+<ul><li>role="radiogroup" / "radio"</li><li>name / required for forms</li><li>Nothing below it is controlled</li></ul>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Tabs</span><span>panel · Radix Tabs</span></div><div class="ab-b fam">
+<div class="tabs sm">
+<div class="seg sm"><span class="it sel">Overview</span><span class="it">Activity</span><span class="it">Files</span></div>
+<div class="pnl sm"><span class="pt">Overview</span>Panel for the active tab.</div>
+</div>
+<ul><li>role="tablist" / "tab" / "tabpanel"</li><li>tab has aria-controls; panel aria-labelledby</li><li>No form value, no field label</li></ul>
+</div></div>
+
+</div>
+</section>
+
+<!-- 02 ANATOMY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Anatomy · list, gap, panel</h2></div>
+<p class="sec-d">The root is a vertical stack: tab list, then the active panel. The list hugs its triggers and starts at the inline start. The panel has no border, fill or padding of its own. It is the consumer's content area and is shown here inside a dashed annotation frame. Dashed lines and gray bars are canvas annotations only.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>variant="segmented" · md</span><span>list 44 · gap 24 · panel</span></div><div class="ab-b">
+<div class="tabs ann">
+<div class="seg"><span class="it sel">Overview</span><span class="it">Activity</span><span class="it">Files</span><span class="it">Settings</span></div>
+<div class="gm"><span>24 · --ds-space-6</span></div>
+<div class="pnl bnd"><span class="pt">Overview</span>Panel content. The first element is usually a heading or text.<span class="ln"></span><span class="ln s"></span></div>
+</div>
+</div><div class="ab-f">1 tablist (scroll container) · 2 tab triggers · 3 sliding indicator (aria-hidden) · 4 tabpanel (tabindex 0). Default variant.</div></div>
+
+<div class="ab"><div class="ab-h"><span>variant="tile" · md</span><span>tiles 88 · gap 24 · panel</span></div><div class="ab-b">
+<div class="tabs ann">
+<div class="tiles">
+<span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+</div>
+<div class="gm"><span>24 · --ds-space-6 (from the tile edge)</span></div>
+<div class="pnl bnd"><span class="pt">Overview</span>Same panel rules. Icons are decorative; the label names the tab.<span class="ln"></span><span class="ln s"></span></div>
+</div>
+</div><div class="ab-f">The tile row keeps TileGroup's 4 px focus-clearance padding and −4 px margin, so the 24 px gap is measured from the tile's outer edge.</div></div>
+
+</div>
+</section>
+
+<!-- 03 SIZES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Sizes</h2></div>
+<p class="sec-d">Trigger sizes are the switcher sizes, unchanged. Only the list-to-panel gap is new: 24 px at md, 16 px at sm. sm is for fine pointers (desktop) only.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>segmented · sm</span><span>strip 32 · trigger 24 · pad-x 12 · 13/20 · gap 16</span></div><div class="ab-b">
+<div class="tabs sm ann">
+<div class="seg sm"><span class="it sel">Overview</span><span class="it">Activity</span><span class="it">Files</span><span class="it">Settings</span></div>
+<div class="gm sm"><span>16 · --ds-space-4</span></div>
+<div class="pnl sm bnd"><span class="pt">Overview</span>Dense desktop panels and inspectors.</div>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>segmented · md (default)</span><span>strip 44 · trigger 36 · pad-x 16 · 16/26 · gap 24</span></div><div class="ab-b">
+<div class="tabs ann">
+<div class="seg"><span class="it sel">Overview</span><span class="it">Activity</span><span class="it">Files</span><span class="it">Settings</span></div>
+<div class="gm"><span>24 · --ds-space-6</span></div>
+<div class="pnl bnd"><span class="pt">Overview</span>Pages, settings, touch.</div>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>tile · sm</span><span>min 72 × 64 · icon 16 · 13/20 · gap 16</span></div><div class="ab-b">
+<div class="tabs sm ann">
+<div class="tiles sm">
+<span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><rect x="14" y="5" width="4" height="4"/><rect x="8" y="15" width="4" height="4"/></svg>Settings</span>
+</div>
+<div class="gm sm"><span>16 · --ds-space-4</span></div>
+<div class="pnl sm bnd"><span class="pt">Overview</span>Side panels on desktop.</div>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>tile · md</span><span>min 96 × 88 · icon 24 · 13/20 · gap 24</span></div><div class="ab-b">
+<div class="tabs ann">
+<div class="tiles">
+<span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><rect x="14" y="5" width="4" height="4"/><rect x="8" y="15" width="4" height="4"/></svg>Settings</span>
+</div>
+<div class="gm"><span>24 · --ds-space-6</span></div>
+<div class="pnl bnd"><span class="pt">Overview</span>Dashboards and touch layouts.</div>
+</div>
+</div></div>
+
+<div class="ab" style="grid-column: span 2"><div class="ab-h"><span>segmented · md · fullWidth</span><span>triggers flex 1, text centred, never scrolls</span></div><div class="ab-b">
+<div class="tabs ann">
+<div class="seg full"><span class="it sel">Details</span><span class="it">Reviews</span><span class="it">Shipping</span></div>
+<div class="gm"><span>24 · --ds-space-6</span></div>
+<div class="pnl bnd"><span class="pt">Details</span>For 2–4 short tabs that should span a card or a narrow column. Segmented only; tiles have no fullWidth.</div>
+</div>
+</div></div>
+
+</div>
+</section>
+
+<!-- 04 SEGMENTED TRIGGER STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Trigger states · segmented</h2></div>
+<p class="sec-d">Shown at md. The look is the SegmentedControl's, driven by the Radix Tabs attributes: <code>[data-state="active"]</code> replaces <code>checked</code>, <code>[data-state="inactive"]</code> replaces <code>unchecked</code>, and <code>[data-disabled]</code> is the same. The trigger in the named state is marked in the header.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default (inactive)</span><span>no fill, gray-700 text</span></div><div class="ab-b">
+<div class="seg"><span class="it sel">Overview</span><span class="it">Activity</span><span class="it">Files</span></div>
+</div><div class="ab-f">Activity and Files: inactive. Transparent 1 px border, strip gray-100 shows through.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hover (inactive)</span><span>fill gray-200, text black</span></div><div class="ab-b">
+<div class="seg"><span class="it sel">Overview</span><span class="it hov">Activity</span><span class="it">Files</span></div>
+</div><div class="ab-f">Activity hovered. Hover on the active trigger changes nothing. There is no pressed style: Radix activates on pointer down.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Active</span><span>white, 1 px black, text black</span></div><div class="ab-b">
+<div class="seg"><span class="it">Overview</span><span class="it sel">Activity</span><span class="it">Files</span></div>
+</div><div class="ab-f">The sliding indicator carries the active look and moves with --ds-motion, as in SegmentedControl.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible · active</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b">
+<div class="seg"><span class="it sel foc">Overview</span><span class="it">Activity</span><span class="it">Files</span></div>
+</div><div class="ab-f">Tab into the list always lands here. In automatic mode the ring is always on the active trigger.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible · inactive</span><span>manual mode only</span></div><div class="ab-b">
+<div class="seg"><span class="it sel">Overview</span><span class="it foc">Activity</span><span class="it">Files</span></div>
+</div><div class="ab-f">With activationMode="manual", → moves focus without activating. The ring sits on an inactive trigger until Enter or Space.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled</span><span>text gray-500, no hover</span></div><div class="ab-b">
+<div class="seg"><span class="it sel">Overview</span><span class="it">Activity</span><span class="it dis">Files</span></div>
+</div><div class="ab-f">Files disabled: native disabled button, cursor not-allowed, skipped by arrows, Home and End, never focusable.</div></div>
+
+<div class="ab"><div class="ab-h"><span>sm · active + focus</span><span>same rules, 24 px trigger</span></div><div class="ab-b">
+<div class="seg sm"><span class="it sel foc">Overview</span><span class="it">Activity</span><span class="it dis">Files</span></div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Active + disabled</span><span>not allowed</span></div><div class="ab-b">
+<p class="note" style="margin:0">A disabled tab cannot be the active one. With no value, the first enabled tab is active. A controlled value that points at a disabled or missing tab is a dev-mode console.error.</p>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled list</span><span>not supported</span></div><div class="ab-b">
+<p class="note" style="margin:0">Radix Tabs has no group disabled, and a list where nothing can be reached hides navigation. Disable single tabs, or don't render Tabs.</p>
+</div></div>
+
+</div>
+</section>
+
+<!-- 05 TILE TRIGGER STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Trigger states · tile</h2></div>
+<p class="sec-d">Shown at md. The look is the TileGroup's: gray-100 tiles, the active tile white with a 2 px black border. The active look cross-fades and does not slide.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default (inactive)</span><span>fill gray-100, gray-700</span></div><div class="ab-b">
+<div class="tiles">
+<span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Hover (inactive)</span><span>fill gray-200, black</span></div><div class="ab-b">
+<div class="tiles">
+<span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile hov"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+</div>
+</div><div class="ab-f">Activity hovered. The active tile does not react to hover.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Active</span><span>white, 2 px black, black</span></div><div class="ab-b">
+<div class="tiles">
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible · active</span><span>+ 2 px black ring, 2 px offset</span></div><div class="ab-b">
+<div class="tiles">
+<span class="tile sel foc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+</div>
+</div><div class="ab-f">The ring sits in the 8 px gap and the 4 px scroller padding, so it is never clipped.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible · inactive</span><span>manual mode only</span></div><div class="ab-b">
+<div class="tiles">
+<span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile foc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Disabled</span><span>gray-50, icon gray-400, text gray-500</span></div><div class="ab-b">
+<div class="tiles">
+<span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile dis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+</div>
+</div><div class="ab-f">Files disabled. Cursor not-allowed, skipped by arrows, never focusable.</div></div>
+
+<div class="ab"><div class="ab-h"><span>sm · active + focus</span><span>72 × 64, icon 16</span></div><div class="ab-b">
+<div class="tiles sm">
+<span class="tile sel foc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile dis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+</div>
+</div></div>
+
+</div>
+</section>
+
+<!-- 06 PANEL -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Panel</h2></div>
+<p class="sec-d">The tabpanel is a focus stop (Radix sets tabindex 0), so keyboard users can reach a panel that has no focusable content and screen readers announce it. It shows only a focus ring, only on keyboard focus. Inactive panels are unmounted by default. With keepMounted they stay in the DOM with <code>hidden</code>, so local state such as half-filled inputs survives a tab switch.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Default</span><span>no border, fill or padding</span></div><div class="ab-b">
+<div class="tabs">
+<div class="seg"><span class="it sel">Overview</span><span class="it">Activity</span></div>
+<div class="pnl"><span class="pt">Overview</span>Content sits flush with the list's inline start.<span class="ln"></span><span class="ln s"></span></div>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Focus-visible</span><span>2 px black ring, 2 px offset</span></div><div class="ab-b">
+<div class="tabs">
+<div class="seg"><span class="it sel">Overview</span><span class="it">Activity</span></div>
+<div class="pnl foc"><span class="pt">Overview</span>Tab from the active trigger lands on the panel.<span class="ln"></span><span class="ln s"></span></div>
+</div>
+</div><div class="ab-f">The ring is drawn 2 px outside the panel box. Don't clip it with overflow: hidden on a parent. A pointer click on the panel shows no ring.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Panel switch</span><span>no transition</span></div><div class="ab-b">
+<div class="tabs">
+<div class="seg"><span class="it">Overview</span><span class="it sel">Activity</span></div>
+<div class="pnl"><span class="pt">Activity</span>The panel swaps instantly. Only the indicator moves. No fade or slide on content.<span class="ln"></span><span class="ln s"></span></div>
+</div>
+</div><div class="ab-f">The panel height follows its content. The list does not move when panels differ in height.</div></div>
+
+</div>
+</section>
+
+<!-- 07 ACTIVATION -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Activation mode</h2></div>
+<p class="sec-d">Radix <code>activationMode</code>. <b>automatic</b> (default): moving focus with arrows, Home or End also activates, and the panel follows focus. <b>manual</b>: arrows only move focus, and Enter or Space activates. Use manual when showing a panel is slow or has side effects, such as a network fetch, a heavy chart or a route change. Use it also on long tile rows, where arrowing across would load every panel on the way.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>automatic (default)</span><span>focus = activation</span></div><div class="ab-b frames">
+<div class="fr"><div class="step"><b>1</b><span class="note">Tab into the list. Focus on active Overview.</span></div>
+<div class="tabs sm"><div class="seg"><span class="it sel foc">Overview</span><span class="it">Activity</span><span class="it">Files</span></div><div class="pnl sm"><span class="pt">Overview</span>Overview panel.</div></div></div>
+<div class="fr"><div class="step"><b>2</b><span class="kbd">→</span><span class="note">Focus and activation move together. The panel switches.</span></div>
+<div class="tabs sm"><div class="seg"><span class="it">Overview</span><span class="it sel foc">Activity</span><span class="it">Files</span></div><div class="pnl sm"><span class="pt">Activity</span>Activity panel.</div></div></div>
+<div class="fr"><div class="step"><b>3</b><span class="kbd">End</span><span class="note">Focus jumps to Files and activates it.</span></div>
+<div class="tabs sm"><div class="seg"><span class="it">Overview</span><span class="it">Activity</span><span class="it sel foc">Files</span></div><div class="pnl sm"><span class="pt">Files</span>Files panel.</div></div></div>
+</div><div class="ab-f">Unlike SegmentedControl, Home and End activate too, because Radix Tabs activates on focus. This is the WAI-ARIA recommendation when panels render instantly.</div></div>
+
+<div class="ab"><div class="ab-h"><span>manual</span><span>focus, then Enter / Space</span></div><div class="ab-b frames">
+<div class="fr"><div class="step"><b>1</b><span class="note">Tab into the list. Focus on active Overview.</span></div>
+<div class="tabs sm"><div class="seg"><span class="it sel foc">Overview</span><span class="it">Activity</span><span class="it">Files</span></div><div class="pnl sm"><span class="pt">Overview</span>Overview panel.</div></div></div>
+<div class="fr"><div class="step"><b>2</b><span class="kbd">→</span><span class="note">Focus moves to Activity. Overview stays active, and so does its panel.</span></div>
+<div class="tabs sm"><div class="seg"><span class="it sel">Overview</span><span class="it foc">Activity</span><span class="it">Files</span></div><div class="pnl sm"><span class="pt">Overview</span>Overview panel (unchanged).</div></div></div>
+<div class="fr"><div class="step"><b>3</b><span class="kbd">Enter</span><span class="note">Activity activates. The indicator slides and the panel switches.</span></div>
+<div class="tabs sm"><div class="seg"><span class="it">Overview</span><span class="it sel foc">Activity</span><span class="it">Files</span></div><div class="pnl sm"><span class="pt">Activity</span>Activity panel.</div></div></div>
+</div><div class="ab-f">Pointer users see no difference: a press always activates. Tab from a focused inactive trigger goes to the active panel.</div></div>
+
+</div>
+</section>
+
+<!-- 08 OVERFLOW -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Overflow · horizontal scroll</h2></div>
+<p class="sec-d">This is the ChoiceGroup behaviour, reused as is. The tab list is the scroll container. It never wraps and has no scroll-snap. A 24 px edge fade shows only on the side with hidden tabs. The active tab is scrolled into view on mount and on change, and any trigger that gets focus is too, which covers manual mode. The panel never scrolls with the list. The dashed frame is a 360 px container.</p>
+<div class="grid3">
+
+<div class="ab"><div class="ab-h"><span>Segmented · at start</span><span>fade end</span></div><div class="ab-b">
+<div class="frame" style="width:360px;box-sizing:border-box">
+<div class="vp fade-end"><div class="strip"><span class="seg"><span class="it sel">Overview</span><span class="it">Activity</span><span class="it">Files</span><span class="it">Members</span><span class="it">Billing</span><span class="it">Settings</span></span></div></div>
+<div class="sb"><b style="left:0;width:52%"></b></div>
+</div>
+</div><div class="ab-f">Thin native scrollbar (gray-300 thumb) for mouse users.</div></div>
+
+<div class="ab"><div class="ab-h"><span>Segmented · middle</span><span>fade both</span></div><div class="ab-b">
+<div class="frame" style="width:360px;box-sizing:border-box">
+<div class="vp fade-both"><div class="strip" style="margin-left:-150px"><span class="seg"><span class="it">Overview</span><span class="it">Activity</span><span class="it">Files</span><span class="it sel">Members</span><span class="it">Billing</span><span class="it">Settings</span></span></div></div>
+<div class="sb"><b style="left:24%;width:52%"></b></div>
+</div>
+</div></div>
+
+<div class="ab"><div class="ab-h"><span>Segmented · manual, focus off-screen</span><span>focused trigger scrolled in</span></div><div class="ab-b">
+<div class="frame" style="width:360px;box-sizing:border-box">
+<div class="vp fade-start"><div class="strip" style="margin-left:-320px"><span class="seg"><span class="it sel">Overview</span><span class="it">Activity</span><span class="it">Files</span><span class="it">Members</span><span class="it">Billing</span><span class="it foc">Settings</span></span></div></div>
+<div class="sb"><b style="left:48%;width:52%"></b></div>
+</div>
+</div><div class="ab-f">End in manual mode: Settings is focused but not active. The strip scrolls to it, and the active Overview may scroll out of view.</div></div>
+
+<div class="ab" style="grid-column: span 2"><div class="ab-h"><span>Tiles · at start, with panel</span><span>fade end · panel unaffected</span></div><div class="ab-b">
+<div class="frame" style="width:360px;box-sizing:border-box">
+<div class="tabs">
+<div class="vp fade-end" style="padding:4px"><div class="strip" style="gap:8px">
+<span class="tile sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Overview</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Activity</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Files</span>
+<span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><rect x="14" y="5" width="4" height="4"/><rect x="8" y="15" width="4" height="4"/></svg>Settings</span>
+</div></div>
+<div class="pnl"><span class="pt">Overview</span>The panel takes the full container width.</div>
+</div>
+</div>
+</div><div class="ab-f">The row keeps its 4 px focus clearance. The fade is on the list only, never on the panel.</div></div>
+
+<div class="ab"><div class="ab-h"><span>fullWidth</span><span>never scrolls</span></div><div class="ab-b">
+<div class="frame" style="width:300px;box-sizing:border-box">
+<div class="seg full"><span class="it sel">Details</span><span class="it">Reviews</span><span class="it">Specs</span></div>
+</div>
+</div><div class="ab-f">Equal-width triggers. Use only for 2–4 short labels; past that, use the hugging list, which scrolls.</div></div>
+
+</div>
+</section>
+
+<!-- 09 KEYBOARD -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">Keyboard &amp; focus order</h2></div>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>Keys</span><span>Radix Tabs · orientation horizontal</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span></td><td>Into the list: lands on the active trigger. Next Tab: the active panel, then its content.</td></tr>
+<tr><td><span class="kbd">Shift+Tab</span></td><td>From the panel: back to the list (active trigger in automatic mode, last-focused trigger in manual). From the list: out, backwards.</td></tr>
+<tr><td><span class="kbd">→</span> / <span class="kbd">←</span></td><td>Next / previous enabled trigger, wraps. Automatic: activates. Manual: focus only. Mirrored in RTL.</td></tr>
+<tr><td><span class="kbd">↑</span> / <span class="kbd">↓</span></td><td>No action (horizontal list). The page scrolls as usual.</td></tr>
+<tr><td><span class="kbd">Home</span> / <span class="kbd">End</span></td><td>First / last enabled trigger. Automatic: activates. Manual: focus only.</td></tr>
+<tr><td><span class="kbd">Enter</span> / <span class="kbd">Space</span></td><td>Activate the focused trigger (only needed in manual mode).</td></tr>
+</tbody>
+</table>
+</div></div>
+<div class="ab"><div class="ab-h"><span>Focus order</span><span>three stops</span></div><div class="ab-b" style="gap:16px">
+<div class="tabs">
+<div class="seg"><span class="it sel foc">Overview</span><span class="it">Activity</span><span class="it dis">Files</span></div>
+<div class="pnl"><span class="pt">Overview</span>Panel (tab stop 2), then <span style="display:inline-flex;align-items:center;height:28px;padding:0 12px;border:1px solid #000;font-family:'Red Hat Mono',monospace;font-size:13px;color:#000">Edit</span> (stop 3, inside the panel).</div>
+</div>
+<p class="note" style="margin:0"><span class="tag">1</span> the tab list is one stop (roving tabindex) and lands on the active trigger · <span class="tag">2</span> the active tabpanel (tabindex 0) · <span class="tag">3</span> focusables inside the panel. Disabled triggers are never focused. Hidden panels are not in the order.</p>
+</div></div>
+</div>
+</section>
+
+<!-- 10 OUT OF SCOPE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Not in v1</h2></div>
+<div class="grid3">
+<div class="ab"><div class="ab-h"><span>Underline / ink bar</span><span>rejected</span></div><div class="ab-b">
+<p class="note" style="margin:0">No new trigger style. Tabs reuse the switcher looks. The underline mock under Navigation in Components.dc.html predates this spec and is superseded (see spec, Notes).</p>
+</div></div>
+<div class="ab"><div class="ab-h"><span>Vertical tabs</span><span>later</span></div><div class="ab-b">
+<p class="note" style="margin:0">Neither switcher look has a vertical form. Vertical tabs would need a new layout (and ↑ ↓ keys), so they get their own design task if needed.</p>
+</div></div>
+<div class="ab"><div class="ab-h"><span>Closable, draggable, overflow menu</span><span>out of scope</span></div><div class="ab-b">
+<p class="note" style="margin:0">No close buttons, reordering, badges, or a "More" menu. Long lists scroll. Prev/next scroll buttons follow the same decision as ChoiceGroup.</p>
+</div></div>
+</div>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>
