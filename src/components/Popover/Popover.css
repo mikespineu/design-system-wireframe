@@ -1,0 +1,91 @@
+/* Popover: non-modal panel on Radix Popover. Tokens only (--ds-*). Spec: docs/specs/InfoTip.md */
+.ds-popover {
+  /* Component-local until --ds-popover-max-width / --ds-z-popover exist. Dialog.css uses 50 / 51. */
+  --ds-popover-max-width: 320px;
+  --ds-z-popover: 60;
+  z-index: var(--ds-z-popover);
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-width: min(var(--ds-popover-max-width), var(--radix-popover-content-available-width));
+  max-height: var(--radix-popover-content-available-height);
+  padding: var(--ds-space-4);
+  background: var(--ds-color-surface);
+  border: var(--ds-border-width) solid var(--ds-color-ink);
+  border-radius: var(--ds-radius-md);
+  box-shadow: none;
+  outline: none;
+  font-family: var(--ds-font-text);
+  font-size: 1rem;
+  line-height: var(--ds-line-height-lg);
+  color: var(--ds-color-text);
+}
+.ds-popover[data-state='open'] { animation: ds-popover-in var(--ds-motion) both; }
+.ds-popover[data-state='closed'] { animation: ds-popover-out var(--ds-motion) both; }
+@keyframes ds-popover-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ds-popover-out { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .ds-popover[data-state] { animation: none; }
+  .ds-popover-close { transition: none; }
+}
+
+.ds-popover-title {
+  flex: none;
+  margin: 0 0 var(--ds-space-2);
+  font-family: var(--ds-font-mono);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: var(--ds-line-height-md);
+  color: var(--ds-color-ink);
+}
+.ds-popover-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+/* The close button is absolute; the first row reserves its width plus a gap. */
+.ds-popover[data-show-close] > :first-child {
+  padding-inline-end: calc(var(--ds-space-8) + var(--ds-space-4));
+}
+
+.ds-popover-close {
+  position: absolute;
+  top: calc(var(--ds-space-4) - var(--ds-space-1));
+  right: calc(var(--ds-space-4) - var(--ds-space-2));
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ds-space-8);
+  height: var(--ds-space-8);
+  padding: 0;
+  border: var(--ds-border-width) solid transparent;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-surface);
+  color: var(--ds-color-ink);
+  cursor: pointer;
+  transition: background-color var(--ds-motion), color var(--ds-motion);
+}
+.ds-popover-close:hover { background: var(--ds-color-fill); }
+.ds-popover-close:focus-visible {
+  border-color: var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline-offset: var(--ds-focus-offset);
+}
+.ds-popover-close:active {
+  background: var(--ds-color-ink);
+  color: var(--ds-color-primary-contrast);
+}
+
+.ds-popover-arrow {
+  display: block;
+  /* Overlap the panel border by 1px; Radix rotates the wrapper per side. */
+  transform: translateY(calc(-1 * var(--ds-border-width)));
+}
+.ds-popover-arrow-fill { fill: var(--ds-color-surface); stroke: none; }
+.ds-popover-arrow-edge {
+  fill: none;
+  stroke: var(--ds-color-ink);
+  stroke-width: var(--ds-border-width);
+}
