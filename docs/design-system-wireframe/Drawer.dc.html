@@ -42,8 +42,27 @@ body{margin:0;background:#FFFFFF}
 .hd>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
 .ttl{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:22px;line-height:29px;color:#000000}
 .desc{margin:0;font-size:16px;line-height:26px;color:#595959}
-.bd{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding:16px 24px 24px;font-size:16px;line-height:26px;color:#404040}
+.bd{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;scroll-padding-block:16px;display:flex;flex-direction:column;gap:16px;padding:16px 24px 24px;border-top:1px solid transparent;font-size:16px;line-height:26px;color:#404040}
 .bd p{margin:0}
+/* scrolling: header divider = body top border, transparent at scrollTop 0, gray-200 once scrolled */
+.bd.edge{border-top-color:#E0E0E0}
+.bd.focus{outline:2px solid #000000;outline-offset:-2px}
+/* canvas-only helpers that set a static scroll position on a real overflow-y:auto body */
+.bd.snap{scroll-snap-type:y mandatory}
+.bd .at{scroll-snap-align:start}
+.bd .at-end{scroll-snap-align:end}
+.bd.end{flex-direction:column-reverse}
+.bdc{display:flex;flex-direction:column;gap:16px}
+.cn{font-family:'Red Hat Mono',monospace;font-weight:500;color:#000000}
+.nv.focus{outline:2px solid #000000;outline-offset:2px}
+.tg{display:grid;grid-template-columns:repeat(auto-fill,96px);gap:12px}
+.tg i{position:relative;display:block;height:96px;background:#C7C7C7;font-style:normal}
+.tg i:nth-child(3n+2){background:#A3A3A3}
+.tg i:nth-child(3n){background:#E0E0E0}
+.tg i::after{content:attr(data-n);position:absolute;left:8px;top:6px;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#000000}
+.smap{display:flex;gap:16px;align-items:center;margin-bottom:8px;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
+.smap b{position:relative;display:block;flex:none;width:120px;height:8px;background:#EEEEEE}
+.smap b i{position:absolute;top:0;bottom:0;background:#000000}
 .ft{flex:none;display:flex;justify-content:flex-end;gap:12px;padding:16px 24px;border-top:1px solid #E0E0E0}
 .ft.stack{flex-direction:column-reverse}
 .ft.stack .btn{width:100%}
@@ -79,7 +98,7 @@ body{margin:0;background:#FFFFFF}
 .kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
 </style>
 </helmet>
-<div style="width: 1440px; min-height: 16400px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+<div style="width: 1440px; min-height: 20000px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
 
 <header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
 <div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
@@ -87,7 +106,7 @@ body{margin:0;background:#FFFFFF}
 <span>Drawer · DS-44 · draft</span>
 </div>
 <h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Drawer</h1>
-<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">Modal side panel that slides in from the right (default), left, top or bottom over the same 50 % black overlay as Dialog. Square corners, no shadow: a 1 px black border on the inner edge separates it from the page. Header, body and footer are Dialog's parts with Dialog's spacing; only the body scrolls. Under 480 px every drawer fills the screen. Built on Radix Dialog.</p>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">Modal side panel that slides in from the right (default), left, top or bottom over the same 50 % black overlay as Dialog. Square corners, no shadow: a 1 px black border on the inner edge separates it from the page. Header, body and footer are Dialog's parts with Dialog's spacing; only the body scrolls, and it is keyboard-scrollable (section 06). Under 480 px every drawer fills the screen. Built on Radix Dialog.</p>
 </header>
 
 <!-- 01 RIGHT -->
@@ -370,9 +389,246 @@ body{margin:0;background:#FFFFFF}
 </div>
 </section>
 
-<!-- 06 ANATOMY -->
+<!-- 06 SCROLLING CONTENT -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Anatomy</h2></div>
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Scrolling content</h2></div>
+<p class="sec-d">When content is taller than the space header and footer leave, only the body scrolls. Header and footer never move. The footer divider is always there and marks the bottom cut. The header divider is the body's own 1 px top border: transparent at scrollTop 0, gray-200 as soon as the body is scrolled (CSS scroll-driven, no JS). The body is a focusable scroll region (tabindex 0, role region, named by the title), so it can be scrolled from the keyboard even when it holds no controls. Native scrollbar, not restyled. Stages at 1:1. The bar under each stage shows the scroll position (left = top, right = end).</p>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>right · sm · at top</span><span>scrollTop 0</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-sc1" aria-describedby="d-sc1">
+<div class="hd"><div><h2 class="ttl" id="t-sc1">Licence terms</h2><p class="desc" id="d-sc1">Read before publishing.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd" tabindex="0" role="region" aria-labelledby="t-sc1">
+<p><span class="cn">1.</span> Photos are licensed for editorial use only. Commercial use needs written permission from the author.</p>
+<p><span class="cn">2.</span> Credit the author on every use, next to the photo or in the credits list.</p>
+<p><span class="cn">3.</span> Crops are allowed. Colour changes are not: the archive is monochrome.</p>
+<p><span class="cn">4.</span> Do not combine archive photos with other images into one composite.</p>
+<p><span class="cn">5.</span> Online use is limited to 2048 px on the long edge.</p>
+<p><span class="cn">6.</span> Print runs over 5,000 copies need a separate agreement.</p>
+<p><span class="cn">7.</span> Licences are personal and cannot be transferred or sublicensed.</p>
+<p><span class="cn">8.</span> Licences end after five years unless renewed before they expire.</p>
+<p><span class="cn">9.</span> Archive prints are sold separately and are not covered by this licence.</p>
+<p><span class="cn">10.</span> Breach of these terms ends the licence immediately.</p>
+</div>
+<div class="ft"><button class="btn">Decline</button><button class="btn pri">Accept</button></div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:0;width:38%"></i></b><span>at top</span></div>No header divider yet (top border transparent). Text runs into the footer divider and is cut there: the cut line says "more below". Body has no controls, so initial focus is the close button.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>right · sm · mid-scroll</span><span>scrollTop &gt; 0</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-sc2" aria-describedby="d-sc2">
+<div class="hd"><div><h2 class="ttl" id="t-sc2">Licence terms</h2><p class="desc" id="d-sc2">Read before publishing.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd edge snap" tabindex="0" role="region" aria-labelledby="t-sc2">
+<p><span class="cn">1.</span> Photos are licensed for editorial use only. Commercial use needs written permission from the author.</p>
+<p><span class="cn">2.</span> Credit the author on every use, next to the photo or in the credits list.</p>
+<p><span class="cn">3.</span> Crops are allowed. Colour changes are not: the archive is monochrome.</p>
+<p class="at"><span class="cn">4.</span> Do not combine archive photos with other images into one composite.</p>
+<p><span class="cn">5.</span> Online use is limited to 2048 px on the long edge.</p>
+<p><span class="cn">6.</span> Print runs over 5,000 copies need a separate agreement.</p>
+<p><span class="cn">7.</span> Licences are personal and cannot be transferred or sublicensed.</p>
+<p><span class="cn">8.</span> Licences end after five years unless renewed before they expire.</p>
+<p><span class="cn">9.</span> Archive prints are sold separately and are not covered by this licence.</p>
+<p><span class="cn">10.</span> Breach of these terms ends the licence immediately.</p>
+</div>
+<div class="ft"><button class="btn">Decline</button><button class="btn pri">Accept</button></div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:32%;width:38%"></i></b><span>mid-scroll</span></div>Header divider (gray-200) appears once the body leaves the top, so content is cut by a line at both edges. Header, close button and footer stay put.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>right · sm · at end</span><span>scrollTop = max</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-sc3" aria-describedby="d-sc3">
+<div class="hd"><div><h2 class="ttl" id="t-sc3">Licence terms</h2><p class="desc" id="d-sc3">Read before publishing.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd edge end" tabindex="0" role="region" aria-labelledby="t-sc3"><div class="bdc">
+<p><span class="cn">1.</span> Photos are licensed for editorial use only. Commercial use needs written permission from the author.</p>
+<p><span class="cn">2.</span> Credit the author on every use, next to the photo or in the credits list.</p>
+<p><span class="cn">3.</span> Crops are allowed. Colour changes are not: the archive is monochrome.</p>
+<p><span class="cn">4.</span> Do not combine archive photos with other images into one composite.</p>
+<p><span class="cn">5.</span> Online use is limited to 2048 px on the long edge.</p>
+<p><span class="cn">6.</span> Print runs over 5,000 copies need a separate agreement.</p>
+<p><span class="cn">7.</span> Licences are personal and cannot be transferred or sublicensed.</p>
+<p><span class="cn">8.</span> Licences end after five years unless renewed before they expire.</p>
+<p><span class="cn">9.</span> Archive prints are sold separately and are not covered by this licence.</p>
+<p><span class="cn">10.</span> Breach of these terms ends the licence immediately.</p>
+</div></div>
+<div class="ft"><button class="btn">Decline</button><button class="btn pri">Accept</button></div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:62%;width:38%"></i></b><span>at end</span></div>The last clause rests on the body's 24 px bottom padding above the footer divider. The header divider stays. Further scrolling does not move the page behind (overscroll-behavior: contain, Radix scroll lock).</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>right · sm · scroll region focus-visible</span><span>Tab from close button</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-sc4" aria-describedby="d-sc4">
+<div class="hd"><div><h2 class="ttl" id="t-sc4">Licence terms</h2><p class="desc" id="d-sc4">Read before publishing.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd focus" tabindex="0" role="region" aria-labelledby="t-sc4">
+<p><span class="cn">1.</span> Photos are licensed for editorial use only. Commercial use needs written permission from the author.</p>
+<p><span class="cn">2.</span> Credit the author on every use, next to the photo or in the credits list.</p>
+<p><span class="cn">3.</span> Crops are allowed. Colour changes are not: the archive is monochrome.</p>
+<p><span class="cn">4.</span> Do not combine archive photos with other images into one composite.</p>
+<p><span class="cn">5.</span> Online use is limited to 2048 px on the long edge.</p>
+<p><span class="cn">6.</span> Print runs over 5,000 copies need a separate agreement.</p>
+<p><span class="cn">7.</span> Licences are personal and cannot be transferred or sublicensed.</p>
+<p><span class="cn">8.</span> Licences end after five years unless renewed before they expire.</p>
+<p><span class="cn">9.</span> Archive prints are sold separately and are not covered by this licence.</p>
+<p><span class="cn">10.</span> Breach of these terms ends the licence immediately.</p>
+</div>
+<div class="ft"><button class="btn">Decline</button><button class="btn pri">Accept</button></div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:0;width:38%"></i></b><span>at top · focused</span></div>2 px black ring drawn inside the body (offset −2 px) so header and footer never clip it. Then <span class="kbd">↑</span> <span class="kbd">↓</span> scroll by line, <span class="kbd">Page Up</span> <span class="kbd">Page Down</span> <span class="kbd">Space</span> by page, <span class="kbd">Home</span> <span class="kbd">End</span> to top / end. Next Tab goes to Decline.</div>
+</div>
+</div>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>left · sm · focus scrolled into view</span><span>Tab to a link below the fold</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%;align-self:flex-end"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw left sm" role="dialog" aria-modal="true" aria-labelledby="t-sc5" aria-describedby="d-sc5">
+<div class="hd"><div><h2 class="ttl" id="t-sc5">Series</h2><p class="desc" id="d-sc5">Pick a series to browse.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd edge snap" tabindex="0" role="region" aria-labelledby="t-sc5"><nav aria-label="Series list, scrolling"><a class="nv" href="#">Harbour, winter</a><a class="nv" href="#">Quarry</a><a class="nv" href="#">Night trains</a><a class="nv" href="#">Dunes</a><a class="nv" href="#">Breakwater</a><a class="nv" href="#">Fog studies</a><a class="nv" href="#">Shipyard</a><a class="nv" href="#">Old town</a><a class="nv" href="#">Tram depot</a><a class="nv at-end focus" href="#">Salt marsh</a><a class="nv" href="#">Lighthouse</a><a class="nv" href="#">Ferry crossing</a><a class="nv" href="#">Market hall</a><a class="nv" href="#">Snowfields</a></nav></div>
+<div class="ft"><button class="btn">Manage</button><button class="btn pri">New series</button></div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:28%;width:44%"></i></b><span>mid-scroll</span></div>Tab onto "Salt marsh", which was below the fold: the browser scrolls it into view natively. scroll-padding-block 16 px keeps the focus ring clear of the footer divider.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>left · md · no footer · at end</span><span>body runs to the panel edge</span></div>
+<div class="stage" style="height: 460px">
+<div class="page"><i style="width:30%;align-self:flex-end"></i><i></i><i style="width:80%"></i><i></i></div>
+<div class="ov"></div>
+<div class="drw left md" role="dialog" aria-modal="true" aria-labelledby="t-sc6" aria-describedby="d-sc6">
+<div class="hd"><div><h2 class="ttl" id="t-sc6">Series</h2><p class="desc" id="d-sc6">Pick a series to browse.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd edge end" tabindex="0" role="region" aria-labelledby="t-sc6"><div class="bdc"><nav aria-label="Series list, no footer"><a class="nv" href="#">Harbour, winter</a><a class="nv" href="#">Quarry</a><a class="nv" href="#">Night trains</a><a class="nv" href="#">Dunes</a><a class="nv" href="#">Breakwater</a><a class="nv" href="#">Fog studies</a><a class="nv" href="#">Shipyard</a><a class="nv" href="#">Old town</a><a class="nv" href="#">Tram depot</a><a class="nv" href="#">Salt marsh</a><a class="nv" href="#">Lighthouse</a><a class="nv" href="#">Ferry crossing</a><a class="nv" href="#">Market hall</a><a class="nv" href="#">Snowfields</a></nav></div></div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:45%;width:55%"></i></b><span>at end</span></div>Without a footer there is no bottom divider: the last row rests on 24 px of padding above the panel's bottom edge. The header divider still marks the top cut.</div>
+</div>
+</div>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>top · sm · mid-scroll</span><span>height 320 px · body 155 px</span></div>
+<div class="stage" style="height: 384px">
+<div class="page" style="justify-content:flex-end"><i style="width:30%"></i><i></i><i style="width:80%"></i></div>
+<div class="ov"></div>
+<div class="drw top sm" role="dialog" aria-modal="true" aria-labelledby="t-sc7" aria-describedby="d-sc7">
+<div class="hd"><div><h2 class="ttl" id="t-sc7">Search the archive</h2><p class="desc" id="d-sc7">Search titles, captions and places.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd edge snap" tabindex="0" role="region" aria-labelledby="t-sc7"><div class="fld"><label class="lb" for="sc7-1">Search</label><input id="sc7-1" class="in" value="harbour"></div><p class="cap">10 results</p><nav aria-label="Search results"><a class="nv" href="#">Harbour, winter · 24 photos · 2019</a><a class="nv" href="#">Harbour cranes · 12 photos · 2017</a><a class="nv" href="#">Harbour at dawn · 9 photos · 2021</a><a class="nv at" href="#">Harbour master's office · 6 photos · 2016</a><a class="nv" href="#">Harbour lights · 18 photos · 2020</a><a class="nv" href="#">Old harbour wall · 7 photos · 2015</a><a class="nv" href="#">Harbour ferries · 11 photos · 2018</a><a class="nv" href="#">Fishing harbour · 14 photos · 2022</a><a class="nv" href="#">Harbour in fog · 5 photos · 2019</a><a class="nv" href="#">Harbour, summer · 20 photos · 2023</a></nav></div>
+<div class="ft"><button class="btn">Clear</button><button class="btn pri">Search</button></div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:22%;width:26%"></i></b><span>mid-scroll</span></div>Fixed height is where scroll matters most: at sm only about 155 px of body is left. The search field scrolls away with the results; it is not pinned (pinning would need a second scroll region).</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>bottom · sm · at top</span><span>height 320 px · scrollTop 0</span></div>
+<div class="stage" style="height: 384px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i></div>
+<div class="ov"></div>
+<div class="drw bottom sm" role="dialog" aria-modal="true" aria-labelledby="t-sc8" aria-describedby="d-sc8">
+<div class="hd"><div><h2 class="ttl" id="t-sc8">20 photos selected</h2><p class="desc" id="d-sc8">Review the selection before export.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd" tabindex="0" role="region" aria-labelledby="t-sc8"><div class="tg" aria-hidden="true"><i data-n="01"></i><i data-n="02"></i><i data-n="03"></i><i data-n="04"></i><i data-n="05"></i><i data-n="06"></i><i data-n="07"></i><i data-n="08"></i><i data-n="09"></i><i data-n="10"></i><i data-n="11"></i><i data-n="12"></i><i data-n="13"></i><i data-n="14"></i><i data-n="15"></i><i data-n="16"></i><i data-n="17"></i><i data-n="18"></i><i data-n="19"></i><i data-n="20"></i></div></div>
+<div class="ft"><button class="btn">Download</button><button class="btn pri">Add to series</button></div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:0;width:34%"></i></b><span>at top</span></div>Row 2 is cut by the footer divider. No header divider at scrollTop 0.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>bottom · sm · mid-scroll · region focused</span><span>scrolled with ↓</span></div>
+<div class="stage" style="height: 384px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i></div>
+<div class="ov"></div>
+<div class="drw bottom sm" role="dialog" aria-modal="true" aria-labelledby="t-sc9" aria-describedby="d-sc9">
+<div class="hd"><div><h2 class="ttl" id="t-sc9">20 photos selected</h2><p class="desc" id="d-sc9">Review the selection before export.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd edge snap focus" tabindex="0" role="region" aria-labelledby="t-sc9"><div class="tg" aria-hidden="true"><i data-n="01"></i><i data-n="02"></i><i data-n="03"></i><i data-n="04"></i><i data-n="05"></i><i class="at" data-n="06"></i><i data-n="07"></i><i data-n="08"></i><i data-n="09"></i><i data-n="10"></i><i data-n="11"></i><i data-n="12"></i><i data-n="13"></i><i data-n="14"></i><i data-n="15"></i><i data-n="16"></i><i data-n="17"></i><i data-n="18"></i><i data-n="19"></i><i data-n="20"></i></div></div>
+<div class="ft"><button class="btn">Download</button><button class="btn pri">Add to series</button></div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:33%;width:34%"></i></b><span>mid-scroll</span></div>No controls in the body, so the region itself takes focus (inset ring) and scrolls with the arrow and page keys. Header divider shown.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>bottom · sm · at end</span><span>scrollTop = max</span></div>
+<div class="stage" style="height: 384px">
+<div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i></div>
+<div class="ov"></div>
+<div class="drw bottom sm" role="dialog" aria-modal="true" aria-labelledby="t-sc10" aria-describedby="d-sc10">
+<div class="hd"><div><h2 class="ttl" id="t-sc10">20 photos selected</h2><p class="desc" id="d-sc10">Review the selection before export.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd edge end" tabindex="0" role="region" aria-labelledby="t-sc10"><div class="bdc"><div class="tg" aria-hidden="true"><i data-n="01"></i><i data-n="02"></i><i data-n="03"></i><i data-n="04"></i><i data-n="05"></i><i data-n="06"></i><i data-n="07"></i><i data-n="08"></i><i data-n="09"></i><i data-n="10"></i><i data-n="11"></i><i data-n="12"></i><i data-n="13"></i><i data-n="14"></i><i data-n="15"></i><i data-n="16"></i><i data-n="17"></i><i data-n="18"></i><i data-n="19"></i><i data-n="20"></i></div></div></div>
+<div class="ft"><button class="btn">Download</button><button class="btn pri">Add to series</button></div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:66%;width:34%"></i></b><span>at end</span></div>Last row on 24 px padding above the footer divider. Wheel and touch scrolling past the end do not chain to the page.</div>
+</div>
+</div>
+
+<div class="grid2">
+<div class="ab">
+<div class="ab-h"><span>full · right · mid-scroll</span><span>375 × 667 · stacked footer</span></div>
+<div class="ab-b" style="background:#F7F7F7">
+<div class="phone">
+<div class="drw full" role="dialog" aria-modal="true" aria-labelledby="t-sc11" aria-describedby="d-sc11">
+<div class="hd"><div><h2 class="ttl" id="t-sc11">Export settings</h2><p class="desc" id="d-sc11">Applies to 3 selected photos.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd edge snap" tabindex="0" role="region" aria-labelledby="t-sc11"><div class="fld"><label class="lb" for="sc11-1">File name</label><input id="sc11-1" class="in" value="harbour-winter"></div><div class="fld"><label class="lb" for="sc11-2">Format</label><input id="sc11-2" class="in" value="JPEG"></div><div class="fld"><label class="lb" for="sc11-3">Long edge (px)</label><input id="sc11-3" class="in" value="2048"></div><div class="fld at"><label class="lb" for="sc11-4">Quality</label><input id="sc11-4" class="in" value="90"></div><div class="fld"><label class="lb" for="sc11-5">Colour profile</label><input id="sc11-5" class="in" value="Gray Gamma 2.2"></div><div class="fld"><label class="lb" for="sc11-6">Metadata</label><input id="sc11-6" class="in" value="Copyright only"></div><div class="fld"><label class="lb" for="sc11-7">Copyright</label><input id="sc11-7" class="in" value="© Archive"></div><div class="fld"><label class="lb" for="sc11-8">Caption</label><input id="sc11-8" class="in" value="Gdynia breakwater"></div><div class="fld"><label class="lb" for="sc11-9">Keywords</label><input id="sc11-9" class="in" value="harbour, winter"></div><div class="fld"><label class="lb" for="sc11-10">Destination</label><input id="sc11-10" class="in" value="Downloads"></div></div>
+<div class="ft stack"><button class="btn">Cancel</button><button class="btn pri">Export</button></div>
+</div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:30%;width:50%"></i></b><span>mid-scroll</span></div>Full mode scrolls the same way. The stacked footer takes about 133 px, so the body gets what is left between header and footer.</div>
+</div>
+
+<div class="ab">
+<div class="ab-h"><span>full · bottom · at end</span><span>375 × 667 · safe-area footer</span></div>
+<div class="ab-b" style="background:#F7F7F7">
+<div class="phone">
+<div class="drw full" role="dialog" aria-modal="true" aria-labelledby="t-sc12" aria-describedby="d-sc12">
+<div class="hd"><div><h2 class="ttl" id="t-sc12">20 photos selected</h2><p class="desc" id="d-sc12">Review the selection before export.</p></div>
+<button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
+<div class="bd edge end" tabindex="0" role="region" aria-labelledby="t-sc12"><div class="bdc"><div class="tg" aria-hidden="true"><i data-n="01"></i><i data-n="02"></i><i data-n="03"></i><i data-n="04"></i><i data-n="05"></i><i data-n="06"></i><i data-n="07"></i><i data-n="08"></i><i data-n="09"></i><i data-n="10"></i><i data-n="11"></i><i data-n="12"></i><i data-n="13"></i><i data-n="14"></i><i data-n="15"></i><i data-n="16"></i><i data-n="17"></i><i data-n="18"></i><i data-n="19"></i><i data-n="20"></i></div></div></div>
+<div class="ft stack"><button class="btn">Download</button><button class="btn pri">Add to series</button></div>
+</div>
+</div>
+</div>
+<div class="ab-f"><div class="smap"><b><i style="left:45%;width:55%"></i></b><span>at end</span></div>Touch scrolling stays inside the body (overscroll contained, page locked). No pull-to-dismiss.</div>
+</div>
+</div>
+</section>
+
+<!-- 07 ANATOMY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Anatomy</h2></div>
 <p class="sec-d">Every part except the panel's position, extent and border edge is shared with Dialog, token for token.</p>
 <table class="tbl">
 <thead><tr><th>Part</th><th>Spec</th><th>vs Dialog</th></tr></thead>
@@ -384,16 +640,18 @@ body{margin:0;background:#FFFFFF}
 <tr><td>Header</td><td>padding 24 / 24 / 0; title + description column, gap 8; close button top-right</td><td>same</td></tr>
 <tr><td>Title</td><td>Red Hat Mono 500, h3 22/29, black; required</td><td>same</td></tr>
 <tr><td>Description</td><td>body 16/26, gray-600; required</td><td>required here (optional in Dialog)</td></tr>
-<tr><td>Body</td><td>padding 16 / 24 / 24, body 16/26 gray-700; fills remaining space, scrolls; overscroll contained</td><td>same, plus flex fill</td></tr>
+<tr><td>Body</td><td>padding 16 / 24 / 24, body 16/26 gray-700; fills remaining space, scrolls; overscroll contained; scroll-padding-block 16</td><td>same, plus flex fill</td></tr>
+<tr><td>Body scroll region</td><td>tabindex 0, role region named by the title; focus-visible ring 2 px black inset (offset −2 px)</td><td>new (Dialog body is not focusable)</td></tr>
+<tr><td>Header divider</td><td>body's 1 px top border: transparent at scrollTop 0, gray-200 once scrolled (scroll-driven CSS; absent where unsupported)</td><td>new</td></tr>
 <tr><td>Footer</td><td>1 px gray-200 top divider, padding 16 / 24, actions right-aligned, gap 12, primary last; pinned to panel bottom</td><td>same</td></tr>
 <tr><td>Close button</td><td>32 × 32, 16 px X icon (2 px stroke), transparent border; aria-label "Close"</td><td>same</td></tr>
 </tbody>
 </table>
 </section>
 
-<!-- 07 MOTION -->
+<!-- 08 MOTION -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Motion</h2></div>
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Motion</h2></div>
 <p class="sec-d">The panel slides from its edge (translate 100 % of its own size to 0) while the overlay fades 0 → 1, both over --ds-motion (120 ms, cubic-bezier(.2, 0, 0, 1)). Closing plays the same in reverse. With prefers-reduced-motion: reduce there is no slide and no fade. Schematics, not to scale: dashed outline = resting position, overlay shown mid-fade.</p>
 
 <div class="grid4">
@@ -478,9 +736,9 @@ body{margin:0;background:#FFFFFF}
 </div>
 </section>
 
-<!-- 08 STATES -->
+<!-- 09 STATES -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">States</h2></div>
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">States</h2></div>
 <p class="sec-d">Close button states in isolation (identical to Dialog), then panel states on a right · sm drawer in a 1:1 stage. Focus rings are 2 px black at 2 px offset.</p>
 
 <div class="grid4">
@@ -552,18 +810,29 @@ body{margin:0;background:#FFFFFF}
 </div>
 
 <div class="ab">
-<div class="ab-h"><span>Open · scrolling body</span><span>header and footer fixed</span></div>
+<div class="ab-h"><span>Open · scrolling body</span><span>mid-scroll · header and footer fixed</span></div>
 <div class="stage" style="height: 460px">
 <div class="page"><i style="width:30%"></i><i></i><i style="width:80%"></i><i></i></div>
 <div class="ov"></div>
 <div class="drw right sm" role="dialog" aria-modal="true" aria-labelledby="t-s4" aria-describedby="d-s4">
 <div class="hd"><div><h2 class="ttl" id="t-s4">Licence terms</h2><p class="desc" id="d-s4">Read before publishing.</p></div>
 <button class="x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></div>
-<div class="bd"><p>Photos are licensed for editorial use only. Commercial use requires written permission from the author.</p><p>Credit the author on every use. Crops are allowed; colour changes are not, because the archive is monochrome.</p><p>Licences end after five years unless renewed. Archive prints need a separate agreement.</p></div>
+<div class="bd edge snap" tabindex="0" role="region" aria-labelledby="t-s4">
+<p><span class="cn">1.</span> Photos are licensed for editorial use only. Commercial use needs written permission from the author.</p>
+<p><span class="cn">2.</span> Credit the author on every use, next to the photo or in the credits list.</p>
+<p><span class="cn">3.</span> Crops are allowed. Colour changes are not: the archive is monochrome.</p>
+<p><span class="cn">4.</span> Do not combine archive photos with other images into one composite.</p>
+<p class="at"><span class="cn">5.</span> Online use is limited to 2048 px on the long edge.</p>
+<p><span class="cn">6.</span> Print runs over 5,000 copies need a separate agreement.</p>
+<p><span class="cn">7.</span> Licences are personal and cannot be transferred or sublicensed.</p>
+<p><span class="cn">8.</span> Licences end after five years unless renewed before they expire.</p>
+<p><span class="cn">9.</span> Archive prints are sold separately and are not covered by this licence.</p>
+<p><span class="cn">10.</span> Breach of these terms ends the licence immediately.</p>
+</div>
 <div class="ft"><button class="btn">Decline</button><button class="btn pri">Accept</button></div>
 </div>
 </div>
-<div class="ab-f">Only the body scrolls; the footer divider marks the cut. Page behind does not scroll (Radix scroll lock); overscroll does not chain.</div>
+<div class="ab-f">Only the body scrolls. Header divider (once scrolled) and footer divider mark both cuts. Page behind does not scroll (Radix scroll lock); overscroll does not chain. All scroll positions, sides and the focused region: section 06.</div>
 </div>
 
 <div class="ab">
@@ -598,15 +867,20 @@ body{margin:0;background:#FFFFFF}
 </div>
 </section>
 
-<!-- 09 KEYBOARD -->
+<!-- 10 KEYBOARD -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">Keyboard and dismissal</h2></div>
+<div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Keyboard and dismissal</h2></div>
 <table class="tbl">
 <thead><tr><th>Input</th><th>Result</th></tr></thead>
 <tbody>
 <tr><td><span class="kbd">Enter</span> / <span class="kbd">Space</span> on trigger</td><td>Open; focus first focusable in body, else first in panel (close button)</td></tr>
-<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Cycle inside panel only (focus trap): close, body controls, footer actions; wraps</td></tr>
-<tr><td><span class="kbd">Esc</span></td><td>Close (slide out); focus returns to trigger</td></tr>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Cycle inside panel only (focus trap): close, body scroll region, body controls, footer actions; wraps</td></tr>
+<tr><td><span class="kbd">↑</span> <span class="kbd">↓</span> on body region</td><td>Scroll the body by a line (native)</td></tr>
+<tr><td><span class="kbd">Page Up</span> <span class="kbd">Page Down</span> / <span class="kbd">Space</span> <span class="kbd">Shift+Space</span> on body region</td><td>Scroll the body by a page (native)</td></tr>
+<tr><td><span class="kbd">Home</span> / <span class="kbd">End</span> on body region</td><td>Jump to top / end of the body (native)</td></tr>
+<tr><td><span class="kbd">Tab</span> to a control below or above the fold</td><td>Browser scrolls it into view; 16 px scroll-padding keeps the ring clear of header and footer</td></tr>
+<tr><td>Wheel / trackpad / touch over the panel</td><td>Scrolls the body only; page stays locked; overscroll does not chain</td></tr>
+<tr><td><span class="kbd">Esc</span></td><td>Close (slide out); focus returns to trigger. Works from the body region too</td></tr>
 <tr><td>Pointer down on overlay</td><td>Close (default); disabled with dismissible={false}</td></tr>
 <tr><td>Close button / Cancel (DrawerClose)</td><td>Close; focus returns to trigger</td></tr>
 <tr><td>Swipe / drag</td><td>Nothing. No gesture dismissal in this version</td></tr>
@@ -616,7 +890,7 @@ body{margin:0;background:#FFFFFF}
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":16400}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":20000}}'>
 class Component extends DCLogic {
 renderVals() {
 return {};
