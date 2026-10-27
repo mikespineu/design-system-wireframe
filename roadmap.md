@@ -138,8 +138,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas covers trigger default, hover, focus, active and disabled
     - Spec names Radix `Tabs` and defines automatic vs manual activation
     - Spec maps every state to `--ds-*` tokens
-- [ ] **DS-22 Tabs — implementation.** Build `Tabs` in `src/components/Tabs/` on Radix `Tabs`, styled via `[data-state="active"]` / `[data-disabled]`.
-  - type: build · has_ui: yes · depends_on: DS-21 · needs_human: no · status: todo
+- [x] **DS-22 Tabs — implementation.** Build `Tabs` in `src/components/Tabs/` on Radix `Tabs`, styled via `[data-state="active"]` / `[data-disabled]`.
+  - type: build · has_ui: yes · depends_on: DS-21 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state
     - Arrow keys move between tabs, Home/End jump; tested with `userEvent`
@@ -210,14 +210,14 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Canvas shows Stack in both directions with every gap step, align/justify options and wrap
     - Canvas shows Grid at 1–4 and 12 columns, with responsive counts at mobile/tablet/desktop
     - Spec defines the typed API (`gap` limited to `--ds-space-*` steps, `as` / `asChild`, responsive props) and the breakpoints used
-- [ ] **DS-36 Stack & Grid — implementation.** Build `Stack` and `Grid` in `src/components/Stack/` and `src/components/Grid/` per `docs/specs/Layout.md`, polymorphic via `asChild` (Radix `Slot`).
-  - type: build · has_ui: yes · depends_on: DS-35 · needs_human: no · status: todo
+- [x] **DS-36 Stack & Grid — implementation.** Build `Stack` and `Grid` in `src/components/Stack/` and `src/components/Grid/` per `docs/specs/Layout.md`, polymorphic via `asChild` (Radix `Slot`).
+  - type: build · has_ui: yes · depends_on: DS-35 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec for every direction, gap, alignment and column count
     - `gap` accepts only `--ds-space-*` steps (type-enforced); responsive props apply at the spec's breakpoints
     - Story per variant, composed example story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-37 Heading & Text — design.** Define the type scale as components: `Heading` (levels 1–6, visual size independent from level) and `Text` (sizes, weights, mono/text family, muted tone, truncate/line-clamp).
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-37 Heading & Text — design.** Define the type scale as components: `Heading` (levels 1–6, visual size independent from level) and `Text` (sizes, weights, mono/text family, muted tone, truncate/line-clamp).
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas shows every Heading size and Text size/weight/family/tone, plus truncate and line-clamp
     - Spec maps every style to `--ds-*` tokens (missing type tokens listed under Token requests)
@@ -260,8 +260,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Renders Popover when `(pointer: coarse)` matches, Tooltip otherwise, and switches live on change; viewport width has no effect
     - Tests mock `matchMedia` for both modes (stub added to `jest.setup.ts` if missing)
     - Story per mode, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-44 Drawer — design.** Define a side panel sliding in from left, right, top or bottom: sizes, overlay, header/title, body scroll, footer actions, close button and motion, consistent with Dialog.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-44 Drawer — design.** Define a side panel sliding in from left, right, top or bottom: sizes, overlay, header/title, body scroll, footer actions, close button and motion, consistent with Dialog.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas covers all four sides in sm/md/lg (and full on mobile), with overlay, title, scrolling body, footer and close
     - Spec names Radix `Dialog` and defines focus trap, Escape, outside click and slide motion with `prefers-reduced-motion`
@@ -349,6 +349,10 @@ Each task carries its fields in an indented line, read by the [software factory]
 ## Done
 
 - **DS-42** Tooltip & Popover — implementation — https://github.com/mikespineu/design-system-wireframe/pull/77
+- **DS-36** Stack & Grid — implementation — https://github.com/mikespineu/design-system-wireframe/pull/75
+- **DS-22** Tabs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/76
+- **DS-37** Heading & Text — design — https://github.com/mikespineu/design-system-wireframe/pull/68
+- **DS-44** Drawer — design — https://github.com/mikespineu/design-system-wireframe/pull/69
 - **DS-39** Toast — design — https://github.com/mikespineu/design-system-wireframe/pull/70
 - **DS-32** Button icons, loading & ButtonGroup — design — https://github.com/mikespineu/design-system-wireframe/pull/72
 - **DS-17** Select — design — https://github.com/mikespineu/design-system-wireframe/pull/73

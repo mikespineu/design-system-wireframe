@@ -1,0 +1,102 @@
+/*
+ * Breakpoints are literal px values (640 / 768 / 1024): custom properties cannot be used in
+ * media queries and no --ds-breakpoint-* tokens exist. See docs/specs/Layout.md, "Breakpoints".
+ * Source order matters: larger breakpoints come last at equal specificity and win.
+ */
+.ds-stack { display: flex; }
+.ds-stack[data-wrap] { flex-wrap: wrap; }
+.ds-stack:is(ul, ol) { list-style: none; margin: 0; padding: 0; }
+
+.ds-stack[data-direction='vertical'] { flex-direction: column; }
+.ds-stack[data-direction='horizontal'] { flex-direction: row; }
+.ds-stack[data-gap='0'] { gap: 0; }
+.ds-stack[data-gap='1'] { gap: var(--ds-space-1); }
+.ds-stack[data-gap='2'] { gap: var(--ds-space-2); }
+.ds-stack[data-gap='3'] { gap: var(--ds-space-3); }
+.ds-stack[data-gap='4'] { gap: var(--ds-space-4); }
+.ds-stack[data-gap='6'] { gap: var(--ds-space-6); }
+.ds-stack[data-gap='8'] { gap: var(--ds-space-8); }
+.ds-stack[data-gap='12'] { gap: var(--ds-space-12); }
+.ds-stack[data-gap='16'] { gap: var(--ds-space-16); }
+.ds-stack[data-gap='24'] { gap: var(--ds-space-24); }
+.ds-stack[data-align='start'] { align-items: flex-start; }
+.ds-stack[data-align='center'] { align-items: center; }
+.ds-stack[data-align='end'] { align-items: flex-end; }
+.ds-stack[data-align='stretch'] { align-items: stretch; }
+.ds-stack[data-align='baseline'] { align-items: baseline; }
+.ds-stack[data-justify='start'] { justify-content: flex-start; }
+.ds-stack[data-justify='center'] { justify-content: center; }
+.ds-stack[data-justify='end'] { justify-content: flex-end; }
+.ds-stack[data-justify='between'] { justify-content: space-between; }
+
+@media (min-width: 640px) {
+  .ds-stack[data-direction-sm='vertical'] { flex-direction: column; }
+  .ds-stack[data-direction-sm='horizontal'] { flex-direction: row; }
+  .ds-stack[data-gap-sm='0'] { gap: 0; }
+  .ds-stack[data-gap-sm='1'] { gap: var(--ds-space-1); }
+  .ds-stack[data-gap-sm='2'] { gap: var(--ds-space-2); }
+  .ds-stack[data-gap-sm='3'] { gap: var(--ds-space-3); }
+  .ds-stack[data-gap-sm='4'] { gap: var(--ds-space-4); }
+  .ds-stack[data-gap-sm='6'] { gap: var(--ds-space-6); }
+  .ds-stack[data-gap-sm='8'] { gap: var(--ds-space-8); }
+  .ds-stack[data-gap-sm='12'] { gap: var(--ds-space-12); }
+  .ds-stack[data-gap-sm='16'] { gap: var(--ds-space-16); }
+  .ds-stack[data-gap-sm='24'] { gap: var(--ds-space-24); }
+  .ds-stack[data-align-sm='start'] { align-items: flex-start; }
+  .ds-stack[data-align-sm='center'] { align-items: center; }
+  .ds-stack[data-align-sm='end'] { align-items: flex-end; }
+  .ds-stack[data-align-sm='stretch'] { align-items: stretch; }
+  .ds-stack[data-align-sm='baseline'] { align-items: baseline; }
+  .ds-stack[data-justify-sm='start'] { justify-content: flex-start; }
+  .ds-stack[data-justify-sm='center'] { justify-content: center; }
+  .ds-stack[data-justify-sm='end'] { justify-content: flex-end; }
+  .ds-stack[data-justify-sm='between'] { justify-content: space-between; }
+}
+
+@media (min-width: 768px) {
+  .ds-stack[data-direction-md='vertical'] { flex-direction: column; }
+  .ds-stack[data-direction-md='horizontal'] { flex-direction: row; }
+  .ds-stack[data-gap-md='0'] { gap: 0; }
+  .ds-stack[data-gap-md='1'] { gap: var(--ds-space-1); }
+  .ds-stack[data-gap-md='2'] { gap: var(--ds-space-2); }
+  .ds-stack[data-gap-md='3'] { gap: var(--ds-space-3); }
+  .ds-stack[data-gap-md='4'] { gap: var(--ds-space-4); }
+  .ds-stack[data-gap-md='6'] { gap: var(--ds-space-6); }
+  .ds-stack[data-gap-md='8'] { gap: var(--ds-space-8); }
+  .ds-stack[data-gap-md='12'] { gap: var(--ds-space-12); }
+  .ds-stack[data-gap-md='16'] { gap: var(--ds-space-16); }
+  .ds-stack[data-gap-md='24'] { gap: var(--ds-space-24); }
+  .ds-stack[data-align-md='start'] { align-items: flex-start; }
+  .ds-stack[data-align-md='center'] { align-items: center; }
+  .ds-stack[data-align-md='end'] { align-items: flex-end; }
+  .ds-stack[data-align-md='stretch'] { align-items: stretch; }
+  .ds-stack[data-align-md='baseline'] { align-items: baseline; }
+  .ds-stack[data-justify-md='start'] { justify-content: flex-start; }
+  .ds-stack[data-justify-md='center'] { justify-content: center; }
+  .ds-stack[data-justify-md='end'] { justify-content: flex-end; }
+  .ds-stack[data-justify-md='between'] { justify-content: space-between; }
+}
+
+@media (min-width: 1024px) {
+  .ds-stack[data-direction-lg='vertical'] { flex-direction: column; }
+  .ds-stack[data-direction-lg='horizontal'] { flex-direction: row; }
+  .ds-stack[data-gap-lg='0'] { gap: 0; }
+  .ds-stack[data-gap-lg='1'] { gap: var(--ds-space-1); }
+  .ds-stack[data-gap-lg='2'] { gap: var(--ds-space-2); }
+  .ds-stack[data-gap-lg='3'] { gap: var(--ds-space-3); }
+  .ds-stack[data-gap-lg='4'] { gap: var(--ds-space-4); }
+  .ds-stack[data-gap-lg='6'] { gap: var(--ds-space-6); }
+  .ds-stack[data-gap-lg='8'] { gap: var(--ds-space-8); }
+  .ds-stack[data-gap-lg='12'] { gap: var(--ds-space-12); }
+  .ds-stack[data-gap-lg='16'] { gap: var(--ds-space-16); }
+  .ds-stack[data-gap-lg='24'] { gap: var(--ds-space-24); }
+  .ds-stack[data-align-lg='start'] { align-items: flex-start; }
+  .ds-stack[data-align-lg='center'] { align-items: center; }
+  .ds-stack[data-align-lg='end'] { align-items: flex-end; }
+  .ds-stack[data-align-lg='stretch'] { align-items: stretch; }
+  .ds-stack[data-align-lg='baseline'] { align-items: baseline; }
+  .ds-stack[data-justify-lg='start'] { justify-content: flex-start; }
+  .ds-stack[data-justify-lg='center'] { justify-content: center; }
+  .ds-stack[data-justify-lg='end'] { justify-content: flex-end; }
+  .ds-stack[data-justify-lg='between'] { justify-content: space-between; }
+}

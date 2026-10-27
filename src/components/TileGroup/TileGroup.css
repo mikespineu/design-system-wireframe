@@ -57,12 +57,12 @@
   white-space: nowrap;
 }
 
-.ds-choice-control[data-variant='tile'] .ds-choice-item[data-state='unchecked']:not([data-disabled]):hover {
+.ds-choice-control[data-variant='tile'] .ds-choice-item:is([data-state='unchecked'], [data-state='inactive']):not([data-disabled]):hover {
   background: var(--ds-color-divider); /* gray-200 */
   color: var(--ds-color-ink);
 }
 
-.ds-choice-control[data-variant='tile'] .ds-choice-item[data-state='checked'] {
+.ds-choice-control[data-variant='tile'] .ds-choice-item:is([data-state='checked'], [data-state='active']) {
   border-color: var(--ds-color-ink);
   background: var(--ds-color-surface);
   color: var(--ds-color-ink);
@@ -77,7 +77,7 @@
   color: var(--ds-color-disabled);
 }
 
-.ds-choice-control[data-variant='tile'][data-disabled] .ds-choice-item[data-state='checked'] {
+.ds-choice-control[data-variant='tile'][data-disabled] .ds-choice-item:is([data-state='checked'], [data-state='active']) {
   border-color: var(--ds-color-disabled);
   background: var(--ds-color-surface);
 }
