@@ -1,7 +1,7 @@
 import { forwardRef, useId, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { Dialog as RadixDialog } from 'radix-ui';
 import { cx } from '../../lib/cx';
-import { Icon } from '../Icon';
+import { RoleIcon } from '../Icon/RoleIcon';
 import './Drawer.css';
 
 export type DrawerSide = 'left' | 'right' | 'top' | 'bottom';
@@ -103,7 +103,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               {!hideCloseButton && (
                 <RadixDialog.Close asChild>
                   <button type="button" className="ds-drawer-close" aria-label="Close">
-                    <Icon name="close" size={16} strokeWidth={2} aria-hidden="true" />
+                    <RoleIcon role="close" size={16} strokeWidth={2} aria-hidden="true" />
                   </button>
                 </RadixDialog.Close>
               )}
