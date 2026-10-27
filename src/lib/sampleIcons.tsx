@@ -33,3 +33,11 @@ export const WarningIcon = createIcon(
 export const CheckIcon = createIcon('CheckIcon', <path d="M5 12l5 5 9-10" />);
 export const CloseIcon = createIcon('CloseIcon', <path d="M6 6l12 12M18 6L6 18" />);
 export const ChevronDownIcon = createIcon('ChevronDownIcon', <path d="M6 9l6 6 6-6" />);
+
+/** Consumer-style Wishlist heart (outline and filled), built with `createIcon`. Not a DS default glyph. */
+const heartPath = 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z';
+export const HeartIcon = createIcon('HeartIcon', <path data-testid="outline" d={heartPath} />);
+export const HeartFilledIcon = createIcon(
+  'HeartFilledIcon',
+  <path data-testid="filled" d={heartPath} fill="currentColor" />,
+);
