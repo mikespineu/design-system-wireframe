@@ -1,0 +1,42 @@
+/* Spinner: overlay for loading Button and IconButton. Tokens only (--ds-*). Spec: docs/specs/Button.md */
+.ds-spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--ds-spinner-size, var(--ds-space-4));
+  height: var(--ds-spinner-size, var(--ds-space-4));
+  color: var(--ds-color-ink);
+  animation: ds-spinner-rotate 800ms linear infinite;
+}
+
+[data-variant='primary'] > .ds-spinner {
+  color: var(--ds-color-primary-contrast);
+}
+
+@keyframes ds-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ds-spinner-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-spinner {
+    animation: ds-spinner-pulse 1600ms ease-in-out infinite;
+  }
+}
+
+@media (forced-colors: active) {
+  .ds-spinner {
+    display: none;
+  }
+}

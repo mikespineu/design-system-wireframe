@@ -1,0 +1,45 @@
+/* IconButton: native button / Radix Toggle / Slot, tokens only (--ds-*). Spec: docs/specs/Button.md */
+.ds-icon-button {
+  position: relative;
+  --ds-spinner-size: 18px;
+}
+
+.ds-icon-button[data-variant='primary']:hover:not([data-loading]):not(:disabled) {
+  border-color: var(--ds-color-primary-hover);
+  background-color: var(--ds-color-primary-hover);
+}
+
+.ds-icon-button:not([data-variant='primary']):hover:not([data-loading]):not(:disabled) {
+  background-color: var(--ds-color-fill);
+}
+
+.ds-icon-button[data-variant='primary']:disabled {
+  border-color: var(--ds-color-divider);
+  background-color: var(--ds-color-divider);
+  color: var(--ds-color-placeholder);
+}
+
+.ds-icon-button[data-variant='ghost']:disabled {
+  border-color: transparent;
+}
+
+/* Pressed: 2 px border grows inward (border-box), so the box stays 44 x 44. */
+.ds-icon-button[data-state='on']:not([data-variant='primary']) {
+  border-width: var(--ds-border-width-strong);
+  border-color: var(--ds-color-ink);
+}
+
+.ds-icon-button[data-state='on']:not([data-variant='primary']):disabled {
+  border-color: var(--ds-color-disabled);
+}
+
+.ds-icon-button[data-loading] {
+  color: transparent;
+  cursor: progress;
+}
+
+@media (forced-colors: active) {
+  .ds-icon-button[data-loading] {
+    color: revert;
+  }
+}

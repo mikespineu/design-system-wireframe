@@ -1,0 +1,34 @@
+/* Button: native button / Radix Slot, tokens only (--ds-*). Spec: docs/specs/Button.md */
+.ds-button {
+  position: relative;
+  gap: var(--ds-space-2);
+}
+
+.ds-button[data-variant='primary']:hover:not([data-loading]):not(:disabled) {
+  border-color: var(--ds-color-primary-hover);
+  background-color: var(--ds-color-primary-hover);
+}
+
+.ds-button:not([data-variant='primary']):hover:not([data-loading]):not(:disabled) {
+  background-color: var(--ds-color-fill);
+}
+
+.ds-button[data-variant='ghost'] {
+  text-underline-offset: var(--ds-space-1);
+}
+
+/* Content stays in flow (same width) but is invisible; text, currentColor icons and underline follow. */
+.ds-button[data-loading] {
+  color: transparent;
+  cursor: progress;
+}
+
+.ds-button .ds-button-icon {
+  flex: none;
+}
+
+@media (forced-colors: active) {
+  .ds-button[data-loading] {
+    color: revert;
+  }
+}
