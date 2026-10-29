@@ -44,8 +44,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Spec defines the dark-mode role set with a contrast ratio for every text/background pair (≥ 4.5:1 text, ≥ 3:1 UI)
     - Canvas shows each knob (brand color, fonts, type scale, radius, shadow, dark) changing the same set of components
     - New raw values listed under Token requests for approval
-- [ ] **DS-27 Theme token foundation — implementation.** Implement the approved token contract in `src/styles/tokens.css` and move every component onto role tokens only. Wrap library CSS in `@layer ds` so consumer overrides always win, and ship the default fonts as an opt-in `fonts.css` instead of bundling them.
-  - type: build · has_ui: yes · depends_on: DS-26 · needs_human: no · status: todo
+- [x] **DS-27 Theme token foundation — implementation.** Implement the approved token contract in `src/styles/tokens.css` and move every component onto role tokens only. Wrap library CSS in `@layer ds` so consumer overrides always win, and ship the default fonts as an opt-in `fonts.css` instead of bundling them.
+  - type: build · has_ui: yes · depends_on: DS-26 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state; the default theme looks unchanged in every existing story
     - A test fails if component CSS or classes use palette tokens or hardcoded font-size, font-weight, letter-spacing, text-transform or box-shadow
