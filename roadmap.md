@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-48** Icon override props in components — implementation — https://github.com/mikespineu/design-system-wireframe/pull/89
 - **DS-27** Theme token foundation — implementation — https://github.com/mikespineu/design-system-wireframe/pull/88
 - **DS-47** Icon API & default glyphs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/82
 - **DS-18** Select — implementation — https://github.com/mikespineu/design-system-wireframe/pull/81
