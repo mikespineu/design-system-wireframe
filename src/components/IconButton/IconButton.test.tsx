@@ -10,7 +10,7 @@ describe('IconButton', () => {
   it('renders a labeled square button with an 18px icon', () => {
     render(<IconButton icon={PlusIcon} aria-label="Add" />);
     const btn = screen.getByRole('button', { name: 'Add' });
-    expect(btn).toHaveClass('h-control', 'w-11', 'border-ink', 'rounded-md');
+    expect(btn).toHaveClass('h-control', 'w-11', 'border-strong', 'rounded-md');
     expect(btn).toHaveAttribute('type', 'button');
     const svg = btn.querySelector('svg');
     expect(svg).toHaveAttribute('width', '18');
@@ -58,7 +58,7 @@ describe('IconButton', () => {
       </IconButton>,
     );
     const link = screen.getByRole('link', { name: 'Search' });
-    expect(link).toHaveClass('h-control', 'border-ink');
+    expect(link).toHaveClass('h-control', 'border-strong');
     expect(link).not.toHaveAttribute('type');
     expect(link.querySelector('svg')).toBeInTheDocument();
     expect(screen.queryByRole('button')).not.toBeInTheDocument();

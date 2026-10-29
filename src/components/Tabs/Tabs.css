@@ -1,3 +1,4 @@
+@layer ds {
 /* Tabs. Spec: docs/specs/Tabs.md. The tab list reuses the ChoiceGroup / SegmentedControl / TileGroup look. */
 .ds-tabs {
   --ds-tabs-gap: var(--ds-space-6);
@@ -5,7 +6,7 @@
   flex-direction: column;
   gap: var(--ds-tabs-gap);
   min-width: 0;
-  font-family: var(--ds-font-text);
+  font-family: var(--ds-font-body);
 }
 
 .ds-tabs[data-size='sm'] {
@@ -17,6 +18,7 @@
 }
 
 .ds-tabs-panel:focus-visible {
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: var(--ds-focus-offset);
+}
 }

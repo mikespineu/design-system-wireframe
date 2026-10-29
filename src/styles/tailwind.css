@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&family=Red+Hat+Text:wght@400;500;700&display=swap');
-@import 'tailwindcss';
+@import 'tailwindcss' layer(ds);
 @import './tokens.css';
 
 /*
  * Design System Wireframe theme. Tailwind's default palette, radii and shadows are cleared,
- * so only on-system utilities exist: a class such as bg-blue-500, rounded-lg or
- * shadow-md generates no CSS. The only hues are the muted status colors.
+ * so only on-system utilities exist: a class such as bg-blue-500 generates no CSS, and
+ * rounded-* / shadow-* read the radius and shadow roles. The only hues are the muted status colors.
  */
 @theme inline {
   /* Colors: bg-white, text-gray-600, border-gray-300, bg-black ... */
@@ -35,7 +34,7 @@
   --color-muted: var(--ds-color-text-muted);
   --color-text: var(--ds-color-text);
   --color-text-strong: var(--ds-color-text-strong);
-  --color-ink: var(--ds-color-ink);
+  --color-ink: var(--ds-color-text-emphasis);
   --color-inverse: var(--ds-color-inverse);
   --color-primary: var(--ds-color-primary);
   --color-primary-hover: var(--ds-color-primary-hover);
@@ -52,9 +51,17 @@
   --color-error-border: var(--ds-color-error-border);
   --color-error-bg: var(--ds-color-error-bg);
 
-  /* Fonts: font-mono for titles, font-sans (default) for body */
-  --font-sans: var(--ds-font-text);
+  /* Fonts: font-heading for titles, font-label for UI text, font-sans / font-body (default) for body, font-mono for numerals */
+  --font-sans: var(--ds-font-body);
+  --font-body: var(--ds-font-body);
+  --font-heading: var(--ds-font-heading);
+  --font-label: var(--ds-font-label);
   --font-mono: var(--ds-font-mono);
+
+  /* Weights: the three weight roles */
+  --font-weight-normal: var(--ds-font-weight-regular);
+  --font-weight-medium: var(--ds-font-weight-medium);
+  --font-weight-bold: var(--ds-font-weight-bold);
 
   /* Spacing: Tailwind's numeric scale runs on the 4 px base (p-4 = 16px, gap-6 = 24px) */
   --spacing: var(--ds-space-1);
@@ -64,55 +71,69 @@
 
   /* Shape: square corners and no shadows */
   --radius-*: initial;
+  --radius-sm: var(--ds-radius-sm);
   --radius-md: var(--ds-radius-md);
+  --radius-lg: var(--ds-radius-lg);
+  --radius-full: var(--ds-radius-full);
   --shadow-*: initial;
+  --shadow-sm: var(--ds-shadow-sm);
+  --shadow-md: var(--ds-shadow-md);
+  --shadow-lg: var(--ds-shadow-lg);
   --inset-shadow-*: initial;
   --drop-shadow-*: initial;
   --ease-ds: cubic-bezier(0.2, 0, 0, 1);
 
-  /* Type scale: text-display, text-h1 ... text-caption (size, leading, tracking, weight) */
-  --text-display: 4.5rem;
-  --text-display--line-height: 1;
-  --text-display--letter-spacing: -0.04em;
-  --text-display--font-weight: 500;
-  --text-h1: 3rem;
-  --text-h1--line-height: 1.1;
-  --text-h1--letter-spacing: -0.03em;
-  --text-h1--font-weight: 500;
-  --text-h2: 2rem;
-  --text-h2--line-height: 1.2;
-  --text-h2--letter-spacing: -0.02em;
-  --text-h2--font-weight: 500;
-  --text-h3: 1.375rem;
-  --text-h3--line-height: var(--ds-line-height-xl);
-  --text-h3--font-weight: 500;
-  --text-h4: 1.125rem;
-  --text-h4--line-height: var(--ds-line-height-lg);
-  --text-h4--font-weight: 500;
-  --text-h5: 1rem;
-  --text-h5--line-height: var(--ds-line-height-md);
-  --text-h5--font-weight: 500;
-  --text-body-lg: 1.125rem;
-  --text-body-lg--line-height: 1.6;
-  --text-body: 1rem;
-  --text-body--line-height: var(--ds-line-height-lg);
-  --text-body-sm: 0.9375rem;
-  --text-body-sm--line-height: var(--ds-line-height-md);
-  --text-label: 0.75rem;
-  --text-label--line-height: 1.33;
-  --text-label--letter-spacing: 0.08em;
-  --text-label--font-weight: 500;
-  --text-caption: 0.8125rem;
-  --text-caption--line-height: var(--ds-line-height-sm);
-  --text-ui-sm: 0.75rem;
-  --text-ui-sm--line-height: var(--ds-line-height-xs);
+  /* Type scale: every style reads its roles (size, line-height, tracking, weight) */
+  --text-display: var(--ds-text-display-size);
+  --text-display--line-height: var(--ds-text-display-line-height);
+  --text-display--letter-spacing: var(--ds-text-display-tracking);
+  --text-display--font-weight: var(--ds-text-heading-weight);
+  --text-h1: var(--ds-text-h1-size);
+  --text-h1--line-height: var(--ds-text-h1-line-height);
+  --text-h1--letter-spacing: var(--ds-text-h1-tracking);
+  --text-h1--font-weight: var(--ds-text-heading-weight);
+  --text-h2: var(--ds-text-h2-size);
+  --text-h2--line-height: var(--ds-text-h2-line-height);
+  --text-h2--letter-spacing: var(--ds-text-h2-tracking);
+  --text-h2--font-weight: var(--ds-text-heading-weight);
+  --text-h3: var(--ds-text-h3-size);
+  --text-h3--line-height: var(--ds-text-h3-line-height);
+  --text-h3--letter-spacing: var(--ds-text-h3-tracking);
+  --text-h3--font-weight: var(--ds-text-heading-weight);
+  --text-h4: var(--ds-text-body-lg-size);
+  --text-h4--line-height: var(--ds-text-body-line-height);
+  --text-h4--font-weight: var(--ds-text-heading-weight);
+  --text-h5: var(--ds-text-body-size);
+  --text-h5--line-height: var(--ds-text-body-sm-line-height);
+  --text-h5--font-weight: var(--ds-text-heading-weight);
+  --text-body-lg: var(--ds-text-body-lg-size);
+  --text-body-lg--line-height: var(--ds-text-body-lg-line-height);
+  --text-body: var(--ds-text-body-size);
+  --text-body--line-height: var(--ds-text-body-line-height);
+  --text-body-sm: var(--ds-text-body-sm-size);
+  --text-body-sm--line-height: var(--ds-text-body-sm-line-height);
+  --text-body-xs: var(--ds-text-body-xs-size);
+  --text-body-xs--line-height: var(--ds-text-body-xs-line-height);
+  --text-caption: var(--ds-text-caption-size);
+  --text-caption--line-height: var(--ds-text-caption-line-height);
+  --text-ui-sm: var(--ds-text-ui-sm-size);
+  --text-ui-sm--line-height: var(--ds-text-ui-sm-line-height);
+  --text-ui-xs: var(--ds-text-ui-xs-size);
+  --text-ui-xs--line-height: var(--ds-text-ui-xs-line-height);
+  --text-label: var(--ds-text-label-size);
+  --text-label--line-height: var(--ds-text-label-line-height);
+  --text-label--letter-spacing: var(--ds-text-label-tracking);
+  --text-label--font-weight: var(--ds-text-label-weight);
+  --text-ui: var(--ds-text-ui-size);
+  --text-ui--line-height: var(--ds-text-ui-line-height);
+  --text-ui--font-weight: var(--ds-text-ui-weight);
 }
 
-@layer base {
+@layer ds.base {
   html {
     background-color: var(--ds-color-background);
-    color: var(--ds-color-ink);
-    font-family: var(--ds-font-text);
+    color: var(--ds-color-text-emphasis);
+    font-family: var(--ds-font-body);
   }
 
   h1,
@@ -121,7 +142,8 @@
   h4,
   h5,
   h6 {
-    font-family: var(--ds-font-mono);
+    font-family: var(--ds-font-heading);
+    text-transform: var(--ds-text-heading-transform);
   }
 }
 
@@ -133,33 +155,55 @@
 
 /* 2 px black ring with offset: focus-visible:focus-ring */
 @utility focus-ring {
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: var(--ds-focus-offset);
+}
+
+/* Role color utilities that do not follow Tailwind's color-name pattern */
+@utility text-emphasis {
+  color: var(--ds-color-text-emphasis);
+}
+@utility text-inverse {
+  color: var(--ds-color-text-inverse);
+}
+@utility text-icon {
+  color: var(--ds-color-icon);
+}
+@utility border-strong {
+  border-color: var(--ds-color-border-strong);
+}
+@utility bg-overlay {
+  background-color: var(--ds-color-overlay);
+}
+
+/* Label style transform role: pair with text-label */
+@utility case-label {
+  text-transform: var(--ds-text-label-transform);
 }
 
 /* Heading styles: look only; the author picks h1-h6. Longhand balance so truncate still works. */
 @utility heading-2xl {
-  @apply font-mono text-display text-ink;
+  @apply font-heading text-display text-ink;
   text-wrap-style: balance;
 }
 @utility heading-xl {
-  @apply font-mono text-h1 text-ink;
+  @apply font-heading text-h1 text-ink;
   text-wrap-style: balance;
 }
 @utility heading-lg {
-  @apply font-mono text-h2 text-ink;
+  @apply font-heading text-h2 text-ink;
   text-wrap-style: balance;
 }
 @utility heading-md {
-  @apply font-mono text-h3 tracking-normal text-ink;
+  @apply font-heading text-h3 tracking-normal text-ink;
   text-wrap-style: balance;
 }
 @utility heading-sm {
-  @apply font-mono text-h4 tracking-normal text-ink;
+  @apply font-heading text-h4 tracking-normal text-ink;
   text-wrap-style: balance;
 }
 @utility heading-xs {
-  @apply font-mono text-h5 tracking-normal text-ink;
+  @apply font-heading text-h5 tracking-normal text-ink;
   text-wrap-style: balance;
 }
 

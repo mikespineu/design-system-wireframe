@@ -11,8 +11,8 @@ describe("Alert", () => {
   });
 
   it.each([
-    ["info", "status", "bg-info-bg", "font-medium", "M12 6.5v2"],
-    ["success", "status", "bg-success-bg", "font-medium", "M7.5 12.5l3 3 6-7"],
+    ["info", "status", "bg-info-bg", "text-ui", "M12 6.5v2"],
+    ["success", "status", "bg-success-bg", "text-ui", "M7.5 12.5l3 3 6-7"],
     ["error", "alert", "bg-error-bg", "font-bold", "M12 3.5l9.5 17h-19z"],
   ] as const)(
     "%s uses role %s with distinct weight and icon",

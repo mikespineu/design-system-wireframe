@@ -12,7 +12,7 @@ describe('Tag', () => {
 
   it.each([
     ['subtle', 'bg-fill'],
-    ['outline', 'border-ink'],
+    ['outline', 'border-strong'],
     ['neutral', 'border-border'],
   ] as const)('applies the %s variant', (variant, cls) => {
     render(<Tag variant={variant} data-testid="t">X</Tag>);

@@ -1,17 +1,18 @@
+@layer ds {
 /* RadioGroup: Radix RadioGroup, tokens only (--ds-*). Spec: docs/specs/RadioGroup.md */
 .ds-radio {
   --ds-radio-box: var(--ds-space-6);
   --ds-radio-dot: var(--ds-space-3);
   --ds-radio-gap: var(--ds-space-3);
   --ds-radio-row: var(--ds-control-height);
-  --ds-radio-line: var(--ds-line-height-lg);
+  --ds-radio-line: var(--ds-text-body-line-height);
   --ds-radio-pad: calc((var(--ds-radio-row) - var(--ds-radio-line)) / 2);
   display: flex;
   align-items: flex-start;
   gap: var(--ds-radio-gap);
   min-height: var(--ds-radio-row);
   cursor: pointer;
-  font-family: var(--ds-font-text);
+  font-family: var(--ds-font-body);
 }
 
 .ds-radio[data-size='sm'] {
@@ -19,7 +20,7 @@
   --ds-radio-dot: var(--ds-space-2);
   --ds-radio-gap: var(--ds-space-2);
   --ds-radio-row: var(--ds-space-8);
-  --ds-radio-line: var(--ds-line-height-md);
+  --ds-radio-line: var(--ds-text-body-sm-line-height);
 }
 
 .ds-radio[data-disabled] {
@@ -36,8 +37,8 @@
   width: var(--ds-radio-box);
   height: var(--ds-radio-box);
   margin-top: calc((var(--ds-radio-row) - var(--ds-radio-box)) / 2);
-  border: var(--ds-border-width-strong) solid var(--ds-color-ink);
-  border-radius: var(--ds-radius-md);
+  border: var(--ds-border-width-strong) solid var(--ds-color-border-strong);
+  border-radius: var(--ds-radius-full);
   background: var(--ds-color-surface);
   cursor: inherit;
   transition: background-color var(--ds-motion), border-color var(--ds-motion);
@@ -47,7 +48,7 @@
   display: block;
   width: var(--ds-radio-dot);
   height: var(--ds-radio-dot);
-  border-radius: var(--ds-radius-md);
+  border-radius: var(--ds-radius-full);
   background: var(--ds-color-primary);
   transition: background-color var(--ds-motion);
 }
@@ -65,7 +66,7 @@
 }
 
 .ds-radio-box:focus-visible {
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: var(--ds-focus-offset);
 }
 
@@ -97,14 +98,14 @@
 
 .ds-radio-label {
   padding-block: var(--ds-radio-pad);
-  color: var(--ds-color-ink);
-  font-size: 1rem;
+  color: var(--ds-color-text-emphasis);
+  font-size: var(--ds-text-body-size);
   line-height: var(--ds-radio-line);
   cursor: inherit;
 }
 
 .ds-radio[data-size='sm'] .ds-radio-label {
-  font-size: 0.9375rem;
+  font-size: var(--ds-text-body-sm-size);
 }
 
 .ds-radio[data-disabled] .ds-radio-label,
@@ -116,8 +117,8 @@
   margin-top: calc(-1 * var(--ds-radio-pad));
   padding-bottom: var(--ds-radio-pad);
   color: var(--ds-color-text-muted);
-  font-size: 0.8125rem;
-  line-height: var(--ds-line-height-sm);
+  font-size: var(--ds-text-caption-size);
+  line-height: var(--ds-text-caption-line-height);
 }
 
 /* Group */
@@ -129,13 +130,13 @@
 }
 
 .ds-radio-group-label {
-  color: var(--ds-color-ink);
-  font-family: var(--ds-font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  line-height: var(--ds-line-height-xs);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: var(--ds-color-text-emphasis);
+  font-family: var(--ds-font-label);
+  font-size: var(--ds-text-label-size);
+  font-weight: var(--ds-text-label-weight);
+  line-height: var(--ds-text-ui-sm-line-height);
+  letter-spacing: var(--ds-text-label-tracking);
+  text-transform: var(--ds-text-label-transform);
 }
 
 .ds-radio-group[data-disabled] .ds-radio-group-label,
@@ -145,8 +146,8 @@
 
 .ds-radio-hint {
   color: var(--ds-color-text-muted);
-  font-size: 0.8125rem;
-  line-height: var(--ds-line-height-sm);
+  font-size: var(--ds-text-caption-size);
+  line-height: var(--ds-text-caption-line-height);
 }
 
 .ds-radio-options {
@@ -165,9 +166,9 @@
   align-items: center;
   gap: var(--ds-space-2);
   color: var(--ds-color-error);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: var(--ds-line-height-sm);
+  font-size: var(--ds-text-caption-size);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: var(--ds-text-caption-line-height);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -175,4 +176,5 @@
   .ds-radio-dot {
     transition: none;
   }
+}
 }

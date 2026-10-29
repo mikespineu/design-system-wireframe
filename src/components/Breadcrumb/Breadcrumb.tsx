@@ -23,7 +23,7 @@ export interface BreadcrumbLinkProps extends AnchorHTMLAttributes<HTMLAnchorElem
 }
 
 const linkClass =
-  'text-muted underline-offset-4 hover:text-ink hover:underline focus-visible:focus-ring';
+  'text-muted underline-offset-4 hover:text-emphasis hover:underline focus-visible:focus-ring';
 
 export const BreadcrumbLink = forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
   ({ asChild = false, className, ...rest }, ref) => {
@@ -38,7 +38,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
     <nav
       aria-label="Breadcrumb"
       ref={ref}
-      className={cx('flex h-control items-center font-mono text-[13px]', className)}
+      className={cx('flex h-control items-center font-label text-caption', className)}
       {...rest}
     >
       <ol className="m-0 flex list-none items-center gap-2 p-0">
@@ -47,7 +47,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
           return (
             <li key={`${item.label}-${i}`} className="flex items-center gap-2">
               {last ? (
-                <span aria-current="page" className="text-ink">
+                <span aria-current="page" className="text-emphasis">
                   {item.label}
                 </span>
               ) : item.href || renderLink ? (

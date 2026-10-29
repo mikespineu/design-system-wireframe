@@ -37,7 +37,7 @@ const FieldLabelContext = createContext<string | null>(null);
 export const useFieldLabelId = () => useContext(FieldLabelContext);
 
 export interface FieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
-  /** Visible label text (rendered uppercase mono). */
+  /** Visible label text (set in the label font, case from the label transform role). */
   label: ReactNode;
   /** Helper text shown under the control. */
   hint?: ReactNode;
@@ -76,7 +76,7 @@ export const Field = ({ label, hint, error, disabled, required, id, className, c
         <Label.Root
           id={`${controlId}-label`}
           htmlFor={controlId}
-          className={cx('font-mono text-label font-medium uppercase', disabled ? 'text-placeholder' : 'text-ink')}
+          className={cx('font-label text-label case-label', disabled ? 'text-placeholder' : 'text-emphasis')}
         >
           {label}
           {required && <span aria-hidden="true"> *</span>}
@@ -119,7 +119,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const inputBase =
-  'box-border h-control w-full rounded-md border border-border bg-surface px-3 font-sans text-body text-ink ' +
+  'box-border h-control w-full rounded-md border border-border bg-surface px-3 font-sans text-body text-emphasis ' +
   'placeholder:text-placeholder transition-colors duration-[120ms] ease-ds focus-visible:focus-ring ' +
   'aria-[invalid=true]:border-2 aria-[invalid=true]:border-error ' +
   'disabled:cursor-not-allowed disabled:border-divider disabled:bg-surface-subtle disabled:text-placeholder';

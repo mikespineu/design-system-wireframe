@@ -1,3 +1,4 @@
+@layer ds {
 /* InfoTip trigger. Tokens only (--ds-*). Spec: docs/specs/InfoTip.md */
 .ds-infotip {
   position: relative;
@@ -25,24 +26,24 @@
 @media (hover: hover) {
   .ds-infotip:hover {
     background: var(--ds-color-fill);
-    color: var(--ds-color-ink);
+    color: var(--ds-color-icon);
   }
 }
 .ds-infotip:focus-visible {
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: var(--ds-focus-offset);
-  color: var(--ds-color-ink);
+  color: var(--ds-color-icon);
 }
 .ds-infotip[data-state='delayed-open'],
 .ds-infotip[data-state='instant-open'],
 .ds-infotip[data-state='open'] {
   background: var(--ds-color-fill);
-  border-color: var(--ds-color-ink);
-  color: var(--ds-color-ink);
+  border-color: var(--ds-color-border-strong);
+  color: var(--ds-color-icon);
 }
 .ds-infotip:active {
-  background: var(--ds-color-ink);
-  border-color: var(--ds-color-ink);
+  background: var(--ds-color-primary);
+  border-color: var(--ds-color-border-strong);
   color: var(--ds-color-primary-contrast);
 }
 @media (pointer: coarse) {
@@ -57,4 +58,5 @@
   .ds-infotip {
     transition: none;
   }
+}
 }

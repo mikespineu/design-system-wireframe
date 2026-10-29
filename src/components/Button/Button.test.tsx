@@ -15,7 +15,7 @@ describe('Button', () => {
   });
 
   it.each([
-    ['secondary', 'border-ink'],
+    ['secondary', 'border-strong'],
     ['ghost', 'underline'],
   ] as const)('applies the %s variant', (variant, cls) => {
     render(<Button variant={variant}>Go</Button>);
@@ -71,7 +71,7 @@ describe('Button', () => {
       </Button>,
     );
     const link = screen.getByRole('link', { name: 'Archive' });
-    expect(link).toHaveClass('border-ink', 'h-control');
+    expect(link).toHaveClass('border-strong', 'h-control');
     expect(link).not.toHaveAttribute('type');
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
