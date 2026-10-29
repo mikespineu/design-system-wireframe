@@ -40,3 +40,8 @@ jobs:
 
       - name: Build library
         run: npm run build
+
+      - name: Verify dist excludes icon libraries
+        run: npx jest src/components/Icon/packaging.test.ts --ci
+        env:
+          REQUIRE_DIST: '1'
