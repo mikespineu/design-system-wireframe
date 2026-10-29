@@ -298,11 +298,11 @@ Each task carries its fields in an indented line, read by the [software factory]
   - done_when:
     - Skill ships with the package
     - Guides choosing raw values, generating the `[data-theme]` block, checking contrast, registering the theme
-- [ ] **DS-11 Consumer docs.** Install and usage guide (import CSS, use components, apply a theme), linked from the README and the Storybook Introduction page.
+- [ ] **DS-11 Consumer docs.** Install and usage guide (import CSS, use components, apply a theme), linked from the README. No Storybook changes.
   - type: docs · has_ui: no · depends_on: DS-1, DS-7 · needs_human: no · status: todo
   - done_when:
     - Install and usage guide covers importing CSS, using components, applying a theme
-    - Linked from the README and the Storybook Introduction page
+    - Linked from the README
 - [x] **DS-25 README — Claude Design & Software Factory.** Create the root `README.md` (the repo has none yet) with two sections. **Claude Design**: how components are designed before they're built: canvases in `docs/design-system-wireframe/*.dc.html`, specs in `docs/specs/<Name>.md`, the design → approved spec → build handoff, and how `--ds-*` tokens connect the design to code. **Software Factory**: how the roadmap works: `roadmap.md` task format, the `/factory:*` skills (`add`, `plan`, `next`, `design`, `build`, `approve`, `status`…), the agent pipeline (planner → designer → builder → QA → reviewer), the hard gates (lint, typecheck, test, Storybook build), job files in `factory/jobs/`, and the steps that need human approval. Also links Storybook and the stack overview so the README reads as one page. Add screenshots to illustrate: the Storybook Introduction page, the factory status page (`/factory:status` / `npm run factory:status`), and one Claude Design canvas. Store them as PNGs in `docs/images/readme/`.
   - type: docs · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
