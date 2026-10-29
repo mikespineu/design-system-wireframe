@@ -1,0 +1,25 @@
+/* ButtonGroup: layout and stacking only; the group draws nothing. Spec: docs/specs/Button.md */
+@layer ds {
+  .ds-button-group {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ds-space-2);
+  }
+
+  .ds-button-group[data-attached] {
+    gap: 0;
+  }
+
+  .ds-button-group[data-attached] > :not(:first-child) {
+    margin-inline-start: calc(-1 * var(--ds-border-width));
+  }
+
+  .ds-button-group[data-attached] > :hover,
+  .ds-button-group[data-attached] > [data-state='on'] {
+    z-index: 1;
+  }
+
+  .ds-button-group > :focus-visible {
+    z-index: 2;
+  }
+}

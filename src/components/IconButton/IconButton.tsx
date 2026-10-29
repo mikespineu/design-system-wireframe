@@ -10,6 +10,7 @@ import { Slot, Toggle } from 'radix-ui';
 import { cx } from '../../lib/cx';
 import { Icon, type IconComponent } from '../Icon';
 import { Spinner } from '../Button/Spinner';
+import { useButtonGroupDisabled } from '../ButtonGroup/context';
 import type { ButtonVariant } from '../Button/Button';
 import './IconButton.css';
 
@@ -74,8 +75,12 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props,
     defaultPressed,
     onPressedChange,
     pressedIcon,
-    ...rest
+    disabled: disabledProp,
+    ...restProps
   } = props;
+  const groupDisabled = useButtonGroupDisabled();
+  const disabled = disabledProp || groupDisabled;
+  const rest = { ...restProps, ...(disabled ? { disabled } : {}) };
 
   const isToggle = pressed !== undefined || defaultPressed !== undefined;
   const [inner, setInner] = useState(defaultPressed ?? false);

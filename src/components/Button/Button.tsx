@@ -3,6 +3,7 @@ import { Slot } from 'radix-ui';
 import { cx } from '../../lib/cx';
 import { Icon, type IconComponent } from '../Icon';
 import { Spinner } from './Spinner';
+import { useButtonGroupDisabled } from '../ButtonGroup/context';
 import './Button.css';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
@@ -45,10 +46,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       type,
       children,
       onClick,
-      ...rest
+      disabled: disabledProp,
+      ...restProps
     },
     ref,
   ) => {
+    const groupDisabled = useButtonGroupDisabled();
+    const disabled = disabledProp || groupDisabled;
+    const rest = { ...restProps, ...(disabled ? { disabled } : {}) };
     const Comp = asChild ? Slot.Root : 'button';
     // `disabled` wins over `loading`: native disabled look, no spinner, no aria-busy.
     const busy = loading && !rest.disabled;
