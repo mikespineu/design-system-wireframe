@@ -197,8 +197,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `leadingIcon` / `trailingIcon` accept any `IconComponent` (tested with `createIcon` and one library from DS-49) and render at the spec size with `aria-hidden`
     - `IconButton` `pressed` sets `aria-pressed` and renders `pressedIcon` when given (heart outline ↔ filled in the story); `aria-label` stays required; no new glyph in `Icon`'s defaults
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-34 ButtonGroup — implementation.** Build `ButtonGroup` in `src/components/ButtonGroup/` that groups `Button` and `IconButton` children (`role="group"`, `aria-label`), attached or spaced, per `docs/specs/Button.md`. Plain buttons in DOM order with native Tab order, no roving focus.
-  - type: build · has_ui: yes · depends_on: DS-32, DS-33 · needs_human: no · status: todo
+- [x] **DS-34 ButtonGroup — implementation.** Build `ButtonGroup` in `src/components/ButtonGroup/` that groups `Button` and `IconButton` children (`role="group"`, `aria-label`), attached or spaced, per `docs/specs/Button.md`. Plain buttons in DOM order with native Tab order, no roving focus.
+  - type: build · has_ui: yes · depends_on: DS-32, DS-33 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state, attached and spaced
     - "Add to cart + Wishlist" story: primary `Button` + secondary heart `IconButton` with pressed toggle
