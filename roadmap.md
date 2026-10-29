@@ -52,8 +52,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Library CSS is in `@layer ds`; an unlayered `[data-theme="x"]` block overrides it regardless of import order (tested)
     - Fonts load only via the opt-in `fonts.css` export; `package.json` `exports` updated
     - "Theming" story shows every role, keyboard story unaffected, `jest-axe` passes in default and dark, token role list exported from `src/index.ts`
-- [ ] **DS-28 createTheme() — implementation.** Typed theme builder in `src/theme/`: `createTheme({ name, brand, neutral?, fonts, radius, shadow, mode })` returns the `[data-theme]` CSS for every role from DS-26. Generates a 50–900 scale from one brand color in OKLCH, derives a dark variant, and `checkContrast(theme)` reports WCAG failures.
-  - type: build · has_ui: no · depends_on: DS-27 · needs_human: no · status: todo
+- [x] **DS-28 createTheme() — implementation.** Typed theme builder in `src/theme/`: `createTheme({ name, brand, neutral?, fonts, radius, shadow, mode })` returns the `[data-theme]` CSS for every role from DS-26. Generates a 50–900 scale from one brand color in OKLCH, derives a dark variant, and `checkContrast(theme)` reports WCAG failures.
+  - type: build · has_ui: no · depends_on: DS-27 · needs_human: no · status: done
   - done_when:
     - `createTheme()` output sets every role in the DS-26 contract; TypeScript rejects unknown keys and invalid values
     - One brand color yields a monotonic 50–900 OKLCH scale (tested on ≥ 3 hues)
