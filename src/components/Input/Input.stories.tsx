@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Field, Input, TextField } from './Input';
+import { lucideIconSet } from '../Icon/librarySources';
 
 /**
  * ## Field API (reuse for Textarea, Select, SearchInput)
@@ -85,6 +86,16 @@ export const AllStates: Story = {
       <TextField label="Email" defaultValue="ada@studio" />
       <TextField label="Email" defaultValue="ada@" error="enter a full email address" />
       <TextField label="Email" disabled placeholder="Unavailable" />
+    </div>
+  ),
+};
+
+/** Default error glyph (top) against a Lucide `errorIcon` (bottom). */
+export const CustomIcons: Story = {
+  render: () => (
+    <div className="flex w-80 flex-col gap-4">
+      <TextField label="Default" error="Required." />
+      <TextField label="Lucide" error="Required." errorIcon={lucideIconSet.alert} />
     </div>
   ),
 };

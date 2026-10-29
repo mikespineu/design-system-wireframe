@@ -330,8 +330,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `useIcon` resolves prop > `IconProvider` > default (unit-tested for all three levels and partial providers)
     - Major changeset with a migration note (`name="x"` → `icon={X}`, `IconButton` `icon`)
     - Story per state, keyboard story for `IconButton`, `jest-axe` test; `Icon`, `IconProvider`, `createIcon`, `useIcon` and `IconComponent` exported from `src/index.ts`
-- [ ] **DS-48 Icon override props in components — implementation.** Add the role-named override props from `docs/specs/Icon.md` to every component that renders an internal icon: Dialog `closeIcon`, Checkbox `checkIcon` / `errorIcon`, Input and Textarea `errorIcon`, Tag `removeIcon`, Alert `icon` (accepts `null`), Slider `decrementIcon` / `incrementIcon` (move its inline SVGs onto default roles).
-  - type: build · has_ui: yes · depends_on: DS-46, DS-47 · needs_human: no · status: todo
+- [x] **DS-48 Icon override props in components — implementation.** Add the role-named override props from `docs/specs/Icon.md` to every component that renders an internal icon: Dialog `closeIcon`, Checkbox `checkIcon` / `errorIcon`, Input and Textarea `errorIcon`, Tag `removeIcon`, Alert `icon` (accepts `null`), Slider `decrementIcon` / `incrementIcon` (move its inline SVGs onto default roles).
+  - type: build · has_ui: yes · depends_on: DS-46, DS-47 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state, with default and overridden icons
     - Each listed component renders its default glyph, the `IconProvider` icon, and the prop icon, and the prop wins over the provider (tested per component)
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-48** Icon override props in components — implementation — https://github.com/mikespineu/design-system-wireframe/pull/89
 - **DS-27** Theme token foundation — implementation — https://github.com/mikespineu/design-system-wireframe/pull/88
 - **DS-47** Icon API & default glyphs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/82
 - **DS-18** Select — implementation — https://github.com/mikespineu/design-system-wireframe/pull/81

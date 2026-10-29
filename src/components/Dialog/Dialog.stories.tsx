@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Dialog, DialogClose } from './Dialog';
 import { Button } from '../Button';
+import { lucideIconSet } from '../Icon/librarySources';
 
 /**
  * Modal panel on Radix `Dialog`. `title` is required; `description` is optional.
@@ -74,4 +75,14 @@ export const KeyboardTrap: Story = {
     await userEvent.tab();
     await expect(body.getByRole('button', { name: 'Close' })).toHaveFocus();
   },
+};
+
+/** Default close glyph (left) against a Lucide `closeIcon` (right). */
+export const CustomIcons: Story = {
+  render: () => (
+    <div className="flex gap-4">
+      <Dialog trigger={<Button>Default close</Button>} title="Default glyph" />
+      <Dialog trigger={<Button>Lucide close</Button>} title="Lucide glyph" closeIcon={lucideIconSet.close} />
+    </div>
+  ),
 };

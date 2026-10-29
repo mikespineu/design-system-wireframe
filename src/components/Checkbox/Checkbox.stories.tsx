@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Checkbox, CheckboxGroup, type CheckedState } from './Checkbox';
+import { lucideIconSet } from '../Icon/librarySources';
 
 /**
  * A square box with the label on its right, built on Radix `Checkbox`.
@@ -122,4 +123,20 @@ export const SelectAll: StoryObj<typeof CheckboxGroup> = {
     await userEvent.click(parent);
     await expect(parent).toHaveAttribute('aria-checked', 'true');
   },
+};
+
+/** Default marks and error glyph (top) against Lucide overrides (bottom). */
+export const CustomIcons: Story = {
+  render: () => (
+    <div className="flex flex-col gap-6">
+      <CheckboxGroup legend="Default" error="Pick one.">
+        <Checkbox label="Checked" defaultChecked />
+        <Checkbox label="Mixed" checked="indeterminate" />
+      </CheckboxGroup>
+      <CheckboxGroup legend="Lucide" error="Pick one." errorIcon={lucideIconSet.alert}>
+        <Checkbox label="Checked" defaultChecked checkIcon={lucideIconSet.check} />
+        <Checkbox label="Mixed" checked="indeterminate" indeterminateIcon={lucideIconSet.minus} />
+      </CheckboxGroup>
+    </div>
+  ),
 };
