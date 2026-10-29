@@ -390,3 +390,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-33** Button icons & loading — implementation — https://github.com/mikespineu/design-system-wireframe/pull/84
 - **DS-34** ButtonGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/86
 - **DS-49** Bring your own icons — docs & library examples — https://github.com/mikespineu/design-system-wireframe/pull/87
+- **DS-11** Consumer docs — https://github.com/mikespineu/design-system-wireframe/pull/92
