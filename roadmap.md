@@ -387,3 +387,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-45** Drawer — implementation — https://github.com/mikespineu/design-system-wireframe/pull/79
 - **DS-38** Typography utilities — implementation — https://github.com/mikespineu/design-system-wireframe/pull/85
 - **DS-33** Button icons & loading — implementation — https://github.com/mikespineu/design-system-wireframe/pull/84
+- **DS-49** Bring your own icons — docs & library examples — https://github.com/mikespineu/design-system-wireframe/pull/87
