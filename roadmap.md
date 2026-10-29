@@ -337,8 +337,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Each listed component renders its default glyph, the `IconProvider` icon, and the prop icon, and the prop wins over the provider (tested per component)
     - Overriding an icon never changes the control's accessible name or size (tested)
     - "Custom icons" story per component (default vs Lucide), keyboard stories still pass, `jest-axe` test per component
-- [ ] **DS-49 Bring your own icons — docs & library examples.** Storybook docs page "Bring your own icons" with live examples for Lucide, Tabler, Phosphor, Heroicons and a custom SVG via `createIcon`, used in `Icon`, `IconButton` and `IconProvider`. The libraries are devDependencies only. Per-library contract tests catch an upgrade that breaks prop forwarding.
-  - type: build · has_ui: yes · depends_on: DS-46, DS-47 · needs_human: no · status: todo
+- [x] **DS-49 Bring your own icons — docs & library examples.** Storybook docs page "Bring your own icons" with live examples for Lucide, Tabler, Phosphor, Heroicons and a custom SVG via `createIcon`, used in `Icon`, `IconButton` and `IconProvider`. The libraries are devDependencies only. Per-library contract tests catch an upgrade that breaks prop forwarding.
+  - type: build · has_ui: yes · depends_on: DS-46, DS-47 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec; `Icon.mdx` explains the contract, `createIcon`, `IconProvider`, override props, sizing and what the wrapper does not normalize (stroke in Phosphor and Heroicons)
     - Stories show each of the 5 sources in `Icon` and `IconButton`, plus one `IconProvider` story that re-skins Dialog, Checkbox and Alert with Lucide
