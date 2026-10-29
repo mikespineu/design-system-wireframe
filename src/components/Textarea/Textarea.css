@@ -1,6 +1,7 @@
+@layer ds {
 /* Textarea: visual twin of Input. Tokens only (--ds-*). Spec: docs/specs/Textarea.md */
 .ds-textarea {
-  --ds-textarea-line: var(--ds-line-height-lg);
+  --ds-textarea-line: var(--ds-text-body-line-height);
   --ds-textarea-chrome: calc(2 * var(--ds-space-2) + 2 * var(--ds-border-width));
   --ds-textarea-min: calc(var(--ds-textarea-rows, 4) * var(--ds-textarea-line) + var(--ds-textarea-chrome));
   box-sizing: border-box;
@@ -12,9 +13,9 @@
   border: var(--ds-border-width) solid var(--ds-color-border);
   border-radius: var(--ds-radius-md);
   background: var(--ds-color-surface);
-  color: var(--ds-color-ink);
-  font-family: var(--ds-font-text);
-  font-size: 1rem;
+  color: var(--ds-color-text-emphasis);
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-body-size);
   line-height: var(--ds-textarea-line);
   overflow-y: auto;
   resize: vertical;
@@ -42,16 +43,16 @@
 }
 
 .ds-textarea:hover:not(:disabled, [readonly], [aria-invalid='true']) {
-  border-color: var(--ds-color-ink);
+  border-color: var(--ds-color-border-strong);
 }
 
 .ds-textarea:focus-visible {
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: var(--ds-focus-offset);
 }
 
 .ds-textarea:focus-visible:not(:disabled, [readonly], [aria-invalid='true']) {
-  border-color: var(--ds-color-ink);
+  border-color: var(--ds-color-border-strong);
 }
 
 .ds-textarea[aria-invalid='true'] {
@@ -85,11 +86,11 @@
   align-items: center;
   justify-content: flex-end;
   gap: 6px;
-  font-family: var(--ds-font-text);
-  font-size: 0.8125rem;
-  line-height: var(--ds-line-height-sm);
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-caption-size);
+  line-height: var(--ds-text-caption-line-height);
   font-variant-numeric: tabular-nums;
-  font-weight: 400;
+  font-weight: var(--ds-font-weight-regular);
   color: var(--ds-color-text-muted);
 }
 
@@ -99,11 +100,12 @@
 
 .ds-textarea-counter[data-state='near'],
 .ds-textarea-counter[data-state='at'] {
-  font-weight: 500;
-  color: var(--ds-color-ink);
+  font-weight: var(--ds-font-weight-medium);
+  color: var(--ds-color-text-emphasis);
 }
 
 .ds-textarea-counter[data-state='over'] {
-  font-weight: 500;
+  font-weight: var(--ds-font-weight-medium);
   color: var(--ds-color-error);
+}
 }

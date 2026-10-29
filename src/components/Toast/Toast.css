@@ -1,3 +1,4 @@
+@layer ds {
 /* Toast: non-modal message on Radix Toast. Tokens only (--ds-*). Spec: docs/specs/Toast.md */
 .ds-toaster {
   position: fixed;
@@ -14,17 +15,17 @@
   max-width: calc(100vw - 2 * var(--ds-space-6));
 }
 .ds-toaster:focus-visible {
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: var(--ds-focus-offset);
 }
 
 .ds-toast {
-  --ds-toast-border-color: var(--ds-color-ink);
+  --ds-toast-border-color: var(--ds-color-border-strong);
   --ds-toast-border-width: var(--ds-border-width);
   --ds-toast-fg: var(--ds-color-info);
   --ds-toast-bg: var(--ds-color-surface);
   --ds-toast-desc: var(--ds-color-text);
-  --ds-toast-title-weight: 500;
+  --ds-toast-title-weight: var(--ds-font-weight-medium);
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
@@ -34,8 +35,8 @@
   padding: calc(var(--ds-space-4) - (var(--ds-toast-border-width) - var(--ds-border-width)));
   background: var(--ds-toast-bg);
   border: var(--ds-toast-border-width) solid var(--ds-toast-border-color);
-  border-radius: var(--ds-radius-md);
-  box-shadow: none;
+  border-radius: var(--ds-radius-lg);
+  box-shadow: var(--ds-shadow-md);
   color: var(--ds-toast-fg);
 }
 .ds-toast[data-severity='success'] {
@@ -49,10 +50,10 @@
   --ds-toast-fg: var(--ds-color-error);
   --ds-toast-bg: var(--ds-color-error-bg);
   --ds-toast-desc: var(--ds-color-text-strong);
-  --ds-toast-title-weight: 700;
+  --ds-toast-title-weight: var(--ds-font-weight-bold);
 }
 .ds-toast:focus-visible {
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: var(--ds-focus-offset);
 }
 
@@ -67,18 +68,18 @@
 }
 .ds-toast-title {
   margin: 0;
-  font-family: var(--ds-font-mono);
-  font-size: 14px;
-  line-height: var(--ds-line-height-sm);
+  font-family: var(--ds-font-label);
+  font-size: var(--ds-text-ui-size);
+  line-height: var(--ds-text-ui-line-height);
   font-weight: var(--ds-toast-title-weight);
   color: var(--ds-toast-fg);
   overflow-wrap: anywhere;
 }
 .ds-toast-description {
   margin: 0;
-  font-family: var(--ds-font-text);
-  font-size: 14px;
-  line-height: var(--ds-line-height-sm);
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-body-xs-size);
+  line-height: var(--ds-text-ui-line-height);
   color: var(--ds-toast-desc);
   overflow-wrap: anywhere;
 }
@@ -92,27 +93,27 @@
   justify-content: center;
   width: var(--ds-space-8);
   height: var(--ds-space-8);
-  margin: calc((var(--ds-space-8) - var(--ds-line-height-sm)) / -2) calc(-1 * var(--ds-space-2));
+  margin: calc((var(--ds-space-8) - var(--ds-text-ui-line-height)) / -2) calc(-1 * var(--ds-space-2));
   padding: 0;
   border: var(--ds-border-width) solid transparent;
-  border-radius: var(--ds-radius-md);
+  border-radius: var(--ds-radius-sm);
   background: transparent;
-  color: var(--ds-color-ink);
+  color: var(--ds-color-icon);
   cursor: pointer;
   transition: background-color var(--ds-motion), border-color var(--ds-motion), color var(--ds-motion);
 }
 .ds-toast-close:hover {
   background: var(--ds-color-surface);
-  border-color: var(--ds-color-ink);
+  border-color: var(--ds-color-border-strong);
 }
 .ds-toast-close:focus-visible {
-  border-color: var(--ds-color-ink);
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  border-color: var(--ds-color-border-strong);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: var(--ds-focus-offset);
 }
 .ds-toast-close:active {
-  background: var(--ds-color-ink);
-  border-color: var(--ds-color-ink);
+  background: var(--ds-color-primary);
+  border-color: var(--ds-color-border-strong);
   color: var(--ds-color-primary-contrast);
 }
 
@@ -156,4 +157,5 @@
     max-width: none;
   }
   .ds-toast { width: 100%; }
+}
 }

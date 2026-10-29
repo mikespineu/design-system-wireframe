@@ -1,3 +1,4 @@
+@layer ds {
 /* ChoiceGroup (internal base of SegmentedControl / TileGroup). Spec: docs/specs/Toggle.md */
 .ds-choice {
   --ds-choice-row: var(--ds-control-height);
@@ -6,7 +7,7 @@
   align-items: center;
   gap: var(--ds-choice-label-gap);
   min-height: var(--ds-choice-row);
-  font-family: var(--ds-font-text);
+  font-family: var(--ds-font-body);
 }
 
 .ds-choice[data-size='sm'] {
@@ -28,19 +29,19 @@
 }
 
 .ds-choice-label {
-  color: var(--ds-color-ink);
-  font-family: var(--ds-font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: var(--ds-color-text-emphasis);
+  font-family: var(--ds-font-label);
+  font-size: var(--ds-text-label-size);
+  font-weight: var(--ds-text-label-weight);
+  line-height: var(--ds-text-label-line-height);
+  letter-spacing: var(--ds-text-label-tracking);
+  text-transform: var(--ds-text-label-transform);
 }
 
 .ds-choice-hint {
   color: var(--ds-color-text-muted);
-  font-size: 0.8125rem;
-  line-height: 20px;
+  font-size: var(--ds-text-caption-size);
+  line-height: var(--ds-text-caption-line-height);
 }
 
 .ds-choice[data-disabled] .ds-choice-label,
@@ -116,8 +117,8 @@
   position: relative;
   flex: none;
   cursor: pointer;
-  font-family: var(--ds-font-text);
-  font-weight: 500;
+  font-family: var(--ds-font-body);
+  font-weight: var(--ds-font-weight-medium);
   white-space: nowrap;
   transition: background-color var(--ds-motion), border-color var(--ds-motion), color var(--ds-motion);
 }
@@ -128,7 +129,7 @@
 
 .ds-choice-item:focus-visible {
   z-index: 1;
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: var(--ds-focus-offset);
 }
 
@@ -136,4 +137,5 @@
   .ds-choice-item {
     transition: none;
   }
+}
 }

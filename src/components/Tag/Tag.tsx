@@ -16,12 +16,12 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   removeLabel?: string;
 }
 
-const base = 'inline-flex items-center font-mono text-xs';
+const base = 'inline-flex items-center rounded-sm font-label text-ui-sm font-normal';
 
 const variants: Record<TagVariant, string> = {
   solid: 'border border-transparent bg-primary text-primary-contrast',
   subtle: 'border border-transparent bg-fill text-text-strong',
-  outline: 'border border-ink bg-transparent text-ink',
+  outline: 'border border-strong bg-transparent text-emphasis',
   neutral: 'border border-border bg-transparent text-text-strong',
 };
 
@@ -66,7 +66,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(({ count, className
   <span
     ref={ref}
     className={cx(
-      'box-border inline-flex h-5.5 min-w-5.5 items-center justify-center bg-primary px-1.5 font-mono text-[11px] font-medium text-primary-contrast',
+      'box-border inline-flex h-5.5 rounded-full min-w-5.5 items-center justify-center bg-primary px-1.5 font-label text-ui-xs font-medium text-primary-contrast',
       className,
     )}
     {...rest}

@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
     "factory:status": "node factory/plugin/skills/status/scripts/status-page.mjs --watch 10 --open",
-    "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json && node -e \"require('fs').copyFileSync('src/styles/fonts.css','dist/fonts.css')\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "npm run build && changeset publish"
@@ -76,6 +76,7 @@
       "default": "./dist/index.js"
     },
     "./styles.css": "./dist/styles.css",
+    "./fonts.css": "./dist/fonts.css",
     "./package.json": "./package.json"
   },
   "files": [

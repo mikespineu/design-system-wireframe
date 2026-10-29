@@ -44,8 +44,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Spec defines the dark-mode role set with a contrast ratio for every text/background pair (≥ 4.5:1 text, ≥ 3:1 UI)
     - Canvas shows each knob (brand color, fonts, type scale, radius, shadow, dark) changing the same set of components
     - New raw values listed under Token requests for approval
-- [ ] **DS-27 Theme token foundation — implementation.** Implement the approved token contract in `src/styles/tokens.css` and move every component onto role tokens only. Wrap library CSS in `@layer ds` so consumer overrides always win, and ship the default fonts as an opt-in `fonts.css` instead of bundling them.
-  - type: build · has_ui: yes · depends_on: DS-26 · needs_human: no · status: todo
+- [x] **DS-27 Theme token foundation — implementation.** Implement the approved token contract in `src/styles/tokens.css` and move every component onto role tokens only. Wrap library CSS in `@layer ds` so consumer overrides always win, and ship the default fonts as an opt-in `fonts.css` instead of bundling them.
+  - type: build · has_ui: yes · depends_on: DS-26 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state; the default theme looks unchanged in every existing story
     - A test fails if component CSS or classes use palette tokens or hardcoded font-size, font-weight, letter-spacing, text-transform or box-shadow
@@ -197,8 +197,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `leadingIcon` / `trailingIcon` accept any `IconComponent` (tested with `createIcon` and one library from DS-49) and render at the spec size with `aria-hidden`
     - `IconButton` `pressed` sets `aria-pressed` and renders `pressedIcon` when given (heart outline ↔ filled in the story); `aria-label` stays required; no new glyph in `Icon`'s defaults
     - Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`
-- [ ] **DS-34 ButtonGroup — implementation.** Build `ButtonGroup` in `src/components/ButtonGroup/` that groups `Button` and `IconButton` children (`role="group"`, `aria-label`), attached or spaced, per `docs/specs/Button.md`. Plain buttons in DOM order with native Tab order, no roving focus.
-  - type: build · has_ui: yes · depends_on: DS-32, DS-33 · needs_human: no · status: todo
+- [x] **DS-34 ButtonGroup — implementation.** Build `ButtonGroup` in `src/components/ButtonGroup/` that groups `Button` and `IconButton` children (`role="group"`, `aria-label`), attached or spaced, per `docs/specs/Button.md`. Plain buttons in DOM order with native Tab order, no roving focus.
+  - type: build · has_ui: yes · depends_on: DS-32, DS-33 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state, attached and spaced
     - "Add to cart + Wishlist" story: primary `Button` + secondary heart `IconButton` with pressed toggle
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-27** Theme token foundation — implementation — https://github.com/mikespineu/design-system-wireframe/pull/88
 - **DS-47** Icon API & default glyphs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/82
 - **DS-18** Select — implementation — https://github.com/mikespineu/design-system-wireframe/pull/81
 - **DS-43** InfoTip — implementation — https://github.com/mikespineu/design-system-wireframe/pull/80
@@ -387,4 +388,5 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-45** Drawer — implementation — https://github.com/mikespineu/design-system-wireframe/pull/79
 - **DS-38** Typography utilities — implementation — https://github.com/mikespineu/design-system-wireframe/pull/85
 - **DS-33** Button icons & loading — implementation — https://github.com/mikespineu/design-system-wireframe/pull/84
+- **DS-34** ButtonGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/86
 - **DS-49** Bring your own icons — docs & library examples — https://github.com/mikespineu/design-system-wireframe/pull/87

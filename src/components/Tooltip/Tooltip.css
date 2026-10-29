@@ -1,3 +1,4 @@
+@layer ds {
 /* Tooltip: short text hint on Radix Tooltip. Tokens only (--ds-*). Spec: docs/specs/InfoTip.md */
 .ds-tooltip {
   /* Component-local until --ds-tooltip-max-width / --ds-z-tooltip exist. Dialog.css uses 50 / 51. */
@@ -8,13 +9,13 @@
   max-width: min(var(--ds-tooltip-max-width), var(--radix-tooltip-content-available-width));
   padding: var(--ds-space-1) var(--ds-space-2);
   background: var(--ds-color-inverse);
-  color: var(--ds-color-primary-contrast);
-  border-radius: var(--ds-radius-md);
-  box-shadow: none;
-  font-family: var(--ds-font-text);
-  font-weight: 400;
-  font-size: 13px;
-  line-height: var(--ds-line-height-sm);
+  color: var(--ds-color-text-inverse);
+  border-radius: var(--ds-radius-sm);
+  box-shadow: var(--ds-shadow-md);
+  font-family: var(--ds-font-body);
+  font-weight: var(--ds-font-weight-regular);
+  font-size: var(--ds-text-caption-size);
+  line-height: var(--ds-text-caption-line-height);
   text-align: left;
   overflow-wrap: break-word;
 }
@@ -27,4 +28,5 @@
 @keyframes ds-tooltip-out { from { opacity: 1; } to { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
   .ds-tooltip[data-state] { animation: none; }
+}
 }
