@@ -25,3 +25,39 @@ describe('QA expanded pair checks', () => {
       expect(names).toContain(`color-placeholder/${g}`)
   })
 })
+
+describe('QA sweep', () => {
+  const hex = (h: number, l: number, s: number) => {
+    const a = s * Math.min(l, 1 - l)
+    const f = (n: number) => {
+      const k = (n + h / 30) % 12
+      const v = l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1))
+      return Math.round(v * 255).toString(16).padStart(2, '0')
+    }
+    return `#${f(0)}${f(8)}${f(4)}`
+  }
+  it('sweeps hues/levels/neutrals/modes: no failures, monotonic scale', () => {
+    const neutrals = [undefined, '#336699', '#ff00ff', '#808080', '#00ff00', '#ffff00', '#a0522d', '#000000', '#ffffff']
+    const fails: string[] = []
+    let n = 0
+    for (let h = 0; h < 360; h += 15) {
+      for (const l of [0.05, 0.15, 0.3, 0.5, 0.7, 0.85, 0.95]) {
+        for (const s of [0.1, 0.5, 1]) {
+          const b = hex(h, l, s)
+          for (const nh of neutrals) {
+            for (const mode of ['light', 'dark', 'both'] as const) {
+              n++
+              const t = createTheme(cfg(b, mode, nh))
+              const rep = checkContrast(t)
+              if (rep.failures.length) fails.push(`${b}/${nh}/${mode}: ${rep.failures.map((f) => `${f.foreground}/${f.background}`).join(',')}`)
+              const ls = Object.values(t.scale).map((e) => e.l)
+              for (let i = 1; i < ls.length; i++) if (!(ls[i]! < ls[i - 1]!)) fails.push(`${b} scale non-monotonic`)
+            }
+          }
+        }
+      }
+    }
+    expect(n).toBeGreaterThan(500)
+    expect(fails.slice(0, 20)).toEqual([])
+  })
+})
