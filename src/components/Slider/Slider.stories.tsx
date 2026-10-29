@@ -2,6 +2,7 @@ import { useState, type ComponentType, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Slider, SliderField as SliderFieldTyped, type SliderOwnProps } from './Slider';
+import { lucideIconSet } from '../Icon/librarySources';
 
 /** Stories pass loose props so one `args` object can cover both scale modes; the real component keeps the strict union. */
 type StoryProps = SliderOwnProps & {
@@ -142,4 +143,14 @@ export const InputSnapping: Story = {
     await userEvent.type(input, '120{Enter}');
     await expect(input).toHaveValue('10');
   },
+};
+
+/** Default stepper glyphs (top) against Lucide overrides (bottom). */
+export const CustomIcons: Story = {
+  render: () => (
+    <div className="flex w-80 flex-col gap-6">
+      <SliderField label="Default" stepper defaultValue={5} min={0} max={10} />
+      <SliderField label="Lucide" stepper defaultValue={5} min={0} max={10} decrementIcon={lucideIconSet.minus} incrementIcon={lucideIconSet.plus} />
+    </div>
+  ),
 };

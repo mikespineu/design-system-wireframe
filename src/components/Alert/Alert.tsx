@@ -1,7 +1,8 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cx } from "../../lib/cx";
-import { RoleIcon } from "../Icon/RoleIcon";
-import type { IconRole } from "../Icon";
+import { Icon } from "../Icon/Icon";
+import type { IconComponent, IconRole } from "../Icon";
+import { useIcon } from "../Icon";
 
 export type AlertSeverity = "info" | "success" | "error";
 
@@ -13,6 +14,8 @@ export interface AlertProps extends Omit<
   title: ReactNode;
   /** Body text. */
   children?: ReactNode;
+  /** Replaces the severity glyph for this instance. `null` hides it. */
+  icon?: IconComponent | null;
 }
 
 /** Colors come from the Foundations/Colors/Status tokens. Severity is also shown by border weight, icon and title weight, never by hue alone. */
@@ -54,8 +57,9 @@ const config: Record<
 };
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ severity = "info", title, children, className, ...rest }, ref) => {
+  ({ severity = "info", title, children, className, icon, ...rest }, ref) => {
     const c = config[severity];
+    const Glyph = useIcon(c.icon, icon);
     return (
       <div
         ref={ref}
@@ -64,7 +68,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         className={cx("flex gap-3 rounded-lg p-4", c.box, className)}
         {...rest}
       >
-        <RoleIcon role={c.icon} size="lg" strokeWidth={c.strokeWidth} className="flex-none" />
+        {Glyph && <Icon icon={Glyph} size="lg" strokeWidth={c.strokeWidth} className="flex-none" />}
         <div className="flex flex-col gap-1">
           <strong className={cx("font-label text-ui", c.titleWeight)}>
             {title}

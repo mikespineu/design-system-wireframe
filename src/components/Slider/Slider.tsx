@@ -13,6 +13,7 @@ import {
 } from 'react';
 import { Slider as RadixSlider } from 'radix-ui';
 import { RoleIcon } from '../Icon/RoleIcon';
+import type { IconComponent } from '../Icon';
 import { cx } from '../../lib/cx';
 import { Field, Input, useFieldControl, useFieldLabelId } from '../Input';
 import {
@@ -59,6 +60,10 @@ export interface SliderOwnProps {
   marks?: SliderMarks;
   /** Minus / plus buttons riding with a value pill. */
   stepper?: boolean;
+  /** Replaces the decrement glyph (prop > IconProvider > default). */
+  decrementIcon?: IconComponent;
+  /** Replaces the increment glyph. */
+  incrementIcon?: IconComponent;
   /** Appended to displayed values, e.g. `%`, `cm`. */
   unit?: string;
   /** Labels, bubble, pill and aria-valuetext. Overrides the unit rule. */
@@ -81,6 +86,8 @@ export type SliderFieldProps = SliderProps & {
   label: ReactNode;
   hint?: ReactNode;
   error?: ReactNode;
+  /** Replaces the glyph beside the error message. */
+  errorIcon?: IconComponent;
   required?: boolean;
   /** Class for the Field wrapper; `className` goes to the slider. */
   fieldClassName?: string;
@@ -147,6 +154,8 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
     size = 'md',
     marks,
     stepper = false,
+    decrementIcon,
+    incrementIcon,
     unit,
     formatValue,
     invalid,
@@ -416,7 +425,7 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProp
         {...(dir2 === -1 ? buttonNaming(verbDownId, 'Decrease') : buttonNaming(verbUpId, 'Increase'))}
         onClick={() => stepBy(dir2)}
       >
-        <RoleIcon role={dir2 === -1 ? 'minus' : 'plus'} size={size === 'sm' ? 'sm' : 'md'} />
+        <RoleIcon role={dir2 === -1 ? 'minus' : 'plus'} size={size === 'sm' ? 'sm' : 'md'} override={dir2 === -1 ? decrementIcon : incrementIcon} />
       </button>
     );
   };
@@ -597,9 +606,9 @@ Slider.displayName = 'Slider';
 
 /** Field + Slider in one. */
 export const SliderField = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderFieldProps>((props, ref) => {
-  const { label, hint, error, required, fieldClassName, id, disabled, ...rest } = props;
+  const { label, hint, error, errorIcon, required, fieldClassName, id, disabled, ...rest } = props;
   return (
-    <Field label={label} hint={hint} error={error} id={id} disabled={disabled} required={required} className={fieldClassName}>
+    <Field label={label} hint={hint} error={error} errorIcon={errorIcon} id={id} disabled={disabled} required={required} className={fieldClassName}>
       <Slider ref={ref} {...(rest as SliderProps)} />
     </Field>
   );
