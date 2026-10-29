@@ -20,14 +20,14 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Current Wireframe tokens are registered as the `default` theme in `src/styles/tokens.css`
     - Components read only semantic `--ds-*` roles; no component changes
     - Existing stories and tests pass unchanged
-- [ ] **DS-2 Example themes — design.** Design two example themes on top of the DS-26 token contract to prove a consumer can change the whole look: `soft` (brand hue, rounded corners, soft shadows, a sans heading font) and `dark` (dark mode of the default Wireframe theme). The current gray Wireframe stays as `default`.
+- [ ] **DS-2 Example themes — design.** Design themes on top of the DS-26 token contract to prove a consumer can change the whole look: `dark` (dark mode of the default Wireframe theme, refining the DS-27 `[data-theme="dark"]` values), and a new theme `bold` in light and dark (`bold`, `bold-dark`) that looks completely different from Wireframe: its own brand hue, font families (heading, body, mono), type scale, letter-spacing and transform, radius, shadows and density. `bold` must not be a black/white/gray theme: it uses a saturated brand color and tinted (non-gray) neutrals in both light and dark. The current gray Wireframe stays as `default`.
   - type: design · has_ui: yes · depends_on: DS-26 · needs_human: yes · status: todo
   - done_when:
-    - Canvas shows `default`, `soft` and `dark` side by side on the same set of existing components
-    - Spec `docs/specs/Themes.md` lists every role from the DS-26 contract with its value in `soft` and `dark`
-    - Spec gives the contrast ratio for every text/background and UI pair in both themes (≥ 4.5:1 text, ≥ 3:1 UI)
+    - Canvas shows `default`, `dark`, `bold` and `bold-dark` side by side on the same set of existing components
+    - Spec `docs/specs/Themes.md` lists every role from the DS-26 contract with its value in `dark`, `bold` and `bold-dark`; `bold` changes every role group (color, fonts, type scale, radius, shadow) and uses a saturated brand hue with tinted, non-gray neutrals
+    - Spec gives the contrast ratio for every text/background and UI pair in all three themes (≥ 4.5:1 text, ≥ 3:1 UI)
     - Spec gives the `createTheme()` input for each theme (brand color, fonts, radius, shadow, mode)
-    - New raw values listed under Token requests for approval
+    - New raw values and font families listed under Token requests for approval
 - [ ] **DS-12 Example themes — implementation.** Ship the approved `soft` and `dark` themes, built with `createTheme()` from their spec inputs, as opt-in CSS exports, plus a Storybook toolbar theme switcher.
   - type: build · has_ui: yes · depends_on: DS-2, DS-28 · needs_human: no · status: todo
   - done_when:
