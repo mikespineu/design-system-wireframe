@@ -346,6 +346,90 @@ Each task carries its fields in an indented line, read by the [software factory]
     - The 5 libraries are in `devDependencies` only; `npm run build` output does not include them (tested on `dist/`)
     - `jest-axe` test on every example story
 
+### Epic: Claude Marketplace
+
+- [ ] **DS-50 Consumer plugin — scope & layout decision.** Write `docs/specs/ClaudePlugin.md` recording the decided scope: a consumer Claude Code plugin with a component-usage skill, the theme skill (DS-10), a UI-review subagent and an MCP server; its own marketplace, separate from `factory`; and a submission to the official Anthropic marketplace. Define the plugin name, the scoped npm package name, folder layout and version policy.
+  - type: docs · has_ui: no · depends_on: – · needs_human: yes · status: todo
+  - done_when:
+    - Spec lists every skill, agent and MCP tool with a one-line purpose
+    - Defines the separate marketplace (name, location) and keeps `factory` out of it; decides the scoped npm package name
+    - Defines the version policy (plugin version synced to the npm version through Changesets)
+    - Lists the Anthropic marketplace submission requirements, with links
+    - Approved by the user
+- [ ] **DS-51 Generated design-system manifest.** Script run in `npm run build` that writes `dist/manifest.json`: every component exported from `src/index.ts` with its props (from the TS types), spec path and Radix primitive, and every `--ds-*` role from `tokens.css`. Exported as `./manifest.json`.
+  - type: build · has_ui: no · depends_on: DS-50 · needs_human: no · status: todo
+  - done_when:
+    - Manifest lists every component exported from `src/index.ts`; a test fails on drift
+    - Lists every `--ds-*` role with its default value
+    - `package.json` exports include `./manifest.json`
+    - Generator tested, coverage ≥ 80 %
+- [ ] **DS-52 Plugin scaffold & marketplace entry.** Create the consumer plugin and its own marketplace per DS-50, with `plugin.json` (name, version, description, author, homepage, keywords), plus a CI job that validates both manifests.
+  - type: infra · has_ui: no · depends_on: DS-50 · needs_human: no · status: todo
+  - done_when:
+    - Plugin folder has `.claude-plugin/plugin.json` with the required fields
+    - The separate marketplace lists only the consumer plugin; `factory` is not in it
+    - `/plugin marketplace add` and `/plugin install` work from a local path (documented manual check)
+    - CI validates `marketplace.json` and `plugin.json`
+- [ ] **DS-53 Component-usage skill.** Given a UI need, the skill picks components from the manifest and shows correct imports (CSS + components), Field wiring, custom icons and a11y rules. It replaces hardcoded colors with `--ds-*` roles.
+  - type: build · has_ui: no · depends_on: DS-51, DS-52 · needs_human: no · status: todo
+  - done_when:
+    - `SKILL.md` reads `manifest.json` instead of hardcoding a component list
+    - Covers install, CSS imports, theming, `Field`/`useFieldControl` and `IconProvider`
+    - 3 worked examples (form, dialog flow, toast) typecheck against the published API (tested)
+- [ ] **DS-54 UI-review subagent.** Plugin agent that reviews a consumer's UI code for design-system misuse: hardcoded colors or spacing, hand-rolled primitives the DS already ships, missing labels, wrong Field wiring.
+  - type: build · has_ui: no · depends_on: DS-51, DS-52 · needs_human: no · status: todo
+  - done_when:
+    - `agents/<name>.md` reads `manifest.json` to know the components and roles
+    - Reports findings as `file:line` with a rule and a fix
+    - Fixture tests: a bad sample gets each rule flagged, a clean sample gets no findings
+- [ ] **DS-55 Design-system MCP server.** Bundled MCP server in the plugin that serves the manifest and the consumer's saved theme: `list_components`, `get_component` (props, spec, example), `list_tokens`, `search` (by need), `get_theme` and `save_theme` (read and write `ds.theme.json`). Registered in `plugin.json`.
+  - type: build · has_ui: no · depends_on: DS-51, DS-52, DS-60 · needs_human: no · status: todo
+  - done_when:
+    - Server starts from the plugin config with no extra install step
+    - The manifest tools return data from `manifest.json` (tested per tool)
+    - `save_theme` writes a schema-valid `ds.theme.json`; `get_theme` reads it back (tested)
+    - Unknown component or token returns a clear error (tested)
+    - Coverage ≥ 80 %
+- [ ] **DS-56 Plugin install docs & version sync.** Add "Use with Claude Code" to the consumer docs (npm install, marketplace add, plugin install, what each skill/agent/MCP tool does) and make the release step bump the plugin version with the package.
+  - type: docs · has_ui: no · depends_on: DS-11, DS-52, DS-59 · needs_human: no · status: todo
+  - done_when:
+    - Consumer docs have a "Use with Claude Code" section with the `npm install` command and exact `/plugin` commands
+    - README links to it
+    - Release updates `plugin.json` version to match `package.json` (tested script or Changesets hook)
+- [ ] **DS-57 Submit to the Anthropic plugin marketplace.** Prepare the listing (description, preview image from the All components canvas, links) and submit the consumer plugin to the official Anthropic marketplace.
+  - type: docs · has_ui: no · depends_on: DS-53, DS-54, DS-55, DS-56, DS-58, DS-59, DS-61 · needs_human: yes · status: todo
+  - done_when:
+    - Listing meets every submission requirement listed in DS-50
+    - Submission sent by the user; link or reference recorded in the job file
+- [ ] **DS-58 Canvas audit & All components canvas.** Audit every `docs/design-system-wireframe/*.dc.html` against `src/components` and `tokens.css`. Add `AllComponents.dc.html` showing every shipped component in its key states with current role tokens. Keep the per-component boards. Delete `Components.dc.html` (it shows the unbuilt Cards and Table).
+  - type: docs · has_ui: no · depends_on: – · needs_human: yes · status: todo
+  - done_when:
+    - Canvas README has an audit table: board → shipped component(s), stale items, keep/fix
+    - `AllComponents.dc.html` shows every component exported from `src/index.ts` and nothing unshipped
+    - `Components.dc.html` removed; README Files table and `canvas.json` list every remaining board
+    - `Main.dc.html` foundations match the DS-27 role tokens, or mismatches are flagged
+- [ ] **DS-59 First npm release.** Rename the package to the scoped name decided in DS-50 (`design-system-test` is taken on npm), set up the npm trusted publisher, and publish the first version through the DS-9 pipeline with provenance.
+  - type: infra · has_ui: no · depends_on: DS-50 · needs_human: yes · status: todo
+  - done_when:
+    - `package.json` `name` is the scoped name; imports in docs and stories updated
+    - npm trusted publishing (OIDC) configured for the repo (by the user)
+    - First version published with provenance; `npm view <name>` shows it
+    - Changelog entry for the release
+- [ ] **DS-60 Saved consumer theme (theme file + CLI).** A consumer keeps their tokens in one file in their own repo, `ds.theme.json` (the `createTheme()` input: brand, neutral, fonts, radius, shadow, mode). `npx <pkg> theme build` validates it, runs `checkContrast()`, and writes `theme.css` with the `[data-theme]` block. The theme skill (DS-10) and the MCP server (DS-55) read and write this same file.
+  - type: build · has_ui: no · depends_on: DS-28, DS-59 · needs_human: no · status: todo
+  - done_when:
+    - JSON schema for `ds.theme.json`, published in the package (tested)
+    - `theme build` writes `theme.css`; exits non-zero with the failing pairs when contrast fails (tested)
+    - Rebuilding from the same file gives identical CSS (tested)
+    - Coverage ≥ 80 %
+- [ ] **DS-61 React starter (ready to use).** `examples/vite-react` app that installs the published package, imports CSS, loads a saved `ds.theme.json` theme and renders a form, a dialog and a toast. CI installs the packed tarball into it and builds it, so a broken release is caught before publish.
+  - type: build · has_ui: no · depends_on: DS-60 · needs_human: no · status: todo
+  - done_when:
+    - `examples/vite-react` builds and runs with the package from `npm pack`
+    - Uses a custom theme from `ds.theme.json`, not the default
+    - CI job builds the example on every PR
+    - Consumer docs link to it as the quick start
+
 ## Done
 
 - **DS-48** Icon override props in components — implementation — https://github.com/mikespineu/design-system-wireframe/pull/89
