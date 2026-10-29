@@ -1,3 +1,4 @@
+@layer ds {
 /* TileGroup look. Layout, scroll and fade come from ../ChoiceGroup/ChoiceGroup.css. Spec: docs/specs/Toggle.md */
 .ds-choice-control[data-variant='tile'] {
   --ds-tile-min-width: var(--ds-space-24);
@@ -37,8 +38,8 @@
   border-radius: var(--ds-radius-md);
   background: var(--ds-color-fill);
   color: var(--ds-color-text);
-  font-size: 0.8125rem;
-  line-height: 20px;
+  font-size: var(--ds-text-caption-size);
+  line-height: var(--ds-text-caption-line-height);
 }
 
 .ds-tile-icon {
@@ -59,13 +60,13 @@
 
 .ds-choice-control[data-variant='tile'] .ds-choice-item:is([data-state='unchecked'], [data-state='inactive']):not([data-disabled]):hover {
   background: var(--ds-color-divider); /* gray-200 */
-  color: var(--ds-color-ink);
+  color: var(--ds-color-text-emphasis);
 }
 
 .ds-choice-control[data-variant='tile'] .ds-choice-item:is([data-state='checked'], [data-state='active']) {
-  border-color: var(--ds-color-ink);
+  border-color: var(--ds-color-border-strong);
   background: var(--ds-color-surface);
-  color: var(--ds-color-ink);
+  color: var(--ds-color-text-emphasis);
 }
 
 .ds-choice-control[data-variant='tile'] .ds-choice-item[data-disabled] {
@@ -80,4 +81,5 @@
 .ds-choice-control[data-variant='tile'][data-disabled] .ds-choice-item:is([data-state='checked'], [data-state='active']) {
   border-color: var(--ds-color-disabled);
   background: var(--ds-color-surface);
+}
 }

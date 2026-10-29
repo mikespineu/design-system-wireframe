@@ -1,3 +1,4 @@
+@layer ds {
 /* Popover: non-modal panel on Radix Popover. Tokens only (--ds-*). Spec: docs/specs/InfoTip.md */
 .ds-popover {
   /* Component-local until --ds-popover-max-width / --ds-z-popover exist. Dialog.css uses 50 / 51. */
@@ -12,13 +13,13 @@
   max-height: var(--radix-popover-content-available-height);
   padding: var(--ds-space-4);
   background: var(--ds-color-surface);
-  border: var(--ds-border-width) solid var(--ds-color-ink);
-  border-radius: var(--ds-radius-md);
-  box-shadow: none;
+  border: var(--ds-border-width) solid var(--ds-color-border-strong);
+  border-radius: var(--ds-radius-lg);
+  box-shadow: var(--ds-shadow-md);
   outline: none;
-  font-family: var(--ds-font-text);
-  font-size: 1rem;
-  line-height: var(--ds-line-height-lg);
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-text-body-size);
+  line-height: var(--ds-text-body-line-height);
   color: var(--ds-color-text);
 }
 .ds-popover[data-state='open'] { animation: ds-popover-in var(--ds-motion) both; }
@@ -33,11 +34,12 @@
 .ds-popover-title {
   flex: none;
   margin: 0 0 var(--ds-space-2);
-  font-family: var(--ds-font-mono);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: var(--ds-line-height-md);
-  color: var(--ds-color-ink);
+  font-family: var(--ds-font-heading);
+  font-weight: var(--ds-text-heading-weight);
+  font-size: var(--ds-text-body-size);
+  line-height: var(--ds-text-body-sm-line-height);
+  text-transform: var(--ds-text-heading-transform);
+  color: var(--ds-color-text-emphasis);
 }
 .ds-popover-body {
   flex: 1 1 auto;
@@ -61,20 +63,20 @@
   height: var(--ds-space-8);
   padding: 0;
   border: var(--ds-border-width) solid transparent;
-  border-radius: var(--ds-radius-md);
+  border-radius: var(--ds-radius-sm);
   background: var(--ds-color-surface);
-  color: var(--ds-color-ink);
+  color: var(--ds-color-icon);
   cursor: pointer;
   transition: background-color var(--ds-motion), color var(--ds-motion);
 }
 .ds-popover-close:hover { background: var(--ds-color-fill); }
 .ds-popover-close:focus-visible {
-  border-color: var(--ds-color-ink);
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  border-color: var(--ds-color-border-strong);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: var(--ds-focus-offset);
 }
 .ds-popover-close:active {
-  background: var(--ds-color-ink);
+  background: var(--ds-color-primary);
   color: var(--ds-color-primary-contrast);
 }
 
@@ -86,11 +88,12 @@
 .ds-popover-arrow-fill { fill: var(--ds-color-surface); stroke: none; }
 .ds-popover-arrow-edge {
   fill: none;
-  stroke: var(--ds-color-ink);
+  stroke: var(--ds-color-border-strong);
   stroke-width: var(--ds-border-width);
 }
 
 .ds-popover-body:focus-visible {
-  outline: var(--ds-focus-width) solid var(--ds-color-ink);
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
   outline-offset: calc(-1 * var(--ds-focus-width));
+}
 }

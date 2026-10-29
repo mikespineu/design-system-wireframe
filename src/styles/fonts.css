@@ -1,0 +1,4 @@
+/* Opt-in default fonts (Red Hat Mono and Red Hat Text). The library never loads fonts by itself:
+   import this file once (`import 'design-system-test/fonts.css'`) to get the Wireframe default look,
+   or skip it and set --ds-font-heading, --ds-font-body and --ds-font-label in your theme. */
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&family=Red+Hat+Text:wght@400;500;700&display=swap');

@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react-vite'
+import '../src/styles/fonts.css'
 import '../src/styles/tailwind.css'
 import { TooltipProvider } from '../src/components/Tooltip'
 

@@ -1,3 +1,4 @@
+@layer ds {
 /* Spinner: overlay for loading Button and IconButton. Tokens only (--ds-*). Spec: docs/specs/Button.md */
 .ds-spinner {
   position: absolute;
@@ -5,7 +6,7 @@
   margin: auto;
   width: var(--ds-spinner-size, var(--ds-space-4));
   height: var(--ds-spinner-size, var(--ds-space-4));
-  color: var(--ds-color-ink);
+  color: var(--ds-color-icon);
   animation: ds-spinner-rotate 800ms linear infinite;
 }
 
@@ -39,4 +40,5 @@
   .ds-spinner {
     display: none;
   }
+}
 }

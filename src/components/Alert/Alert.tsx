@@ -31,7 +31,7 @@ const config: Record<
     icon: "info",
     strokeWidth: 1.5,
     box: "border border-info-border bg-info-bg text-info",
-    titleWeight: "font-medium",
+    titleWeight: "",
     body: "text-text",
     role: "status",
   },
@@ -39,7 +39,7 @@ const config: Record<
     icon: "success",
     strokeWidth: 2,
     box: "border border-success-border bg-success-bg text-success",
-    titleWeight: "font-medium",
+    titleWeight: "",
     body: "text-text",
     role: "status",
   },
@@ -61,16 +61,16 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         ref={ref}
         role={c.role}
         data-severity={severity}
-        className={cx("flex gap-3 p-4", c.box, className)}
+        className={cx("flex gap-3 rounded-lg p-4", c.box, className)}
         {...rest}
       >
         <RoleIcon role={c.icon} size="lg" strokeWidth={c.strokeWidth} className="flex-none" />
         <div className="flex flex-col gap-1">
-          <strong className={cx("font-mono text-sm", c.titleWeight)}>
+          <strong className={cx("font-label text-ui", c.titleWeight)}>
             {title}
           </strong>
           {children != null && (
-            <span className={cx("text-sm leading-normal", c.body)}>
+            <span className={cx("font-sans text-body-xs", c.body)}>
               {children}
             </span>
           )}

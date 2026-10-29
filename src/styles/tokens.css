@@ -1,7 +1,10 @@
-/* Design System Wireframe design tokens. Spec: docs/design-system-wireframe/README.md */
+/* Design System Wireframe design tokens. Specs: docs/design-system-wireframe/README.md, docs/specs/Theming.md
+   All library CSS lives in `@layer ds`, so any unlayered consumer rule (for example a
+   `[data-theme="acme"]` block) wins regardless of import order. */
+@layer ds {
 :root,
 [data-theme="default"] {
-  /* Gray palette: white ground, gray accents, black ink. No hue. */
+  /* Tier 1, primitives: raw palette, never read by components. Gray palette: white ground, gray accents, black ink. No hue. */
   --ds-color-white: #ffffff;
   --ds-color-gray-50: #f7f7f7;
   --ds-color-gray-100: #eeeeee;
@@ -15,7 +18,7 @@
   --ds-color-gray-900: #141414;
   --ds-color-black: #000000;
 
-  /* Semantic roles */
+  /* Tier 2, roles: color */
   --ds-color-background: var(--ds-color-white);
   --ds-color-surface: var(--ds-color-white);
   --ds-color-surface-subtle: var(--ds-color-gray-50);
@@ -27,11 +30,18 @@
   --ds-color-text-muted: var(--ds-color-gray-600);
   --ds-color-text: var(--ds-color-gray-700);
   --ds-color-text-strong: var(--ds-color-gray-800);
-  --ds-color-ink: var(--ds-color-black);
+  --ds-color-text-emphasis: var(--ds-color-black);
+  --ds-color-text-inverse: var(--ds-color-white);
+  --ds-color-border-strong: var(--ds-color-black);
+  --ds-color-icon: var(--ds-color-black);
+  --ds-color-focus: var(--ds-color-black);
+  --ds-color-overlay: rgb(0 0 0 / 0.5);
   --ds-color-inverse: var(--ds-color-gray-900);
   --ds-color-primary: var(--ds-color-black);
   --ds-color-primary-hover: var(--ds-color-gray-800);
   --ds-color-primary-contrast: var(--ds-color-white);
+  /* Deprecated alias of --ds-color-text-emphasis. Components no longer read it; themes do not set it. */
+  --ds-color-ink: var(--ds-color-text-emphasis);
 
   /* Status: the only hue in the system, used for feedback only and always
      paired with an icon and a label. fg passes 4.5:1 on white and on its bg. */
@@ -45,19 +55,65 @@
   --ds-color-error-border: #e3aaa6;
   --ds-color-error-bg: #fbedec;
 
-  /* Typography: Red Hat Mono for titles, Red Hat Text for body */
+  /* Roles: font. Red Hat Mono for titles and labels, Red Hat Text for body (load with the opt-in fonts.css) */
   --ds-font-mono: 'Red Hat Mono', ui-monospace, monospace;
   --ds-font-text: 'Red Hat Text', system-ui, sans-serif;
-  --ds-font-family: var(--ds-font-text);
+  --ds-font-heading: var(--ds-font-mono);
+  --ds-font-body: var(--ds-font-text);
+  --ds-font-label: var(--ds-font-mono);
+  --ds-font-family: var(--ds-font-body);
 
-  /* Line heights */
-  --ds-line-height-xs: 16px;
-  --ds-line-height-sm: 20px;
-  --ds-line-height-md: 24px;
-  --ds-line-height-lg: 26px;
-  --ds-line-height-xl: 29px;
+  /* Roles: font weight */
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
 
-  /* Spacing: 4 px base */
+  /* Roles: type scale */
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+
+  /* Legacy line-height aliases (not part of the contract) */
+  --ds-line-height-xs: var(--ds-text-ui-sm-line-height);
+  --ds-line-height-sm: var(--ds-text-caption-line-height);
+  --ds-line-height-md: var(--ds-text-body-sm-line-height);
+  --ds-line-height-lg: var(--ds-text-body-line-height);
+  --ds-line-height-xl: var(--ds-text-h3-line-height);
+
+  /* Spacing: 4 px base. Not themeable. */
   --ds-space-1: 4px;
   --ds-space-2: 8px;
   --ds-space-3: 12px;
@@ -68,9 +124,19 @@
   --ds-space-16: 64px;
   --ds-space-24: 96px;
 
-  /* Shape & line: square corners, no shadows, depth from borders and fills */
+  /* Roles: radius. Square corners; --ds-radius is the legacy base the steps default to */
   --ds-radius: 0;
+  --ds-radius-sm: var(--ds-radius);
   --ds-radius-md: var(--ds-radius);
+  --ds-radius-lg: var(--ds-radius);
+  --ds-radius-full: var(--ds-radius);
+
+  /* Roles: shadow. No shadows by default, depth comes from borders and fills */
+  --ds-shadow-sm: none;
+  --ds-shadow-md: none;
+  --ds-shadow-lg: none;
+
+  /* Roles: shape and density */
   --ds-border-width: 1px;
   --ds-border-width-strong: 2px;
   --ds-focus-width: 2px;
@@ -88,4 +154,43 @@
 
   /* Photography: always monochrome */
   --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+/* Dark: overrides the 30 color roles only. Fonts, type, radius, shadow and shape stay at their defaults. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ds-color-background: var(--ds-color-gray-900);
+  --ds-color-surface: var(--ds-color-gray-900);
+  --ds-color-surface-subtle: #1f1f1f;
+  --ds-color-fill: var(--ds-color-gray-800);
+  --ds-color-divider: #333333;
+  --ds-color-border: #737373;
+  --ds-color-disabled: var(--ds-color-gray-600);
+  --ds-color-placeholder: #8f8f8f;
+  --ds-color-text-muted: var(--ds-color-gray-400);
+  --ds-color-text: var(--ds-color-gray-300);
+  --ds-color-text-strong: var(--ds-color-gray-200);
+  --ds-color-text-emphasis: var(--ds-color-gray-50);
+  --ds-color-text-inverse: var(--ds-color-gray-900);
+  --ds-color-border-strong: var(--ds-color-gray-50);
+  --ds-color-icon: var(--ds-color-gray-50);
+  --ds-color-focus: var(--ds-color-gray-50);
+  --ds-color-overlay: rgb(0 0 0 / 0.7);
+  --ds-color-inverse: var(--ds-color-gray-100);
+  --ds-color-primary: var(--ds-color-gray-50);
+  --ds-color-primary-hover: var(--ds-color-gray-200);
+  --ds-color-primary-contrast: var(--ds-color-gray-900);
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  --ds-color-info: var(--ds-color-gray-300);
+  --ds-color-info-border: var(--ds-color-gray-600);
+  --ds-color-info-bg: #1f1f1f;
+  --ds-color-success: #9cc7ab;
+  --ds-color-success-border: #2e6b45;
+  --ds-color-success-bg: #13261a;
+  --ds-color-error: #e3aaa6;
+  --ds-color-error-border: #a3302b;
+  --ds-color-error-bg: #2d1414;
+}
 }

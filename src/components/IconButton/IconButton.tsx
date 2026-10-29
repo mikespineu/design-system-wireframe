@@ -56,8 +56,8 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary: 'border-primary bg-primary text-primary-contrast',
-  secondary: 'border-ink bg-surface text-ink disabled:border-border disabled:text-disabled',
-  ghost: 'border-transparent bg-transparent text-ink disabled:text-disabled',
+  secondary: 'border-strong bg-surface text-icon disabled:border-border disabled:text-disabled',
+  ghost: 'border-transparent bg-transparent text-icon disabled:text-disabled',
 };
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {

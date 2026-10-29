@@ -1,3 +1,4 @@
+@layer ds {
 /* IconButton: native button / Radix Toggle / Slot, tokens only (--ds-*). Spec: docs/specs/Button.md */
 .ds-icon-button {
   position: relative;
@@ -26,7 +27,7 @@
 /* Pressed: 2 px border grows inward (border-box), so the box stays 44 x 44. */
 .ds-icon-button[data-state='on']:not([data-variant='primary']) {
   border-width: var(--ds-border-width-strong);
-  border-color: var(--ds-color-ink);
+  border-color: var(--ds-color-border-strong);
 }
 
 .ds-icon-button[data-state='on']:not([data-variant='primary']):disabled {
@@ -42,4 +43,5 @@
   .ds-icon-button[data-loading] {
     color: revert;
   }
+}
 }

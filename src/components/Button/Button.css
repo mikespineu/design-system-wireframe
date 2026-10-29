@@ -1,3 +1,4 @@
+@layer ds {
 /* Button: native button / Radix Slot, tokens only (--ds-*). Spec: docs/specs/Button.md */
 .ds-button {
   position: relative;
@@ -31,4 +32,5 @@
   .ds-button[data-loading] {
     color: revert;
   }
+}
 }

@@ -8,13 +8,14 @@ const heading = ['2xl', 'xl', 'lg', 'md', 'sm', 'xs'].map((s) => `heading-${s}`)
 const body = ['lg', 'md', 'sm', 'xs', '2xs'].map((s) => `body-${s}`)
 const composed = [...heading, ...body]
 const modifiers = ['font-normal', 'font-medium', 'font-bold', 'font-sans', 'font-mono', 'text-text', 'text-muted', 'text-ink', 'text-inherit']
+const roleUtilities = ['font-label', 'font-heading', 'text-emphasis', 'text-icon', 'text-inverse', 'border-strong', 'rounded-sm', 'rounded-lg', 'rounded-full', 'case-label', 'text-ui', 'text-ui-sm', 'text-ui-xs', 'text-body-xs', 'text-label']
 
 let css = ''
 
 beforeAll(() => {
   css = execFileSync(
     'node',
-    [join(process.cwd(), 'test/compile-tailwind.mjs'), ...composed, ...modifiers, 'truncate', 'line-clamp-2', 'md:heading-xl'],
+    [join(process.cwd(), 'test/compile-tailwind.mjs'), ...composed, ...modifiers, ...roleUtilities, 'truncate', 'line-clamp-2', 'md:heading-xl'],
     { encoding: 'utf8' },
   )
 })
@@ -32,28 +33,56 @@ describe('typography utilities (compiled CSS)', () => {
   })
 
   it.each([
-    ['heading-2xl', '4.5rem', '-0.04em'],
-    ['heading-xl', '3rem', '-0.03em'],
-    ['heading-lg', '2rem', '-0.02em'],
-    ['heading-md', '1.375rem', 'var(--tracking-normal)'],
-    ['heading-sm', '1.125rem', 'var(--tracking-normal)'],
-    ['heading-xs', '1rem', 'var(--tracking-normal)'],
-    ['body-lg', '1.125rem', 'var(--tracking-normal)'],
-    ['body-md', '1rem', 'var(--tracking-normal)'],
-    ['body-sm', '0.9375rem', 'var(--tracking-normal)'],
-    ['body-xs', '0.8125rem', 'var(--tracking-normal)'],
-    ['body-2xs', '0.75rem', 'var(--tracking-normal)'],
-  ])('%s resolves size %s and tracking %s', (c, size, tracking) => {
+    ['heading-2xl', 'display', 'var(--tw-tracking, var(--ds-text-display-tracking))'],
+    ['heading-xl', 'h1', 'var(--tw-tracking, var(--ds-text-h1-tracking))'],
+    ['heading-lg', 'h2', 'var(--tw-tracking, var(--ds-text-h2-tracking))'],
+    ['heading-md', 'h3', 'var(--tracking-normal)'],
+    ['heading-sm', 'body-lg', 'var(--tracking-normal)'],
+    ['heading-xs', 'body', 'var(--tracking-normal)'],
+    ['body-lg', 'body-lg', 'var(--tracking-normal)'],
+    ['body-md', 'body', 'var(--tracking-normal)'],
+    ['body-sm', 'body-sm', 'var(--tracking-normal)'],
+    ['body-xs', 'caption', 'var(--tracking-normal)'],
+    ['body-2xs', 'ui-sm', 'var(--tracking-normal)'],
+  ])('%s reads the %s size role and tracking %s', (c, style, tracking) => {
     const r = rule(c)
-    expect(r).toContain(`font-size: ${size}`)
-    expect(r.includes(`letter-spacing: ${tracking};`) || r.includes(`letter-spacing: var(--tw-tracking, ${tracking});`)).toBe(true)
+    expect(r).toContain(`font-size: var(--ds-text-${style}-size)`)
+    expect(r).toContain(`letter-spacing: ${tracking};`)
   })
 
-  it('maps line heights', () => {
-    expect(rule('heading-md')).toContain('--ds-line-height-xl')
-    expect(rule('body-md')).toContain('--ds-line-height-lg')
-    expect(rule('body-xs')).toContain('--ds-line-height-sm')
-    expect(rule('body-2xs')).toContain('--ds-line-height-xs')
+  it('maps line heights to roles', () => {
+    expect(rule('heading-md')).toContain('--ds-text-h3-line-height')
+    expect(rule('body-md')).toContain('--ds-text-body-line-height')
+    expect(rule('body-xs')).toContain('--ds-text-caption-line-height')
+    expect(rule('body-2xs')).toContain('--ds-text-ui-sm-line-height')
+  })
+
+  it.each(heading)('%s uses the heading font role', (c) => {
+    expect(rule(c)).toContain('font-family: var(--ds-font-heading)')
+  })
+
+  it.each([
+    ['font-medium', 'var(--ds-font-weight-medium)'],
+    ['font-bold', 'var(--ds-font-weight-bold)'],
+    ['font-normal', 'var(--ds-font-weight-regular)'],
+    ['font-label', 'var(--ds-font-label)'],
+    ['font-heading', 'var(--ds-font-heading)'],
+    ['font-sans', 'var(--ds-font-body)'],
+    ['text-emphasis', 'var(--ds-color-text-emphasis)'],
+    ['text-icon', 'var(--ds-color-icon)'],
+    ['text-inverse', 'var(--ds-color-text-inverse)'],
+    ['border-strong', 'var(--ds-color-border-strong)'],
+    ['rounded-sm', 'var(--ds-radius-sm)'],
+    ['rounded-lg', 'var(--ds-radius-lg)'],
+    ['rounded-full', 'var(--ds-radius-full)'],
+    ['case-label', 'var(--ds-text-label-transform)'],
+  ])('%s resolves to its role %s', (c, role) => {
+    expect(rule(c)).toContain(role)
+  })
+
+  it.each(['text-ui', 'text-ui-sm', 'text-ui-xs', 'text-body-xs', 'text-label'])('%s reads size and line-height roles', (c) => {
+    expect(rule(c)).toMatch(/font-size: var\(--ds-text-[\w-]+-size\)/)
+    expect(rule(c)).toMatch(/line-height: var\(--tw-leading, var\(--ds-text-[\w-]+-line-height\)\)/)
   })
 
   it.each(heading)('%s balances with the longhand only', (c) => {
