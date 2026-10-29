@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { Badge, Tag } from './Tag';
+import { lucideIconSet } from '../Icon/librarySources';
 
 const meta = {
   title: 'Components/Tag',
@@ -41,6 +42,16 @@ export const All: Story = {
       <Tag variant="outline">Archived</Tag>
       <Tag variant="neutral" onRemove={fn()}>landscape</Tag>
       <Badge count={12} />
+    </div>
+  ),
+};
+
+/** Default remove glyph (left) against a Lucide `removeIcon` (right). */
+export const CustomIcons: Story = {
+  render: () => (
+    <div className="flex gap-4">
+      <Tag variant="neutral" onRemove={() => {}}>landscape</Tag>
+      <Tag variant="neutral" onRemove={() => {}} removeIcon={lucideIconSet.close}>landscape</Tag>
     </div>
   ),
 };

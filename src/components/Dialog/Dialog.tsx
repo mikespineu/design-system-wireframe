@@ -2,6 +2,7 @@ import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react
 import { Dialog as RadixDialog } from 'radix-ui';
 import { cx } from '../../lib/cx';
 import { RoleIcon } from '../Icon/RoleIcon';
+import type { IconComponent } from '../Icon';
 import './Dialog.css';
 
 export type DialogSize = 'sm' | 'md' | 'lg';
@@ -27,6 +28,8 @@ export interface DialogProps
   /** false: overlay click does not close (Esc and close button still do). */
   dismissible?: boolean;
   hideCloseButton?: boolean;
+  /** Replaces the close glyph for this instance (prop > IconProvider > default). */
+  closeIcon?: IconComponent;
 }
 
 const FOCUSABLE =
@@ -48,6 +51,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       size = 'md',
       dismissible = true,
       hideCloseButton = false,
+      closeIcon,
       className,
       onPointerDownOutside,
       onInteractOutside,
@@ -97,7 +101,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
               {!hideCloseButton && (
                 <RadixDialog.Close asChild>
                   <button type="button" className="ds-dialog-close" aria-label="Close">
-                    <RoleIcon role="close" size="md" />
+                    <RoleIcon role="close" size="md" override={closeIcon} />
                   </button>
                 </RadixDialog.Close>
               )}

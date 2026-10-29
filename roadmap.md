@@ -298,11 +298,11 @@ Each task carries its fields in an indented line, read by the [software factory]
   - done_when:
     - Skill ships with the package
     - Guides choosing raw values, generating the `[data-theme]` block, checking contrast, registering the theme
-- [ ] **DS-11 Consumer docs.** Install and usage guide (import CSS, use components, apply a theme), linked from the README and the Storybook Introduction page.
+- [ ] **DS-11 Consumer docs.** Install and usage guide (import CSS, use components, apply a theme), linked from the README. No Storybook changes.
   - type: docs · has_ui: no · depends_on: DS-1, DS-7 · needs_human: no · status: todo
   - done_when:
     - Install and usage guide covers importing CSS, using components, applying a theme
-    - Linked from the README and the Storybook Introduction page
+    - Linked from the README
 - [x] **DS-25 README — Claude Design & Software Factory.** Create the root `README.md` (the repo has none yet) with two sections. **Claude Design**: how components are designed before they're built: canvases in `docs/design-system-wireframe/*.dc.html`, specs in `docs/specs/<Name>.md`, the design → approved spec → build handoff, and how `--ds-*` tokens connect the design to code. **Software Factory**: how the roadmap works: `roadmap.md` task format, the `/factory:*` skills (`add`, `plan`, `next`, `design`, `build`, `approve`, `status`…), the agent pipeline (planner → designer → builder → QA → reviewer), the hard gates (lint, typecheck, test, Storybook build), job files in `factory/jobs/`, and the steps that need human approval. Also links Storybook and the stack overview so the README reads as one page. Add screenshots to illustrate: the Storybook Introduction page, the factory status page (`/factory:status` / `npm run factory:status`), and one Claude Design canvas. Store them as PNGs in `docs/images/readme/`.
   - type: docs · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
@@ -330,8 +330,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `useIcon` resolves prop > `IconProvider` > default (unit-tested for all three levels and partial providers)
     - Major changeset with a migration note (`name="x"` → `icon={X}`, `IconButton` `icon`)
     - Story per state, keyboard story for `IconButton`, `jest-axe` test; `Icon`, `IconProvider`, `createIcon`, `useIcon` and `IconComponent` exported from `src/index.ts`
-- [ ] **DS-48 Icon override props in components — implementation.** Add the role-named override props from `docs/specs/Icon.md` to every component that renders an internal icon: Dialog `closeIcon`, Checkbox `checkIcon` / `errorIcon`, Input and Textarea `errorIcon`, Tag `removeIcon`, Alert `icon` (accepts `null`), Slider `decrementIcon` / `incrementIcon` (move its inline SVGs onto default roles).
-  - type: build · has_ui: yes · depends_on: DS-46, DS-47 · needs_human: no · status: todo
+- [x] **DS-48 Icon override props in components — implementation.** Add the role-named override props from `docs/specs/Icon.md` to every component that renders an internal icon: Dialog `closeIcon`, Checkbox `checkIcon` / `errorIcon`, Input and Textarea `errorIcon`, Tag `removeIcon`, Alert `icon` (accepts `null`), Slider `decrementIcon` / `incrementIcon` (move its inline SVGs onto default roles).
+  - type: build · has_ui: yes · depends_on: DS-46, DS-47 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every state, with default and overridden icons
     - Each listed component renders its default glyph, the `IconProvider` icon, and the prop icon, and the prop wins over the provider (tested per component)
@@ -348,6 +348,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-48** Icon override props in components — implementation — https://github.com/mikespineu/design-system-wireframe/pull/89
 - **DS-27** Theme token foundation — implementation — https://github.com/mikespineu/design-system-wireframe/pull/88
 - **DS-47** Icon API & default glyphs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/82
 - **DS-18** Select — implementation — https://github.com/mikespineu/design-system-wireframe/pull/81

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Alert } from "./Alert";
+import { lucideIconSet } from "../Icon/librarySources";
 
 const meta = {
   title: "Components/Alert",
@@ -45,6 +46,17 @@ export const All: Story = {
       <Alert severity="error" title="Error">
         Upload failed. Check the file and try again.
       </Alert>
+    </div>
+  ),
+};
+
+/** Default glyph, Lucide `icon`, and `icon={null}` for each severity. */
+export const CustomIcons: Story = {
+  render: () => (
+    <div className="flex flex-col gap-3">
+      <Alert severity="info" title="Default">Severity glyph.</Alert>
+      <Alert severity="info" title="Lucide" icon={lucideIconSet.success}>Prop glyph.</Alert>
+      <Alert severity="error" title="Error: hidden" icon={null}>No glyph.</Alert>
     </div>
   ),
 };

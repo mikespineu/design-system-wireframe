@@ -1,6 +1,7 @@
 import { forwardRef, type HTMLAttributes } from 'react';
 import { cx } from '../../lib/cx';
 import { RoleIcon } from '../Icon/RoleIcon';
+import type { IconComponent } from '../Icon';
 
 export type TagVariant = 'solid' | 'subtle' | 'outline' | 'neutral';
 export type TagSize = 'md' | 'sm';
@@ -14,6 +15,8 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   onRemove?: () => void;
   /** Accessible name for the close button. Defaults to "Remove <label>" for string children. */
   removeLabel?: string;
+  /** Replaces the remove glyph (prop > IconProvider > default). */
+  removeIcon?: IconComponent;
 }
 
 const base = 'inline-flex items-center rounded-sm font-label text-ui-sm font-normal';
@@ -31,7 +34,7 @@ const sizes: Record<TagSize, string> = {
 };
 
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
-  ({ variant = 'solid', size = 'md', onRemove, removeLabel, className, children, ...rest }, ref) => {
+  ({ variant = 'solid', size = 'md', onRemove, removeLabel, removeIcon, className, children, ...rest }, ref) => {
     const removable = typeof onRemove === 'function';
     const label = removeLabel ?? (typeof children === 'string' ? `Remove ${children}` : 'Remove');
     return (
@@ -48,7 +51,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
             onClick={onRemove}
             className="flex size-5.5 cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-muted focus-visible:focus-ring"
           >
-            <RoleIcon role="close" size="sm" />
+            <RoleIcon role="close" size="sm" override={removeIcon} />
           </button>
         )}
       </span>
