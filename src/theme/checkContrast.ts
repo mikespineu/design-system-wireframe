@@ -31,29 +31,34 @@ type Pair = [string, string, PairKind]
  * Required pairs from docs/specs/Theming.md (Accessibility). Disabled roles, dividers and status
  * borders are exempt; `color-border` on `color-surface` is a known gap kept for Wireframe parity.
  */
+const TEXT_ROLES = [
+  'color-text-emphasis',
+  'color-text-strong',
+  'color-text',
+  'color-text-muted',
+  'color-placeholder',
+] as const
+const TEXT_GROUNDS = [
+  'color-background',
+  'color-surface',
+  'color-fill',
+  'color-info-bg',
+  'color-success-bg',
+  'color-error-bg',
+] as const
+
 export const requiredPairs: readonly Pair[] = [
-  text('color-text-emphasis', 'color-background'),
-  text('color-text-emphasis', 'color-surface'),
-  text('color-text-strong', 'color-background'),
-  text('color-text-strong', 'color-surface'),
-  text('color-text', 'color-background'),
-  text('color-text', 'color-surface'),
-  text('color-text-muted', 'color-background'),
-  text('color-text-muted', 'color-surface'),
-  text('color-placeholder', 'color-background'),
-  text('color-placeholder', 'color-surface'),
-  text('color-text-emphasis', 'color-fill'),
-  text('color-text-strong', 'color-fill'),
+  // Every text role on every ground it sits on.
+  ...TEXT_ROLES.flatMap((role) => TEXT_GROUNDS.map((ground) => text(role, ground))),
   text('color-primary-contrast', 'color-primary'),
   text('color-primary-contrast', 'color-primary-hover'),
   text('color-text-inverse', 'color-inverse'),
+  // Each status fg on its bg and on background.
   text('color-info', 'color-info-bg'),
-  text('color-text', 'color-info-bg'),
+  text('color-info', 'color-background'),
   text('color-success', 'color-success-bg'),
-  text('color-text', 'color-success-bg'),
   text('color-success', 'color-background'),
   text('color-error', 'color-error-bg'),
-  text('color-text-strong', 'color-error-bg'),
   text('color-error', 'color-background'),
   ui('color-primary-contrast', 'color-error'),
   ui('color-border-strong', 'color-background'),
@@ -64,6 +69,7 @@ export const requiredPairs: readonly Pair[] = [
   ui('color-focus', 'color-surface'),
   ui('color-primary', 'color-background'),
   ui('color-primary', 'color-surface'),
+  ui('color-error', 'color-background'),
   ui('color-error', 'color-surface'),
   ui('color-placeholder', 'color-background'),
   ui('color-placeholder', 'color-surface'),

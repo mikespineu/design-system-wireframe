@@ -106,6 +106,11 @@ function makeTint(neutral?: string) {
   }
 }
 
+/** Nudges `fg` until it reaches `min` on every ground (each nudge keeps earlier grounds passing: it moves away from them). */
+function ensureOnAll(fg: string, grounds: readonly string[], min: number, direction: 'darker' | 'lighter'): string {
+  return grounds.reduce((acc, ground) => ensureContrast(acc, ground, min, direction), fg)
+}
+
 function colorRoles(scale: ColorScale, tint: (hex: string) => string, mode: 'light' | 'dark'): Record<string, string> {
   const at = (step: ScaleStep) => scale[step].hex
   if (mode === 'light') {
@@ -117,6 +122,7 @@ function colorRoles(scale: ColorScale, tint: (hex: string) => string, mode: 'lig
     const hover =
       hoverStep === primaryStep ? oklchToHex({ ...scale[900], l: scale[900].l - 0.08 }) : at(hoverStep)
     const emphasis = tint(r.black)
+    const grounds = [bg, tint(r.s100), tint(r.s50), '#edf5ef', '#fbedec']
     return {
       '--ds-color-background': bg,
       '--ds-color-surface': bg,
@@ -125,8 +131,8 @@ function colorRoles(scale: ColorScale, tint: (hex: string) => string, mode: 'lig
       '--ds-color-divider': tint(r.s200),
       '--ds-color-border': tint(r.s300),
       '--ds-color-disabled': tint(r.s400),
-      '--ds-color-placeholder': ensureContrast(tint(r.s500), bg, 4.5, 'darker'),
-      '--ds-color-text-muted': ensureContrast(tint(r.s600), bg, 4.5, 'darker'),
+      '--ds-color-placeholder': ensureOnAll(tint(r.s500), grounds, 4.5, 'darker'),
+      '--ds-color-text-muted': ensureOnAll(tint(r.s600), grounds, 4.5, 'darker'),
       '--ds-color-text': tint(r.s700),
       '--ds-color-text-strong': tint(r.s800),
       '--ds-color-text-emphasis': emphasis,
@@ -153,6 +159,7 @@ function colorRoles(scale: ColorScale, tint: (hex: string) => string, mode: 'lig
   const d = ramp.dark
   const bg = tint(ramp.light.s900)
   const primary = at(100)
+  const grounds = [bg, tint(d.fill), tint(d.subtle), '#13261a', '#2d1414']
   return {
     '--ds-color-background': bg,
     '--ds-color-surface': bg,
@@ -161,8 +168,8 @@ function colorRoles(scale: ColorScale, tint: (hex: string) => string, mode: 'lig
     '--ds-color-divider': tint(d.divider),
     '--ds-color-border': ensureContrast(tint(d.border), bg, 3, 'lighter'),
     '--ds-color-disabled': tint(d.disabled),
-    '--ds-color-placeholder': ensureContrast(tint(d.placeholder), bg, 4.5, 'lighter'),
-    '--ds-color-text-muted': ensureContrast(tint(d.muted), bg, 4.5, 'lighter'),
+    '--ds-color-placeholder': ensureOnAll(tint(d.placeholder), grounds, 4.5, 'lighter'),
+    '--ds-color-text-muted': ensureOnAll(tint(d.muted), grounds, 4.5, 'lighter'),
     '--ds-color-text': tint(d.text),
     '--ds-color-text-strong': tint(d.strong),
     '--ds-color-text-emphasis': tint(d.emphasis),

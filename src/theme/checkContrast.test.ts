@@ -41,6 +41,36 @@ describe('checkContrast', () => {
     expect(report.failures[0]).toMatchObject({ required: 3, background: 'color-background' })
   })
 
+  const roles = ['color-text-emphasis', 'color-text-strong', 'color-text', 'color-text-muted', 'color-placeholder']
+  const grounds = ['color-background', 'color-surface', 'color-fill', 'color-info-bg', 'color-success-bg', 'color-error-bg']
+  const textPairs = roles.flatMap((r) => grounds.map((g) => [r, g] as const))
+
+  it.each(textPairs)('flags %s on %s when it falls under 4.5:1', (fg, bg) => {
+    const theme = createTheme({ ...base, mode: 'light' })
+    const values = theme.blocks[0]!.values
+    values[`--ds-${bg}`] = '#ffffff'
+    values[`--ds-${fg}`] = '#bbbbbb'
+    const hit = checkContrast(theme).failures.find((f) => f.foreground === fg && f.background === bg)
+    expect(hit).toMatchObject({ kind: 'text', required: 4.5 })
+  })
+
+  it('requires every text role on every ground and each status fg on background', () => {
+    const keys = requiredPairs.map(([f, b]) => `${f}|${b}`)
+    for (const [r, g] of textPairs) expect(keys).toContain(`${r}|${g}`)
+    for (const s of ['info', 'success', 'error']) {
+      expect(keys).toContain(`color-${s}|color-${s}-bg`)
+      expect(keys).toContain(`color-${s}|color-background`)
+    }
+    expect(keys).not.toContain('color-border|color-surface')
+  })
+
+  it('flags color-info on color-background', () => {
+    const theme = createTheme({ ...base, mode: 'light' })
+    theme.blocks[0]!.values['--ds-color-info'] = '#cccccc'
+    const hit = checkContrast(theme).failures.find((f) => f.foreground === 'color-info' && f.background === 'color-background')
+    expect(hit).toMatchObject({ kind: 'text', required: 4.5 })
+  })
+
   it('reports the dark block mode', () => {
     const theme = createTheme(base)
     theme.blocks[1]!.values['--ds-color-primary-contrast'] = theme.blocks[1]!.values['--ds-color-primary']!
