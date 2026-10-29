@@ -298,8 +298,8 @@ Each task carries its fields in an indented line, read by the [software factory]
   - done_when:
     - Skill ships with the package
     - Guides choosing raw values, generating the `[data-theme]` block, checking contrast, registering the theme
-- [ ] **DS-11 Consumer docs.** Install and usage guide (import CSS, use components, apply a theme), linked from the README. No Storybook changes.
-  - type: docs · has_ui: no · depends_on: DS-1, DS-7 · needs_human: no · status: todo
+- [x] **DS-11 Consumer docs.** Install and usage guide (import CSS, use components, apply a theme), linked from the README. No Storybook changes.
+  - type: docs · has_ui: no · depends_on: DS-1, DS-7 · needs_human: no · status: done
   - done_when:
     - Install and usage guide covers importing CSS, using components, applying a theme
     - Linked from the README
@@ -391,3 +391,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-33** Button icons & loading — implementation — https://github.com/mikespineu/design-system-wireframe/pull/84
 - **DS-34** ButtonGroup — implementation — https://github.com/mikespineu/design-system-wireframe/pull/86
 - **DS-49** Bring your own icons — docs & library examples — https://github.com/mikespineu/design-system-wireframe/pull/87
+- **DS-11** Consumer docs — https://github.com/mikespineu/design-system-wireframe/pull/92
