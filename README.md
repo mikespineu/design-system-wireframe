@@ -4,12 +4,17 @@ A minimal black / gray / white React design system. White ground, gray accents, 
 
 **Live preview:** [ds.mikespin.dev](https://ds.mikespin.dev/)
 
+- [Using the package](#using-the-package)
 - [Stack](#stack)
 - [Storybook](#storybook)
 - [Claude Design](#claude-design)
 - [Software Factory](#software-factory)
 - [Commands](#commands)
 - [License](#license)
+
+## Using the package
+
+Install, import the CSS, use components and apply a theme: see the [consumer guide](docs/consumer-guide.md).
 
 ## Stack
 
