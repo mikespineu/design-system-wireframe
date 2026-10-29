@@ -32,3 +32,4 @@ export * from './hooks';
 export * from './components/Drawer';
 export * from './styles/roles';
 export * from './components/ButtonGroup';
+export * from './theme';
