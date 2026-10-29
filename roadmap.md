@@ -298,8 +298,8 @@ Each task carries its fields in an indented line, read by the [software factory]
   - done_when:
     - Skill ships with the package
     - Guides choosing raw values, generating the `[data-theme]` block, checking contrast, registering the theme
-- [ ] **DS-11 Consumer docs.** Install and usage guide (import CSS, use components, apply a theme), linked from the README. No Storybook changes.
-  - type: docs · has_ui: no · depends_on: DS-1, DS-7 · needs_human: no · status: todo
+- [x] **DS-11 Consumer docs.** Install and usage guide (import CSS, use components, apply a theme), linked from the README. No Storybook changes.
+  - type: docs · has_ui: no · depends_on: DS-1, DS-7 · needs_human: no · status: done
   - done_when:
     - Install and usage guide covers importing CSS, using components, applying a theme
     - Linked from the README
