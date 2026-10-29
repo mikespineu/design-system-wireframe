@@ -10,6 +10,7 @@ import {
 import { Label } from 'radix-ui';
 import { cx } from '../../lib/cx';
 import { RoleIcon } from '../Icon/RoleIcon';
+import type { IconComponent } from '../Icon';
 
 /** Wiring that Field hands to the control inside it. */
 export interface FieldControlProps {
@@ -50,11 +51,13 @@ export interface FieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childr
   id?: string;
   /** Content aligned to the right of the hint row (e.g. a character counter). */
   hintAside?: ReactNode;
+  /** Replaces the glyph beside the error message (prop > IconProvider > default). */
+  errorIcon?: IconComponent;
   /** The control. Any child calling `useFieldControl()` (e.g. Input) is wired automatically. */
   children: ReactNode;
 }
 
-export const Field = ({ label, hint, error, disabled, required, id, className, children, hintAside, ...rest }: FieldProps) => {
+export const Field = ({ label, hint, error, disabled, required, id, className, children, hintAside, errorIcon, ...rest }: FieldProps) => {
   const generated = useId();
   const controlId = id ?? generated;
   const hintId = hint ? `${controlId}-hint` : undefined;
@@ -100,7 +103,7 @@ export const Field = ({ label, hint, error, disabled, required, id, className, c
         )}
         {error && (
           <span id={errorId} className="flex items-center gap-1.5 text-caption font-medium text-error">
-            <RoleIcon role="alert" size={14} />
+            <RoleIcon role="alert" size={14} override={errorIcon} />
             <span>
               <span className="sr-only">Error: </span>
               {error}
@@ -135,14 +138,16 @@ export interface TextFieldProps extends InputProps {
   label: ReactNode;
   hint?: ReactNode;
   error?: ReactNode;
+  /** Replaces the glyph beside the error message (prop > IconProvider > default). */
+  errorIcon?: IconComponent;
   /** Class for the Field wrapper; `className` goes to the input. */
   fieldClassName?: string;
 }
 
 /** Field + Input in one. */
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ label, hint, error, fieldClassName, id, disabled, required, ...rest }, ref) => (
-    <Field label={label} hint={hint} error={error} id={id} disabled={disabled} required={required} className={fieldClassName}>
+  ({ label, hint, error, errorIcon, fieldClassName, id, disabled, required, ...rest }, ref) => (
+    <Field label={label} hint={hint} error={error} errorIcon={errorIcon} id={id} disabled={disabled} required={required} className={fieldClassName}>
       <Input ref={ref} {...rest} />
     </Field>
   ),

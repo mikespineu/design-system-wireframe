@@ -11,6 +11,7 @@ import {
 } from 'react';
 import { cx } from '../../lib/cx';
 import { RoleIcon } from '../Icon/RoleIcon';
+import type { IconComponent } from '../Icon';
 import { Field, useFieldControl } from '../Input';
 import './Textarea.css';
 
@@ -33,6 +34,8 @@ export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaE
   maxLength?: number;
   /** Mark invalid without a Field. */
   invalid?: boolean;
+  /** Replaces the over-limit counter glyph (prop > IconProvider > default). */
+  errorIcon?: IconComponent;
 }
 
 type CounterState = 'under' | 'near' | 'at' | 'over';
@@ -60,10 +63,11 @@ export interface TextareaCounterProps {
   count: number;
   max: number;
   className?: string;
+  errorIcon?: IconComponent;
 }
 
 /** Visible "n / max" (aria-hidden), static limit description and a debounced polite live region. */
-export const TextareaCounter = ({ id, count, max, className }: TextareaCounterProps) => {
+export const TextareaCounter = ({ id, count, max, className, errorIcon }: TextareaCounterProps) => {
   const state = counterState(count, max);
   const [message, setMessage] = useState('');
   const first = useRef(true);
@@ -86,7 +90,7 @@ export const TextareaCounter = ({ id, count, max, className }: TextareaCounterPr
         You can enter up to {max} characters
       </span>
       <span className={cx('ds-textarea-counter', className)} data-state={state} aria-hidden="true">
-        {state === 'over' && <RoleIcon role="alert" size={14} />}
+        {state === 'over' && <RoleIcon role="alert" size={14} override={errorIcon} />}
         <span>
           {count} / {max}
         </span>
@@ -123,6 +127,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps & Internal
       maxRows = 6,
       maxLength,
       invalid,
+      errorIcon,
       className,
       style,
       counterInHintRow,
@@ -180,7 +185,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps & Internal
     return (
       <div className="ds-textarea-wrap">
         {textarea}
-        <TextareaCounter id={counterId!} count={count} max={maxLength} />
+        <TextareaCounter id={counterId!} count={count} max={maxLength} errorIcon={errorIcon} />
       </div>
     );
   },
@@ -197,7 +202,7 @@ export interface TextareaFieldProps extends TextareaProps {
 
 /** Field + Textarea in one. The counter sits right of the hint. */
 export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>(
-  ({ label, hint, error, fieldClassName, id, disabled, required, maxLength, value, defaultValue, onChange, ...rest }, ref) => {
+  ({ label, hint, error, errorIcon, fieldClassName, id, disabled, required, maxLength, value, defaultValue, onChange, ...rest }, ref) => {
     const generated = useId();
     const fieldId = id ?? generated;
     const { count, handleChange } = useCharCount(value, defaultValue, onChange);
@@ -206,12 +211,13 @@ export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>
         label={label}
         hint={hint}
         error={error}
+        errorIcon={errorIcon}
         id={fieldId}
         disabled={disabled}
         required={required}
         className={fieldClassName}
         hintAside={
-          maxLength !== undefined ? <TextareaCounter id={`${fieldId}-counter`} count={count} max={maxLength} /> : undefined
+          maxLength !== undefined ? <TextareaCounter id={`${fieldId}-counter`} count={count} max={maxLength} errorIcon={errorIcon} /> : undefined
         }
       >
         <Textarea

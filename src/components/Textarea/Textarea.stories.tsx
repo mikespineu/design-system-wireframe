@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Textarea, TextareaField } from './Textarea';
+import { lucideIconSet } from '../Icon/librarySources';
 
 /**
  * Multi-line twin of `Input`. `Textarea` is the control (works inside `Field`);
@@ -100,4 +101,14 @@ export const Keyboard: Story = {
     await userEvent.keyboard('one{Enter}two');
     await expect(el).toHaveValue('one\ntwo');
   },
+};
+
+/** Default error glyph (top) against a Lucide `errorIcon` (bottom). */
+export const CustomIcons: Story = {
+  render: () => (
+    <div className="flex w-80 flex-col gap-4">
+      <TextareaField label="Default" error="Required." maxLength={5} defaultValue="too long" />
+      <TextareaField label="Lucide" error="Required." maxLength={5} defaultValue="too long" errorIcon={lucideIconSet.alert} />
+    </div>
+  ),
 };

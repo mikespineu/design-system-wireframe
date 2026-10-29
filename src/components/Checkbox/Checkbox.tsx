@@ -13,6 +13,7 @@ import {
 import { Checkbox as RadixCheckbox, Label } from 'radix-ui';
 import { cx } from '../../lib/cx';
 import { RoleIcon } from '../Icon/RoleIcon';
+import type { IconComponent } from '../Icon';
 import './Checkbox.css';
 
 export type CheckboxSize = 'sm' | 'md';
@@ -35,10 +36,14 @@ export interface CheckboxProps
   description?: ReactNode;
   size?: CheckboxSize;
   invalid?: boolean;
+  /** Replaces the checked mark (prop > IconProvider > default). */
+  checkIcon?: IconComponent;
+  /** Replaces the indeterminate mark. */
+  indeterminateIcon?: IconComponent;
 }
 
 export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, CheckboxProps>(
-  ({ label, description, size, invalid, disabled, id, className, 'aria-describedby': describedBy, ...rest }, ref) => {
+  ({ label, description, size, invalid, checkIcon, indeterminateIcon, disabled, id, className, 'aria-describedby': describedBy, ...rest }, ref) => {
     const group = useContext(GroupContext);
     const boxRef = useRef<HTMLButtonElement | null>(null);
     const setRefs = useCallback(
@@ -75,10 +80,10 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Checkb
         >
           <RadixCheckbox.Indicator className="ds-checkbox-indicator">
             <span className="ds-checkbox-mark ds-checkbox-mark-check">
-              <RoleIcon role="check" size="md" />
+              <RoleIcon role="check" size="md" override={checkIcon} />
             </span>
             <span className="ds-checkbox-mark ds-checkbox-mark-dash">
-              <RoleIcon role="minus" size="md" />
+              <RoleIcon role="minus" size="md" override={indeterminateIcon} />
             </span>
           </RadixCheckbox.Indicator>
         </RadixCheckbox.Root>
@@ -109,11 +114,13 @@ export interface CheckboxGroupProps extends Omit<ComponentPropsWithoutRef<'field
   disabled?: boolean;
   orientation?: 'vertical' | 'horizontal';
   size?: CheckboxSize;
+  /** Replaces the glyph beside the error message. */
+  errorIcon?: IconComponent;
   children: ReactNode;
 }
 
 export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
-  ({ legend, hideLegend, hint, error, required, disabled, orientation = 'vertical', size, children, className, id, ...rest }, ref) => {
+  ({ legend, hideLegend, hint, error, required, disabled, orientation = 'vertical', size, errorIcon, children, className, id, ...rest }, ref) => {
     const generated = useId();
     const baseId = id ?? generated;
     const hintId = hint ? `${baseId}-hint` : undefined;
@@ -144,7 +151,7 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
           <div className="ds-checkbox-options">{children}</div>
           {error && (
             <span id={errorId} className="ds-checkbox-error">
-              <RoleIcon role="alert" size={14} />
+              <RoleIcon role="alert" size={14} override={errorIcon} />
               <span>
                 <span className="sr-only">Error: </span>
                 {error}
