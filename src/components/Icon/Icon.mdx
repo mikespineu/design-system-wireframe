@@ -1,0 +1,99 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as Examples from './BringYourOwnIcons.stories';
+
+<Meta title="Foundations/Icon/Bring your own icons docs" />
+
+# Bring your own icons
+
+The design system ships no public icon set. `Icon` renders any SVG component that meets the `IconComponent` contract. Components that draw an icon inside themselves fall back to a small private set of default glyphs, and you can replace a glyph for one instance, for a subtree, or not at all.
+
+## The contract
+
+An `IconComponent` is `ComponentType<IconComponentProps>`. It must:
+
+1. Render exactly one root `<svg>` and spread `width`, `height`, `className`, `style`, `strokeWidth`, `role`, `focusable` and every `aria-*` prop onto it. Props it receives must win over its own defaults.
+2. Paint with `currentColor` (stroke, fill, or both). The system never passes a color.
+3. Not be focusable, have no event handlers, and render no `<title>` unless it is labeled. The system decides decorative or labeled.
+4. Scale to any `width` / `height` through its own `viewBox`. The grid size does not matter (24 for Lucide, Tabler and Heroicons, 256 for Phosphor).
+
+Contract violations are the consumer's responsibility. Refs are not required.
+
+| Library | Example | Size | Stroke |
+| --- | --- | --- | --- |
+| Lucide (`lucide-react`) | `X` | `width` / `height` override `size` | honors `strokeWidth` |
+| Tabler (`@tabler/icons-react`) | `IconX` | `width` / `height` override `size` | its prop is `stroke`; `strokeWidth` from rest props wins |
+| Phosphor (`@phosphor-icons/react`) | `X` | `width` / `height` | fill-based, `strokeWidth` has no effect |
+| Heroicons (`@heroicons/react/24/outline`) | `XMarkIcon` | `width` / `height` | honors `strokeWidth` |
+
+The libraries are used here as devDependencies only. Install the ones you need in your own app.
+
+## Use it in `Icon`
+
+```tsx
+import { X } from 'lucide-react';
+import { Icon } from 'design-system-test';
+
+<Icon icon={X} size="lg" />
+<Icon icon={X} label="Close" /> // labeled, wrapped in Radix AccessibleIcon
+```
+
+<Canvas of={Examples.InIcon} />
+
+## Use it in `IconButton`
+
+`IconButton` takes the icon as content, so you always pass one. The accessible name comes from the required `aria-label`.
+
+```tsx
+<IconButton icon={XMarkIcon} aria-label="Close" />
+```
+
+<Canvas of={Examples.InIconButton} />
+
+## `createIcon`
+
+Turn a hand-drawn SVG into an `IconComponent`. Children are drawn on the grid (default `0 0 24 24`). The result paints with `currentColor`, is `aria-hidden` unless it gets `aria-label` or `aria-labelledby`, and props you pass win over its defaults.
+
+```tsx
+import { createIcon } from 'design-system-test';
+
+const Close = createIcon('Close', <path d="M5 5l14 14M19 5L5 19" />);
+const Wide = createIcon('Wide', <path d="…" />, { viewBox: '0 0 32 32' });
+```
+
+For filled shapes, set `fill="currentColor" stroke="none"` on the children.
+
+## `IconProvider`
+
+Replace the default glyphs for a subtree. Provide any of the 11 roles: `close`, `check`, `minus`, `plus`, `alert`, `info`, `success`, `warning`, `chevron-down`, `chevron-left`, `chevron-right`. Nested providers merge, and the inner one wins per role. Define the `icons` map at module level or memoize it, because the merged value is memoized on its identity. Values cannot be `null`. A provider changes only the drawing, never size, stroke, color or ARIA.
+
+```tsx
+const icons = { close: X, check: Check, success: CircleCheck };
+
+<IconProvider icons={icons}>
+  <App />
+</IconProvider>
+```
+
+<Canvas of={Examples.ProviderWithLucide} />
+
+## Override props and `useIcon`
+
+Resolution order: the override prop, then the nearest provider, then the default glyph. `useIcon(role, override?)` exposes the same order, so your own components can respect the provider. `null` is allowed only on `Alert`'s `icon`, where the title and role still carry the severity.
+
+## Sizing
+
+| Size | Px | Stroke |
+| --- | --- | --- |
+| `sm` | 12 | 2 |
+| `md` (default) | 16 | 2 |
+| `lg` | 20 | 1.5 |
+| number | any | 2 up to 16 px, 1.5 above |
+
+The system passes `width`, `height` and `strokeWidth` to every icon. That keeps lines at 1 px or more at small sizes.
+
+## What the wrapper does not normalize
+
+- **Phosphor** is fill-based. `strokeWidth` has no effect. Pick the weight in a wrapper: `(p) => <X {...p} weight="bold" />`.
+- **Heroicons** honors `strokeWidth`, so it is drawn at the system weight and not its built-in 1.5 at small sizes. Phosphor's weights and Heroicons' solid/outline variants are your choice.
+- **Tabler** uses `stroke` for its own weight. The system `strokeWidth` wins because it is spread last.
+- To keep a library's own weight, set the stroke after the spread: `const Close = (p: IconComponentProps) => <X {...p} strokeWidth={1.75} />`.
