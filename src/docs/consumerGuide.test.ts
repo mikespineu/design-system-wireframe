@@ -28,3 +28,13 @@ describe('consumer guide', () => {
     expect(guide).toContain('data-theme');
   });
 });
+
+describe('consumer guide exported components', () => {
+  it('lists only names that src/index.ts really exports', async () => {
+    const line = guide.split('\n').find((l) => l.startsWith('Exported components:')) ?? '';
+    const names = [...line.matchAll(/`(\w+)`/g)].map((m) => m[1] as string);
+    expect(names.length).toBeGreaterThan(0);
+    const api = (await import('../index')) as Record<string, unknown>;
+    for (const name of names) expect(api).toHaveProperty(name);
+  });
+});

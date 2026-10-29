@@ -77,7 +77,7 @@ export function Example() {
 }
 ```
 
-Exported components: Alert, Breadcrumb, Button, ButtonGroup, Checkbox, Dialog, Drawer, Grid, Icon, IconButton, InfoTip, Input, Popover, RadioGroup, SegmentedControl, Select, Slider, Stack, Switch, Tabs, Tag, Textarea, TileGroup, Toast, Tooltip. The hook `useMediaQuery` is exported too. The full list of props, states and keyboard behavior is in [Storybook](https://ds.mikespin.dev/), one story per state.
+Exported components: `Alert`, `Breadcrumb`, `Button`, `ButtonGroup`, `Checkbox`, `Dialog`, `Drawer`, `Grid`, `Icon`, `IconButton`, `InfoTip`, `Input`, `Popover`, `RadioGroup`, `SegmentedControl`, `Select`, `Slider`, `Stack`, `Switch`, `Tabs`, `Tag`, `Textarea`, `TileGroup`, `ToastProvider`, `Toaster`, `Tooltip`. The hooks `useMediaQuery` and `useToast` are exported too. The full list of props, states and keyboard behavior is in [Storybook](https://ds.mikespin.dev/), one story per state.
 
 Conventions:
 
