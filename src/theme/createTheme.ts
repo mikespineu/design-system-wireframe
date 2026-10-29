@@ -116,11 +116,16 @@ function colorRoles(scale: ColorScale, tint: (hex: string) => string, mode: 'lig
   if (mode === 'light') {
     const r = ramp.light
     const bg = tint(r.white)
-    const primaryStep = (([500, 600, 700, 800, 900] as const).find((s) => contrastRatio(at(s), '#ffffff') >= 4.5) ?? 900)
+    const primaryStep = (([500, 600, 700, 800, 900] as const).find((s) => contrastRatio(at(s), bg) >= 4.5) ?? 900)
     const hoverStep = (Math.min(900, primaryStep + 100) as ScaleStep)
-    const primary = at(primaryStep)
-    const hover =
-      hoverStep === primaryStep ? oklchToHex({ ...scale[900], l: scale[900].l - 0.08 }) : at(hoverStep)
+    // primary-contrast is the (possibly tinted) ground, so every fill is verified against that exact value.
+    const primary = ensureContrast(at(primaryStep), bg, 4.5, 'darker')
+    const hover = ensureContrast(
+      hoverStep === primaryStep ? oklchToHex({ ...scale[900], l: scale[900].l - 0.08 }) : at(hoverStep),
+      bg,
+      4.5,
+      'darker',
+    )
     const emphasis = tint(r.black)
     const grounds = [bg, tint(r.s100), tint(r.s50), '#edf5ef', '#fbedec']
     return {
@@ -160,6 +165,9 @@ function colorRoles(scale: ColorScale, tint: (hex: string) => string, mode: 'lig
   const bg = tint(ramp.light.s900)
   const primary = at(100)
   const grounds = [bg, tint(d.fill), tint(d.subtle), '#13261a', '#2d1414']
+  const hover = at(200)
+  // Darken the 900 step until it reads on both the primary and hover fills.
+  const primaryContrast = ensureOnAll(at(900), [primary, hover], 4.5, 'darker')
   return {
     '--ds-color-background': bg,
     '--ds-color-surface': bg,
@@ -180,8 +188,8 @@ function colorRoles(scale: ColorScale, tint: (hex: string) => string, mode: 'lig
     '--ds-color-overlay': 'rgb(0 0 0 / 0.7)',
     '--ds-color-inverse': tint(d.inverse),
     '--ds-color-primary': primary,
-    '--ds-color-primary-hover': at(200),
-    '--ds-color-primary-contrast': at(900),
+    '--ds-color-primary-hover': hover,
+    '--ds-color-primary-contrast': primaryContrast,
     '--ds-color-info': tint(d.text),
     '--ds-color-info-border': tint(d.infoBorder),
     '--ds-color-info-bg': tint(d.subtle),

@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import * as lib from '../index'
 import { themeRoleGroups, themeRoles } from '../styles/roles'
+import { checkContrast } from './checkContrast'
 import { contrastRatio } from './color'
 import { createTheme, type ThemeConfig } from './createTheme'
 
@@ -122,5 +123,13 @@ describe('createTheme', () => {
   it('exports createTheme and checkContrast from the package entry', () => {
     expect(lib.createTheme).toBe(createTheme)
     expect(typeof lib.checkContrast).toBe('function')
+  })
+
+  it('picks primary against the tinted primary-contrast (green brand, magenta neutral)', () => {
+    const t = createTheme({ ...base, brand: '#00ff00', neutral: '#ff00ff', mode: 'both' })
+    expect(checkContrast(t).failures).toEqual([])
+    const v = t.blocks[0]!.values
+    expect(contrastRatio(v['--ds-color-primary-contrast']!, v['--ds-color-primary']!)).toBeGreaterThanOrEqual(4.5)
+    expect(contrastRatio(v['--ds-color-primary-contrast']!, v['--ds-color-primary-hover']!)).toBeGreaterThanOrEqual(4.5)
   })
 })
