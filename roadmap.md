@@ -67,6 +67,20 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `Main.dc.html` shows the DS-27 color roles, font-weight roles, every type step in `tokens.css` (incl. body-sm, body-xs, ui sizes, h4/h5), and the radius and shadow steps
     - `Form.dc.html` uses the shipped Field, Select and RadioGroup look, and no board mentions the deleted `Components.dc.html` (incl. `Tabs.dc.html`)
     - `canvasBoards.test.ts` fails on any hex outside a board's token block; canvas README audit table updated
+- [ ] **DS-64 Storybook theme switcher (addon).** Storybook-only tooling, not a design-system component: add `@storybook/addon-themes` as a devDependency and register `withThemeByDataAttribute` on `data-theme` in `.storybook/preview.tsx`, replacing the hard-coded `data-theme="default"`. Its toolbar lists `default`, `dark`, `bold` and `bold-dark`, and `.storybook/` loads the opt-in theme CSS and fonts from DS-12. Nothing ships in the package.
+  - type: build · has_ui: yes · depends_on: DS-2, DS-12 · needs_human: no · status: todo
+  - done_when:
+    - Storybook toolbar (via `@storybook/addon-themes`) switches between `default`, `dark`, `bold` and `bold-dark`; the choice persists across stories and docs pages
+    - Every existing component story renders in all four themes without console errors (tested), matching the approved spec `docs/specs/Themes.md`
+    - Storybook-only: no new folder in `src/components/`, nothing added to `src/index.ts`, and the library build output (`dist/`) is unchanged; the addon is a devDependency only
+    - A Storybook "Themes" docs page shows the four themes side by side on the same components, like the canvas
+- [ ] **DS-65 "Create your own theme" guide.** A step-by-step guide in `docs/theming-guide.md` for consumers who want their own look: pick a brand color, neutrals, fonts, radius and shadow, generate the `[data-theme]` block with `createTheme()`, add an override block for roles the generator does not cover, check it with `checkContrast()`, ship light and dark, and turn it on with `data-theme`. Uses the `bold` theme from DS-12 as the worked example.
+  - type: docs · has_ui: no · depends_on: DS-12, DS-28 · needs_human: no · status: todo
+  - done_when:
+    - Guide covers every step: choosing values, `createTheme()` input, override block, `checkContrast()`, light and dark, applying `data-theme`, loading fonts
+    - Every code sample matches the real `ThemeConfig` type and runs (checked by a test that imports the samples)
+    - Rebuilds the `bold` theme from its spec input as the worked example
+    - Linked from `docs/consumer-guide.md` and the README
 
 ### Epic: Components
 
