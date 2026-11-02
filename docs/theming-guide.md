@@ -2,7 +2,7 @@
 
 A step-by-step guide for consumers who want their own look. You pick a brand color, neutrals, fonts, radius and shadow, generate a `[data-theme]` block with `createTheme()`, add an override block for the roles the generator does not cover, check contrast with `checkContrast()`, ship a light and a dark theme, and turn it on with `data-theme`.
 
-The worked example is the `bold` theme that ships with the package (`design-system-test/themes/bold.css`). Every step rebuilds it from its spec input (`docs/specs/Themes.md`, "createTheme() input"), so at the end you have the same CSS the package ships. Every TypeScript sample below is a real file in [`docs/theming-guide/samples/`](theming-guide/samples/). A test imports and runs them, typechecks them against `ThemeConfig`, and fails if a code block in this guide differs from its file or if the rebuilt `bold` CSS differs from `src/themes/bold.css`.
+The worked example is the `bold` theme that ships with the package (`design-system-test/themes/bold.css`). Every step rebuilds it from its spec input (`docs/specs/Themes.md`, "createTheme() input"), so at the end you have the same CSS the package ships. Every TypeScript sample below is a real file in [`docs/theming-guide/samples/`](theming-guide/samples/). `npm run typecheck` checks them against `ThemeConfig`. A test imports and runs them, and fails if a code block in this guide differs from its file or if the rebuilt `bold` CSS differs from `src/themes/bold.css`.
 
 Read the [consumer guide](consumer-guide.md#apply-a-theme) first for how themes are applied and the [theming contract](specs/Theming.md) for the 87 roles.
 

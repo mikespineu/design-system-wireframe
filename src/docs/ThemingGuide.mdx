@@ -1,0 +1,7 @@
+import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import guide from '../../docs/theming-guide.md?raw';
+import { prepareGuideForStorybook } from './themingGuide';
+
+<Meta title="Foundations/Theming/Create your own theme" />
+
+<Markdown>{prepareGuideForStorybook(guide)}</Markdown>
