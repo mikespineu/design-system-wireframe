@@ -515,6 +515,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-66** Starter guide & install accuracy — https://github.com/mikespineu/design-system-wireframe/pull/110
 - **DS-67** README screenshot script & themed images — https://github.com/mikespineu/design-system-wireframe/pull/107
 - **DS-63** Canvas boards on role tokens — https://github.com/mikespineu/design-system-wireframe/pull/104
 - **DS-64** Storybook theme switcher (addon) — https://github.com/mikespineu/design-system-wireframe/pull/103
