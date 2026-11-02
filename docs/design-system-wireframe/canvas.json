@@ -135,6 +135,13 @@
       "w": 1440,
       "x": 27360,
       "y": 0
+    },
+    "Themes.dc.html": {
+      "h": 11600,
+      "title": "Themes",
+      "w": 1440,
+      "x": 28880,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -174,7 +181,8 @@
     "Button.dc.html",
     "Toast.dc.html",
     "Drawer.dc.html",
-    "Typography.dc.html"
+    "Typography.dc.html",
+    "Themes.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"

@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Themes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<!-- Bold theme fonts (requested under Token requests in docs/specs/Themes.md) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700;800&amp;family=Figtree:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+/* house chrome (not themed) */
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
+.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:820px;font-size:16px;line-height:26px;color:#404040}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
+.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column;min-width:0}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab-b{display:flex;flex-direction:column;gap:8px;padding:24px}
+.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.kv{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#404040}
+.kv li{display:flex;flex-direction:column;gap:2px;padding-bottom:6px;border-bottom:1px solid #EEEEEE}
+.kv b{font-weight:500;color:#000000;word-break:break-all}
+.note{margin:0;font-size:13px;line-height:20px;color:#595959}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:left;height:40px;padding:0 12px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
+.tbl td{height:40px;padding:0 12px 0 0;border-bottom:1px solid #E0E0E0;color:#404040;vertical-align:middle}
+.tbl td.m{font-family:'Red Hat Mono',monospace;font-size:12px}
+.tbl tr.grp td{height:32px;font-family:'Red Hat Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#000000;border-bottom:1px solid #000000}
+.sw{display:inline-block;width:14px;height:14px;border:1px solid #C7C7C7;vertical-align:-3px;margin-right:6px}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
+.code{margin:0;padding:16px;background:#F7F7F7;border:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:18px;color:#262626;white-space:pre-wrap;word-break:break-word}
+.fail{color:#A3302B}
+
+/* ===== Theme contract: default role values (Wireframe). Every themed panel reads only these. ===== */
+.th{
+  --ds-color-background:#FFFFFF;--ds-color-surface:#FFFFFF;--ds-color-surface-subtle:#F7F7F7;--ds-color-fill:#EEEEEE;
+  --ds-color-divider:#E0E0E0;--ds-color-border:#C7C7C7;--ds-color-disabled:#A3A3A3;--ds-color-placeholder:#767676;
+  --ds-color-text-muted:#595959;--ds-color-text:#404040;--ds-color-text-strong:#262626;--ds-color-text-emphasis:#000000;
+  --ds-color-text-inverse:#FFFFFF;--ds-color-border-strong:#000000;--ds-color-icon:#000000;--ds-color-focus:#000000;
+  --ds-color-overlay:rgb(0 0 0 / 0.5);--ds-color-inverse:#141414;
+  --ds-color-primary:#000000;--ds-color-primary-hover:#262626;--ds-color-primary-contrast:#FFFFFF;
+  --ds-color-info:#404040;--ds-color-info-border:#C7C7C7;--ds-color-info-bg:#F7F7F7;
+  --ds-color-success:#2E6B45;--ds-color-success-border:#9CC7AB;--ds-color-success-bg:#EDF5EF;
+  --ds-color-error:#A3302B;--ds-color-error-border:#E3AAA6;--ds-color-error-bg:#FBEDEC;
+  --ds-font-mono:'Red Hat Mono',ui-monospace,monospace;
+  --ds-font-heading:var(--ds-font-mono);--ds-font-body:'Red Hat Text',system-ui,sans-serif;--ds-font-label:var(--ds-font-mono);
+  --ds-font-weight-regular:400;--ds-font-weight-medium:500;--ds-font-weight-bold:700;
+  --ds-text-display-size:4.5rem;--ds-text-display-line-height:1;--ds-text-display-tracking:-0.04em;
+  --ds-text-h1-size:3rem;--ds-text-h1-line-height:1.1;--ds-text-h1-tracking:-0.03em;
+  --ds-text-h2-size:2rem;--ds-text-h2-line-height:1.2;--ds-text-h2-tracking:-0.02em;
+  --ds-text-h3-size:1.375rem;--ds-text-h3-line-height:29px;--ds-text-h3-tracking:0;
+  --ds-text-heading-weight:var(--ds-font-weight-medium);--ds-text-heading-transform:none;
+  --ds-text-body-lg-size:1.125rem;--ds-text-body-lg-line-height:1.6;
+  --ds-text-body-size:1rem;--ds-text-body-line-height:26px;
+  --ds-text-body-sm-size:0.9375rem;--ds-text-body-sm-line-height:24px;
+  --ds-text-body-xs-size:0.875rem;--ds-text-body-xs-line-height:1.5;
+  --ds-text-caption-size:0.8125rem;--ds-text-caption-line-height:20px;
+  --ds-text-label-size:0.75rem;--ds-text-label-line-height:16px;--ds-text-label-weight:var(--ds-font-weight-medium);--ds-text-label-tracking:0.08em;--ds-text-label-transform:uppercase;
+  --ds-text-ui-size:0.875rem;--ds-text-ui-line-height:20px;--ds-text-ui-weight:var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size:0.75rem;--ds-text-ui-sm-line-height:16px;
+  --ds-text-ui-xs-size:0.6875rem;--ds-text-ui-xs-line-height:16px;
+  --ds-radius-sm:0;--ds-radius-md:0;--ds-radius-lg:0;--ds-radius-full:0;
+  --ds-shadow-sm:none;--ds-shadow-md:none;--ds-shadow-lg:none;
+  --ds-border-width:1px;--ds-border-width-strong:2px;--ds-focus-width:2px;--ds-focus-offset:2px;--ds-control-height:44px;
+  --ds-motion:120ms cubic-bezier(0.2, 0, 0, 1);--ds-photo-filter:grayscale(1) contrast(1.1);
+  background:var(--ds-color-background);color:var(--ds-color-text);font-family:var(--ds-font-body);
+  padding:32px;box-sizing:border-box;
+}
+
+/* ===== dark: DS-27 color values kept (all required pairs pass); refinement: photos dimmed ===== */
+.t-dark{color-scheme:dark;
+  --ds-color-background:#141414;--ds-color-surface:#141414;--ds-color-surface-subtle:#1F1F1F;--ds-color-fill:#262626;
+  --ds-color-divider:#333333;--ds-color-border:#737373;--ds-color-disabled:#595959;--ds-color-placeholder:#8F8F8F;
+  --ds-color-text-muted:#A3A3A3;--ds-color-text:#C7C7C7;--ds-color-text-strong:#E0E0E0;--ds-color-text-emphasis:#F7F7F7;
+  --ds-color-text-inverse:#141414;--ds-color-border-strong:#F7F7F7;--ds-color-icon:#F7F7F7;--ds-color-focus:#F7F7F7;
+  --ds-color-overlay:rgb(0 0 0 / 0.7);--ds-color-inverse:#EEEEEE;
+  --ds-color-primary:#F7F7F7;--ds-color-primary-hover:#E0E0E0;--ds-color-primary-contrast:#141414;
+  --ds-color-info:#C7C7C7;--ds-color-info-border:#595959;--ds-color-info-bg:#1F1F1F;
+  --ds-color-success:#9CC7AB;--ds-color-success-border:#2E6B45;--ds-color-success-bg:#13261A;
+  --ds-color-error:#E3AAA6;--ds-color-error-border:#A3302B;--ds-color-error-bg:#2D1414;
+  --ds-photo-filter:grayscale(1) contrast(1.1) brightness(0.85)}
+
+/* ===== bold + bold-dark: shared non-color roles (fonts, weights, type scale, radius, shape) ===== */
+.t-bold,.t-bold-dark{
+  --ds-font-heading:'Bricolage Grotesque','Arial Black',system-ui,sans-serif;--ds-font-body:'Figtree',system-ui,sans-serif;
+  --ds-font-label:'Figtree',system-ui,sans-serif;--ds-font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --ds-font-weight-regular:400;--ds-font-weight-medium:600;--ds-font-weight-bold:700;
+  --ds-text-display-size:5rem;--ds-text-display-line-height:0.95;--ds-text-display-tracking:-0.02em;
+  --ds-text-h1-size:3.5rem;--ds-text-h1-line-height:1;--ds-text-h1-tracking:-0.015em;
+  --ds-text-h2-size:2.25rem;--ds-text-h2-line-height:1.1;--ds-text-h2-tracking:-0.01em;
+  --ds-text-h3-size:1.5rem;--ds-text-h3-line-height:28px;--ds-text-h3-tracking:0;
+  --ds-text-heading-weight:800;--ds-text-heading-transform:uppercase;
+  --ds-text-body-lg-size:1.25rem;--ds-text-body-lg-line-height:1.5;
+  --ds-text-body-size:1.0625rem;--ds-text-body-line-height:28px;
+  --ds-text-body-sm-size:1rem;--ds-text-body-sm-line-height:24px;
+  --ds-text-body-xs-size:0.9375rem;--ds-text-body-xs-line-height:1.5;
+  --ds-text-caption-size:0.875rem;--ds-text-caption-line-height:20px;
+  --ds-text-label-size:0.875rem;--ds-text-label-line-height:20px;--ds-text-label-weight:var(--ds-font-weight-bold);--ds-text-label-tracking:0.01em;--ds-text-label-transform:none;
+  --ds-text-ui-size:1rem;--ds-text-ui-line-height:24px;--ds-text-ui-weight:var(--ds-font-weight-bold);
+  --ds-text-ui-sm-size:0.8125rem;--ds-text-ui-sm-line-height:18px;
+  --ds-text-ui-xs-size:0.75rem;--ds-text-ui-xs-line-height:16px;
+  --ds-radius-sm:8px;--ds-radius-md:14px;--ds-radius-lg:24px;--ds-radius-full:9999px;
+  --ds-shadow-sm:0 2px 0 #140E3D;--ds-shadow-md:0 4px 0 #140E3D;--ds-shadow-lg:8px 8px 0 #140E3D;
+  --ds-border-width:2px;--ds-border-width-strong:3px;--ds-focus-width:3px;--ds-focus-offset:2px;--ds-control-height:48px;
+  --ds-motion:160ms cubic-bezier(0.34, 1.56, 0.64, 1);--ds-photo-filter:none}
+/* bold (light): ultramarine brand, lavender ground, indigo ink */
+.t-bold{
+  --ds-color-background:#F4F1FF;--ds-color-surface:#FFFFFF;--ds-color-surface-subtle:#EBE6FC;--ds-color-fill:#E3DCFB;
+  --ds-color-divider:#D5CCF5;--ds-color-border:#8478B8;--ds-color-disabled:#B3AAD9;--ds-color-placeholder:#63579A;
+  --ds-color-text-muted:#554A8A;--ds-color-text:#2F2766;--ds-color-text-strong:#221B52;--ds-color-text-emphasis:#140E3D;
+  --ds-color-text-inverse:#F4F1FF;--ds-color-border-strong:#140E3D;--ds-color-icon:#140E3D;--ds-color-focus:#4318D1;
+  --ds-color-overlay:rgb(20 14 61 / 0.6);--ds-color-inverse:#140E3D;
+  --ds-color-primary:#4318D1;--ds-color-primary-hover:#3510A8;--ds-color-primary-contrast:#FFFFFF;
+  --ds-color-info:#2F2766;--ds-color-info-border:#D5CCF5;--ds-color-info-bg:#EBE6FC;
+  --ds-color-success:#2E6B45;--ds-color-success-border:#9CC7AB;--ds-color-success-bg:#EDF5EF;
+  --ds-color-error:#A3302B;--ds-color-error-border:#E3AAA6;--ds-color-error-bg:#FBEDEC}
+/* bold-dark: indigo night ground, raised indigo surface, light violet brand */
+.t-bold-dark{color-scheme:dark;
+  --ds-color-background:#120D2E;--ds-color-surface:#19133A;--ds-color-surface-subtle:#211A4A;--ds-color-fill:#2A2259;
+  --ds-color-divider:#3A3170;--ds-color-border:#7C70C2;--ds-color-disabled:#4D4485;--ds-color-placeholder:#9A90D6;
+  --ds-color-text-muted:#B3ABE6;--ds-color-text:#D2CCF5;--ds-color-text-strong:#E3DFFA;--ds-color-text-emphasis:#F5F3FF;
+  --ds-color-text-inverse:#120D2E;--ds-color-border-strong:#F5F3FF;--ds-color-icon:#F5F3FF;--ds-color-focus:#A08CFF;
+  --ds-color-overlay:rgb(8 5 26 / 0.75);--ds-color-inverse:#E3DFFA;
+  --ds-color-primary:#A08CFF;--ds-color-primary-hover:#8B73FF;--ds-color-primary-contrast:#120D2E;
+  --ds-color-info:#D2CCF5;--ds-color-info-border:#4D4485;--ds-color-info-bg:#211A4A;
+  --ds-color-success:#9CC7AB;--ds-color-success-border:#2E6B45;--ds-color-success-bg:#13261A;
+  --ds-color-error:#E3AAA6;--ds-color-error-border:#A3302B;--ds-color-error-bg:#2D1414;
+  --ds-shadow-sm:0 2px 0 rgb(0 0 0 / 0.6);--ds-shadow-md:0 4px 0 rgb(0 0 0 / 0.6);--ds-shadow-lg:8px 8px 0 #4318D1;
+  --ds-photo-filter:brightness(0.9)}
+
+/* ===== Components, styled through roles only (same CSS as Theming.dc.html) ===== */
+.set{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.col{display:flex;flex-direction:column;gap:20px;min-width:0}
+.stk{display:flex;flex-direction:column;gap:8px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.h3{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:var(--ds-text-h3-size);line-height:var(--ds-text-h3-line-height);letter-spacing:var(--ds-text-h3-tracking);text-transform:var(--ds-text-heading-transform);color:var(--ds-color-text-emphasis)}
+.p{margin:0;font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text)}
+.btn{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;height:var(--ds-control-height);padding:0 24px;border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-md);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);white-space:nowrap;cursor:pointer}
+.pri{background:var(--ds-color-primary);border-color:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.pri.hov{background:var(--ds-color-primary-hover);border-color:var(--ds-color-primary-hover)}
+.pri.dis{background:var(--ds-color-divider);border-color:var(--ds-color-divider);color:var(--ds-color-placeholder);cursor:not-allowed}
+.sec2{background:var(--ds-color-surface);border-color:var(--ds-color-border-strong);color:var(--ds-color-text-emphasis)}
+.sec2.hov{background:var(--ds-color-fill)}
+.sec2.dis{border-color:var(--ds-color-border);color:var(--ds-color-placeholder);cursor:not-allowed}
+.gh{padding:0 16px;background:transparent;color:var(--ds-color-text-emphasis);text-decoration:underline;text-underline-offset:4px}
+.foc{outline:var(--ds-focus-width) solid var(--ds-color-focus);outline-offset:var(--ds-focus-offset)}
+.fld{display:flex;flex-direction:column;gap:8px}
+.lbl{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-emphasis)}
+.in{box-sizing:border-box;display:flex;align-items:center;width:100%;height:var(--ds-control-height);padding:0 12px;border:var(--ds-border-width) solid var(--ds-color-border);border-radius:var(--ds-radius-md);background:var(--ds-color-surface);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text-emphasis)}
+.in .ph{color:var(--ds-color-placeholder)}
+.in.inv{border-width:var(--ds-border-width-strong);border-color:var(--ds-color-error)}
+.in.dis{border-color:var(--ds-color-divider);background:var(--ds-color-surface-subtle);color:var(--ds-color-placeholder)}
+.in.hov,.in.foc{border-color:var(--ds-color-border-strong)}
+.hint{font-family:var(--ds-font-body);font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);color:var(--ds-color-text-muted)}
+.err{display:flex;align-items:center;gap:6px;font-family:var(--ds-font-body);font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);font-weight:var(--ds-font-weight-medium);color:var(--ds-color-error)}
+.cbr{display:inline-flex;align-items:center;gap:12px;min-height:var(--ds-control-height);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text-emphasis)}
+.cb{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border:var(--ds-border-width-strong) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-sm);background:var(--ds-color-surface);color:var(--ds-color-primary-contrast)}
+.cb svg{width:16px;height:16px}
+.cb.on{background:var(--ds-color-primary);border-color:var(--ds-color-primary)}
+.cb.hov{background:var(--ds-color-fill)}
+.cb.on.hov{background:var(--ds-color-primary-hover);border-color:var(--ds-color-primary-hover)}
+.cb.inv{border-color:var(--ds-color-error)}
+.cb.inv.on{background:var(--ds-color-error)}
+.cb.dis{border-color:var(--ds-color-disabled);background:var(--ds-color-surface-subtle)}
+.cb.dis.on{background:var(--ds-color-disabled)}
+.tag{box-sizing:border-box;display:inline-flex;align-items:center;height:28px;padding:0 10px;border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-sm);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);font-weight:var(--ds-font-weight-regular)}
+.tag.so{background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.tag.su{background:var(--ds-color-fill);color:var(--ds-color-text-strong)}
+.tag.ou{border-color:var(--ds-color-border-strong);color:var(--ds-color-text-emphasis)}
+.badge{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;height:22px;min-width:22px;padding:0 6px;border-radius:var(--ds-radius-full);background:var(--ds-color-primary);color:var(--ds-color-primary-contrast);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-xs-size);line-height:var(--ds-text-ui-xs-line-height);font-weight:var(--ds-font-weight-medium)}
+.al{display:flex;gap:12px;padding:16px;border:var(--ds-border-width) solid;border-radius:var(--ds-radius-lg)}
+.al svg{flex:none}
+.al.ok{border-color:var(--ds-color-success-border);background:var(--ds-color-success-bg);color:var(--ds-color-success)}
+.al.er{border-color:var(--ds-color-error-border);background:var(--ds-color-error-bg);color:var(--ds-color-error)}
+.al-c{display:flex;flex-direction:column;gap:4px}
+.al-t{font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight)}
+.al.er .al-t{font-weight:var(--ds-font-weight-bold)}
+.al-b{font-family:var(--ds-font-body);font-size:var(--ds-text-body-xs-size);line-height:var(--ds-text-body-xs-line-height);color:var(--ds-color-text)}
+.al.er .al-b{color:var(--ds-color-text-strong)}
+.sl{display:flex;align-items:center;height:var(--ds-control-height);margin-top:28px}
+.sl-tr{position:relative;flex:1;height:var(--ds-border-width-strong);border-radius:var(--ds-radius-full);background:var(--ds-color-placeholder)}
+.sl-rg{position:absolute;left:0;top:50%;width:60%;height:4px;transform:translateY(-50%);border-radius:var(--ds-radius-full);background:var(--ds-color-primary)}
+.sl-th{position:absolute;left:60%;top:50%;box-sizing:border-box;width:16px;height:16px;transform:translate(-50%,-50%);border:var(--ds-border-width-strong) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-full);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-sm)}
+.sl-bub{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);padding:4px 8px;border-radius:var(--ds-radius-sm);background:var(--ds-color-inverse);color:var(--ds-color-text-inverse);font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);font-weight:var(--ds-font-weight-medium);white-space:nowrap;box-shadow:var(--ds-shadow-md)}
+.scr{padding:20px;background:var(--ds-color-overlay)}
+.dlg{background:var(--ds-color-surface);border:var(--ds-border-width) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-lg);box-shadow:var(--ds-shadow-lg);overflow:hidden}
+.dlg-h{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:24px 24px 0}
+.dlg-hd{display:flex;flex-direction:column;gap:8px;min-width:0}
+.dlg-d{margin:0;font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text-muted)}
+.dlg-x{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:-4px -8px 0 0;border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-sm);background:var(--ds-color-surface);color:var(--ds-color-icon)}
+.dlg-x.foc{border-color:var(--ds-color-border-strong)}
+.dlg-b{padding:16px 24px 24px;font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text)}
+.dlg-f{display:flex;justify-content:flex-end;gap:12px;padding:16px 24px;border-top:var(--ds-border-width) solid var(--ds-color-divider)}
+.cap{font-family:var(--ds-font-mono);font-size:11px;line-height:16px;color:var(--ds-color-text-muted)}
+.cell{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.sgrid{display:grid;grid-template-columns:96px repeat(4,minmax(0,1fr));gap:16px 12px;align-items:center}
+.sgrid .rh{font-family:var(--ds-font-mono);font-size:11px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-emphasis)}
+.sgrid .btn{padding:0 14px}
+.pimg{display:block;width:100%;height:auto;filter:var(--ds-photo-filter)}
+.typ{width:100%;border-collapse:collapse}
+.typ td{padding:10px 12px 10px 0;border-bottom:var(--ds-border-width) solid var(--ds-color-divider);vertical-align:middle}
+.typ td.m{font-family:var(--ds-font-mono);font-size:11px;line-height:16px;color:var(--ds-color-text-muted);white-space:nowrap}
+.hd{font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);text-transform:var(--ds-text-heading-transform);color:var(--ds-color-text-emphasis)}
+.box{display:block;width:44px;height:44px;box-sizing:border-box;border:var(--ds-border-width-strong) solid var(--ds-color-border-strong);background:var(--ds-color-surface)}
+.shd{display:block;width:52px;height:52px;box-sizing:border-box;border:var(--ds-border-width) solid var(--ds-color-divider);background:var(--ds-color-surface);border-radius:var(--ds-radius-sm)}
+/* House layout for the four-up comparison: applies to every theme equally */
+.quad .th{padding:16px}
+.quad .set{grid-template-columns:minmax(0,1fr)}
+.quad .btn{padding:0 16px}
+.quad .scr{padding:12px}
+.quad .dlg-h{padding:16px 16px 0}
+.quad .dlg-b{padding:12px 16px 16px}
+.quad .dlg-f{flex-wrap:wrap;padding:12px 16px}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 11600px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<span>Design System Wireframe</span>
+<span>Themes · DS-2 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Themes</h1>
+<p style="margin: 0; max-width: 860px; font-size: 18px; line-height: 1.6; color: #404040">Four themes on the DS-26 contract. <b>default</b> is today's Wireframe, unchanged. <b>dark</b> is its dark mode (DS-27 colors kept, photos dimmed). <b>bold</b> and <b>bold-dark</b> prove a consumer can change the whole look: an ultramarine brand, lavender and indigo neutrals, Bricolage Grotesque / Figtree / IBM Plex Mono, uppercase heavy headings with sentence-case labels, round corners, hard offset shadows, 2 px lines and 48 px controls. Every panel renders the same markup and the same component CSS; only the role block on the panel root differs.</p>
+</header>
+
+<!-- 01 SIDE BY SIDE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Four themes, one component set</h2></div>
+<p class="sec-d">Heading + body, Button (primary, secondary with focus-visible, ghost), TextField (default, invalid), Checkbox (checked, focus-visible), Tag (solid, subtle, outline) + Badge, Alert (success, error), Slider (thumb focus-visible with value bubble), Dialog on its overlay. Identical markup in all four artboards.</p>
+<div class="grid4 quad">
+
+<div class="ab"><div class="ab-h"><span>default</span><span>no attribute</span></div>
+<div class="th">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div><div class="ab-f">Wireframe. White ground, black ink and action, Red Hat Mono titles and uppercase labels, square, flat, 44 px.</div></div>
+
+<div class="ab"><div class="ab-h"><span>dark</span><span>data-theme="dark"</span></div>
+<div class="th t-dark">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div><div class="ab-f">Same system, ground inverted. 30 DS-27 color values kept; photos dimmed to 85 % brightness.</div></div>
+
+<div class="ab"><div class="ab-h"><span>bold</span><span>data-theme="bold"</span></div>
+<div class="th t-bold">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div><div class="ab-f">Ultramarine #4318D1 on lavender #F4F1FF, indigo ink #140E3D. Uppercase 800 headings, sentence-case labels, 14 px corners, hard shadows, 48 px.</div></div>
+
+<div class="ab"><div class="ab-h"><span>bold-dark</span><span>data-theme="bold-dark"</span></div>
+<div class="th t-bold-dark">
+<div class="set">
+<div class="col">
+<div class="stk"><h3 class="h3">Order prints</h3><p class="p">Archival paper, shipped flat. Choose a format, then confirm.</p></div>
+<div class="row"><span class="btn pri">Continue</span><span class="btn sec2 foc">Cancel</span><span class="btn gh">Learn more</span></div>
+<div class="fld"><span class="lbl">Email</span><div class="in">ada@studio.com</div><span class="hint">Only used for the receipt.</span></div>
+<div class="fld"><span class="lbl">Postcode</span><div class="in inv">12</div><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Enter a 5-digit postcode.</span></div>
+<div class="row" style="gap:24px"><span class="cbr"><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>Print</span><span class="cbr"><span class="cb foc"></span>Framed</span></div>
+<div class="row"><span class="tag so">New</span><span class="tag su">Draft</span><span class="tag ou">Archived</span><span class="badge">3</span></div>
+</div>
+<div class="col">
+<div class="al ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="al-c"><span class="al-t">Order placed</span><span class="al-b">Prints ship in 3 working days.</span></span></div>
+<div class="al er"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 17.5v.5"/></svg><span class="al-c"><span class="al-t">Payment failed</span><span class="al-b">Your card was declined. Try another card.</span></span></div>
+<div class="sl"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"><span class="sl-bub">60</span></span></span></div>
+<div class="scr"><div class="dlg"><div class="dlg-h"><div class="dlg-hd"><h3 class="h3">Delete print?</h3><p class="dlg-d">It is removed from every collection.</p></div><span class="dlg-x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><div class="dlg-b">You can restore it from Trash for 30 days.</div><div class="dlg-f"><span class="btn sec2">Cancel</span><span class="btn pri">Delete</span></div></div></div>
+</div>
+</div>
+</div><div class="ab-f">Indigo night #120D2E with a raised surface #19133A, light violet brand #A08CFF with dark text, brand-colored hard shadow on the dialog.</div></div>
+
+</div>
+</section>
+
+<!-- 02 STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Interaction states · per theme</h2></div>
+<p class="sec-d">Every state reads a role, so it survives every theme. Rows: primary button, secondary button, text input, checkbox. Columns: rest, hover, focus-visible, disabled (checkbox: rest and checked, hover, focus and invalid checked, disabled). Same markup in all four artboards.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>default · states</span><span>no attribute</span></div>
+<div class="th"><div class="sgrid">
+<span class="rh">Primary</span>
+<div class="cell"><span class="btn pri">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn pri hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn pri foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn pri dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Secondary</span>
+<div class="cell"><span class="btn sec2">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn sec2 hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn sec2 foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn sec2 dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Input</span>
+<div class="cell" style="align-items:stretch"><div class="in"><span class="ph">Name</span></div><span class="cap">rest</span></div>
+<div class="cell" style="align-items:stretch"><div class="in hov">Ada</div><span class="cap">hover</span></div>
+<div class="cell" style="align-items:stretch"><div class="in foc">Ada</div><span class="cap">focus-visible</span></div>
+<div class="cell" style="align-items:stretch"><div class="in dis">Ada</div><span class="cap">disabled</span></div>
+<span class="rh">Invalid</span>
+<div class="cell" style="align-items:stretch"><div class="in inv">Ad</div><span class="cap">invalid</span></div>
+<div class="cell" style="align-items:stretch"><div class="in inv foc">Ad</div><span class="cap">invalid + focus</span></div>
+<div class="cell" style="grid-column:span 2"><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Error: enter a full name.</span><span class="cap">error message</span></div>
+<span class="rh">Checkbox</span>
+<div class="cell"><span class="row"><span class="cb"></span><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">rest · checked</span></div>
+<div class="cell"><span class="row"><span class="cb hov"></span><span class="cb on hov"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">hover</span></div>
+<div class="cell"><span class="row"><span class="cb foc"></span><span class="cb inv on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">focus · invalid</span></div>
+<div class="cell"><span class="row"><span class="cb dis"></span><span class="cb dis on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">disabled</span></div>
+</div></div></div>
+
+<div class="ab"><div class="ab-h"><span>dark · states</span><span>data-theme="dark"</span></div>
+<div class="th t-dark"><div class="sgrid">
+<span class="rh">Primary</span>
+<div class="cell"><span class="btn pri">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn pri hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn pri foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn pri dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Secondary</span>
+<div class="cell"><span class="btn sec2">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn sec2 hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn sec2 foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn sec2 dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Input</span>
+<div class="cell" style="align-items:stretch"><div class="in"><span class="ph">Name</span></div><span class="cap">rest</span></div>
+<div class="cell" style="align-items:stretch"><div class="in hov">Ada</div><span class="cap">hover</span></div>
+<div class="cell" style="align-items:stretch"><div class="in foc">Ada</div><span class="cap">focus-visible</span></div>
+<div class="cell" style="align-items:stretch"><div class="in dis">Ada</div><span class="cap">disabled</span></div>
+<span class="rh">Invalid</span>
+<div class="cell" style="align-items:stretch"><div class="in inv">Ad</div><span class="cap">invalid</span></div>
+<div class="cell" style="align-items:stretch"><div class="in inv foc">Ad</div><span class="cap">invalid + focus</span></div>
+<div class="cell" style="grid-column:span 2"><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Error: enter a full name.</span><span class="cap">error message</span></div>
+<span class="rh">Checkbox</span>
+<div class="cell"><span class="row"><span class="cb"></span><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">rest · checked</span></div>
+<div class="cell"><span class="row"><span class="cb hov"></span><span class="cb on hov"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">hover</span></div>
+<div class="cell"><span class="row"><span class="cb foc"></span><span class="cb inv on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">focus · invalid</span></div>
+<div class="cell"><span class="row"><span class="cb dis"></span><span class="cb dis on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">disabled</span></div>
+</div></div></div>
+
+<div class="ab"><div class="ab-h"><span>bold · states</span><span>data-theme="bold"</span></div>
+<div class="th t-bold"><div class="sgrid">
+<span class="rh">Primary</span>
+<div class="cell"><span class="btn pri">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn pri hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn pri foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn pri dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Secondary</span>
+<div class="cell"><span class="btn sec2">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn sec2 hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn sec2 foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn sec2 dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Input</span>
+<div class="cell" style="align-items:stretch"><div class="in"><span class="ph">Name</span></div><span class="cap">rest</span></div>
+<div class="cell" style="align-items:stretch"><div class="in hov">Ada</div><span class="cap">hover</span></div>
+<div class="cell" style="align-items:stretch"><div class="in foc">Ada</div><span class="cap">focus-visible</span></div>
+<div class="cell" style="align-items:stretch"><div class="in dis">Ada</div><span class="cap">disabled</span></div>
+<span class="rh">Invalid</span>
+<div class="cell" style="align-items:stretch"><div class="in inv">Ad</div><span class="cap">invalid</span></div>
+<div class="cell" style="align-items:stretch"><div class="in inv foc">Ad</div><span class="cap">invalid + focus</span></div>
+<div class="cell" style="grid-column:span 2"><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Error: enter a full name.</span><span class="cap">error message</span></div>
+<span class="rh">Checkbox</span>
+<div class="cell"><span class="row"><span class="cb"></span><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">rest · checked</span></div>
+<div class="cell"><span class="row"><span class="cb hov"></span><span class="cb on hov"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">hover</span></div>
+<div class="cell"><span class="row"><span class="cb foc"></span><span class="cb inv on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">focus · invalid</span></div>
+<div class="cell"><span class="row"><span class="cb dis"></span><span class="cb dis on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">disabled</span></div>
+</div></div></div>
+
+<div class="ab"><div class="ab-h"><span>bold-dark · states</span><span>data-theme="bold-dark"</span></div>
+<div class="th t-bold-dark"><div class="sgrid">
+<span class="rh">Primary</span>
+<div class="cell"><span class="btn pri">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn pri hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn pri foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn pri dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Secondary</span>
+<div class="cell"><span class="btn sec2">Save</span><span class="cap">rest</span></div>
+<div class="cell"><span class="btn sec2 hov">Save</span><span class="cap">hover</span></div>
+<div class="cell"><span class="btn sec2 foc">Save</span><span class="cap">focus-visible</span></div>
+<div class="cell"><span class="btn sec2 dis">Save</span><span class="cap">disabled</span></div>
+<span class="rh">Input</span>
+<div class="cell" style="align-items:stretch"><div class="in"><span class="ph">Name</span></div><span class="cap">rest</span></div>
+<div class="cell" style="align-items:stretch"><div class="in hov">Ada</div><span class="cap">hover</span></div>
+<div class="cell" style="align-items:stretch"><div class="in foc">Ada</div><span class="cap">focus-visible</span></div>
+<div class="cell" style="align-items:stretch"><div class="in dis">Ada</div><span class="cap">disabled</span></div>
+<span class="rh">Invalid</span>
+<div class="cell" style="align-items:stretch"><div class="in inv">Ad</div><span class="cap">invalid</span></div>
+<div class="cell" style="align-items:stretch"><div class="in inv foc">Ad</div><span class="cap">invalid + focus</span></div>
+<div class="cell" style="grid-column:span 2"><span class="err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4.5v4M8 11v.5"/></svg>Error: enter a full name.</span><span class="cap">error message</span></div>
+<span class="rh">Checkbox</span>
+<div class="cell"><span class="row"><span class="cb"></span><span class="cb on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">rest · checked</span></div>
+<div class="cell"><span class="row"><span class="cb hov"></span><span class="cb on hov"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">hover</span></div>
+<div class="cell"><span class="row"><span class="cb foc"></span><span class="cb inv on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">focus · invalid</span></div>
+<div class="cell"><span class="row"><span class="cb dis"></span><span class="cb dis on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span></span><span class="cap">disabled</span></div>
+</div></div></div>
+
+</div>
+</section>
+
+<!-- 03 KEYBOARD FOCUS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Keyboard focus · per theme</h2></div>
+<p class="sec-d">Focus-visible on every focusable part in the set. The ring is an outline in color-focus at focus-width with focus-offset, so it follows the radius and survives forced-colors mode. Text controls and the dialog close also switch their border to border-strong. Themes add no keys and never change focus order.</p>
+<div class="grid4">
+
+<div class="ab"><div class="ab-h"><span>default</span><span>2 px · offset 2</span></div>
+<div class="th"><div class="stk" style="gap:20px">
+<div class="cell"><span class="btn pri foc">Continue</span><span class="cap">primary button</span></div>
+<div class="cell"><span class="btn sec2 foc">Cancel</span><span class="cap">secondary button</span></div>
+<div class="cell" style="align-items:stretch"><div class="in foc">ada@studio.com</div><span class="cap">text field</span></div>
+<div class="cell"><span class="cbr"><span class="cb foc"></span>Framed</span><span class="cap">checkbox</span></div>
+<div class="cell" style="align-items:stretch"><div class="sl" style="margin-top:0"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"></span></span></div><span class="cap">slider thumb</span></div>
+<div class="cell"><span class="dlg-x foc" style="margin:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="cap">dialog close</span></div>
+</div></div><div class="ab-f">Ring #000000 · 21.00:1 on background and surface.</div></div>
+
+<div class="ab"><div class="ab-h"><span>dark</span><span>2 px · offset 2</span></div>
+<div class="th t-dark"><div class="stk" style="gap:20px">
+<div class="cell"><span class="btn pri foc">Continue</span><span class="cap">primary button</span></div>
+<div class="cell"><span class="btn sec2 foc">Cancel</span><span class="cap">secondary button</span></div>
+<div class="cell" style="align-items:stretch"><div class="in foc">ada@studio.com</div><span class="cap">text field</span></div>
+<div class="cell"><span class="cbr"><span class="cb foc"></span>Framed</span><span class="cap">checkbox</span></div>
+<div class="cell" style="align-items:stretch"><div class="sl" style="margin-top:0"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"></span></span></div><span class="cap">slider thumb</span></div>
+<div class="cell"><span class="dlg-x foc" style="margin:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="cap">dialog close</span></div>
+</div></div><div class="ab-f">Ring #F7F7F7 · 17.20:1 on background and surface.</div></div>
+
+<div class="ab"><div class="ab-h"><span>bold</span><span>3 px · offset 2</span></div>
+<div class="th t-bold"><div class="stk" style="gap:20px">
+<div class="cell"><span class="btn pri foc">Continue</span><span class="cap">primary button</span></div>
+<div class="cell"><span class="btn sec2 foc">Cancel</span><span class="cap">secondary button</span></div>
+<div class="cell" style="align-items:stretch"><div class="in foc">ada@studio.com</div><span class="cap">text field</span></div>
+<div class="cell"><span class="cbr"><span class="cb foc"></span>Framed</span><span class="cap">checkbox</span></div>
+<div class="cell" style="align-items:stretch"><div class="sl" style="margin-top:0"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"></span></span></div><span class="cap">slider thumb</span></div>
+<div class="cell"><span class="dlg-x foc" style="margin:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="cap">dialog close</span></div>
+</div></div><div class="ab-f">Ring #4318D1 (brand) · 8.24:1 on background, 9.17:1 on surface.</div></div>
+
+<div class="ab"><div class="ab-h"><span>bold-dark</span><span>3 px · offset 2</span></div>
+<div class="th t-bold-dark"><div class="stk" style="gap:20px">
+<div class="cell"><span class="btn pri foc">Continue</span><span class="cap">primary button</span></div>
+<div class="cell"><span class="btn sec2 foc">Cancel</span><span class="cap">secondary button</span></div>
+<div class="cell" style="align-items:stretch"><div class="in foc">ada@studio.com</div><span class="cap">text field</span></div>
+<div class="cell"><span class="cbr"><span class="cb foc"></span>Framed</span><span class="cap">checkbox</span></div>
+<div class="cell" style="align-items:stretch"><div class="sl" style="margin-top:0"><span class="sl-tr"><span class="sl-rg"></span><span class="sl-th foc"></span></span></div><span class="cap">slider thumb</span></div>
+<div class="cell"><span class="dlg-x foc" style="margin:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="cap">dialog close</span></div>
+</div></div><div class="ab-f">Ring #A08CFF (brand) · 6.85:1 on background, 6.43:1 on surface.</div></div>
+
+</div>
+<div class="ab"><div class="ab-h"><span>Keyboard</span><span>themes add no keys</span></div><div class="ab-b">
+<table class="tbl">
+<thead><tr><th style="width:260px">Rule</th><th>What every theme keeps</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">Tab</span> / <span class="kbd">Shift+Tab</span></td><td>Focus order and every key binding come from the components and Radix. Themes change values only, never display, order or tabindex.</td></tr>
+<tr><td>Focus ring</td><td>Outline in color-focus, focus-width 2 px (Wireframe) or 3 px (bold), offset 2 px; at least 3:1 against background and surface in every theme.</td></tr>
+<tr><td>Theme switch</td><td>Changing data-theme at runtime is pure CSS: no re-mount, focus stays where it is.</td></tr>
+</tbody>
+</table>
+</div></div>
+</section>
+
+<!-- 04 COLOR ROLES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Color roles · four themes</h2></div>
+<p class="sec-d">All 30 color roles. default and dark are the shipped Wireframe values. bold changes every neutral (tinted toward hue 255, none is gray) and the brand; status triples keep the Wireframe hues so feedback still reads as feedback. Names are color roles with the --ds-color- prefix omitted.</p>
+<div class="ab"><div class="ab-b">
+<table class="tbl">
+<thead><tr><th style="width:200px">Role</th><th>default</th><th>dark</th><th>bold</th><th>bold-dark</th></tr></thead>
+<tbody>
+<tr><td class="m">background</td><td class="m"><span class="sw" style="background:#FFFFFF"></span>#FFFFFF</td><td class="m"><span class="sw" style="background:#141414"></span>#141414</td><td class="m"><span class="sw" style="background:#F4F1FF"></span>#F4F1FF</td><td class="m"><span class="sw" style="background:#120D2E"></span>#120D2E</td></tr>
+<tr><td class="m">surface</td><td class="m"><span class="sw" style="background:#FFFFFF"></span>#FFFFFF</td><td class="m"><span class="sw" style="background:#141414"></span>#141414</td><td class="m"><span class="sw" style="background:#FFFFFF"></span>#FFFFFF</td><td class="m"><span class="sw" style="background:#19133A"></span>#19133A</td></tr>
+<tr><td class="m">surface-subtle</td><td class="m"><span class="sw" style="background:#F7F7F7"></span>#F7F7F7</td><td class="m"><span class="sw" style="background:#1F1F1F"></span>#1F1F1F</td><td class="m"><span class="sw" style="background:#EBE6FC"></span>#EBE6FC</td><td class="m"><span class="sw" style="background:#211A4A"></span>#211A4A</td></tr>
+<tr><td class="m">fill</td><td class="m"><span class="sw" style="background:#EEEEEE"></span>#EEEEEE</td><td class="m"><span class="sw" style="background:#262626"></span>#262626</td><td class="m"><span class="sw" style="background:#E3DCFB"></span>#E3DCFB</td><td class="m"><span class="sw" style="background:#2A2259"></span>#2A2259</td></tr>
+<tr><td class="m">divider</td><td class="m"><span class="sw" style="background:#E0E0E0"></span>#E0E0E0</td><td class="m"><span class="sw" style="background:#333333"></span>#333333</td><td class="m"><span class="sw" style="background:#D5CCF5"></span>#D5CCF5</td><td class="m"><span class="sw" style="background:#3A3170"></span>#3A3170</td></tr>
+<tr><td class="m">border</td><td class="m"><span class="sw" style="background:#C7C7C7"></span>#C7C7C7</td><td class="m"><span class="sw" style="background:#737373"></span>#737373</td><td class="m"><span class="sw" style="background:#8478B8"></span>#8478B8</td><td class="m"><span class="sw" style="background:#7C70C2"></span>#7C70C2</td></tr>
+<tr><td class="m">disabled</td><td class="m"><span class="sw" style="background:#A3A3A3"></span>#A3A3A3</td><td class="m"><span class="sw" style="background:#595959"></span>#595959</td><td class="m"><span class="sw" style="background:#B3AAD9"></span>#B3AAD9</td><td class="m"><span class="sw" style="background:#4D4485"></span>#4D4485</td></tr>
+<tr><td class="m">placeholder</td><td class="m"><span class="sw" style="background:#767676"></span>#767676</td><td class="m"><span class="sw" style="background:#8F8F8F"></span>#8F8F8F</td><td class="m"><span class="sw" style="background:#63579A"></span>#63579A</td><td class="m"><span class="sw" style="background:#9A90D6"></span>#9A90D6</td></tr>
+<tr><td class="m">text-muted</td><td class="m"><span class="sw" style="background:#595959"></span>#595959</td><td class="m"><span class="sw" style="background:#A3A3A3"></span>#A3A3A3</td><td class="m"><span class="sw" style="background:#554A8A"></span>#554A8A</td><td class="m"><span class="sw" style="background:#B3ABE6"></span>#B3ABE6</td></tr>
+<tr><td class="m">text</td><td class="m"><span class="sw" style="background:#404040"></span>#404040</td><td class="m"><span class="sw" style="background:#C7C7C7"></span>#C7C7C7</td><td class="m"><span class="sw" style="background:#2F2766"></span>#2F2766</td><td class="m"><span class="sw" style="background:#D2CCF5"></span>#D2CCF5</td></tr>
+<tr><td class="m">text-strong</td><td class="m"><span class="sw" style="background:#262626"></span>#262626</td><td class="m"><span class="sw" style="background:#E0E0E0"></span>#E0E0E0</td><td class="m"><span class="sw" style="background:#221B52"></span>#221B52</td><td class="m"><span class="sw" style="background:#E3DFFA"></span>#E3DFFA</td></tr>
+<tr><td class="m">text-emphasis</td><td class="m"><span class="sw" style="background:#000000"></span>#000000</td><td class="m"><span class="sw" style="background:#F7F7F7"></span>#F7F7F7</td><td class="m"><span class="sw" style="background:#140E3D"></span>#140E3D</td><td class="m"><span class="sw" style="background:#F5F3FF"></span>#F5F3FF</td></tr>
+<tr><td class="m">text-inverse</td><td class="m"><span class="sw" style="background:#FFFFFF"></span>#FFFFFF</td><td class="m"><span class="sw" style="background:#141414"></span>#141414</td><td class="m"><span class="sw" style="background:#F4F1FF"></span>#F4F1FF</td><td class="m"><span class="sw" style="background:#120D2E"></span>#120D2E</td></tr>
+<tr><td class="m">border-strong</td><td class="m"><span class="sw" style="background:#000000"></span>#000000</td><td class="m"><span class="sw" style="background:#F7F7F7"></span>#F7F7F7</td><td class="m"><span class="sw" style="background:#140E3D"></span>#140E3D</td><td class="m"><span class="sw" style="background:#F5F3FF"></span>#F5F3FF</td></tr>
+<tr><td class="m">icon</td><td class="m"><span class="sw" style="background:#000000"></span>#000000</td><td class="m"><span class="sw" style="background:#F7F7F7"></span>#F7F7F7</td><td class="m"><span class="sw" style="background:#140E3D"></span>#140E3D</td><td class="m"><span class="sw" style="background:#F5F3FF"></span>#F5F3FF</td></tr>
+<tr><td class="m">focus</td><td class="m"><span class="sw" style="background:#000000"></span>#000000</td><td class="m"><span class="sw" style="background:#F7F7F7"></span>#F7F7F7</td><td class="m"><span class="sw" style="background:#4318D1"></span>#4318D1</td><td class="m"><span class="sw" style="background:#A08CFF"></span>#A08CFF</td></tr>
+<tr><td class="m">overlay</td><td class="m">rgb(0 0 0 / 0.5)</td><td class="m">rgb(0 0 0 / 0.7)</td><td class="m">rgb(20 14 61 / 0.6)</td><td class="m">rgb(8 5 26 / 0.75)</td></tr>
+<tr><td class="m">inverse</td><td class="m"><span class="sw" style="background:#141414"></span>#141414</td><td class="m"><span class="sw" style="background:#EEEEEE"></span>#EEEEEE</td><td class="m"><span class="sw" style="background:#140E3D"></span>#140E3D</td><td class="m"><span class="sw" style="background:#E3DFFA"></span>#E3DFFA</td></tr>
+<tr><td class="m">primary</td><td class="m"><span class="sw" style="background:#000000"></span>#000000</td><td class="m"><span class="sw" style="background:#F7F7F7"></span>#F7F7F7</td><td class="m"><span class="sw" style="background:#4318D1"></span>#4318D1</td><td class="m"><span class="sw" style="background:#A08CFF"></span>#A08CFF</td></tr>
+<tr><td class="m">primary-hover</td><td class="m"><span class="sw" style="background:#262626"></span>#262626</td><td class="m"><span class="sw" style="background:#E0E0E0"></span>#E0E0E0</td><td class="m"><span class="sw" style="background:#3510A8"></span>#3510A8</td><td class="m"><span class="sw" style="background:#8B73FF"></span>#8B73FF</td></tr>
+<tr><td class="m">primary-contrast</td><td class="m"><span class="sw" style="background:#FFFFFF"></span>#FFFFFF</td><td class="m"><span class="sw" style="background:#141414"></span>#141414</td><td class="m"><span class="sw" style="background:#FFFFFF"></span>#FFFFFF</td><td class="m"><span class="sw" style="background:#120D2E"></span>#120D2E</td></tr>
+<tr><td class="m">info · border · bg</td><td class="m">#404040 · #C7C7C7 · #F7F7F7</td><td class="m">#C7C7C7 · #595959 · #1F1F1F</td><td class="m">#2F2766 · #D5CCF5 · #EBE6FC</td><td class="m">#D2CCF5 · #4D4485 · #211A4A</td></tr>
+<tr><td class="m">success · border · bg</td><td class="m">#2E6B45 · #9CC7AB · #EDF5EF</td><td class="m">#9CC7AB · #2E6B45 · #13261A</td><td class="m">#2E6B45 · #9CC7AB · #EDF5EF</td><td class="m">#9CC7AB · #2E6B45 · #13261A</td></tr>
+<tr><td class="m">error · border · bg</td><td class="m">#A3302B · #E3AAA6 · #FBEDEC</td><td class="m">#E3AAA6 · #A3302B · #2D1414</td><td class="m">#A3302B · #E3AAA6 · #FBEDEC</td><td class="m">#E3AAA6 · #A3302B · #2D1414</td></tr>
+</tbody>
+</table>
+</div><div class="ab-f">bold uses a white control surface on a lavender ground (controls and panels lift off the page); bold-dark raises the surface one step above the ground for the same reason. Wireframe keeps surface equal to background.</div></div>
+</section>
+
+<!-- 05 TYPE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Type scale · Wireframe vs bold</h2></div>
+<p class="sec-d">default and dark share the Wireframe scale; bold and bold-dark share the bold scale. bold flips Wireframe's case logic: headings are uppercase, heavy (800) and slightly tight; labels drop uppercase and wide tracking for bold sentence case. Body grows to 17 px, buttons to 16 px bold, controls to 48 px.</p>
+<div class="grid2">
+<div class="ab"><div class="ab-h"><span>Wireframe scale</span><span>default · dark</span></div>
+<div class="th"><table class="typ"><tbody>
+<tr><td><span class="hd" style="font-size:var(--ds-text-display-size);line-height:var(--ds-text-display-line-height);letter-spacing:var(--ds-text-display-tracking)">Aa</span></td><td class="m">display · 72 / 72 · 500 · -0.04em</td></tr>
+<tr><td><span class="hd" style="font-size:var(--ds-text-h1-size);line-height:var(--ds-text-h1-line-height);letter-spacing:var(--ds-text-h1-tracking)">Prints</span></td><td class="m">h1 · 48 / 52.8 · -0.03em</td></tr>
+<tr><td><span class="hd" style="font-size:var(--ds-text-h2-size);line-height:var(--ds-text-h2-line-height);letter-spacing:var(--ds-text-h2-tracking)">Prints</span></td><td class="m">h2 · 32 / 38.4 · -0.02em</td></tr>
+<tr><td><span class="h3">Delete print?</span></td><td class="m">h3 · 22 / 29 · 0 · none</td></tr>
+<tr><td><span style="font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height)">Archival paper, shipped flat.</span></td><td class="m">body-lg · 18 / 28.8</td></tr>
+<tr><td><span class="p">Archival paper, shipped flat.</span></td><td class="m">body · 16 / 26</td></tr>
+<tr><td><span style="font-size:var(--ds-text-body-sm-size);line-height:var(--ds-text-body-sm-line-height)">Checkbox sm label</span></td><td class="m">body-sm · 15 / 24</td></tr>
+<tr><td><span style="font-size:var(--ds-text-body-xs-size);line-height:var(--ds-text-body-xs-line-height)">Alert body text</span></td><td class="m">body-xs · 14 / 21</td></tr>
+<tr><td><span class="hint">Only used for the receipt.</span></td><td class="m">caption · 13 / 20</td></tr>
+<tr><td><span class="lbl">Email address</span></td><td class="m">label · 12 / 16 · 500 · 0.08em · uppercase</td></tr>
+<tr><td><span style="font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);color:var(--ds-color-text-emphasis)">Continue</span></td><td class="m">ui · 14 / 20 · 500</td></tr>
+<tr><td><span class="tag su">Draft</span></td><td class="m">ui-sm · 12 / 16</td></tr>
+<tr><td><span class="badge">12</span></td><td class="m">ui-xs · 11 / 16</td></tr>
+</tbody></table></div>
+<div class="ab-f">Red Hat Mono (heading, label, mono) · Red Hat Text (body). Weights 400 / 500 / 700.</div></div>
+
+<div class="ab"><div class="ab-h"><span>bold scale</span><span>bold · bold-dark</span></div>
+<div class="th t-bold"><table class="typ"><tbody>
+<tr><td><span class="hd" style="font-size:var(--ds-text-display-size);line-height:var(--ds-text-display-line-height);letter-spacing:var(--ds-text-display-tracking)">Aa</span></td><td class="m">display · 80 / 76 · 800 · -0.02em</td></tr>
+<tr><td><span class="hd" style="font-size:var(--ds-text-h1-size);line-height:var(--ds-text-h1-line-height);letter-spacing:var(--ds-text-h1-tracking)">Prints</span></td><td class="m">h1 · 56 / 56 · -0.015em</td></tr>
+<tr><td><span class="hd" style="font-size:var(--ds-text-h2-size);line-height:var(--ds-text-h2-line-height);letter-spacing:var(--ds-text-h2-tracking)">Prints</span></td><td class="m">h2 · 36 / 39.6 · -0.01em</td></tr>
+<tr><td><span class="h3">Delete print?</span></td><td class="m">h3 · 24 / 28 · 0 · uppercase</td></tr>
+<tr><td><span style="font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height)">Archival paper, shipped flat.</span></td><td class="m">body-lg · 20 / 30</td></tr>
+<tr><td><span class="p">Archival paper, shipped flat.</span></td><td class="m">body · 17 / 28</td></tr>
+<tr><td><span style="font-size:var(--ds-text-body-sm-size);line-height:var(--ds-text-body-sm-line-height)">Checkbox sm label</span></td><td class="m">body-sm · 16 / 24</td></tr>
+<tr><td><span style="font-size:var(--ds-text-body-xs-size);line-height:var(--ds-text-body-xs-line-height)">Alert body text</span></td><td class="m">body-xs · 15 / 22.5</td></tr>
+<tr><td><span class="hint">Only used for the receipt.</span></td><td class="m">caption · 14 / 20</td></tr>
+<tr><td><span class="lbl">Email address</span></td><td class="m">label · 14 / 20 · 700 · 0.01em · none</td></tr>
+<tr><td><span style="font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);color:var(--ds-color-text-emphasis)">Continue</span></td><td class="m">ui · 16 / 24 · 700</td></tr>
+<tr><td><span class="tag su">Draft</span></td><td class="m">ui-sm · 13 / 18</td></tr>
+<tr><td><span class="badge">12</span></td><td class="m">ui-xs · 12 / 16</td></tr>
+</tbody></table></div>
+<div class="ab-f">Bricolage Grotesque 800 (heading) · Figtree (body, label) · IBM Plex Mono (numerals). Weights 400 / 600 / 700.</div></div>
+</div>
+</section>
+
+<!-- 06 SHAPE, DEPTH, DENSITY, PHOTO -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Radius · shadow · density · photo</h2></div>
+<p class="sec-d">Wireframe is square, flat, 1 px lines, 44 px controls, monochrome photos. bold is round (8 / 14 / 24 / full), uses hard offset shadows in ink (light) or black and brand (dark), 2 px lines, 3 px strong lines and focus ring, 48 px controls and color photography.</p>
+<div class="grid4">
+
+<div class="ab"><div class="ab-h"><span>default</span><span>square · flat</span></div>
+<div class="th"><div class="stk" style="gap:16px">
+<span class="cap">radius sm / md / lg / full · 0 / 0 / 0 / 0</span>
+<div class="row" style="gap:10px"><span class="box" style="border-radius:var(--ds-radius-sm)"></span><span class="box" style="border-radius:var(--ds-radius-md)"></span><span class="box" style="border-radius:var(--ds-radius-lg)"></span><span class="box" style="border-radius:var(--ds-radius-full)"></span></div>
+<span class="cap">shadow sm / md / lg · none</span>
+<div class="row" style="gap:16px;padding:0 12px 12px 0"><span class="shd" style="box-shadow:var(--ds-shadow-sm)"></span><span class="shd" style="box-shadow:var(--ds-shadow-md)"></span><span class="shd" style="box-shadow:var(--ds-shadow-lg)"></span></div>
+<span class="cap">control height 44 · border 1 / 2</span>
+<div class="row"><span class="btn pri">Save</span><div class="in" style="width:110px">Ada</div></div>
+<span class="cap">photo-filter grayscale(1) contrast(1.1)</span>
+<svg class="pimg" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="#7FB3E0"/><circle cx="122" cy="28" r="13" fill="#F2C14E"/><path d="M0 100L52 42l34 36 24-24 50 46z" fill="#3E7D4F"/><path d="M0 100l32-26 30 26z" fill="#2C5A3A"/></svg>
+</div></div><div class="ab-f">Illustrative photo stand-in.</div></div>
+
+<div class="ab"><div class="ab-h"><span>dark</span><span>square · flat</span></div>
+<div class="th t-dark"><div class="stk" style="gap:16px">
+<span class="cap">radius sm / md / lg / full · 0 / 0 / 0 / 0</span>
+<div class="row" style="gap:10px"><span class="box" style="border-radius:var(--ds-radius-sm)"></span><span class="box" style="border-radius:var(--ds-radius-md)"></span><span class="box" style="border-radius:var(--ds-radius-lg)"></span><span class="box" style="border-radius:var(--ds-radius-full)"></span></div>
+<span class="cap">shadow sm / md / lg · none</span>
+<div class="row" style="gap:16px;padding:0 12px 12px 0"><span class="shd" style="box-shadow:var(--ds-shadow-sm)"></span><span class="shd" style="box-shadow:var(--ds-shadow-md)"></span><span class="shd" style="box-shadow:var(--ds-shadow-lg)"></span></div>
+<span class="cap">control height 44 · border 1 / 2</span>
+<div class="row"><span class="btn pri">Save</span><div class="in" style="width:110px">Ada</div></div>
+<span class="cap">photo-filter … brightness(0.85) · refined</span>
+<svg class="pimg" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="#7FB3E0"/><circle cx="122" cy="28" r="13" fill="#F2C14E"/><path d="M0 100L52 42l34 36 24-24 50 46z" fill="#3E7D4F"/><path d="M0 100l32-26 30 26z" fill="#2C5A3A"/></svg>
+</div></div><div class="ab-f">Only change to dark outside color: photos dimmed so a bright image does not glare on the dark ground.</div></div>
+
+<div class="ab"><div class="ab-h"><span>bold</span><span>round · hard shadow</span></div>
+<div class="th t-bold"><div class="stk" style="gap:16px">
+<span class="cap">radius sm / md / lg / full · 8 / 14 / 24 / 9999</span>
+<div class="row" style="gap:10px"><span class="box" style="border-radius:var(--ds-radius-sm)"></span><span class="box" style="border-radius:var(--ds-radius-md)"></span><span class="box" style="border-radius:var(--ds-radius-lg)"></span><span class="box" style="border-radius:var(--ds-radius-full)"></span></div>
+<span class="cap">shadow sm / md / lg · 0 2 0 · 0 4 0 · 8 8 0 ink</span>
+<div class="row" style="gap:16px;padding:0 12px 12px 0"><span class="shd" style="box-shadow:var(--ds-shadow-sm)"></span><span class="shd" style="box-shadow:var(--ds-shadow-md)"></span><span class="shd" style="box-shadow:var(--ds-shadow-lg)"></span></div>
+<span class="cap">control height 48 · border 2 / 3</span>
+<div class="row"><span class="btn pri">Save</span><div class="in" style="width:110px">Ada</div></div>
+<span class="cap">photo-filter none (color)</span>
+<svg class="pimg" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="#7FB3E0"/><circle cx="122" cy="28" r="13" fill="#F2C14E"/><path d="M0 100L52 42l34 36 24-24 50 46z" fill="#3E7D4F"/><path d="M0 100l32-26 30 26z" fill="#2C5A3A"/></svg>
+</div></div><div class="ab-f">Shadows are solid ink offsets, not blurs: depth reads as print, not as light.</div></div>
+
+<div class="ab"><div class="ab-h"><span>bold-dark</span><span>round · hard shadow</span></div>
+<div class="th t-bold-dark"><div class="stk" style="gap:16px">
+<span class="cap">radius sm / md / lg / full · 8 / 14 / 24 / 9999</span>
+<div class="row" style="gap:10px"><span class="box" style="border-radius:var(--ds-radius-sm)"></span><span class="box" style="border-radius:var(--ds-radius-md)"></span><span class="box" style="border-radius:var(--ds-radius-lg)"></span><span class="box" style="border-radius:var(--ds-radius-full)"></span></div>
+<span class="cap">shadow · black 60 % · lg in brand #4318D1</span>
+<div class="row" style="gap:16px;padding:0 12px 12px 0"><span class="shd" style="box-shadow:var(--ds-shadow-sm)"></span><span class="shd" style="box-shadow:var(--ds-shadow-md)"></span><span class="shd" style="box-shadow:var(--ds-shadow-lg)"></span></div>
+<span class="cap">control height 48 · border 2 / 3</span>
+<div class="row"><span class="btn pri">Save</span><div class="in" style="width:110px">Ada</div></div>
+<span class="cap">photo-filter brightness(0.9)</span>
+<svg class="pimg" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="#7FB3E0"/><circle cx="122" cy="28" r="13" fill="#F2C14E"/><path d="M0 100L52 42l34 36 24-24 50 46z" fill="#3E7D4F"/><path d="M0 100l32-26 30 26z" fill="#2C5A3A"/></svg>
+</div></div><div class="ab-f">Ink shadows vanish on a dark ground, so small parts use black and the dialog a brand-colored offset.</div></div>
+
+</div>
+</section>
+
+<!-- 07 CONTRAST -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">Contrast · dark, bold, bold-dark</h2></div>
+<p class="sec-d">Every pair checkContrast() requires (DS-28), plus the field rest border and the exempt and decorative pairs for completeness. WCAG 2.x relative luminance from the hex values, rounded to 2 decimals. Text needs 4.5:1, UI 3:1. default ratios are in the Theming canvas, section 12.</p>
+<div class="ab"><div class="ab-b">
+<table class="tbl">
+<thead><tr><th>Pair (fg / bg)</th><th style="width:70px">Kind</th><th style="width:250px">dark</th><th style="width:250px">bold</th><th style="width:250px">bold-dark</th></tr></thead>
+<tbody>
+<tr class="grp"><td colspan="5">Text roles on every ground (text, 4.5:1)</td></tr>
+<tr><td class="m">text-emphasis / background</td><td>text</td><td class="m">#F7F7F7 / #141414 · 17.20</td><td class="m">#140E3D / #F4F1FF · 16.27</td><td class="m">#F5F3FF / #120D2E · 17.05</td></tr>
+<tr><td class="m">text-emphasis / surface</td><td>text</td><td class="m">#F7F7F7 / #141414 · 17.20</td><td class="m">#140E3D / #FFFFFF · 18.10</td><td class="m">#F5F3FF / #19133A · 16.01</td></tr>
+<tr><td class="m">text-emphasis / fill</td><td>text</td><td class="m">#F7F7F7 / #262626 · 14.13</td><td class="m">#140E3D / #E3DCFB · 13.70</td><td class="m">#F5F3FF / #2A2259 · 13.01</td></tr>
+<tr><td class="m">text-emphasis / info-bg</td><td>text</td><td class="m">#F7F7F7 / #1F1F1F · 15.39</td><td class="m">#140E3D / #EBE6FC · 14.88</td><td class="m">#F5F3FF / #211A4A · 14.60</td></tr>
+<tr><td class="m">text-emphasis / success-bg</td><td>text</td><td class="m">#F7F7F7 / #13261A · 14.85</td><td class="m">#140E3D / #EDF5EF · 16.30</td><td class="m">#F5F3FF / #13261A · 14.51</td></tr>
+<tr><td class="m">text-emphasis / error-bg</td><td>text</td><td class="m">#F7F7F7 / #2D1414 · 16.04</td><td class="m">#140E3D / #FBEDEC · 15.89</td><td class="m">#F5F3FF / #2D1414 · 15.67</td></tr>
+<tr><td class="m">text-strong / background</td><td>text</td><td class="m">#E0E0E0 / #141414 · 13.96</td><td class="m">#221B52 / #F4F1FF · 14.01</td><td class="m">#E3DFFA / #120D2E · 14.43</td></tr>
+<tr><td class="m">text-strong / surface</td><td>text</td><td class="m">#E0E0E0 / #141414 · 13.96</td><td class="m">#221B52 / #FFFFFF · 15.59</td><td class="m">#E3DFFA / #19133A · 13.55</td></tr>
+<tr><td class="m">text-strong / fill</td><td>text</td><td class="m">#E0E0E0 / #262626 · 11.46</td><td class="m">#221B52 / #E3DCFB · 11.80</td><td class="m">#E3DFFA / #2A2259 · 11.01</td></tr>
+<tr><td class="m">text-strong / info-bg</td><td>text</td><td class="m">#E0E0E0 / #1F1F1F · 12.49</td><td class="m">#221B52 / #EBE6FC · 12.81</td><td class="m">#E3DFFA / #211A4A · 12.36</td></tr>
+<tr><td class="m">text-strong / success-bg</td><td>text</td><td class="m">#E0E0E0 / #13261A · 12.05</td><td class="m">#221B52 / #EDF5EF · 14.04</td><td class="m">#E3DFFA / #13261A · 12.28</td></tr>
+<tr><td class="m">text-strong / error-bg</td><td>text</td><td class="m">#E0E0E0 / #2D1414 · 13.02</td><td class="m">#221B52 / #FBEDEC · 13.68</td><td class="m">#E3DFFA / #2D1414 · 13.26</td></tr>
+<tr><td class="m">text / background</td><td>text</td><td class="m">#C7C7C7 / #141414 · 10.90</td><td class="m">#2F2766 / #F4F1FF · 11.77</td><td class="m">#D2CCF5 / #120D2E · 12.20</td></tr>
+<tr><td class="m">text / surface</td><td>text</td><td class="m">#C7C7C7 / #141414 · 10.90</td><td class="m">#2F2766 / #FFFFFF · 13.10</td><td class="m">#D2CCF5 / #19133A · 11.46</td></tr>
+<tr><td class="m">text / fill</td><td>text</td><td class="m">#C7C7C7 / #262626 · 8.95</td><td class="m">#2F2766 / #E3DCFB · 9.92</td><td class="m">#D2CCF5 / #2A2259 · 9.31</td></tr>
+<tr><td class="m">text / info-bg</td><td>text</td><td class="m">#C7C7C7 / #1F1F1F · 9.75</td><td class="m">#2F2766 / #EBE6FC · 10.77</td><td class="m">#D2CCF5 / #211A4A · 10.44</td></tr>
+<tr><td class="m">text / success-bg</td><td>text</td><td class="m">#C7C7C7 / #13261A · 9.41</td><td class="m">#2F2766 / #EDF5EF · 11.80</td><td class="m">#D2CCF5 / #13261A · 10.38</td></tr>
+<tr><td class="m">text / error-bg</td><td>text</td><td class="m">#C7C7C7 / #2D1414 · 10.17</td><td class="m">#2F2766 / #FBEDEC · 11.50</td><td class="m">#D2CCF5 / #2D1414 · 11.21</td></tr>
+<tr><td class="m">text-muted / background</td><td>text</td><td class="m">#A3A3A3 / #141414 · 7.30</td><td class="m">#554A8A / #F4F1FF · 6.91</td><td class="m">#B3ABE6 / #120D2E · 8.80</td></tr>
+<tr><td class="m">text-muted / surface</td><td>text</td><td class="m">#A3A3A3 / #141414 · 7.30</td><td class="m">#554A8A / #FFFFFF · 7.68</td><td class="m">#B3ABE6 / #19133A · 8.27</td></tr>
+<tr><td class="m">text-muted / fill</td><td>text</td><td class="m">#A3A3A3 / #262626 · 6.00</td><td class="m">#554A8A / #E3DCFB · 5.82</td><td class="m">#B3ABE6 / #2A2259 · 6.72</td></tr>
+<tr><td class="m">text-muted / info-bg</td><td>text</td><td class="m">#A3A3A3 / #1F1F1F · 6.53</td><td class="m">#554A8A / #EBE6FC · 6.31</td><td class="m">#B3ABE6 / #211A4A · 7.54</td></tr>
+<tr><td class="m">text-muted / success-bg</td><td>text</td><td class="m">#A3A3A3 / #13261A · 6.31</td><td class="m">#554A8A / #EDF5EF · 6.92</td><td class="m">#B3ABE6 / #13261A · 7.49</td></tr>
+<tr><td class="m">text-muted / error-bg</td><td>text</td><td class="m">#A3A3A3 / #2D1414 · 6.81</td><td class="m">#554A8A / #FBEDEC · 6.74</td><td class="m">#B3ABE6 / #2D1414 · 8.09</td></tr>
+<tr><td class="m">placeholder / background</td><td>text</td><td class="m">#8F8F8F / #141414 · 5.70</td><td class="m">#63579A / #F4F1FF · 5.62</td><td class="m">#9A90D6 / #120D2E · 6.53</td></tr>
+<tr><td class="m">placeholder / surface</td><td>text</td><td class="m">#8F8F8F / #141414 · 5.70</td><td class="m">#63579A / #FFFFFF · 6.25</td><td class="m">#9A90D6 / #19133A · 6.13</td></tr>
+<tr><td class="m">placeholder / fill</td><td>text</td><td class="m">#8F8F8F / #262626 · 4.68</td><td class="m">#63579A / #E3DCFB · 4.73</td><td class="m">#9A90D6 / #2A2259 · 4.98</td></tr>
+<tr><td class="m">placeholder / info-bg</td><td>text</td><td class="m">#8F8F8F / #1F1F1F · 5.10</td><td class="m">#63579A / #EBE6FC · 5.14</td><td class="m">#9A90D6 / #211A4A · 5.59</td></tr>
+<tr><td class="m">placeholder / success-bg</td><td>text</td><td class="m">#8F8F8F / #13261A · 4.92</td><td class="m">#63579A / #EDF5EF · 5.63</td><td class="m">#9A90D6 / #13261A · 5.56</td></tr>
+<tr><td class="m">placeholder / error-bg</td><td>text</td><td class="m">#8F8F8F / #2D1414 · 5.32</td><td class="m">#63579A / #FBEDEC · 5.48</td><td class="m">#9A90D6 / #2D1414 · 6.00</td></tr>
+<tr class="grp"><td colspan="5">Paired fills and status (text, 4.5:1)</td></tr>
+<tr><td class="m">primary-contrast / primary</td><td>text</td><td class="m">#141414 / #F7F7F7 · 17.20</td><td class="m">#FFFFFF / #4318D1 · 9.17</td><td class="m">#120D2E / #A08CFF · 6.85</td></tr>
+<tr><td class="m">primary-contrast / primary-hover</td><td>text</td><td class="m">#141414 / #E0E0E0 · 13.96</td><td class="m">#FFFFFF / #3510A8 · 11.73</td><td class="m">#120D2E / #8B73FF · 5.34</td></tr>
+<tr><td class="m">text-inverse / inverse</td><td>text</td><td class="m">#141414 / #EEEEEE · 15.88</td><td class="m">#F4F1FF / #140E3D · 16.27</td><td class="m">#120D2E / #E3DFFA · 14.43</td></tr>
+<tr><td class="m">info / info-bg</td><td>text</td><td class="m">#C7C7C7 / #1F1F1F · 9.75</td><td class="m">#2F2766 / #EBE6FC · 10.77</td><td class="m">#D2CCF5 / #211A4A · 10.44</td></tr>
+<tr><td class="m">info / background</td><td>text</td><td class="m">#C7C7C7 / #141414 · 10.90</td><td class="m">#2F2766 / #F4F1FF · 11.77</td><td class="m">#D2CCF5 / #120D2E · 12.20</td></tr>
+<tr><td class="m">success / success-bg</td><td>text</td><td class="m">#9CC7AB / #13261A · 8.46</td><td class="m">#2E6B45 / #EDF5EF · 5.72</td><td class="m">#9CC7AB / #13261A · 8.46</td></tr>
+<tr><td class="m">success / background</td><td>text</td><td class="m">#9CC7AB / #141414 · 9.80</td><td class="m">#2E6B45 / #F4F1FF · 5.71</td><td class="m">#9CC7AB / #120D2E · 9.95</td></tr>
+<tr><td class="m">error / error-bg</td><td>text</td><td class="m">#E3AAA6 / #2D1414 · 8.65</td><td class="m">#A3302B / #FBEDEC · 6.11</td><td class="m">#E3AAA6 / #2D1414 · 8.65</td></tr>
+<tr><td class="m">error / background</td><td>text</td><td class="m">#E3AAA6 / #141414 · 9.27</td><td class="m">#A3302B / #F4F1FF · 6.26</td><td class="m">#E3AAA6 / #120D2E · 9.41</td></tr>
+<tr class="grp"><td colspan="5">UI (3:1)</td></tr>
+<tr><td class="m">primary-contrast / error (invalid checked mark)</td><td>UI</td><td class="m">#141414 / #E3AAA6 · 9.27</td><td class="m">#FFFFFF / #A3302B · 6.97</td><td class="m">#120D2E / #E3AAA6 · 9.41</td></tr>
+<tr><td class="m">border-strong · icon / background</td><td>UI</td><td class="m">#F7F7F7 / #141414 · 17.20</td><td class="m">#140E3D / #F4F1FF · 16.27</td><td class="m">#F5F3FF / #120D2E · 17.05</td></tr>
+<tr><td class="m">border-strong · icon / surface</td><td>UI</td><td class="m">#F7F7F7 / #141414 · 17.20</td><td class="m">#140E3D / #FFFFFF · 18.10</td><td class="m">#F5F3FF / #19133A · 16.01</td></tr>
+<tr><td class="m">focus · primary / background</td><td>UI</td><td class="m">#F7F7F7 / #141414 · 17.20</td><td class="m">#4318D1 / #F4F1FF · 8.24</td><td class="m">#A08CFF / #120D2E · 6.85</td></tr>
+<tr><td class="m">focus · primary / surface</td><td>UI</td><td class="m">#F7F7F7 / #141414 · 17.20</td><td class="m">#4318D1 / #FFFFFF · 9.17</td><td class="m">#A08CFF / #19133A · 6.43</td></tr>
+<tr><td class="m">error / background (invalid border)</td><td>UI</td><td class="m">#E3AAA6 / #141414 · 9.27</td><td class="m">#A3302B / #F4F1FF · 6.26</td><td class="m">#E3AAA6 / #120D2E · 9.41</td></tr>
+<tr><td class="m">error / surface (invalid border)</td><td>UI</td><td class="m">#E3AAA6 / #141414 · 9.27</td><td class="m">#A3302B / #FFFFFF · 6.97</td><td class="m">#E3AAA6 / #19133A · 8.84</td></tr>
+<tr><td class="m">placeholder / background (slider track)</td><td>UI</td><td class="m">#8F8F8F / #141414 · 5.70</td><td class="m">#63579A / #F4F1FF · 5.62</td><td class="m">#9A90D6 / #120D2E · 6.53</td></tr>
+<tr><td class="m">placeholder / surface</td><td>UI</td><td class="m">#8F8F8F / #141414 · 5.70</td><td class="m">#63579A / #FFFFFF · 6.25</td><td class="m">#9A90D6 / #19133A · 6.13</td></tr>
+<tr><td class="m">text-muted / background (tag remove icon)</td><td>UI</td><td class="m">#A3A3A3 / #141414 · 7.30</td><td class="m">#554A8A / #F4F1FF · 6.91</td><td class="m">#B3ABE6 / #120D2E · 8.80</td></tr>
+<tr><td class="m">border / surface (field rest border)</td><td>UI</td><td class="m">#737373 / #141414 · 3.89</td><td class="m">#8478B8 / #FFFFFF · 3.92</td><td class="m">#7C70C2 / #19133A · 4.14</td></tr>
+<tr><td class="m">border / background</td><td>UI</td><td class="m">#737373 / #141414 · 3.89</td><td class="m">#8478B8 / #F4F1FF · 3.52</td><td class="m">#7C70C2 / #120D2E · 4.41</td></tr>
+<tr class="grp"><td colspan="5">Exempt (disabled) and decorative</td></tr>
+<tr><td class="m">placeholder / surface-subtle (disabled field text)</td><td>exempt</td><td class="m">#8F8F8F / #1F1F1F · 5.10</td><td class="m">#63579A / #EBE6FC · 5.14</td><td class="m">#9A90D6 / #211A4A · 5.59</td></tr>
+<tr><td class="m">placeholder / divider (disabled primary)</td><td>exempt</td><td class="m">#8F8F8F / #333333 · 3.91</td><td class="m">#63579A / #D5CCF5 · 4.10</td><td class="m">#9A90D6 / #3A3170 · 3.96</td></tr>
+<tr><td class="m">disabled / background</td><td>exempt</td><td class="m">#595959 / #141414 · 2.63</td><td class="m">#B3AAD9 / #F4F1FF · 1.95</td><td class="m">#4D4485 / #120D2E · 2.21</td></tr>
+<tr><td class="m">divider / background</td><td>decor.</td><td class="m">#333333 / #141414 · 1.46</td><td class="m">#D5CCF5 / #F4F1FF · 1.37</td><td class="m">#3A3170 / #120D2E · 1.65</td></tr>
+<tr><td class="m">info-border / info-bg</td><td>decor.</td><td class="m">#595959 / #1F1F1F · 2.35</td><td class="m">#D5CCF5 / #EBE6FC · 1.25</td><td class="m">#4D4485 / #211A4A · 1.89</td></tr>
+<tr><td class="m">success-border / success-bg</td><td>decor.</td><td class="m">#2E6B45 / #13261A · 2.50</td><td class="m">#9CC7AB / #EDF5EF · 1.69</td><td class="m">#2E6B45 / #13261A · 2.50</td></tr>
+<tr><td class="m">error-border / error-bg</td><td>decor.</td><td class="m">#A3302B / #2D1414 · 2.47</td><td class="m">#E3AAA6 / #FBEDEC · 1.74</td><td class="m">#A3302B / #2D1414 · 2.47</td></tr>
+</tbody>
+</table>
+</div><div class="ab-f">All required pairs pass in all three themes. Unlike default (1.69:1, known gap), the field rest border passes 3:1 in dark, bold and bold-dark.</div></div>
+</section>
+
+<!-- 08 createTheme INPUT -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">createTheme() input</h2></div>
+<p class="sec-d">The ThemeConfig for each theme (src/theme/createTheme.ts). createTheme() owns color generation, fonts, radius and shadow; it always emits the default weights, type scale and shape, and caps neutral tint chroma at 0.03. The designed values above are normative: DS-12 appends the roles the generator cannot express (listed under each input) as a second block with the same selector, then runs checkContrast() on the merged values.</p>
+<div class="grid3">
+<div class="ab"><div class="ab-h"><span>dark</span><span>shipped in tokens.css</span></div><div class="ab-b">
+<pre class="code">createTheme({
+  name: 'dark',
+  brand: '#000000',
+  fonts: {
+    heading: "'Red Hat Mono', ui-monospace, monospace",
+    body: "'Red Hat Text', system-ui, sans-serif",
+    label: "'Red Hat Mono', ui-monospace, monospace",
+  },
+  radius: {},
+  shadow: {},
+  mode: 'dark',
+})</pre>
+<p class="note">Generator output equals the DS-27 block except primary #EBEBEB, primary-hover #D7D7D7, primary-contrast #292929, focus #EBEBEB. The shipped block keeps #F7F7F7 / #E0E0E0 / #141414 / #F7F7F7 and adds photo-filter … brightness(0.85).</p>
+</div></div>
+<div class="ab"><div class="ab-h"><span>bold</span><span>mode light</span></div><div class="ab-b">
+<pre class="code">createTheme({
+  name: 'bold',
+  brand: '#4318D1',
+  neutral: '#140E3D',
+  fonts: {
+    heading: "'Bricolage Grotesque', 'Arial Black', system-ui, sans-serif",
+    body: "'Figtree', system-ui, sans-serif",
+    label: "'Figtree', system-ui, sans-serif",
+    mono: "'IBM Plex Mono', ui-monospace, monospace",
+  },
+  radius: { sm: '8px', md: '14px', lg: '24px', full: '9999px' },
+  shadow: {
+    sm: '0 2px 0 #140e3d',
+    md: '0 4px 0 #140e3d',
+    lg: '8px 8px 0 #140e3d',
+  },
+  mode: 'light',
+})</pre>
+<p class="note">Appended block: 24 color roles (all except the status triples), font-weight-medium 600, all 36 type-scale roles, border-width 2px, border-width-strong 3px, focus-width 3px, control-height 48px, motion, photo-filter none.</p>
+</div></div>
+<div class="ab"><div class="ab-h"><span>bold-dark</span><span>mode dark</span></div><div class="ab-b">
+<pre class="code">createTheme({
+  name: 'bold-dark',
+  brand: '#4318D1',
+  neutral: '#140E3D',
+  fonts: { /* same as bold */ },
+  radius: { sm: '8px', md: '14px', lg: '24px', full: '9999px' },
+  shadow: {
+    sm: '0 2px 0 rgb(0 0 0 / 0.6)',
+    md: '0 4px 0 rgb(0 0 0 / 0.6)',
+    lg: '8px 8px 0 #4318d1',
+  },
+  mode: 'dark',
+})</pre>
+<p class="note">A separate call, not mode 'both': the 'both' dark block carries colors only, so data-theme="bold-dark" on its own would fall back to Wireframe fonts, type and shape. Appended block: 24 color roles, then the same non-color roles as bold except photo-filter brightness(0.9).</p>
+</div></div>
+</div>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>
