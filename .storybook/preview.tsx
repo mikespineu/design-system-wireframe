@@ -7,10 +7,14 @@ import '../src/themes/bold.css'
 import '../src/themes/bold-fonts.css'
 import './docs-theme.css'
 import { TooltipProvider } from '../src/components/Tooltip'
-import { storybookThemes, withThemeAtRender } from './themes'
+import { inheritedTheme, storybookThemes, withThemeAtRender } from './themes'
 import { ThemedDocsContainer } from './ThemedDocsContainer'
 
+// A story iframe embedded in a docs page (`inline: false`) starts on the docs page's theme, not the default.
+const embeddedTheme = inheritedTheme()
+
 const preview: Preview = {
+  ...(embeddedTheme ? { initialGlobals: { theme: embeddedTheme } } : {}),
   decorators: [
     // Applies the theme during render, so open Drawer and Dialog stories never show the default theme first.
     withThemeAtRender,
