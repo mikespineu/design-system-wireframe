@@ -59,6 +59,14 @@ Each task carries its fields in an indented line, read by the [software factory]
     - One brand color yields a monotonic 50–900 OKLCH scale (tested on ≥ 3 hues)
     - `checkContrast()` flags every text/background pair under 4.5:1 and UI pair under 3:1, with the role names
     - `createTheme`, `checkContrast` and their types exported from `src/index.ts`; coverage ≥ 80 % for `src/theme/`
+- [ ] **DS-63 Canvas boards on role tokens.** Move every `docs/design-system-wireframe/*.dc.html` board except Theming and AllComponents from hard-coded hex to `var(--ds-*)` role tokens, so each board follows `data-theme`. Bring `Main.dc.html` foundations up to the DS-27 token set, redraw `Form.dc.html` with the shipped Field, Select and RadioGroup, and clear the stale items flagged in the DS-58 audit.
+  - type: docs · has_ui: no · depends_on: DS-58, DS-62 · needs_human: no · status: todo
+  - done_when:
+    - Every board styles only through `var(--ds-*)`; raw values appear only in a token block identical to `tokens.css` (default and `[data-theme="dark"]`), plus illustration-only fills listed in the canvas README
+    - Setting `data-theme="dark"` on any board recolors it (checked headless, screenshots in the PR)
+    - `Main.dc.html` shows the DS-27 color roles, font-weight roles, every type step in `tokens.css` (incl. body-sm, body-xs, ui sizes, h4/h5), and the radius and shadow steps
+    - `Form.dc.html` uses the shipped Field, Select and RadioGroup look, and no board mentions the deleted `Components.dc.html` (incl. `Tabs.dc.html`)
+    - `canvasBoards.test.ts` fails on any hex outside a board's token block; canvas README audit table updated
 
 ### Epic: Components
 
@@ -429,6 +437,16 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Uses a custom theme from `ds.theme.json`, not the default
     - CI job builds the example on every PR
     - Consumer docs link to it as the quick start
+
+### Epic: Factory
+
+- [ ] **DS-62 Docs tasks may edit canvases.** DS-58 needed a manual override: canvas-only work was a `docs` task, but the Builder scope check and the `has_ui: no` UI guard both block `docs/design-system-wireframe/**`. Let `docs` tasks edit canvases, and teach the task shapers to file canvas maintenance as `docs` and new component visuals as `design`.
+  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - `factory/plugin/RULES.md`: for `type: docs` tasks, the Builder scope check and UI guard allow `docs/design-system-wireframe/**`; `src/**`, stories, `.storybook/` and `docs/specs/**` stay guarded
+    - `skills/build/SKILL.md` scope check and UI guard match the rule
+    - `skills/add/SKILL.md`, `skills/plan/SKILL.md` and `agents/planner.md` say: changes to existing boards → `docs`, `has_ui: no`; a new component or visual change → `design` + `build`
+    - No changes outside `factory/plugin/**` and `docs/factory/**`
 
 ## Done
 
