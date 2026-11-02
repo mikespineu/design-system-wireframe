@@ -1,12 +1,23 @@
 import type { Preview } from '@storybook/react-vite'
+import { withThemeByDataAttribute } from '@storybook/addon-themes'
 import '../src/styles/fonts.css'
 import '../src/styles/tailwind.css'
+// Opt-in demo themes (DS-12). Storybook-only: the library never loads them by itself.
+import '../src/themes/bold.css'
+import '../src/themes/bold-fonts.css'
 import { TooltipProvider } from '../src/components/Tooltip'
-
-document.documentElement.setAttribute('data-theme', 'default')
+import { storybookThemes } from './themes'
 
 const preview: Preview = {
-  decorators: [(Story) => <TooltipProvider><Story /></TooltipProvider>],
+  decorators: [
+    // Sets data-theme on <html> (the addon's default parentSelector), so docs pages, portals and every story follow the toolbar.
+    withThemeByDataAttribute({
+      themes: storybookThemes,
+      defaultTheme: 'default',
+      attributeName: 'data-theme',
+    }),
+    (Story) => <TooltipProvider><Story /></TooltipProvider>,
+  ],
   parameters: {
     options: { storySort: { order: ['Introduction', 'Foundations', 'Components', 'Patterns'] } },
     controls: {
