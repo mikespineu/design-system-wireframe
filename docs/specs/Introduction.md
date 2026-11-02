@@ -3,9 +3,9 @@
 - task: DS-70
 - canvas: docs/design-system-wireframe/Introduction.dc.html
 - canvas_url: https://claude.ai/artifact/N5SZzot7DeRFzPhvikTCrL
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-11-02
 - approval_hash:
 
 The Storybook landing page, `src/Introduction.stories.tsx` (title `Introduction`, story `Intro`, id `introduction--intro`). Today it pitches only the gray wireframe ("No hue", "No decoration"), lists 7 of the 25 component families as plain tags, and never shows a theme, `createTheme()` or the theme switcher. The redesign is organized around three questions: why use it, how to start from it, and how to customize it.
