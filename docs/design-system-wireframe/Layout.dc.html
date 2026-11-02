@@ -11,33 +11,231 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
 <style>
-body{margin:0;background:#FFFFFF}
+/* ds-tokens:start */
+/* Copied from src/styles/tokens.css (default + dark). Everything below reads var(--ds-*). Checked by src/test/canvasBoards.test.ts. */
+:root,
+[data-theme="default"] {
+  /* Tier 1, primitives: raw palette, never read by components. Gray palette: white ground, gray accents, black ink. No hue. */
+  --ds-color-white: #ffffff;
+  --ds-color-gray-50: #f7f7f7;
+  --ds-color-gray-100: #eeeeee;
+  --ds-color-gray-200: #e0e0e0;
+  --ds-color-gray-300: #c7c7c7;
+  --ds-color-gray-400: #a3a3a3;
+  --ds-color-gray-500: #767676;
+  --ds-color-gray-600: #595959;
+  --ds-color-gray-700: #404040;
+  --ds-color-gray-800: #262626;
+  --ds-color-gray-900: #141414;
+  --ds-color-black: #000000;
+
+  /* Tier 2, roles: color */
+  --ds-color-background: var(--ds-color-white);
+  --ds-color-surface: var(--ds-color-white);
+  --ds-color-surface-subtle: var(--ds-color-gray-50);
+  --ds-color-fill: var(--ds-color-gray-100);
+  --ds-color-divider: var(--ds-color-gray-200);
+  --ds-color-border: var(--ds-color-gray-300);
+  --ds-color-disabled: var(--ds-color-gray-400);
+  --ds-color-placeholder: var(--ds-color-gray-500);
+  --ds-color-text-muted: var(--ds-color-gray-600);
+  --ds-color-text: var(--ds-color-gray-700);
+  --ds-color-text-strong: var(--ds-color-gray-800);
+  --ds-color-text-emphasis: var(--ds-color-black);
+  --ds-color-text-inverse: var(--ds-color-white);
+  --ds-color-border-strong: var(--ds-color-black);
+  --ds-color-icon: var(--ds-color-black);
+  --ds-color-focus: var(--ds-color-black);
+  --ds-color-overlay: rgb(0 0 0 / 0.5);
+  --ds-color-inverse: var(--ds-color-gray-900);
+  --ds-color-primary: var(--ds-color-black);
+  --ds-color-primary-hover: var(--ds-color-gray-800);
+  --ds-color-primary-contrast: var(--ds-color-white);
+  /* Deprecated alias of --ds-color-text-emphasis. Components no longer read it; themes do not set it. */
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  /* Status: the only hue in the system, used for feedback only and always
+     paired with an icon and a label. fg passes 4.5:1 on white and on its bg. */
+  --ds-color-info: var(--ds-color-gray-700);
+  --ds-color-info-border: var(--ds-color-gray-300);
+  --ds-color-info-bg: var(--ds-color-gray-50);
+  --ds-color-success: #2e6b45;
+  --ds-color-success-border: #9cc7ab;
+  --ds-color-success-bg: #edf5ef;
+  --ds-color-error: #a3302b;
+  --ds-color-error-border: #e3aaa6;
+  --ds-color-error-bg: #fbedec;
+
+  /* Roles: font. Red Hat Mono for titles and labels, Red Hat Text for body (load with the opt-in fonts.css) */
+  --ds-font-mono: 'Red Hat Mono', ui-monospace, monospace;
+  --ds-font-text: 'Red Hat Text', system-ui, sans-serif;
+  --ds-font-heading: var(--ds-font-mono);
+  --ds-font-body: var(--ds-font-text);
+  --ds-font-label: var(--ds-font-mono);
+  --ds-font-family: var(--ds-font-body);
+
+  /* Roles: font weight */
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
+
+  /* Roles: type scale */
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+
+  /* Legacy line-height aliases (not part of the contract) */
+  --ds-line-height-xs: var(--ds-text-ui-sm-line-height);
+  --ds-line-height-sm: var(--ds-text-caption-line-height);
+  --ds-line-height-md: var(--ds-text-body-sm-line-height);
+  --ds-line-height-lg: var(--ds-text-body-line-height);
+  --ds-line-height-xl: var(--ds-text-h3-line-height);
+
+  /* Spacing: 4 px base. Not themeable. */
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-24: 96px;
+
+  /* Roles: radius. Square corners; --ds-radius is the legacy base the steps default to */
+  --ds-radius: 0;
+  --ds-radius-sm: var(--ds-radius);
+  --ds-radius-md: var(--ds-radius);
+  --ds-radius-lg: var(--ds-radius);
+  --ds-radius-full: var(--ds-radius);
+
+  /* Roles: shadow. No shadows by default, depth comes from borders and fills */
+  --ds-shadow-sm: none;
+  --ds-shadow-md: none;
+  --ds-shadow-lg: none;
+
+  /* Roles: shape and density */
+  --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+
+  /* Icons: fixed system constants, not part of the theme contract */
+  --ds-icon-size-sm: 12px;
+  --ds-icon-size-md: 16px;
+  --ds-icon-size-lg: 20px;
+  --ds-icon-stroke: 1.5;
+  --ds-icon-stroke-strong: 2;
+
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* Photography: always monochrome */
+  --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+/* Dark: overrides the 30 color roles only. Fonts, type, radius, shadow and shape stay at their defaults. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ds-color-background: var(--ds-color-gray-900);
+  --ds-color-surface: var(--ds-color-gray-900);
+  --ds-color-surface-subtle: #1f1f1f;
+  --ds-color-fill: var(--ds-color-gray-800);
+  --ds-color-divider: #333333;
+  --ds-color-border: #737373;
+  --ds-color-disabled: var(--ds-color-gray-600);
+  --ds-color-placeholder: #8f8f8f;
+  --ds-color-text-muted: var(--ds-color-gray-400);
+  --ds-color-text: var(--ds-color-gray-300);
+  --ds-color-text-strong: var(--ds-color-gray-200);
+  --ds-color-text-emphasis: var(--ds-color-gray-50);
+  --ds-color-text-inverse: var(--ds-color-gray-900);
+  --ds-color-border-strong: var(--ds-color-gray-50);
+  --ds-color-icon: var(--ds-color-gray-50);
+  --ds-color-focus: var(--ds-color-gray-50);
+  --ds-color-overlay: rgb(0 0 0 / 0.7);
+  --ds-color-inverse: var(--ds-color-gray-100);
+  --ds-color-primary: var(--ds-color-gray-50);
+  --ds-color-primary-hover: var(--ds-color-gray-200);
+  --ds-color-primary-contrast: var(--ds-color-gray-900);
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  --ds-color-info: var(--ds-color-gray-300);
+  --ds-color-info-border: var(--ds-color-gray-600);
+  --ds-color-info-bg: #1f1f1f;
+  --ds-color-success: #9cc7ab;
+  --ds-color-success-border: #2e6b45;
+  --ds-color-success-bg: #13261a;
+  --ds-color-error: #e3aaa6;
+  --ds-color-error-border: #a3302b;
+  --ds-color-error-bg: #2d1414;
+
+  /* Dims the monochrome photos so they do not glare on the dark ground. */
+  --ds-photo-filter: grayscale(1) contrast(1.1) brightness(0.85);
+}
+/* ds-tokens:end */
+
+body{margin:0;background:var(--ds-color-background)}
 .sec{display:flex;flex-direction:column;gap:32px}
 .sec-h{display:flex;align-items:baseline;gap:24px}
-.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
-.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
-.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
-.sec-d code,.ab-f code{font-family:'Red Hat Mono',monospace;font-size:0.9em;color:#000000}
+.sec-n{font-family:var(--ds-font-mono);font-size:13px;color:var(--ds-color-text-muted)}
+.sec-t{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:var(--ds-color-text)}
+.sec-d code,.ab-f code{font-family:var(--ds-font-mono);font-size:0.9em;color:var(--ds-color-text-emphasis)}
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
 .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
 .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
 .grid5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;align-items:start}
-.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column;min-width:0}
-.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
-.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
+.ab{border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);display:flex;flex-direction:column;min-width:0}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid var(--ds-color-divider);font-family:var(--ds-font-mono);font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-emphasis)}
+.ab-h span+span{color:var(--ds-color-text-muted);text-transform:none;letter-spacing:0;text-align:right}
 .ab-b{display:flex;flex-direction:column;gap:8px;padding:32px 24px;min-width:0}
-.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
+.ab-f{padding:12px 16px;border-top:1px solid var(--ds-color-divider);font-size:13px;line-height:20px;color:var(--ds-color-text-muted)}
 /* layout demo: hatch = gap / free space inside the Stack or Grid; boxes = children */
-.hatch{background:repeating-linear-gradient(45deg,#E0E0E0 0 1px,transparent 1px 6px);outline:1px dashed #C7C7C7}
+.hatch{background:repeating-linear-gradient(45deg,var(--ds-color-divider) 0 1px,transparent 1px 6px);outline:1px dashed var(--ds-color-border)}
 .stk{display:flex;flex-direction:row;flex-wrap:nowrap}
 .stk.v{flex-direction:column}
 .stk.wrap{flex-wrap:wrap}
 .fit{width:max-content}
-.it{box-sizing:border-box;display:flex;align-items:center;justify-content:center;min-width:48px;min-height:32px;padding:0 8px;background:#FFFFFF;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#000000;white-space:nowrap}
+.it{box-sizing:border-box;display:flex;align-items:center;justify-content:center;min-width:48px;min-height:32px;padding:0 8px;background:var(--ds-color-surface);border:1px solid var(--ds-color-border-strong);font-family:var(--ds-font-mono);font-size:12px;line-height:16px;color:var(--ds-color-text-emphasis);white-space:nowrap}
 .stk.v .it{min-height:24px}
 .it.tall{min-height:48px}
 .it.taller{min-height:72px}
-.it.fill{background:#EEEEEE}
+.it.fill{background:var(--ds-color-fill)}
 .gd{display:grid}
 .gd .it{min-height:48px;min-width:0}
 .c1{grid-template-columns:repeat(1,minmax(0,1fr))}
@@ -47,44 +245,44 @@ body{margin:0;background:#FFFFFF}
 .c12{grid-template-columns:repeat(12,minmax(0,1fr))}
 .s3{grid-column:span 3}.s4{grid-column:span 4}.s6{grid-column:span 6}.s8{grid-column:span 8}.s12{grid-column:span 12}
 .g0{gap:0}.g1{gap:4px}.g2{gap:8px}.g3{gap:12px}.g4{gap:16px}.g6{gap:24px}.g8{gap:32px}.g12{gap:48px}.g16{gap:64px}.g24{gap:96px}
-.dim{font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
-.code{margin:0;padding:12px;background:#F7F7F7;border:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:20px;color:#000000;white-space:pre;overflow:hidden}
+.dim{font-family:var(--ds-font-mono);font-size:12px;line-height:16px;color:var(--ds-color-text-muted)}
+.code{margin:0;padding:12px;background:var(--ds-color-surface-subtle);border:1px solid var(--ds-color-divider);font-family:var(--ds-font-mono);font-size:12px;line-height:20px;color:var(--ds-color-text-emphasis);white-space:pre;overflow:hidden}
 /* viewport frames */
 .frames{display:flex;gap:24px;align-items:flex-start}
-.frame{box-sizing:border-box;border:1px solid #C7C7C7;background:#FFFFFF;flex:none}
-.frame-h{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;color:#595959}
-.frame-h b{font-weight:500;color:#000000;letter-spacing:0.08em;text-transform:uppercase}
+.frame{box-sizing:border-box;border:1px solid var(--ds-color-border);background:var(--ds-color-surface);flex:none}
+.frame-h{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--ds-color-divider);font-family:var(--ds-font-mono);font-size:12px;line-height:16px;color:var(--ds-color-text-muted)}
+.frame-h b{font-weight:var(--ds-font-weight-medium);color:var(--ds-color-text-emphasis);letter-spacing:0.08em;text-transform:uppercase}
 .frame-b{padding:16px}
 .w-mobile{width:375px}
 .w-tablet{width:768px}
 .w-desktop{width:100%}
 /* focusable sample content */
-.btn{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 24px;border:1px solid #000000;background:#FFFFFF;font-family:'Red Hat Mono',monospace;font-size:14px;font-weight:500;color:#000000;white-space:nowrap}
-.btn.pri{background:#000000;color:#FFFFFF}
-.card{box-sizing:border-box;display:flex;align-items:center;gap:8px;min-height:56px;padding:12px 16px;border:1px solid #E0E0E0;background:#FFFFFF;font-size:15px;line-height:24px;color:#000000;text-decoration:underline;text-underline-offset:4px}
-.tn{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 4px;box-sizing:border-box;border:1px solid #C7C7C7;background:#F7F7F7;font-family:'Red Hat Mono',monospace;font-size:11px;font-weight:500;color:#404040;text-decoration:none}
-.btn.pri .tn{border-color:#595959;background:#262626;color:#FFFFFF}
-.foc{outline:2px solid #000000;outline-offset:2px}
+.btn{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 24px;border:1px solid var(--ds-color-border-strong);background:var(--ds-color-surface);font-family:var(--ds-font-mono);font-size:14px;font-weight:var(--ds-font-weight-medium);color:var(--ds-color-text-emphasis);white-space:nowrap}
+.btn.pri{background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.card{box-sizing:border-box;display:flex;align-items:center;gap:8px;min-height:56px;padding:12px 16px;border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);font-size:15px;line-height:24px;color:var(--ds-color-text-emphasis);text-decoration:underline;text-underline-offset:4px}
+.tn{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 4px;box-sizing:border-box;border:1px solid var(--ds-color-border);background:var(--ds-color-surface-subtle);font-family:var(--ds-font-mono);font-size:11px;font-weight:var(--ds-font-weight-medium);color:var(--ds-color-text);text-decoration:none}
+.btn.pri .tn{border-color:var(--ds-color-text-muted);background:var(--ds-color-primary-hover);color:var(--ds-color-text-inverse)}
+.foc{outline:2px solid var(--ds-color-focus);outline-offset:2px}
 .no{opacity:1;border-style:dashed}
-.tag{display:inline-flex;align-items:center;height:28px;padding:0 10px;border:1px solid #C7C7C7;background:#F7F7F7;font-family:'Red Hat Mono',monospace;font-size:12px;color:#000000;white-space:nowrap}
+.tag{display:inline-flex;align-items:center;height:28px;padding:0 10px;border:1px solid var(--ds-color-border);background:var(--ds-color-surface-subtle);font-family:var(--ds-font-mono);font-size:12px;color:var(--ds-color-text-emphasis);white-space:nowrap}
 .tbl{width:100%;border-collapse:collapse;font-size:15px}
-.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
-.tbl td{height:52px;padding:0 16px 0 0;border-bottom:1px solid #E0E0E0;color:#404040}
-.tbl td code{font-family:'Red Hat Mono',monospace;font-size:13px;color:#000000}
-.legend{display:flex;gap:24px;align-items:center;font-size:13px;line-height:20px;color:#595959}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:var(--ds-font-mono);font-weight:var(--ds-font-weight-medium);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid var(--ds-color-border-strong)}
+.tbl td{height:52px;padding:0 16px 0 0;border-bottom:1px solid var(--ds-color-divider);color:var(--ds-color-text)}
+.tbl td code{font-family:var(--ds-font-mono);font-size:13px;color:var(--ds-color-text-emphasis)}
+.legend{display:flex;gap:24px;align-items:center;font-size:13px;line-height:20px;color:var(--ds-color-text-muted)}
 .legend .sw{display:inline-block;width:24px;height:16px;vertical-align:middle;margin-right:8px}
 </style>
 </helmet>
-<div style="width: 1440px; min-height: 11200px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+<div style="width: 1440px; min-height: 11200px; box-sizing: border-box; padding: 96px; background: var(--ds-color-background); color: var(--ds-color-text-emphasis); font-family: var(--ds-font-body); display: flex; flex-direction: column; gap: 80px">
 
-<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
-<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid var(--ds-color-border-strong); padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: var(--ds-font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ds-color-text-muted)">
 <span>Design System Wireframe</span>
 <span>Layout · Stack &amp; Grid · DS-35 · draft</span>
 </div>
-<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Layout</h1>
-<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">Two invisible layout primitives. Stack puts children in a line, vertical or horizontal, with a gap from the spacing scale. Grid puts children in 1, 2, 3, 4, 6 or 12 equal columns. Both draw nothing themselves: no color, border, padding or radius. Gap only takes <code style="font-family:'Red Hat Mono',monospace">--ds-space-*</code> steps. Every layout prop can change at the sm / md / lg breakpoints. Both render a div by default, take <code style="font-family:'Red Hat Mono',monospace">as</code> for another element, or <code style="font-family:'Red Hat Mono',monospace">asChild</code> to style their only child (Radix Slot).</p>
-<div class="legend"><span><span class="sw hatch"></span>Gap and free space inside the Stack or Grid (canvas only)</span><span><span class="sw" style="border:1px solid #000000;background:#FFFFFF"></span>A child</span><span><span class="sw" style="border:1px dashed #C7C7C7"></span>Stack or Grid bounds (canvas only)</span></div>
+<h1 style="margin: 0; font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); font-size: 96px; line-height: 1; letter-spacing: -0.04em">Layout</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: var(--ds-color-text)">Two invisible layout primitives. Stack puts children in a line, vertical or horizontal, with a gap from the spacing scale. Grid puts children in 1, 2, 3, 4, 6 or 12 equal columns. Both draw nothing themselves: no color, border, padding or radius. Gap only takes <code style="font-family:var(--ds-font-mono)">--ds-space-*</code> steps. Every layout prop can change at the sm / md / lg breakpoints. Both render a div by default, take <code style="font-family:var(--ds-font-mono)">as</code> for another element, or <code style="font-family:var(--ds-font-mono)">asChild</code> to style their only child (Radix Slot).</p>
+<div class="legend"><span><span class="sw hatch"></span>Gap and free space inside the Stack or Grid (canvas only)</span><span><span class="sw" style="border:1px solid var(--ds-color-border-strong);background:var(--ds-color-surface)"></span>A child</span><span><span class="sw" style="border:1px dashed var(--ds-color-border)"></span>Stack or Grid bounds (canvas only)</span></div>
 </header>
 
 <!-- 01 STACK GAP HORIZONTAL -->
@@ -439,7 +637,7 @@ body{margin:0;background:#FFFFFF}
 <div class="ab"><div class="ab-h"><span>Grid · 12 with spans</span><span>main before aside</span></div><div class="ab-b">
 <div class="gd c12 g3"><a class="card s8"><span class="tn">1</span>Main</a><a class="card s4 foc"><span class="tn">2</span>Aside</a><a class="card s12"><span class="tn">3</span>Footer</a></div>
 </div><div class="ab-f">Put content in the DOM in reading order; the spans only size it.</div></div>
-<div class="ab" style="border-style:dashed;border-color:#C7C7C7"><div class="ab-h"><span>Not offered</span><span>reverse / order</span></div><div class="ab-b">
+<div class="ab" style="border-style:dashed;border-color:var(--ds-color-border)"><div class="ab-h"><span>Not offered</span><span>reverse / order</span></div><div class="ab-b">
 <div class="stk g3"><span class="btn no"><span class="tn">3</span>Publish</span><span class="btn no"><span class="tn">2</span>Save draft</span><span class="btn no foc"><span class="tn">1</span>Back</span></div>
 </div><div class="ab-f">row-reverse would show 3, 2, 1 while Tab still goes 1, 2, 3 (WCAG 1.3.2, 2.4.3). Not part of the API; reorder the JSX instead.</div></div>
 </div>

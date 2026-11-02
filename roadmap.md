@@ -58,8 +58,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - One brand color yields a monotonic 50–900 OKLCH scale (tested on ≥ 3 hues)
     - `checkContrast()` flags every text/background pair under 4.5:1 and UI pair under 3:1, with the role names
     - `createTheme`, `checkContrast` and their types exported from `src/index.ts`; coverage ≥ 80 % for `src/theme/`
-- [ ] **DS-63 Canvas boards on role tokens.** Move every `docs/design-system-wireframe/*.dc.html` board except Theming and AllComponents from hard-coded hex to `var(--ds-*)` role tokens, so each board follows `data-theme`. Bring `Main.dc.html` foundations up to the DS-27 token set, redraw `Form.dc.html` with the shipped Field, Select and RadioGroup, and clear the stale items flagged in the DS-58 audit.
-  - type: docs · has_ui: no · depends_on: DS-58, DS-62 · needs_human: no · status: todo
+- [x] **DS-63 Canvas boards on role tokens.** Move every `docs/design-system-wireframe/*.dc.html` board except Theming and AllComponents from hard-coded hex to `var(--ds-*)` role tokens, so each board follows `data-theme`. Bring `Main.dc.html` foundations up to the DS-27 token set, redraw `Form.dc.html` with the shipped Field, Select and RadioGroup, and clear the stale items flagged in the DS-58 audit.
+  - type: docs · has_ui: no · depends_on: DS-58, DS-62 · needs_human: no · status: done
   - done_when:
     - Every board styles only through `var(--ds-*)`; raw values appear only in a token block identical to `tokens.css` (default and `[data-theme="dark"]`), plus illustration-only fills listed in the canvas README
     - Setting `data-theme="dark"` on any board recolors it (checked headless, screenshots in the PR)
@@ -493,6 +493,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-63** Canvas boards on role tokens — https://github.com/mikespineu/design-system-wireframe/pull/104
 - **DS-64** Storybook theme switcher (addon) — https://github.com/mikespineu/design-system-wireframe/pull/103
 - **DS-65** "Create your own theme" guide — https://github.com/mikespineu/design-system-wireframe/pull/102
 - **DS-62** Docs tasks may edit canvases — https://github.com/mikespineu/design-system-wireframe/pull/101

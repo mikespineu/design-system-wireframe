@@ -11,51 +11,249 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
 <style>
-body{margin:0;background:#FFFFFF}
+/* ds-tokens:start */
+/* Copied from src/styles/tokens.css (default + dark). Everything below reads var(--ds-*). Checked by src/test/canvasBoards.test.ts. */
+:root,
+[data-theme="default"] {
+  /* Tier 1, primitives: raw palette, never read by components. Gray palette: white ground, gray accents, black ink. No hue. */
+  --ds-color-white: #ffffff;
+  --ds-color-gray-50: #f7f7f7;
+  --ds-color-gray-100: #eeeeee;
+  --ds-color-gray-200: #e0e0e0;
+  --ds-color-gray-300: #c7c7c7;
+  --ds-color-gray-400: #a3a3a3;
+  --ds-color-gray-500: #767676;
+  --ds-color-gray-600: #595959;
+  --ds-color-gray-700: #404040;
+  --ds-color-gray-800: #262626;
+  --ds-color-gray-900: #141414;
+  --ds-color-black: #000000;
+
+  /* Tier 2, roles: color */
+  --ds-color-background: var(--ds-color-white);
+  --ds-color-surface: var(--ds-color-white);
+  --ds-color-surface-subtle: var(--ds-color-gray-50);
+  --ds-color-fill: var(--ds-color-gray-100);
+  --ds-color-divider: var(--ds-color-gray-200);
+  --ds-color-border: var(--ds-color-gray-300);
+  --ds-color-disabled: var(--ds-color-gray-400);
+  --ds-color-placeholder: var(--ds-color-gray-500);
+  --ds-color-text-muted: var(--ds-color-gray-600);
+  --ds-color-text: var(--ds-color-gray-700);
+  --ds-color-text-strong: var(--ds-color-gray-800);
+  --ds-color-text-emphasis: var(--ds-color-black);
+  --ds-color-text-inverse: var(--ds-color-white);
+  --ds-color-border-strong: var(--ds-color-black);
+  --ds-color-icon: var(--ds-color-black);
+  --ds-color-focus: var(--ds-color-black);
+  --ds-color-overlay: rgb(0 0 0 / 0.5);
+  --ds-color-inverse: var(--ds-color-gray-900);
+  --ds-color-primary: var(--ds-color-black);
+  --ds-color-primary-hover: var(--ds-color-gray-800);
+  --ds-color-primary-contrast: var(--ds-color-white);
+  /* Deprecated alias of --ds-color-text-emphasis. Components no longer read it; themes do not set it. */
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  /* Status: the only hue in the system, used for feedback only and always
+     paired with an icon and a label. fg passes 4.5:1 on white and on its bg. */
+  --ds-color-info: var(--ds-color-gray-700);
+  --ds-color-info-border: var(--ds-color-gray-300);
+  --ds-color-info-bg: var(--ds-color-gray-50);
+  --ds-color-success: #2e6b45;
+  --ds-color-success-border: #9cc7ab;
+  --ds-color-success-bg: #edf5ef;
+  --ds-color-error: #a3302b;
+  --ds-color-error-border: #e3aaa6;
+  --ds-color-error-bg: #fbedec;
+
+  /* Roles: font. Red Hat Mono for titles and labels, Red Hat Text for body (load with the opt-in fonts.css) */
+  --ds-font-mono: 'Red Hat Mono', ui-monospace, monospace;
+  --ds-font-text: 'Red Hat Text', system-ui, sans-serif;
+  --ds-font-heading: var(--ds-font-mono);
+  --ds-font-body: var(--ds-font-text);
+  --ds-font-label: var(--ds-font-mono);
+  --ds-font-family: var(--ds-font-body);
+
+  /* Roles: font weight */
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
+
+  /* Roles: type scale */
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+
+  /* Legacy line-height aliases (not part of the contract) */
+  --ds-line-height-xs: var(--ds-text-ui-sm-line-height);
+  --ds-line-height-sm: var(--ds-text-caption-line-height);
+  --ds-line-height-md: var(--ds-text-body-sm-line-height);
+  --ds-line-height-lg: var(--ds-text-body-line-height);
+  --ds-line-height-xl: var(--ds-text-h3-line-height);
+
+  /* Spacing: 4 px base. Not themeable. */
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-24: 96px;
+
+  /* Roles: radius. Square corners; --ds-radius is the legacy base the steps default to */
+  --ds-radius: 0;
+  --ds-radius-sm: var(--ds-radius);
+  --ds-radius-md: var(--ds-radius);
+  --ds-radius-lg: var(--ds-radius);
+  --ds-radius-full: var(--ds-radius);
+
+  /* Roles: shadow. No shadows by default, depth comes from borders and fills */
+  --ds-shadow-sm: none;
+  --ds-shadow-md: none;
+  --ds-shadow-lg: none;
+
+  /* Roles: shape and density */
+  --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+
+  /* Icons: fixed system constants, not part of the theme contract */
+  --ds-icon-size-sm: 12px;
+  --ds-icon-size-md: 16px;
+  --ds-icon-size-lg: 20px;
+  --ds-icon-stroke: 1.5;
+  --ds-icon-stroke-strong: 2;
+
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* Photography: always monochrome */
+  --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+/* Dark: overrides the 30 color roles only. Fonts, type, radius, shadow and shape stay at their defaults. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ds-color-background: var(--ds-color-gray-900);
+  --ds-color-surface: var(--ds-color-gray-900);
+  --ds-color-surface-subtle: #1f1f1f;
+  --ds-color-fill: var(--ds-color-gray-800);
+  --ds-color-divider: #333333;
+  --ds-color-border: #737373;
+  --ds-color-disabled: var(--ds-color-gray-600);
+  --ds-color-placeholder: #8f8f8f;
+  --ds-color-text-muted: var(--ds-color-gray-400);
+  --ds-color-text: var(--ds-color-gray-300);
+  --ds-color-text-strong: var(--ds-color-gray-200);
+  --ds-color-text-emphasis: var(--ds-color-gray-50);
+  --ds-color-text-inverse: var(--ds-color-gray-900);
+  --ds-color-border-strong: var(--ds-color-gray-50);
+  --ds-color-icon: var(--ds-color-gray-50);
+  --ds-color-focus: var(--ds-color-gray-50);
+  --ds-color-overlay: rgb(0 0 0 / 0.7);
+  --ds-color-inverse: var(--ds-color-gray-100);
+  --ds-color-primary: var(--ds-color-gray-50);
+  --ds-color-primary-hover: var(--ds-color-gray-200);
+  --ds-color-primary-contrast: var(--ds-color-gray-900);
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  --ds-color-info: var(--ds-color-gray-300);
+  --ds-color-info-border: var(--ds-color-gray-600);
+  --ds-color-info-bg: #1f1f1f;
+  --ds-color-success: #9cc7ab;
+  --ds-color-success-border: #2e6b45;
+  --ds-color-success-bg: #13261a;
+  --ds-color-error: #e3aaa6;
+  --ds-color-error-border: #a3302b;
+  --ds-color-error-bg: #2d1414;
+
+  /* Dims the monochrome photos so they do not glare on the dark ground. */
+  --ds-photo-filter: grayscale(1) contrast(1.1) brightness(0.85);
+}
+/* ds-tokens:end */
+
+body{margin:0;background:var(--ds-color-background)}
 .sec{display:flex;flex-direction:column;gap:32px}
 .sec-h{display:flex;align-items:baseline;gap:24px}
-.sec-n{font-family:'Red Hat Mono',monospace;font-size:13px;color:#595959}
-.sec-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:32px;letter-spacing:-0.02em}
-.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:#404040}
-.sub-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#595959}
+.sec-n{font-family:var(--ds-font-mono);font-size:13px;color:var(--ds-color-text-muted)}
+.sec-t{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:760px;font-size:16px;line-height:26px;color:var(--ds-color-text)}
+.sub-t{margin:0;font-family:var(--ds-font-mono);font-weight:var(--ds-font-weight-medium);font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-muted)}
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
 .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
 .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:start}
 .grid5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;align-items:start}
-.ab{border:1px solid #E0E0E0;background:#FFFFFF;display:flex;flex-direction:column}
-.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #E0E0E0;font-family:'Red Hat Mono',monospace;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
-.ab-h span+span{color:#595959;text-transform:none;letter-spacing:0;text-align:right}
-.ab-f{padding:12px 16px;border-top:1px solid #E0E0E0;font-size:13px;line-height:20px;color:#595959}
-.stage{position:relative;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:24px;background:#FFFFFF;overflow:hidden}
-.stage.gray{background:#F7F7F7}
+.ab{border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);display:flex;flex-direction:column}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid var(--ds-color-divider);font-family:var(--ds-font-mono);font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-emphasis)}
+.ab-h span+span{color:var(--ds-color-text-muted);text-transform:none;letter-spacing:0;text-align:right}
+.ab-f{padding:12px 16px;border-top:1px solid var(--ds-color-divider);font-size:13px;line-height:20px;color:var(--ds-color-text-muted)}
+.stage{position:relative;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:24px;background:var(--ds-color-surface);overflow:hidden}
+.stage.gray{background:var(--ds-color-surface-subtle)}
 .anc{position:relative;display:inline-flex}
 
 /* labels and fields */
-.lb{font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:#000000}
+.lb{font-family:var(--ds-font-mono);font-weight:var(--ds-font-weight-medium);font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-emphasis)}
 .row{display:flex;align-items:center;gap:4px}
-.in{box-sizing:border-box;display:flex;align-items:center;height:44px;width:100%;padding:0 12px;border:1px solid #C7C7C7;background:#FFFFFF;font-size:16px;color:#000000}
+.in{box-sizing:border-box;display:flex;align-items:center;height:44px;width:100%;padding:0 12px;border:1px solid var(--ds-color-border);background:var(--ds-color-surface);font-size:16px;color:var(--ds-color-text-emphasis)}
 .fld{display:flex;flex-direction:column;gap:8px;width:280px}
 
 /* buttons */
-.btn{box-sizing:border-box;height:44px;padding:0 16px;border:1px solid #000000;background:#FFFFFF;font-family:'Red Hat Text',sans-serif;font-weight:500;font-size:16px;color:#000000;cursor:pointer}
-.btn.pri{background:#000000;color:#FFFFFF}
-.btn.focus{outline:2px solid #000000;outline-offset:2px}
-.ib{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid #000000;background:#FFFFFF;color:#000000;cursor:pointer}
-.ib.hover{background:#EEEEEE}
-.ib.focus{outline:2px solid #000000;outline-offset:2px}
+.btn{box-sizing:border-box;height:44px;padding:0 16px;border:1px solid var(--ds-color-border-strong);background:var(--ds-color-surface);font-family:var(--ds-font-body);font-weight:var(--ds-font-weight-medium);font-size:16px;color:var(--ds-color-text-emphasis);cursor:pointer}
+.btn.pri{background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.btn.focus{outline:2px solid var(--ds-color-focus);outline-offset:2px}
+.ib{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid var(--ds-color-border-strong);background:var(--ds-color-surface);color:var(--ds-color-text-emphasis);cursor:pointer}
+.ib.hover{background:var(--ds-color-fill)}
+.ib.focus{outline:2px solid var(--ds-color-focus);outline-offset:2px}
 
 /* InfoTip trigger */
-.it{position:relative;box-sizing:border-box;flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:0;padding:0;border:1px solid transparent;border-radius:0;background:transparent;color:#595959;cursor:pointer}
+.it{position:relative;box-sizing:border-box;flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:0;padding:0;border:1px solid transparent;border-radius:0;background:transparent;color:var(--ds-color-text-muted);cursor:pointer}
 .it.sm{width:24px;height:24px}
-.it.hover{background:#EEEEEE;color:#000000}
-.it.focus{color:#000000;outline:2px solid #000000;outline-offset:2px}
-.it.open{background:#EEEEEE;border-color:#000000;color:#000000}
-.it.press{background:#000000;border-color:#000000;color:#FFFFFF}
-.hit{position:absolute;inset:-6px;outline:1px dashed #A3A3A3;pointer-events:none}
+.it.hover{background:var(--ds-color-fill);color:var(--ds-color-text-emphasis)}
+.it.focus{color:var(--ds-color-text-emphasis);outline:2px solid var(--ds-color-focus);outline-offset:2px}
+.it.open{background:var(--ds-color-fill);border-color:var(--ds-color-border-strong);color:var(--ds-color-text-emphasis)}
+.it.press{background:var(--ds-color-primary);border-color:var(--ds-color-border-strong);color:var(--ds-color-primary-contrast)}
+.hit{position:absolute;inset:-6px;outline:1px dashed var(--ds-color-disabled);pointer-events:none}
 .it.sm .hit{inset:-10px}
 
 /* Tooltip */
-.tt{position:absolute;z-index:3;box-sizing:border-box;width:max-content;max-width:240px;padding:4px 8px;background:#141414;color:#FFFFFF;border-radius:0;font-family:'Red Hat Text',sans-serif;font-size:13px;line-height:20px;text-align:left;text-transform:none;letter-spacing:0;font-weight:400}
+.tt{position:absolute;z-index:3;box-sizing:border-box;width:max-content;max-width:240px;padding:4px 8px;background:var(--ds-color-inverse);color:var(--ds-color-text-inverse);border-radius:0;font-family:var(--ds-font-body);font-size:13px;line-height:20px;text-align:left;text-transform:none;letter-spacing:0;font-weight:var(--ds-font-weight-regular)}
 .tt.top{bottom:calc(100% + 10px);left:50%;transform:translateX(-50%)}
 .tt.bottom{top:calc(100% + 10px);left:50%;transform:translateX(-50%)}
 .tt.right{left:calc(100% + 10px);top:50%;transform:translateY(-50%)}
@@ -67,7 +265,7 @@ body{margin:0;background:#FFFFFF}
 .tt.left .aw{left:100%;top:50%;margin-top:-6px}
 
 /* Popover */
-.pp{position:absolute;z-index:3;box-sizing:border-box;width:240px;max-width:320px;padding:16px;background:#FFFFFF;border:1px solid #000000;border-radius:0;box-shadow:none;color:#404040;font-family:'Red Hat Text',sans-serif;font-size:16px;line-height:26px;text-align:left;text-transform:none;letter-spacing:0;font-weight:400;display:flex;flex-direction:column;gap:12px}
+.pp{position:absolute;z-index:3;box-sizing:border-box;width:240px;max-width:320px;padding:16px;background:var(--ds-color-surface);border:1px solid var(--ds-color-border-strong);border-radius:0;box-shadow:none;color:var(--ds-color-text);font-family:var(--ds-font-body);font-size:16px;line-height:26px;text-align:left;text-transform:none;letter-spacing:0;font-weight:var(--ds-font-weight-regular);display:flex;flex-direction:column;gap:12px}
 .pp p{margin:0}
 .pp.top{bottom:calc(100% + 11px);left:50%;transform:translateX(-50%)}
 .pp.bottom{top:calc(100% + 11px);left:50%;transform:translateX(-50%)}
@@ -78,53 +276,53 @@ body{margin:0;background:#FFFFFF}
 .pp.right .aw{right:100%;top:50%;margin-top:-8px}
 .pp.left .aw{left:100%;top:50%;margin-top:-8px}
 .pp-h{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:-4px}
-.pp-t{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:16px;line-height:24px;color:#000000}
-.x{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:-4px -8px 0 0;padding:0;border:1px solid transparent;background:#FFFFFF;color:#000000;cursor:pointer}
-.x.focus{border-color:#000000;outline:2px solid #000000;outline-offset:2px}
+.pp-t{margin:0;font-family:var(--ds-font-mono);font-weight:var(--ds-font-weight-medium);font-size:16px;line-height:24px;color:var(--ds-color-text-emphasis)}
+.x{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin:-4px -8px 0 0;padding:0;border:1px solid transparent;background:var(--ds-color-surface);color:var(--ds-color-text-emphasis);cursor:pointer}
+.x.focus{border-color:var(--ds-color-border-strong);outline:2px solid var(--ds-color-focus);outline-offset:2px}
 
 /* pointers and frames */
 .cur{position:absolute;z-index:4;pointer-events:none}
-.fng{position:absolute;z-index:4;width:40px;height:52px;box-sizing:border-box;border:1px dashed #767676;border-radius:20px;background:rgba(238,238,238,.8);pointer-events:none}
-.phone{position:relative;box-sizing:border-box;width:320px;height:460px;padding:56px 20px 20px;border:1px solid #000000;background:#FFFFFF;display:flex;flex-direction:column;gap:24px}
-.phone .bar{position:absolute;top:0;left:0;right:0;height:32px;border-bottom:1px solid #E0E0E0;display:flex;align-items:center;padding:0 16px;font-family:'Red Hat Mono',monospace;font-size:12px;color:#595959}
-.edge{position:absolute;left:0;right:0;border-top:1px dashed #767676}
-.edge-v{position:absolute;top:0;bottom:0;border-left:1px dashed #767676}
-.edge-l{position:absolute;font-family:'Red Hat Mono',monospace;font-size:11px;line-height:16px;color:#595959;background:#F7F7F7;padding:0 4px}
+.fng{position:absolute;z-index:4;width:40px;height:52px;box-sizing:border-box;border:1px dashed var(--ds-color-placeholder);border-radius:20px;background:color-mix(in srgb, var(--ds-color-fill) 80%, transparent);pointer-events:none}
+.phone{position:relative;box-sizing:border-box;width:320px;height:460px;padding:56px 20px 20px;border:1px solid var(--ds-color-border-strong);background:var(--ds-color-surface);display:flex;flex-direction:column;gap:24px}
+.phone .bar{position:absolute;top:0;left:0;right:0;height:32px;border-bottom:1px solid var(--ds-color-divider);display:flex;align-items:center;padding:0 16px;font-family:var(--ds-font-mono);font-size:12px;color:var(--ds-color-text-muted)}
+.edge{position:absolute;left:0;right:0;border-top:1px dashed var(--ds-color-placeholder)}
+.edge-v{position:absolute;top:0;bottom:0;border-left:1px dashed var(--ds-color-placeholder)}
+.edge-l{position:absolute;font-family:var(--ds-font-mono);font-size:11px;line-height:16px;color:var(--ds-color-text-muted);background:var(--ds-color-surface-subtle);padding:0 4px}
 .ghost{opacity:.35}
-.tag{display:inline-flex;align-items:center;height:20px;padding:0 6px;border:1px solid #000000;background:#FFFFFF;font-family:'Red Hat Mono',monospace;font-size:11px;line-height:16px;color:#000000;white-space:nowrap}
-.ov{position:absolute;inset:0;background:rgba(0,0,0,.5)}
-.dlg{position:relative;box-sizing:border-box;width:420px;background:#FFFFFF;border:1px solid #000000;color:#404040;display:flex;flex-direction:column}
+.tag{display:inline-flex;align-items:center;height:20px;padding:0 6px;border:1px solid var(--ds-color-border-strong);background:var(--ds-color-surface);font-family:var(--ds-font-mono);font-size:11px;line-height:16px;color:var(--ds-color-text-emphasis);white-space:nowrap}
+.ov{position:absolute;inset:0;background:var(--ds-color-overlay)}
+.dlg{position:relative;box-sizing:border-box;width:420px;background:var(--ds-color-surface);border:1px solid var(--ds-color-border-strong);color:var(--ds-color-text);display:flex;flex-direction:column}
 .dlg .hd{padding:24px 24px 0}
-.dlg .ttl{margin:0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:22px;line-height:29px;color:#000000}
+.dlg .ttl{margin:0;font-family:var(--ds-font-mono);font-weight:var(--ds-font-weight-medium);font-size:22px;line-height:29px;color:var(--ds-color-text-emphasis)}
 .dlg .bd{padding:16px 24px 24px;font-size:16px;line-height:26px}
-.dlg .ft{display:flex;justify-content:flex-end;gap:12px;padding:16px 24px;border-top:1px solid #E0E0E0}
+.dlg .ft{display:flex;justify-content:flex-end;gap:12px;padding:16px 24px;border-top:1px solid var(--ds-color-divider)}
 
 /* tables */
 .tbl{width:100%;border-collapse:collapse;font-size:15px}
-.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:'Red Hat Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #000000}
-.tbl td{height:52px;padding:8px 16px 8px 0;border-bottom:1px solid #E0E0E0;color:#404040;vertical-align:middle}
-.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid #000000;font-family:'Red Hat Mono',monospace;font-size:12px}
-.mono{font-family:'Red Hat Mono',monospace;font-size:13px}
+.tbl th{text-align:left;height:44px;padding:0 16px 0 0;font-family:var(--ds-font-mono);font-weight:var(--ds-font-weight-medium);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid var(--ds-color-border-strong)}
+.tbl td{height:52px;padding:8px 16px 8px 0;border-bottom:1px solid var(--ds-color-divider);color:var(--ds-color-text);vertical-align:middle}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid var(--ds-color-border-strong);font-family:var(--ds-font-mono);font-size:12px}
+.mono{font-family:var(--ds-font-mono);font-size:13px}
 
 /* timeline */
-.tl{position:relative;height:56px;border-bottom:1px solid #000000}
+.tl{position:relative;height:56px;border-bottom:1px solid var(--ds-color-border-strong)}
 .tl i{position:absolute;bottom:0;height:24px;box-sizing:border-box}
-.tl .wait{border:1px dashed #767676;background:#FFFFFF}
-.tl .on{background:#141414}
-.tl .pop{background:#FFFFFF;border:1px solid #000000}
-.tl b{position:absolute;bottom:28px;font-family:'Red Hat Mono',monospace;font-weight:400;font-size:11px;line-height:16px;color:#595959;white-space:nowrap}
-.tl .tick{position:absolute;bottom:-6px;width:1px;height:12px;background:#000000}
+.tl .wait{border:1px dashed var(--ds-color-placeholder);background:var(--ds-color-surface)}
+.tl .on{background:var(--ds-color-inverse)}
+.tl .pop{background:var(--ds-color-surface);border:1px solid var(--ds-color-border-strong)}
+.tl b{position:absolute;bottom:28px;font-family:var(--ds-font-mono);font-weight:var(--ds-font-weight-regular);font-size:11px;line-height:16px;color:var(--ds-color-text-muted);white-space:nowrap}
+.tl .tick{position:absolute;bottom:-6px;width:1px;height:12px;background:var(--ds-color-primary)}
 </style>
 </helmet>
-<div style="width: 1440px; min-height: 8000px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 80px">
+<div style="width: 1440px; min-height: 8000px; box-sizing: border-box; padding: 96px; background: var(--ds-color-background); color: var(--ds-color-text-emphasis); font-family: var(--ds-font-body); display: flex; flex-direction: column; gap: 80px">
 
-<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
-<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid var(--ds-color-border-strong); padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: var(--ds-font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ds-color-text-muted)">
 <span>Design System Wireframe</span>
 <span>InfoTip · Tooltip · Popover · DS-41 · draft</span>
 </div>
-<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">InfoTip</h1>
-<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #404040">An info icon button that explains a field or setting in plain text. With a mouse or trackpad (<span class="mono">(pointer: fine)</span>) it is a Tooltip: dark, compact, opens on hover or keyboard focus. When touch is the primary input (<span class="mono">(pointer: coarse)</span>) it is a Popover: white panel with a black border, opens on tap. The switch reads only that media query, never the viewport width. Tooltip (text only) and Popover (any content) are also public components, built on Radix Tooltip and Radix Popover.</p>
+<h1 style="margin: 0; font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); font-size: 96px; line-height: 1; letter-spacing: -0.04em">InfoTip</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: var(--ds-color-text)">An info icon button that explains a field or setting in plain text. With a mouse or trackpad (<span class="mono">(pointer: fine)</span>) it is a Tooltip: dark, compact, opens on hover or keyboard focus. When touch is the primary input (<span class="mono">(pointer: coarse)</span>) it is a Popover: white panel with a black border, opens on tap. The switch reads only that media query, never the viewport width. Tooltip (text only) and Popover (any content) are also public components, built on Radix Tooltip and Radix Popover.</p>
 </header>
 
 <!-- 01 INFOTIP MODES -->
@@ -139,8 +337,8 @@ body{margin:0;background:#FFFFFF}
 <div class="fld">
 <div class="row"><span class="lb" id="m1-l">Billing period</span>
 <span class="anc"><button class="it open" aria-label="About billing period"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button>
-<span class="tt top" role="tooltip">Charges renew on the same day each month. You can change the day in Settings.<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span>
-<svg class="cur" style="left: 18px; top: 18px" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 3-1-3-7h6z" fill="#000000" stroke="#FFFFFF"/></svg>
+<span class="tt top" role="tooltip">Charges renew on the same day each month. You can change the day in Settings.<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="var(--ds-color-inverse)"/></svg></span>
+<svg class="cur" style="left: 18px; top: 18px" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 3-1-3-7h6z" fill="var(--ds-color-icon)" stroke="var(--ds-color-primary-contrast)"/></svg>
 </span></div>
 <div class="in">Monthly</div>
 </div>
@@ -156,7 +354,7 @@ body{margin:0;background:#FFFFFF}
 <div class="fld" style="width: 100%">
 <div class="row"><span class="lb">Billing period</span>
 <span class="anc"><button class="it open" aria-label="About billing period" aria-expanded="true" aria-haspopup="dialog"><span class="hit"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button>
-<span class="pp bottom" role="dialog" aria-label="About billing period" style="width: 264px; transform: translateX(-55%)"><p>Charges renew on the same day each month. You can change the day in Settings.</p><svg class="aw" style="left: 55%" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span>
+<span class="pp bottom" role="dialog" aria-label="About billing period" style="width: 264px; transform: translateX(-55%)"><p>Charges renew on the same day each month. You can change the day in Settings.</p><svg class="aw" style="left: 55%" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="var(--ds-color-surface)"/><path d="M0 8L8 0L16 8" fill="none" stroke="var(--ds-color-icon)"/></svg></span>
 <span class="fng" style="left: 4px; top: 12px"></span>
 </span></div>
 <div class="in">Monthly</div>
@@ -237,7 +435,7 @@ body{margin:0;background:#FFFFFF}
 <div class="grid4">
 <div class="ab"><div class="ab-h"><span>md · coarse hit area</span><span>44 × 44, dashed</span></div><div class="stage gray" style="height: 140px"><button class="it" aria-label="About billing period"><span class="hit"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div><div class="ab-f">::after, inset −6 px. Only under (pointer: coarse).</div></div>
 <div class="ab"><div class="ab-h"><span>sm · coarse hit area</span><span>44 × 44, dashed</span></div><div class="stage gray" style="height: 140px"><button class="it sm" aria-label="About billing period"><span class="hit"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div><div class="ab-f">::after, inset −10 px. Overlaps neighbours invisibly; keep 8 px clear of other targets.</div></div>
-<div class="ab"><div class="ab-h"><span>sm · inline in text</span><span>caption row</span></div><div class="stage" style="height: 140px"><div class="row" style="font-size: 13px; line-height: 20px; color: #595959">Includes VAT<button class="it sm" aria-label="About VAT"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div><div class="ab-f">4 px gap after the text. Trigger is centred on the line.</div></div>
+<div class="ab"><div class="ab-h"><span>sm · inline in text</span><span>caption row</span></div><div class="stage" style="height: 140px"><div class="row" style="font-size: 13px; line-height: 20px; color: var(--ds-color-text-muted)">Includes VAT<button class="it sm" aria-label="About VAT"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div><div class="ab-f">4 px gap after the text. Trigger is centred on the line.</div></div>
 <div class="ab"><div class="ab-h"><span>md · help slot</span><span>after a control</span></div><div class="stage" style="height: 140px"><div class="row" style="gap: 8px"><div class="in" style="width: 160px">Monthly</div><button class="it" aria-label="About billing period"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5"/></svg></button></div></div><div class="ab-f">8 px after a 44 px control, centred. Fits the SegmentedControl / TileGroup help slot.</div></div>
 </div>
 </section>
@@ -250,16 +448,16 @@ body{margin:0;background:#FFFFFF}
 <p class="sub-t">Sides · open · arrow</p>
 <div class="grid4">
 <div class="ab"><div class="ab-h"><span>side top (default)</span><span>data-side="top"</span></div><div class="stage" style="height: 200px">
-<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span></span>
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="var(--ds-color-inverse)"/></svg></span></span>
 </div></div>
 <div class="ab"><div class="ab-h"><span>side right</span><span>data-side="right"</span></div><div class="stage" style="height: 200px; justify-content: flex-start">
-<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt right" role="tooltip">Add photo<svg class="aw" width="6" height="12" viewBox="0 0 6 12" aria-hidden="true"><path d="M6 0v12L0 6z" fill="#141414"/></svg></span></span>
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt right" role="tooltip">Add photo<svg class="aw" width="6" height="12" viewBox="0 0 6 12" aria-hidden="true"><path d="M6 0v12L0 6z" fill="var(--ds-color-inverse)"/></svg></span></span>
 </div></div>
 <div class="ab"><div class="ab-h"><span>side bottom</span><span>data-side="bottom"</span></div><div class="stage" style="height: 200px">
-<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt bottom" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 6h12L6 0z" fill="#141414"/></svg></span></span>
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt bottom" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 6h12L6 0z" fill="var(--ds-color-inverse)"/></svg></span></span>
 </div></div>
 <div class="ab"><div class="ab-h"><span>side left</span><span>data-side="left"</span></div><div class="stage" style="height: 200px; justify-content: flex-end">
-<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt left" role="tooltip">Add photo<svg class="aw" width="6" height="12" viewBox="0 0 6 12" aria-hidden="true"><path d="M0 0v12l6-6z" fill="#141414"/></svg></span></span>
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt left" role="tooltip">Add photo<svg class="aw" width="6" height="12" viewBox="0 0 6 12" aria-hidden="true"><path d="M0 0v12l6-6z" fill="var(--ds-color-inverse)"/></svg></span></span>
 </div></div>
 </div>
 
@@ -269,28 +467,28 @@ body{margin:0;background:#FFFFFF}
 <span class="anc"><button class="ib" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button></span>
 </div><div class="ab-f">Nothing portaled. No aria-describedby on the trigger.</div></div>
 <div class="ab"><div class="ab-h"><span>Hover, waiting</span><span>0–400 ms</span></div><div class="stage" style="height: 200px">
-<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><svg class="cur" style="left: 24px; top: 24px" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 3-1-3-7h6z" fill="#000000" stroke="#FFFFFF"/></svg></span>
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><svg class="cur" style="left: 24px; top: 24px" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 3-1-3-7h6z" fill="var(--ds-color-icon)" stroke="var(--ds-color-primary-contrast)"/></svg></span>
 </div><div class="ab-f">Trigger shows its own hover. Tip not yet shown; leaving now cancels it.</div></div>
 <div class="ab"><div class="ab-h"><span>Open by hover</span><span>data-state="delayed-open"</span></div><div class="stage" style="height: 200px">
-<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span><svg class="cur" style="left: 24px; top: 24px" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 3-1-3-7h6z" fill="#000000" stroke="#FFFFFF"/></svg></span>
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="var(--ds-color-inverse)"/></svg></span><svg class="cur" style="left: 24px; top: 24px" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 3-1-3-7h6z" fill="var(--ds-color-icon)" stroke="var(--ds-color-primary-contrast)"/></svg></span>
 </div><div class="ab-f">After 400 ms. 120 ms fade in.</div></div>
 <div class="ab"><div class="ab-h"><span>Open by keyboard focus</span><span>data-state="instant-open"</span></div><div class="stage" style="height: 200px">
-<span class="anc"><button class="ib focus" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" style="bottom: calc(100% + 10px)" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span></span>
+<span class="anc"><button class="ib focus" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" style="bottom: calc(100% + 10px)" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="var(--ds-color-inverse)"/></svg></span></span>
 </div><div class="ab-f">No delay on focus. Trigger keeps its focus ring; tip clears the ring (4 px offset ≥ 2 + 2).</div></div>
 </div>
 
 <p class="sub-t">Long text and collisions</p>
 <div class="grid3">
 <div class="ab"><div class="ab-h"><span>Wraps at 240 px</span><span>max 2–3 lines</span></div><div class="stage" style="height: 240px; align-items: flex-end; padding-bottom: 48px">
-<span class="anc"><button class="ib hover" aria-label="Sync"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" role="tooltip">Uploads every photo in this series to the shared archive. Large series may take a few minutes.<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span></span>
+<span class="anc"><button class="ib hover" aria-label="Sync"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" role="tooltip">Uploads every photo in this series to the shared archive. Large series may take a few minutes.<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="var(--ds-color-inverse)"/></svg></span></span>
 </div><div class="ab-f">Left-aligned text. Longer content belongs in a Popover or on the page.</div></div>
 <div class="ab"><div class="ab-h"><span>Flip</span><span>side="top" → data-side="bottom"</span></div><div class="stage gray" style="height: 240px; align-items: flex-start; padding-top: 24px">
 <span class="edge" style="top: 16px"></span><span class="edge-l" style="top: 0; right: 8px">viewport edge + 8 px padding</span>
-<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt bottom" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 6h12L6 0z" fill="#141414"/></svg></span></span>
+<span class="anc"><button class="ib hover" aria-label="Add photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt bottom" role="tooltip">Add photo<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 6h12L6 0z" fill="var(--ds-color-inverse)"/></svg></span></span>
 </div><div class="ab-f">Not enough room above, so Radix flips to the opposite side. The arrow follows data-side.</div></div>
 <div class="ab"><div class="ab-h"><span>Shift</span><span>align="center" kept inside edge</span></div><div class="stage gray" style="height: 240px; justify-content: flex-end; padding-right: 20px">
 <span class="edge-v" style="right: 8px"></span><span class="edge-l" style="top: 8px; right: 12px">edge + 8</span>
-<span class="anc"><button class="ib hover" aria-label="Download"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" style="left: auto; right: -12px; transform: none" role="tooltip">Download all originals<svg class="aw" style="left: auto; right: 28px; margin-left: 0" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="#141414"/></svg></span></span>
+<span class="anc"><button class="ib hover" aria-label="Download"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt top" style="left: auto; right: -12px; transform: none" role="tooltip">Download all originals<svg class="aw" style="left: auto; right: 28px; margin-left: 0" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 0h12L6 6z" fill="var(--ds-color-inverse)"/></svg></span></span>
 </div><div class="ab-f">The tip slides along its side to stay 8 px inside the viewport; the arrow stays on the trigger centre, at least 8 px from the tip's corners.</div></div>
 </div>
 </section>
@@ -304,19 +502,19 @@ body{margin:0;background:#FFFFFF}
 <div class="grid2">
 <div class="ab"><div class="ab-h"><span>side bottom (default)</span><span>data-side="bottom"</span></div><div class="stage" style="height: 300px; align-items: flex-start; padding-top: 40px">
 <span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
-<span class="pp bottom" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span></span>
+<span class="pp bottom" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="var(--ds-color-surface)"/><path d="M0 8L8 0L16 8" fill="none" stroke="var(--ds-color-icon)"/></svg></span></span>
 </div></div>
 <div class="ab"><div class="ab-h"><span>side top</span><span>data-side="top"</span></div><div class="stage" style="height: 300px; align-items: flex-end; padding-bottom: 40px">
 <span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
-<span class="pp top" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 0h16L8 8z" fill="#FFFFFF"/><path d="M0 0L8 8L16 0" fill="none" stroke="#000000"/></svg></span></span>
+<span class="pp top" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 0h16L8 8z" fill="var(--ds-color-surface)"/><path d="M0 0L8 8L16 0" fill="none" stroke="var(--ds-color-icon)"/></svg></span></span>
 </div></div>
 <div class="ab"><div class="ab-h"><span>side right</span><span>data-side="right"</span></div><div class="stage" style="height: 260px; justify-content: flex-start; padding-left: 96px">
 <span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
-<span class="pp right" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="8" height="16" viewBox="0 0 8 16" aria-hidden="true"><path d="M8 0v16L0 8z" fill="#FFFFFF"/><path d="M8 0L0 8L8 16" fill="none" stroke="#000000"/></svg></span></span>
+<span class="pp right" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="8" height="16" viewBox="0 0 8 16" aria-hidden="true"><path d="M8 0v16L0 8z" fill="var(--ds-color-surface)"/><path d="M8 0L0 8L8 16" fill="none" stroke="var(--ds-color-icon)"/></svg></span></span>
 </div></div>
 <div class="ab"><div class="ab-h"><span>side left</span><span>data-side="left"</span></div><div class="stage" style="height: 260px; justify-content: flex-end; padding-right: 96px">
 <span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
-<span class="pp left" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="8" height="16" viewBox="0 0 8 16" aria-hidden="true"><path d="M0 0v16l8-8z" fill="#FFFFFF"/><path d="M0 0L8 8L0 16" fill="none" stroke="#000000"/></svg></span></span>
+<span class="pp left" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="8" height="16" viewBox="0 0 8 16" aria-hidden="true"><path d="M0 0v16l8-8z" fill="var(--ds-color-surface)"/><path d="M0 0L8 8L0 16" fill="none" stroke="var(--ds-color-icon)"/></svg></span></span>
 </div></div>
 </div>
 
@@ -327,15 +525,15 @@ body{margin:0;background:#FFFFFF}
 </div><div class="ab-f">Content unmounted. Trigger has aria-expanded="false". Popover does not restyle the trigger.</div></div>
 <div class="ab"><div class="ab-h"><span>Open · focus inside</span><span>data-state="open"</span></div><div class="stage" style="height: 300px; align-items: flex-start; padding-top: 40px">
 <span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
-<span class="pp bottom" style="width: 232px" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri focus">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span></span>
+<span class="pp bottom" style="width: 232px" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri focus">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="var(--ds-color-surface)"/><path d="M0 8L8 0L16 8" fill="none" stroke="var(--ds-color-icon)"/></svg></span></span>
 </div><div class="ab-f">Opened with Enter: focus moves to the first focusable inside. Tab loops inside; Esc returns focus to Share.</div></div>
 <div class="ab"><div class="ab-h"><span>Open · title + close</span><span>close focus-visible</span></div><div class="stage" style="height: 300px; align-items: flex-start; padding-top: 40px">
 <span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
-<span class="pp bottom" style="width: 232px" role="dialog" aria-labelledby="pp-t1"><span class="pp-h"><h3 class="pp-t" id="pp-t1">Share link</h3><button class="x focus" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></span><p>Anyone with the link can view.</p><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span></span>
+<span class="pp bottom" style="width: 232px" role="dialog" aria-labelledby="pp-t1"><span class="pp-h"><h3 class="pp-t" id="pp-t1">Share link</h3><button class="x focus" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg></button></span><p>Anyone with the link can view.</p><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="var(--ds-color-surface)"/><path d="M0 8L8 0L16 8" fill="none" stroke="var(--ds-color-icon)"/></svg></span></span>
 </div><div class="ab-f">Optional title (mono 16/24) names the dialog. Optional close button: same 32 × 32 button and states as Dialog close.</div></div>
 <div class="ab"><div class="ab-h"><span>Open · text only</span><span>focus on panel</span></div><div class="stage" style="height: 300px; align-items: flex-start; padding-top: 40px">
 <span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Terms</button>
-<span class="pp bottom" style="width: 232px" role="dialog" aria-label="Terms" tabindex="-1"><p>Editorial use only. Credit the author on every use.</p><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span></span>
+<span class="pp bottom" style="width: 232px" role="dialog" aria-label="Terms" tabindex="-1"><p>Editorial use only. Credit the author on every use.</p><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="var(--ds-color-surface)"/><path d="M0 8L8 0L16 8" fill="none" stroke="var(--ds-color-icon)"/></svg></span></span>
 </div><div class="ab-f">Nothing focusable inside: Radix focuses the panel itself. No extra ring; the black border already marks it. This is InfoTip's Popover mode.</div></div>
 </div>
 
@@ -344,12 +542,12 @@ body{margin:0;background:#FFFFFF}
 <div class="ab"><div class="ab-h"><span>Flip</span><span>side="bottom" → data-side="top"</span></div><div class="stage gray" style="height: 300px; align-items: flex-end; padding-bottom: 28px">
 <span class="edge" style="bottom: 16px"></span><span class="edge-l" style="bottom: 0; right: 8px">viewport edge + 8 px padding</span>
 <span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Share</button>
-<span class="pp top" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 0h16L8 8z" fill="#FFFFFF"/><path d="M0 0L8 8L16 0" fill="none" stroke="#000000"/></svg></span></span>
+<span class="pp top" role="dialog" aria-label="Share"><p>Anyone with the link can view the series.</p><div><button class="btn pri">Copy link</button></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 0h16L8 8z" fill="var(--ds-color-surface)"/><path d="M0 0L8 8L16 0" fill="none" stroke="var(--ds-color-icon)"/></svg></span></span>
 </div><div class="ab-f">No room below, so it opens on top. Arrow and fade origin follow data-side.</div></div>
 <div class="ab"><div class="ab-h"><span>Available height</span><span>content scrolls</span></div><div class="stage gray" style="height: 300px; align-items: flex-start; padding-top: 24px">
 <span class="edge" style="bottom: 16px"></span><span class="edge-l" style="bottom: 0; right: 8px">viewport edge + 8 px padding</span>
 <span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Licence</button>
-<span class="pp bottom" style="width: 320px; height: 196px; padding-right: 8px" role="dialog" aria-label="Licence"><div style="flex: 1; min-height: 0; overflow-y: auto; padding-right: 8px"><p>Photos are licensed for editorial use only. Commercial use requires written permission from the author. Credit the author on every use. Crops are allowed; colour changes are not.</p></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="#FFFFFF"/><path d="M0 8L8 0L16 8" fill="none" stroke="#000000"/></svg></span></span>
+<span class="pp bottom" style="width: 320px; height: 196px; padding-right: 8px" role="dialog" aria-label="Licence"><div style="flex: 1; min-height: 0; overflow-y: auto; padding-right: 8px"><p>Photos are licensed for editorial use only. Commercial use requires written permission from the author. Credit the author on every use. Crops are allowed; colour changes are not.</p></div><svg class="aw" width="16" height="8" viewBox="0 0 16 8" aria-hidden="true"><path d="M0 8h16L8 0z" fill="var(--ds-color-surface)"/><path d="M0 8L8 0L16 8" fill="none" stroke="var(--ds-color-icon)"/></svg></span></span>
 </div><div class="ab-f">Neither side fits the whole panel: max height is the Radix available height, and the panel scrolls. Max width 320 px.</div></div>
 </div>
 </section>
@@ -367,7 +565,7 @@ body{margin:0;background:#FFFFFF}
 <div class="hd"><h2 class="ttl" id="ly-t">Share series</h2></div>
 <div class="bd">Choose who can see the photos in this series.</div>
 <div class="ft"><span class="anc"><button class="btn" aria-expanded="true" aria-haspopup="dialog">Permissions</button>
-<span class="pp right" style="width: 260px" role="dialog" aria-label="Permissions"><p>Viewers can see and download. Editors can also reorder.</p><div style="display: flex; gap: 12px; align-items: center"><span class="anc"><button class="ib focus" aria-label="Copy link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt bottom" role="tooltip">Copy link<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 6h12L6 0z" fill="#141414"/></svg></span></span></div><svg class="aw" width="8" height="16" viewBox="0 0 8 16" aria-hidden="true"><path d="M8 0v16L0 8z" fill="#FFFFFF"/><path d="M8 0L0 8L8 16" fill="none" stroke="#000000"/></svg></span></span>
+<span class="pp right" style="width: 260px" role="dialog" aria-label="Permissions"><p>Viewers can see and download. Editors can also reorder.</p><div style="display: flex; gap: 12px; align-items: center"><span class="anc"><button class="ib focus" aria-label="Copy link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button><span class="tt bottom" role="tooltip">Copy link<svg class="aw" width="12" height="6" viewBox="0 0 12 6" aria-hidden="true"><path d="M0 6h12L6 0z" fill="var(--ds-color-inverse)"/></svg></span></span></div><svg class="aw" width="8" height="16" viewBox="0 0 8 16" aria-hidden="true"><path d="M8 0v16L0 8z" fill="var(--ds-color-surface)"/><path d="M8 0L0 8L8 16" fill="none" stroke="var(--ds-color-icon)"/></svg></span></span>
 <button class="btn pri">Done</button></div>
 </div>
 <div style="position: absolute; left: 24px; top: 24px; display: flex; flex-direction: column; gap: 8px">
