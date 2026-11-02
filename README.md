@@ -87,6 +87,7 @@ Canvases are `*.dc.html` files in [`docs/design-system-wireframe/`](docs/design-
 | [`Toast.dc.html`](docs/design-system-wireframe/Toast.dc.html) | Toast design (DS-39) |
 | [`Drawer.dc.html`](docs/design-system-wireframe/Drawer.dc.html) | Drawer design (DS-44) |
 | [`Typography.dc.html`](docs/design-system-wireframe/Typography.dc.html) | Heading and body type styles, shipped as Tailwind utilities (DS-37) |
+| [`Introduction.dc.html`](docs/design-system-wireframe/Introduction.dc.html) | Storybook Introduction page redesign in four themes (DS-70) |
 
 [`canvas.json`](docs/design-system-wireframe/canvas.json) holds the artboard layout; see the folder's [README](docs/design-system-wireframe/README.md).
 

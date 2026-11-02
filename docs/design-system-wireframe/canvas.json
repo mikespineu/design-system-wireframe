@@ -142,6 +142,13 @@
       "w": 1440,
       "x": 28880,
       "y": 0
+    },
+    "Introduction.dc.html": {
+      "h": 31000,
+      "title": "Introduction page",
+      "w": 1440,
+      "x": 30400,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -182,7 +189,8 @@
     "Toast.dc.html",
     "Drawer.dc.html",
     "Typography.dc.html",
-    "Themes.dc.html"
+    "Themes.dc.html",
+    "Introduction.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
