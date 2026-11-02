@@ -192,5 +192,8 @@
   --ds-color-error: #e3aaa6;
   --ds-color-error-border: #a3302b;
   --ds-color-error-bg: #2d1414;
+
+  /* Dims the monochrome photos so they do not glare on the dark ground. */
+  --ds-photo-filter: grayscale(1) contrast(1.1) brightness(0.85);
 }
 }

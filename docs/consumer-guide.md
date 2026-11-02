@@ -28,6 +28,8 @@ The package exposes three entry points (see `exports` in `package.json`):
 | `design-system-test` | The components, hooks and types (JavaScript) |
 | `design-system-test/styles.css` | Required. Tokens, component CSS and the Tailwind utilities the components use, in one file |
 | `design-system-test/fonts.css` | Optional. Loads Red Hat Mono and Red Hat Text from Google Fonts for the default look |
+| `design-system-test/themes/bold.css` | Optional. The `bold` and `bold-dark` demo themes; turn on with `data-theme="bold"` or `"bold-dark"` |
+| `design-system-test/themes/bold-fonts.css` | Optional. Loads Bricolage Grotesque, Figtree and IBM Plex Mono from Google Fonts for the bold themes |
 
 Import the stylesheet once, at your app entry, next to the React root:
 

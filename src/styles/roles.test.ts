@@ -35,11 +35,12 @@ describe('theme role list', () => {
     for (const role of themeRoles) expect(defaults.has(role)).toBe(true)
   })
 
-  it('overrides exactly the 30 color roles in the dark theme', () => {
+  it('overrides the 30 color roles and the photo filter in the dark theme', () => {
     const dark = block('[data-theme="dark"]')
     for (const role of themeRoleGroups.color) expect(dark.has(role)).toBe(true)
     const others = [...dark.keys()].filter((k) => !(themeRoleGroups.color as readonly string[]).includes(k))
-    expect(others).toEqual(['--ds-color-ink'])
+    expect(others).toEqual(['--ds-color-ink', '--ds-photo-filter'])
+    expect(dark.get('--ds-photo-filter')).toBe('grayscale(1) contrast(1.1) brightness(0.85)')
     expect(css).toMatch(/\[data-theme="dark"\]\s*\{\s*color-scheme: dark;/)
   })
 
