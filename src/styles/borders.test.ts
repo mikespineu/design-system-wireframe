@@ -39,23 +39,24 @@ describe('border width utilities (compiled CSS)', () => {
   })
 })
 
-describe('components take border widths from the roles', () => {
-  const literal = /(^|[\s'"`:])border(-(0|2|4|8|[xytblrse](-(0|2|4|8))?))?(?=$|[\s'"`])/
+/** A class token (optionally behind variants) that is Tailwind's literal border width: `border`, `border-2`, `border-t`, `border-y-4`. */
+const literalBorder = /^(?:[\w[\]=-]+:)*border(?:-(?:2|4|8|[xytblrse](?:-(?:2|4|8))?))?$/
+const literalIn = (classes: string) => classes.split(/\s+/).filter((c) => literalBorder.test(c))
 
+describe('components take border widths from the roles', () => {
   it.each(files.filter((f) => f.endsWith('.tsx')).map((f) => [f.slice(components.length + 1), f]))(
     '%s has no literal Tailwind border width on a themed border',
     (_name, file) => {
       const src = readFileSync(file, 'utf8')
       const classes = [...src.matchAll(/(["'`])((?:(?!\1)[^\n])*)\1/g)].map((m) => m[2]!).filter((s) => /\s/.test(s) || s.startsWith('border'))
-      const bad = classes.flatMap((s) => s.split(/\s+/)).filter((c) => /^(?:[\w[\]=-]+:)*border(-(2|4|8|[xytblrse](-(2|4|8))?))?$/.test(c))
-      expect(bad).toEqual([])
+      expect(classes.flatMap(literalIn)).toEqual([])
     },
   )
 
   it('the detector flags the old classes', () => {
-    expect(literal.test('flex border bg-surface')).toBe(true)
-    expect(literal.test('aria-[invalid=true]:border-2')).toBe(true)
-    expect(literal.test('border-strong border-line')).toBe(false)
+    expect(literalIn('flex border bg-surface')).toEqual(['border'])
+    expect(literalIn('aria-[invalid=true]:border-2 border-t')).toEqual(['aria-[invalid=true]:border-2', 'border-t'])
+    expect(literalIn('border-strong border-line border-transparent border-0 border-line-strong')).toEqual([])
   })
 
   it.each(files.filter((f) => f.endsWith('.css')).map((f) => [f.slice(components.length + 1), f]))(

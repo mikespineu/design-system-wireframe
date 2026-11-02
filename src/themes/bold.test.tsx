@@ -230,6 +230,28 @@ describe('contrast', () => {
     expect(report.checked).toBe(requiredPairs.length)
   })
 
+  it('the shipped dark block in tokens.css (var() refs resolved against :root) passes checkContrast()', () => {
+    const tokens = readFileSync(join(root, 'src/styles/tokens.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '')
+    const decls = (from: number) => {
+      const body = tokens.slice(tokens.indexOf('{', from) + 1, tokens.indexOf('\n}', from))
+      return new Map([...body.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)].map((m): [string, string] => [m[1]!, m[2]!.trim()]))
+    }
+    const rootDecls = decls(tokens.indexOf(':root,'))
+    const darkDecls = decls(tokens.indexOf('[data-theme="dark"]'))
+    const resolve = (value: string, depth = 0): string => {
+      const ref = value.match(/^var\((--[\w-]+)\)$/)
+      if (!ref) return value
+      const next = darkDecls.get(ref[1]!) ?? rootDecls.get(ref[1]!)
+      if (!next || depth > 8) throw new Error(`cannot resolve ${value}`)
+      return resolve(next, depth + 1)
+    }
+    const values = Object.fromEntries(themeRoleGroups.color.map((role) => [role, resolve(darkDecls.get(role)!)]))
+    const report = checkContrast({ blocks: [{ mode: 'dark', selector: 'dark', values }] })
+    expect(report.failures).toEqual([])
+    expect(report.ok).toBe(true)
+    expect(report.checked).toBe(requiredPairs.length)
+  })
+
   it('keeps the field rest border above 3:1 on the surface in both themes', () => {
     for (const [name] of themes) {
       const v = resolved(shipped, name)
