@@ -11,27 +11,311 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
 <style>
-body{margin:0;background:#FFFFFF}
-a{color:#000000}a:hover{color:#595959}
-input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid #000000;outline-offset:2px}
-input::placeholder,textarea::placeholder{color:#767676}
+/* ds-tokens:start */
+/* Copied from src/styles/tokens.css (default + dark). Everything below reads var(--ds-*). Checked by src/test/canvasBoards.test.ts. */
+:root,
+[data-theme="default"] {
+  /* Tier 1, primitives: raw palette, never read by components. Gray palette: white ground, gray accents, black ink. No hue. */
+  --ds-color-white: #ffffff;
+  --ds-color-gray-50: #f7f7f7;
+  --ds-color-gray-100: #eeeeee;
+  --ds-color-gray-200: #e0e0e0;
+  --ds-color-gray-300: #c7c7c7;
+  --ds-color-gray-400: #a3a3a3;
+  --ds-color-gray-500: #767676;
+  --ds-color-gray-600: #595959;
+  --ds-color-gray-700: #404040;
+  --ds-color-gray-800: #262626;
+  --ds-color-gray-900: #141414;
+  --ds-color-black: #000000;
+
+  /* Tier 2, roles: color */
+  --ds-color-background: var(--ds-color-white);
+  --ds-color-surface: var(--ds-color-white);
+  --ds-color-surface-subtle: var(--ds-color-gray-50);
+  --ds-color-fill: var(--ds-color-gray-100);
+  --ds-color-divider: var(--ds-color-gray-200);
+  --ds-color-border: var(--ds-color-gray-300);
+  --ds-color-disabled: var(--ds-color-gray-400);
+  --ds-color-placeholder: var(--ds-color-gray-500);
+  --ds-color-text-muted: var(--ds-color-gray-600);
+  --ds-color-text: var(--ds-color-gray-700);
+  --ds-color-text-strong: var(--ds-color-gray-800);
+  --ds-color-text-emphasis: var(--ds-color-black);
+  --ds-color-text-inverse: var(--ds-color-white);
+  --ds-color-border-strong: var(--ds-color-black);
+  --ds-color-icon: var(--ds-color-black);
+  --ds-color-focus: var(--ds-color-black);
+  --ds-color-overlay: rgb(0 0 0 / 0.5);
+  --ds-color-inverse: var(--ds-color-gray-900);
+  --ds-color-primary: var(--ds-color-black);
+  --ds-color-primary-hover: var(--ds-color-gray-800);
+  --ds-color-primary-contrast: var(--ds-color-white);
+  /* Deprecated alias of --ds-color-text-emphasis. Components no longer read it; themes do not set it. */
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  /* Status: the only hue in the system, used for feedback only and always
+     paired with an icon and a label. fg passes 4.5:1 on white and on its bg. */
+  --ds-color-info: var(--ds-color-gray-700);
+  --ds-color-info-border: var(--ds-color-gray-300);
+  --ds-color-info-bg: var(--ds-color-gray-50);
+  --ds-color-success: #2e6b45;
+  --ds-color-success-border: #9cc7ab;
+  --ds-color-success-bg: #edf5ef;
+  --ds-color-error: #a3302b;
+  --ds-color-error-border: #e3aaa6;
+  --ds-color-error-bg: #fbedec;
+
+  /* Roles: font. Red Hat Mono for titles and labels, Red Hat Text for body (load with the opt-in fonts.css) */
+  --ds-font-mono: 'Red Hat Mono', ui-monospace, monospace;
+  --ds-font-text: 'Red Hat Text', system-ui, sans-serif;
+  --ds-font-heading: var(--ds-font-mono);
+  --ds-font-body: var(--ds-font-text);
+  --ds-font-label: var(--ds-font-mono);
+  --ds-font-family: var(--ds-font-body);
+
+  /* Roles: font weight */
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
+
+  /* Roles: type scale */
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+
+  /* Legacy line-height aliases (not part of the contract) */
+  --ds-line-height-xs: var(--ds-text-ui-sm-line-height);
+  --ds-line-height-sm: var(--ds-text-caption-line-height);
+  --ds-line-height-md: var(--ds-text-body-sm-line-height);
+  --ds-line-height-lg: var(--ds-text-body-line-height);
+  --ds-line-height-xl: var(--ds-text-h3-line-height);
+
+  /* Spacing: 4 px base. Not themeable. */
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-24: 96px;
+
+  /* Roles: radius. Square corners; --ds-radius is the legacy base the steps default to */
+  --ds-radius: 0;
+  --ds-radius-sm: var(--ds-radius);
+  --ds-radius-md: var(--ds-radius);
+  --ds-radius-lg: var(--ds-radius);
+  --ds-radius-full: var(--ds-radius);
+
+  /* Roles: shadow. No shadows by default, depth comes from borders and fills */
+  --ds-shadow-sm: none;
+  --ds-shadow-md: none;
+  --ds-shadow-lg: none;
+
+  /* Roles: shape and density */
+  --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+
+  /* Icons: fixed system constants, not part of the theme contract */
+  --ds-icon-size-sm: 12px;
+  --ds-icon-size-md: 16px;
+  --ds-icon-size-lg: 20px;
+  --ds-icon-stroke: 1.5;
+  --ds-icon-stroke-strong: 2;
+
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* Photography: always monochrome */
+  --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+/* Dark: overrides the 30 color roles only. Fonts, type, radius, shadow and shape stay at their defaults. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ds-color-background: var(--ds-color-gray-900);
+  --ds-color-surface: var(--ds-color-gray-900);
+  --ds-color-surface-subtle: #1f1f1f;
+  --ds-color-fill: var(--ds-color-gray-800);
+  --ds-color-divider: #333333;
+  --ds-color-border: #737373;
+  --ds-color-disabled: var(--ds-color-gray-600);
+  --ds-color-placeholder: #8f8f8f;
+  --ds-color-text-muted: var(--ds-color-gray-400);
+  --ds-color-text: var(--ds-color-gray-300);
+  --ds-color-text-strong: var(--ds-color-gray-200);
+  --ds-color-text-emphasis: var(--ds-color-gray-50);
+  --ds-color-text-inverse: var(--ds-color-gray-900);
+  --ds-color-border-strong: var(--ds-color-gray-50);
+  --ds-color-icon: var(--ds-color-gray-50);
+  --ds-color-focus: var(--ds-color-gray-50);
+  --ds-color-overlay: rgb(0 0 0 / 0.7);
+  --ds-color-inverse: var(--ds-color-gray-100);
+  --ds-color-primary: var(--ds-color-gray-50);
+  --ds-color-primary-hover: var(--ds-color-gray-200);
+  --ds-color-primary-contrast: var(--ds-color-gray-900);
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  --ds-color-info: var(--ds-color-gray-300);
+  --ds-color-info-border: var(--ds-color-gray-600);
+  --ds-color-info-bg: #1f1f1f;
+  --ds-color-success: #9cc7ab;
+  --ds-color-success-border: #2e6b45;
+  --ds-color-success-bg: #13261a;
+  --ds-color-error: #e3aaa6;
+  --ds-color-error-border: #a3302b;
+  --ds-color-error-bg: #2d1414;
+
+  /* Dims the monochrome photos so they do not glare on the dark ground. */
+  --ds-photo-filter: grayscale(1) contrast(1.1) brightness(0.85);
+}
+/* ds-tokens:end */
+body{margin:0;background:var(--ds-color-background)}
+a{color:var(--ds-color-text-emphasis)}a:hover{color:var(--ds-color-text-muted)}
+.page,.page *{box-sizing:border-box}
+.page{width:1440px;height:1500px;padding:var(--ds-space-24);background:var(--ds-color-background);color:var(--ds-color-text-emphasis);font-family:var(--ds-font-body);display:flex;flex-direction:column;gap:var(--ds-space-16)}
+.top{display:flex;justify-content:space-between;padding-bottom:var(--ds-space-6);border-bottom:var(--ds-border-width) solid var(--ds-color-border-strong);font-family:var(--ds-font-mono);font-size:var(--ds-text-caption-size);letter-spacing:var(--ds-text-label-tracking);text-transform:uppercase;color:var(--ds-color-text-muted)}
+.cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--ds-space-24);align-items:start}
+.aside{display:flex;flex-direction:column;gap:var(--ds-space-8)}
+.eyebrow{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-muted)}
+.h1{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:var(--ds-text-h1-size);line-height:var(--ds-text-h1-line-height);letter-spacing:var(--ds-text-h1-tracking);text-transform:var(--ds-text-heading-transform);color:var(--ds-color-text-emphasis)}
+.h2{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:var(--ds-text-h2-size);line-height:var(--ds-text-h2-line-height);letter-spacing:var(--ds-text-h2-tracking);text-transform:var(--ds-text-heading-transform);color:var(--ds-color-success)}
+.lead{margin:0;font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height);color:var(--ds-color-text)}
+.cap{font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);color:var(--ds-color-text-muted)}
+.photo{display:block;width:100%;height:auto;filter:var(--ds-photo-filter)}
+.main{display:flex;flex-direction:column;gap:var(--ds-space-8)}
+.frm{display:flex;flex-direction:column;gap:var(--ds-space-8)}
+.fs{margin:0;padding:0;border:0;min-width:0;display:flex;flex-direction:column;gap:var(--ds-space-6)}
+.fs>legend{padding:0;margin-bottom:var(--ds-space-6);font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:var(--ds-text-h3-size);line-height:var(--ds-text-h3-line-height);letter-spacing:var(--ds-text-h3-tracking);text-transform:var(--ds-text-heading-transform);color:var(--ds-color-text-emphasis)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ds-space-6);align-items:start}
+.ic{display:block;flex:none}
+
+/* Field: label, control, hint, error (same looks as AllComponents) */
+.fld{display:flex;flex-direction:column;gap:var(--ds-space-2);width:100%;min-width:0}
+.fld-top{display:flex;justify-content:space-between;align-items:baseline}
+.fld-l{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-emphasis)}
+.fld-h{font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);color:var(--ds-color-text-muted)}
+.fld-e{display:flex;align-items:center;gap:6px;font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);font-weight:var(--ds-font-weight-medium);color:var(--ds-color-error)}
+.cnt{font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);font-variant-numeric:tabular-nums;color:var(--ds-color-text-muted)}
+
+/* Input, Select trigger, Textarea */
+.inp{display:flex;align-items:center;gap:var(--ds-space-2);width:100%;height:var(--ds-control-height);margin:0;padding:0 var(--ds-space-3);border:var(--ds-border-width) solid var(--ds-color-border);border-radius:var(--ds-radius-md);background:var(--ds-color-surface);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text-emphasis);text-align:start;transition:border-color var(--ds-motion),background-color var(--ds-motion)}
+.inp::placeholder,.ta::placeholder{color:var(--ds-color-placeholder)}
+.ta{display:block;width:100%;height:calc(6 * var(--ds-text-body-line-height) + 2 * var(--ds-space-2) + 2 * var(--ds-border-width));margin:0;padding:var(--ds-space-2) var(--ds-space-3);border:var(--ds-border-width) solid var(--ds-color-border);border-radius:var(--ds-radius-md);background:var(--ds-color-surface);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text-emphasis);resize:vertical}
+.inp:hover,.ta:hover{border-color:var(--ds-color-border-strong)}
+.inp:focus-visible,.ta:focus-visible{border-color:var(--ds-color-border-strong);outline:var(--ds-focus-width) solid var(--ds-color-focus);outline-offset:var(--ds-focus-offset)}
+.inp[aria-invalid="true"],.ta[aria-invalid="true"]{border-width:var(--ds-border-width-strong);border-color:var(--ds-color-error)}
+.sel{justify-content:space-between;cursor:pointer}
+.sel-v{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sel[data-placeholder="true"] .sel-v{color:var(--ds-color-placeholder)}
+.sel .chev{color:var(--ds-color-icon);transition:transform var(--ds-motion)}
+.sel[data-state="open"]{border-color:var(--ds-color-border-strong)}
+.sel[data-state="open"][aria-invalid="true"]{border-color:var(--ds-color-error)}
+.sel[data-state="open"] .chev{transform:rotate(180deg)}
+.selw{position:relative}
+.menu{position:absolute;z-index:5;top:calc(100% + var(--ds-space-1));left:0;right:0;margin:0;padding:var(--ds-space-1) 0;list-style:none;background:var(--ds-color-surface);border:var(--ds-border-width) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-lg);box-shadow:var(--ds-shadow-md);color:var(--ds-color-text-emphasis);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);overflow:hidden}
+.opt{display:flex;align-items:flex-start;gap:var(--ds-space-2);min-height:var(--ds-control-height);padding:calc((var(--ds-control-height) - var(--ds-text-body-line-height)) / 2) var(--ds-space-3);cursor:pointer;user-select:none}
+.opt>span:first-child{flex:1 1 auto}
+.opt .tick{display:none;margin-top:calc((var(--ds-text-body-line-height) - var(--ds-space-4)) / 2)}
+.opt[aria-selected="true"]{font-weight:var(--ds-font-weight-medium)}
+.opt[aria-selected="true"] .tick{display:block}
+.opt[data-highlighted="true"]{background:var(--ds-color-fill);outline:var(--ds-focus-width) solid var(--ds-color-focus);outline-offset:calc(-1 * var(--ds-focus-width))}
+
+/* RadioGroup and Checkbox: a real input drives state, the box is drawn like the shipped controls */
+.grp{display:flex;flex-direction:column;gap:var(--ds-space-2);min-width:0}
+.grp-in{display:flex;gap:var(--ds-space-6)}
+.ctl{position:relative;display:flex;align-items:flex-start;gap:var(--ds-space-3);min-height:var(--ds-control-height);font-family:var(--ds-font-body);cursor:pointer}
+.ctl-lb{padding-block:9px;color:var(--ds-color-text-emphasis);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height)}
+.ctl-in{position:absolute;left:0;top:10px;width:var(--ds-space-6);height:var(--ds-space-6);margin:0;opacity:0;cursor:pointer}
+.cb,.rb{flex:none;display:inline-flex;align-items:center;justify-content:center;width:var(--ds-space-6);height:var(--ds-space-6);margin-top:10px;border:var(--ds-border-width-strong) solid var(--ds-color-border-strong);background:var(--ds-color-surface);transition:background-color var(--ds-motion),border-color var(--ds-motion)}
+.cb{border-radius:var(--ds-radius-sm);color:var(--ds-color-primary-contrast)}
+.rb{border-radius:var(--ds-radius-full)}
+.cb svg{display:none}
+.rb i{display:none;width:var(--ds-space-3);height:var(--ds-space-3);border-radius:var(--ds-radius-full);background:var(--ds-color-primary)}
+.ctl:hover .ctl-in:not(:checked)+.cb,.ctl:hover .ctl-in:not(:checked)+.rb{background:var(--ds-color-fill)}
+.ctl-in:checked+.cb{background:var(--ds-color-primary)}
+.ctl-in:checked+.cb svg,.ctl-in:checked+.rb i{display:block}
+.ctl:hover .ctl-in:checked+.cb{border-color:var(--ds-color-primary-hover);background:var(--ds-color-primary-hover)}
+.ctl:hover .ctl-in:checked+.rb{border-color:var(--ds-color-primary-hover)}
+.ctl:hover .ctl-in:checked+.rb i{background:var(--ds-color-primary-hover)}
+.ctl-in:focus-visible+.cb,.ctl-in:focus-visible+.rb{outline:var(--ds-focus-width) solid var(--ds-color-focus);outline-offset:var(--ds-focus-offset)}
+.ctl-in[aria-invalid="true"]+.cb{border-color:var(--ds-color-error)}
+.ctl-in[aria-invalid="true"]:checked+.cb{background:var(--ds-color-error)}
+.consent{display:flex;flex-direction:column;gap:var(--ds-space-2);padding-top:var(--ds-space-6);border-top:var(--ds-border-width) solid var(--ds-color-divider)}
+.consent .ctl-lb{font-size:var(--ds-text-body-sm-size);line-height:var(--ds-text-body-sm-line-height);padding-block:10px}
+.consent .fld-e{padding-left:var(--ds-space-8)}
+
+/* Button, Alert */
+.btn{display:inline-flex;align-items:center;justify-content:center;height:var(--ds-control-height);margin:0;padding:0 var(--ds-space-6);border:var(--ds-border-width) solid;border-radius:var(--ds-radius-md);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);white-space:nowrap;cursor:pointer;transition:background-color var(--ds-motion),border-color var(--ds-motion)}
+.btn-primary{border-color:var(--ds-color-primary);background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.btn-primary:hover{border-color:var(--ds-color-primary-hover);background:var(--ds-color-primary-hover)}
+.btn-secondary{border-color:var(--ds-color-border-strong);background:var(--ds-color-surface);color:var(--ds-color-text-emphasis)}
+.btn-secondary:hover{background:var(--ds-color-fill)}
+.btn:focus-visible{outline:var(--ds-focus-width) solid var(--ds-color-focus);outline-offset:var(--ds-focus-offset)}
+.actions{display:flex;gap:var(--ds-space-4);align-items:center}
+.actions .note{margin-left:auto;font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);color:var(--ds-color-text-muted)}
+.alert{display:flex;gap:var(--ds-space-3);padding:var(--ds-space-4);border:var(--ds-border-width) solid;border-radius:var(--ds-radius-lg)}
+.alert-error{border-color:var(--ds-color-error-border);background:var(--ds-color-error-bg);color:var(--ds-color-error)}
+.alert-t{font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-font-weight-bold)}
+.alert-b{font-size:var(--ds-text-body-xs-size);line-height:var(--ds-text-body-xs-line-height);color:var(--ds-color-text-strong)}
+.alert-in{display:flex;flex-direction:column;gap:var(--ds-space-1)}
+.sent{display:flex;flex-direction:column;gap:var(--ds-space-6);padding:var(--ds-space-12);background:var(--ds-color-success-bg);border:var(--ds-border-width) solid var(--ds-color-success-border);border-radius:var(--ds-radius-lg);color:var(--ds-color-success)}
+.sent p{margin:0;font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text)}
 </style>
 </helmet>
-<div style="width: 1440px; height: 1500px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 64px">
+<div class="page">
 
-<header style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959; border-bottom: 1px solid #000000; padding-bottom: 24px">
+<header class="top">
 <span>Design System Wireframe — Patterns</span>
-<span>Example form · v0.1</span>
+<span>Example form · v0.2</span>
 </header>
 
-<div style="display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 96px; align-items: start">
+<div class="cols">
 
-<aside style="display: flex; flex-direction: column; gap: 32px">
-<span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">Contact</span>
-<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -0.03em">Start a conversation</h1>
-<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #404040">Tell us what you are working on. We reply within [RESPONSE TIME].</p>
+<aside class="aside">
+<span class="eyebrow">Contact</span>
+<h1 class="h1">Start a conversation</h1>
+<p class="lead">Tell us what you are working on. We reply within [RESPONSE TIME].</p>
 <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-<svg viewBox="0 0 400 500" style="display: block; width: 100%; height: auto" role="img" aria-label="Photo stand-in: concrete building facade with hard shadows">
+<svg class="photo" data-ds-illustration viewBox="0 0 400 500" role="img" aria-label="Photo stand-in: concrete building facade with hard shadows">
 <defs><filter id="fg1"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter></defs>
 <rect width="400" height="500" fill="#EEEEEE"></rect>
 <rect x="50" y="80" width="214" height="420" fill="#C7C7C7"></rect>
@@ -48,95 +332,99 @@ input::placeholder,textarea::placeholder{color:#767676}
 <polygon points="50,400 264,240 264,500 50,500" fill="#000000" opacity="0.55"></polygon>
 <rect width="400" height="500" filter="url(#fg1)" opacity="0.18"></rect>
 </svg>
-<figcaption style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Studio · [LOCATION]</figcaption>
+<figcaption class="cap">Studio · [LOCATION]</figcaption>
 </figure>
 </aside>
 
-<div style="display: flex; flex-direction: column; gap: 32px">
+<div class="main">
 
 <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
-<div role="status" style="display: flex; flex-direction: column; gap: 24px; padding: 48px; background: #EDF5EF; border: 1px solid #9CC7AB">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2E6B45" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-7"></path></svg>
-<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em; color: #2E6B45">Message sent</h2>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #404040">Thanks, {{v.first}}. We will reply to {{v.email}}.</p>
-<button type="button" onClick="{{reset}}" style="align-self: flex-start; height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #FFFFFF; color: #000000; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; cursor: pointer">Send another</button>
+<div role="status" class="sent">
+<svg class="ic" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-7"></path></svg>
+<h2 class="h2">Message sent</h2>
+<p>Thanks, {{v.first}}. We will reply to {{v.email}}.</p>
+<button type="button" onClick="{{reset}}" class="btn btn-secondary" style="align-self: flex-start">Send another</button>
 </div>
 </sc-if>
 
 <sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
-<form noValidate="{{ true }}" onSubmit="{{submit}}" style="display: flex; flex-direction: column; gap: 32px">
+<form noValidate="{{ true }}" onSubmit="{{submit}}" class="frm">
 
 <sc-if value="{{showSummary}}" hint-placeholder-val="{{ false }}">
-<div role="alert" style="display: flex; gap: 12px; padding: 16px; border: 1px solid #E3AAA6; background: #FBEDEC">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3302B" stroke-width="1.75" aria-hidden="true" style="flex: none"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg>
-<div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Red Hat Mono', monospace; font-weight: 700; font-size: 14px; color: #A3302B">{{errorCount}} fields need attention</strong><span style="font-size: 14px; line-height: 1.5; color: #262626">Fix the marked fields and send again.</span></div>
+<div role="alert" class="alert alert-error">
+<svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg>
+<div class="alert-in"><strong class="alert-t">{{errorText}}</strong><span class="alert-b">Fix the marked fields and send again.</span></div>
 </div>
 </sc-if>
 
-<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 24px">
-<legend style="padding: 0; margin-bottom: 24px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 22px">About you</legend>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<label for="f-first" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">First name</label>
-<input id="f-first" type="text" autoComplete="given-name" value="{{v.first}}" onChange="{{on.first}}" aria-invalid="{{f.first.invalid}}" aria-describedby="f-first-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.first.border}}; border-radius: 0; background: {{f.first.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 16px; color: #000000">
-<sc-if value="{{f.first.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-first-e" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: enter your first name</span></sc-if>
+<fieldset class="fs">
+<legend>About you</legend>
+<div class="two">
+<div class="fld">
+<label for="f-first" class="fld-l">First name</label>
+<input id="f-first" class="inp" type="text" autoComplete="given-name" value="{{v.first}}" onChange="{{on.first}}" aria-invalid="{{f.first.invalid}}" aria-describedby="f-first-e">
+<sc-if value="{{f.first.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-first-e" class="fld-e"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6.5v7M12 15.5v2"></path></svg><span>Error: enter your first name</span></span></sc-if>
 </div>
-<div style="display: flex; flex-direction: column; gap: 8px">
-<label for="f-last" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Last name</label>
-<input id="f-last" type="text" autoComplete="family-name" value="{{v.last}}" onChange="{{on.last}}" aria-invalid="{{f.last.invalid}}" aria-describedby="f-last-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.last.border}}; border-radius: 0; background: {{f.last.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 16px; color: #000000">
-<sc-if value="{{f.last.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-last-e" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: enter your last name</span></sc-if>
-</div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 8px">
-<label for="f-email" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Email</label>
-<input id="f-email" type="email" autoComplete="email" placeholder="name@domain.com" value="{{v.email}}" onChange="{{on.email}}" aria-invalid="{{f.email.invalid}}" aria-describedby="f-email-h" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.email.border}}; border-radius: 0; background: {{f.email.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 16px; color: #000000">
-<sc-if value="{{f.email.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-email-h" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: enter a full email address</span></sc-if>
-<sc-if value="{{f.email.valid}}" hint-placeholder-val="{{ true }}"><span id="f-email-h" style="font-size: 13px; color: #595959">We only use this to reply.</span></sc-if>
-</div>
-</fieldset>
-
-<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 24px">
-<legend style="padding: 0; margin-bottom: 24px; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 22px">Your request</legend>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<label for="f-topic" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Topic</label>
-<select id="f-topic" value="{{v.topic}}" onChange="{{on.topic}}" aria-invalid="{{f.topic.invalid}}" aria-describedby="f-topic-e" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: {{f.topic.border}}; border-radius: 0; background: {{f.topic.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 16px; color: #000000">
-<option value="">Choose a topic</option>
-<option value="project">New project</option>
-<option value="print">Print order</option>
-<option value="press">Press</option>
-<option value="other">Other</option>
-</select>
-<sc-if value="{{f.topic.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-topic-e" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: choose a topic</span></sc-if>
-</div>
-<div role="radiogroup" aria-labelledby="f-reply-l" style="display: flex; flex-direction: column; gap: 8px">
-<span id="f-reply-l" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Reply by</span>
-<div style="display: flex; gap: 24px">
-<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px"><input type="radio" name="reply" value="email" checked="{{replyEmail}}" onChange="{{on.reply}}" style="width: 20px; height: 20px; margin: 0; accent-color: #000000">Email</label>
-<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px"><input type="radio" name="reply" value="call" checked="{{replyCall}}" onChange="{{on.reply}}" style="width: 20px; height: 20px; margin: 0; accent-color: #000000">Call</label>
+<div class="fld">
+<label for="f-last" class="fld-l">Last name</label>
+<input id="f-last" class="inp" type="text" autoComplete="family-name" value="{{v.last}}" onChange="{{on.last}}" aria-invalid="{{f.last.invalid}}" aria-describedby="f-last-e">
+<sc-if value="{{f.last.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-last-e" class="fld-e"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6.5v7M12 15.5v2"></path></svg><span>Error: enter your last name</span></span></sc-if>
 </div>
 </div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: baseline">
-<label for="f-msg" style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Message</label>
-<span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">{{msgCount}} / 500</span>
-</div>
-<textarea id="f-msg" rows="6" maxLength="500" placeholder="A few lines about the project" value="{{v.message}}" onChange="{{on.message}}" aria-invalid="{{f.message.invalid}}" aria-describedby="f-msg-h" style="box-sizing: border-box; padding: 12px; border: {{f.message.border}}; border-radius: 0; background: {{f.message.bg}}; font-family: 'Red Hat Text', sans-serif; font-size: 16px; line-height: 1.5; color: #000000; resize: vertical"></textarea>
-<sc-if value="{{f.message.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-msg-h" style="font-size: 13px; font-weight: 500; color: #A3302B">Error: write at least 20 characters</span></sc-if>
-<sc-if value="{{f.message.valid}}" hint-placeholder-val="{{ true }}"><span id="f-msg-h" style="font-size: 13px; color: #595959">At least 20 characters.</span></sc-if>
+<div class="fld">
+<label for="f-email" class="fld-l">Email</label>
+<input id="f-email" class="inp" type="email" autoComplete="email" placeholder="name@domain.com" value="{{v.email}}" onChange="{{on.email}}" aria-invalid="{{f.email.invalid}}" aria-describedby="f-email-h">
+<sc-if value="{{f.email.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-email-h" class="fld-e"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6.5v7M12 15.5v2"></path></svg><span>Error: enter a full email address</span></span></sc-if>
+<sc-if value="{{f.email.valid}}" hint-placeholder-val="{{ true }}"><span id="f-email-h" class="fld-h">We only use this to reply.</span></sc-if>
 </div>
 </fieldset>
 
-<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 24px; border-top: 1px solid #E0E0E0">
-<label style="display: flex; align-items: flex-start; gap: 12px; min-height: 44px; font-size: 15px; line-height: 1.5"><input type="checkbox" checked="{{v.consent}}" onChange="{{on.consent}}" aria-invalid="{{f.consent.invalid}}" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #000000">I agree that my details are stored to answer this request. [LINK TO PRIVACY POLICY]</label>
-<sc-if value="{{f.consent.invalid}}" hint-placeholder-val="{{ false }}"><span style="padding-left: 32px; font-size: 13px; font-weight: 500; color: #A3302B">Error: consent is required to send</span></sc-if>
+<fieldset class="fs">
+<legend>Your request</legend>
+<div class="two">
+<div class="fld">
+<label id="f-topic-l" class="fld-l">Topic</label>
+<div class="selw">
+<button id="f-topic" type="button" class="inp sel" role="combobox" aria-haspopup="listbox" aria-controls="f-topic-list" aria-labelledby="f-topic-l" aria-expanded="{{topic.open}}" aria-activedescendant="{{topic.active}}" aria-invalid="{{f.topic.invalid}}" aria-describedby="f-topic-e" data-state="{{topic.state}}" data-placeholder="{{topic.empty}}" onClick="{{on.topicToggle}}" onKeyDown="{{on.topicKey}}" onBlur="{{on.topicBlur}}"><span class="sel-v">{{topic.label}}</span><svg class="ic chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+<sc-if value="{{topic.open}}" hint-placeholder-val="{{ false }}">
+<ul id="f-topic-list" class="menu" role="listbox" aria-labelledby="f-topic-l" onMouseDown="{{on.keepFocus}}">
+<li id="f-topic-o1" class="opt" role="option" aria-selected="{{topic.o1.sel}}" data-highlighted="{{topic.o1.hi}}" onClick="{{on.pick1}}"><span>New project</span><svg class="ic tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></li>
+<li id="f-topic-o2" class="opt" role="option" aria-selected="{{topic.o2.sel}}" data-highlighted="{{topic.o2.hi}}" onClick="{{on.pick2}}"><span>Print order</span><svg class="ic tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></li>
+<li id="f-topic-o3" class="opt" role="option" aria-selected="{{topic.o3.sel}}" data-highlighted="{{topic.o3.hi}}" onClick="{{on.pick3}}"><span>Press</span><svg class="ic tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></li>
+<li id="f-topic-o4" class="opt" role="option" aria-selected="{{topic.o4.sel}}" data-highlighted="{{topic.o4.hi}}" onClick="{{on.pick4}}"><span>Other</span><svg class="ic tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></li>
+</ul>
+</sc-if>
+</div>
+<sc-if value="{{f.topic.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-topic-e" class="fld-e"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6.5v7M12 15.5v2"></path></svg><span>Error: choose a topic</span></span></sc-if>
+</div>
+<div class="grp" role="radiogroup" aria-labelledby="f-reply-l">
+<span id="f-reply-l" class="fld-l">Reply by</span>
+<div class="grp-in">
+<label class="ctl"><input class="ctl-in" type="radio" name="reply" value="email" checked="{{replyEmail}}" onChange="{{on.reply}}"><span class="rb"><i></i></span><span class="ctl-lb">Email</span></label>
+<label class="ctl"><input class="ctl-in" type="radio" name="reply" value="call" checked="{{replyCall}}" onChange="{{on.reply}}"><span class="rb"><i></i></span><span class="ctl-lb">Call</span></label>
+</div>
+</div>
+</div>
+<div class="fld">
+<div class="fld-top">
+<label for="f-msg" class="fld-l">Message</label>
+<span class="cnt">{{msgCount}} / 500</span>
+</div>
+<textarea id="f-msg" class="ta" rows="6" maxLength="500" placeholder="A few lines about the project" value="{{v.message}}" onChange="{{on.message}}" aria-invalid="{{f.message.invalid}}" aria-describedby="f-msg-h"></textarea>
+<sc-if value="{{f.message.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-msg-h" class="fld-e"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6.5v7M12 15.5v2"></path></svg><span>Error: write at least 20 characters</span></span></sc-if>
+<sc-if value="{{f.message.valid}}" hint-placeholder-val="{{ true }}"><span id="f-msg-h" class="fld-h">At least 20 characters.</span></sc-if>
+</div>
+</fieldset>
+
+<div class="consent">
+<label class="ctl"><input class="ctl-in" type="checkbox" checked="{{v.consent}}" onChange="{{on.consent}}" aria-invalid="{{f.consent.invalid}}" aria-describedby="f-consent-e"><span class="cb"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span><span class="ctl-lb">I agree that my details are stored to answer this request. [LINK TO PRIVACY POLICY]</span></label>
+<sc-if value="{{f.consent.invalid}}" hint-placeholder-val="{{ false }}"><span id="f-consent-e" class="fld-e"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6.5v7M12 15.5v2"></path></svg><span>Error: consent is required to send</span></span></sc-if>
 </div>
 
-<div style="display: flex; gap: 16px; align-items: center">
-<button type="submit" style="height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #000000; color: #FFFFFF; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; cursor: pointer">Send message</button>
-<button type="button" onClick="{{reset}}" style="height: 44px; padding: 0 24px; border: 1px solid #000000; border-radius: 0; background: #FFFFFF; color: #000000; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 14px; cursor: pointer">Clear</button>
-<span style="margin-left: auto; font-size: 13px; color: #595959">All fields required</span>
+<div class="actions">
+<button type="submit" class="btn btn-primary">Send message</button>
+<button type="button" onClick="{{reset}}" class="btn btn-secondary">Clear</button>
+<span class="note">All fields required</span>
 </div>
 
 </form>
@@ -150,13 +438,24 @@ input::placeholder,textarea::placeholder{color:#767676}
 class Component extends DCLogic {
 constructor(props) {
 super(props);
-this.state = { v: this.empty(), touched: false, sent: false };
+this.state = { v: this.empty(), touched: false, sent: false, open: false, hi: 0 };
 }
 empty() {
 return { first: '', last: '', email: '', topic: '', reply: 'email', message: '', consent: false };
 }
+topics() {
+return [
+{ value: 'project', label: 'New project' },
+{ value: 'print', label: 'Print order' },
+{ value: 'press', label: 'Press' },
+{ value: 'other', label: 'Other' }
+];
+}
 set(key, val) {
 this.setState({ v: Object.assign({}, this.state.v, { [key]: val }) });
+}
+pick(i) {
+this.setState({ v: Object.assign({}, this.state.v, { topic: this.topics()[i].value }), open: false, hi: i });
 }
 errors(v) {
 return {
@@ -177,14 +476,15 @@ let count = 0;
 Object.keys(errs).forEach((k) => {
 const bad = touched && errs[k];
 if (bad) count += 1;
-f[k] = {
-invalid: bad,
-valid: !bad,
-border: bad ? '2px solid #A3302B' : '1px solid #C7C7C7',
-bg: '#FFFFFF'
-};
+f[k] = { invalid: bad, valid: !bad };
 });
 const text = (k) => (e) => this.set(k, e.target.value);
+const topics = this.topics();
+const current = topics.findIndex((t) => t.value === v.topic);
+const open = this.state.open;
+const hi = this.state.hi;
+const opt = (i) => ({ sel: current === i, hi: open && hi === i });
+const last = topics.length - 1;
 return {
 v: v,
 f: f,
@@ -192,24 +492,58 @@ sent: this.state.sent,
 notSent: !this.state.sent,
 showSummary: count > 0,
 errorCount: count,
+errorText: count + (count === 1 ? " field needs attention" : " fields need attention"),
 msgCount: v.message.length,
 replyEmail: v.reply === 'email',
 replyCall: v.reply === 'call',
+topic: {
+open: open,
+state: open ? 'open' : 'closed',
+empty: current < 0,
+label: current < 0 ? 'Choose a topic' : topics[current].label,
+active: open ? 'f-topic-o' + (hi + 1) : '',
+o1: opt(0),
+o2: opt(1),
+o3: opt(2),
+o4: opt(3)
+},
 on: {
 first: text('first'),
 last: text('last'),
 email: text('email'),
-topic: text('topic'),
 message: text('message'),
 reply: text('reply'),
-consent: (e) => this.set('consent', e.target.checked)
+consent: (e) => this.set('consent', e.target.checked),
+topicToggle: () => this.setState({ open: !this.state.open, hi: Math.max(current, 0) }),
+topicBlur: () => this.setState({ open: false }),
+keepFocus: (e) => e.preventDefault(),
+pick1: () => this.pick(0),
+pick2: () => this.pick(1),
+pick3: () => this.pick(2),
+pick4: () => this.pick(3),
+topicKey: (e) => {
+const k = e.key;
+if (k === 'Tab') return;
+if (k === 'Escape') { if (open) { e.preventDefault(); this.setState({ open: false }); } return; }
+if (k === 'ArrowDown' || k === 'ArrowUp') {
+e.preventDefault();
+const step = k === 'ArrowDown' ? 1 : -1;
+if (!open) this.setState({ open: true, hi: Math.max(current, 0) });
+else this.setState({ hi: Math.min(last, Math.max(0, hi + step)) });
+} else if (k === 'Home' || k === 'End') {
+if (open) { e.preventDefault(); this.setState({ hi: k === 'Home' ? 0 : last }); }
+} else if (k === 'Enter' || k === ' ') {
+e.preventDefault();
+if (open) this.pick(hi); else this.setState({ open: true, hi: Math.max(current, 0) });
+}
+}
 },
 submit: (e) => {
 e.preventDefault();
 const bad = Object.values(this.errors(this.state.v)).some(Boolean);
 this.setState({ touched: true, sent: !bad });
 },
-reset: () => this.setState({ v: this.empty(), touched: false, sent: false })
+reset: () => this.setState({ v: this.empty(), touched: false, sent: false, open: false, hi: 0 })
 };
 }
 }

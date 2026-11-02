@@ -11,132 +11,423 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
 <style>
-body{margin:0;background:#FFFFFF}
-a{color:#000000}a:hover{color:#595959}
+/* ds-tokens:start */
+/* Copied from src/styles/tokens.css (default + dark). Everything below reads var(--ds-*). Checked by src/test/canvasBoards.test.ts. */
+:root,
+[data-theme="default"] {
+  /* Tier 1, primitives: raw palette, never read by components. Gray palette: white ground, gray accents, black ink. No hue. */
+  --ds-color-white: #ffffff;
+  --ds-color-gray-50: #f7f7f7;
+  --ds-color-gray-100: #eeeeee;
+  --ds-color-gray-200: #e0e0e0;
+  --ds-color-gray-300: #c7c7c7;
+  --ds-color-gray-400: #a3a3a3;
+  --ds-color-gray-500: #767676;
+  --ds-color-gray-600: #595959;
+  --ds-color-gray-700: #404040;
+  --ds-color-gray-800: #262626;
+  --ds-color-gray-900: #141414;
+  --ds-color-black: #000000;
+
+  /* Tier 2, roles: color */
+  --ds-color-background: var(--ds-color-white);
+  --ds-color-surface: var(--ds-color-white);
+  --ds-color-surface-subtle: var(--ds-color-gray-50);
+  --ds-color-fill: var(--ds-color-gray-100);
+  --ds-color-divider: var(--ds-color-gray-200);
+  --ds-color-border: var(--ds-color-gray-300);
+  --ds-color-disabled: var(--ds-color-gray-400);
+  --ds-color-placeholder: var(--ds-color-gray-500);
+  --ds-color-text-muted: var(--ds-color-gray-600);
+  --ds-color-text: var(--ds-color-gray-700);
+  --ds-color-text-strong: var(--ds-color-gray-800);
+  --ds-color-text-emphasis: var(--ds-color-black);
+  --ds-color-text-inverse: var(--ds-color-white);
+  --ds-color-border-strong: var(--ds-color-black);
+  --ds-color-icon: var(--ds-color-black);
+  --ds-color-focus: var(--ds-color-black);
+  --ds-color-overlay: rgb(0 0 0 / 0.5);
+  --ds-color-inverse: var(--ds-color-gray-900);
+  --ds-color-primary: var(--ds-color-black);
+  --ds-color-primary-hover: var(--ds-color-gray-800);
+  --ds-color-primary-contrast: var(--ds-color-white);
+  /* Deprecated alias of --ds-color-text-emphasis. Components no longer read it; themes do not set it. */
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  /* Status: the only hue in the system, used for feedback only and always
+     paired with an icon and a label. fg passes 4.5:1 on white and on its bg. */
+  --ds-color-info: var(--ds-color-gray-700);
+  --ds-color-info-border: var(--ds-color-gray-300);
+  --ds-color-info-bg: var(--ds-color-gray-50);
+  --ds-color-success: #2e6b45;
+  --ds-color-success-border: #9cc7ab;
+  --ds-color-success-bg: #edf5ef;
+  --ds-color-error: #a3302b;
+  --ds-color-error-border: #e3aaa6;
+  --ds-color-error-bg: #fbedec;
+
+  /* Roles: font. Red Hat Mono for titles and labels, Red Hat Text for body (load with the opt-in fonts.css) */
+  --ds-font-mono: 'Red Hat Mono', ui-monospace, monospace;
+  --ds-font-text: 'Red Hat Text', system-ui, sans-serif;
+  --ds-font-heading: var(--ds-font-mono);
+  --ds-font-body: var(--ds-font-text);
+  --ds-font-label: var(--ds-font-mono);
+  --ds-font-family: var(--ds-font-body);
+
+  /* Roles: font weight */
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
+
+  /* Roles: type scale */
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+
+  /* Legacy line-height aliases (not part of the contract) */
+  --ds-line-height-xs: var(--ds-text-ui-sm-line-height);
+  --ds-line-height-sm: var(--ds-text-caption-line-height);
+  --ds-line-height-md: var(--ds-text-body-sm-line-height);
+  --ds-line-height-lg: var(--ds-text-body-line-height);
+  --ds-line-height-xl: var(--ds-text-h3-line-height);
+
+  /* Spacing: 4 px base. Not themeable. */
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-24: 96px;
+
+  /* Roles: radius. Square corners; --ds-radius is the legacy base the steps default to */
+  --ds-radius: 0;
+  --ds-radius-sm: var(--ds-radius);
+  --ds-radius-md: var(--ds-radius);
+  --ds-radius-lg: var(--ds-radius);
+  --ds-radius-full: var(--ds-radius);
+
+  /* Roles: shadow. No shadows by default, depth comes from borders and fills */
+  --ds-shadow-sm: none;
+  --ds-shadow-md: none;
+  --ds-shadow-lg: none;
+
+  /* Roles: shape and density */
+  --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+
+  /* Icons: fixed system constants, not part of the theme contract */
+  --ds-icon-size-sm: 12px;
+  --ds-icon-size-md: 16px;
+  --ds-icon-size-lg: 20px;
+  --ds-icon-stroke: 1.5;
+  --ds-icon-stroke-strong: 2;
+
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* Photography: always monochrome */
+  --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+/* Dark: overrides the 30 color roles only. Fonts, type, radius, shadow and shape stay at their defaults. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ds-color-background: var(--ds-color-gray-900);
+  --ds-color-surface: var(--ds-color-gray-900);
+  --ds-color-surface-subtle: #1f1f1f;
+  --ds-color-fill: var(--ds-color-gray-800);
+  --ds-color-divider: #333333;
+  --ds-color-border: #737373;
+  --ds-color-disabled: var(--ds-color-gray-600);
+  --ds-color-placeholder: #8f8f8f;
+  --ds-color-text-muted: var(--ds-color-gray-400);
+  --ds-color-text: var(--ds-color-gray-300);
+  --ds-color-text-strong: var(--ds-color-gray-200);
+  --ds-color-text-emphasis: var(--ds-color-gray-50);
+  --ds-color-text-inverse: var(--ds-color-gray-900);
+  --ds-color-border-strong: var(--ds-color-gray-50);
+  --ds-color-icon: var(--ds-color-gray-50);
+  --ds-color-focus: var(--ds-color-gray-50);
+  --ds-color-overlay: rgb(0 0 0 / 0.7);
+  --ds-color-inverse: var(--ds-color-gray-100);
+  --ds-color-primary: var(--ds-color-gray-50);
+  --ds-color-primary-hover: var(--ds-color-gray-200);
+  --ds-color-primary-contrast: var(--ds-color-gray-900);
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  --ds-color-info: var(--ds-color-gray-300);
+  --ds-color-info-border: var(--ds-color-gray-600);
+  --ds-color-info-bg: #1f1f1f;
+  --ds-color-success: #9cc7ab;
+  --ds-color-success-border: #2e6b45;
+  --ds-color-success-bg: #13261a;
+  --ds-color-error: #e3aaa6;
+  --ds-color-error-border: #a3302b;
+  --ds-color-error-bg: #2d1414;
+
+  /* Dims the monochrome photos so they do not glare on the dark ground. */
+  --ds-photo-filter: grayscale(1) contrast(1.1) brightness(0.85);
+}
+/* ds-tokens:end */
+body{margin:0;background:var(--ds-color-background)}
+a{color:var(--ds-color-text-emphasis)}a:hover{color:var(--ds-color-text-muted)}
+.page,.page *{box-sizing:border-box}
+.page{width:1440px;padding:var(--ds-space-24);background:var(--ds-color-background);color:var(--ds-color-text-emphasis);font-family:var(--ds-font-body);display:flex;flex-direction:column;gap:var(--ds-space-24)}
+.hdr{display:flex;flex-direction:column;gap:var(--ds-space-6);border-bottom:var(--ds-border-width) solid var(--ds-color-border-strong);padding-bottom:var(--ds-space-12)}
+.hdr-top{display:flex;justify-content:space-between;font-family:var(--ds-font-mono);font-size:var(--ds-text-caption-size);letter-spacing:var(--ds-text-label-tracking);text-transform:uppercase;color:var(--ds-color-text-muted)}
+.hdr h1{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:96px;line-height:1;letter-spacing:var(--ds-text-display-tracking);text-transform:var(--ds-text-heading-transform)}
+.hdr p{margin:0;max-width:640px;font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height);color:var(--ds-color-text)}
+.sec{display:flex;flex-direction:column;gap:var(--ds-space-8)}
+.sec-h{display:flex;align-items:baseline;gap:var(--ds-space-6)}
+.sec-n{font-family:var(--ds-font-mono);font-size:var(--ds-text-caption-size);color:var(--ds-color-text-muted)}
+.sec-t{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:var(--ds-text-h2-size);line-height:var(--ds-text-h2-line-height);letter-spacing:var(--ds-text-h2-tracking);text-transform:var(--ds-text-heading-transform)}
+.sec-x{margin-left:auto;font-size:var(--ds-text-body-xs-size);color:var(--ds-color-text-muted)}
+.sub{font-family:var(--ds-font-label);font-weight:var(--ds-text-label-weight);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);letter-spacing:var(--ds-text-label-tracking);text-transform:uppercase;color:var(--ds-color-text-emphasis)}
+.sub-row{display:flex;align-items:baseline;gap:var(--ds-space-4)}
+.sub-row p{margin:0;font-size:var(--ds-text-body-xs-size);color:var(--ds-color-text-muted)}
+.k{font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);color:var(--ds-color-text-muted)}
+.cap{font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-sm-size);color:var(--ds-color-text-muted)}
+.pal{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--ds-space-4)}
+.tile{display:flex;flex-direction:column;gap:var(--ds-space-3);min-width:0}
+.sw{height:120px;border:var(--ds-border-width) solid var(--ds-color-divider)}
+.tx{display:flex;flex-direction:column;gap:var(--ds-space-1);font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);color:var(--ds-color-text-muted)}
+.tx strong{font-weight:var(--ds-font-weight-medium);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);color:var(--ds-color-text-emphasis)}
+.roles{display:flex;flex-direction:column;gap:var(--ds-space-8)}
+.rg{display:flex;flex-direction:column;gap:var(--ds-space-4)}
+.rgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--ds-space-6) var(--ds-space-4)}
+.sw-r{height:64px}
+.sw-t{display:flex;align-items:center;justify-content:center;height:64px;background:var(--ds-color-background);font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:var(--ds-text-h2-size)}
+.sw-ov{position:relative;height:64px;background:linear-gradient(90deg,var(--ds-color-fill) 50%,var(--ds-color-surface-subtle) 50%)}
+.sw-ov span{position:absolute;inset:0}
+.st{display:grid;grid-template-columns:2fr 1fr 1fr;height:96px}
+.stat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ds-space-4)}
+.row3{display:grid;grid-template-columns:120px minmax(0,1fr) 420px;gap:var(--ds-space-6);align-items:baseline;padding:var(--ds-space-4) 0;border-bottom:var(--ds-border-width) solid var(--ds-color-divider)}
+.row3 .k:last-child{text-align:right}
+.trow{display:grid;grid-template-columns:200px minmax(0,1fr) 300px;gap:var(--ds-space-6);align-items:baseline;padding:var(--ds-space-6) 0;border-bottom:var(--ds-border-width) solid var(--ds-color-divider)}
+.trow .k:last-child{text-align:right}
+.tbl{display:flex;flex-direction:column;border-top:var(--ds-border-width) solid var(--ds-color-border-strong)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ds-space-16)}
+.col{display:flex;flex-direction:column;gap:var(--ds-space-8)}
+.srow{display:grid;grid-template-columns:72px 48px minmax(0,1fr);gap:var(--ds-space-4);align-items:center;font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-sm-size)}
+.srow div{height:var(--ds-space-4);background:var(--ds-color-text-emphasis)}
+.srow .k{color:var(--ds-color-text-muted)}
+.shapes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--ds-space-4)}
+.shapes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ds-space-4)}
+.shape{height:64px;background:var(--ds-color-surface);border:var(--ds-border-width) solid var(--ds-color-border)}
+.box96{height:96px}
+.code{display:flex;flex-direction:column;gap:var(--ds-space-1);padding:var(--ds-space-6);background:var(--ds-color-surface-subtle);font-family:var(--ds-font-mono);font-size:var(--ds-text-caption-size);line-height:1.7;color:var(--ds-color-text-strong)}
+.photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--ds-space-4)}
+.fig{margin:0;display:flex;flex-direction:column;gap:var(--ds-space-2)}
+.photo{display:block;width:100%;height:auto;filter:var(--ds-photo-filter)}
+.dd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ds-space-4)}
+.dd>div{display:flex;flex-direction:column;gap:var(--ds-space-3);padding:var(--ds-space-6);border:var(--ds-border-width) solid var(--ds-color-divider)}
+.dd>div:first-child{border-color:var(--ds-color-border-strong)}
+.dd>div:last-child{background:var(--ds-color-surface-subtle)}
+.dd span:last-child{font-size:var(--ds-text-body-sm-size);line-height:1.6;color:var(--ds-color-text)}
 </style>
 </helmet>
-<div style="width: 1440px; height: 2640px; box-sizing: border-box; padding: 96px; background: #FFFFFF; color: #000000; font-family: 'Red Hat Text', system-ui, sans-serif; display: flex; flex-direction: column; gap: 96px">
+<div class="page">
 
-<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid #000000; padding-bottom: 48px">
-<div style="display: flex; justify-content: space-between; font-family: 'Red Hat Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">
+<header class="hdr">
+<div class="hdr-top">
 <span>Design System Wireframe</span>
-<span>Foundations · v0.1</span>
+<span>Foundations · v0.2</span>
 </div>
-<h1 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.04em">Foundations</h1>
-<p style="margin: 0; max-width: 640px; font-size: 18px; line-height: 1.6; color: #404040">White ground. Gray accents. Black for ink and action. Muted green and red only for feedback. Photography is always monochrome. Titles are set in Red Hat Mono; everything else in Red Hat Text.</p>
+<h1>Foundations</h1>
+<p>White ground. Gray accents. Black for ink and action. Muted green and red only for feedback. Photography is always monochrome. Titles are set in Red Hat Mono; everything else in Red Hat Text. Every swatch, size and shape on this board reads a <code>--ds-*</code> token, so it follows the theme: set <code>data-theme</code> on the page to see another one.</p>
 </header>
 
-<section style="display: flex; flex-direction: column; gap: 32px">
-<div style="display: flex; align-items: baseline; gap: 24px">
-<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">01</span>
-<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Color</h2>
-<span style="margin-left: auto; font-size: 14px; color: #595959">Contrast ratios measured against white</span>
+<section class="sec">
+<div class="sec-h">
+<span class="sec-n">01</span>
+<h2 class="sec-t">Color</h2>
+<span class="sec-x">Primitives (tier 1) never change with the theme. Contrast ratios are measured against white.</span>
 </div>
-<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #FFFFFF; border: 1px solid #C7C7C7"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">white</strong><span style="color: #595959">#FFFFFF</span><span style="color: #595959">Background</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #F7F7F7; border: 1px solid #E0E0E0"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">gray-50</strong><span style="color: #595959">#F7F7F7</span><span style="color: #595959">Surface subtle</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #EEEEEE"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">gray-100</strong><span style="color: #595959">#EEEEEE</span><span style="color: #595959">Hover / fill</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #E0E0E0"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">gray-200</strong><span style="color: #595959">#E0E0E0</span><span style="color: #595959">Divider</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #C7C7C7"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">gray-300</strong><span style="color: #595959">#C7C7C7</span><span style="color: #595959">Border</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #A3A3A3"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">gray-400</strong><span style="color: #595959">#A3A3A3</span><span style="color: #595959">Disabled · 2.5:1</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #767676"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">gray-500</strong><span style="color: #595959">#767676</span><span style="color: #595959">Placeholder · 4.5:1</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #595959"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">gray-600</strong><span style="color: #595959">#595959</span><span style="color: #595959">Text muted · 7:1</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #404040"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">gray-700</strong><span style="color: #595959">#404040</span><span style="color: #595959">Text body · 10.4:1</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #262626"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">gray-800</strong><span style="color: #595959">#262626</span><span style="color: #595959">Hover on black</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #141414"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">gray-900</strong><span style="color: #595959">#141414</span><span style="color: #595959">Inverse surface</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 120px; background: #000000"></div><div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">black</strong><span style="color: #595959">#000000</span><span style="color: #595959">Ink · action · 21:1</span></div></div>
+<div class="pal">
+<div class="tile"><div class="sw" style="background: var(--ds-color-white)"></div><div class="tx"><strong>white</strong><span>--ds-color-white</span><span>Background</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-gray-50)"></div><div class="tx"><strong>gray-50</strong><span>--ds-color-gray-50</span><span>Surface subtle</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-gray-100)"></div><div class="tx"><strong>gray-100</strong><span>--ds-color-gray-100</span><span>Fill · hover</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-gray-200)"></div><div class="tx"><strong>gray-200</strong><span>--ds-color-gray-200</span><span>Divider</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-gray-300)"></div><div class="tx"><strong>gray-300</strong><span>--ds-color-gray-300</span><span>Border</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-gray-400)"></div><div class="tx"><strong>gray-400</strong><span>--ds-color-gray-400</span><span>Disabled · 2.5:1</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-gray-500)"></div><div class="tx"><strong>gray-500</strong><span>--ds-color-gray-500</span><span>Placeholder · 4.5:1</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-gray-600)"></div><div class="tx"><strong>gray-600</strong><span>--ds-color-gray-600</span><span>Text muted · 7:1</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-gray-700)"></div><div class="tx"><strong>gray-700</strong><span>--ds-color-gray-700</span><span>Text · 10.4:1</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-gray-800)"></div><div class="tx"><strong>gray-800</strong><span>--ds-color-gray-800</span><span>Text strong · hover on black</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-gray-900)"></div><div class="tx"><strong>gray-900</strong><span>--ds-color-gray-900</span><span>Inverse surface</span></div></div>
+<div class="tile"><div class="sw" style="background: var(--ds-color-black)"></div><div class="tx"><strong>black</strong><span>--ds-color-black</span><span>Text emphasis · action · 21:1</span></div></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 16px; padding-top: 16px">
-<div style="display: flex; align-items: baseline; gap: 16px">
-<span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Status</span>
-<span style="font-size: 14px; color: #595959">The only hue in the system. Muted, used only for feedback, always paired with an icon and a label.</span>
+</section>
+
+<section class="sec">
+<div class="sec-h">
+<span class="sec-n">02</span>
+<h2 class="sec-t">Color roles</h2>
+<span class="sec-x">30 roles (tier 2). Components read these, themes override them.</span>
 </div>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 12px">
-<div style="display: grid; grid-template-columns: 2fr 1fr 1fr; height: 96px"><div style="background: #404040"></div><div style="background: #C7C7C7"></div><div style="background: #F7F7F7; border: 1px solid #E0E0E0"></div></div>
-<div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">info · neutral</strong><span style="color: #595959">fg #404040 · border #C7C7C7 · bg #F7F7F7</span><span style="color: #595959">fg on bg 9.7:1</span></div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 12px">
-<div style="display: grid; grid-template-columns: 2fr 1fr 1fr; height: 96px"><div style="background: #2E6B45"></div><div style="background: #9CC7AB"></div><div style="background: #EDF5EF"></div></div>
-<div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">success · green</strong><span style="color: #595959">fg #2E6B45 · border #9CC7AB · bg #EDF5EF</span><span style="color: #595959">fg on bg 5.7:1 · on white 6.4:1</span></div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 12px">
-<div style="display: grid; grid-template-columns: 2fr 1fr 1fr; height: 96px"><div style="background: #A3302B"></div><div style="background: #E3AAA6"></div><div style="background: #FBEDEC"></div></div>
-<div style="display: flex; flex-direction: column; gap: 4px; font-family: 'Red Hat Mono', monospace; font-size: 12px"><strong style="font-weight: 500; font-size: 14px">error · red</strong><span style="color: #595959">fg #A3302B · border #E3AAA6 · bg #FBEDEC</span><span style="color: #595959">fg on bg 6.1:1 · on white 7:1</span></div>
+<div class="roles">
+<div class="rg"><span class="sub">Surface</span><div class="rgrid"><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-background)"></div><div class="tx"><strong>background</strong><span>--ds-color-background</span><span>Page ground</span></div></div><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-surface)"></div><div class="tx"><strong>surface</strong><span>--ds-color-surface</span><span>Cards, controls, panels</span></div></div><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-surface-subtle)"></div><div class="tx"><strong>surface-subtle</strong><span>--ds-color-surface-subtle</span><span>Quiet panels, disabled fields</span></div></div><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-fill)"></div><div class="tx"><strong>fill</strong><span>--ds-color-fill</span><span>Hover and subtle fills</span></div></div></div></div>
+<div class="rg"><span class="sub">Line</span><div class="rgrid"><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-divider)"></div><div class="tx"><strong>divider</strong><span>--ds-color-divider</span><span>Hairlines</span></div></div><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-border)"></div><div class="tx"><strong>border</strong><span>--ds-color-border</span><span>Control borders</span></div></div><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-border-strong)"></div><div class="tx"><strong>border-strong</strong><span>--ds-color-border-strong</span><span>Strong borders, checked boxes</span></div></div><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-focus)"></div><div class="tx"><strong>focus</strong><span>--ds-color-focus</span><span>Focus ring</span></div></div><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-disabled)"></div><div class="tx"><strong>disabled</strong><span>--ds-color-disabled</span><span>Disabled borders and fills</span></div></div></div></div>
+<div class="rg"><span class="sub">Text</span><div class="rgrid"><div class="tile"><div class="sw sw-t" style="color: var(--ds-color-text-emphasis)">Aa</div><div class="tx"><strong>text-emphasis</strong><span>--ds-color-text-emphasis</span><span>Titles, ink</span></div></div><div class="tile"><div class="sw sw-t" style="color: var(--ds-color-text-strong)">Aa</div><div class="tx"><strong>text-strong</strong><span>--ds-color-text-strong</span><span>Strong body text</span></div></div><div class="tile"><div class="sw sw-t" style="color: var(--ds-color-text)">Aa</div><div class="tx"><strong>text</strong><span>--ds-color-text</span><span>Body text</span></div></div><div class="tile"><div class="sw sw-t" style="color: var(--ds-color-text-muted)">Aa</div><div class="tx"><strong>text-muted</strong><span>--ds-color-text-muted</span><span>Captions, help</span></div></div><div class="tile"><div class="sw sw-t" style="color: var(--ds-color-placeholder)">Aa</div><div class="tx"><strong>placeholder</strong><span>--ds-color-placeholder</span><span>Placeholder, disabled text</span></div></div><div class="tile"><div class="sw sw-t" style="color: var(--ds-color-text-inverse); background: var(--ds-color-inverse)">Aa</div><div class="tx"><strong>text-inverse</strong><span>--ds-color-text-inverse</span><span>Text on inverse and primary</span></div></div></div></div>
+<div class="rg"><span class="sub">Icon and layer</span><div class="rgrid"><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-icon)"></div><div class="tx"><strong>icon</strong><span>--ds-color-icon</span><span>Icon strokes</span></div></div><div class="tile"><div class="sw sw-ov"><span style="background: var(--ds-color-overlay)"></span></div><div class="tx"><strong>overlay</strong><span>--ds-color-overlay</span><span>Scrim behind dialogs and drawers</span></div></div><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-inverse)"></div><div class="tx"><strong>inverse</strong><span>--ds-color-inverse</span><span>Tooltips, inverse surfaces</span></div></div></div></div>
+<div class="rg"><span class="sub">Action</span><div class="rgrid"><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-primary)"></div><div class="tx"><strong>primary</strong><span>--ds-color-primary</span><span>Primary button, checked controls</span></div></div><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-primary-hover)"></div><div class="tx"><strong>primary-hover</strong><span>--ds-color-primary-hover</span><span>Primary hover</span></div></div><div class="tile"><div class="sw sw-r" style="background: var(--ds-color-primary-contrast)"></div><div class="tx"><strong>primary-contrast</strong><span>--ds-color-primary-contrast</span><span>Text on primary</span></div></div></div></div>
+<div class="rg">
+<div class="sub-row"><span class="sub">Status</span><p>The only hue in the system. Muted, used only for feedback, always paired with an icon and a label. 9 roles.</p></div>
+<div class="stat">
+<div class="tile v"><div class="st"><div style="background: var(--ds-color-info)"></div><div style="background: var(--ds-color-info-border)"></div><div style="background: var(--ds-color-info-bg); border: 1px solid var(--ds-color-info-border)"></div></div><div class="tx"><strong>info · neutral</strong><span>fg info · border info-border · bg info-bg</span><span>fg on bg 9.7:1</span></div></div>
+<div class="tile v"><div class="st"><div style="background: var(--ds-color-success)"></div><div style="background: var(--ds-color-success-border)"></div><div style="background: var(--ds-color-success-bg); border: 1px solid var(--ds-color-success-border)"></div></div><div class="tx"><strong>success · green</strong><span>fg success · border success-border · bg success-bg</span><span>fg on bg 5.7:1 · on white 6.4:1</span></div></div>
+<div class="tile v"><div class="st"><div style="background: var(--ds-color-error)"></div><div style="background: var(--ds-color-error-border)"></div><div style="background: var(--ds-color-error-bg); border: 1px solid var(--ds-color-error-border)"></div></div><div class="tx"><strong>error · red</strong><span>fg error · border error-border · bg error-bg</span><span>fg on bg 6.1:1 · on white 7:1</span></div></div>
 </div>
 </div>
 </div>
 </section>
 
-<section style="display: flex; flex-direction: column; gap: 32px">
-<div style="display: flex; align-items: baseline; gap: 24px">
-<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">02</span>
-<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Typography</h2>
-<span style="margin-left: auto; font-size: 14px; color: #595959">Titles: Red Hat Mono · Body: Red Hat Text</span>
+<section class="sec">
+<div class="sec-h">
+<span class="sec-n">03</span>
+<h2 class="sec-t">Typography</h2>
+<span class="sec-x">Titles: --ds-font-heading · Body: --ds-font-body</span>
 </div>
-<div style="display: flex; flex-direction: column; border-top: 1px solid #000000">
-<div style="display: grid; grid-template-columns: 200px minmax(0, 1fr) 220px; gap: 24px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid #E0E0E0"><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">display</span><span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 72px; line-height: 1; letter-spacing: -0.04em">Less, but better</span><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Mono 500 · 72/72 · −4%</span></div>
-<div style="display: grid; grid-template-columns: 200px minmax(0, 1fr) 220px; gap: 24px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid #E0E0E0"><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">h1</span><span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -0.03em">Quiet interfaces</span><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Mono 500 · 48/53 · −3%</span></div>
-<div style="display: grid; grid-template-columns: 200px minmax(0, 1fr) 220px; gap: 24px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid #E0E0E0"><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">h2</span><span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; line-height: 1.2; letter-spacing: -0.02em">Section heading</span><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Mono 500 · 32/38 · −2%</span></div>
-<div style="display: grid; grid-template-columns: 200px minmax(0, 1fr) 220px; gap: 24px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid #E0E0E0"><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">h3</span><span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 22px; line-height: 1.3">Card title</span><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Mono 500 · 22/29</span></div>
-<div style="display: grid; grid-template-columns: 200px minmax(0, 1fr) 220px; gap: 24px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid #E0E0E0"><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">body-lg</span><span style="font-size: 18px; line-height: 1.6; color: #404040">Body large for introductions. Generous leading keeps long passages calm and readable.</span><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Text 400 · 18/29</span></div>
-<div style="display: grid; grid-template-columns: 200px minmax(0, 1fr) 220px; gap: 24px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid #E0E0E0"><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">body</span><span style="font-size: 16px; line-height: 1.6; color: #404040">Default body copy for interface text, descriptions and form help.</span><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Text 400 · 16/26</span></div>
-<div style="display: grid; grid-template-columns: 200px minmax(0, 1fr) 220px; gap: 24px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid #E0E0E0"><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">label</span><span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Overline / label</span><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Mono 500 · 12/16 · +8% · caps</span></div>
-<div style="display: grid; grid-template-columns: 200px minmax(0, 1fr) 220px; gap: 24px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid #E0E0E0"><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">caption</span><span style="font-size: 13px; line-height: 1.5; color: #595959">Caption text for photos, metadata and footnotes.</span><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">Text 400 · 13/20</span></div>
+<div class="rg">
+<span class="sub">Font roles</span>
+<div class="tbl">
+<div class="row3"><span class="k">heading</span><span style="font-family: var(--ds-font-heading); font-size: var(--ds-text-h3-size)">Less, but better</span><span class="k">--ds-font-heading · Red Hat Mono · Titles</span></div>
+<div class="row3"><span class="k">body</span><span style="font-family: var(--ds-font-body); font-size: var(--ds-text-h3-size)">Less, but better</span><span class="k">--ds-font-body · Red Hat Text · Body copy, help</span></div>
+<div class="row3"><span class="k">label</span><span style="font-family: var(--ds-font-label); font-size: var(--ds-text-h3-size)">Less, but better</span><span class="k">--ds-font-label · Red Hat Mono · Labels, buttons, tags</span></div>
+<div class="row3"><span class="k">mono</span><span style="font-family: var(--ds-font-mono); font-size: var(--ds-text-h3-size)">Less, but better</span><span class="k">--ds-font-mono · Red Hat Mono · Code, numbers</span></div>
+</div>
+</div>
+<div class="rg">
+<span class="sub">Font-weight roles</span>
+<div class="tbl">
+<div class="row3"><span class="k">regular</span><span style="font-family: var(--ds-font-body); font-weight: var(--ds-font-weight-regular); font-size: var(--ds-text-body-lg-size)">Quiet interfaces, clear hierarchy</span><span class="k">--ds-font-weight-regular · 400</span></div>
+<div class="row3"><span class="k">medium</span><span style="font-family: var(--ds-font-body); font-weight: var(--ds-font-weight-medium); font-size: var(--ds-text-body-lg-size)">Quiet interfaces, clear hierarchy</span><span class="k">--ds-font-weight-medium · 500</span></div>
+<div class="row3"><span class="k">bold</span><span style="font-family: var(--ds-font-body); font-weight: var(--ds-font-weight-bold); font-size: var(--ds-text-body-lg-size)">Quiet interfaces, clear hierarchy</span><span class="k">--ds-font-weight-bold · 700</span></div>
+</div>
+</div>
+<div class="rg">
+<span class="sub">Type steps · 15 steps in the default theme</span>
+<div class="tbl">
+<div class="trow"><span class="k">display</span><span style="font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); text-transform: var(--ds-text-heading-transform); color: var(--ds-color-text-emphasis); font-size: var(--ds-text-display-size); line-height: var(--ds-text-display-line-height); letter-spacing: var(--ds-text-display-tracking)">Less, but better</span><span class="k">Mono 500 · 72/72 · −4%</span></div>
+<div class="trow"><span class="k">h1</span><span style="font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); text-transform: var(--ds-text-heading-transform); color: var(--ds-color-text-emphasis); font-size: var(--ds-text-h1-size); line-height: var(--ds-text-h1-line-height); letter-spacing: var(--ds-text-h1-tracking)">Quiet interfaces</span><span class="k">Mono 500 · 48/53 · −3%</span></div>
+<div class="trow"><span class="k">h2</span><span style="font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); text-transform: var(--ds-text-heading-transform); color: var(--ds-color-text-emphasis); font-size: var(--ds-text-h2-size); line-height: var(--ds-text-h2-line-height); letter-spacing: var(--ds-text-h2-tracking)">Section heading</span><span class="k">Mono 500 · 32/38 · −2%</span></div>
+<div class="trow"><span class="k">h3</span><span style="font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); text-transform: var(--ds-text-heading-transform); color: var(--ds-color-text-emphasis); font-size: var(--ds-text-h3-size); line-height: var(--ds-text-h3-line-height); letter-spacing: var(--ds-text-h3-tracking)">Card title</span><span class="k">Mono 500 · 22/29</span></div>
+<div class="trow"><span class="k">h4</span><span style="font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); text-transform: var(--ds-text-heading-transform); color: var(--ds-color-text-emphasis); font-size: var(--ds-text-body-lg-size); line-height: var(--ds-text-body-line-height)">Group heading</span><span class="k">Mono 500 · 18/26 · body-lg size, body leading</span></div>
+<div class="trow"><span class="k">h5</span><span style="font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); text-transform: var(--ds-text-heading-transform); color: var(--ds-color-text-emphasis); font-size: var(--ds-text-body-size); line-height: var(--ds-text-body-sm-line-height)">Small heading</span><span class="k">Mono 500 · 16/24 · body size, body-sm leading</span></div>
+<div class="trow"><span class="k">body-lg</span><span style="font-family: var(--ds-font-body); color: var(--ds-color-text); font-size: var(--ds-text-body-lg-size); line-height: var(--ds-text-body-lg-line-height)">Body large for introductions. Generous leading keeps long passages calm and readable.</span><span class="k">Text 400 · 18/29</span></div>
+<div class="trow"><span class="k">body</span><span style="font-family: var(--ds-font-body); color: var(--ds-color-text); font-size: var(--ds-text-body-size); line-height: var(--ds-text-body-line-height)">Default body copy for interface text, descriptions and form help.</span><span class="k">Text 400 · 16/26</span></div>
+<div class="trow"><span class="k">body-sm</span><span style="font-family: var(--ds-font-body); color: var(--ds-color-text); font-size: var(--ds-text-body-sm-size); line-height: var(--ds-text-body-sm-line-height)">Compact body copy for dense layouts, menus and list rows.</span><span class="k">Text 400 · 15/24</span></div>
+<div class="trow"><span class="k">body-xs</span><span style="font-family: var(--ds-font-body); color: var(--ds-color-text); font-size: var(--ds-text-body-xs-size); line-height: var(--ds-text-body-xs-line-height)">Small body copy for alert descriptions and tables.</span><span class="k">Text 400 · 14/21</span></div>
+<div class="trow"><span class="k">caption</span><span style="font-family: var(--ds-font-body); color: var(--ds-color-text); font-size: var(--ds-text-caption-size); line-height: var(--ds-text-caption-line-height); color: var(--ds-color-text-muted)">Caption text for photos, metadata and footnotes.</span><span class="k">Text 400 · 13/20</span></div>
+<div class="trow"><span class="k">label</span><span style="font-family: var(--ds-font-label); font-weight: var(--ds-text-label-weight); font-size: var(--ds-text-label-size); line-height: var(--ds-text-label-line-height); letter-spacing: var(--ds-text-label-tracking); text-transform: var(--ds-text-label-transform); color: var(--ds-color-text-emphasis)">Overline / label</span><span class="k">Mono 500 · 12/16 · +8% · caps</span></div>
+<div class="trow"><span class="k">ui</span><span style="font-family: var(--ds-font-label); font-weight: var(--ds-text-ui-weight); font-size: var(--ds-text-ui-size); line-height: var(--ds-text-ui-line-height); color: var(--ds-color-text-emphasis)">Button and control text</span><span class="k">Mono 500 · 14/20</span></div>
+<div class="trow"><span class="k">ui-sm</span><span style="font-family: var(--ds-font-label); font-size: var(--ds-text-ui-sm-size); line-height: var(--ds-text-ui-sm-line-height); color: var(--ds-color-text-emphasis)">Tags, small controls, counters</span><span class="k">Mono 400 · 12/16</span></div>
+<div class="trow"><span class="k">ui-xs</span><span style="font-family: var(--ds-font-label); font-size: var(--ds-text-ui-xs-size); line-height: var(--ds-text-ui-xs-line-height); color: var(--ds-color-text-emphasis)">Badges, dense captions</span><span class="k">Mono 400 · 11/16</span></div>
+</div>
 </div>
 </section>
 
-<section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px">
-<div style="display: flex; flex-direction: column; gap: 32px">
-<div style="display: flex; align-items: baseline; gap: 24px">
-<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">03</span>
-<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Spacing</h2>
-<span style="margin-left: auto; font-size: 14px; color: #595959">4 px base</span>
+<section class="two">
+<div class="col">
+<div class="sec-h">
+<span class="sec-n">04</span>
+<h2 class="sec-t">Spacing</h2>
+<span class="sec-x">4 px base</span>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px; font-family: 'Red Hat Mono', monospace; font-size: 12px">
-<div style="display: grid; grid-template-columns: 72px 48px minmax(0, 1fr); gap: 16px; align-items: center"><span>space-1</span><span style="color: #595959">4</span><div style="width: 4px; height: 16px; background: #000000"></div></div>
-<div style="display: grid; grid-template-columns: 72px 48px minmax(0, 1fr); gap: 16px; align-items: center"><span>space-2</span><span style="color: #595959">8</span><div style="width: 8px; height: 16px; background: #000000"></div></div>
-<div style="display: grid; grid-template-columns: 72px 48px minmax(0, 1fr); gap: 16px; align-items: center"><span>space-3</span><span style="color: #595959">12</span><div style="width: 12px; height: 16px; background: #000000"></div></div>
-<div style="display: grid; grid-template-columns: 72px 48px minmax(0, 1fr); gap: 16px; align-items: center"><span>space-4</span><span style="color: #595959">16</span><div style="width: 16px; height: 16px; background: #000000"></div></div>
-<div style="display: grid; grid-template-columns: 72px 48px minmax(0, 1fr); gap: 16px; align-items: center"><span>space-6</span><span style="color: #595959">24</span><div style="width: 24px; height: 16px; background: #000000"></div></div>
-<div style="display: grid; grid-template-columns: 72px 48px minmax(0, 1fr); gap: 16px; align-items: center"><span>space-8</span><span style="color: #595959">32</span><div style="width: 32px; height: 16px; background: #000000"></div></div>
-<div style="display: grid; grid-template-columns: 72px 48px minmax(0, 1fr); gap: 16px; align-items: center"><span>space-12</span><span style="color: #595959">48</span><div style="width: 48px; height: 16px; background: #000000"></div></div>
-<div style="display: grid; grid-template-columns: 72px 48px minmax(0, 1fr); gap: 16px; align-items: center"><span>space-16</span><span style="color: #595959">64</span><div style="width: 64px; height: 16px; background: #000000"></div></div>
-<div style="display: grid; grid-template-columns: 72px 48px minmax(0, 1fr); gap: 16px; align-items: center"><span>space-24</span><span style="color: #595959">96</span><div style="width: 96px; height: 16px; background: #000000"></div></div>
+<div class="col" style="gap: var(--ds-space-3)">
+<div class="srow"><span>space-1</span><span class="k">4</span><div style="width: var(--ds-space-1)"></div></div>
+<div class="srow"><span>space-2</span><span class="k">8</span><div style="width: var(--ds-space-2)"></div></div>
+<div class="srow"><span>space-3</span><span class="k">12</span><div style="width: var(--ds-space-3)"></div></div>
+<div class="srow"><span>space-4</span><span class="k">16</span><div style="width: var(--ds-space-4)"></div></div>
+<div class="srow"><span>space-6</span><span class="k">24</span><div style="width: var(--ds-space-6)"></div></div>
+<div class="srow"><span>space-8</span><span class="k">32</span><div style="width: var(--ds-space-8)"></div></div>
+<div class="srow"><span>space-12</span><span class="k">48</span><div style="width: var(--ds-space-12)"></div></div>
+<div class="srow"><span>space-16</span><span class="k">64</span><div style="width: var(--ds-space-16)"></div></div>
+<div class="srow"><span>space-24</span><span class="k">96</span><div style="width: var(--ds-space-24)"></div></div>
 </div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 32px">
-<div style="display: flex; align-items: baseline; gap: 24px">
-<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">04</span>
-<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Shape &amp; line</h2>
-<span style="margin-left: auto; font-size: 14px; color: #595959">No radius · no shadow</span>
+<div class="col">
+<div class="sec-h">
+<span class="sec-n">05</span>
+<h2 class="sec-t">Shape &amp; line</h2>
+<span class="sec-x">No radius · no shadow by default</span>
 </div>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 96px; border: 1px solid #E0E0E0"></div><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px">hairline · 1px gray-200</span></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 96px; border: 1px solid #000000"></div><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px">rule · 1px black</span></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 96px; border: 2px solid #000000; outline: 2px solid #000000; outline-offset: 3px"></div><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px">focus · 2px + 2px offset</span></div>
+<div class="shapes3">
+<div class="tile"><div class="shape box96" style="border-color: var(--ds-color-divider)"></div><span class="k">hairline · border-width, divider</span></div>
+<div class="tile"><div class="shape box96" style="border-color: var(--ds-color-border-strong)"></div><span class="k">rule · border-width, border-strong</span></div>
+<div class="tile"><div class="shape box96" style="border-width: var(--ds-border-width-strong); border-color: var(--ds-color-border-strong); outline: var(--ds-focus-width) solid var(--ds-color-focus); outline-offset: var(--ds-focus-offset)"></div><span class="k">focus · focus-width + focus-offset</span></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px; padding: 24px; background: #F7F7F7; font-family: 'Red Hat Mono', monospace; font-size: 13px; line-height: 1.7; color: #262626">
+<div class="tile"><span class="sub">Radius steps</span><div class="shapes">
+<div class="tile v"><div class="shape" style="border-radius: var(--ds-radius-sm)"></div><span class="k">--ds-radius-sm</span></div>
+<div class="tile v"><div class="shape" style="border-radius: var(--ds-radius-md)"></div><span class="k">--ds-radius-md</span></div>
+<div class="tile v"><div class="shape" style="border-radius: var(--ds-radius-lg)"></div><span class="k">--ds-radius-lg</span></div>
+<div class="tile v"><div class="shape" style="border-radius: var(--ds-radius-full)"></div><span class="k">--ds-radius-full</span></div>
+</div><span class="k">Square by default: sm, md, lg and full all resolve to --ds-radius (0). A theme sets each step.</span></div>
+<div class="tile"><span class="sub">Shadow steps</span><div class="shapes3">
+<div class="tile v"><div class="shape" style="box-shadow: var(--ds-shadow-sm)"></div><span class="k">--ds-shadow-sm</span></div>
+<div class="tile v"><div class="shape" style="box-shadow: var(--ds-shadow-md)"></div><span class="k">--ds-shadow-md</span></div>
+<div class="tile v"><div class="shape" style="box-shadow: var(--ds-shadow-lg)"></div><span class="k">--ds-shadow-lg</span></div>
+</div><span class="k">None by default: depth comes from borders and gray fills. A theme sets each step.</span></div>
+<div class="code">
 <span>--ds-radius: 0;  /* -sm, -md, -lg, -full all default to it */</span>
 <span>--ds-shadow-sm | -md | -lg: none;  /* depth = borders + gray fills */</span>
 <span>--ds-border-width: 1px;  --ds-border-width-strong: 2px;</span>
-<span>--ds-color-divider (#E0E0E0) | --ds-color-border (#C7C7C7) | --ds-color-border-strong (#000000)</span>
-<span>--ds-focus-width: 2px;  --ds-focus-offset: 2px;  --ds-color-focus: #000000;</span>
+<span>--ds-color-divider | --ds-color-border | --ds-color-border-strong</span>
+<span>--ds-focus-width: 2px;  --ds-focus-offset: 2px;  --ds-color-focus;</span>
 <span>--ds-control-height: 44px;</span>
 <span>--ds-motion: 120ms cubic-bezier(.2, 0, 0, 1);</span>
 </div>
 </div>
 </section>
 
-<section style="display: flex; flex-direction: column; gap: 32px">
-<div style="display: flex; align-items: baseline; gap: 24px">
-<span style="font-family: 'Red Hat Mono', monospace; font-size: 13px; color: #595959">05</span>
-<h2 style="margin: 0; font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: -0.02em">Photography</h2>
-<span style="margin-left: auto; font-size: 14px; color: #595959">filter: grayscale(1) contrast(1.1)</span>
+<section class="sec">
+<div class="sec-h">
+<span class="sec-n">06</span>
+<h2 class="sec-t">Photography</h2>
+<span class="sec-x">filter: var(--ds-photo-filter)</span>
 </div>
-<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
-<figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-<svg viewBox="0 0 300 375" style="display: block; width: 100%; height: auto" role="img" aria-label="Photo stand-in: horizon with low sun over hills">
+<div class="photos">
+<figure class="fig">
+<svg class="photo" data-ds-illustration viewBox="0 0 300 375" role="img" aria-label="Photo stand-in: horizon with low sun over hills">
 <defs><filter id="gr1"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter></defs>
 <rect width="300" height="375" fill="#D4D4D4"></rect>
 <circle cx="190" cy="170" r="46" fill="#F7F7F7"></circle>
@@ -145,10 +436,10 @@ a{color:#000000}a:hover{color:#595959}
 <path d="M0 330 C 100 318 200 342 300 322 L300 375 L0 375 Z" fill="#141414"></path>
 <rect width="300" height="375" filter="url(#gr1)" opacity="0.18"></rect>
 </svg>
-<figcaption style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">01 — Landscape · 4:5</figcaption>
+<figcaption class="cap">01 — Landscape · 4:5</figcaption>
 </figure>
-<figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-<svg viewBox="0 0 300 375" style="display: block; width: 100%; height: auto" role="img" aria-label="Photo stand-in: concrete building facade with hard shadows">
+<figure class="fig">
+<svg class="photo" data-ds-illustration viewBox="0 0 300 375" role="img" aria-label="Photo stand-in: concrete building facade with hard shadows">
 <defs><filter id="gr2"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter></defs>
 <rect width="300" height="375" fill="#EEEEEE"></rect>
 <rect x="40" y="60" width="160" height="315" fill="#C7C7C7"></rect>
@@ -165,10 +456,10 @@ a{color:#000000}a:hover{color:#595959}
 <polygon points="40,300 200,180 200,375 40,375" fill="#000000" opacity="0.55"></polygon>
 <rect width="300" height="375" filter="url(#gr2)" opacity="0.18"></rect>
 </svg>
-<figcaption style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">02 — Architecture · 4:5</figcaption>
+<figcaption class="cap">02 — Architecture · 4:5</figcaption>
 </figure>
-<figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-<svg viewBox="0 0 300 375" style="display: block; width: 100%; height: auto" role="img" aria-label="Photo stand-in: portrait silhouette with rim light">
+<figure class="fig">
+<svg class="photo" data-ds-illustration viewBox="0 0 300 375" role="img" aria-label="Photo stand-in: portrait silhouette with rim light">
 <defs><filter id="gr3"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter></defs>
 <rect width="300" height="375" fill="#A3A3A3"></rect>
 <rect x="0" y="0" width="120" height="375" fill="#BDBDBD"></rect>
@@ -177,10 +468,10 @@ a{color:#000000}a:hover{color:#595959}
 <path d="M58 375 C 66 280 110 240 158 238 C 210 240 250 280 258 375 Z" fill="#141414"></path>
 <rect width="300" height="375" filter="url(#gr3)" opacity="0.18"></rect>
 </svg>
-<figcaption style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">03 — Portrait · 4:5</figcaption>
+<figcaption class="cap">03 — Portrait · 4:5</figcaption>
 </figure>
-<figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-<svg viewBox="0 0 300 375" style="display: block; width: 100%; height: auto" role="img" aria-label="Photo stand-in: abstract sand ripples texture">
+<figure class="fig">
+<svg class="photo" data-ds-illustration viewBox="0 0 300 375" role="img" aria-label="Photo stand-in: abstract sand ripples texture">
 <defs><filter id="gr4"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter></defs>
 <rect width="300" height="375" fill="#262626"></rect>
 <g fill="none" stroke="#C7C7C7" stroke-width="3">
@@ -196,24 +487,24 @@ a{color:#000000}a:hover{color:#595959}
 </g>
 <rect width="300" height="375" filter="url(#gr4)" opacity="0.22"></rect>
 </svg>
-<figcaption style="font-family: 'Red Hat Mono', monospace; font-size: 12px; color: #595959">04 — Texture · 4:5</figcaption>
+<figcaption class="cap">04 — Texture · 4:5</figcaption>
 </figure>
 </div>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 12px; padding: 24px; border: 1px solid #000000">
-<span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Do</span>
-<span style="font-size: 15px; line-height: 1.6; color: #404040">100% grayscale, slight contrast lift (+10%), visible film grain. Square corners. Crops 4:5, 1:1, 16:9. Mono caption beneath, never over the image.</span>
+<div class="dd">
+<div>
+<span class="sub">Do</span>
+<span>100% grayscale, slight contrast lift (+10%), visible film grain. Square corners. Crops 4:5, 1:1, 16:9. Mono caption beneath, never over the image.</span>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px; padding: 24px; border: 1px solid #E0E0E0; background: #F7F7F7">
-<span style="font-family: 'Red Hat Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #595959">Don't</span>
-<span style="font-size: 15px; line-height: 1.6; color: #404040">Color or partial color, sepia, duotone tints, gradient overlays, drop shadows, rounded corners, text placed on busy areas.</span>
+<div>
+<span class="sub" style="color: var(--ds-color-text-muted)">Don't</span>
+<span>Color or partial color, sepia, duotone tints, gradient overlays, drop shadows, rounded corners, text placed on busy areas.</span>
 </div>
 </div>
 </section>
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2640}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6170}}'>
 class Component extends DCLogic {
 renderVals() {
 return {};
