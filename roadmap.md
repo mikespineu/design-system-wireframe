@@ -332,6 +332,36 @@ Each task carries its fields in an indented line, read by the [software factory]
     - The Storybook section explains how to run it locally (`npm run storybook`, per-worktree port) and links the deployed Storybook if `vercel.json` defines one
     - Screenshots of the Storybook Introduction page, the factory status page and one Claude Design canvas are committed in `docs/images/readme/` (PNG, ≤ 500 KB each) and embedded in their sections, each with descriptive alt text
     - Every skill, path, image and command named in the README exists in the repo (all relative links resolve)
+- [ ] **DS-66 Starter guide & install accuracy.** Write `docs/starter-guide.md`: start from 'Use this template', rename, make your own theme the default, decide what to keep (factory, canvases, specs, workflows), and get to a green build. Fix the consumer guide so it no longer sends readers to the unrelated `design-system-test` npm package before DS-59 ships.
+  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - `docs/starter-guide.md` takes a new owner from 'Use this template' to a passing `npm ci && npm run lint && npm run typecheck && npm test && npm run build-storybook`, covering renaming `name`/`repository` in `package.json` and making their theme the default (`:root` default in `src/styles/tokens.css`, the Storybook theme list in `.storybook/themes.ts`, generating the theme via `docs/theming-guide.md`)
+    - It lists every workflow in `.github/workflows/` with the secrets or variables it needs and how to disable it; says `release.yml` is inert until `NPM_PUBLISH_ENABLED` is set and `storybook-vercel.yml` fails on every push without the Vercel secrets
+    - It names which of `factory/`, `roadmap.md`, `CLAUDE.md`/`AGENTS.md`, `docs/specs/` and `docs/design-system-wireframe/` can be deleted without breaking lint, typecheck, `npm test` or the Storybook build, each claim verified by deleting it in the worktree and running the commands (then restoring)
+    - The Install section of `docs/consumer-guide.md` no longer tells readers to install `design-system-test` from npm; it explains today's options (the template, or `npm run build && npm pack` and install the tarball) until DS-59 publishes the package, and `src/docs/consumerGuide.test.ts` still passes
+    - A test checks that every relative link in `docs/starter-guide.md` resolves to a file in the repo and every `npm run <script>` it mentions exists in `package.json`
+- [ ] **DS-67 README screenshot script & themed images.** Add `npm run readme:screenshots`, a script under `scripts/` that serves the static Storybook and uses Playwright to capture the theme showcase and a demo page in every theme into `docs/images/readme/`. Tooling only; components, stories and Storybook config stay unchanged.
+  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - `npm run readme:screenshots` builds Storybook if `storybook-static/` is missing, serves it on a free port picked at runtime (never a hardcoded 6006), captures with Playwright, and stops the server when done
+    - It writes `docs/images/readme/themes-side-by-side.png` from `Foundations/Themes` → `SideBySide`, and `docs/images/readme/contact-form-<theme>.png` for `default`, `dark`, `bold` and `bold-dark` (selected with the `theme` global), all committed
+    - Every generated PNG is under 500 KB and at most 1600 px wide
+    - The diff touches nothing under `src/`, `.storybook/`, `*.css`, `*.stories.*` or `*.mdx`, so the UI guard passes
+- [ ] **DS-68 README rewrite — why, start, customize.** Restructure `README.md` around the value proposition: a pitch with badges and the themed hero image, a 'Why use it' list where every claim links to its proof, 'Start from it' (starter guide), 'Customize in minutes' (tested `createTheme()` snippet plus the per-theme screenshots), and the component list linked to Storybook. Move the Claude Design material to `docs/claude-design.md` and the factory material into `docs/factory/README.md`, leaving a short 'How it's built' section that links to both.
+  - type: docs · has_ui: no · depends_on: DS-66, DS-67 · needs_human: no · status: todo
+  - done_when:
+    - Before the first `##` heading the README has a one-line pitch, badges (CI status, MIT license, live Storybook, a 'Use this template' link to `/generate`) and `docs/images/readme/themes-side-by-side.png`
+    - A 'Why use it' section links each claim to its proof: Radix primitives, the role-token contract in `@layer ds` (`docs/specs/Theming.md`), `createTheme()`/`checkContrast()` (`docs/theming-guide.md`), `bold`/`bold-dark` restyling everything with no component changes (per-theme screenshots), and story per state + keyboard stories + `jest-axe` + 80% coverage enforced in CI
+    - 'Start from it' links `docs/starter-guide.md`, and 'Customize in minutes' shows `docs/theming-guide/samples/minimal.ts`; a test fails if the README code block differs from that sample file
+    - The Claude Design section moves to `docs/claude-design.md` and the factory section into `docs/factory/README.md` with nothing dropped; the README keeps a 'How it's built' section of at most 10 lines linking both; `docs/design-system-wireframe/` is not touched
+    - A test checks that every relative link and image in `README.md` resolves to a file in the repo, and `src/docs/consumerGuide.test.ts` still passes
+- [ ] **DS-69 GitHub repo listing — description, topics, social preview.** Update the GitHub repo listing to match the new README: a description that leads with themeable starter value, topics for discoverability, and a social preview image cropped from the themed screenshot. Uploading the social preview is a manual step in GitHub Settings, so this needs a human.
+  - type: docs · has_ui: no · depends_on: DS-67, DS-68 · needs_human: yes · status: todo
+  - done_when:
+    - `docs/images/readme/social-preview.png` (1280×640, under 1 MB) is committed, cropped from `themes-side-by-side.png`
+    - The repo description (`gh repo view --json description`) leads with themeable, accessible starter value instead of the gray wireframe and the agent pipeline, after the user approves the wording
+    - Topics include `design-tokens`, `theming`, `storybook`, `radix-ui` and `template` alongside the existing ones
+    - The user has uploaded the social preview in Settings → General, and 'Template repository' is still enabled (`isTemplate: true`)
 
 ### Epic: Icons
 
