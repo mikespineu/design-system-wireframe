@@ -6,8 +6,8 @@ status: waiting        # claimed | in-progress | waiting | blocked | merged
 stage: pr
 branch: "feat/DS-2-example-themes-design"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-2-example-themes-design"
-pr: ""
-pr_url: ""
+pr: "97"
+pr_url: "https://github.com/mikespineu/design-system-wireframe/pull/97"
 canvas_url: "https://claude.ai/artifact/1PkVgkht4TuQFLdxmoxxTj"
 storybook_url: ""
 model: default
@@ -31,6 +31,7 @@ updated: "2026-11-02T13:48:15Z"
 - 14:48 spec: check passed (header fields, 7 sections, 87 tokens all in tokens.css, canvas complete HTML)
 - 14:48 spec: verified all 186 contrast cells with contrastRatio() from src/theme/color.ts: all pass thresholds; fixed 2 rounding slips in bold (text-strong/background 14.02→14.01, text-strong/info-bg 12.82→12.81) in spec and canvas, republished canvas (v2)
 - 14:48 pr: waiting for you (approve design or request changes)
+- 14:48 pr: opened draft PR #97 with factory:needs-approval
 
 ## Gate results
 
