@@ -20,8 +20,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Current Wireframe tokens are registered as the `default` theme in `src/styles/tokens.css`
     - Components read only semantic `--ds-*` roles; no component changes
     - Existing stories and tests pass unchanged
-- [ ] **DS-2 Example themes — design.** Design themes on top of the DS-26 token contract to prove a consumer can change the whole look: `dark` (dark mode of the default Wireframe theme, refining the DS-27 `[data-theme="dark"]` values), and a new theme `bold` in light and dark (`bold`, `bold-dark`) that looks completely different from Wireframe: its own brand hue, font families (heading, body, mono), type scale, letter-spacing and transform, radius, shadows and density. `bold` must not be a black/white/gray theme: it uses a saturated brand color and tinted (non-gray) neutrals in both light and dark. The current gray Wireframe stays as `default`.
-  - type: design · has_ui: yes · depends_on: DS-26 · needs_human: yes · status: todo
+- [x] **DS-2 Example themes — design.** Design themes on top of the DS-26 token contract to prove a consumer can change the whole look: `dark` (dark mode of the default Wireframe theme, refining the DS-27 `[data-theme="dark"]` values), and a new theme `bold` in light and dark (`bold`, `bold-dark`) that looks completely different from Wireframe: its own brand hue, font families (heading, body, mono), type scale, letter-spacing and transform, radius, shadows and density. `bold` must not be a black/white/gray theme: it uses a saturated brand color and tinted (non-gray) neutrals in both light and dark. The current gray Wireframe stays as `default`.
+  - type: design · has_ui: yes · depends_on: DS-26 · needs_human: yes · status: done
   - done_when:
     - Canvas shows `default`, `dark`, `bold` and `bold-dark` side by side on the same set of existing components
     - Spec `docs/specs/Themes.md` lists every role from the DS-26 contract with its value in `dark`, `bold` and `bold-dark`; `bold` changes every role group (color, fonts, type scale, radius, shadow) and uses a saturated brand hue with tinted, non-gray neutrals
@@ -463,6 +463,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-2** Example themes — design — https://github.com/mikespineu/design-system-wireframe/pull/97
 - **DS-58** Canvas audit & All components canvas — https://github.com/mikespineu/design-system-wireframe/pull/95
 - **DS-48** Icon override props in components — implementation — https://github.com/mikespineu/design-system-wireframe/pull/89
 - **DS-27** Theme token foundation — implementation — https://github.com/mikespineu/design-system-wireframe/pull/88
