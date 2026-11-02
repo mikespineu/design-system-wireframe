@@ -16,22 +16,22 @@ import type { ComponentType, ReactElement } from 'react';
 import preview from '../../.storybook/preview';
 import { storybookThemes } from '../../.storybook/themes';
 
+// The real addon applies the attribute in an effect, after render, so the mock does not apply it at all:
+// the first render of a story can only see the theme if the preview sets it synchronously (withThemeAtRender).
 jest.mock('@storybook/addon-themes', () => {
   type Config = { themes: Record<string, string>; defaultTheme: string; parentSelector?: string; attributeName?: string };
   const configs: Config[] = [];
-  // Miniature of the real decorator: applies data-theme (or `attributeName`) on the parent element.
   const withThemeByDataAttribute = (config: Config) => {
     configs.push(config);
-    return (Story: ComponentType, context: { globals: { theme?: string } }) => {
-      const name = context.globals.theme ?? config.defaultTheme;
-      document
-        .querySelector(config.parentSelector ?? 'html')
-        ?.setAttribute(config.attributeName ?? 'data-theme', config.themes[name] ?? name);
-      return <Story />;
-    };
+    return (Story: () => unknown) => Story();
   };
   return { __configs: configs, withThemeByDataAttribute };
 });
+// Storybook's ESM-only docs, theming and channel modules are not loaded by the preview in Jest.
+jest.mock('@storybook/addon-docs/blocks', () => ({ DocsContainer: () => null }), { virtual: true });
+jest.mock('storybook/theming', () => ({ themes: { dark: {}, light: {} } }), { virtual: true });
+jest.mock('storybook/preview-api', () => ({ addons: { getChannel: () => ({ on: () => {}, off: () => {} }) } }), { virtual: true });
+jest.mock('storybook/internal/core-events', () => ({ GLOBALS_UPDATED: 'globalsUpdated' }), { virtual: true });
 
 const root = join(__dirname, '..', '..');
 const themes = ['default', 'dark', 'bold', 'bold-dark'] as const;
@@ -85,13 +85,16 @@ const findStoryFiles = (dir: string): string[] =>
 
 const storyFiles = findStoryFiles(join(root, 'src')).sort();
 
-const compose = (meta: Meta, story: StoryObj, theme: string): ComponentType | undefined => {
+const compose = (meta: Meta, story: StoryObj, theme: string, seen: (Array<string | null>)): ComponentType | undefined => {
   const args = { ...meta.args, ...story.args };
   const ctx: Ctx = { args, globals: { theme }, parameters: {} };
   const renderFn = story.render ?? meta.render;
   const Component = meta.component;
   if (!renderFn && !Component) return undefined;
-  const Base: ComponentType = () => (renderFn ? renderFn(args, ctx) : Component ? <Component {...args} /> : <></>);
+  const Base: ComponentType = () => {
+    seen.push(document.documentElement.getAttribute('data-theme'));
+    return renderFn ? renderFn(args, ctx) : Component ? <Component {...args} /> : <></>;
+  };
   // Later decorators wrap earlier ones: story, then component, then the preview (global).
   const decorators = [...(story.decorators ?? []), ...(meta.decorators ?? []), ...((preview.decorators ?? []) as unknown as Decorator[])];
   return decorators.reduce<ComponentType>((Inner, decorator) => {
@@ -127,10 +130,14 @@ describe('every story renders in every theme without console errors', () => {
       );
       try {
         for (const [key, value] of stories) {
-          const Story = compose(meta, value as StoryObj, theme);
+          document.documentElement.removeAttribute('data-theme');
+          const seen: Array<string | null> = [];
+          const Story = compose(meta, value as StoryObj, theme, seen);
           if (!Story) continue;
           const before = problems.length;
           const { unmount } = render(<Story />);
+          // Set before the story's first render, so an open Drawer or Dialog never shows the default theme first.
+          expect(seen[0]).toBe(theme);
           expect(document.documentElement.getAttribute('data-theme')).toBe(theme);
           unmount();
           if (problems.length > before) problems.splice(before, 0, `story ${key}:`);

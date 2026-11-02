@@ -70,4 +70,15 @@ describe('Themes docs page', () => {
     const source = readFileSync(join(__dirname, 'Themes.stories.tsx'), 'utf8');
     expect(source).not.toMatch(/class(Name)?\s*=/);
   });
+
+  it('isolates every panel from the toolbar theme: a default scope sits between the page and the panel', () => {
+    // The toolbar puts a theme on <html>; `dark` only sets color roles, so without this reset the dark panel
+    // would inherit bold's radius, fonts and uppercase headings when the toolbar is on bold or bold-dark.
+    render(markup(SideBySide));
+    for (const theme of themes) {
+      const panel = screen.getByTestId(`theme-panel-${theme}`);
+      expect(panel.getAttribute('data-theme')).toBe(theme);
+      expect(panel.parentElement?.getAttribute('data-theme')).toBe('default');
+    }
+  });
 });

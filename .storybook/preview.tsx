@@ -5,11 +5,15 @@ import '../src/styles/tailwind.css'
 // Opt-in demo themes (DS-12). Storybook-only: the library never loads them by itself.
 import '../src/themes/bold.css'
 import '../src/themes/bold-fonts.css'
+import './docs-theme.css'
 import { TooltipProvider } from '../src/components/Tooltip'
-import { storybookThemes } from './themes'
+import { storybookThemes, withThemeAtRender } from './themes'
+import { ThemedDocsContainer } from './ThemedDocsContainer'
 
 const preview: Preview = {
   decorators: [
+    // Applies the theme during render, so open Drawer and Dialog stories never show the default theme first.
+    withThemeAtRender,
     // Sets data-theme on <html> (the addon's default parentSelector), so docs pages, portals and every story follow the toolbar.
     withThemeByDataAttribute({
       themes: storybookThemes,
@@ -19,6 +23,7 @@ const preview: Preview = {
     (Story) => <TooltipProvider><Story /></TooltipProvider>,
   ],
   parameters: {
+    docs: { container: ThemedDocsContainer },
     options: { storySort: { order: ['Introduction', 'Foundations', 'Components', 'Patterns'] } },
     controls: {
       matchers: {

@@ -53,22 +53,28 @@ const Panel = ({ name, note, children }: { name: string; note: string; children:
       <span>{name}</span>
       <code>data-theme=&quot;{name}&quot;</code>
     </figcaption>
-    <div
-      data-theme={name}
-      data-testid={`theme-panel-${name}`}
-      style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 'var(--ds-space-6)',
-        padding: 'var(--ds-space-6)',
-        border: 'var(--ds-border-width) solid var(--ds-color-divider)',
-        background: 'var(--ds-color-background)',
-        color: 'var(--ds-color-text)',
-        font: 'var(--ds-text-body-size) / var(--ds-text-body-line-height) var(--ds-font-body)',
-      }}
-    >
-      {children}
+    {/*
+      Reset: the toolbar puts a theme on <html>, and `dark` only sets color roles. Every panel sits in a
+      `default` scope first, so the panel shows exactly its own theme whatever the toolbar says.
+    */}
+    <div data-theme="default" data-testid={`theme-reset-${name}`} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div
+        data-theme={name}
+        data-testid={`theme-panel-${name}`}
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--ds-space-6)',
+          padding: 'var(--ds-space-6)',
+          border: 'var(--ds-border-width) solid var(--ds-color-divider)',
+          background: 'var(--ds-color-background)',
+          color: 'var(--ds-color-text)',
+          font: 'var(--ds-text-body-size) / var(--ds-text-body-line-height) var(--ds-font-body)',
+        }}
+      >
+        {children}
+      </div>
     </div>
     <p
       style={{
