@@ -463,6 +463,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-63** Canvas boards on role tokens — https://github.com/mikespineu/design-system-wireframe/pull/104
 - **DS-65** "Create your own theme" guide — https://github.com/mikespineu/design-system-wireframe/pull/102
 - **DS-62** Docs tasks may edit canvases — https://github.com/mikespineu/design-system-wireframe/pull/101
 - **DS-12** Bold demo theme — implementation — https://github.com/mikespineu/design-system-wireframe/pull/100
