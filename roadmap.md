@@ -362,6 +362,21 @@ Each task carries its fields in an indented line, read by the [software factory]
     - The repo description (`gh repo view --json description`) leads with themeable, accessible starter value instead of the gray wireframe and the agent pipeline, after the user approves the wording
     - Topics include `design-tokens`, `theming`, `storybook`, `radix-ui` and `template` alongside the existing ones
     - The user has uploaded the social preview in Settings → General, and 'Template repository' is still enabled (`isTemplate: true`)
+- [ ] **DS-70 Introduction page refresh — design.** Redesign the Storybook `Introduction` page (`src/Introduction.stories.tsx`) around why use it, start from it and customize it. Today it pitches only the gray wireframe ("No hue", "No decoration"), lists 7 of 26 components, and never shows a theme, `createTheme()` or the theme switcher.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas `docs/design-system-wireframe/Introduction.dc.html` shows the whole page in `default`, `dark`, `bold` and `bold-dark`: hero, "Why use it" (Radix a11y, role tokens, `createTheme()`/`checkContrast()`, stories + `jest-axe` + coverage), a theme showcase, "Start from it" and "Customize in minutes"
+    - Spec `docs/specs/Introduction.md` gives each section's copy, its links (Storybook docs pages, GitHub starter and theming guides) and the shipped components and stories it uses
+    - Spec replaces the hand-kept component list with one covering every component exported from `src/index.ts`
+    - Spec covers heading levels, keyboard order, contrast in all four themes and phone-width layout, using only existing `--ds-*` tokens and Tailwind utilities
+- [ ] **DS-71 Introduction page refresh — implementation.** Rebuild `src/Introduction.stories.tsx` per `docs/specs/Introduction.md` from shipped components and utilities only, with the component list derived from `src/index.ts` exports.
+  - type: build · has_ui: yes · depends_on: DS-70 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every section, in `default`, `dark`, `bold` and `bold-dark`
+    - A test fails if a component exported from `src/index.ts` is missing from the page's component list
+    - A test checks every link on the page resolves (Storybook story/docs ids exist; GitHub doc paths exist in the repo)
+    - Tab order follows the spec (`userEvent` test) and a `jest-axe` test passes in every theme
+    - `docs/images/readme/storybook-introduction.png` is re-captured from the new page
 
 ### Epic: Icons
 
