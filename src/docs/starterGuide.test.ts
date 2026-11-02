@@ -114,3 +114,30 @@ describe('starter guide covers the setup steps', () => {
     expect(guide).toContain(text);
   });
 });
+
+describe('starter guide names the tests that an edit turns red', () => {
+  const read = (file: string) => readFileSync(join(root, file), 'utf8');
+
+  it.each([
+    ['src/theme/createTheme.test.ts', 'matches the non-color defaults in tokens.css'],
+    ['src/styles/tokens.test.ts', 'contrast in the %s theme'],
+    ['src/themes/bold.test.tsx', 'the shipped dark block in tokens.css (var() refs resolved against :root) passes checkContrast()'],
+    ['src/docs/consumerGuide.test.ts', 'consumer guide install'],
+  ])('%s: the guide names it, and the test "%s" still exists', (file, title) => {
+    expect(guide).toContain(file.split('/').pop() as string);
+    expect(read(file)).toContain(title);
+  });
+
+  it('lists the phrases that consumerGuide.test.ts requires in the Install section', () => {
+    const test = read('src/docs/consumerGuide.test.ts');
+    const install = test.slice(test.indexOf("explains today's options"));
+    const required = [...install.matchAll(/toContain\('([^']+)'\)/g)].map((m) => m[1] as string);
+    expect(required.length).toBeGreaterThan(0);
+    for (const phrase of required) expect(guide).toContain(`\`${phrase}\``);
+  });
+
+  it('names the defaults file that createTheme.test.ts compares with tokens.css', () => {
+    expect(guide).toContain('src/theme/defaults.ts');
+    expect(existsSync(join(root, 'src/theme/defaults.ts'))).toBe(true);
+  });
+});

@@ -76,7 +76,7 @@ The package name `design-system-test` is taken on npm by an unrelated package, a
 
 4. Update the repository guard and name in the release workflow and in [`RELEASING.md`](../RELEASING.md) (step 6).
 
-The replace also rewrites the Install section of `docs/consumer-guide.md`, which explains why the old name must not be installed from npm. Rewrite that section for your package. The rename was checked with the name `@acme/ds`: after the replace above and the `repository` change, `npm ci --dry-run`, lint, typecheck, `npm test` and `npm run build-storybook` all pass.
+The replace also rewrites the Install section of `docs/consumer-guide.md`, which explains why the old name must not be installed from npm. Rewrite that section for your package, but know that `src/docs/consumerGuide.test.ts` ("consumer guide install") requires the section to contain the phrases `Use this template`, `npm run build`, `npm pack` and `starter-guide.md`, and not to tell readers to `npm install design-system-test`. Either keep those four phrases in your rewrite, or change that test (or delete its "explains today's options" case) in the same commit; otherwise `npm test` stays red. The rename was checked with the name `@acme/ds`: after the replace above and the `repository` change, `npm ci --dry-run`, lint, typecheck, `npm test` and `npm run build-storybook` all pass.
 
 ## 4. Make your theme the default
 
@@ -103,6 +103,9 @@ After this edit the repository is not green until you update what pins the old d
 | --- | --- | --- |
 | `src/styles/tokens.test.ts`, two tests in the "cascade layer" group | They assert the old default and dark values (`var(--ds-color-white)`, `var(--ds-color-gray-900)`, `var(--ds-color-gray-800)`) | Change the expected values to yours |
 | `src/test/canvasBoards.test.ts`, "carries one token block identical to tokens.css" for every board | Every canvas in `docs/design-system-wireframe/` carries a copy of `tokens.css` between `/* ds-tokens:start */` and `/* ds-tokens:end */` | Delete the canvases and the two canvas tests (step 5), or paste the new `tokens.css` into each board |
+| `src/theme/createTheme.test.ts`, "matches the non-color defaults in tokens.css" | The test compares the font weights, type scale and shape values that `createTheme()` emits (`src/theme/defaults.ts`) with the `:root` block. It fails as soon as you put your own non-color values (the weights, type scale and shape from the override block of [theming guide step 4](theming-guide.md#step-4-add-an-override-block)) into `:root` | Put the same values into `fontWeightDefaults`, `typeScaleDefaults` and `shapeDefaults` in `src/theme/defaults.ts`, then run `npm run themes:generate` to rewrite `src/themes/bold.css`, which is built from those defaults. If you changed a role that the bold demo theme does not override itself, `src/themes/bold.test.tsx` ("role values match the spec") and `docs/theming-guide/theming-guide.test.ts` ("the worked example rebuilds bold") also fail, because they pin bold to the old defaults and to `docs/specs/Themes.md`. Remove the bold demo theme in that case (see step 4.3), or delete the `createTheme.test.ts` case if you do not want the generator defaults tied to `tokens.css` |
+| `src/styles/tokens.test.ts`, "contrast in the default theme" and "contrast in the dark theme" | They check the text pairs (4.5:1) and the interface pairs (3:1) on the resolved light and dark values. They fail when one of your values misses its ratio, for example a `text-muted` that is too pale on your `background` | Fix the value (see [step 5 of the theming guide](theming-guide.md#step-5-check-contrast-with-checkcontrast)). Do not relax the test |
+| `src/themes/bold.test.tsx`, "the shipped dark block in tokens.css (var() refs resolved against :root) passes checkContrast()" | It resolves the `var()` references of the `dark` block against `:root` and runs `checkContrast()` on the result. It fails when your dark values, or the `:root` values they refer to (for example a changed `--ds-color-gray-*`), miss a required pair | Run `checkContrast()` on your dark theme, as in the theming guide, and fix the values it reports |
 
 ### 4.3 The Storybook theme list
 
@@ -186,9 +189,11 @@ If a step fails, the most common causes are:
 
 | Symptom | Cause |
 | --- | --- |
-| `src/docs/consumerGuide.test.ts` fails | The package name in `package.json` and the imports in `docs/consumer-guide.md` differ (step 3) |
+| `src/docs/consumerGuide.test.ts` fails | The package name in `package.json` and the imports in `docs/consumer-guide.md` differ, or your rewritten Install section lacks `Use this template`, `npm run build`, `npm pack` or `starter-guide.md` (step 3) |
 | Imports of the package name do not resolve in tests or in `npm run typecheck` | `jest.config.cjs` or `tsconfig.json` still holds the old name (step 3) |
 | `tokens.test.ts` or `canvasBoards.test.ts` fails after you edit the tokens | Tests pin the old default values (step 4.2) |
+| `createTheme.test.ts` fails ("matches the non-color defaults in tokens.css") after you edit the tokens | `src/theme/defaults.ts` still holds the old weights, type scale and shape (step 4.2) |
+| A "contrast in the ... theme" test in `tokens.test.ts`, or the dark-block `checkContrast()` test in `bold.test.tsx`, fails after you edit the tokens | One of your light or dark color values misses its contrast ratio (step 4.2) |
 | `storybookThemes.test.tsx` fails after you edit `.storybook/themes.ts` | The test lists the themes (step 4.3) |
 | `npm test` fails after you delete a folder | A test reads that folder (step 5) |
 
