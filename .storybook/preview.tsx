@@ -1,13 +1,33 @@
 import type { Preview } from '@storybook/react-vite'
+import { withThemeByDataAttribute } from '@storybook/addon-themes'
 import '../src/styles/fonts.css'
 import '../src/styles/tailwind.css'
+// Opt-in demo themes (DS-12). Storybook-only: the library never loads them by itself.
+import '../src/themes/bold.css'
+import '../src/themes/bold-fonts.css'
+import './docs-theme.css'
 import { TooltipProvider } from '../src/components/Tooltip'
+import { inheritedTheme, storybookThemes, withThemeAtRender } from './themes'
+import { ThemedDocsContainer } from './ThemedDocsContainer'
 
-document.documentElement.setAttribute('data-theme', 'default')
+// A story iframe embedded in a docs page (`inline: false`) starts on the docs page's theme, not the default.
+const embeddedTheme = inheritedTheme()
 
 const preview: Preview = {
-  decorators: [(Story) => <TooltipProvider><Story /></TooltipProvider>],
+  ...(embeddedTheme ? { initialGlobals: { theme: embeddedTheme } } : {}),
+  decorators: [
+    // Applies the theme during render, so open Drawer and Dialog stories never show the default theme first.
+    withThemeAtRender,
+    // Sets data-theme on <html> (the addon's default parentSelector), so docs pages, portals and every story follow the toolbar.
+    withThemeByDataAttribute({
+      themes: storybookThemes,
+      defaultTheme: 'default',
+      attributeName: 'data-theme',
+    }),
+    (Story) => <TooltipProvider><Story /></TooltipProvider>,
+  ],
   parameters: {
+    docs: { container: ThemedDocsContainer },
     options: { storySort: { order: ['Introduction', 'Foundations', 'Components', 'Patterns'] } },
     controls: {
       matchers: {

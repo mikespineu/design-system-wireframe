@@ -66,8 +66,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `Main.dc.html` shows the DS-27 color roles, font-weight roles, every type step in `tokens.css` (incl. body-sm, body-xs, ui sizes, h4/h5), and the radius and shadow steps
     - `Form.dc.html` uses the shipped Field, Select and RadioGroup look, and no board mentions the deleted `Components.dc.html` (incl. `Tabs.dc.html`)
     - `canvasBoards.test.ts` fails on any hex outside a board's token block; canvas README audit table updated
-- [ ] **DS-64 Storybook theme switcher (addon).** Storybook-only tooling, not a design-system component: add `@storybook/addon-themes` as a devDependency and register `withThemeByDataAttribute` on `data-theme` in `.storybook/preview.tsx`, replacing the hard-coded `data-theme="default"`. Its toolbar lists `default`, `dark`, `bold` and `bold-dark`, and `.storybook/` loads the opt-in theme CSS and fonts from DS-12. Nothing ships in the package.
-  - type: build · has_ui: yes · depends_on: DS-2, DS-12 · needs_human: no · status: todo
+- [x] **DS-64 Storybook theme switcher (addon).** Storybook-only tooling, not a design-system component: add `@storybook/addon-themes` as a devDependency and register `withThemeByDataAttribute` on `data-theme` in `.storybook/preview.tsx`, replacing the hard-coded `data-theme="default"`. Its toolbar lists `default`, `dark`, `bold` and `bold-dark`, and `.storybook/` loads the opt-in theme CSS and fonts from DS-12. Nothing ships in the package.
+  - type: build · has_ui: yes · depends_on: DS-2, DS-12 · needs_human: no · status: done
   - done_when:
     - Storybook toolbar (via `@storybook/addon-themes`) switches between `default`, `dark`, `bold` and `bold-dark`; the choice persists across stories and docs pages
     - Every existing component story renders in all four themes without console errors (tested), matching the approved spec `docs/specs/Themes.md`
@@ -463,6 +463,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-64** Storybook theme switcher (addon) — https://github.com/mikespineu/design-system-wireframe/pull/103
 - **DS-65** "Create your own theme" guide — https://github.com/mikespineu/design-system-wireframe/pull/102
 - **DS-62** Docs tasks may edit canvases — https://github.com/mikespineu/design-system-wireframe/pull/101
 - **DS-12** Bold demo theme — implementation — https://github.com/mikespineu/design-system-wireframe/pull/100

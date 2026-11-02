@@ -11,6 +11,7 @@ module.exports = {
     ],
   },
   moduleNameMapper: {
+    '^storybook/test$': '<rootDir>/test/storybook-test.ts',
     '^design-system-test$': '<rootDir>/src/index.ts',
     '\\.(css|scss)$': 'identity-obj-proxy',
     '\\.(svg|png|jpg|avif)$': '<rootDir>/test/fileMock.cjs',

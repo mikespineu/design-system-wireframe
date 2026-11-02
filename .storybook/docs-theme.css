@@ -1,0 +1,22 @@
+/*
+ * Storybook-only. Docs pages follow the theme on <html> (the toolbar's data-theme). Storybook paints its docs
+ * canvas white, which would sit under a dark theme's light text, so the page, the canvas and every story frame
+ * take their ground and ink from the active theme's roles. Storybook's own blocks (prose, controls, code) switch
+ * between its light and dark themes in ThemedDocsContainer.
+ */
+html,
+body {
+  background: var(--ds-color-background);
+  color: var(--ds-color-text);
+}
+
+:root .sbdocs-wrapper,
+:root .sbdocs-preview,
+:root .sbdocs .docs-story {
+  background: var(--ds-color-background);
+  color: var(--ds-color-text);
+}
+
+:root .sbdocs-preview {
+  border-color: var(--ds-color-divider);
+}
