@@ -32,42 +32,85 @@ const themePanels = [
   { name: 'bold-dark', note: 'Indigo night with a raised surface, light violet brand, brand-colored dialog shadow.' },
 ] as const;
 
+/*
+ * Layout uses inline styles on --ds-* tokens, not Tailwind classes: Tailwind scans all of src, so a utility
+ * used only here would be added to the shipped dist/styles.css. Storybook-only code must not change the build.
+ */
+const row = { display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'var(--ds-space-3)' } as const;
+const grid = { display: 'grid', gap: 'var(--ds-space-6)', gridTemplateColumns: 'repeat(auto-fit, minmax(20rem, 1fr))' } as const;
+
 const Panel = ({ name, note, children }: { name: string; note: string; children: ReactNode }) => (
-  <figure className="m-0 flex flex-col">
-    <figcaption className="mb-2 flex justify-between font-mono text-caption text-muted">
+  <figure style={{ margin: 0, display: 'flex', flexDirection: 'column' }}>
+    <figcaption
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: 'var(--ds-space-2)',
+        font: 'var(--ds-text-caption-size) / var(--ds-text-caption-line-height) var(--ds-font-mono)',
+        color: 'var(--ds-color-text-muted)',
+      }}
+    >
       <span>{name}</span>
       <code>data-theme=&quot;{name}&quot;</code>
     </figcaption>
     <div
       data-theme={name}
       data-testid={`theme-panel-${name}`}
-      className="flex flex-1 flex-col gap-6 border border-divider bg-background p-6 font-body text-body text-text"
+      style={{
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'var(--ds-space-6)',
+        padding: 'var(--ds-space-6)',
+        border: 'var(--ds-border-width) solid var(--ds-color-divider)',
+        background: 'var(--ds-color-background)',
+        color: 'var(--ds-color-text)',
+        font: 'var(--ds-text-body-size) / var(--ds-text-body-line-height) var(--ds-font-body)',
+      }}
     >
       {children}
     </div>
-    <p className="mt-2 text-caption text-muted">{note}</p>
+    <p
+      style={{
+        margin: 'var(--ds-space-2) 0 0',
+        fontSize: 'var(--ds-text-caption-size)',
+        color: 'var(--ds-color-text-muted)',
+      }}
+    >
+      {note}
+    </p>
   </figure>
 );
 
 /** The same component set as the canvas, rendered once per theme. */
 const ComponentSet = () => (
   <>
-    <div className="flex flex-col gap-1">
-      <h3 className="font-heading text-h3 text-emphasis">Order prints</h3>
-      <p>Archival paper, shipped flat. Choose a format, then confirm.</p>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--ds-space-1)' }}>
+      <h3
+        style={{
+          margin: 0,
+          font: 'var(--ds-text-heading-weight) var(--ds-text-h3-size) / var(--ds-text-h3-line-height) var(--ds-font-heading)',
+          letterSpacing: 'var(--ds-text-h3-tracking)',
+          textTransform: 'var(--ds-text-heading-transform)' as 'none',
+          color: 'var(--ds-color-text-emphasis)',
+        }}
+      >
+        Order prints
+      </h3>
+      <p style={{ margin: 0 }}>Archival paper, shipped flat. Choose a format, then confirm.</p>
     </div>
-    <div className="flex flex-wrap gap-3">
+    <div style={row}>
       <Button variant="primary">Continue</Button>
       <Button variant="secondary">Cancel</Button>
       <Button variant="ghost">Learn more</Button>
     </div>
     <TextField label="Email" defaultValue="ada@studio.com" hint="Only used for the receipt." />
     <TextField label="Postcode" defaultValue="12" error="Enter a 5-digit postcode." />
-    <div className="flex flex-wrap gap-6">
+    <div style={{ ...row, gap: 'var(--ds-space-6)' }}>
       <Checkbox label="Print" defaultChecked />
       <Checkbox label="Framed" />
     </div>
-    <div className="flex flex-wrap items-center gap-3">
+    <div style={row}>
       <Tag variant="solid">New</Tag>
       <Tag variant="subtle">Draft</Tag>
       <Tag variant="outline">Archived</Tag>
@@ -101,7 +144,7 @@ const ComponentSet = () => (
 /** Four panels, each scoped with its own `data-theme`, so they all show at once whatever the toolbar says. */
 export const SideBySide: Story = {
   render: () => (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-4">
+    <div style={grid}>
       {themePanels.map(({ name, note }) => (
         <Panel key={name} name={name} note={note}>
           <ComponentSet />
@@ -114,12 +157,12 @@ export const SideBySide: Story = {
 /** Tab through one panel: focus order is identical in every theme, only the ring color and width change. */
 export const Keyboard: Story = {
   render: () => (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <div style={grid}>
       {themePanels.map(({ name, note }) => (
         <Panel key={name} name={name} note={note}>
           <TextField label="Email" defaultValue="ada@studio.com" />
           <Checkbox label="Print" />
-          <div className="flex gap-3">
+          <div style={row}>
             <Button variant="primary">Continue</Button>
             <Button variant="secondary">Cancel</Button>
           </div>

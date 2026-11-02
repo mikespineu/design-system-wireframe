@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import type { ReactElement } from 'react';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -62,5 +64,10 @@ describe('Themes docs page', () => {
     render(markup(SideBySide));
     await user.click(within(screen.getByTestId('theme-panel-bold')).getByRole('button', { name: 'Delete print' }));
     expect(await screen.findByRole('dialog', { name: 'Delete print?' })).toBeInTheDocument();
+  });
+
+  it('adds no Tailwind classes: Tailwind scans all of src, so any utility here would change dist/styles.css', () => {
+    const source = readFileSync(join(__dirname, 'Themes.stories.tsx'), 'utf8');
+    expect(source).not.toMatch(/class(Name)?\s*=/);
   });
 });
