@@ -11,11 +11,25 @@ How to install the design system, load its CSS, use the components and apply a t
 
 ## Install
 
-The package is `design-system-test`. React 19 is a peer dependency; `radix-ui` is installed with the package.
+The package is not on npm yet. The name `design-system-test` on the npm registry belongs to an unrelated package, so installing that name from the registry gets you the wrong code. Until this package is published under a name of its own, pick one of two routes. Imports in this guide use `design-system-test`, the `name` in `package.json`; if you renamed it, use your name instead.
+
+**Option 1: start from the template.** Click "Use this template" on GitHub and follow the [starter guide](starter-guide.md). You get your own copy of the repository, with the components, Storybook and tests, ready to rename and theme. Build it with `npm run build` and use it as in option 2, or publish it under your own name.
+
+**Option 2: install a tarball.** Build the package in a clone of this repository, pack it, and install the `.tgz` file into your app:
 
 ```bash
-npm install design-system-test react react-dom
+# in a clone of this repository
+npm ci
+npm run build   # writes dist/ (JavaScript, types, styles.css, fonts.css, themes)
+npm pack        # writes design-system-test-<version>.tgz here
+
+# in your app
+npm install /path/to/design-system-test-0.1.0.tgz react react-dom
 ```
+
+The file name is `<name>-<version>.tgz` with the values from `package.json` (a scoped name `@scope/pkg` gives `scope-pkg-<version>.tgz`). `npm pack` packs `dist/` (plus `package.json`, the README and the license), so run `npm run build` first. Rebuild and reinstall the tarball to pick up changes.
+
+React 19 is a peer dependency; `radix-ui` is installed with the package.
 
 It is ESM only (`"type": "module"`, one `import` entry) and ships its own TypeScript types. Your bundler must handle CSS imports from `node_modules` (Vite, webpack with css-loader and Next.js do).
 

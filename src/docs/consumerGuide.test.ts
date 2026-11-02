@@ -29,6 +29,23 @@ describe('consumer guide', () => {
   });
 });
 
+describe('consumer guide install', () => {
+  const install = guide.split(/^## /m).find((section) => section.startsWith('Install')) ?? '';
+  // Built from a string so a rename of the package (see docs/starter-guide.md) cannot break the syntax.
+  const npmInstallOfUnrelatedPackage = new RegExp('npm\\s+(?:install|i|add)\\s+design-system-test(?![\\w/.-])');
+
+  it('does not send readers to the unrelated npm package before it is published', () => {
+    expect(install).not.toMatch(npmInstallOfUnrelatedPackage);
+  });
+
+  it("explains today's options: the template, or a packed tarball", () => {
+    expect(install).toContain('Use this template');
+    expect(install).toContain('npm run build');
+    expect(install).toContain('npm pack');
+    expect(install).toContain('starter-guide.md');
+  });
+});
+
 describe('consumer guide exported components', () => {
   it('lists only names that src/index.ts really exports', async () => {
     const line = guide.split('\n').find((l) => l.startsWith('Exported components:')) ?? '';
