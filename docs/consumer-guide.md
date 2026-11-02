@@ -147,6 +147,8 @@ document.documentElement.dataset.theme = 'dark';
 
 ### Your own theme
 
+For a step-by-step route (pick a brand color, neutrals, fonts, radius and shadow, generate the block with `createTheme()`, check it with `checkContrast()`, ship light and dark), follow the [Create your own theme guide](theming-guide.md). The rest of this section is the by-hand version: write the block yourself.
+
 Write a block that overrides only the roles you want, and put it in your own CSS (any import order works against the library CSS because of `@layer ds`; to override the built-in `bold` or `bold-dark` blocks, import your file after `themes/bold.css`, and do not put the override in an `@layer`). Roles you leave out inherit from the default theme.
 
 ```css
