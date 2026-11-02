@@ -28,10 +28,10 @@ This session's id is `${CLAUDE_SESSION_ID}`. Write it to the job file's `session
 Job file: `status: in-progress`, `stage: build`. Run the **builder** subagent with:
 - the absolute worktree path and the task block (description, `done_when`);
 - for `has_ui: yes`: the approved spec text and the canvas path;
-- for `has_ui: no`: "do not change UI files";
+- for `has_ui: no`: "do not change UI files" (on `type: docs` tasks add: "you may edit canvases under `docs/design-system-wireframe/`, nothing else UI");
 - on a fix loop: the failure output or findings as feedback.
 
-Then: scope check (Builder may not touch specs, canvases, `.husky`, the review workflow), commit anything left uncommitted, and run the **UI guard** for `has_ui: no` tasks (skip it if this run has `--allow-ui`).
+Then: scope check (Builder may not touch specs, canvases, `.husky`, the review workflow; `docs` tasks may touch canvases under `docs/design-system-wireframe/`), commit anything left uncommitted, and run the **UI guard** for `has_ui: no` tasks (skip it if this run has `--allow-ui`; for `docs` tasks `docs/design-system-wireframe/` is exempt, see RULES.md).
 
 Note the Builder's turns and model in the timeline.
 

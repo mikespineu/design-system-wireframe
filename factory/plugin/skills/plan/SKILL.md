@@ -24,7 +24,7 @@ Run the **planner** subagent with: the absolute path of `.worktrees/plan-researc
 
 Then check its JSON yourself (deterministic, don't trust it):
 - Every task has `title`, `description`, `type` in `design | build | infra | docs`, `has_ui`, `needs_human`, `depends_on`, and 1–5 `done_when` items.
-- A UI feature has a `design` task and a `build` task that depends on it; a feature has at most 4 tasks.
+- A UI feature (a new component or a visual change) has a `design` task and a `build` task that depends on it; a change to an existing board in `docs/design-system-wireframe/` is one `docs` task with `has_ui: no`; a feature has at most 4 tasks.
 - `depends_on` names only existing roadmap IDs or keys of proposed tasks; no cycles.
 - No proposal duplicates a roadmap task (compare titles and component names, done ones too).
 

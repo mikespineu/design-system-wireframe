@@ -23,7 +23,7 @@ You implement one backlog task in its own git worktree (the absolute path is in 
 - Match the spec and canvas exactly. You can't edit the spec or the canvas; if something in them is impossible, say so in your final message.
 
 ## Non-UI tasks (`has_ui: no`)
-- Don't change components, styles, stories, Storybook config or canvases. If the task can't be done without a UI change, stop and say so in your final message; the factory stops and asks a human.
+- Don't change components, styles, stories, Storybook config or canvases. Exception: on a `type: docs` task you may edit canvases under `docs/design-system-wireframe/` (never `docs/specs/**`, `src/**`, stories or `.storybook/`). If the task can't be done without a UI change, stop and say so in your final message; the factory stops and asks a human.
 
 ## Rules
 - Never push, merge, rebase, or use `--no-verify`. Never touch `main`.

@@ -453,8 +453,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Factory
 
-- [ ] **DS-62 Docs tasks may edit canvases.** DS-58 needed a manual override: canvas-only work was a `docs` task, but the Builder scope check and the `has_ui: no` UI guard both block `docs/design-system-wireframe/**`. Let `docs` tasks edit canvases, and teach the task shapers to file canvas maintenance as `docs` and new component visuals as `design`.
-  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-62 Docs tasks may edit canvases.** DS-58 needed a manual override: canvas-only work was a `docs` task, but the Builder scope check and the `has_ui: no` UI guard both block `docs/design-system-wireframe/**`. Let `docs` tasks edit canvases, and teach the task shapers to file canvas maintenance as `docs` and new component visuals as `design`.
+  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - `factory/plugin/RULES.md`: for `type: docs` tasks, the Builder scope check and UI guard allow `docs/design-system-wireframe/**`; `src/**`, stories, `.storybook/` and `docs/specs/**` stay guarded
     - `skills/build/SKILL.md` scope check and UI guard match the rule
@@ -464,6 +464,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 ## Done
 
 - **DS-65** "Create your own theme" guide — https://github.com/mikespineu/design-system-wireframe/pull/102
+- **DS-62** Docs tasks may edit canvases — https://github.com/mikespineu/design-system-wireframe/pull/101
 - **DS-12** Bold demo theme — implementation — https://github.com/mikespineu/design-system-wireframe/pull/100
 - **DS-2** Example themes — design — https://github.com/mikespineu/design-system-wireframe/pull/97
 - **DS-58** Canvas audit & All components canvas — https://github.com/mikespineu/design-system-wireframe/pull/95
