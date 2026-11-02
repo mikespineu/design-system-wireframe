@@ -1,0 +1,5 @@
+/* Opt-in fonts for the bold and bold-dark themes: Bricolage Grotesque (heading, 800), Figtree (body and
+   label, 400/600/700) and IBM Plex Mono (mono, 400/600). All SIL Open Font License. The library never loads
+   fonts by itself: import this file once (`import 'design-system-test/themes/bold-fonts.css'`), or skip it
+   and load the same families yourself; the theme falls back to Arial Black and system-ui. */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');

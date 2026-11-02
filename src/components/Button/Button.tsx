@@ -21,7 +21,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const base =
-  'inline-flex h-control items-center justify-center rounded-md border font-label text-ui ' +
+  'inline-flex h-control items-center justify-center rounded-md border-line font-label text-ui ' +
   'cursor-pointer transition-colors duration-[120ms] ease-ds focus-visible:focus-ring ' +
   'disabled:cursor-not-allowed aria-disabled:cursor-not-allowed';
 

@@ -51,7 +51,7 @@ interface IconButtonToggleProps extends IconButtonBaseProps {
 export type IconButtonProps = IconButtonActionProps | IconButtonToggleProps;
 
 const base =
-  'inline-flex h-control w-11 items-center justify-center rounded-md border ' +
+  'inline-flex h-control w-11 items-center justify-center rounded-md border-line ' +
   'cursor-pointer transition-colors duration-[120ms] ease-ds focus-visible:focus-ring ' +
   'disabled:cursor-not-allowed aria-disabled:cursor-not-allowed';
 

@@ -9,7 +9,7 @@ describe('Input', () => {
     const ref = createRef<HTMLInputElement>();
     render(<Input ref={ref} aria-label="Name" />);
     expect(ref.current).toBeInstanceOf(HTMLInputElement);
-    expect(screen.getByRole('textbox')).toHaveClass('h-control', 'rounded-md', 'border');
+    expect(screen.getByRole('textbox')).toHaveClass('h-control', 'rounded-md', 'border-line');
   });
 
   it('accepts typing', async () => {

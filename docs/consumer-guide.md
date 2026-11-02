@@ -28,6 +28,8 @@ The package exposes three entry points (see `exports` in `package.json`):
 | `design-system-test` | The components, hooks and types (JavaScript) |
 | `design-system-test/styles.css` | Required. Tokens, component CSS and the Tailwind utilities the components use, in one file |
 | `design-system-test/fonts.css` | Optional. Loads Red Hat Mono and Red Hat Text from Google Fonts for the default look |
+| `design-system-test/themes/bold.css` | Optional. The `bold` and `bold-dark` demo themes; turn on with `data-theme="bold"` or `"bold-dark"` |
+| `design-system-test/themes/bold-fonts.css` | Optional. Loads Bricolage Grotesque, Figtree and IBM Plex Mono from Google Fonts for the bold themes |
 
 Import the stylesheet once, at your app entry, next to the React root:
 
@@ -127,7 +129,9 @@ A theme is a set of overrides of the semantic roles (colors, fonts, type scale, 
 The stylesheet contains two themes:
 
 - `default` (also applied on `:root`, so no attribute is needed): white ground, gray accents, black ink.
-- `dark`: overrides the color roles only.
+- `dark`: overrides the color roles and dims photos (`--ds-photo-filter` adds `brightness(0.85)`). Fonts, type, radius and shape stay as in `default`.
+
+Two more themes are opt-in: `bold` and `bold-dark` (`design-system-test/themes/bold.css`, fonts in `design-system-test/themes/bold-fonts.css`). `bold-dark` sets every role itself, so it works without `bold`. `themes/bold.css` is unlayered, like any consumer theme block. If you override roles of `bold` or `bold-dark` in your own CSS, import your file after `themes/bold.css`: both have the same specificity, so source order decides. An override placed inside your own `@layer` loses to `bold.css`.
 
 Set the attribute on `html` to switch the whole app:
 
@@ -143,7 +147,7 @@ document.documentElement.dataset.theme = 'dark';
 
 ### Your own theme
 
-Write a block that overrides only the roles you want, and put it in your own CSS (any import order works because of `@layer ds`). Roles you leave out inherit from the default theme.
+Write a block that overrides only the roles you want, and put it in your own CSS (any import order works against the library CSS because of `@layer ds`; to override the built-in `bold` or `bold-dark` blocks, import your file after `themes/bold.css`, and do not put the override in an `@layer`). Roles you leave out inherit from the default theme.
 
 ```css
 /* acme.css */
