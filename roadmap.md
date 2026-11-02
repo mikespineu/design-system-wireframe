@@ -73,8 +73,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Every existing component story renders in all four themes without console errors (tested), matching the approved spec `docs/specs/Themes.md`
     - Storybook-only: no new folder in `src/components/`, nothing added to `src/index.ts`, and the library build output (`dist/`) is unchanged; the addon is a devDependency only
     - A Storybook "Themes" docs page shows the four themes side by side on the same components, like the canvas
-- [ ] **DS-65 "Create your own theme" guide.** A step-by-step guide in `docs/theming-guide.md` for consumers who want their own look: pick a brand color, neutrals, fonts, radius and shadow, generate the `[data-theme]` block with `createTheme()`, add an override block for roles the generator does not cover, check it with `checkContrast()`, ship light and dark, and turn it on with `data-theme`. Uses the `bold` theme from DS-12 as the worked example.
-  - type: docs · has_ui: no · depends_on: DS-12, DS-28 · needs_human: no · status: todo
+- [x] **DS-65 "Create your own theme" guide.** A step-by-step guide in `docs/theming-guide.md` for consumers who want their own look: pick a brand color, neutrals, fonts, radius and shadow, generate the `[data-theme]` block with `createTheme()`, add an override block for roles the generator does not cover, check it with `checkContrast()`, ship light and dark, and turn it on with `data-theme`. Uses the `bold` theme from DS-12 as the worked example.
+  - type: docs · has_ui: no · depends_on: DS-12, DS-28 · needs_human: no · status: done
   - done_when:
     - Guide covers every step: choosing values, `createTheme()` input, override block, `checkContrast()`, light and dark, applying `data-theme`, loading fonts
     - Every code sample matches the real `ThemeConfig` type and runs (checked by a test that imports the samples)
@@ -453,8 +453,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Factory
 
-- [ ] **DS-62 Docs tasks may edit canvases.** DS-58 needed a manual override: canvas-only work was a `docs` task, but the Builder scope check and the `has_ui: no` UI guard both block `docs/design-system-wireframe/**`. Let `docs` tasks edit canvases, and teach the task shapers to file canvas maintenance as `docs` and new component visuals as `design`.
-  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-62 Docs tasks may edit canvases.** DS-58 needed a manual override: canvas-only work was a `docs` task, but the Builder scope check and the `has_ui: no` UI guard both block `docs/design-system-wireframe/**`. Let `docs` tasks edit canvases, and teach the task shapers to file canvas maintenance as `docs` and new component visuals as `design`.
+  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - `factory/plugin/RULES.md`: for `type: docs` tasks, the Builder scope check and UI guard allow `docs/design-system-wireframe/**`; `src/**`, stories, `.storybook/` and `docs/specs/**` stay guarded
     - `skills/build/SKILL.md` scope check and UI guard match the rule
@@ -463,6 +463,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-65** "Create your own theme" guide — https://github.com/mikespineu/design-system-wireframe/pull/102
+- **DS-62** Docs tasks may edit canvases — https://github.com/mikespineu/design-system-wireframe/pull/101
 - **DS-12** Bold demo theme — implementation — https://github.com/mikespineu/design-system-wireframe/pull/100
 - **DS-2** Example themes — design — https://github.com/mikespineu/design-system-wireframe/pull/97
 - **DS-58** Canvas audit & All components canvas — https://github.com/mikespineu/design-system-wireframe/pull/95

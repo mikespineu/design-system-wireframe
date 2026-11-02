@@ -15,7 +15,7 @@ State lives in files and git: `roadmap.md` on `main` (the backlog), one **job fi
     - Criterion
 ```
 
-- `type`: `design` (canvas + spec), or `build` / `infra` / `docs` (code).
+- `type`: `design` (new canvas + spec), or `build` / `infra` / `docs` (code). `docs` is also where maintenance of existing canvases belongs (`has_ui: no`).
 - `has_ui: yes` build tasks need an **approved spec on `main`** from the design task they depend on.
 - **Ready** means: status `todo`, every `depends_on` task is `[x]` done on main, there's no `feat/DS-n-*` branch on origin, and (for UI builds) the approved spec exists.
 - `needs_human: yes`: `/factory:next` skips it. If the user starts it explicitly, its PR needs their approval before merging.
@@ -79,10 +79,12 @@ Model per agent: use the subagent's default unless the user asked for one; then 
 
 After every Builder pass: `git -C <worktree> diff --name-only origin/main...HEAD` plus `git status --porcelain`. If any path matches `src/components/`, `src/styles/`, `*.css`, `*.stories.*`, `*.mdx`, `.storybook/`, `docs/design-system-wireframe/`, stop: block the task with the file list and the reason "has_ui: no but changes UI files; needs a design task". The user can accept it with `/factory:retry DS-n --allow-ui`, which adds `factory:needs-approval` to the PR.
 
+Exception: for `type: docs` tasks, everything under `docs/design-system-wireframe/` (canvases `*.dc.html`, `canvas.json`, its `README.md`) is exempt and does not trip the guard. Every other UI path above stays guarded for `docs` tasks, including a `*.css` or `*.mdx` file elsewhere.
+
 ## Scope checks after each subagent (deterministic, by you)
 
 - **Designer** may only change `docs/specs/**` and `docs/design-system-wireframe/**`.
-- **Builder** may not change `docs/specs/**`, `docs/design-system-wireframe/**`, `.husky/**`, or `.github/workflows/claude-code-review.yml`.
+- **Builder** may not change `docs/specs/**`, `docs/design-system-wireframe/**`, `.husky/**`, or `.github/workflows/claude-code-review.yml`. Exception: on `type: docs` tasks the Builder may change `docs/design-system-wireframe/**` (canvas maintenance); `src/**`, stories, `.storybook/` and `docs/specs/**` stay off-limits.
 - **QA** may only add or change `*.test.ts(x)` files and `.qa/**` (gitignored).
 - **Reviewer** and **Planner** change nothing.
 

@@ -1,0 +1,28 @@
+// The 24 non-status color roles the generator cannot get right for bold.
+// The status triples (success, error) stay as the generator emits them.
+export const boldColors: Record<string, string> = {
+  '--ds-color-background': '#f4f1ff',
+  '--ds-color-surface': '#ffffff',
+  '--ds-color-surface-subtle': '#ebe6fc',
+  '--ds-color-fill': '#e3dcfb',
+  '--ds-color-divider': '#d5ccf5',
+  '--ds-color-border': '#8478b8',
+  '--ds-color-disabled': '#b3aad9',
+  '--ds-color-placeholder': '#63579a',
+  '--ds-color-text-muted': '#554a8a',
+  '--ds-color-text': '#2f2766',
+  '--ds-color-text-strong': '#221b52',
+  '--ds-color-text-emphasis': '#140e3d',
+  '--ds-color-text-inverse': '#f4f1ff',
+  '--ds-color-border-strong': '#140e3d',
+  '--ds-color-icon': '#140e3d',
+  '--ds-color-focus': '#4318d1',
+  '--ds-color-overlay': 'rgb(20 14 61 / 0.6)',
+  '--ds-color-inverse': '#140e3d',
+  '--ds-color-primary': '#4318d1',
+  '--ds-color-primary-hover': '#3510a8',
+  '--ds-color-primary-contrast': '#ffffff',
+  '--ds-color-info': '#2f2766',
+  '--ds-color-info-border': '#d5ccf5',
+  '--ds-color-info-bg': '#ebe6fc',
+}

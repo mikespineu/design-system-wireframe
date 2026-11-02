@@ -17,7 +17,7 @@ Take a task from `roadmap.md` to a merged PR with as little hand-holding as poss
 | Orchestration | The main session follows the skill and `RULES.md`; the `planner`, `designer`, `builder`, `qa` and `reviewer` subagents do the creative work. |
 | Fix loops | Max 2 per stage, then blocked. `/factory:retry DS-n opus` for a stronger model. |
 | Design | Only design tasks make a canvas and a spec. Canvas published to claude.ai (stable URL). The human always approves. |
-| UI guard | `has_ui: no` builds that touch UI paths stop and ask; `--allow-ui` accepts and requires approval. |
+| UI guard | `has_ui: no` builds that touch UI paths stop and ask; `--allow-ui` accepts and requires approval. `docs` tasks may edit canvases (`docs/design-system-wireframe/**`) without tripping it. |
 | Merge | Every task ends in a PR; the factory squash-merges on green checks (≥ 1 check), plus `factory:approved` where required. |
 | State | `roadmap.md` (via PRs), job files `factory/jobs/DS-n.md`, branches, PRs, labels. |
 | Watching | `npm run factory:status` keeps a status page live (10 s refresh); `/factory:status` for a snapshot. Each session shows its own run live. |
@@ -61,7 +61,7 @@ docs/design-system-wireframe/*.dc.html   # canvases
 
 **Design (`/factory:design DS-n`):** claim (branch via GitHub API) → worktree + `npm ci` → job file → Designer subagent (scope: specs and canvases only) → publish the canvas with the Artifact tool (same URL on revisions) → deterministic spec check (fields, sections, tokens exist, canvas is valid HTML; max 2 loops) → draft PR labeled `factory:needs-approval` → waiting for the human. `/factory:design DS-n <feedback>` revises; `/factory:approve DS-n` stamps `approved: yes` with name and date, ticks the roadmap, labels `factory:approved`, and merges on green checks.
 
-**Build (`/factory:build DS-n`):** refuses on the wrong type, open deps, or (UI) no approved spec unchanged since approval → claim → worktree → job file → Builder (TDD; scope excludes specs, canvases, hooks) → UI guard (`has_ui: no`) → gates (lint, typecheck, test with ≥ 80 % coverage, build-storybook) → QA (Storybook on the worktree's port; may only add tests) → Reviewer (read-only; JSON verdict) → tick roadmap + Done entry → PR → wait for checks → merge (approval label if required) → clean up. Each failing stage loops back to the Builder at most twice.
+**Build (`/factory:build DS-n`):** refuses on the wrong type, open deps, or (UI) no approved spec unchanged since approval → claim → worktree → job file → Builder (TDD; scope excludes specs, canvases, hooks; `docs` tasks may edit canvases) → UI guard (`has_ui: no`) → gates (lint, typecheck, test with ≥ 80 % coverage, build-storybook) → QA (Storybook on the worktree's port; may only add tests) → Reviewer (read-only; JSON verdict) → tick roadmap + Done entry → PR → wait for checks → merge (approval label if required) → clean up. Each failing stage loops back to the Builder at most twice.
 
 **Blocking:** commit, push, draft PR with `factory:blocked`, a comment with the reason, next step and last output, and the job file updated. `/factory:retry` resumes from that stage.
 

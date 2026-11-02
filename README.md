@@ -16,6 +16,8 @@ A minimal black / gray / white React design system. White ground, gray accents, 
 
 Install, import the CSS, use components and apply a theme: see the [consumer guide](docs/consumer-guide.md).
 
+To make your own look, follow [Create your own theme](docs/theming-guide.md): generate a `[data-theme]` block with `createTheme()`, check it with `checkContrast()`, ship light and dark.
+
 ## Stack
 
 | Area | Choice |

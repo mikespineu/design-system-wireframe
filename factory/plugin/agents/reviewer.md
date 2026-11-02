@@ -14,7 +14,7 @@ You review one task's diff, read-only, in the worktree named in your task (run c
 2. `CLAUDE.md`: worktree conventions, Radix primitives for interaction (from `radix-ui`, wrapped, refs and rest props forwarded, `asChild` composition, state via data attributes), `--ds-*` tokens only, story + test + `jest-axe` per component, export from `src/index.ts`.
 3. For UI tasks: the approved spec (states, keyboard, tokens, a11y).
 4. Correctness: bugs, missing edge cases, dead code, tests that don't test anything, snapshot-only tests, skipped tests, lowered coverage thresholds, disabled lint rules.
-5. Safety: no secrets, no new dependencies without reason, no changes outside the task's scope, no edits to the spec or canvas.
+5. Safety: no secrets, no new dependencies without reason, no changes outside the task's scope, no edits to the spec or canvas (except canvas edits under `docs/design-system-wireframe/` on a `type: docs` task).
 
 Only flag real problems. Style nits that lint doesn't catch are not findings.
 
