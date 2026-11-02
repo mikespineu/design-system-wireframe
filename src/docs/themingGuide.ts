@@ -1,5 +1,5 @@
 /** GitHub location of the docs folder, used to resolve relative links of `docs/theming-guide.md`. */
-export const GUIDE_DOCS_BASE = 'https://github.com/mikespineu/design-system-test';
+export const GUIDE_DOCS_BASE = 'https://github.com/mikespineu/design-system-wireframe';
 
 const isExternal = (href: string) => /^([a-z][a-z0-9+.-]*:|\/\/|#)/i.test(href);
 
@@ -13,7 +13,8 @@ function resolveHref(href: string): string {
 /**
  * Prepares `docs/theming-guide.md` for the Storybook docs page without changing the file, so it keeps
  * working on GitHub: strips the `<!-- sample -->` / `<!-- excerpt -->` HTML comments and rewrites
- * relative links to absolute GitHub URLs. In-page `#anchor` links and links inside code fences stay as they are.
+ * relative links to absolute GitHub URLs, and turns `- [ ]` task-list items into plain bullets (Storybook would render
+ * them as unlabelled checkboxes, an axe `label` violation). In-page `#anchor` links and links inside code fences stay as they are.
  */
 export function prepareGuideForStorybook(markdown: string): string {
   let inFence = false;
@@ -26,6 +27,7 @@ export function prepareGuideForStorybook(markdown: string): string {
       }
       if (inFence) return line;
       return line
+        .replace(/^(\s*)([-*+])\s+\[[ xX]\]\s+/, '$1$2 ')
         .replace(/^\s*<!--.*?-->\s*$/, '')
         .replace(/<!--.*?-->/g, '')
         .replace(/(\[[^\]]*\])\(([^)\s]+)\)/g, (_m, text: string, href: string) => `${text}(${resolveHref(href)})`);

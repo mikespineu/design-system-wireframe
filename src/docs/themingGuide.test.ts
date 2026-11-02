@@ -38,6 +38,19 @@ describe('prepareGuideForStorybook', () => {
     for (const m of prose.matchAll(/\]\(([^)\s]+)\)/g)) expect(m[1]).toMatch(/^(#|https:\/\/)/);
   });
 
+  it('turns task-list items into plain bullets', () => {
+    expect(prepareGuideForStorybook('- [ ] one\n- [x] two\n  * [X] three\n- [link](#a)')).toBe(
+      '- one\n- two\n  * three\n- [link](#a)',
+    );
+  });
+
+  it('leaves no task-list markers in the real guide output', () => {
+    expect(guide).toMatch(/^- \[ \] /m);
+    const out = prepareGuideForStorybook(guide);
+    expect(out).not.toMatch(/^\s*[-*+]\s+\[[ xX]\]/m);
+    expect(out).toContain('- Brand, neutral, fonts, radius and shadow chosen (step 1)');
+  });
+
   it('does not alter code blocks', () => {
     const fences = (s: string) => s.match(/```[\s\S]*?```/g);
     expect(fences(prepareGuideForStorybook(guide))).toEqual(fences(guide));
