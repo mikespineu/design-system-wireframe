@@ -8,10 +8,61 @@ Live canvas: https://claude.ai/artifact/4R5XwSAJ1Hj8gTqgLdwTmK
 
 | File | Contents |
 | --- | --- |
-| `Main.dc.html` | Foundations — color, typography, spacing, shape & line, photography |
-| `Components.dc.html` | Buttons, inputs, selection controls, tags, navigation, cards, feedback, table |
+| `Main.dc.html` | Foundations: color, typography, spacing, shape and line, photography |
+| `AllComponents.dc.html` | Every component exported from `src/index.ts` in its key states, drawn with the current `--ds-*` role tokens |
 | `Form.dc.html` | Example contact form with live validation (interactive) |
+| `Textarea.dc.html` | Textarea design (DS-3) |
+| `Slider.dc.html` | Slider design (DS-23) |
+| `Dialog.dc.html` | Dialog design (DS-19) |
+| `Checkbox.dc.html` | Checkbox and CheckboxGroup design (DS-13) |
+| `Toggle.dc.html` | Switch, SegmentedControl and TileGroup design (DS-5) |
+| `Theming.dc.html` | Theme contract and knobs: roles, color, fonts, type scale, radius, shadow, dark (DS-26) |
+| `RadioGroup.dc.html` | RadioGroup design (DS-15) |
+| `InfoTip.dc.html` | InfoTip, Tooltip and Popover design (DS-41) |
+| `Icon.dc.html` | Icon system design (DS-46) |
+| `Tabs.dc.html` | Tabs design (DS-21) |
+| `Layout.dc.html` | Stack and Grid design (DS-35) |
+| `Select.dc.html` | Select design (DS-17) |
+| `Button.dc.html` | Button, IconButton and ButtonGroup design (DS-32) |
+| `Toast.dc.html` | Toast design (DS-39) |
+| `Drawer.dc.html` | Drawer design (DS-44) |
+| `Typography.dc.html` | Heading and body type styles, shipped as Tailwind utilities (DS-37) |
 | `canvas.json` | Canvas layout (artboard sizes and positions) |
+
+### Audit
+
+DS-58 audited every board against `src/index.ts`, `src/components/*` and `src/styles/tokens.css` (the DS-27 role tokens). Result: `Components.dc.html` was deleted, `AllComponents.dc.html` was added, three small token fixes were made, and the rest is flagged below.
+
+Common to every board except Theming: colors are written as hex (`#000000`, `#E0E0E0`, ...) instead of `var(--ds-*)` roles, because the boards predate DS-27. Every hex still equals a value of the default theme (checked against `tokens.css`), so the boards are visually correct; they just do not follow a theme. Not fixed: rewriting ~10k lines of boards is out of scope. `AllComponents.dc.html` reads every value through `var(--ds-*)`.
+
+Fixed means edited in this task. Flag means left as is and noted here. Shipped component(s) are the exports of `src/index.ts`.
+
+| Board | Shipped component(s) | Stale items | Keep / Fix |
+| --- | --- | --- | --- |
+| `Main.dc.html` | none (foundations, `tokens.css`) | **Fixed:** the "Shape & line" snippet named `--ds-shadow`, `--ds-border` and `--ds-border-strong`, which do not exist; it now lists the real tokens (`--ds-radius`, `--ds-shadow-sm/md/lg`, `--ds-border-width(-strong)`, `--ds-color-divider/border/border-strong`, `--ds-focus-width/offset`, `--ds-color-focus`, `--ds-control-height`, `--ds-motion`). **Flag:** no role layer (the 30 color roles such as `text-strong`, `text-emphasis`, `border-strong`, `icon`, `focus`, `overlay`, `inverse`, `primary-*`; Theming has them); gray-800 is labeled only "Hover on black" (roles `primary-hover`, `text-strong`) and black only "Ink" (role `text-emphasis`; `--ds-color-ink` is a deprecated alias); type list omits body-sm 15/24, body-xs 14/1.5, ui 14/20, ui-sm 12/16, ui-xs 11/16 and the h4/h5 steps; no font-weight roles; radius and shadow steps (`-sm/-md/-lg/-full`) not shown. Palette hexes, status colors, 9 spacing steps and display to caption sizes all match `tokens.css`. | Keep; fixed + flag |
+| `AllComponents.dc.html` | all 25 components exported from `src/index.ts` | New. Not stale by construction: `var(--ds-*)` only. | Keep |
+| `Form.dc.html` | none (pattern); would use Field, TextField, Select, RadioGroup, Checkbox, Button, Alert | Hand-built with native `<input>`, `<select>` and 20 px radios and hex colors, not the shipped controls; error icons use stroke 1.75 (system uses 1.5 or 2). Predates Select, RadioGroup and Field. | Keep; flag (rebuild on shipped components) |
+| `Textarea.dc.html` | Textarea, TextareaField, TextareaCounter | Hex colors only. States, sizes (2/4/8 rows), resize and counter match the code. | Keep; flag (hex) |
+| `Slider.dc.html` | Slider, SliderField | Hex colors only. Shows rejected directions B, C and D as design record; shipped is A Hairline. | Keep; flag (hex) |
+| `Dialog.dc.html` | Dialog, DialogClose | **Fixed:** overlay row cited `color-mix` of `--ds-color-ink`; now `--ds-color-overlay`. Hex colors elsewhere. | Keep; fixed + flag (hex) |
+| `Checkbox.dc.html` | Checkbox, CheckboxGroup | Hex colors only. Sizes, states and group match the code. | Keep; flag (hex) |
+| `Toggle.dc.html` | Switch, SegmentedControl, TileGroup (ChoiceGroup is internal, not exported) | Hex colors only. The "Cards" label is a sample segment name, not a component. | Keep; flag (hex) |
+| `Theming.dc.html` | `createTheme`, role exports (`src/theme`, `src/styles/roles.ts`) | None found: already reads `var(--ds-*)` roles; every token it names exists in `tokens.css`. Hex values are the example themes (Orchard, dark) by design. | Keep |
+| `RadioGroup.dc.html` | RadioGroup, RadioGroupItem | Hex colors only. The 50% circular radio is the "Alternative · not proposed" mock; shipped radios are square (`--ds-radius-full` is 0). | Keep; flag (hex) |
+| `InfoTip.dc.html` | InfoTip, Tooltip, TooltipProvider, Popover | Hex colors only. The 20 px radius is a touch-target overlay, not component shape. | Keep; flag (hex) |
+| `Icon.dc.html` | Icon, createIcon, IconProvider (11 private default glyphs) | Hex colors only. Glyph count, sizes (12/16/20) and strokes (1.5/2) match `glyphs.tsx` and `constants.ts`. | Keep; flag (hex) |
+| `Tabs.dc.html` | Tabs | Hex colors only. Line 478 mentions the underline mock "in Components.dc.html": that file is now deleted, so the sentence is historical (the underline was rejected; shipped Tabs reuse the segmented and tile looks). Left as is. | Keep; flag (dangling reference) |
+| `Layout.dc.html` | Stack, Grid | Hex colors only. Gaps, columns, alignments and breakpoints match the code. | Keep; flag (hex) |
+| `Select.dc.html` | Select, SelectField | Hex colors only. | Keep; flag (hex) |
+| `Button.dc.html` | Button, IconButton, ButtonGroup | Hex colors only. Variants, loading, pressed and attached/spaced groups match the code. | Keep; flag (hex) |
+| `Toast.dc.html` | ToastProvider, useToast, Toaster | Hex colors only. Width 384, severities and 2 px error border match the code. | Keep; flag (hex) |
+| `Drawer.dc.html` | Drawer, DrawerClose | **Fixed:** overlay row cited `color-mix` of `--ds-color-ink`; now `--ds-color-overlay`. Hex colors elsewhere. | Keep; fixed + flag (hex) |
+| `Typography.dc.html` | none (Tailwind utilities `heading-*` and `body-*` in `tailwind.css`, DS-38) | Hex colors only. Correctly shows classes, not components. | Keep; flag (hex) |
+| `Components.dc.html` (deleted) | none | Showed the unbuilt Cards and Table; checkbox, radio and switch as native 20 px controls (shipped: 24 px, 2 px strong border; switch 48 x 24); Tabs as an underline (rejected); an inverse-fill snackbar (shipped Toast differs); pre-DS-27 hex colors. | Deleted; replaced by `AllComponents.dc.html` |
+
+Components with no dedicated board: Alert, Breadcrumb, Tag and Badge, Input, Field and TextField. They were only drawn on the deleted `Components.dc.html`; `AllComponents.dc.html` is now their canvas. A spec-level board for them is a separate design task.
+
+Historical mentions of `Components.dc.html` left as they are: `docs/specs/Tabs.md`, `docs/specs/Toast.md`, `docs/specs/Textarea.md` and the `Tabs.dc.html` note above.
 
 ## Factory status
 
@@ -111,15 +162,19 @@ Tokens: `--ds-color-{info,success,error}`, `-border`, `-bg`. An invalid field ge
 ## Shape & line
 
 ```css
---ds-radius: 0;
---ds-shadow: none; /* depth = borders + gray fills */
---ds-border: 1px solid #E0E0E0;
---ds-border-strong: 1px solid #000000;
---ds-focus: 2px solid #000000; /* outline-offset: 2px */
+--ds-radius: 0;                 /* --ds-radius-sm | -md | -lg | -full default to it */
+--ds-shadow-sm: none;           /* also -md, -lg; depth = borders + gray fills */
+--ds-border-width: 1px;
+--ds-border-width-strong: 2px;
+--ds-color-divider: #E0E0E0;    /* hairline */
+--ds-color-border: #C7C7C7;     /* control border */
+--ds-color-border-strong: #000000;
+--ds-focus-width: 2px;          /* --ds-focus-offset: 2px; --ds-color-focus: #000000 */
+--ds-control-height: 44px;
 --ds-motion: 120ms cubic-bezier(.2, 0, 0, 1);
 ```
 
-Controls are 44 px tall at default size.
+Controls are 44 px tall at default size (`--ds-control-height`).
 
 ## Photography
 

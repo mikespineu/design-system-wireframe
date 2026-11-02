@@ -66,10 +66,24 @@ Canvases are `*.dc.html` files in [`docs/design-system-wireframe/`](docs/design-
 | File | Contents |
 | --- | --- |
 | [`Main.dc.html`](docs/design-system-wireframe/Main.dc.html) | Foundations: color, typography, spacing, shape and line, photography |
-| [`Components.dc.html`](docs/design-system-wireframe/Components.dc.html) | Buttons, inputs, selection controls, tags, navigation, cards, feedback, table |
-| [`Form.dc.html`](docs/design-system-wireframe/Form.dc.html) | Example contact form with live validation |
+| [`AllComponents.dc.html`](docs/design-system-wireframe/AllComponents.dc.html) | Every component exported from `src/index.ts` in its key states, drawn with the current `--ds-*` role tokens |
+| [`Form.dc.html`](docs/design-system-wireframe/Form.dc.html) | Example contact form with live validation (interactive) |
 | [`Textarea.dc.html`](docs/design-system-wireframe/Textarea.dc.html) | Textarea design (DS-3) |
 | [`Slider.dc.html`](docs/design-system-wireframe/Slider.dc.html) | Slider design (DS-23) |
+| [`Dialog.dc.html`](docs/design-system-wireframe/Dialog.dc.html) | Dialog design (DS-19) |
+| [`Checkbox.dc.html`](docs/design-system-wireframe/Checkbox.dc.html) | Checkbox and CheckboxGroup design (DS-13) |
+| [`Toggle.dc.html`](docs/design-system-wireframe/Toggle.dc.html) | Switch, SegmentedControl and TileGroup design (DS-5) |
+| [`Theming.dc.html`](docs/design-system-wireframe/Theming.dc.html) | Theme contract and knobs: roles, color, fonts, type scale, radius, shadow, dark (DS-26) |
+| [`RadioGroup.dc.html`](docs/design-system-wireframe/RadioGroup.dc.html) | RadioGroup design (DS-15) |
+| [`InfoTip.dc.html`](docs/design-system-wireframe/InfoTip.dc.html) | InfoTip, Tooltip and Popover design (DS-41) |
+| [`Icon.dc.html`](docs/design-system-wireframe/Icon.dc.html) | Icon system design (DS-46) |
+| [`Tabs.dc.html`](docs/design-system-wireframe/Tabs.dc.html) | Tabs design (DS-21) |
+| [`Layout.dc.html`](docs/design-system-wireframe/Layout.dc.html) | Stack and Grid design (DS-35) |
+| [`Select.dc.html`](docs/design-system-wireframe/Select.dc.html) | Select design (DS-17) |
+| [`Button.dc.html`](docs/design-system-wireframe/Button.dc.html) | Button, IconButton and ButtonGroup design (DS-32) |
+| [`Toast.dc.html`](docs/design-system-wireframe/Toast.dc.html) | Toast design (DS-39) |
+| [`Drawer.dc.html`](docs/design-system-wireframe/Drawer.dc.html) | Drawer design (DS-44) |
+| [`Typography.dc.html`](docs/design-system-wireframe/Typography.dc.html) | Heading and body type styles, shipped as Tailwind utilities (DS-37) |
 
 [`canvas.json`](docs/design-system-wireframe/canvas.json) holds the artboard layout; see the folder's [README](docs/design-system-wireframe/README.md).
 

@@ -117,10 +117,12 @@ a{color:#000000}a:hover{color:#595959}
 <div style="display: flex; flex-direction: column; gap: 12px"><div style="height: 96px; border: 2px solid #000000; outline: 2px solid #000000; outline-offset: 3px"></div><span style="font-family: 'Red Hat Mono', monospace; font-size: 12px">focus · 2px + 2px offset</span></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 12px; padding: 24px; background: #F7F7F7; font-family: 'Red Hat Mono', monospace; font-size: 13px; line-height: 1.7; color: #262626">
-<span>--ds-radius: 0;</span>
-<span>--ds-shadow: none;  /* depth = borders + gray fills */</span>
-<span>--ds-border: 1px solid #E0E0E0;</span>
-<span>--ds-border-strong: 1px solid #000000;</span>
+<span>--ds-radius: 0;  /* -sm, -md, -lg, -full all default to it */</span>
+<span>--ds-shadow-sm | -md | -lg: none;  /* depth = borders + gray fills */</span>
+<span>--ds-border-width: 1px;  --ds-border-width-strong: 2px;</span>
+<span>--ds-color-divider (#E0E0E0) | --ds-color-border (#C7C7C7) | --ds-color-border-strong (#000000)</span>
+<span>--ds-focus-width: 2px;  --ds-focus-offset: 2px;  --ds-color-focus: #000000;</span>
+<span>--ds-control-height: 44px;</span>
 <span>--ds-motion: 120ms cubic-bezier(.2, 0, 0, 1);</span>
 </div>
 </div>
