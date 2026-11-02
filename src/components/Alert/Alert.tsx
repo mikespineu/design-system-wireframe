@@ -33,7 +33,7 @@ const config: Record<
   info: {
     icon: "info",
     strokeWidth: 1.5,
-    box: "border border-info-border bg-info-bg text-info",
+    box: "border-line border-info-border bg-info-bg text-info",
     titleWeight: "",
     body: "text-text",
     role: "status",
@@ -41,7 +41,7 @@ const config: Record<
   success: {
     icon: "success",
     strokeWidth: 2,
-    box: "border border-success-border bg-success-bg text-success",
+    box: "border-line border-success-border bg-success-bg text-success",
     titleWeight: "",
     body: "text-text",
     role: "status",
@@ -49,7 +49,7 @@ const config: Record<
   error: {
     icon: "warning",
     strokeWidth: 2,
-    box: "border border-error-border bg-error-bg text-error",
+    box: "border-line border-error-border bg-error-bg text-error",
     titleWeight: "font-bold",
     body: "text-text-strong",
     role: "alert",

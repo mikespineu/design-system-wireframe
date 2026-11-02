@@ -169,6 +169,16 @@
 @utility text-icon {
   color: var(--ds-color-icon);
 }
+/* Border width follows the theme roles: border-line = --ds-border-width (1px, bold 2px),
+   border-line-strong = --ds-border-width-strong (2px, bold 3px). Use these, never `border` or `border-2`. */
+@utility border-line {
+  border-style: solid;
+  border-width: var(--ds-border-width);
+}
+@utility border-line-strong {
+  border-style: solid;
+  border-width: var(--ds-border-width-strong);
+}
 @utility border-strong {
   border-color: var(--ds-color-border-strong);
 }

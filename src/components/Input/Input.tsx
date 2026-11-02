@@ -117,14 +117,14 @@ export const Field = ({ label, hint, error, disabled, required, id, className, c
 };
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  /** Mark invalid without a Field (Field sets this for you). 2px error border. */
+  /** Mark invalid without a Field (Field sets this for you). strong (--ds-border-width-strong) error border. */
   invalid?: boolean;
 }
 
 const inputBase =
-  'box-border h-control w-full rounded-md border border-border bg-surface px-3 font-sans text-body text-emphasis ' +
+  'box-border h-control w-full rounded-md border-line border-border bg-surface px-3 font-sans text-body text-emphasis ' +
   'placeholder:text-placeholder transition-colors duration-[120ms] ease-ds focus-visible:focus-ring ' +
-  'aria-[invalid=true]:border-2 aria-[invalid=true]:border-error ' +
+  'aria-[invalid=true]:border-line-strong aria-[invalid=true]:border-error ' +
   'disabled:cursor-not-allowed disabled:border-divider disabled:bg-surface-subtle disabled:text-placeholder';
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(({ invalid, className, ...rest }, ref) => {

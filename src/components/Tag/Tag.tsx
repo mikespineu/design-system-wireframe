@@ -22,10 +22,10 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
 const base = 'inline-flex items-center rounded-sm font-label text-ui-sm font-normal';
 
 const variants: Record<TagVariant, string> = {
-  solid: 'border border-transparent bg-primary text-primary-contrast',
-  subtle: 'border border-transparent bg-fill text-text-strong',
-  outline: 'border border-strong bg-transparent text-emphasis',
-  neutral: 'border border-border bg-transparent text-text-strong',
+  solid: 'border-line border-transparent bg-primary text-primary-contrast',
+  subtle: 'border-line border-transparent bg-fill text-text-strong',
+  outline: 'border-line border-strong bg-transparent text-emphasis',
+  neutral: 'border-line border-border bg-transparent text-text-strong',
 };
 
 const sizes: Record<TagSize, string> = {
