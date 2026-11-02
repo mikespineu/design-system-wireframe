@@ -1,6 +1,6 @@
 # Component build plan
 
-Source of truth: `docs/design-system-wireframe/Components.dc.html` (visual spec, sections 01–06), `docs/design-system-wireframe/README.md` (tokens, Tailwind utilities), `src/styles/tokens.css`.
+Source of truth: `docs/design-system-wireframe/AllComponents.dc.html` (every shipped component in its key states) and the per-component boards in the same folder, `docs/design-system-wireframe/README.md` (tokens, Tailwind utilities), `src/styles/tokens.css`.
 Rules: `CLAUDE.md` (worktrees, Radix for interaction, `--ds-*` tokens, story + test + jest-axe per component).
 
 ## How agents use this file
@@ -8,7 +8,7 @@ Rules: `CLAUDE.md` (worktrees, Radix for interaction, `--ds-*` tokens, story + t
 1. Pick the first unchecked task whose **Deps** are all merged to `main`. Skip tasks already claimed.
 2. Claim it: replace `—` in **Owner** with your agent name and open a one-line PR to `main` containing only that edit, or ask the user to do so. Do not start before the claim is on `main`.
 3. `git worktree add .worktrees/feat-<name> -b feat/<name> main`, then `npm ci`.
-4. Open the spec section in `Components.dc.html` and match every state shown (Default / Hover / Focus / Disabled / Error ...).
+4. Open the component's board in `docs/design-system-wireframe/` (and its section in `AllComponents.dc.html` if shipped) and match every state shown (Default / Hover / Focus / Disabled / Error ...).
 5. Build to the Definition of Done below. One component per PR, one PR per worktree.
 6. In the same PR, tick the box here. Remove the worktree after merge.
 

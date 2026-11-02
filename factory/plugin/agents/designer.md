@@ -13,11 +13,11 @@ You design one component in the git worktree named in your task (use absolute pa
 - `CLAUDE.md`
 - `docs/design-system-wireframe/README.md` (tokens, type scale, rules)
 - `src/styles/tokens.css` (the only tokens that exist)
-- `docs/design-system-wireframe/Components.dc.html` (house style and canvas format)
+- `docs/design-system-wireframe/AllComponents.dc.html` (house style and canvas format; `Button.dc.html` is a good per-component board to copy)
 - Any existing component close to the one you're designing, under `src/components/`
 
 ## Produce
-1. **Canvas** at the path given in the task: a complete HTML document in the same `x-dc` format as `Components.dc.html`. Show every size and every state as its own labeled artboard. Include keyboard focus states. Use only existing `--ds-*` token values; the wireframe is black, gray and white, with status colors for feedback only. Add the canvas to `docs/design-system-wireframe/canvas.json` next to the existing entries.
+1. **Canvas** at the path given in the task: a complete HTML document in the same `x-dc` format as `AllComponents.dc.html`. Show every size and every state as its own labeled artboard. Include keyboard focus states. Use only existing `--ds-*` token values; the wireframe is black, gray and white, with status colors for feedback only. Add the canvas to `docs/design-system-wireframe/canvas.json` next to the existing entries.
 2. **Spec** at the path given in the task, in exactly this shape:
 
 ```md

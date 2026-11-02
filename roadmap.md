@@ -409,8 +409,8 @@ Each task carries its fields in an indented line, read by the [software factory]
   - done_when:
     - Listing meets every submission requirement listed in DS-50
     - Submission sent by the user; link or reference recorded in the job file
-- [ ] **DS-58 Canvas audit & All components canvas.** Audit every `docs/design-system-wireframe/*.dc.html` against `src/components` and `tokens.css`. Add `AllComponents.dc.html` showing every shipped component in its key states with current role tokens. Keep the per-component boards. Delete `Components.dc.html` (it shows the unbuilt Cards and Table).
-  - type: docs · has_ui: no · depends_on: – · needs_human: yes · status: todo
+- [x] **DS-58 Canvas audit & All components canvas.** Audit every `docs/design-system-wireframe/*.dc.html` against `src/components` and `tokens.css`. Add `AllComponents.dc.html` showing every shipped component in its key states with current role tokens. Keep the per-component boards. Delete `Components.dc.html` (it shows the unbuilt Cards and Table).
+  - type: docs · has_ui: no · depends_on: – · needs_human: yes · status: done
   - done_when:
     - Canvas README has an audit table: board → shipped component(s), stale items, keep/fix
     - `AllComponents.dc.html` shows every component exported from `src/index.ts` and nothing unshipped
@@ -450,6 +450,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-58** Canvas audit & All components canvas — https://github.com/mikespineu/design-system-wireframe/pull/95
 - **DS-48** Icon override props in components — implementation — https://github.com/mikespineu/design-system-wireframe/pull/89
 - **DS-27** Theme token foundation — implementation — https://github.com/mikespineu/design-system-wireframe/pull/88
 - **DS-47** Icon API & default glyphs — implementation — https://github.com/mikespineu/design-system-wireframe/pull/82
