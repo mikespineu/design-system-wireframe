@@ -77,7 +77,7 @@ The build task (DS-4) is ready once the approved spec is on `main`.
 | Stage | What happens | If it fails |
 | --- | --- | --- |
 | Builder | TDD in `.worktrees/feat-DS-4-…`, from the approved spec if the task has UI | – |
-| UI guard | `has_ui: no` tasks stop if they touch UI files | blocked; `/factory:retry DS-n --allow-ui` accepts it |
+| UI guard | `has_ui: no` tasks stop if they touch UI files (`docs` tasks may edit canvases in `docs/design-system-wireframe/`) | blocked; `/factory:retry DS-n --allow-ui` accepts it |
 | Gates | lint, typecheck, test (coverage ≥ 80 %), build-storybook | back to Builder, max 2 loops |
 | QA | Storybook vs spec and canvas, keyboard, axe; may add tests | back to Builder, max 2 loops |
 | Reviewer | diff vs `done_when`, spec and `CLAUDE.md` | back to Builder, max 2 loops |
