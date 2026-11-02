@@ -339,8 +339,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - The Storybook section explains how to run it locally (`npm run storybook`, per-worktree port) and links the deployed Storybook if `vercel.json` defines one
     - Screenshots of the Storybook Introduction page, the factory status page and one Claude Design canvas are committed in `docs/images/readme/` (PNG, ≤ 500 KB each) and embedded in their sections, each with descriptive alt text
     - Every skill, path, image and command named in the README exists in the repo (all relative links resolve)
-- [ ] **DS-66 Starter guide & install accuracy.** Write `docs/starter-guide.md`: start from 'Use this template', rename, make your own theme the default, decide what to keep (factory, canvases, specs, workflows), and get to a green build. Fix the consumer guide so it no longer sends readers to the unrelated `design-system-test` npm package before DS-59 ships.
-  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-66 Starter guide & install accuracy.** Write `docs/starter-guide.md`: start from 'Use this template', rename, make your own theme the default, decide what to keep (factory, canvases, specs, workflows), and get to a green build. Fix the consumer guide so it no longer sends readers to the unrelated `design-system-test` npm package before DS-59 ships.
+  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - `docs/starter-guide.md` takes a new owner from 'Use this template' to a passing `npm ci && npm run lint && npm run typecheck && npm test && npm run build-storybook`, covering renaming `name`/`repository` in `package.json` and making their theme the default (`:root` default in `src/styles/tokens.css`, the Storybook theme list in `.storybook/themes.ts`, generating the theme via `docs/theming-guide.md`)
     - It lists every workflow in `.github/workflows/` with the secrets or variables it needs and how to disable it; says `release.yml` is inert until `NPM_PUBLISH_ENABLED` is set and `storybook-vercel.yml` fails on every push without the Vercel secrets
