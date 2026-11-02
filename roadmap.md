@@ -293,6 +293,13 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Matches the approved spec on every side and size
     - Focus moves in on open and back to the trigger on close; Escape and overlay click close
     - Story per side and state, keyboard story, open/closed stories, `jest-axe` test, exported from `src/index.ts`
+- [ ] **DS-72 Fix failing RadioGroup & Toast story play checks.** Two story `play` functions fail in every theme, and failed before DS-64 too: `components-radiogroup--keyboard` (after Tab then ArrowDown, "Express" stays `aria-checked="false"`, so `toBeChecked` fails) and `components-toast--reduced-motion` (`expected false to be true` near `Toast.stories.tsx:287`). Find out for each one whether the component or the story is wrong, and fix it. Radix `RadioGroup` should check the item that gets focus from an arrow key; Toast should follow `prefers-reduced-motion` as `docs/specs/Toast.md` describes.
+  - type: build · has_ui: yes · depends_on: DS-15, DS-39 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved specs `docs/specs/RadioGroup.md` and `docs/specs/Toast.md` (keyboard selection and reduced motion)
+    - `components-radiogroup--keyboard` and `components-toast--reduced-motion` play functions pass in Storybook with no console errors, in all four themes
+    - Jest tests with `userEvent` cover the fixed behavior (arrow keys check the focused radio; toast under reduced motion), with a `jest-axe` check
+    - If the cause was in the story, not the component, the PR says so and the component is unchanged
 
 ### Epic: Publishing
 
@@ -340,8 +347,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - It names which of `factory/`, `roadmap.md`, `CLAUDE.md`/`AGENTS.md`, `docs/specs/` and `docs/design-system-wireframe/` can be deleted without breaking lint, typecheck, `npm test` or the Storybook build, each claim verified by deleting it in the worktree and running the commands (then restoring)
     - The Install section of `docs/consumer-guide.md` no longer tells readers to install `design-system-test` from npm; it explains today's options (the template, or `npm run build && npm pack` and install the tarball) until DS-59 publishes the package, and `src/docs/consumerGuide.test.ts` still passes
     - A test checks that every relative link in `docs/starter-guide.md` resolves to a file in the repo and every `npm run <script>` it mentions exists in `package.json`
-- [ ] **DS-67 README screenshot script & themed images.** Add `npm run readme:screenshots`, a script under `scripts/` that serves the static Storybook and uses Playwright to capture the theme showcase and a demo page in every theme into `docs/images/readme/`. Tooling only; components, stories and Storybook config stay unchanged.
-  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-67 README screenshot script & themed images.** Add `npm run readme:screenshots`, a script under `scripts/` that serves the static Storybook and uses Playwright to capture the theme showcase and a demo page in every theme into `docs/images/readme/`. Tooling only; components, stories and Storybook config stay unchanged.
+  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - `npm run readme:screenshots` builds Storybook if `storybook-static/` is missing, serves it on a free port picked at runtime (never a hardcoded 6006), captures with Playwright, and stops the server when done
     - It writes `docs/images/readme/themes-side-by-side.png` from `Foundations/Themes` → `SideBySide`, and `docs/images/readme/contact-form-<theme>.png` for `default`, `dark`, `bold` and `bold-dark` (selected with the `theme` global), all committed
@@ -362,6 +369,21 @@ Each task carries its fields in an indented line, read by the [software factory]
     - The repo description (`gh repo view --json description`) leads with themeable, accessible starter value instead of the gray wireframe and the agent pipeline, after the user approves the wording
     - Topics include `design-tokens`, `theming`, `storybook`, `radix-ui` and `template` alongside the existing ones
     - The user has uploaded the social preview in Settings → General, and 'Template repository' is still enabled (`isTemplate: true`)
+- [ ] **DS-70 Introduction page refresh — design.** Redesign the Storybook `Introduction` page (`src/Introduction.stories.tsx`) around why use it, start from it and customize it. Today it pitches only the gray wireframe ("No hue", "No decoration"), lists 7 of 26 components, and never shows a theme, `createTheme()` or the theme switcher.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Canvas `docs/design-system-wireframe/Introduction.dc.html` shows the whole page in `default`, `dark`, `bold` and `bold-dark`: hero, "Why use it" (Radix a11y, role tokens, `createTheme()`/`checkContrast()`, stories + `jest-axe` + coverage), a theme showcase, "Start from it" and "Customize in minutes"
+    - Spec `docs/specs/Introduction.md` gives each section's copy, its links (Storybook docs pages, GitHub starter and theming guides) and the shipped components and stories it uses
+    - Spec replaces the hand-kept component list with one covering every component exported from `src/index.ts`
+    - Spec covers heading levels, keyboard order, contrast in all four themes and phone-width layout, using only existing `--ds-*` tokens and Tailwind utilities
+- [ ] **DS-71 Introduction page refresh — implementation.** Rebuild `src/Introduction.stories.tsx` per `docs/specs/Introduction.md` from shipped components and utilities only, with the component list derived from `src/index.ts` exports.
+  - type: build · has_ui: yes · depends_on: DS-70 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every section, in `default`, `dark`, `bold` and `bold-dark`
+    - A test fails if a component exported from `src/index.ts` is missing from the page's component list
+    - A test checks every link on the page resolves (Storybook story/docs ids exist; GitHub doc paths exist in the repo)
+    - Tab order follows the spec (`userEvent` test) and a `jest-axe` test passes in every theme
+    - `docs/images/readme/storybook-introduction.png` is re-captured from the new page
 
 ### Epic: Icons
 
@@ -493,6 +515,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-67** README screenshot script & themed images — https://github.com/mikespineu/design-system-wireframe/pull/107
 - **DS-63** Canvas boards on role tokens — https://github.com/mikespineu/design-system-wireframe/pull/104
 - **DS-64** Storybook theme switcher (addon) — https://github.com/mikespineu/design-system-wireframe/pull/103
 - **DS-65** "Create your own theme" guide — https://github.com/mikespineu/design-system-wireframe/pull/102
