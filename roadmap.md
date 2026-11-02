@@ -347,8 +347,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - It names which of `factory/`, `roadmap.md`, `CLAUDE.md`/`AGENTS.md`, `docs/specs/` and `docs/design-system-wireframe/` can be deleted without breaking lint, typecheck, `npm test` or the Storybook build, each claim verified by deleting it in the worktree and running the commands (then restoring)
     - The Install section of `docs/consumer-guide.md` no longer tells readers to install `design-system-test` from npm; it explains today's options (the template, or `npm run build && npm pack` and install the tarball) until DS-59 publishes the package, and `src/docs/consumerGuide.test.ts` still passes
     - A test checks that every relative link in `docs/starter-guide.md` resolves to a file in the repo and every `npm run <script>` it mentions exists in `package.json`
-- [ ] **DS-67 README screenshot script & themed images.** Add `npm run readme:screenshots`, a script under `scripts/` that serves the static Storybook and uses Playwright to capture the theme showcase and a demo page in every theme into `docs/images/readme/`. Tooling only; components, stories and Storybook config stay unchanged.
-  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-67 README screenshot script & themed images.** Add `npm run readme:screenshots`, a script under `scripts/` that serves the static Storybook and uses Playwright to capture the theme showcase and a demo page in every theme into `docs/images/readme/`. Tooling only; components, stories and Storybook config stay unchanged.
+  - type: docs · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - `npm run readme:screenshots` builds Storybook if `storybook-static/` is missing, serves it on a free port picked at runtime (never a hardcoded 6006), captures with Playwright, and stops the server when done
     - It writes `docs/images/readme/themes-side-by-side.png` from `Foundations/Themes` → `SideBySide`, and `docs/images/readme/contact-form-<theme>.png` for `default`, `dark`, `bold` and `bold-dark` (selected with the `theme` global), all committed
@@ -515,6 +515,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-67** README screenshot script & themed images — https://github.com/mikespineu/design-system-wireframe/pull/107
 - **DS-63** Canvas boards on role tokens — https://github.com/mikespineu/design-system-wireframe/pull/104
 - **DS-64** Storybook theme switcher (addon) — https://github.com/mikespineu/design-system-wireframe/pull/103
 - **DS-65** "Create your own theme" guide — https://github.com/mikespineu/design-system-wireframe/pull/102
