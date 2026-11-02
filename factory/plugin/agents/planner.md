@@ -23,7 +23,7 @@ You research where the design system should go next and propose roadmap tasks. Y
 ## Propose
 - Respect the focus in your task (an epic, a theme, or free text). No focus = balanced across epics.
 - At most the number of features asked for (default 5). Prefer things that unblock other work or that the history shows are hurting.
-- Each feature is shaped like `/factory:add` would shape it: UI → `design` + `build` (build depends on design); no UI → one `build`/`infra`/`docs` task; new tokens, releases, secrets or anything outside the repo → `needs_human: yes`. At most 4 tasks per feature.
+- Each feature is shaped like `/factory:add` would shape it: a new component or visual change → `design` + `build` (build depends on design); changes to an existing board (canvas) → one `docs` task, `has_ui: no` (docs tasks may edit `docs/design-system-wireframe/**`); other no-UI work → one `build`/`infra`/`docs` task; new tokens, releases, secrets or anything outside the repo → `needs_human: yes`. At most 4 tasks per feature.
 - `done_when`: 1–5 testable items per task. UI build tasks start with "Matches the approved spec in every state" and include "Story per state, keyboard story, `jest-axe` test, exported from `src/index.ts`". Name the Radix primitive in the build description when one fits.
 - `depends_on` may reference existing roadmap IDs or other proposed tasks by local key (`P1`, `P2`, …). Never invent IDs; the orchestrator assigns them.
 

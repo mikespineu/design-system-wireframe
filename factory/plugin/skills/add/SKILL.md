@@ -24,7 +24,8 @@ If the request is already clear, ask nothing.
 
 | Feature | Tasks |
 | --- | --- |
-| Has UI | a `design` task (`has_ui: yes`) **and** a `build` task (`has_ui: yes`) that depends on it |
+| New component, or a visual change to the product | a `design` task (`has_ui: yes`) **and** a `build` task (`has_ui: yes`) that depends on it |
+| Change to an existing board (fix, update or restructure a canvas in `docs/design-system-wireframe/`) | one task: `docs`, `has_ui: no` (docs tasks may edit canvases) |
 | No UI (tooling, CI, docs, refactor) | one task: `build`, `infra` or `docs`, `has_ui: no` |
 | Needs new tokens, a release, secrets, or anything outside the repo | the same, with `needs_human: yes` |
 
