@@ -14,6 +14,11 @@ describe('prepareGuideForStorybook', () => {
     expect(out).toContain('b  c');
   });
 
+  it('keeps blank lines inside code fences untouched', () => {
+    const src = 'a\n\n<!-- sample: x -->\n```ts\none\n\n\ntwo\n```';
+    expect(prepareGuideForStorybook(src)).toBe('a\n\n```ts\none\n\n\ntwo\n```');
+  });
+
   it('keeps comment-like text inside code fences', () => {
     const src = '```html\n<!-- keep -->\n[a](b.md)\n```';
     expect(prepareGuideForStorybook(src)).toBe(src);

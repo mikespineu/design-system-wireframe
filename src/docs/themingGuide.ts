@@ -18,20 +18,21 @@ function resolveHref(href: string): string {
  */
 export function prepareGuideForStorybook(markdown: string): string {
   let inFence = false;
-  return markdown
-    .split('\n')
-    .map((line) => {
-      if (/^\s*```/.test(line)) {
-        inFence = !inFence;
-        return line;
-      }
-      if (inFence) return line;
-      return line
-        .replace(/^(\s*)([-*+])\s+\[[ xX]\]\s+/, '$1$2 ')
-        .replace(/^\s*<!--.*?-->\s*$/, '')
-        .replace(/<!--.*?-->/g, '')
-        .replace(/(\[[^\]]*\])\(([^)\s]+)\)/g, (_m, text: string, href: string) => `${text}(${resolveHref(href)})`);
-    })
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n');
+  const out: string[] = [];
+  for (const line of markdown.split('\n')) {
+    if (/^\s*```/.test(line)) {
+      inFence = !inFence;
+      out.push(line);
+    } else if (inFence) {
+      out.push(line);
+    } else if (!/^\s*<!--.*?-->\s*$/.test(line)) {
+      out.push(
+        line
+          .replace(/^(\s*)([-*+])\s+\[[ xX]\]\s+/, '$1$2 ')
+          .replace(/<!--.*?-->/g, '')
+          .replace(/(\[[^\]]*\])\(([^)\s]+)\)/g, (_m, text: string, href: string) => `${text}(${resolveHref(href)})`),
+      );
+    }
+  }
+  return out.join('\n');
 }
