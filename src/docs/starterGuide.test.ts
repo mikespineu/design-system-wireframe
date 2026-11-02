@@ -123,6 +123,10 @@ describe('starter guide names the tests that an edit turns red', () => {
     ['src/styles/tokens.test.ts', 'contrast in the %s theme'],
     ['src/themes/bold.test.tsx', 'the shipped dark block in tokens.css (var() refs resolved against :root) passes checkContrast()'],
     ['src/docs/consumerGuide.test.ts', 'consumer guide install'],
+    ['src/themes/bold.test.tsx', 'shipped bold.css equals the generator output'],
+    ['src/themes/bold.test.tsx', 'role values match the spec'],
+    ['src/themes/bold.test.tsx', 'draws the focus ring from the focus roles, which both themes set to 3px / 2px'],
+    ['docs/theming-guide/theming-guide.test.ts', 'the worked example rebuilds bold from its spec input'],
   ])('%s: the guide names it, and the test "%s" still exists', (file, title) => {
     expect(guide).toContain(file.split('/').pop() as string);
     expect(read(file)).toContain(title);
@@ -134,6 +138,11 @@ describe('starter guide names the tests that an edit turns red', () => {
     const required = [...install.matchAll(/toContain\('([^']+)'\)/g)].map((m) => m[1] as string);
     expect(required.length).toBeGreaterThan(0);
     for (const phrase of required) expect(guide).toContain(`\`${phrase}\``);
+  });
+
+  it('does not send the reader to step 4.3 for removing the bold demo theme, which 4.3 says is not covered', () => {
+    expect(guide).not.toContain('Remove the bold demo theme');
+    expect(guide).toContain('Removing them touches the package exports');
   });
 
   it('names the defaults file that createTheme.test.ts compares with tokens.css', () => {
