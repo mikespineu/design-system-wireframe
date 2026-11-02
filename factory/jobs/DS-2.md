@@ -2,8 +2,8 @@
 task: DS-2
 title: "Example themes — design"
 line: design           # design | build
-status: in-progress        # claimed | in-progress | waiting | blocked | merged
-stage: ci
+status: merged        # claimed | in-progress | waiting | blocked | merged
+stage: merge
 branch: "feat/DS-2-example-themes-design"
 worktree: "/Users/michalkrecisz/Desktop/workspace/design-system-test/.worktrees/feat-DS-2-example-themes-design"
 pr: "97"
@@ -16,7 +16,7 @@ loops: { gates: 0, qa: 0, review: 0, ci: 0, spec: 0 }
 needs_you: ""
 blocked_reason: ""
 started: "2026-11-02T13:22:31Z"
-updated: "2026-11-02T14:01:33Z"
+updated: "2026-11-02T14:05:11Z"
 ---
 
 # DS-2 Example themes — design
@@ -34,6 +34,8 @@ updated: "2026-11-02T14:01:33Z"
 - 14:48 pr: opened draft PR #97 with factory:needs-approval
 - 15:01 approve: approved by mikespin
 - 15:02 ci: merged origin/main (DS-58 added canvasBoards README test); pre-push failed 2 tests (board missing from READMEs); added Themes.dc.html rows to docs/design-system-wireframe/README.md and README.md
+- 15:05 ci: checks green on ddc39fe (ci, claude-review, deploy)
+- 15:05 merge: squash-merging PR #97
 
 ## Gate results
 
