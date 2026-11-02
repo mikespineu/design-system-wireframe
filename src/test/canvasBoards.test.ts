@@ -20,6 +20,7 @@ const END = '/* ds-tokens:end */'
 /** Extra theme files a board's token block also carries, after tokens.css. */
 const EXTRA_THEMES: Record<string, string[]> = {
   'Themes.dc.html': [join(root, 'src', 'themes', 'bold.css')],
+  'Introduction.dc.html': [join(root, 'src', 'themes', 'bold.css')],
 }
 
 const squash = (css: string) =>

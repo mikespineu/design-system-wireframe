@@ -1,0 +1,1484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Introduction</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<!-- Bold theme fonts (same files as src/themes/bold-fonts.css) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700;800&amp;family=Figtree:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap">
+<style>
+/* ds-tokens:start */
+/* Copied from src/styles/tokens.css (default + dark) and src/themes/bold.css (bold + bold-dark), as in Themes.dc.html. Everything below reads var(--ds-*). Checked by src/test/canvasBoards.test.ts. */
+:root,
+[data-theme="default"] {
+  /* Tier 1, primitives: raw palette, never read by components. Gray palette: white ground, gray accents, black ink. No hue. */
+  --ds-color-white: #ffffff;
+  --ds-color-gray-50: #f7f7f7;
+  --ds-color-gray-100: #eeeeee;
+  --ds-color-gray-200: #e0e0e0;
+  --ds-color-gray-300: #c7c7c7;
+  --ds-color-gray-400: #a3a3a3;
+  --ds-color-gray-500: #767676;
+  --ds-color-gray-600: #595959;
+  --ds-color-gray-700: #404040;
+  --ds-color-gray-800: #262626;
+  --ds-color-gray-900: #141414;
+  --ds-color-black: #000000;
+
+  /* Tier 2, roles: color */
+  --ds-color-background: var(--ds-color-white);
+  --ds-color-surface: var(--ds-color-white);
+  --ds-color-surface-subtle: var(--ds-color-gray-50);
+  --ds-color-fill: var(--ds-color-gray-100);
+  --ds-color-divider: var(--ds-color-gray-200);
+  --ds-color-border: var(--ds-color-gray-300);
+  --ds-color-disabled: var(--ds-color-gray-400);
+  --ds-color-placeholder: var(--ds-color-gray-500);
+  --ds-color-text-muted: var(--ds-color-gray-600);
+  --ds-color-text: var(--ds-color-gray-700);
+  --ds-color-text-strong: var(--ds-color-gray-800);
+  --ds-color-text-emphasis: var(--ds-color-black);
+  --ds-color-text-inverse: var(--ds-color-white);
+  --ds-color-border-strong: var(--ds-color-black);
+  --ds-color-icon: var(--ds-color-black);
+  --ds-color-focus: var(--ds-color-black);
+  --ds-color-overlay: rgb(0 0 0 / 0.5);
+  --ds-color-inverse: var(--ds-color-gray-900);
+  --ds-color-primary: var(--ds-color-black);
+  --ds-color-primary-hover: var(--ds-color-gray-800);
+  --ds-color-primary-contrast: var(--ds-color-white);
+  /* Deprecated alias of --ds-color-text-emphasis. Components no longer read it; themes do not set it. */
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  /* Status: the only hue in the system, used for feedback only and always
+     paired with an icon and a label. fg passes 4.5:1 on white and on its bg. */
+  --ds-color-info: var(--ds-color-gray-700);
+  --ds-color-info-border: var(--ds-color-gray-300);
+  --ds-color-info-bg: var(--ds-color-gray-50);
+  --ds-color-success: #2e6b45;
+  --ds-color-success-border: #9cc7ab;
+  --ds-color-success-bg: #edf5ef;
+  --ds-color-error: #a3302b;
+  --ds-color-error-border: #e3aaa6;
+  --ds-color-error-bg: #fbedec;
+
+  /* Roles: font. Red Hat Mono for titles and labels, Red Hat Text for body (load with the opt-in fonts.css) */
+  --ds-font-mono: 'Red Hat Mono', ui-monospace, monospace;
+  --ds-font-text: 'Red Hat Text', system-ui, sans-serif;
+  --ds-font-heading: var(--ds-font-mono);
+  --ds-font-body: var(--ds-font-text);
+  --ds-font-label: var(--ds-font-mono);
+  --ds-font-family: var(--ds-font-body);
+
+  /* Roles: font weight */
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
+
+  /* Roles: type scale */
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+
+  /* Legacy line-height aliases (not part of the contract) */
+  --ds-line-height-xs: var(--ds-text-ui-sm-line-height);
+  --ds-line-height-sm: var(--ds-text-caption-line-height);
+  --ds-line-height-md: var(--ds-text-body-sm-line-height);
+  --ds-line-height-lg: var(--ds-text-body-line-height);
+  --ds-line-height-xl: var(--ds-text-h3-line-height);
+
+  /* Spacing: 4 px base. Not themeable. */
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-24: 96px;
+
+  /* Roles: radius. Square corners; --ds-radius is the legacy base the steps default to */
+  --ds-radius: 0;
+  --ds-radius-sm: var(--ds-radius);
+  --ds-radius-md: var(--ds-radius);
+  --ds-radius-lg: var(--ds-radius);
+  --ds-radius-full: var(--ds-radius);
+
+  /* Roles: shadow. No shadows by default, depth comes from borders and fills */
+  --ds-shadow-sm: none;
+  --ds-shadow-md: none;
+  --ds-shadow-lg: none;
+
+  /* Roles: shape and density */
+  --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+
+  /* Icons: fixed system constants, not part of the theme contract */
+  --ds-icon-size-sm: 12px;
+  --ds-icon-size-md: 16px;
+  --ds-icon-size-lg: 20px;
+  --ds-icon-stroke: 1.5;
+  --ds-icon-stroke-strong: 2;
+
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* Photography: always monochrome */
+  --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+/* Dark: overrides the 30 color roles only. Fonts, type, radius, shadow and shape stay at their defaults. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ds-color-background: var(--ds-color-gray-900);
+  --ds-color-surface: var(--ds-color-gray-900);
+  --ds-color-surface-subtle: #1f1f1f;
+  --ds-color-fill: var(--ds-color-gray-800);
+  --ds-color-divider: #333333;
+  --ds-color-border: #737373;
+  --ds-color-disabled: var(--ds-color-gray-600);
+  --ds-color-placeholder: #8f8f8f;
+  --ds-color-text-muted: var(--ds-color-gray-400);
+  --ds-color-text: var(--ds-color-gray-300);
+  --ds-color-text-strong: var(--ds-color-gray-200);
+  --ds-color-text-emphasis: var(--ds-color-gray-50);
+  --ds-color-text-inverse: var(--ds-color-gray-900);
+  --ds-color-border-strong: var(--ds-color-gray-50);
+  --ds-color-icon: var(--ds-color-gray-50);
+  --ds-color-focus: var(--ds-color-gray-50);
+  --ds-color-overlay: rgb(0 0 0 / 0.7);
+  --ds-color-inverse: var(--ds-color-gray-100);
+  --ds-color-primary: var(--ds-color-gray-50);
+  --ds-color-primary-hover: var(--ds-color-gray-200);
+  --ds-color-primary-contrast: var(--ds-color-gray-900);
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  --ds-color-info: var(--ds-color-gray-300);
+  --ds-color-info-border: var(--ds-color-gray-600);
+  --ds-color-info-bg: #1f1f1f;
+  --ds-color-success: #9cc7ab;
+  --ds-color-success-border: #2e6b45;
+  --ds-color-success-bg: #13261a;
+  --ds-color-error: #e3aaa6;
+  --ds-color-error-border: #a3302b;
+  --ds-color-error-bg: #2d1414;
+
+  /* Dims the monochrome photos so they do not glare on the dark ground. */
+  --ds-photo-filter: grayscale(1) contrast(1.1) brightness(0.85);
+}
+/* Themes: src/themes/bold.css (bold and bold-dark), copied verbatim */
+/* Opt-in demo theme. Generated by createTheme() plus the spec override block (src/themes/bold.ts).
+   Do not edit by hand: run `npm run themes:generate`. Turn on with <html data-theme="bold"> or "bold-dark".
+   Load the fonts with themes/bold-fonts.css. Unlayered, so it wins over the library CSS in any import order. */
+
+[data-theme="bold"] {
+  --ds-color-background: #f9faff;
+  --ds-color-surface: #f9faff;
+  --ds-color-surface-subtle: #f6f6ff;
+  --ds-color-fill: #ebedff;
+  --ds-color-divider: #dcdef4;
+  --ds-color-border: #c3c5db;
+  --ds-color-disabled: #a0a1b6;
+  --ds-color-placeholder: #696a7e;
+  --ds-color-text-muted: #56576a;
+  --ds-color-text: #3d3e50;
+  --ds-color-text-strong: #242435;
+  --ds-color-text-emphasis: #090917;
+  --ds-color-text-inverse: #f9faff;
+  --ds-color-border-strong: #090917;
+  --ds-color-icon: #090917;
+  --ds-color-focus: #5b49f8;
+  --ds-color-overlay: rgb(0 0 0 / 0.5);
+  --ds-color-inverse: #121221;
+  --ds-color-primary: #5b49f8;
+  --ds-color-primary-hover: #482fd5;
+  --ds-color-primary-contrast: #f9faff;
+  --ds-color-info: #3d3e50;
+  --ds-color-info-border: #c3c5db;
+  --ds-color-info-bg: #f6f6ff;
+  --ds-color-success: #2e6b45;
+  --ds-color-success-border: #9cc7ab;
+  --ds-color-success-bg: #edf5ef;
+  --ds-color-error: #a3302b;
+  --ds-color-error-border: #e3aaa6;
+  --ds-color-error-bg: #fbedec;
+  --ds-font-heading: 'Bricolage Grotesque', 'Arial Black', system-ui, sans-serif;
+  --ds-font-body: 'Figtree', system-ui, sans-serif;
+  --ds-font-label: 'Figtree', system-ui, sans-serif;
+  --ds-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+  --ds-radius-sm: 8px;
+  --ds-radius-md: 14px;
+  --ds-radius-lg: 24px;
+  --ds-radius-full: 9999px;
+  --ds-shadow-sm: 0 2px 0 #140e3d;
+  --ds-shadow-md: 0 4px 0 #140e3d;
+  --ds-shadow-lg: 8px 8px 0 #140e3d;
+  --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+  --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+[data-theme="bold"] {
+  --ds-color-background: #f4f1ff;
+  --ds-color-surface: #ffffff;
+  --ds-color-surface-subtle: #ebe6fc;
+  --ds-color-fill: #e3dcfb;
+  --ds-color-divider: #d5ccf5;
+  --ds-color-border: #8478b8;
+  --ds-color-disabled: #b3aad9;
+  --ds-color-placeholder: #63579a;
+  --ds-color-text-muted: #554a8a;
+  --ds-color-text: #2f2766;
+  --ds-color-text-strong: #221b52;
+  --ds-color-text-emphasis: #140e3d;
+  --ds-color-text-inverse: #f4f1ff;
+  --ds-color-border-strong: #140e3d;
+  --ds-color-icon: #140e3d;
+  --ds-color-focus: #4318d1;
+  --ds-color-overlay: rgb(20 14 61 / 0.6);
+  --ds-color-inverse: #140e3d;
+  --ds-color-primary: #4318d1;
+  --ds-color-primary-hover: #3510a8;
+  --ds-color-primary-contrast: #ffffff;
+  --ds-color-info: #2f2766;
+  --ds-color-info-border: #d5ccf5;
+  --ds-color-info-bg: #ebe6fc;
+  --ds-font-weight-medium: 600;
+  --ds-text-display-size: 5rem;
+  --ds-text-display-line-height: 0.95;
+  --ds-text-display-tracking: -0.02em;
+  --ds-text-h1-size: 3.5rem;
+  --ds-text-h1-line-height: 1;
+  --ds-text-h1-tracking: -0.015em;
+  --ds-text-h2-size: 2.25rem;
+  --ds-text-h2-line-height: 1.1;
+  --ds-text-h2-tracking: -0.01em;
+  --ds-text-h3-size: 1.5rem;
+  --ds-text-h3-line-height: 28px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: 800;
+  --ds-text-heading-transform: uppercase;
+  --ds-text-body-lg-size: 1.25rem;
+  --ds-text-body-lg-line-height: 1.5;
+  --ds-text-body-size: 1.0625rem;
+  --ds-text-body-line-height: 28px;
+  --ds-text-body-sm-size: 1rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.9375rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.875rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.875rem;
+  --ds-text-label-line-height: 20px;
+  --ds-text-label-weight: var(--ds-font-weight-bold);
+  --ds-text-label-tracking: 0.01em;
+  --ds-text-label-transform: none;
+  --ds-text-ui-size: 1rem;
+  --ds-text-ui-line-height: 24px;
+  --ds-text-ui-weight: var(--ds-font-weight-bold);
+  --ds-text-ui-sm-size: 0.8125rem;
+  --ds-text-ui-sm-line-height: 18px;
+  --ds-text-ui-xs-size: 0.75rem;
+  --ds-text-ui-xs-line-height: 16px;
+  --ds-border-width: 2px;
+  --ds-border-width-strong: 3px;
+  --ds-focus-width: 3px;
+  --ds-control-height: 48px;
+  --ds-motion: 160ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ds-photo-filter: none;
+}
+
+[data-theme="bold-dark"] {
+  color-scheme: dark;
+  --ds-color-background: #121221;
+  --ds-color-surface: #121221;
+  --ds-color-surface-subtle: #1d1d2d;
+  --ds-color-fill: #242435;
+  --ds-color-divider: #303142;
+  --ds-color-border: #707185;
+  --ds-color-disabled: #56576a;
+  --ds-color-placeholder: #8c8da2;
+  --ds-color-text-muted: #a0a1b6;
+  --ds-color-text: #c3c5db;
+  --ds-color-text-strong: #dcdef4;
+  --ds-color-text-emphasis: #f6f6ff;
+  --ds-color-text-inverse: #121221;
+  --ds-color-border-strong: #f6f6ff;
+  --ds-color-icon: #f6f6ff;
+  --ds-color-focus: #e6eaff;
+  --ds-color-overlay: rgb(0 0 0 / 0.7);
+  --ds-color-inverse: #ebedff;
+  --ds-color-primary: #e6eaff;
+  --ds-color-primary-hover: #ced4ff;
+  --ds-color-primary-contrast: #21106e;
+  --ds-color-info: #c3c5db;
+  --ds-color-info-border: #56576a;
+  --ds-color-info-bg: #1d1d2d;
+  --ds-color-success: #9cc7ab;
+  --ds-color-success-border: #2e6b45;
+  --ds-color-success-bg: #13261a;
+  --ds-color-error: #e3aaa6;
+  --ds-color-error-border: #a3302b;
+  --ds-color-error-bg: #2d1414;
+  --ds-font-heading: 'Bricolage Grotesque', 'Arial Black', system-ui, sans-serif;
+  --ds-font-body: 'Figtree', system-ui, sans-serif;
+  --ds-font-label: 'Figtree', system-ui, sans-serif;
+  --ds-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+  --ds-radius-sm: 8px;
+  --ds-radius-md: 14px;
+  --ds-radius-lg: 24px;
+  --ds-radius-full: 9999px;
+  --ds-shadow-sm: 0 2px 0 rgb(0 0 0 / 0.6);
+  --ds-shadow-md: 0 4px 0 rgb(0 0 0 / 0.6);
+  --ds-shadow-lg: 8px 8px 0 #4318d1;
+  --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+  --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+[data-theme="bold-dark"] {
+  --ds-color-background: #120d2e;
+  --ds-color-surface: #19133a;
+  --ds-color-surface-subtle: #211a4a;
+  --ds-color-fill: #2a2259;
+  --ds-color-divider: #3a3170;
+  --ds-color-border: #7c70c2;
+  --ds-color-disabled: #4d4485;
+  --ds-color-placeholder: #9a90d6;
+  --ds-color-text-muted: #b3abe6;
+  --ds-color-text: #d2ccf5;
+  --ds-color-text-strong: #e3dffa;
+  --ds-color-text-emphasis: #f5f3ff;
+  --ds-color-text-inverse: #120d2e;
+  --ds-color-border-strong: #f5f3ff;
+  --ds-color-icon: #f5f3ff;
+  --ds-color-focus: #a08cff;
+  --ds-color-overlay: rgb(8 5 26 / 0.75);
+  --ds-color-inverse: #e3dffa;
+  --ds-color-primary: #a08cff;
+  --ds-color-primary-hover: #8b73ff;
+  --ds-color-primary-contrast: #120d2e;
+  --ds-color-info: #d2ccf5;
+  --ds-color-info-border: #4d4485;
+  --ds-color-info-bg: #211a4a;
+  --ds-font-weight-medium: 600;
+  --ds-text-display-size: 5rem;
+  --ds-text-display-line-height: 0.95;
+  --ds-text-display-tracking: -0.02em;
+  --ds-text-h1-size: 3.5rem;
+  --ds-text-h1-line-height: 1;
+  --ds-text-h1-tracking: -0.015em;
+  --ds-text-h2-size: 2.25rem;
+  --ds-text-h2-line-height: 1.1;
+  --ds-text-h2-tracking: -0.01em;
+  --ds-text-h3-size: 1.5rem;
+  --ds-text-h3-line-height: 28px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: 800;
+  --ds-text-heading-transform: uppercase;
+  --ds-text-body-lg-size: 1.25rem;
+  --ds-text-body-lg-line-height: 1.5;
+  --ds-text-body-size: 1.0625rem;
+  --ds-text-body-line-height: 28px;
+  --ds-text-body-sm-size: 1rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.9375rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.875rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.875rem;
+  --ds-text-label-line-height: 20px;
+  --ds-text-label-weight: var(--ds-font-weight-bold);
+  --ds-text-label-tracking: 0.01em;
+  --ds-text-label-transform: none;
+  --ds-text-ui-size: 1rem;
+  --ds-text-ui-line-height: 24px;
+  --ds-text-ui-weight: var(--ds-font-weight-bold);
+  --ds-text-ui-sm-size: 0.8125rem;
+  --ds-text-ui-sm-line-height: 18px;
+  --ds-text-ui-xs-size: 0.75rem;
+  --ds-text-ui-xs-line-height: 16px;
+  --ds-border-width: 2px;
+  --ds-border-width-strong: 3px;
+  --ds-focus-width: 3px;
+  --ds-control-height: 48px;
+  --ds-motion: 160ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ds-photo-filter: brightness(0.9);
+}
+/* ds-tokens:end */
+
+body{margin:0;background:var(--ds-color-background)}
+/* ===== House chrome (board header, sections, artboard frames). Not themed: it sits outside every data-theme panel. ===== */
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:var(--ds-font-mono);font-size:13px;color:var(--ds-color-text-muted)}
+.sec-t{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:900px;font-size:16px;line-height:26px;color:var(--ds-color-text)}
+.sec-d code,.note code,.ab-f code,.tbl code,.ab-h code{font-family:var(--ds-font-mono);font-size:13px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.phones{display:flex;flex-wrap:wrap;gap:24px 36px;align-items:flex-start}
+.ab{border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);display:flex;flex-direction:column;min-width:0}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid var(--ds-color-divider);font-family:var(--ds-font-mono);font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-emphasis)}
+.ab-h span+span{color:var(--ds-color-text-muted);text-transform:none;letter-spacing:0;text-align:right}
+.ab-f{padding:12px 16px;border-top:1px solid var(--ds-color-divider);font-size:13px;line-height:20px;color:var(--ds-color-text-muted)}
+.note{margin:0;font-size:13px;line-height:20px;color:var(--ds-color-text-muted)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:left;height:40px;padding:0 12px 0 0;font-family:var(--ds-font-mono);font-weight:var(--ds-font-weight-medium);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid var(--ds-color-border-strong);color:var(--ds-color-text-emphasis)}
+.tbl td{height:40px;padding:6px 12px 6px 0;border-bottom:1px solid var(--ds-color-divider);color:var(--ds-color-text);vertical-align:middle}
+.tbl td.m{font-family:var(--ds-font-mono);font-size:12px}
+.tbl tr.grp td{height:32px;font-family:var(--ds-font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-emphasis);border-bottom:1px solid var(--ds-color-border-strong)}
+.kbd{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid var(--ds-color-border-strong);font-family:var(--ds-font-mono);font-size:12px;color:var(--ds-color-text-emphasis)}
+.pr{display:inline-flex;align-items:center;justify-content:center;width:36px;height:22px;margin-right:8px;border:1px solid var(--ds-color-border);font-family:var(--ds-font-mono);font-size:11px;vertical-align:-6px}
+.num{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 4px;background:var(--ds-color-primary);color:var(--ds-color-primary-contrast);font-family:var(--ds-font-mono);font-size:12px}
+.outline{margin:0;padding:0;list-style:none;font-family:var(--ds-font-mono);font-size:13px;line-height:24px;color:var(--ds-color-text)}
+.outline li.l2{padding-left:24px}
+.outline li.l3{padding-left:48px;color:var(--ds-color-text-muted)}
+.outline b{color:var(--ds-color-text-emphasis);font-weight:var(--ds-font-weight-medium)}
+
+/* ===== The page. Every value reads a role, so each artboard follows its data-theme. ===== */
+.pg{background:var(--ds-color-background);color:var(--ds-color-text);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height)}
+.pg *,.pg *::before,.pg *::after{box-sizing:border-box}
+.pg code{font-family:var(--ds-font-mono);font-size:0.9em;color:var(--ds-color-text-strong)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--ds-space-12)}
+.band{padding:var(--ds-space-24) 0;border-bottom:var(--ds-border-width) solid var(--ds-color-divider)}
+.band:last-child{border-bottom:0}
+.eyebrow{margin:0;font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-muted)}
+.hd{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);text-transform:var(--ds-text-heading-transform);color:var(--ds-color-text-emphasis);text-wrap:balance;overflow-wrap:break-word}
+.h1{margin-top:var(--ds-space-6);max-width:16ch;font-size:var(--ds-text-display-size);line-height:var(--ds-text-display-line-height);letter-spacing:var(--ds-text-display-tracking)}
+.h2{font-size:var(--ds-text-h1-size);line-height:var(--ds-text-h1-line-height);letter-spacing:var(--ds-text-h1-tracking)}
+.h3{font-size:var(--ds-text-h3-size);line-height:var(--ds-text-h3-line-height);letter-spacing:var(--ds-text-h3-tracking)}
+.h4{font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-line-height)}
+.lede{margin:var(--ds-space-8) 0 0;max-width:60ch;font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height);color:var(--ds-color-text)}
+.intro{margin:var(--ds-space-4) 0 0;max-width:64ch;font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height);color:var(--ds-color-text)}
+.p{margin:0;color:var(--ds-color-text)}
+.muted{color:var(--ds-color-text-muted)}
+
+/* Button (shipped look, from AllComponents.dc.html) */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--ds-space-2);height:var(--ds-control-height);border:var(--ds-border-width) solid;border-radius:var(--ds-radius-md);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);white-space:nowrap;cursor:pointer;text-decoration:none}
+.btn-primary{padding:0 var(--ds-space-6);border-color:var(--ds-color-primary);background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.btn-primary.is-hover{border-color:var(--ds-color-primary-hover);background:var(--ds-color-primary-hover)}
+.btn-secondary{padding:0 var(--ds-space-6);border-color:var(--ds-color-border-strong);background:var(--ds-color-surface);color:var(--ds-color-text-emphasis)}
+.btn-secondary.is-hover{background:var(--ds-color-fill)}
+.btn-ghost{padding:0 var(--ds-space-4);border-color:transparent;background:transparent;color:var(--ds-color-text-emphasis);text-decoration:underline;text-underline-offset:var(--ds-space-1)}
+.btn-ghost.is-hover{background:var(--ds-color-fill)}
+.f{outline:var(--ds-focus-width) solid var(--ds-color-focus);outline-offset:var(--ds-focus-offset);position:relative;z-index:1}
+.cta{display:flex;flex-wrap:wrap;gap:var(--ds-space-3);margin-top:var(--ds-space-8)}
+
+/* Tag (shipped look) */
+.tag{display:inline-flex;align-items:center;height:28px;padding:0 10px;border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-sm);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);font-weight:var(--ds-font-weight-regular);white-space:nowrap}
+.tag-solid{background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.tag-subtle{background:var(--ds-color-fill);color:var(--ds-color-text-strong)}
+.tag-outline{border-color:var(--ds-color-border-strong);color:var(--ds-color-text-emphasis)}
+.tag-neutral{border-color:var(--ds-color-border);color:var(--ds-color-text-strong)}
+.tags{display:flex;flex-wrap:wrap;gap:var(--ds-space-2);margin:0;padding:0;list-style:none}
+
+/* Hero: theme switcher tip and facts */
+.tip{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ds-space-3) var(--ds-space-4);margin-top:var(--ds-space-8);padding:var(--ds-space-4);border:var(--ds-border-width) solid var(--ds-color-border);border-radius:var(--ds-radius-md);background:var(--ds-color-surface-subtle);font-size:var(--ds-text-body-sm-size);line-height:var(--ds-text-body-sm-line-height);color:var(--ds-color-text)}
+.tip-t{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-emphasis)}
+.tip-b{flex:1 1 320px;margin:0}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--ds-space-6);margin:var(--ds-space-12) 0 0;padding:var(--ds-space-6) 0 0;border-top:var(--ds-border-width) solid var(--ds-color-divider)}
+.facts div{display:flex;flex-direction:column-reverse;gap:var(--ds-space-1)}
+.facts dt{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-muted)}
+.facts dd{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:var(--ds-text-h2-size);line-height:var(--ds-text-h2-line-height);letter-spacing:var(--ds-text-h2-tracking);color:var(--ds-color-text-emphasis)}
+
+/* Text link (plain <a>, no component) */
+.tl{display:inline-flex;align-items:center;gap:var(--ds-space-2);min-height:var(--ds-control-height);align-self:flex-start;font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);color:var(--ds-color-text-emphasis);text-decoration:underline;text-decoration-thickness:var(--ds-border-width);text-underline-offset:var(--ds-space-1)}
+.tl.is-hover{text-decoration-thickness:var(--ds-border-width-strong)}
+.tl svg,.rowl svg{flex:none;width:var(--ds-icon-size-md);height:var(--ds-icon-size-md);color:var(--ds-color-icon)}
+.links{display:flex;flex-wrap:wrap;column-gap:var(--ds-space-6)}
+
+/* Why use it */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--ds-space-6);margin:var(--ds-space-12) 0 0;padding:0;list-style:none}
+.card{display:flex;flex-direction:column;gap:var(--ds-space-3);padding:var(--ds-space-6);border:var(--ds-border-width) solid var(--ds-color-divider);border-radius:var(--ds-radius-lg);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-sm)}
+.card .tl{margin-top:auto}
+
+/* Theme showcase */
+.show{display:flex;flex-direction:column;gap:var(--ds-space-6);margin-top:var(--ds-space-12)}
+.show-bar{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--ds-space-4)}
+.cg{display:flex;flex-direction:column;gap:var(--ds-space-2);min-width:0;max-width:100%}
+.cg-l{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-emphasis)}
+.seg{display:inline-flex;height:var(--ds-control-height);padding:var(--ds-space-1);border-radius:var(--ds-radius-md);background:var(--ds-color-fill);width:fit-content;max-width:100%;overflow:hidden}
+.seg-i{flex:none;display:inline-flex;align-items:center;justify-content:center;height:calc(var(--ds-control-height) - 2 * var(--ds-space-1));padding-inline:var(--ds-space-4);border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-md);color:var(--ds-color-text);font-family:var(--ds-font-body);font-weight:var(--ds-font-weight-medium);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);white-space:nowrap}
+.seg-i.is-on{border-color:var(--ds-color-border-strong);background:var(--ds-color-surface);color:var(--ds-color-text-emphasis)}
+.seg-i.is-hover{background:var(--ds-color-divider);color:var(--ds-color-text-emphasis)}
+.demo-f{margin:0;display:flex;flex-direction:column;gap:var(--ds-space-2)}
+.demo-cap{display:flex;justify-content:space-between;gap:var(--ds-space-4);font-family:var(--ds-font-mono);font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);color:var(--ds-color-text-muted)}
+.demo{padding:var(--ds-space-8);border:var(--ds-border-width) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-lg);background:var(--ds-color-background);color:var(--ds-color-text);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);box-shadow:var(--ds-shadow-lg)}
+.demo-t{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ds-space-3);margin-top:var(--ds-space-4)}
+.demo-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--ds-space-8);margin-top:var(--ds-space-6);align-items:start}
+.col{display:flex;flex-direction:column;gap:var(--ds-space-4);min-width:0}
+.row-b{display:flex;flex-wrap:wrap;gap:var(--ds-space-3)}
+.bc{display:flex;align-items:center;height:var(--ds-control-height);font-family:var(--ds-font-label);font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height)}
+.bc ol{display:flex;align-items:center;gap:var(--ds-space-2);margin:0;padding:0;list-style:none}
+.bc li{display:flex;align-items:center;gap:var(--ds-space-2)}
+.bc .cur{color:var(--ds-color-text-emphasis)}
+.bc .sep{color:var(--ds-color-disabled)}
+.fld{display:flex;flex-direction:column;gap:var(--ds-space-2);width:100%;min-width:0}
+.fld-l{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-emphasis)}
+.fld-h{font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);color:var(--ds-color-text-muted)}
+.inp{display:flex;align-items:center;width:100%;height:var(--ds-control-height);padding:0 var(--ds-space-3);border:var(--ds-border-width) solid var(--ds-color-border);border-radius:var(--ds-radius-md);background:var(--ds-color-surface);color:var(--ds-color-text-emphasis)}
+.inp .ph{color:var(--ds-color-placeholder)}
+.ctl{display:flex;align-items:flex-start;gap:var(--ds-space-3);min-height:var(--ds-control-height)}
+.ctl-lb{padding-block:9px;color:var(--ds-color-text-emphasis)}
+.sw{flex:none;display:inline-flex;align-items:center;justify-content:flex-end;width:var(--ds-space-12);height:var(--ds-space-6);margin-top:10px;padding:var(--ds-border-width-strong);border:var(--ds-border-width-strong) solid var(--ds-color-primary);border-radius:var(--ds-radius-full);background:var(--ds-color-primary)}
+.sw i{display:block;width:var(--ds-space-4);height:var(--ds-space-4);border-radius:var(--ds-radius-full);background:var(--ds-color-primary-contrast)}
+.alert{display:flex;gap:var(--ds-space-3);padding:var(--ds-space-4);border:var(--ds-border-width) solid var(--ds-color-success-border);border-radius:var(--ds-radius-lg);background:var(--ds-color-success-bg);color:var(--ds-color-success)}
+.alert svg{flex:none;width:var(--ds-icon-size-lg);height:var(--ds-icon-size-lg)}
+.alert-in{display:flex;flex-direction:column;gap:var(--ds-space-1)}
+.alert-t{font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight)}
+.alert-b{font-size:var(--ds-text-body-xs-size);line-height:var(--ds-text-body-xs-line-height);color:var(--ds-color-text)}
+
+/* Start from it / Customize in minutes */
+.cols{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--ds-space-12);margin-top:var(--ds-space-12);align-items:start}
+.cz{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--ds-space-12);margin-top:var(--ds-space-12);align-items:start}
+.steps{margin:0;padding:0;list-style:none;border-bottom:var(--ds-border-width) solid var(--ds-color-divider)}
+.step{display:grid;grid-template-columns:var(--ds-space-16) minmax(0,1fr);gap:var(--ds-space-4);padding:var(--ds-space-6) 0;border-top:var(--ds-border-width) solid var(--ds-color-divider)}
+.step-n{font-family:var(--ds-font-mono);font-size:var(--ds-text-h3-size);line-height:var(--ds-text-h3-line-height);color:var(--ds-color-text-muted)}
+.step-b{display:flex;flex-direction:column;gap:var(--ds-space-2);min-width:0}
+.cmd{margin:var(--ds-space-2) 0 0;padding:var(--ds-space-4);border:var(--ds-border-width) solid var(--ds-color-divider);border-radius:var(--ds-radius-md);background:var(--ds-color-surface-subtle);font-family:var(--ds-font-mono);font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);color:var(--ds-color-text-strong);white-space:pre;overflow-x:auto}
+.side{display:flex;flex-direction:column;gap:var(--ds-space-4);padding:var(--ds-space-6);border:var(--ds-border-width) solid var(--ds-color-divider);border-radius:var(--ds-radius-lg);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-sm)}
+.code-f{margin:0;display:flex;flex-direction:column;gap:var(--ds-space-2);min-width:0}
+.code-c{font-family:var(--ds-font-mono);font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);color:var(--ds-color-text-muted)}
+.code{margin:0;padding:var(--ds-space-6);border:var(--ds-border-width) solid var(--ds-color-divider);border-radius:var(--ds-radius-lg);background:var(--ds-color-surface-subtle);font-family:var(--ds-font-mono);font-size:var(--ds-text-caption-size);line-height:var(--ds-text-caption-line-height);color:var(--ds-color-text-strong);white-space:pre;overflow-x:auto}
+
+/* Every component: link rows */
+.rows{margin:0;padding:0;list-style:none;border-top:var(--ds-border-width) solid var(--ds-color-divider)}
+.rows li{border-bottom:var(--ds-border-width) solid var(--ds-color-divider)}
+.rowl{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ds-space-1) var(--ds-space-3);min-height:var(--ds-control-height);padding:var(--ds-space-2);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);color:var(--ds-color-text-emphasis);text-decoration:none}
+.rowl.is-hover{background:var(--ds-color-fill)}
+.rowl .parts{margin-left:auto;font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);font-weight:var(--ds-font-weight-regular);color:var(--ds-color-text-muted);text-align:right}
+.groups{column-count:3;column-gap:var(--ds-space-8);margin-top:var(--ds-space-12)}
+.grp{break-inside:avoid;margin-bottom:var(--ds-space-8)}
+.grp .hd{margin-bottom:var(--ds-space-3)}
+.also{margin:var(--ds-space-4) 0 0;max-width:90ch;font-size:var(--ds-text-body-sm-size);line-height:var(--ds-text-body-sm-line-height);color:var(--ds-color-text-muted)}
+
+/* Phone width (below 768 px). In the build these are the unprefixed utilities; md: and lg: add the desktop values. */
+.pg.m .wrap{padding:0 var(--ds-space-6)}
+.pg.m .band{padding:var(--ds-space-16) 0}
+.pg.m .h1{font-size:var(--ds-text-h2-size);line-height:var(--ds-text-h2-line-height);letter-spacing:var(--ds-text-h2-tracking)}
+.pg.m .h2{font-size:var(--ds-text-h3-size);line-height:var(--ds-text-h3-line-height);letter-spacing:var(--ds-text-h3-tracking)}
+.pg.m .h3{font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-line-height);letter-spacing:0}
+.pg.m .lede,.pg.m .intro{font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height)}
+.pg.m .cta{flex-direction:column}
+.pg.m .cta .btn{width:100%}
+.pg.m .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.pg.m .cards,.pg.m .cols,.pg.m .cz,.pg.m .demo-g{grid-template-columns:minmax(0,1fr)}
+.pg.m .cards,.pg.m .cols,.pg.m .cz,.pg.m .show,.pg.m .groups{margin-top:var(--ds-space-8)}
+.pg.m .groups{column-count:1}
+.pg.m .demo{padding:var(--ds-space-4)}
+.pg.m .step{grid-template-columns:minmax(0,1fr);gap:var(--ds-space-2)}
+.pg.m .code{padding:var(--ds-space-4)}
+.pg.m .seg{overflow-x:auto}
+.phone{width:375px;flex:none;border:1px solid var(--ds-color-divider);display:flex;flex-direction:column}
+.phone .scr{height:820px;overflow:hidden}
+
+/* States and contrast boards */
+.th{padding:24px;background:var(--ds-color-background);color:var(--ds-color-text);font-family:var(--ds-font-body)}
+.sgrid{display:grid;grid-template-columns:112px repeat(3,minmax(0,1fr));gap:20px 16px;align-items:center}
+.rh{font-family:var(--ds-font-mono);font-size:11px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-emphasis)}
+.cell{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+.cap{font-family:var(--ds-font-mono);font-size:11px;line-height:16px;color:var(--ds-color-text-muted)}
+.chip{display:inline-flex;align-items:center;justify-content:center;width:40px;height:24px;margin-right:8px;border:1px solid var(--ds-color-border);font-family:var(--ds-font-mono);font-size:12px;vertical-align:-7px}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 31000px; box-sizing: border-box; padding: 96px; background: var(--ds-color-background); color: var(--ds-color-text-emphasis); font-family: var(--ds-font-body); display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid var(--ds-color-border-strong); padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: var(--ds-font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ds-color-text-muted)">
+<span>Design System Wireframe</span>
+<span>Introduction page · DS-70 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); font-size: 96px; line-height: 1; letter-spacing: -0.04em">Introduction</h1>
+<p style="margin: 0; max-width: 900px; font-size: 18px; line-height: 1.6; color: var(--ds-color-text)">The Storybook landing page (<code style="font-family: var(--ds-font-mono); font-size: 15px">src/Introduction.stories.tsx</code>), redesigned around why use it, start from it and customize it. Six bands: hero with the theme switcher tip, Why use it, a live theme showcase, Start from it, Customize in minutes, and a component list that covers every family exported from <code style="font-family: var(--ds-font-mono); font-size: 15px">src/index.ts</code>. Built from shipped components (Button, Tag, SegmentedControl, Breadcrumb, TextField, Switch, Alert) and Tailwind utilities only. Each artboard sets <code style="font-family: var(--ds-font-mono); font-size: 15px">data-theme</code> on its root; the role values come from tokens.css and themes/bold.css in the token block. Copy, links and story ids: <code style="font-family: var(--ds-font-mono); font-size: 15px">docs/specs/Introduction.md</code>.</p>
+</header>
+
+<!-- ============================================================ 01 DESKTOP, FOUR THEMES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">The whole page · desktop · four themes</h2></div>
+<p class="sec-d">Same markup in all four artboards; only <code>data-theme</code> on the page root differs (in Storybook the toolbar puts it on <code>&lt;html&gt;</code>). The showcase panel opens on <code>bold</code> in every theme: it sits in a <code>data-theme="default"</code> reset and then its own <code>data-theme</code>, so it always shows exactly the picked theme. Content width 1280 max, 48 px gutters, 96 px band padding.</p>
+
+<!-- ======== DEFAULT -->
+<div class="ab"><div class="ab-h"><span>default · desktop</span><span>data-theme="default" (no attribute)</span></div>
+<div class="pg" data-theme="default">
+<section class="band"><div class="wrap">
+<p class="eyebrow">Design System Wireframe · React 19 · Radix UI</p>
+<h1 class="hd h1">Accessible React components. Your look, in minutes.</h1>
+<p class="lede">25 component families on Radix primitives, styled only through role tokens. Build on the black and white wireframe today, then generate your own theme with <code>createTheme()</code>, check it with <code>checkContrast()</code> and ship it in light and dark, without touching a component.</p>
+<div class="cta"><span class="btn btn-primary">Use this template</span><span class="btn btn-secondary">Create your own theme</span><span class="btn btn-ghost">Browse components</span></div>
+<div class="tip"><span class="tip-t">Theme switcher</span><p class="tip-b">Pick a theme from the paintbrush menu in the Storybook toolbar. This page, every story and every docs page follow it.</p><ul class="tags"><li class="tag tag-neutral">default</li><li class="tag tag-neutral">dark</li><li class="tag tag-neutral">bold</li><li class="tag tag-neutral">bold-dark</li></ul></div>
+<dl class="facts"><div><dt>Component families</dt><dd>25</dd></div><div><dt>Themes included</dt><dd>4</dd></div><div><dt>Themeable roles</dt><dd>87</dd></div><div><dt>Coverage floor</dt><dd>80 %</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Why use it</h2>
+<p class="intro">Four things you would otherwise build yourself, each with its proof one click away.</p>
+<ul class="cards">
+<li class="card"><p class="eyebrow">Radix UI</p><h3 class="hd h3">Accessible by default</h3><p class="p">Every interactive part is a Radix primitive, so focus, keyboard and ARIA come from Radix, not from hand-written handlers. Names a screen reader needs, like a Dialog title or an IconButton label, are required props.</p><span class="tl">Try the Dialog keyboard story<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">Role tokens</p><h3 class="hd h3">Themed through roles</h3><p class="p">Components read only the 87 semantic roles, never raw values. All library CSS sits in <code>@layer ds</code>, so one <code>[data-theme]</code> block of yours restyles everything, in any import order.</p><span class="tl">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">createTheme() · checkContrast()</p><h3 class="hd h3">Generate and verify a theme</h3><p class="p"><code>createTheme()</code> turns one brand color, fonts, radius and shadow into a complete theme block. <code>checkContrast()</code> checks every text and UI pair against WCAG AA, so a failing theme never ships.</p><span class="tl">Read the theming guide on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">Stories · jest-axe · coverage</p><h3 class="hd h3">Tested like a product</h3><p class="p">A story per state, keyboard stories for every interactive component, <code>userEvent</code> and <code>jest-axe</code> in every test file. CI runs lint, typecheck and the suite with an 80 % coverage floor on every pull request.</p><span class="tl">See the CI workflow on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+</ul>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">One component set, four themes</h2>
+<p class="intro">The screen below is stock components. Pick a theme: only the <code>data-theme</code> attribute on the panel changes, never the markup. <code>bold</code> and <code>bold-dark</code> are opt-in (<code>themes/bold.css</code>); Storybook loads them for you.</p>
+<div class="show">
+<div class="show-bar"><div class="cg"><span class="cg-l">Preview theme</span><div class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></div></div><span class="tl">Compare all four side by side<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div>
+<figure class="demo-f"><figcaption class="demo-cap"><span>Preview</span><code>data-theme="bold"</code></figcaption>
+<div data-theme="default"><div class="demo" data-theme="bold">
+<nav class="bc"><ol><li><span class="muted">Projects</span><span class="sep">/</span></li><li><span class="cur">Launch plan</span></li></ol></nav>
+<div class="demo-t"><h3 class="hd h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span><span class="tag tag-outline">Shared</span></div>
+<p class="p" style="margin-top:var(--ds-space-2)">Stock parts only: no custom CSS, nothing to restyle by hand.</p>
+<div class="demo-g">
+<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div><span class="fld-h">Who signs this off?</span></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
+<div class="col"><div class="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span><span class="btn btn-ghost">Cancel</span></div></div>
+</div>
+</div></div>
+</figure>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Start from it</h2>
+<p class="intro">Make the repository yours and you get the components, tokens, Storybook, tests and CI in one step.</p>
+<div class="cols">
+<ol class="steps">
+<li class="step"><span class="step-n" aria-hidden="true">01</span><div class="step-b"><h3 class="hd h3">Use the template</h3><p class="p">Create your own copy of the repository on GitHub with “Use this template”.</p><span class="tl">Use this template on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">02</span><div class="step-b"><h3 class="hd h3">Run it</h3><p class="p">Install and open Storybook. Lint, typecheck and tests run the same way locally and in CI.</p><pre class="cmd">npm ci
+npm run storybook</pre></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">03</span><div class="step-b"><h3 class="hd h3">Build your screens</h3><p class="p">Compose pages from the components below and the Tailwind utilities, or start from a pattern.</p><div class="links"><span class="tl">Contact form pattern<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="tl">Configurator pattern<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></div></li>
+</ol>
+<div class="side"><h3 class="hd h3">Read first</h3><ul class="rows">
+<li><span class="rowl">Consumer guide<span class="parts">GitHub</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Colors<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Typography<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Spacing<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Shape and line<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+</ul></div>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Customize in minutes</h2>
+<p class="intro">One brand color is enough. <code>createTheme()</code> derives the rest: neutrals, hover, focus, radius, shadow and a dark block.</p>
+<div class="cz">
+<div><ol class="steps">
+<li class="step"><span class="step-n" aria-hidden="true">01</span><div class="step-b"><h3 class="hd h3">Generate</h3><p class="p">Call <code>createTheme()</code> with a name, a brand color and fonts. It returns a stylesheet with every role set.</p></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">02</span><div class="step-b"><h3 class="hd h3">Check</h3><p class="p">Run <code>checkContrast()</code> on the blocks. It lists every text and UI pair under WCAG AA, so your build can fail on it.</p></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">03</span><div class="step-b"><h3 class="hd h3">Turn it on</h3><p class="p">Import the CSS and set <code>data-theme="acme"</code> on <code>&lt;html&gt;</code>, or <code>"acme-dark"</code> for dark.</p></div></li>
+</ol>
+<div class="links" style="margin-top:var(--ds-space-4)"><span class="tl">Follow the step-by-step guide<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="tl">Apply a theme: consumer guide<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></div>
+<figure class="code-f"><figcaption class="code-c">docs/theming-guide/samples/minimal.ts</figcaption><pre class="code" data-ds-code>import { createTheme } from 'design-system-test'
+
+// The smallest useful input: one brand color, nothing else chosen.
+// Unset radius is 0, unset shadow is none, unset neutral gives pure grays.
+export const acme = createTheme({
+  name: 'acme',
+  brand: '#0b6e4f',
+  fonts: { heading: "'Inter', system-ui, sans-serif", body: "'Inter', system-ui, sans-serif" },
+  radius: {},
+  shadow: {},
+  mode: 'both',
+})
+
+// acme.css holds two blocks: [data-theme="acme"] (light, every role) and
+// [data-theme="acme-dark"] (dark, color roles only).
+export const selectors: string[] = acme.blocks.map((block) => block.selector)</pre></figure>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Every component</h2>
+<p class="intro">All 25 families exported from <code>src/index.ts</code>, each with a docs page, a story per state and tests. Parts exported with a family are listed beside it.</p>
+<div class="groups">
+<div class="grp"><h3 class="hd h4">Actions</h3><ul class="rows"><li><span class="rowl">Button<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">IconButton<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">ButtonGroup<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Forms</h3><ul class="rows"><li><span class="rowl">Input<span class="parts">Field, TextField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Textarea<span class="parts">TextareaField, TextareaCounter</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Checkbox<span class="parts">CheckboxGroup</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">RadioGroup<span class="parts">RadioGroupItem</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Switch<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">SegmentedControl<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">TileGroup<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Slider<span class="parts">SliderField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Overlays</h3><ul class="rows"><li><span class="rowl">Dialog<span class="parts">DialogClose</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Drawer<span class="parts">DrawerClose</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Popover<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tooltip<span class="parts">TooltipProvider</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">InfoTip<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Feedback</h3><ul class="rows"><li><span class="rowl">Alert<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Toast<span class="parts">ToastProvider, Toaster, useToast</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tag<span class="parts">Badge</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Navigation</h3><ul class="rows"><li><span class="rowl">Breadcrumb<span class="parts">BreadcrumbLink</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tabs<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Layout</h3><ul class="rows"><li><span class="rowl">Stack<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Grid<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Icons</h3><ul class="rows"><li><span class="rowl">Icon<span class="parts">IconProvider, createIcon, useIcon</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+</div>
+<p class="also">Also exported: the hooks <code>useMediaQuery</code> and <code>useToast</code>; the theme tools <code>createTheme</code>, <code>checkContrast</code> and <code>generateScale</code>; the role lists <code>themeRoles</code>, <code>themeRoleGroups</code>, <code>colorRoles</code>, <code>fontRoles</code>, <code>fontWeightRoles</code>, <code>typeScaleRoles</code>, <code>radiusRoles</code>, <code>shadowRoles</code> and <code>shapeRoles</code>.</p>
+</div></section>
+</div>
+<div class="ab-f">Wireframe: black primary, Red Hat Mono headings and uppercase labels, square corners, flat. The bold showcase panel is the first thing that shows a hue.</div></div>
+
+<!-- ======== DARK -->
+<div class="ab"><div class="ab-h"><span>dark · desktop</span><span>data-theme="dark"</span></div>
+<div class="pg" data-theme="dark">
+<section class="band"><div class="wrap">
+<p class="eyebrow">Design System Wireframe · React 19 · Radix UI</p>
+<h1 class="hd h1">Accessible React components. Your look, in minutes.</h1>
+<p class="lede">25 component families on Radix primitives, styled only through role tokens. Build on the black and white wireframe today, then generate your own theme with <code>createTheme()</code>, check it with <code>checkContrast()</code> and ship it in light and dark, without touching a component.</p>
+<div class="cta"><span class="btn btn-primary">Use this template</span><span class="btn btn-secondary">Create your own theme</span><span class="btn btn-ghost">Browse components</span></div>
+<div class="tip"><span class="tip-t">Theme switcher</span><p class="tip-b">Pick a theme from the paintbrush menu in the Storybook toolbar. This page, every story and every docs page follow it.</p><ul class="tags"><li class="tag tag-neutral">default</li><li class="tag tag-neutral">dark</li><li class="tag tag-neutral">bold</li><li class="tag tag-neutral">bold-dark</li></ul></div>
+<dl class="facts"><div><dt>Component families</dt><dd>25</dd></div><div><dt>Themes included</dt><dd>4</dd></div><div><dt>Themeable roles</dt><dd>87</dd></div><div><dt>Coverage floor</dt><dd>80 %</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Why use it</h2>
+<p class="intro">Four things you would otherwise build yourself, each with its proof one click away.</p>
+<ul class="cards">
+<li class="card"><p class="eyebrow">Radix UI</p><h3 class="hd h3">Accessible by default</h3><p class="p">Every interactive part is a Radix primitive, so focus, keyboard and ARIA come from Radix, not from hand-written handlers. Names a screen reader needs, like a Dialog title or an IconButton label, are required props.</p><span class="tl">Try the Dialog keyboard story<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">Role tokens</p><h3 class="hd h3">Themed through roles</h3><p class="p">Components read only the 87 semantic roles, never raw values. All library CSS sits in <code>@layer ds</code>, so one <code>[data-theme]</code> block of yours restyles everything, in any import order.</p><span class="tl">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">createTheme() · checkContrast()</p><h3 class="hd h3">Generate and verify a theme</h3><p class="p"><code>createTheme()</code> turns one brand color, fonts, radius and shadow into a complete theme block. <code>checkContrast()</code> checks every text and UI pair against WCAG AA, so a failing theme never ships.</p><span class="tl">Read the theming guide on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">Stories · jest-axe · coverage</p><h3 class="hd h3">Tested like a product</h3><p class="p">A story per state, keyboard stories for every interactive component, <code>userEvent</code> and <code>jest-axe</code> in every test file. CI runs lint, typecheck and the suite with an 80 % coverage floor on every pull request.</p><span class="tl">See the CI workflow on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+</ul>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">One component set, four themes</h2>
+<p class="intro">The screen below is stock components. Pick a theme: only the <code>data-theme</code> attribute on the panel changes, never the markup. <code>bold</code> and <code>bold-dark</code> are opt-in (<code>themes/bold.css</code>); Storybook loads them for you.</p>
+<div class="show">
+<div class="show-bar"><div class="cg"><span class="cg-l">Preview theme</span><div class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></div></div><span class="tl">Compare all four side by side<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div>
+<figure class="demo-f"><figcaption class="demo-cap"><span>Preview</span><code>data-theme="bold"</code></figcaption>
+<div data-theme="default"><div class="demo" data-theme="bold">
+<nav class="bc"><ol><li><span class="muted">Projects</span><span class="sep">/</span></li><li><span class="cur">Launch plan</span></li></ol></nav>
+<div class="demo-t"><h3 class="hd h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span><span class="tag tag-outline">Shared</span></div>
+<p class="p" style="margin-top:var(--ds-space-2)">Stock parts only: no custom CSS, nothing to restyle by hand.</p>
+<div class="demo-g">
+<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div><span class="fld-h">Who signs this off?</span></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
+<div class="col"><div class="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span><span class="btn btn-ghost">Cancel</span></div></div>
+</div>
+</div></div>
+</figure>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Start from it</h2>
+<p class="intro">Make the repository yours and you get the components, tokens, Storybook, tests and CI in one step.</p>
+<div class="cols">
+<ol class="steps">
+<li class="step"><span class="step-n" aria-hidden="true">01</span><div class="step-b"><h3 class="hd h3">Use the template</h3><p class="p">Create your own copy of the repository on GitHub with “Use this template”.</p><span class="tl">Use this template on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">02</span><div class="step-b"><h3 class="hd h3">Run it</h3><p class="p">Install and open Storybook. Lint, typecheck and tests run the same way locally and in CI.</p><pre class="cmd">npm ci
+npm run storybook</pre></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">03</span><div class="step-b"><h3 class="hd h3">Build your screens</h3><p class="p">Compose pages from the components below and the Tailwind utilities, or start from a pattern.</p><div class="links"><span class="tl">Contact form pattern<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="tl">Configurator pattern<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></div></li>
+</ol>
+<div class="side"><h3 class="hd h3">Read first</h3><ul class="rows">
+<li><span class="rowl">Consumer guide<span class="parts">GitHub</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Colors<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Typography<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Spacing<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Shape and line<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+</ul></div>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Customize in minutes</h2>
+<p class="intro">One brand color is enough. <code>createTheme()</code> derives the rest: neutrals, hover, focus, radius, shadow and a dark block.</p>
+<div class="cz">
+<div><ol class="steps">
+<li class="step"><span class="step-n" aria-hidden="true">01</span><div class="step-b"><h3 class="hd h3">Generate</h3><p class="p">Call <code>createTheme()</code> with a name, a brand color and fonts. It returns a stylesheet with every role set.</p></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">02</span><div class="step-b"><h3 class="hd h3">Check</h3><p class="p">Run <code>checkContrast()</code> on the blocks. It lists every text and UI pair under WCAG AA, so your build can fail on it.</p></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">03</span><div class="step-b"><h3 class="hd h3">Turn it on</h3><p class="p">Import the CSS and set <code>data-theme="acme"</code> on <code>&lt;html&gt;</code>, or <code>"acme-dark"</code> for dark.</p></div></li>
+</ol>
+<div class="links" style="margin-top:var(--ds-space-4)"><span class="tl">Follow the step-by-step guide<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="tl">Apply a theme: consumer guide<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></div>
+<figure class="code-f"><figcaption class="code-c">docs/theming-guide/samples/minimal.ts</figcaption><pre class="code" data-ds-code>import { createTheme } from 'design-system-test'
+
+// The smallest useful input: one brand color, nothing else chosen.
+// Unset radius is 0, unset shadow is none, unset neutral gives pure grays.
+export const acme = createTheme({
+  name: 'acme',
+  brand: '#0b6e4f',
+  fonts: { heading: "'Inter', system-ui, sans-serif", body: "'Inter', system-ui, sans-serif" },
+  radius: {},
+  shadow: {},
+  mode: 'both',
+})
+
+// acme.css holds two blocks: [data-theme="acme"] (light, every role) and
+// [data-theme="acme-dark"] (dark, color roles only).
+export const selectors: string[] = acme.blocks.map((block) => block.selector)</pre></figure>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Every component</h2>
+<p class="intro">All 25 families exported from <code>src/index.ts</code>, each with a docs page, a story per state and tests. Parts exported with a family are listed beside it.</p>
+<div class="groups">
+<div class="grp"><h3 class="hd h4">Actions</h3><ul class="rows"><li><span class="rowl">Button<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">IconButton<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">ButtonGroup<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Forms</h3><ul class="rows"><li><span class="rowl">Input<span class="parts">Field, TextField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Textarea<span class="parts">TextareaField, TextareaCounter</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Checkbox<span class="parts">CheckboxGroup</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">RadioGroup<span class="parts">RadioGroupItem</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Switch<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">SegmentedControl<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">TileGroup<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Slider<span class="parts">SliderField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Overlays</h3><ul class="rows"><li><span class="rowl">Dialog<span class="parts">DialogClose</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Drawer<span class="parts">DrawerClose</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Popover<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tooltip<span class="parts">TooltipProvider</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">InfoTip<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Feedback</h3><ul class="rows"><li><span class="rowl">Alert<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Toast<span class="parts">ToastProvider, Toaster, useToast</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tag<span class="parts">Badge</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Navigation</h3><ul class="rows"><li><span class="rowl">Breadcrumb<span class="parts">BreadcrumbLink</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tabs<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Layout</h3><ul class="rows"><li><span class="rowl">Stack<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Grid<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Icons</h3><ul class="rows"><li><span class="rowl">Icon<span class="parts">IconProvider, createIcon, useIcon</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+</div>
+<p class="also">Also exported: the hooks <code>useMediaQuery</code> and <code>useToast</code>; the theme tools <code>createTheme</code>, <code>checkContrast</code> and <code>generateScale</code>; the role lists <code>themeRoles</code>, <code>themeRoleGroups</code>, <code>colorRoles</code>, <code>fontRoles</code>, <code>fontWeightRoles</code>, <code>typeScaleRoles</code>, <code>radiusRoles</code>, <code>shadowRoles</code> and <code>shapeRoles</code>.</p>
+</div></section>
+</div>
+<div class="ab-f">Same page, ground inverted. Primary turns light with dark text; the bold panel keeps its own lavender ground because it sits in its own scope.</div></div>
+
+<!-- ======== BOLD -->
+<div class="ab"><div class="ab-h"><span>bold · desktop</span><span>data-theme="bold"</span></div>
+<div class="pg" data-theme="bold">
+<section class="band"><div class="wrap">
+<p class="eyebrow">Design System Wireframe · React 19 · Radix UI</p>
+<h1 class="hd h1">Accessible React components. Your look, in minutes.</h1>
+<p class="lede">25 component families on Radix primitives, styled only through role tokens. Build on the black and white wireframe today, then generate your own theme with <code>createTheme()</code>, check it with <code>checkContrast()</code> and ship it in light and dark, without touching a component.</p>
+<div class="cta"><span class="btn btn-primary">Use this template</span><span class="btn btn-secondary">Create your own theme</span><span class="btn btn-ghost">Browse components</span></div>
+<div class="tip"><span class="tip-t">Theme switcher</span><p class="tip-b">Pick a theme from the paintbrush menu in the Storybook toolbar. This page, every story and every docs page follow it.</p><ul class="tags"><li class="tag tag-neutral">default</li><li class="tag tag-neutral">dark</li><li class="tag tag-neutral">bold</li><li class="tag tag-neutral">bold-dark</li></ul></div>
+<dl class="facts"><div><dt>Component families</dt><dd>25</dd></div><div><dt>Themes included</dt><dd>4</dd></div><div><dt>Themeable roles</dt><dd>87</dd></div><div><dt>Coverage floor</dt><dd>80 %</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Why use it</h2>
+<p class="intro">Four things you would otherwise build yourself, each with its proof one click away.</p>
+<ul class="cards">
+<li class="card"><p class="eyebrow">Radix UI</p><h3 class="hd h3">Accessible by default</h3><p class="p">Every interactive part is a Radix primitive, so focus, keyboard and ARIA come from Radix, not from hand-written handlers. Names a screen reader needs, like a Dialog title or an IconButton label, are required props.</p><span class="tl">Try the Dialog keyboard story<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">Role tokens</p><h3 class="hd h3">Themed through roles</h3><p class="p">Components read only the 87 semantic roles, never raw values. All library CSS sits in <code>@layer ds</code>, so one <code>[data-theme]</code> block of yours restyles everything, in any import order.</p><span class="tl">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">createTheme() · checkContrast()</p><h3 class="hd h3">Generate and verify a theme</h3><p class="p"><code>createTheme()</code> turns one brand color, fonts, radius and shadow into a complete theme block. <code>checkContrast()</code> checks every text and UI pair against WCAG AA, so a failing theme never ships.</p><span class="tl">Read the theming guide on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">Stories · jest-axe · coverage</p><h3 class="hd h3">Tested like a product</h3><p class="p">A story per state, keyboard stories for every interactive component, <code>userEvent</code> and <code>jest-axe</code> in every test file. CI runs lint, typecheck and the suite with an 80 % coverage floor on every pull request.</p><span class="tl">See the CI workflow on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+</ul>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">One component set, four themes</h2>
+<p class="intro">The screen below is stock components. Pick a theme: only the <code>data-theme</code> attribute on the panel changes, never the markup. <code>bold</code> and <code>bold-dark</code> are opt-in (<code>themes/bold.css</code>); Storybook loads them for you.</p>
+<div class="show">
+<div class="show-bar"><div class="cg"><span class="cg-l">Preview theme</span><div class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></div></div><span class="tl">Compare all four side by side<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div>
+<figure class="demo-f"><figcaption class="demo-cap"><span>Preview</span><code>data-theme="bold"</code></figcaption>
+<div data-theme="default"><div class="demo" data-theme="bold">
+<nav class="bc"><ol><li><span class="muted">Projects</span><span class="sep">/</span></li><li><span class="cur">Launch plan</span></li></ol></nav>
+<div class="demo-t"><h3 class="hd h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span><span class="tag tag-outline">Shared</span></div>
+<p class="p" style="margin-top:var(--ds-space-2)">Stock parts only: no custom CSS, nothing to restyle by hand.</p>
+<div class="demo-g">
+<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div><span class="fld-h">Who signs this off?</span></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
+<div class="col"><div class="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span><span class="btn btn-ghost">Cancel</span></div></div>
+</div>
+</div></div>
+</figure>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Start from it</h2>
+<p class="intro">Make the repository yours and you get the components, tokens, Storybook, tests and CI in one step.</p>
+<div class="cols">
+<ol class="steps">
+<li class="step"><span class="step-n" aria-hidden="true">01</span><div class="step-b"><h3 class="hd h3">Use the template</h3><p class="p">Create your own copy of the repository on GitHub with “Use this template”.</p><span class="tl">Use this template on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">02</span><div class="step-b"><h3 class="hd h3">Run it</h3><p class="p">Install and open Storybook. Lint, typecheck and tests run the same way locally and in CI.</p><pre class="cmd">npm ci
+npm run storybook</pre></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">03</span><div class="step-b"><h3 class="hd h3">Build your screens</h3><p class="p">Compose pages from the components below and the Tailwind utilities, or start from a pattern.</p><div class="links"><span class="tl">Contact form pattern<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="tl">Configurator pattern<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></div></li>
+</ol>
+<div class="side"><h3 class="hd h3">Read first</h3><ul class="rows">
+<li><span class="rowl">Consumer guide<span class="parts">GitHub</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Colors<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Typography<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Spacing<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Shape and line<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+</ul></div>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Customize in minutes</h2>
+<p class="intro">One brand color is enough. <code>createTheme()</code> derives the rest: neutrals, hover, focus, radius, shadow and a dark block.</p>
+<div class="cz">
+<div><ol class="steps">
+<li class="step"><span class="step-n" aria-hidden="true">01</span><div class="step-b"><h3 class="hd h3">Generate</h3><p class="p">Call <code>createTheme()</code> with a name, a brand color and fonts. It returns a stylesheet with every role set.</p></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">02</span><div class="step-b"><h3 class="hd h3">Check</h3><p class="p">Run <code>checkContrast()</code> on the blocks. It lists every text and UI pair under WCAG AA, so your build can fail on it.</p></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">03</span><div class="step-b"><h3 class="hd h3">Turn it on</h3><p class="p">Import the CSS and set <code>data-theme="acme"</code> on <code>&lt;html&gt;</code>, or <code>"acme-dark"</code> for dark.</p></div></li>
+</ol>
+<div class="links" style="margin-top:var(--ds-space-4)"><span class="tl">Follow the step-by-step guide<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="tl">Apply a theme: consumer guide<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></div>
+<figure class="code-f"><figcaption class="code-c">docs/theming-guide/samples/minimal.ts</figcaption><pre class="code" data-ds-code>import { createTheme } from 'design-system-test'
+
+// The smallest useful input: one brand color, nothing else chosen.
+// Unset radius is 0, unset shadow is none, unset neutral gives pure grays.
+export const acme = createTheme({
+  name: 'acme',
+  brand: '#0b6e4f',
+  fonts: { heading: "'Inter', system-ui, sans-serif", body: "'Inter', system-ui, sans-serif" },
+  radius: {},
+  shadow: {},
+  mode: 'both',
+})
+
+// acme.css holds two blocks: [data-theme="acme"] (light, every role) and
+// [data-theme="acme-dark"] (dark, color roles only).
+export const selectors: string[] = acme.blocks.map((block) => block.selector)</pre></figure>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Every component</h2>
+<p class="intro">All 25 families exported from <code>src/index.ts</code>, each with a docs page, a story per state and tests. Parts exported with a family are listed beside it.</p>
+<div class="groups">
+<div class="grp"><h3 class="hd h4">Actions</h3><ul class="rows"><li><span class="rowl">Button<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">IconButton<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">ButtonGroup<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Forms</h3><ul class="rows"><li><span class="rowl">Input<span class="parts">Field, TextField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Textarea<span class="parts">TextareaField, TextareaCounter</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Checkbox<span class="parts">CheckboxGroup</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">RadioGroup<span class="parts">RadioGroupItem</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Switch<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">SegmentedControl<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">TileGroup<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Slider<span class="parts">SliderField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Overlays</h3><ul class="rows"><li><span class="rowl">Dialog<span class="parts">DialogClose</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Drawer<span class="parts">DrawerClose</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Popover<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tooltip<span class="parts">TooltipProvider</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">InfoTip<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Feedback</h3><ul class="rows"><li><span class="rowl">Alert<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Toast<span class="parts">ToastProvider, Toaster, useToast</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tag<span class="parts">Badge</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Navigation</h3><ul class="rows"><li><span class="rowl">Breadcrumb<span class="parts">BreadcrumbLink</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tabs<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Layout</h3><ul class="rows"><li><span class="rowl">Stack<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Grid<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Icons</h3><ul class="rows"><li><span class="rowl">Icon<span class="parts">IconProvider, createIcon, useIcon</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+</div>
+<p class="also">Also exported: the hooks <code>useMediaQuery</code> and <code>useToast</code>; the theme tools <code>createTheme</code>, <code>checkContrast</code> and <code>generateScale</code>; the role lists <code>themeRoles</code>, <code>themeRoleGroups</code>, <code>colorRoles</code>, <code>fontRoles</code>, <code>fontWeightRoles</code>, <code>typeScaleRoles</code>, <code>radiusRoles</code>, <code>shadowRoles</code> and <code>shapeRoles</code>.</p>
+</div></section>
+</div>
+<div class="ab-f">Ultramarine primary on lavender, white cards with a hard ink shadow, uppercase 800 headings, 2 px lines, 48 px controls. Nothing in the page markup changed.</div></div>
+
+<!-- ======== BOLD-DARK -->
+<div class="ab"><div class="ab-h"><span>bold-dark · desktop</span><span>data-theme="bold-dark"</span></div>
+<div class="pg" data-theme="bold-dark">
+<section class="band"><div class="wrap">
+<p class="eyebrow">Design System Wireframe · React 19 · Radix UI</p>
+<h1 class="hd h1">Accessible React components. Your look, in minutes.</h1>
+<p class="lede">25 component families on Radix primitives, styled only through role tokens. Build on the black and white wireframe today, then generate your own theme with <code>createTheme()</code>, check it with <code>checkContrast()</code> and ship it in light and dark, without touching a component.</p>
+<div class="cta"><span class="btn btn-primary">Use this template</span><span class="btn btn-secondary">Create your own theme</span><span class="btn btn-ghost">Browse components</span></div>
+<div class="tip"><span class="tip-t">Theme switcher</span><p class="tip-b">Pick a theme from the paintbrush menu in the Storybook toolbar. This page, every story and every docs page follow it.</p><ul class="tags"><li class="tag tag-neutral">default</li><li class="tag tag-neutral">dark</li><li class="tag tag-neutral">bold</li><li class="tag tag-neutral">bold-dark</li></ul></div>
+<dl class="facts"><div><dt>Component families</dt><dd>25</dd></div><div><dt>Themes included</dt><dd>4</dd></div><div><dt>Themeable roles</dt><dd>87</dd></div><div><dt>Coverage floor</dt><dd>80 %</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Why use it</h2>
+<p class="intro">Four things you would otherwise build yourself, each with its proof one click away.</p>
+<ul class="cards">
+<li class="card"><p class="eyebrow">Radix UI</p><h3 class="hd h3">Accessible by default</h3><p class="p">Every interactive part is a Radix primitive, so focus, keyboard and ARIA come from Radix, not from hand-written handlers. Names a screen reader needs, like a Dialog title or an IconButton label, are required props.</p><span class="tl">Try the Dialog keyboard story<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">Role tokens</p><h3 class="hd h3">Themed through roles</h3><p class="p">Components read only the 87 semantic roles, never raw values. All library CSS sits in <code>@layer ds</code>, so one <code>[data-theme]</code> block of yours restyles everything, in any import order.</p><span class="tl">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">createTheme() · checkContrast()</p><h3 class="hd h3">Generate and verify a theme</h3><p class="p"><code>createTheme()</code> turns one brand color, fonts, radius and shadow into a complete theme block. <code>checkContrast()</code> checks every text and UI pair against WCAG AA, so a failing theme never ships.</p><span class="tl">Read the theming guide on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">Stories · jest-axe · coverage</p><h3 class="hd h3">Tested like a product</h3><p class="p">A story per state, keyboard stories for every interactive component, <code>userEvent</code> and <code>jest-axe</code> in every test file. CI runs lint, typecheck and the suite with an 80 % coverage floor on every pull request.</p><span class="tl">See the CI workflow on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+</ul>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">One component set, four themes</h2>
+<p class="intro">The screen below is stock components. Pick a theme: only the <code>data-theme</code> attribute on the panel changes, never the markup. <code>bold</code> and <code>bold-dark</code> are opt-in (<code>themes/bold.css</code>); Storybook loads them for you.</p>
+<div class="show">
+<div class="show-bar"><div class="cg"><span class="cg-l">Preview theme</span><div class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></div></div><span class="tl">Compare all four side by side<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div>
+<figure class="demo-f"><figcaption class="demo-cap"><span>Preview</span><code>data-theme="bold"</code></figcaption>
+<div data-theme="default"><div class="demo" data-theme="bold">
+<nav class="bc"><ol><li><span class="muted">Projects</span><span class="sep">/</span></li><li><span class="cur">Launch plan</span></li></ol></nav>
+<div class="demo-t"><h3 class="hd h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span><span class="tag tag-outline">Shared</span></div>
+<p class="p" style="margin-top:var(--ds-space-2)">Stock parts only: no custom CSS, nothing to restyle by hand.</p>
+<div class="demo-g">
+<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div><span class="fld-h">Who signs this off?</span></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
+<div class="col"><div class="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span><span class="btn btn-ghost">Cancel</span></div></div>
+</div>
+</div></div>
+</figure>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Start from it</h2>
+<p class="intro">Make the repository yours and you get the components, tokens, Storybook, tests and CI in one step.</p>
+<div class="cols">
+<ol class="steps">
+<li class="step"><span class="step-n" aria-hidden="true">01</span><div class="step-b"><h3 class="hd h3">Use the template</h3><p class="p">Create your own copy of the repository on GitHub with “Use this template”.</p><span class="tl">Use this template on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">02</span><div class="step-b"><h3 class="hd h3">Run it</h3><p class="p">Install and open Storybook. Lint, typecheck and tests run the same way locally and in CI.</p><pre class="cmd">npm ci
+npm run storybook</pre></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">03</span><div class="step-b"><h3 class="hd h3">Build your screens</h3><p class="p">Compose pages from the components below and the Tailwind utilities, or start from a pattern.</p><div class="links"><span class="tl">Contact form pattern<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="tl">Configurator pattern<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></div></li>
+</ol>
+<div class="side"><h3 class="hd h3">Read first</h3><ul class="rows">
+<li><span class="rowl">Consumer guide<span class="parts">GitHub</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Colors<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Typography<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Spacing<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li><span class="rowl">Shape and line<span class="parts">Foundations</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+</ul></div>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Customize in minutes</h2>
+<p class="intro">One brand color is enough. <code>createTheme()</code> derives the rest: neutrals, hover, focus, radius, shadow and a dark block.</p>
+<div class="cz">
+<div><ol class="steps">
+<li class="step"><span class="step-n" aria-hidden="true">01</span><div class="step-b"><h3 class="hd h3">Generate</h3><p class="p">Call <code>createTheme()</code> with a name, a brand color and fonts. It returns a stylesheet with every role set.</p></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">02</span><div class="step-b"><h3 class="hd h3">Check</h3><p class="p">Run <code>checkContrast()</code> on the blocks. It lists every text and UI pair under WCAG AA, so your build can fail on it.</p></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">03</span><div class="step-b"><h3 class="hd h3">Turn it on</h3><p class="p">Import the CSS and set <code>data-theme="acme"</code> on <code>&lt;html&gt;</code>, or <code>"acme-dark"</code> for dark.</p></div></li>
+</ol>
+<div class="links" style="margin-top:var(--ds-space-4)"><span class="tl">Follow the step-by-step guide<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="tl">Apply a theme: consumer guide<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></div>
+<figure class="code-f"><figcaption class="code-c">docs/theming-guide/samples/minimal.ts</figcaption><pre class="code" data-ds-code>import { createTheme } from 'design-system-test'
+
+// The smallest useful input: one brand color, nothing else chosen.
+// Unset radius is 0, unset shadow is none, unset neutral gives pure grays.
+export const acme = createTheme({
+  name: 'acme',
+  brand: '#0b6e4f',
+  fonts: { heading: "'Inter', system-ui, sans-serif", body: "'Inter', system-ui, sans-serif" },
+  radius: {},
+  shadow: {},
+  mode: 'both',
+})
+
+// acme.css holds two blocks: [data-theme="acme"] (light, every role) and
+// [data-theme="acme-dark"] (dark, color roles only).
+export const selectors: string[] = acme.blocks.map((block) => block.selector)</pre></figure>
+</div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Every component</h2>
+<p class="intro">All 25 families exported from <code>src/index.ts</code>, each with a docs page, a story per state and tests. Parts exported with a family are listed beside it.</p>
+<div class="groups">
+<div class="grp"><h3 class="hd h4">Actions</h3><ul class="rows"><li><span class="rowl">Button<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">IconButton<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">ButtonGroup<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Forms</h3><ul class="rows"><li><span class="rowl">Input<span class="parts">Field, TextField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Textarea<span class="parts">TextareaField, TextareaCounter</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Checkbox<span class="parts">CheckboxGroup</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">RadioGroup<span class="parts">RadioGroupItem</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Switch<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">SegmentedControl<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">TileGroup<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Slider<span class="parts">SliderField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Overlays</h3><ul class="rows"><li><span class="rowl">Dialog<span class="parts">DialogClose</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Drawer<span class="parts">DrawerClose</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Popover<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tooltip<span class="parts">TooltipProvider</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">InfoTip<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Feedback</h3><ul class="rows"><li><span class="rowl">Alert<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Toast<span class="parts">ToastProvider, Toaster, useToast</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tag<span class="parts">Badge</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Navigation</h3><ul class="rows"><li><span class="rowl">Breadcrumb<span class="parts">BreadcrumbLink</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Tabs<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Layout</h3><ul class="rows"><li><span class="rowl">Stack<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Grid<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Icons</h3><ul class="rows"><li><span class="rowl">Icon<span class="parts">IconProvider, createIcon, useIcon</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+</div>
+<p class="also">Also exported: the hooks <code>useMediaQuery</code> and <code>useToast</code>; the theme tools <code>createTheme</code>, <code>checkContrast</code> and <code>generateScale</code>; the role lists <code>themeRoles</code>, <code>themeRoleGroups</code>, <code>colorRoles</code>, <code>fontRoles</code>, <code>fontWeightRoles</code>, <code>typeScaleRoles</code>, <code>radiusRoles</code>, <code>shadowRoles</code> and <code>shapeRoles</code>.</p>
+</div></section>
+</div>
+<div class="ab-f">Indigo night with raised violet cards, light violet primary with dark text, black offset shadows. The showcase panel still opens on light bold, so the contrast between page and preview is the point.</div></div>
+</section>
+
+<!-- ============================================================ 02 PHONE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02</span><h2 class="sec-t">Phone width · 375 px</h2></div>
+<p class="sec-d">Below 768 px: 24 px gutters, 64 px band padding, every grid becomes one column. Headings step down one level of the scale (h1 uses the h2 size, section h2 the h3 size, card h3 the h4 size), because the bold display face in uppercase 800 does not fit a 327 px column at h1 size. Hero buttons stack at full width. The SegmentedControl strip scrolls sideways when the four options do not fit (its built-in behavior), and the code sample scrolls inside its focusable box. Each crop is 820 px tall; the themes are spread so every one appears at phone width.</p>
+<div class="phones">
+
+<div class="phone"><div class="ab-h"><span>Hero</span><span>bold</span></div><div class="scr"><div class="pg m" data-theme="bold">
+<section class="band"><div class="wrap">
+<p class="eyebrow">Design System Wireframe · React 19 · Radix UI</p>
+<h1 class="hd h1">Accessible React components. Your look, in minutes.</h1>
+<p class="lede">25 component families on Radix primitives, styled only through role tokens. Build on the black and white wireframe today, then generate your own theme with <code>createTheme()</code>, check it with <code>checkContrast()</code> and ship it in light and dark, without touching a component.</p>
+<div class="cta"><span class="btn btn-primary">Use this template</span><span class="btn btn-secondary">Create your own theme</span><span class="btn btn-ghost">Browse components</span></div>
+<div class="tip"><span class="tip-t">Theme switcher</span><p class="tip-b">Pick a theme from the paintbrush menu in the Storybook toolbar. This page, every story and every docs page follow it.</p><ul class="tags"><li class="tag tag-neutral">default</li><li class="tag tag-neutral">dark</li><li class="tag tag-neutral">bold</li><li class="tag tag-neutral">bold-dark</li></ul></div>
+<dl class="facts"><div><dt>Component families</dt><dd>25</dd></div><div><dt>Themes included</dt><dd>4</dd></div><div><dt>Themeable roles</dt><dd>87</dd></div><div><dt>Coverage floor</dt><dd>80 %</dd></div></dl>
+</div></section>
+</div></div></div>
+
+<div class="phone"><div class="ab-h"><span>Why use it</span><span>dark</span></div><div class="scr"><div class="pg m" data-theme="dark">
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Why use it</h2>
+<p class="intro">Four things you would otherwise build yourself, each with its proof one click away.</p>
+<ul class="cards">
+<li class="card"><p class="eyebrow">Radix UI</p><h3 class="hd h3">Accessible by default</h3><p class="p">Every interactive part is a Radix primitive, so focus, keyboard and ARIA come from Radix, not from hand-written handlers. Names a screen reader needs, like a Dialog title or an IconButton label, are required props.</p><span class="tl">Try the Dialog keyboard story<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+<li class="card"><p class="eyebrow">Role tokens</p><h3 class="hd h3">Themed through roles</h3><p class="p">Components read only the 87 semantic roles, never raw values. All library CSS sits in <code>@layer ds</code>, so one <code>[data-theme]</code> block of yours restyles everything, in any import order.</p><span class="tl">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li>
+</ul>
+</div></section>
+</div></div></div>
+
+<div class="phone"><div class="ab-h"><span>Showcase</span><span>bold-dark page · bold panel</span></div><div class="scr"><div class="pg m" data-theme="bold-dark">
+<section class="band"><div class="wrap">
+<h2 class="hd h2">One component set, four themes</h2>
+<p class="intro">The screen below is stock components. Pick a theme: only the <code>data-theme</code> attribute on the panel changes, never the markup.</p>
+<div class="show">
+<div class="show-bar"><div class="cg"><span class="cg-l">Preview theme</span><div class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></div></div></div>
+<figure class="demo-f"><figcaption class="demo-cap"><span>Preview</span><code>data-theme="bold"</code></figcaption>
+<div data-theme="default"><div class="demo" data-theme="bold">
+<nav class="bc"><ol><li><span class="muted">Projects</span><span class="sep">/</span></li><li><span class="cur">Launch plan</span></li></ol></nav>
+<div class="demo-t"><h3 class="hd h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span><span class="tag tag-outline">Shared</span></div>
+<div class="demo-g">
+<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div><span class="fld-h">Who signs this off?</span></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
+<div class="col"><div class="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span><span class="btn btn-ghost">Cancel</span></div></div>
+</div>
+</div></div>
+</figure>
+</div>
+</div></section>
+</div></div></div>
+
+<div class="phone"><div class="ab-h"><span>Start from it</span><span>default</span></div><div class="scr"><div class="pg m" data-theme="default">
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Start from it</h2>
+<p class="intro">Make the repository yours and you get the components, tokens, Storybook, tests and CI in one step.</p>
+<div class="cols">
+<ol class="steps">
+<li class="step"><span class="step-n" aria-hidden="true">01</span><div class="step-b"><h3 class="hd h3">Use the template</h3><p class="p">Create your own copy of the repository on GitHub with “Use this template”.</p><span class="tl">Use this template on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">02</span><div class="step-b"><h3 class="hd h3">Run it</h3><p class="p">Install and open Storybook. Lint, typecheck and tests run the same way locally and in CI.</p><pre class="cmd">npm ci
+npm run storybook</pre></div></li>
+<li class="step"><span class="step-n" aria-hidden="true">03</span><div class="step-b"><h3 class="hd h3">Build your screens</h3><p class="p">Compose pages from the components below and the Tailwind utilities, or start from a pattern.</p><div class="links"><span class="tl">Contact form pattern<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span><span class="tl">Configurator pattern<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div></div></li>
+</ol>
+</div>
+</div></section>
+</div></div></div>
+
+<div class="phone"><div class="ab-h"><span>Customize</span><span>bold · code focus-visible</span></div><div class="scr"><div class="pg m" data-theme="bold">
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Customize in minutes</h2>
+<p class="intro">One brand color is enough. <code>createTheme()</code> derives the rest: neutrals, hover, focus, radius, shadow and a dark block.</p>
+<div class="cz">
+<figure class="code-f"><figcaption class="code-c">docs/theming-guide/samples/minimal.ts</figcaption><pre class="code f" data-ds-code>import { createTheme } from 'design-system-test'
+
+// The smallest useful input: one brand color, nothing else chosen.
+// Unset radius is 0, unset shadow is none, unset neutral gives pure grays.
+export const acme = createTheme({
+  name: 'acme',
+  brand: '#0b6e4f',
+  fonts: { heading: "'Inter', system-ui, sans-serif", body: "'Inter', system-ui, sans-serif" },
+  radius: {},
+  shadow: {},
+  mode: 'both',
+})</pre></figure>
+<div><ol class="steps">
+<li class="step"><span class="step-n" aria-hidden="true">01</span><div class="step-b"><h3 class="hd h3">Generate</h3><p class="p">Call <code>createTheme()</code> with a name, a brand color and fonts. It returns a stylesheet with every role set.</p></div></li>
+</ol></div>
+</div>
+</div></section>
+</div></div></div>
+
+<div class="phone"><div class="ab-h"><span>Every component</span><span>default</span></div><div class="scr"><div class="pg m" data-theme="default">
+<section class="band"><div class="wrap">
+<h2 class="hd h2">Every component</h2>
+<p class="intro">All 25 families exported from <code>src/index.ts</code>, each with a docs page, a story per state and tests.</p>
+<div class="groups">
+<div class="grp"><h3 class="hd h4">Actions</h3><ul class="rows"><li><span class="rowl">Button<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">IconButton<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">ButtonGroup<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<div class="grp"><h3 class="hd h4">Forms</h3><ul class="rows"><li><span class="rowl">Input<span class="parts">Field, TextField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Textarea<span class="parts">TextareaField, TextareaCounter</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Checkbox<span class="parts">CheckboxGroup</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">RadioGroup<span class="parts">RadioGroupItem</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li><li><span class="rowl">Switch<span class="parts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+</div>
+</div></section>
+</div></div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ 03 STATES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Interactive states · per theme</h2></div>
+<p class="sec-d">Every focusable thing on the page, in rest, hover and focus-visible. The CTAs and the theme switcher are the shipped Button and SegmentedControl, so their states come from those components. The text link and the component row are plain <code>&lt;a&gt;</code> elements styled with utilities: hover thickens the underline (text link) or fills the row with <code>fill</code> (row); focus-visible is the shared ring (<code>focus</code> color, focus width, 2 px offset). Same markup in all four artboards.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>default · states</span><span>data-theme="default"</span></div>
+<div class="th pg" data-theme="default"><div class="sgrid">
+<span></span><span class="cap">rest</span><span class="cap">hover</span><span class="cap">focus-visible</span>
+<span class="rh">CTA primary</span><div class="cell"><span class="btn btn-primary">Use this template</span></div><div class="cell"><span class="btn btn-primary is-hover">Use this template</span></div><div class="cell"><span class="btn btn-primary f">Use this template</span></div>
+<span class="rh">CTA secondary</span><div class="cell"><span class="btn btn-secondary">Create your own theme</span></div><div class="cell"><span class="btn btn-secondary is-hover">Create your own theme</span></div><div class="cell"><span class="btn btn-secondary f">Create your own theme</span></div>
+<span class="rh">CTA ghost</span><div class="cell"><span class="btn btn-ghost">Browse components</span></div><div class="cell"><span class="btn btn-ghost is-hover">Browse components</span></div><div class="cell"><span class="btn btn-ghost f">Browse components</span></div>
+<span class="rh">Text link</span><div class="cell"><span class="tl">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div><div class="cell"><span class="tl is-hover">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div><div class="cell"><span class="tl f">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div>
+<span class="rh">Component row</span><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl is-hover">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl f">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<span class="rh">Theme switcher</span><div class="cell" style="grid-column:span 3"><div class="row-b" style="align-items:center;gap:24px"><span class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></span><span class="seg"><span class="seg-i">default</span><span class="seg-i is-hover">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></span></div><span class="cap">rest (bold selected) · hover on dark</span><span class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on f">bold</span><span class="seg-i">bold-dark</span></span><span class="cap">focus-visible on the selected segment (Tab lands here)</span></div>
+<span class="rh">Code sample</span><div class="cell" style="grid-column:span 3;align-items:stretch"><pre class="code f" style="padding:var(--ds-space-4)">export const acme = createTheme({</pre><span class="cap">focus-visible (scrollable region, tabindex 0)</span></div>
+</div></div></div>
+
+<div class="ab"><div class="ab-h"><span>dark · states</span><span>data-theme="dark"</span></div>
+<div class="th pg" data-theme="dark"><div class="sgrid">
+<span></span><span class="cap">rest</span><span class="cap">hover</span><span class="cap">focus-visible</span>
+<span class="rh">CTA primary</span><div class="cell"><span class="btn btn-primary">Use this template</span></div><div class="cell"><span class="btn btn-primary is-hover">Use this template</span></div><div class="cell"><span class="btn btn-primary f">Use this template</span></div>
+<span class="rh">CTA secondary</span><div class="cell"><span class="btn btn-secondary">Create your own theme</span></div><div class="cell"><span class="btn btn-secondary is-hover">Create your own theme</span></div><div class="cell"><span class="btn btn-secondary f">Create your own theme</span></div>
+<span class="rh">CTA ghost</span><div class="cell"><span class="btn btn-ghost">Browse components</span></div><div class="cell"><span class="btn btn-ghost is-hover">Browse components</span></div><div class="cell"><span class="btn btn-ghost f">Browse components</span></div>
+<span class="rh">Text link</span><div class="cell"><span class="tl">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div><div class="cell"><span class="tl is-hover">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div><div class="cell"><span class="tl f">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div>
+<span class="rh">Component row</span><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl is-hover">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl f">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<span class="rh">Theme switcher</span><div class="cell" style="grid-column:span 3"><div class="row-b" style="align-items:center;gap:24px"><span class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></span><span class="seg"><span class="seg-i">default</span><span class="seg-i is-hover">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></span></div><span class="cap">rest (bold selected) · hover on dark</span><span class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on f">bold</span><span class="seg-i">bold-dark</span></span><span class="cap">focus-visible on the selected segment (Tab lands here)</span></div>
+<span class="rh">Code sample</span><div class="cell" style="grid-column:span 3;align-items:stretch"><pre class="code f" style="padding:var(--ds-space-4)">export const acme = createTheme({</pre><span class="cap">focus-visible (scrollable region, tabindex 0)</span></div>
+</div></div></div>
+
+<div class="ab"><div class="ab-h"><span>bold · states</span><span>data-theme="bold"</span></div>
+<div class="th pg" data-theme="bold"><div class="sgrid">
+<span></span><span class="cap">rest</span><span class="cap">hover</span><span class="cap">focus-visible</span>
+<span class="rh">CTA primary</span><div class="cell"><span class="btn btn-primary">Use this template</span></div><div class="cell"><span class="btn btn-primary is-hover">Use this template</span></div><div class="cell"><span class="btn btn-primary f">Use this template</span></div>
+<span class="rh">CTA secondary</span><div class="cell"><span class="btn btn-secondary">Create your own theme</span></div><div class="cell"><span class="btn btn-secondary is-hover">Create your own theme</span></div><div class="cell"><span class="btn btn-secondary f">Create your own theme</span></div>
+<span class="rh">CTA ghost</span><div class="cell"><span class="btn btn-ghost">Browse components</span></div><div class="cell"><span class="btn btn-ghost is-hover">Browse components</span></div><div class="cell"><span class="btn btn-ghost f">Browse components</span></div>
+<span class="rh">Text link</span><div class="cell"><span class="tl">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div><div class="cell"><span class="tl is-hover">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div><div class="cell"><span class="tl f">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div>
+<span class="rh">Component row</span><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl is-hover">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl f">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<span class="rh">Theme switcher</span><div class="cell" style="grid-column:span 3"><div class="row-b" style="align-items:center;gap:24px"><span class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></span><span class="seg"><span class="seg-i">default</span><span class="seg-i is-hover">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></span></div><span class="cap">rest (bold selected) · hover on dark</span><span class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on f">bold</span><span class="seg-i">bold-dark</span></span><span class="cap">focus-visible on the selected segment (Tab lands here)</span></div>
+<span class="rh">Code sample</span><div class="cell" style="grid-column:span 3;align-items:stretch"><pre class="code f" style="padding:var(--ds-space-4)">export const acme = createTheme({</pre><span class="cap">focus-visible (scrollable region, tabindex 0)</span></div>
+</div></div></div>
+
+<div class="ab"><div class="ab-h"><span>bold-dark · states</span><span>data-theme="bold-dark"</span></div>
+<div class="th pg" data-theme="bold-dark"><div class="sgrid">
+<span></span><span class="cap">rest</span><span class="cap">hover</span><span class="cap">focus-visible</span>
+<span class="rh">CTA primary</span><div class="cell"><span class="btn btn-primary">Use this template</span></div><div class="cell"><span class="btn btn-primary is-hover">Use this template</span></div><div class="cell"><span class="btn btn-primary f">Use this template</span></div>
+<span class="rh">CTA secondary</span><div class="cell"><span class="btn btn-secondary">Create your own theme</span></div><div class="cell"><span class="btn btn-secondary is-hover">Create your own theme</span></div><div class="cell"><span class="btn btn-secondary f">Create your own theme</span></div>
+<span class="rh">CTA ghost</span><div class="cell"><span class="btn btn-ghost">Browse components</span></div><div class="cell"><span class="btn btn-ghost is-hover">Browse components</span></div><div class="cell"><span class="btn btn-ghost f">Browse components</span></div>
+<span class="rh">Text link</span><div class="cell"><span class="tl">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div><div class="cell"><span class="tl is-hover">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div><div class="cell"><span class="tl f">Read the theming contract<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></div>
+<span class="rh">Component row</span><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl is-hover">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div><div class="cell" style="align-items:stretch"><ul class="rows"><li><span class="rowl f">Select<span class="parts">SelectField</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></li></ul></div>
+<span class="rh">Theme switcher</span><div class="cell" style="grid-column:span 3"><div class="row-b" style="align-items:center;gap:24px"><span class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></span><span class="seg"><span class="seg-i">default</span><span class="seg-i is-hover">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></span></div><span class="cap">rest (bold selected) · hover on dark</span><span class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on f">bold</span><span class="seg-i">bold-dark</span></span><span class="cap">focus-visible on the selected segment (Tab lands here)</span></div>
+<span class="rh">Code sample</span><div class="cell" style="grid-column:span 3;align-items:stretch"><pre class="code f" style="padding:var(--ds-space-4)">export const acme = createTheme({</pre><span class="cap">focus-visible (scrollable region, tabindex 0)</span></div>
+</div></div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ 04 SHOWCASE SELECTIONS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Theme showcase · each selection</h2></div>
+<p class="sec-d">Picking a segment swaps only the panel's <code>data-theme</code>; the caption shows the value. The panel sits in a <code>data-theme="default"</code> reset first, because <code>dark</code> only sets color roles: without the reset a dark panel on a bold page would inherit bold's fonts, radius and 48 px controls. Third artboard proves it: a <code>bold-dark</code> page with the <code>dark</code> panel is square, flat and in Red Hat. The selection is local state; it does not change the page or the toolbar.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>default page · default selected</span><span>panel data-theme="default"</span></div>
+<div class="pg th" data-theme="default"><div class="show" style="margin-top:0">
+<div class="cg"><span class="cg-l">Preview theme</span><div class="seg"><span class="seg-i is-on">default</span><span class="seg-i">dark</span><span class="seg-i">bold</span><span class="seg-i">bold-dark</span></div></div>
+<figure class="demo-f"><figcaption class="demo-cap"><span>Preview</span><code>data-theme="default"</code></figcaption>
+<div data-theme="default"><div class="demo" data-theme="default" style="padding:var(--ds-space-6)">
+<div class="demo-t" style="margin-top:0"><h3 class="hd h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
+<div class="demo-g"><div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div><div class="col"><div class="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div></div>
+</div></div></figure></div></div></div>
+
+<div class="ab"><div class="ab-h"><span>default page · dark selected</span><span>panel data-theme="dark"</span></div>
+<div class="pg th" data-theme="default"><div class="show" style="margin-top:0">
+<div class="cg"><span class="cg-l">Preview theme</span><div class="seg"><span class="seg-i">default</span><span class="seg-i is-on">dark</span><span class="seg-i">bold</span><span class="seg-i">bold-dark</span></div></div>
+<figure class="demo-f"><figcaption class="demo-cap"><span>Preview</span><code>data-theme="dark"</code></figcaption>
+<div data-theme="default"><div class="demo" data-theme="dark" style="padding:var(--ds-space-6)">
+<div class="demo-t" style="margin-top:0"><h3 class="hd h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
+<div class="demo-g"><div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div><div class="col"><div class="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div></div>
+</div></div></figure></div></div></div>
+
+<div class="ab"><div class="ab-h"><span>bold-dark page · dark selected</span><span>reset, then panel data-theme="dark"</span></div>
+<div class="pg th" data-theme="bold-dark"><div class="show" style="margin-top:0">
+<div class="cg"><span class="cg-l">Preview theme</span><div class="seg"><span class="seg-i">default</span><span class="seg-i is-on">dark</span><span class="seg-i">bold</span><span class="seg-i">bold-dark</span></div></div>
+<figure class="demo-f"><figcaption class="demo-cap"><span>Preview</span><code>data-theme="dark"</code></figcaption>
+<div data-theme="default"><div class="demo" data-theme="dark" style="padding:var(--ds-space-6)">
+<div class="demo-t" style="margin-top:0"><h3 class="hd h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
+<div class="demo-g"><div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div><div class="col"><div class="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div></div>
+</div></div></figure></div></div></div>
+
+<div class="ab"><div class="ab-h"><span>dark page · bold-dark selected</span><span>panel data-theme="bold-dark"</span></div>
+<div class="pg th" data-theme="dark"><div class="show" style="margin-top:0">
+<div class="cg"><span class="cg-l">Preview theme</span><div class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i">bold</span><span class="seg-i is-on">bold-dark</span></div></div>
+<figure class="demo-f"><figcaption class="demo-cap"><span>Preview</span><code>data-theme="bold-dark"</code></figcaption>
+<div data-theme="default"><div class="demo" data-theme="bold-dark" style="padding:var(--ds-space-6)">
+<div class="demo-t" style="margin-top:0"><h3 class="hd h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
+<div class="demo-g"><div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div><div class="col"><div class="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div></div>
+</div></div></figure></div></div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ 05 KEYBOARD AND OUTLINE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Keyboard order and heading outline</h2></div>
+<p class="sec-d">Tab order is DOM order, top to bottom, left to right; nothing uses a positive <code>tabindex</code>. 50 stops on desktop and phone alike (layout changes, order does not). The component list is last on purpose, so its 25 rows never stand between a keyboard user and the guides.</p>
+<div class="grid2">
+
+<div class="ab"><div class="ab-h"><span>Tab order</span><span>default · desktop</span></div>
+<div style="padding:24px"><table class="tbl">
+<tr><th style="width:64px">Stop</th><th>Element</th><th>Kind</th></tr>
+<tr class="grp"><td colspan="3">Hero</td></tr>
+<tr><td><span class="num">1</span></td><td>Use this template</td><td class="m">Button asChild &lt;a&gt; · GitHub</td></tr>
+<tr><td><span class="num">2</span></td><td>Create your own theme</td><td class="m">Button asChild &lt;a&gt; · docs</td></tr>
+<tr><td><span class="num">3</span></td><td>Browse components</td><td class="m">Button asChild &lt;a href="#components"&gt;</td></tr>
+<tr class="grp"><td colspan="3">Why use it</td></tr>
+<tr><td><span class="num">4–7</span></td><td>Four card links, left to right</td><td class="m">&lt;a&gt; text link</td></tr>
+<tr class="grp"><td colspan="3">Theme showcase</td></tr>
+<tr><td><span class="num">8</span></td><td>Preview theme (selected segment)</td><td class="m">SegmentedControl · arrows move and select</td></tr>
+<tr><td><span class="num">9</span></td><td>Compare all four side by side</td><td class="m">&lt;a&gt; text link</td></tr>
+<tr><td><span class="num">10</span></td><td>Owner</td><td class="m">TextField</td></tr>
+<tr><td><span class="num">11</span></td><td>Notify the team</td><td class="m">Switch</td></tr>
+<tr><td><span class="num">12–14</span></td><td>Publish, Save draft, Cancel</td><td class="m">Button (no action)</td></tr>
+<tr class="grp"><td colspan="3">Start from it</td></tr>
+<tr><td><span class="num">15</span></td><td>Use this template on GitHub</td><td class="m">&lt;a&gt; text link</td></tr>
+<tr><td><span class="num">16–17</span></td><td>Contact form pattern, Configurator pattern</td><td class="m">&lt;a&gt; text link</td></tr>
+<tr><td><span class="num">18–22</span></td><td>Read first: Consumer guide, Colors, Typography, Spacing, Shape and line</td><td class="m">&lt;a&gt; row</td></tr>
+<tr class="grp"><td colspan="3">Customize in minutes</td></tr>
+<tr><td><span class="num">23–24</span></td><td>Follow the step-by-step guide, Apply a theme</td><td class="m">&lt;a&gt; text link</td></tr>
+<tr><td><span class="num">25</span></td><td>minimal.ts code sample</td><td class="m">&lt;pre tabindex="0" role="region"&gt;</td></tr>
+<tr class="grp"><td colspan="3">Every component</td></tr>
+<tr><td><span class="num">26–50</span></td><td>25 component rows, column by column (Actions, Forms, Overlays, Feedback, Navigation, Layout, Icons)</td><td class="m">&lt;a&gt; row</td></tr>
+</table>
+<p class="note" style="margin-top:16px">On desktop the steps column comes before the Read first column and the text column before the code sample, so DOM order matches the visual order. On phone the code sample is drawn above the steps only in crop 02 to show its focus ring; in the build it stays after the links (stop 25).</p></div></div>
+
+<div style="display:flex;flex-direction:column;gap:24px">
+<div class="ab"><div class="ab-h"><span>Keys</span><span>no custom key handling</span></div>
+<div style="padding:24px"><table class="tbl">
+<tr><th style="width:180px">Key</th><th>Does</th></tr>
+<tr><td><span class="kbd">Tab</span> <span class="kbd">Shift</span>+<span class="kbd">Tab</span></td><td>Next / previous stop in the order on the left.</td></tr>
+<tr><td><span class="kbd">Enter</span></td><td>Follows a link or CTA. Storybook and GitHub links open in the top window, not inside the preview iframe. "Browse components" scrolls to the list and moves focus to its h2 (tabindex -1).</td></tr>
+<tr><td><span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">↑</span> <span class="kbd">↓</span></td><td>In Preview theme: move and select, so the panel retheme follows the arrow (Radix RadioGroup). Wraps at the ends.</td></tr>
+<tr><td><span class="kbd">Home</span> <span class="kbd">End</span></td><td>In Preview theme: move focus to the first / last segment (shipped SegmentedControl behavior).</td></tr>
+<tr><td><span class="kbd">Space</span></td><td>Selects the focused segment; toggles Notify the team; activates the demo buttons (no action).</td></tr>
+<tr><td><span class="kbd">←</span> <span class="kbd">→</span></td><td>On the focused code sample: scrolls it sideways when it overflows (phone).</td></tr>
+</table></div></div>
+
+<div class="ab"><div class="ab-h"><span>Heading outline</span><span>one h1, no skipped levels</span></div>
+<div style="padding:24px"><ul class="outline">
+<li><b>h1</b> Accessible React components. Your look, in minutes.</li>
+<li class="l2"><b>h2</b> Why use it</li>
+<li class="l3">h3 Accessible by default · Themed through roles · Generate and verify a theme · Tested like a product</li>
+<li class="l2"><b>h2</b> One component set, four themes</li>
+<li class="l3">h3 Launch plan (inside the preview panel)</li>
+<li class="l2"><b>h2</b> Start from it</li>
+<li class="l3">h3 Use the template · Run it · Build your screens · Read first</li>
+<li class="l2"><b>h2</b> Customize in minutes</li>
+<li class="l3">h3 Generate · Check · Turn it on</li>
+<li class="l2"><b>h2</b> Every component <span style="color:var(--ds-color-text-muted)">(id="components", tabindex -1)</span></li>
+<li class="l3">h3 Actions · Forms · Overlays · Feedback · Navigation · Layout · Icons</li>
+</ul>
+<p class="note" style="margin-top:16px">The eyebrow, the card kickers, the theme switcher tip title, the step numbers and the facts are not headings. Landmarks: one <code>&lt;main&gt;</code>; each band is a <code>&lt;section aria-labelledby&gt;</code> pointing at its h2; the hero section points at the h1.</p></div></div>
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ 06 CONTRAST -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Contrast · page-level pairs in four themes</h2></div>
+<p class="sec-d">Each chip is drawn from the roles themselves (its own <code>data-theme</code>), so it shows the pair as shipped. Ratios are computed from the token values and rounded down to one decimal. Text needs 4.5:1, the focus ring 3:1. Every pair passes in every theme; the lowest is 6.3:1 (bold, muted text on surface-subtle). The components inside the showcase panel are covered by their own specs and by <code>checkContrast()</code> for bold and bold-dark.</p>
+<div class="ab"><div class="ab-h"><span>Pairs used by the page</span><span>fg on bg · ratio</span></div>
+<div style="padding:24px"><table class="tbl">
+<tr><th style="width:300px">Where</th><th style="width:240px">Pair</th><th>default</th><th>dark</th><th>bold</th><th>bold-dark</th></tr>
+<tr><td>Body, lede, card text</td><td class="m">text on background</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-background);color:var(--ds-color-text)">Aa</span>10.3</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-background);color:var(--ds-color-text)">Aa</span>10.8</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-background);color:var(--ds-color-text)">Aa</span>11.7</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-background);color:var(--ds-color-text)">Aa</span>12.1</td></tr>
+<tr><td>Eyebrow, facts labels, parts</td><td class="m">text-muted on background</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-background);color:var(--ds-color-text-muted)">Aa</span>7.0</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-background);color:var(--ds-color-text-muted)">Aa</span>7.3</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-background);color:var(--ds-color-text-muted)">Aa</span>6.9</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-background);color:var(--ds-color-text-muted)">Aa</span>8.8</td></tr>
+<tr><td>Headings, links, row names</td><td class="m">text-emphasis on background</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-background);color:var(--ds-color-text-emphasis)">Aa</span>21.0</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-background);color:var(--ds-color-text-emphasis)">Aa</span>17.1</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-background);color:var(--ds-color-text-emphasis)">Aa</span>16.2</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-background);color:var(--ds-color-text-emphasis)">Aa</span>17.0</td></tr>
+<tr><td>Card and Read first text</td><td class="m">text on surface</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-surface);color:var(--ds-color-text)">Aa</span>10.3</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-surface);color:var(--ds-color-text)">Aa</span>10.8</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-surface);color:var(--ds-color-text)">Aa</span>13.1</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-surface);color:var(--ds-color-text)">Aa</span>11.4</td></tr>
+<tr><td>Card kicker on card</td><td class="m">text-muted on surface</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-surface);color:var(--ds-color-text-muted)">Aa</span>7.0</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-surface);color:var(--ds-color-text-muted)">Aa</span>7.3</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-surface);color:var(--ds-color-text-muted)">Aa</span>7.6</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-surface);color:var(--ds-color-text-muted)">Aa</span>8.2</td></tr>
+<tr><td>Theme switcher tip</td><td class="m">text on surface-subtle</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text)">Aa</span>9.6</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text)">Aa</span>9.7</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text)">Aa</span>10.7</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text)">Aa</span>10.4</td></tr>
+<tr><td>Code sample, npm commands</td><td class="m">text-strong on surface-subtle</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text-strong)">Aa</span>14.1</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text-strong)">Aa</span>12.4</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text-strong)">Aa</span>12.8</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text-strong)">Aa</span>12.3</td></tr>
+<tr><td>Muted on surface-subtle (lowest pair)</td><td class="m">text-muted on surface-subtle</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text-muted)">Aa</span>6.5</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text-muted)">Aa</span>6.5</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text-muted)">Aa</span>6.3</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-surface-subtle);color:var(--ds-color-text-muted)">Aa</span>7.5</td></tr>
+<tr><td>Primary CTA label</td><td class="m">primary-contrast on primary</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)">Aa</span>21.0</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)">Aa</span>17.1</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)">Aa</span>9.1</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)">Aa</span>6.8</td></tr>
+<tr><td>Row name on hover</td><td class="m">text-emphasis on fill</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-fill);color:var(--ds-color-text-emphasis)">Aa</span>18.0</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-fill);color:var(--ds-color-text-emphasis)">Aa</span>14.1</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-fill);color:var(--ds-color-text-emphasis)">Aa</span>13.7</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-fill);color:var(--ds-color-text-emphasis)">Aa</span>13.0</td></tr>
+<tr><td>Unselected segment</td><td class="m">text on fill</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-fill);color:var(--ds-color-text)">Aa</span>8.9</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-fill);color:var(--ds-color-text)">Aa</span>8.9</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-fill);color:var(--ds-color-text)">Aa</span>9.9</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-fill);color:var(--ds-color-text)">Aa</span>9.3</td></tr>
+<tr><td>Focus ring (3:1)</td><td class="m">focus on background</td>
+<td><span class="chip" data-theme="default" style="background:var(--ds-color-background);border:2px solid var(--ds-color-focus)"></span>21.0</td>
+<td><span class="chip" data-theme="dark" style="background:var(--ds-color-background);border:2px solid var(--ds-color-focus)"></span>17.1</td>
+<td><span class="chip" data-theme="bold" style="background:var(--ds-color-background);border:2px solid var(--ds-color-focus)"></span>8.2</td>
+<td><span class="chip" data-theme="bold-dark" style="background:var(--ds-color-background);border:2px solid var(--ds-color-focus)"></span>6.8</td></tr>
+</table></div>
+<div class="ab-f">Computed with the WCAG 2.x relative-luminance formula from the hex values in tokens.css and themes/bold.css. The DS-71 jest-axe run in every theme stays the gate; jsdom cannot compute color contrast, so a Storybook a11y addon pass (addon-a11y, already installed) is the visual check.</div></div>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>
