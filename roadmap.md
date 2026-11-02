@@ -453,8 +453,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Factory
 
-- [ ] **DS-62 Docs tasks may edit canvases.** DS-58 needed a manual override: canvas-only work was a `docs` task, but the Builder scope check and the `has_ui: no` UI guard both block `docs/design-system-wireframe/**`. Let `docs` tasks edit canvases, and teach the task shapers to file canvas maintenance as `docs` and new component visuals as `design`.
-  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-62 Docs tasks may edit canvases.** DS-58 needed a manual override: canvas-only work was a `docs` task, but the Builder scope check and the `has_ui: no` UI guard both block `docs/design-system-wireframe/**`. Let `docs` tasks edit canvases, and teach the task shapers to file canvas maintenance as `docs` and new component visuals as `design`.
+  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - `factory/plugin/RULES.md`: for `type: docs` tasks, the Builder scope check and UI guard allow `docs/design-system-wireframe/**`; `src/**`, stories, `.storybook/` and `docs/specs/**` stay guarded
     - `skills/build/SKILL.md` scope check and UI guard match the rule
