@@ -369,8 +369,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - The repo description (`gh repo view --json description`) leads with themeable, accessible starter value instead of the gray wireframe and the agent pipeline, after the user approves the wording
     - Topics include `design-tokens`, `theming`, `storybook`, `radix-ui` and `template` alongside the existing ones
     - The user has uploaded the social preview in Settings → General, and 'Template repository' is still enabled (`isTemplate: true`)
-- [ ] **DS-70 Introduction page refresh — design.** Redesign the Storybook `Introduction` page (`src/Introduction.stories.tsx`) around why use it, start from it and customize it. Today it pitches only the gray wireframe ("No hue", "No decoration"), lists 7 of 26 components, and never shows a theme, `createTheme()` or the theme switcher.
-  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: todo
+- [x] **DS-70 Introduction page refresh — design.** Redesign the Storybook `Introduction` page (`src/Introduction.stories.tsx`) around why use it, start from it and customize it. Today it pitches only the gray wireframe ("No hue", "No decoration"), lists 7 of 26 components, and never shows a theme, `createTheme()` or the theme switcher.
+  - type: design · has_ui: yes · depends_on: – · needs_human: no · status: done
   - done_when:
     - Canvas `docs/design-system-wireframe/Introduction.dc.html` shows the whole page in `default`, `dark`, `bold` and `bold-dark`: hero, "Why use it" (Radix a11y, role tokens, `createTheme()`/`checkContrast()`, stories + `jest-axe` + coverage), a theme showcase, "Start from it" and "Customize in minutes"
     - Spec `docs/specs/Introduction.md` gives each section's copy, its links (Storybook docs pages, GitHub starter and theming guides) and the shipped components and stories it uses
@@ -516,6 +516,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 ## Done
 
 - **DS-66** Starter guide & install accuracy — https://github.com/mikespineu/design-system-wireframe/pull/110
+- **DS-70** Introduction page refresh — design — https://github.com/mikespineu/design-system-wireframe/pull/109
 - **DS-67** README screenshot script & themed images — https://github.com/mikespineu/design-system-wireframe/pull/107
 - **DS-63** Canvas boards on role tokens — https://github.com/mikespineu/design-system-wireframe/pull/104
 - **DS-64** Storybook theme switcher (addon) — https://github.com/mikespineu/design-system-wireframe/pull/103
