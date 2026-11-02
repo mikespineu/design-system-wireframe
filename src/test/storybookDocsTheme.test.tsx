@@ -67,6 +67,27 @@ describe('ThemedDocsContainer', () => {
     expect(document.documentElement.getAttribute('data-theme')).toBe(theme);
   });
 
+  it('seeds from the current globals of the docs context, not only the URL (the container remounts on every docs render)', () => {
+    withGlobals('');
+    const context = { store: { userGlobals: { get: () => ({ theme: 'bold-dark' }) } } };
+    render(<ThemedDocsContainer {...props} context={context as never}>page</ThemedDocsContainer>);
+    expect(base()).toBe('dark');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('bold-dark');
+  });
+
+  it('prefers the context globals over a stale URL param, and falls back to the URL when the context has no theme', () => {
+    withGlobals('&globals=theme:dark');
+    const { unmount } = render(
+      <ThemedDocsContainer {...props} context={{ store: { userGlobals: { get: () => ({ theme: 'bold' }) } } } as never}>page</ThemedDocsContainer>,
+    );
+    expect(document.documentElement.getAttribute('data-theme')).toBe('bold');
+    unmount();
+    render(
+      <ThemedDocsContainer {...props} context={{ store: { userGlobals: { get: () => ({ theme: '' }) } } } as never}>page</ThemedDocsContainer>,
+    );
+    expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+  });
+
   it('sets no initial theme outside an embedding docs page, so the toolbar default applies', () => {
     expect(preview.initialGlobals).toBeUndefined();
   });

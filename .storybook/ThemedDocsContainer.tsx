@@ -5,8 +5,18 @@ import { addons } from 'storybook/preview-api'
 import { themes } from 'storybook/theming'
 import { isThemeName, storybookThemes, themeFromGlobalsParam } from './themes'
 
-/** The toolbar choice at load time: the `globals=theme:<name>` iframe param, else the default theme. */
-const initialTheme = () => themeFromGlobalsParam(new URLSearchParams(window.location.search).get('globals')) ?? 'default'
+/**
+ * The toolbar choice when the container mounts. Storybook remounts the container on every docs render, after
+ * the toolbar's GLOBALS_UPDATED was already emitted, and never updates the iframe URL, so the current globals
+ * come first: they live in the docs context's story store (present at runtime, though not in the public
+ * DocsContextProps type). The `globals=theme:<name>` iframe param is the fallback, then the default theme.
+ */
+const initialTheme = (context: unknown) => {
+  const store = (context as { store?: { userGlobals?: { get?: () => { theme?: unknown } } } } | undefined)?.store
+  const current = store?.userGlobals?.get?.().theme
+  if (isThemeName(current)) return current
+  return themeFromGlobalsParam(new URLSearchParams(window.location.search).get('globals')) ?? 'default'
+}
 
 const isDark = (name: string) => name === 'dark' || name === 'bold-dark'
 
@@ -17,7 +27,7 @@ const isDark = (name: string) => name === 'dark' || name === 'bold-dark'
  * dark theme for `dark` and `bold-dark`. Colors of the canvas and the page come from docs-theme.css.
  */
 export const ThemedDocsContainer = (props: ComponentProps<typeof DocsContainer>) => {
-  const [name, setName] = useState(initialTheme)
+  const [name, setName] = useState(() => initialTheme(props.context))
 
   useEffect(() => {
     const channel = addons.getChannel()
