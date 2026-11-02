@@ -14,5 +14,5 @@
     "types": ["jest", "@testing-library/jest-dom"],
     "paths": { "design-system-test": ["./src/index.ts"] }
   },
-  "include": ["src", "docs/theming-guide", "test", ".storybook", "jest.setup.ts", "*.d.ts"]
+  "include": ["src", "docs/theming-guide", "scripts/*.test.ts", "test", ".storybook", "jest.setup.ts", "*.d.ts"]
 }
