@@ -33,6 +33,7 @@ updated: "2026-11-02T14:01:33Z"
 - 14:48 pr: waiting for you (approve design or request changes)
 - 14:48 pr: opened draft PR #97 with factory:needs-approval
 - 15:01 approve: approved by mikespin
+- 15:02 ci: merged origin/main (DS-58 added canvasBoards README test); pre-push failed 2 tests (board missing from READMEs); added Themes.dc.html rows to docs/design-system-wireframe/README.md and README.md
 
 ## Gate results
 
@@ -52,3 +53,4 @@ updated: "2026-11-02T14:01:33Z"
 - `createTheme()` limits (from the Designer): it emits the default type scale, weights and shape, caps neutral chroma at 0.03, sets surface = background, and takes dark primary from scale step 100. So bold needs an override block after the generated one, and `bold-dark` uses its own `mode: 'dark'` call (a `'both'` dark block carries colors only). For `dark` with brand #000000 the generator differs from DS-27 in 4 roles, so `dark` stays hand-written.
 - Open questions: extend `ThemeConfig` (type, weights, shape, neutral chroma) in a follow-up; keep hand-tuned bold colors vs generator output; saturated status colors for bold (+12 raw values); bigger change to `dark` (raised surface); opt-in font CSS for bold vs consumer-loaded.
 - Roadmap: DS-12 still names `soft` and `dark`; it should ship `bold`, `bold-dark` and the dark photo-filter change, with a 4-theme Storybook toolbar. Needs `/factory:edit DS-12`.
+- After merging main, `canvasBoards.test.ts` (DS-58) requires every board in both READMEs; the orchestrator added the `Themes.dc.html` row to the canvas README and the root README (root README is outside the Designer scope, so it was done here, not by the Designer).

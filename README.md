@@ -74,6 +74,7 @@ Canvases are `*.dc.html` files in [`docs/design-system-wireframe/`](docs/design-
 | [`Checkbox.dc.html`](docs/design-system-wireframe/Checkbox.dc.html) | Checkbox and CheckboxGroup design (DS-13) |
 | [`Toggle.dc.html`](docs/design-system-wireframe/Toggle.dc.html) | Switch, SegmentedControl and TileGroup design (DS-5) |
 | [`Theming.dc.html`](docs/design-system-wireframe/Theming.dc.html) | Theme contract and knobs: roles, color, fonts, type scale, radius, shadow, dark (DS-26) |
+| [`Themes.dc.html`](docs/design-system-wireframe/Themes.dc.html) | Example themes default, dark, bold and bold-dark side by side, with roles, contrast and `createTheme()` inputs (DS-2) |
 | [`RadioGroup.dc.html`](docs/design-system-wireframe/RadioGroup.dc.html) | RadioGroup design (DS-15) |
 | [`InfoTip.dc.html`](docs/design-system-wireframe/InfoTip.dc.html) | InfoTip, Tooltip and Popover design (DS-41) |
 | [`Icon.dc.html`](docs/design-system-wireframe/Icon.dc.html) | Icon system design (DS-46) |
