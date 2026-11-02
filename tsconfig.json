@@ -11,7 +11,8 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["jest", "@testing-library/jest-dom"]
+    "types": ["jest", "@testing-library/jest-dom"],
+    "paths": { "design-system-test": ["./src/index.ts"] }
   },
-  "include": ["src", "test", ".storybook", "jest.setup.ts", "*.d.ts"]
+  "include": ["src", "docs/theming-guide", "test", ".storybook", "jest.setup.ts", "*.d.ts"]
 }

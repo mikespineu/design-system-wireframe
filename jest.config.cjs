@@ -1,7 +1,7 @@
 /** @type {import('jest').Config} */
 module.exports = {
   testEnvironment: 'jsdom',
-  roots: ['<rootDir>/src'],
+  roots: ['<rootDir>/src', '<rootDir>/docs/theming-guide'],
   testMatch: ['**/*.test.{ts,tsx}'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   transform: {
@@ -11,6 +11,7 @@ module.exports = {
     ],
   },
   moduleNameMapper: {
+    '^design-system-test$': '<rootDir>/src/index.ts',
     '\\.(css|scss)$': 'identity-obj-proxy',
     '\\.(svg|png|jpg|avif)$': '<rootDir>/test/fileMock.cjs',
   },
