@@ -2,9 +2,9 @@
   "v": 3,
   "attachments": {},
   "boards": {
-    "Components.dc.html": {
-      "h": 3000,
-      "title": "Components",
+    "AllComponents.dc.html": {
+      "h": 12200,
+      "title": "All components",
       "w": 1440,
       "x": 1520,
       "y": 0
@@ -164,7 +164,7 @@
   },
   "order": [
     "Main.dc.html",
-    "Components.dc.html",
+    "AllComponents.dc.html",
     "Form.dc.html",
     "Textarea.dc.html",
     "Slider.dc.html",
