@@ -300,8 +300,9 @@ const Showcase = () => {
         Storybook loads them for you.
       </p>
       <div className="mt-8 flex flex-col gap-6 md:mt-12">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="flex min-w-0 flex-wrap items-end justify-between gap-4">
           <SegmentedControl
+            className="max-w-full min-w-0"
             label="Preview theme"
             labelPosition="top"
             options={themeOptions}
