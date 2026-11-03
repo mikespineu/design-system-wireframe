@@ -76,21 +76,24 @@ describe('README why, start, customize', () => {
   const why = sectionTitled(readme, 'Why use it');
 
   it('links each claim in "Why use it" to its proof', () => {
+    const targets = [...why.matchAll(/!?\[[^\]]*\]\(([^)\s]+)\)/g)].map((m) => m[1] as string);
     for (const proof of [
-      'radix-ui.com/primitives',
+      'https://www.radix-ui.com/primitives',
+      'CLAUDE.md#radix-primitives-required',
+      'docs/specs/Dialog.md',
       'docs/specs/Theming.md',
-      '@layer ds',
+      'src/styles/tokens.css',
       'docs/theming-guide.md',
-      '`createTheme()`',
-      '`checkContrast()`',
-      '`bold`',
-      '`bold-dark`',
-      '(#customize-in-minutes)',
-      'jest-axe',
+      '#customize-in-minutes',
+      'src/themes/bold.css',
+      'CLAUDE.md#conventions',
       '.github/workflows/ci.yml',
-      '80 % coverage',
+      'jest.config.cjs',
     ]) {
-      expect(why).toContain(proof);
+      expect({ proof, linked: targets.includes(proof) }).toEqual({ proof, linked: true });
+    }
+    for (const word of ['@layer ds', '`createTheme()`', '`checkContrast()`', '`bold`', '`bold-dark`', 'jest-axe', '80 % coverage']) {
+      expect(why).toContain(word);
     }
   });
 

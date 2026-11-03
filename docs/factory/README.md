@@ -101,7 +101,7 @@ To stop a run, press Esc in its session; then `/factory:retry` picks it up later
 
 ## Job files
 
-Each task has `factory/jobs/DS-<n>.md`: status, stage, links (branch, PR, canvas, Storybook), loop counts, model, a timeline of every step, gate results, and notes. It's written on the task branch while the task runs and lands in `factory/jobs/` when the PR merges, so the folder is the factory's history. Job files are created from [`TEMPLATE.md`](../../factory/jobs/TEMPLATE.md), so [`factory/jobs/`](../../factory/jobs/) is the factory's history and the status page reads it. See the [jobs README](../../factory/jobs/README.md).
+Each task has `factory/jobs/DS-<n>.md`: status, stage, links (branch, PR, canvas, Storybook), loop counts, model, a timeline of every step, gate results, and notes. It's written on the task branch while the task runs and lands in `factory/jobs/` when the PR merges, so the folder is the factory's history. Job files are created from [`TEMPLATE.md`](../../factory/jobs/TEMPLATE.md), and the status page reads [`factory/jobs/`](../../factory/jobs/). See the [jobs README](../../factory/jobs/README.md).
 
 ## Reference
 
