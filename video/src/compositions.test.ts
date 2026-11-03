@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -12,6 +13,17 @@ describe('compositions', () => {
       { id: 'placeholder-default', width: 1920, height: 1080, fps: 30 },
       { id: 'placeholder-bold', width: 1920, height: 1080, fps: 30 },
     ]);
+  });
+
+  it('keeps compositionIds.json (read by scripts/still.mjs) equal to the registered ids', () => {
+    const ids: unknown = JSON.parse(readFileSync(new URL('./compositionIds.json', import.meta.url), 'utf8'));
+    expect(ids).toEqual(compositions.map((c) => c.id));
+  });
+
+  it('still.mjs reads ids from that file, not from CLI output', () => {
+    const script = readFileSync(new URL('../scripts/still.mjs', import.meta.url), 'utf8');
+    expect(script).toContain('compositionIds.json');
+    expect(script).not.toMatch(/'compositions'/);
   });
 
   it('has unique ids', () => {
