@@ -460,8 +460,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Defines the version policy (plugin version synced to the npm version through Changesets)
     - Lists the Anthropic marketplace submission requirements, with links
     - Approved by the user
-- [ ] **DS-51 Generated design-system manifest.** Script run in `npm run build` that writes `dist/manifest.json`: every component exported from `src/index.ts` with its props (from the TS types), spec path and Radix primitive, and every `--ds-*` role from `tokens.css`. Exported as `./manifest.json`.
-  - type: build · has_ui: no · depends_on: DS-50 · needs_human: no · status: todo
+- [x] **DS-51 Generated design-system manifest.** Script run in `npm run build` that writes `dist/manifest.json`: every component exported from `src/index.ts` with its props (from the TS types), spec path and Radix primitive, and every `--ds-*` role from `tokens.css`. Exported as `./manifest.json`.
+  - type: build · has_ui: no · depends_on: DS-50 · needs_human: no · status: done
   - done_when:
     - Manifest lists every component exported from `src/index.ts`; a test fails on drift
     - Lists every `--ds-*` role with its default value
