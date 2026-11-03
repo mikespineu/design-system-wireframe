@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { createRef, useEffect } from 'react';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -189,6 +191,48 @@ describe('Toast', () => {
       </ToastProvider>,
     );
     expect(ref.current).toHaveClass('custom');
+  });
+
+  describe('reduced motion', () => {
+    const css = readFileSync(join(__dirname, 'Toast.css'), 'utf8');
+    /** The block body that follows `header`, matched by braces (the library CSS sits inside `@layer ds`). */
+    const block = (header: string) => {
+      const start = css.indexOf(header);
+      expect(start).toBeGreaterThan(-1);
+      let depth = 0;
+      for (let i = css.indexOf('{', start); i < css.length; i++) {
+        if (css[i] === '{') depth++;
+        if (css[i] === '}' && --depth === 0) return css.slice(css.indexOf('{', start) + 1, i);
+      }
+      throw new Error('unbalanced CSS');
+    };
+
+    it('removes enter, exit and swipe-end animations and the swipe-cancel and close transitions', () => {
+      const reduce = block('@media (prefers-reduced-motion: reduce)');
+      expect(reduce).toMatch(/\.ds-toast\[data-state='open'\][^{]*\{\s*animation: none;/);
+      expect(reduce).toContain(".ds-toast[data-state='closed']");
+      expect(reduce).toContain(".ds-toast[data-swipe='end']");
+      expect(reduce).toMatch(/\.ds-toast\[data-swipe='cancel'\],\s*\.ds-toast-close \{ transition: none; \}/);
+      expect(reduce).not.toMatch(/animation: (?!none)/);
+    });
+
+    it('appears and disappears at once, with no violations', async () => {
+      jest.useRealTimers();
+      const matchMedia = jest.spyOn(window, 'matchMedia').mockImplementation(
+        (query: string) =>
+          ({ matches: query.includes('prefers-reduced-motion'), media: query, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {}, dispatchEvent: () => false, onchange: null }) as MediaQueryList,
+      );
+      try {
+        const { container, user } = setup();
+        show({ title: 'No motion', description: 'Appears and leaves without animation.', duration: Infinity });
+        expect(screen.getByText('No motion')).toBeVisible();
+        expect(await axe(container)).toHaveNoViolations();
+        await user.click(screen.getByRole('button', { name: /close/i }));
+        expect(toasts()).toHaveLength(0);
+      } finally {
+        matchMedia.mockRestore();
+      }
+    });
   });
 
   describe('a11y', () => {
