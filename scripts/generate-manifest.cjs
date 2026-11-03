@@ -45,31 +45,34 @@ function radixPrimitives(dir) {
   return [...found].sort()
 }
 
-/** Spec file for a component: docs/specs/<Name>.md, else the spec that mentions `Name` in backticks most often. */
-// Components whose spec the mention heuristic gets wrong (null: no spec yet).
-const SPEC_OVERRIDES = { SegmentedControl: 'Toggle', TileGroup: 'Toggle', Alert: null, Badge: null, Tag: null }
+// Components whose spec is not <Name>.md (or <Folder>.md). null: no spec covers the component.
+// No fuzzy matching: a wrong spec path is worse than none.
+const SPEC_OVERRIDES = {
+  Switch: 'Toggle',
+  SegmentedControl: 'Toggle',
+  TileGroup: 'Toggle',
+  Popover: 'InfoTip',
+  Tooltip: 'InfoTip',
+  TooltipProvider: 'InfoTip',
+  IconButton: 'Button',
+  ButtonGroup: 'Button',
+  Stack: 'Layout',
+  Grid: 'Layout',
+  Alert: null,
+  Badge: null,
+  Tag: null,
+  Breadcrumb: null,
+  BreadcrumbLink: null,
+  Field: null,
+  Input: null,
+  TextField: null,
+}
 
+/** Spec file for a component: explicit override, else docs/specs/<Name>.md if it exists, else null. */
 function findSpec(name, root = ROOT) {
   const dir = path.join(root, 'docs', 'specs')
-  if (!fs.existsSync(dir)) return null
-  const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md')).sort()
-  if (name in SPEC_OVERRIDES) {
-    const o = SPEC_OVERRIDES[name]
-    return o && files.includes(`${o}.md`) ? `docs/specs/${o}.md` : null
-  }
-  if (files.includes(`${name}.md`)) return `docs/specs/${name}.md`
-  const re = new RegExp('`' + name + '[`<. ]', 'g')
-  let hit
-  let best = 0
-  for (const f of files) {
-    if (f === 'Introduction.md') continue
-    const n = (fs.readFileSync(path.join(dir, f), 'utf8').match(re) ?? []).length
-    if (n > best) {
-      best = n
-      hit = f
-    }
-  }
-  return hit ? `docs/specs/${hit}` : null
+  const spec = name in SPEC_OVERRIDES ? SPEC_OVERRIDES[name] : name
+  return spec && fs.existsSync(path.join(dir, `${spec}.md`)) ? `docs/specs/${spec}.md` : null
 }
 
 function isComponentName(name) {
@@ -126,7 +129,7 @@ function collectComponents(entry, root = ROOT) {
     components.push({
       name,
       source: rel.split(path.sep).join('/'),
-      spec: findSpec(folder ?? name, root) ?? findSpec(name, root),
+      spec: findSpec(name, root) ?? (folder && !(name in SPEC_OVERRIDES) ? findSpec(folder, root) : null),
       radix: folder ? radixPrimitives(path.join(root, 'src', 'components', folder)) : [],
       props,
     })

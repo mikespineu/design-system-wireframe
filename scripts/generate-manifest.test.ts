@@ -33,6 +33,20 @@ describe('generated manifest (real repo)', () => {
     expect(button?.props.map((p) => p.name)).toEqual(expect.arrayContaining(['variant']))
   })
 
+  it('maps components to the right spec (null when none covers them)', () => {
+    const spec = (n: string) => manifest.components.find((c) => c.name === n)?.spec
+    const expected: Record<string, string | null> = {
+      Field: null, Input: null, TextField: null, Alert: null, Badge: null, Tag: null, Breadcrumb: null,
+      Switch: 'docs/specs/Toggle.md', SegmentedControl: 'docs/specs/Toggle.md', TileGroup: 'docs/specs/Toggle.md',
+      Popover: 'docs/specs/InfoTip.md', Tooltip: 'docs/specs/InfoTip.md', InfoTip: 'docs/specs/InfoTip.md',
+      IconButton: 'docs/specs/Button.md', ButtonGroup: 'docs/specs/Button.md', Button: 'docs/specs/Button.md',
+      Stack: 'docs/specs/Layout.md', Grid: 'docs/specs/Layout.md', SelectField: 'docs/specs/Select.md',
+      SliderField: 'docs/specs/Slider.md', Toaster: 'docs/specs/Toast.md', Dialog: 'docs/specs/Dialog.md',
+    }
+    for (const [name, want] of Object.entries(expected)) expect([name, spec(name)]).toEqual([name, want])
+    expect(manifest.components.filter((c) => c.spec && /ClaudePlugin|Theming|Themes|Typography|Introduction/.test(c.spec))).toEqual([])
+  })
+
   it('lists every --ds-* property in tokens.css with its default value', () => {
     const css = readFileSync(join(root, 'src/styles/tokens.css'), 'utf8')
     const names = new Set([...css.matchAll(/^\s*(--ds-[\w-]+)\s*:/gm)].map((m) => m[1]))
@@ -63,16 +77,15 @@ describe('helpers', () => {
     expect(gen.radixPrimitives(join(dir, 'nope'))).toEqual([])
   })
 
-  it('findSpec prefers exact file, then most mentions, honours overrides, else null', () => {
+  it('findSpec uses overrides, then <Name>.md, else null', () => {
     const dir = mkdtempSync(join(tmpdir(), 'ds-spec-'))
     mkdirSync(join(dir, 'docs/specs'), { recursive: true })
-    writeFileSync(join(dir, 'docs/specs/Foo.md'), 'x')
-    writeFileSync(join(dir, 'docs/specs/Intro.md'), '`Bar` and `Bar` `Baz`')
-    writeFileSync(join(dir, 'docs/specs/Other.md'), '`Bar`')
+    for (const f of ['Foo', 'Toggle']) writeFileSync(join(dir, `docs/specs/${f}.md`), 'x')
     expect(gen.findSpec('Foo', dir)).toBe('docs/specs/Foo.md')
-    expect(gen.findSpec('Bar', dir)).toBe('docs/specs/Intro.md')
+    expect(gen.findSpec('Switch', dir)).toBe('docs/specs/Toggle.md')
     expect(gen.findSpec('Nothing', dir)).toBeNull()
     expect(gen.findSpec('Tag', dir)).toBeNull()
+    expect(gen.findSpec('Stack', dir)).toBeNull()
     expect(gen.findSpec('Foo', join(dir, 'missing'))).toBeNull()
   })
 
@@ -80,6 +93,26 @@ describe('helpers', () => {
     const out = join(mkdtempSync(join(tmpdir(), 'ds-out-')), 'sub', 'manifest.json')
     const m = gen.writeManifest(root, out)
     expect(JSON.parse(readFileSync(out, 'utf8')).components).toHaveLength(m.components.length)
+  })
+
+  it('collectComponents handles odd exports in a fixture project', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ds-fix-'))
+    mkdirSync(join(dir, 'src/components/Box'), { recursive: true })
+    writeFileSync(join(dir, 'tsconfig.json'), JSON.stringify({ compilerOptions: { lib: ['ES2022'], types: [], strict: true, module: 'ESNext', moduleResolution: 'Bundler', jsx: 'preserve' } }))
+    writeFileSync(join(dir, 'src/components/Box/Box.tsx'), "import { Dialog } from 'radix-ui'\nexport interface Element { x?: number }\nexport interface BoxProps {\n  /** the a */\n  a: string\n  b?: number\n}\nexport function Box(p: BoxProps): Element { return {} }\nexport function Bare(): Element { return {} }\nexport function Num(): number { return 1 }\nexport const Five = 5\nexport function lower(): Element { return {} }\nexport type Ty = string\n")
+    writeFileSync(join(dir, 'src/components/Box/index.ts'), "export * from './Box'\n")
+    writeFileSync(join(dir, 'src/Loose.ts'), 'export interface Element {}\nexport function Loose(): Element { return {} }\n')
+    writeFileSync(join(dir, 'src/index.ts'), "export * from './components/Box'\nexport { Loose } from './Loose'\n")
+    const list = gen.collectComponents(join(dir, 'src/index.ts'), dir) as (Component & { source: string })[]
+    expect(list.map((c) => c.name)).toEqual(['Bare', 'Box', 'Loose'])
+    const box = list.find((c) => c.name === 'Box')
+    expect(box?.props).toEqual([
+      { name: 'a', type: 'string', required: true, description: 'the a' },
+      { name: 'b', type: 'number | undefined', required: false, description: '' },
+    ])
+    expect(list.find((c) => c.name === 'Bare')?.props).toEqual([])
+    expect(list.find((c) => c.name === 'Loose')?.radix).toEqual([])
+    expect(list.find((c) => c.name === 'Loose')?.spec).toBeNull()
   })
 
   it('collectComponents throws when the entry cannot be read', () => {
