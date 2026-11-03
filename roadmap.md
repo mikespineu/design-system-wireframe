@@ -362,8 +362,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - 'Start from it' links `docs/starter-guide.md`, and 'Customize in minutes' shows `docs/theming-guide/samples/minimal.ts`; a test fails if the README code block differs from that sample file
     - The Claude Design section moves to `docs/claude-design.md` and the factory section into `docs/factory/README.md` with nothing dropped; the README keeps a 'How it's built' section of at most 10 lines linking both; `docs/design-system-wireframe/` is not touched
     - A test checks that every relative link and image in `README.md` resolves to a file in the repo, and `src/docs/consumerGuide.test.ts` still passes
-- [ ] **DS-69 GitHub repo listing — description, topics, social preview.** Update the GitHub repo listing to match the new README: a description that leads with themeable starter value, topics for discoverability, and a social preview image cropped from the themed screenshot. Uploading the social preview is a manual step in GitHub Settings, so this needs a human.
-  - type: docs · has_ui: no · depends_on: DS-67, DS-68 · needs_human: yes · status: todo
+- [x] **DS-69 GitHub repo listing — description, topics, social preview.** Update the GitHub repo listing to match the new README: a description that leads with themeable starter value, topics for discoverability, and a social preview image cropped from the themed screenshot. Uploading the social preview is a manual step in GitHub Settings, so this needs a human.
+  - type: docs · has_ui: no · depends_on: DS-67, DS-68 · needs_human: yes · status: done
   - done_when:
     - `docs/images/readme/social-preview.png` (1280×640, under 1 MB) is committed, cropped from `themes-side-by-side.png`
     - The repo description (`gh repo view --json description`) leads with themeable, accessible starter value instead of the gray wireframe and the agent pipeline, after the user approves the wording
