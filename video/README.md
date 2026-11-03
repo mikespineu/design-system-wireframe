@@ -18,7 +18,7 @@ npm run build          # builds dist/
 npm run video:install  # npm pack -> video/.pack/, npm ci in video/, installs the tarball
 ```
 
-`video:install` installs the library from the `npm pack` output, the same way a consumer would, with `--no-save --no-package-lock`, so `video/package.json` and its lockfile do not change when the tarball does. Re-run it after every library change. `video/` imports only public exports:
+`video:install` installs the library from the `npm pack` output, the same way a consumer would, with `--no-save`, so `video/package.json` and its lockfile do not change when the tarball does. Re-run it after every library change. `video/` imports only public exports:
 
 - `design-system-test` (components)
 - `design-system-test/styles.css`, `design-system-test/fonts.css`
