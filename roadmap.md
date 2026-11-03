@@ -376,8 +376,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Spec `docs/specs/Introduction.md` gives each section's copy, its links (Storybook docs pages, GitHub starter and theming guides) and the shipped components and stories it uses
     - Spec replaces the hand-kept component list with one covering every component exported from `src/index.ts`
     - Spec covers heading levels, keyboard order, contrast in all four themes and phone-width layout, using only existing `--ds-*` tokens and Tailwind utilities
-- [ ] **DS-71 Introduction page refresh — implementation.** Rebuild `src/Introduction.stories.tsx` per `docs/specs/Introduction.md` from shipped components and utilities only, with the component list derived from `src/index.ts` exports.
-  - type: build · has_ui: yes · depends_on: DS-70 · needs_human: no · status: todo
+- [x] **DS-71 Introduction page refresh — implementation.** Rebuild `src/Introduction.stories.tsx` per `docs/specs/Introduction.md` from shipped components and utilities only, with the component list derived from `src/index.ts` exports.
+  - type: build · has_ui: yes · depends_on: DS-70 · needs_human: no · status: done
   - done_when:
     - Matches the approved spec in every section, in `default`, `dark`, `bold` and `bold-dark`
     - A test fails if a component exported from `src/index.ts` is missing from the page's component list
