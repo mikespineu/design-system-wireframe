@@ -1,6 +1,6 @@
 import { useState, type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { RadioGroup, RadioGroupItem } from './RadioGroup';
 
 /**
@@ -78,14 +78,28 @@ const ControlledDemo = (args: ComponentProps<typeof RadioGroup>) => {
 
 export const Controlled: Story = { render: (args) => <ControlledDemo {...args} /> };
 
+/**
+ * Radix moves focus in a timeout after the arrow keydown and checks the item only while the key is still
+ * held. A bare `userEvent.keyboard('{ArrowDown}')` releases the key before that timeout runs, so the
+ * play function holds each arrow key for a moment, like a real key press does.
+ */
+const arrow = async (key: 'ArrowDown' | 'ArrowUp') => {
+  await userEvent.keyboard(`{${key}>}`);
+  await new Promise((r) => setTimeout(r, 20));
+  await userEvent.keyboard(`{/${key}}`);
+};
+
 export const Keyboard: Story = {
   play: async ({ canvasElement }) => {
     const c = within(canvasElement);
     await userEvent.tab();
     await expect(c.getByRole('radio', { name: 'Standard' })).toHaveFocus();
-    await userEvent.keyboard('{ArrowDown}');
-    await expect(c.getByRole('radio', { name: 'Express' })).toBeChecked();
-    await userEvent.keyboard('{ArrowUp}{ArrowUp}');
-    await expect(c.getByRole('radio', { name: 'Pickup' })).toBeChecked();
+    await expect(c.getByRole('radio', { name: 'Standard' })).not.toBeChecked();
+    await arrow('ArrowDown');
+    await waitFor(() => expect(c.getByRole('radio', { name: 'Express' })).toBeChecked());
+    await expect(c.getByRole('radio', { name: 'Express' })).toHaveFocus();
+    await arrow('ArrowUp');
+    await arrow('ArrowUp');
+    await waitFor(() => expect(c.getByRole('radio', { name: 'Pickup' })).toBeChecked());
   },
 };
