@@ -1,0 +1,1196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design System Wireframe Promo video storyboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap">
+<!-- Bold theme fonts (same files as src/themes/bold-fonts.css) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700;800&amp;family=Figtree:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap">
+<style>
+/* ds-tokens:start */
+/* Copied from src/styles/tokens.css (default + dark) and src/themes/bold.css (bold + bold-dark), as in Themes.dc.html and Introduction.dc.html. Everything below reads var(--ds-*). Checked by src/test/canvasBoards.test.ts. */
+:root,
+[data-theme="default"] {
+  /* Tier 1, primitives: raw palette, never read by components. Gray palette: white ground, gray accents, black ink. No hue. */
+  --ds-color-white: #ffffff;
+  --ds-color-gray-50: #f7f7f7;
+  --ds-color-gray-100: #eeeeee;
+  --ds-color-gray-200: #e0e0e0;
+  --ds-color-gray-300: #c7c7c7;
+  --ds-color-gray-400: #a3a3a3;
+  --ds-color-gray-500: #767676;
+  --ds-color-gray-600: #595959;
+  --ds-color-gray-700: #404040;
+  --ds-color-gray-800: #262626;
+  --ds-color-gray-900: #141414;
+  --ds-color-black: #000000;
+
+  /* Tier 2, roles: color */
+  --ds-color-background: var(--ds-color-white);
+  --ds-color-surface: var(--ds-color-white);
+  --ds-color-surface-subtle: var(--ds-color-gray-50);
+  --ds-color-fill: var(--ds-color-gray-100);
+  --ds-color-divider: var(--ds-color-gray-200);
+  --ds-color-border: var(--ds-color-gray-300);
+  --ds-color-disabled: var(--ds-color-gray-400);
+  --ds-color-placeholder: var(--ds-color-gray-500);
+  --ds-color-text-muted: var(--ds-color-gray-600);
+  --ds-color-text: var(--ds-color-gray-700);
+  --ds-color-text-strong: var(--ds-color-gray-800);
+  --ds-color-text-emphasis: var(--ds-color-black);
+  --ds-color-text-inverse: var(--ds-color-white);
+  --ds-color-border-strong: var(--ds-color-black);
+  --ds-color-icon: var(--ds-color-black);
+  --ds-color-focus: var(--ds-color-black);
+  --ds-color-overlay: rgb(0 0 0 / 0.5);
+  --ds-color-inverse: var(--ds-color-gray-900);
+  --ds-color-primary: var(--ds-color-black);
+  --ds-color-primary-hover: var(--ds-color-gray-800);
+  --ds-color-primary-contrast: var(--ds-color-white);
+  /* Deprecated alias of --ds-color-text-emphasis. Components no longer read it; themes do not set it. */
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  /* Status: the only hue in the system, used for feedback only and always
+     paired with an icon and a label. fg passes 4.5:1 on white and on its bg. */
+  --ds-color-info: var(--ds-color-gray-700);
+  --ds-color-info-border: var(--ds-color-gray-300);
+  --ds-color-info-bg: var(--ds-color-gray-50);
+  --ds-color-success: #2e6b45;
+  --ds-color-success-border: #9cc7ab;
+  --ds-color-success-bg: #edf5ef;
+  --ds-color-error: #a3302b;
+  --ds-color-error-border: #e3aaa6;
+  --ds-color-error-bg: #fbedec;
+
+  /* Roles: font. Red Hat Mono for titles and labels, Red Hat Text for body (load with the opt-in fonts.css) */
+  --ds-font-mono: 'Red Hat Mono', ui-monospace, monospace;
+  --ds-font-text: 'Red Hat Text', system-ui, sans-serif;
+  --ds-font-heading: var(--ds-font-mono);
+  --ds-font-body: var(--ds-font-text);
+  --ds-font-label: var(--ds-font-mono);
+  --ds-font-family: var(--ds-font-body);
+
+  /* Roles: font weight */
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
+
+  /* Roles: type scale */
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+
+  /* Legacy line-height aliases (not part of the contract) */
+  --ds-line-height-xs: var(--ds-text-ui-sm-line-height);
+  --ds-line-height-sm: var(--ds-text-caption-line-height);
+  --ds-line-height-md: var(--ds-text-body-sm-line-height);
+  --ds-line-height-lg: var(--ds-text-body-line-height);
+  --ds-line-height-xl: var(--ds-text-h3-line-height);
+
+  /* Spacing: 4 px base. Not themeable. */
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-24: 96px;
+
+  /* Roles: radius. Square corners; --ds-radius is the legacy base the steps default to */
+  --ds-radius: 0;
+  --ds-radius-sm: var(--ds-radius);
+  --ds-radius-md: var(--ds-radius);
+  --ds-radius-lg: var(--ds-radius);
+  --ds-radius-full: var(--ds-radius);
+
+  /* Roles: shadow. No shadows by default, depth comes from borders and fills */
+  --ds-shadow-sm: none;
+  --ds-shadow-md: none;
+  --ds-shadow-lg: none;
+
+  /* Roles: shape and density */
+  --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+
+  /* Icons: fixed system constants, not part of the theme contract */
+  --ds-icon-size-sm: 12px;
+  --ds-icon-size-md: 16px;
+  --ds-icon-size-lg: 20px;
+  --ds-icon-stroke: 1.5;
+  --ds-icon-stroke-strong: 2;
+
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* Photography: always monochrome */
+  --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+/* Dark: overrides the 30 color roles only. Fonts, type, radius, shadow and shape stay at their defaults. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ds-color-background: var(--ds-color-gray-900);
+  --ds-color-surface: var(--ds-color-gray-900);
+  --ds-color-surface-subtle: #1f1f1f;
+  --ds-color-fill: var(--ds-color-gray-800);
+  --ds-color-divider: #333333;
+  --ds-color-border: #737373;
+  --ds-color-disabled: var(--ds-color-gray-600);
+  --ds-color-placeholder: #8f8f8f;
+  --ds-color-text-muted: var(--ds-color-gray-400);
+  --ds-color-text: var(--ds-color-gray-300);
+  --ds-color-text-strong: var(--ds-color-gray-200);
+  --ds-color-text-emphasis: var(--ds-color-gray-50);
+  --ds-color-text-inverse: var(--ds-color-gray-900);
+  --ds-color-border-strong: var(--ds-color-gray-50);
+  --ds-color-icon: var(--ds-color-gray-50);
+  --ds-color-focus: var(--ds-color-gray-50);
+  --ds-color-overlay: rgb(0 0 0 / 0.7);
+  --ds-color-inverse: var(--ds-color-gray-100);
+  --ds-color-primary: var(--ds-color-gray-50);
+  --ds-color-primary-hover: var(--ds-color-gray-200);
+  --ds-color-primary-contrast: var(--ds-color-gray-900);
+  --ds-color-ink: var(--ds-color-text-emphasis);
+
+  --ds-color-info: var(--ds-color-gray-300);
+  --ds-color-info-border: var(--ds-color-gray-600);
+  --ds-color-info-bg: #1f1f1f;
+  --ds-color-success: #9cc7ab;
+  --ds-color-success-border: #2e6b45;
+  --ds-color-success-bg: #13261a;
+  --ds-color-error: #e3aaa6;
+  --ds-color-error-border: #a3302b;
+  --ds-color-error-bg: #2d1414;
+
+  /* Dims the monochrome photos so they do not glare on the dark ground. */
+  --ds-photo-filter: grayscale(1) contrast(1.1) brightness(0.85);
+}
+
+/* Opt-in demo theme. Generated by createTheme() plus the spec override block (src/themes/bold.ts).
+   Do not edit by hand: run `npm run themes:generate`. Turn on with <html data-theme="bold"> or "bold-dark".
+   Load the fonts with themes/bold-fonts.css. Unlayered, so it wins over the library CSS in any import order. */
+
+[data-theme="bold"] {
+  --ds-color-background: #f9faff;
+  --ds-color-surface: #f9faff;
+  --ds-color-surface-subtle: #f6f6ff;
+  --ds-color-fill: #ebedff;
+  --ds-color-divider: #dcdef4;
+  --ds-color-border: #c3c5db;
+  --ds-color-disabled: #a0a1b6;
+  --ds-color-placeholder: #696a7e;
+  --ds-color-text-muted: #56576a;
+  --ds-color-text: #3d3e50;
+  --ds-color-text-strong: #242435;
+  --ds-color-text-emphasis: #090917;
+  --ds-color-text-inverse: #f9faff;
+  --ds-color-border-strong: #090917;
+  --ds-color-icon: #090917;
+  --ds-color-focus: #5b49f8;
+  --ds-color-overlay: rgb(0 0 0 / 0.5);
+  --ds-color-inverse: #121221;
+  --ds-color-primary: #5b49f8;
+  --ds-color-primary-hover: #482fd5;
+  --ds-color-primary-contrast: #f9faff;
+  --ds-color-info: #3d3e50;
+  --ds-color-info-border: #c3c5db;
+  --ds-color-info-bg: #f6f6ff;
+  --ds-color-success: #2e6b45;
+  --ds-color-success-border: #9cc7ab;
+  --ds-color-success-bg: #edf5ef;
+  --ds-color-error: #a3302b;
+  --ds-color-error-border: #e3aaa6;
+  --ds-color-error-bg: #fbedec;
+  --ds-font-heading: 'Bricolage Grotesque', 'Arial Black', system-ui, sans-serif;
+  --ds-font-body: 'Figtree', system-ui, sans-serif;
+  --ds-font-label: 'Figtree', system-ui, sans-serif;
+  --ds-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+  --ds-radius-sm: 8px;
+  --ds-radius-md: 14px;
+  --ds-radius-lg: 24px;
+  --ds-radius-full: 9999px;
+  --ds-shadow-sm: 0 2px 0 #140e3d;
+  --ds-shadow-md: 0 4px 0 #140e3d;
+  --ds-shadow-lg: 8px 8px 0 #140e3d;
+  --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+  --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+[data-theme="bold"] {
+  --ds-color-background: #f4f1ff;
+  --ds-color-surface: #ffffff;
+  --ds-color-surface-subtle: #ebe6fc;
+  --ds-color-fill: #e3dcfb;
+  --ds-color-divider: #d5ccf5;
+  --ds-color-border: #8478b8;
+  --ds-color-disabled: #b3aad9;
+  --ds-color-placeholder: #63579a;
+  --ds-color-text-muted: #554a8a;
+  --ds-color-text: #2f2766;
+  --ds-color-text-strong: #221b52;
+  --ds-color-text-emphasis: #140e3d;
+  --ds-color-text-inverse: #f4f1ff;
+  --ds-color-border-strong: #140e3d;
+  --ds-color-icon: #140e3d;
+  --ds-color-focus: #4318d1;
+  --ds-color-overlay: rgb(20 14 61 / 0.6);
+  --ds-color-inverse: #140e3d;
+  --ds-color-primary: #4318d1;
+  --ds-color-primary-hover: #3510a8;
+  --ds-color-primary-contrast: #ffffff;
+  --ds-color-info: #2f2766;
+  --ds-color-info-border: #d5ccf5;
+  --ds-color-info-bg: #ebe6fc;
+  --ds-font-weight-medium: 600;
+  --ds-text-display-size: 5rem;
+  --ds-text-display-line-height: 0.95;
+  --ds-text-display-tracking: -0.02em;
+  --ds-text-h1-size: 3.5rem;
+  --ds-text-h1-line-height: 1;
+  --ds-text-h1-tracking: -0.015em;
+  --ds-text-h2-size: 2.25rem;
+  --ds-text-h2-line-height: 1.1;
+  --ds-text-h2-tracking: -0.01em;
+  --ds-text-h3-size: 1.5rem;
+  --ds-text-h3-line-height: 28px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: 800;
+  --ds-text-heading-transform: uppercase;
+  --ds-text-body-lg-size: 1.25rem;
+  --ds-text-body-lg-line-height: 1.5;
+  --ds-text-body-size: 1.0625rem;
+  --ds-text-body-line-height: 28px;
+  --ds-text-body-sm-size: 1rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.9375rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.875rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.875rem;
+  --ds-text-label-line-height: 20px;
+  --ds-text-label-weight: var(--ds-font-weight-bold);
+  --ds-text-label-tracking: 0.01em;
+  --ds-text-label-transform: none;
+  --ds-text-ui-size: 1rem;
+  --ds-text-ui-line-height: 24px;
+  --ds-text-ui-weight: var(--ds-font-weight-bold);
+  --ds-text-ui-sm-size: 0.8125rem;
+  --ds-text-ui-sm-line-height: 18px;
+  --ds-text-ui-xs-size: 0.75rem;
+  --ds-text-ui-xs-line-height: 16px;
+  --ds-border-width: 2px;
+  --ds-border-width-strong: 3px;
+  --ds-focus-width: 3px;
+  --ds-control-height: 48px;
+  --ds-motion: 160ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ds-photo-filter: none;
+}
+
+[data-theme="bold-dark"] {
+  color-scheme: dark;
+  --ds-color-background: #121221;
+  --ds-color-surface: #121221;
+  --ds-color-surface-subtle: #1d1d2d;
+  --ds-color-fill: #242435;
+  --ds-color-divider: #303142;
+  --ds-color-border: #707185;
+  --ds-color-disabled: #56576a;
+  --ds-color-placeholder: #8c8da2;
+  --ds-color-text-muted: #a0a1b6;
+  --ds-color-text: #c3c5db;
+  --ds-color-text-strong: #dcdef4;
+  --ds-color-text-emphasis: #f6f6ff;
+  --ds-color-text-inverse: #121221;
+  --ds-color-border-strong: #f6f6ff;
+  --ds-color-icon: #f6f6ff;
+  --ds-color-focus: #e6eaff;
+  --ds-color-overlay: rgb(0 0 0 / 0.7);
+  --ds-color-inverse: #ebedff;
+  --ds-color-primary: #e6eaff;
+  --ds-color-primary-hover: #ced4ff;
+  --ds-color-primary-contrast: #21106e;
+  --ds-color-info: #c3c5db;
+  --ds-color-info-border: #56576a;
+  --ds-color-info-bg: #1d1d2d;
+  --ds-color-success: #9cc7ab;
+  --ds-color-success-border: #2e6b45;
+  --ds-color-success-bg: #13261a;
+  --ds-color-error: #e3aaa6;
+  --ds-color-error-border: #a3302b;
+  --ds-color-error-bg: #2d1414;
+  --ds-font-heading: 'Bricolage Grotesque', 'Arial Black', system-ui, sans-serif;
+  --ds-font-body: 'Figtree', system-ui, sans-serif;
+  --ds-font-label: 'Figtree', system-ui, sans-serif;
+  --ds-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-bold: 700;
+  --ds-text-display-size: 4.5rem;
+  --ds-text-display-line-height: 1;
+  --ds-text-display-tracking: -0.04em;
+  --ds-text-h1-size: 3rem;
+  --ds-text-h1-line-height: 1.1;
+  --ds-text-h1-tracking: -0.03em;
+  --ds-text-h2-size: 2rem;
+  --ds-text-h2-line-height: 1.2;
+  --ds-text-h2-tracking: -0.02em;
+  --ds-text-h3-size: 1.375rem;
+  --ds-text-h3-line-height: 29px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: var(--ds-font-weight-medium);
+  --ds-text-heading-transform: none;
+  --ds-text-body-lg-size: 1.125rem;
+  --ds-text-body-lg-line-height: 1.6;
+  --ds-text-body-size: 1rem;
+  --ds-text-body-line-height: 26px;
+  --ds-text-body-sm-size: 0.9375rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.875rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.8125rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.75rem;
+  --ds-text-label-line-height: 16px;
+  --ds-text-label-weight: var(--ds-font-weight-medium);
+  --ds-text-label-tracking: 0.08em;
+  --ds-text-label-transform: uppercase;
+  --ds-text-ui-size: 0.875rem;
+  --ds-text-ui-line-height: 20px;
+  --ds-text-ui-weight: var(--ds-font-weight-medium);
+  --ds-text-ui-sm-size: 0.75rem;
+  --ds-text-ui-sm-line-height: 16px;
+  --ds-text-ui-xs-size: 0.6875rem;
+  --ds-text-ui-xs-line-height: 16px;
+  --ds-radius-sm: 8px;
+  --ds-radius-md: 14px;
+  --ds-radius-lg: 24px;
+  --ds-radius-full: 9999px;
+  --ds-shadow-sm: 0 2px 0 rgb(0 0 0 / 0.6);
+  --ds-shadow-md: 0 4px 0 rgb(0 0 0 / 0.6);
+  --ds-shadow-lg: 8px 8px 0 #4318d1;
+  --ds-border-width: 1px;
+  --ds-border-width-strong: 2px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-control-height: 44px;
+  --ds-motion: 120ms cubic-bezier(0.2, 0, 0, 1);
+  --ds-photo-filter: grayscale(1) contrast(1.1);
+}
+
+[data-theme="bold-dark"] {
+  --ds-color-background: #120d2e;
+  --ds-color-surface: #19133a;
+  --ds-color-surface-subtle: #211a4a;
+  --ds-color-fill: #2a2259;
+  --ds-color-divider: #3a3170;
+  --ds-color-border: #7c70c2;
+  --ds-color-disabled: #4d4485;
+  --ds-color-placeholder: #9a90d6;
+  --ds-color-text-muted: #b3abe6;
+  --ds-color-text: #d2ccf5;
+  --ds-color-text-strong: #e3dffa;
+  --ds-color-text-emphasis: #f5f3ff;
+  --ds-color-text-inverse: #120d2e;
+  --ds-color-border-strong: #f5f3ff;
+  --ds-color-icon: #f5f3ff;
+  --ds-color-focus: #a08cff;
+  --ds-color-overlay: rgb(8 5 26 / 0.75);
+  --ds-color-inverse: #e3dffa;
+  --ds-color-primary: #a08cff;
+  --ds-color-primary-hover: #8b73ff;
+  --ds-color-primary-contrast: #120d2e;
+  --ds-color-info: #d2ccf5;
+  --ds-color-info-border: #4d4485;
+  --ds-color-info-bg: #211a4a;
+  --ds-font-weight-medium: 600;
+  --ds-text-display-size: 5rem;
+  --ds-text-display-line-height: 0.95;
+  --ds-text-display-tracking: -0.02em;
+  --ds-text-h1-size: 3.5rem;
+  --ds-text-h1-line-height: 1;
+  --ds-text-h1-tracking: -0.015em;
+  --ds-text-h2-size: 2.25rem;
+  --ds-text-h2-line-height: 1.1;
+  --ds-text-h2-tracking: -0.01em;
+  --ds-text-h3-size: 1.5rem;
+  --ds-text-h3-line-height: 28px;
+  --ds-text-h3-tracking: 0;
+  --ds-text-heading-weight: 800;
+  --ds-text-heading-transform: uppercase;
+  --ds-text-body-lg-size: 1.25rem;
+  --ds-text-body-lg-line-height: 1.5;
+  --ds-text-body-size: 1.0625rem;
+  --ds-text-body-line-height: 28px;
+  --ds-text-body-sm-size: 1rem;
+  --ds-text-body-sm-line-height: 24px;
+  --ds-text-body-xs-size: 0.9375rem;
+  --ds-text-body-xs-line-height: 1.5;
+  --ds-text-caption-size: 0.875rem;
+  --ds-text-caption-line-height: 20px;
+  --ds-text-label-size: 0.875rem;
+  --ds-text-label-line-height: 20px;
+  --ds-text-label-weight: var(--ds-font-weight-bold);
+  --ds-text-label-tracking: 0.01em;
+  --ds-text-label-transform: none;
+  --ds-text-ui-size: 1rem;
+  --ds-text-ui-line-height: 24px;
+  --ds-text-ui-weight: var(--ds-font-weight-bold);
+  --ds-text-ui-sm-size: 0.8125rem;
+  --ds-text-ui-sm-line-height: 18px;
+  --ds-text-ui-xs-size: 0.75rem;
+  --ds-text-ui-xs-line-height: 16px;
+  --ds-border-width: 2px;
+  --ds-border-width-strong: 3px;
+  --ds-focus-width: 3px;
+  --ds-control-height: 48px;
+  --ds-motion: 160ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ds-photo-filter: brightness(0.9);
+}
+/* ds-tokens:end */
+
+body{margin:0;background:var(--ds-color-background)}
+/* ===== House chrome (board header, sections, artboard frames). Not part of the video. ===== */
+.sec{display:flex;flex-direction:column;gap:32px}
+.sec-h{display:flex;align-items:baseline;gap:24px}
+.sec-n{font-family:var(--ds-font-mono);font-size:13px;color:var(--ds-color-text-muted)}
+.sec-t{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:32px;letter-spacing:-0.02em}
+.sec-d{margin:0;max-width:960px;font-size:16px;line-height:26px;color:var(--ds-color-text)}
+.sec-d code,.note code,.ab-f code,.tbl code,.ab-h code{font-family:var(--ds-font-mono);font-size:13px}
+.kfs{display:grid;grid-template-columns:repeat(2,602px);gap:32px 24px;align-items:start}
+.ab{border:1px solid var(--ds-color-divider);background:var(--ds-color-surface);display:flex;flex-direction:column;min-width:0}
+.ab-h{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid var(--ds-color-divider);font-family:var(--ds-font-mono);font-size:12px;line-height:16px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ds-color-text-emphasis)}
+.ab-h span+span{color:var(--ds-color-text-muted);text-transform:none;letter-spacing:0;text-align:right}
+.ab-f{padding:12px 16px;border-top:1px solid var(--ds-color-divider);font-size:13px;line-height:20px;color:var(--ds-color-text-muted)}
+.note{margin:0;font-size:13px;line-height:20px;color:var(--ds-color-text-muted)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:left;height:40px;padding:0 12px 0 0;font-family:var(--ds-font-mono);font-weight:var(--ds-font-weight-medium);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid var(--ds-color-border-strong);color:var(--ds-color-text-emphasis)}
+.tbl td{height:36px;padding:6px 12px 6px 0;border-bottom:1px solid var(--ds-color-divider);color:var(--ds-color-text);vertical-align:middle}
+.tbl td.m{font-family:var(--ds-font-mono);font-size:12px}
+
+/* Timeline strip: one segment per scene, width = frames, painted in the scene's theme */
+.tline{display:flex;width:100%;border:1px solid var(--ds-color-border-strong)}
+.tseg{min-width:0;height:72px;padding:6px;overflow:hidden;background:var(--ds-color-background);color:var(--ds-color-text-emphasis);border-right:1px solid var(--ds-color-border);font-family:var(--ds-font-mono);font-size:11px;line-height:14px}
+.tseg:last-child{border-right:0}
+.tseg b{display:block;font-weight:var(--ds-font-weight-medium)}
+.tseg span{color:var(--ds-color-text-muted)}
+.tflash{display:flex;width:100%;height:20px;margin-top:4px}
+.tflash i{display:block;min-width:0;border-left:2px solid transparent}
+.tflash i.r{border-left-color:var(--ds-color-border-strong)}
+
+/* ===== Keyframe stage. 960 x 540 logical px = 1920 x 1080 output at 2x. Drawn here at 0.625 (600 x 338) or 1.25 (1200 x 675). ===== */
+.kf{position:relative;width:600px;height:338px;overflow:hidden}
+.kf.lg{width:1200px;height:675px}
+.st{position:absolute;top:0;left:0;width:960px;height:540px;transform:scale(0.625);transform-origin:0 0;overflow:hidden;background:var(--ds-color-background);color:var(--ds-color-text);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height)}
+.kf.lg .st{transform:scale(1.25)}
+.st *,.st *::before,.st *::after{box-sizing:border-box}
+/* Title-safe box: 96 x 64 logical inset = 192 x 128 output, inside the 10 % title-safe area */
+.safe{position:absolute;top:var(--ds-space-16);bottom:var(--ds-space-16);left:var(--ds-space-24);right:var(--ds-space-24);display:flex;flex-direction:column;gap:var(--ds-space-6)}
+.safe.mid{justify-content:center}
+.safe.row{flex-direction:row;gap:var(--ds-space-8);align-items:center}
+/* Safe-area overlay (designer guide only, never rendered in the video) */
+.sa{position:absolute;border:1px dashed var(--ds-color-text-muted);pointer-events:none}
+.sa.act{top:27px;bottom:27px;left:48px;right:48px}
+.sa.ttl{top:54px;bottom:54px;left:96px;right:96px}
+.sa-l{position:absolute;padding:2px 6px;font-family:var(--ds-font-mono);font-size:9px;line-height:12px;color:var(--ds-color-text-muted);background:var(--ds-color-background)}
+
+/* Video type: every size is a role, so each theme restyles it */
+.hd{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);text-transform:var(--ds-text-heading-transform);color:var(--ds-color-text-emphasis);text-wrap:balance}
+.t-display{font-size:var(--ds-text-display-size);line-height:var(--ds-text-display-line-height);letter-spacing:var(--ds-text-display-tracking)}
+.t-h1{font-size:var(--ds-text-h1-size);line-height:var(--ds-text-h1-line-height);letter-spacing:var(--ds-text-h1-tracking)}
+.t-h2{font-size:var(--ds-text-h2-size);line-height:var(--ds-text-h2-line-height);letter-spacing:var(--ds-text-h2-tracking)}
+.t-h3{font-size:var(--ds-text-h3-size);line-height:var(--ds-text-h3-line-height);letter-spacing:var(--ds-text-h3-tracking)}
+.dim{color:var(--ds-color-text-muted)}
+.sub{margin:0;font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height);color:var(--ds-color-text)}
+.sub.sm{font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height)}
+.p{margin:0;color:var(--ds-color-text)}
+.eyebrow{margin:0;font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-muted)}
+.mono{font-family:var(--ds-font-mono)}
+.ul{position:relative;display:inline-block}
+.ul::after{content:'';position:absolute;left:0;right:0;bottom:0.02em;height:var(--ds-space-1);background:var(--ds-color-border-strong)}
+.col{display:flex;flex-direction:column;gap:var(--ds-space-4);min-width:0}
+.hrow{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--ds-space-6)}
+.stack{display:flex;flex-direction:column;gap:var(--ds-space-2)}
+
+/* Terminal and code: inverse ground, text-inverse ink (a checkContrast() pair). Caret is steady, never blinks. */
+.term{margin:0;padding:var(--ds-space-4);border-radius:var(--ds-radius-md);background:var(--ds-color-inverse);color:var(--ds-color-text-inverse);font-family:var(--ds-font-mono);font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height);white-space:pre}
+.term.sm{padding:var(--ds-space-3);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height)}
+.caret{display:inline-block;width:0.6em;height:1.1em;vertical-align:-0.2em;background:var(--ds-color-text-inverse)}
+.code{margin:0;padding:var(--ds-space-4);border-radius:var(--ds-radius-md);background:var(--ds-color-inverse);color:var(--ds-color-text-inverse);font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);white-space:pre}
+
+/* Shipped component looks (from AllComponents.dc.html) */
+.f{outline:var(--ds-focus-width) solid var(--ds-color-focus);outline-offset:var(--ds-focus-offset)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--ds-space-2);height:var(--ds-control-height);border:var(--ds-border-width) solid;border-radius:var(--ds-radius-md);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);white-space:nowrap}
+.btn-primary{padding:0 var(--ds-space-6);border-color:var(--ds-color-primary);background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.btn-secondary{padding:0 var(--ds-space-6);border-color:var(--ds-color-border-strong);background:var(--ds-color-surface);color:var(--ds-color-text-emphasis)}
+.btn-icon{width:var(--ds-control-height);padding:0}
+.btn svg{width:var(--ds-icon-size-md);height:var(--ds-icon-size-md)}
+.row-b{display:flex;flex-wrap:wrap;gap:var(--ds-space-3);align-items:center}
+.tag{display:inline-flex;align-items:center;height:28px;padding:0 10px;border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-sm);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);font-weight:var(--ds-font-weight-regular);white-space:nowrap}
+.tag.mono{font-family:var(--ds-font-mono)}
+.tag-sm{height:var(--ds-space-6);padding:0 var(--ds-space-2)}
+.tag-solid{background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.tag-subtle{background:var(--ds-color-fill);color:var(--ds-color-text-strong)}
+.tag-outline{border-color:var(--ds-color-border-strong);color:var(--ds-color-text-emphasis)}
+.tag-neutral{border-color:var(--ds-color-border);color:var(--ds-color-text-strong)}
+.tag-rm{gap:6px;padding-right:var(--ds-space-1)}
+.tag-x{display:flex;align-items:center;justify-content:center;width:22px;height:22px;color:var(--ds-color-text-muted)}
+.tag-x svg{width:var(--ds-icon-size-sm);height:var(--ds-icon-size-sm)}
+.tags{display:flex;flex-wrap:wrap;gap:var(--ds-space-2)}
+.fld{display:flex;flex-direction:column;gap:var(--ds-space-2);width:100%;min-width:0}
+.fld-l{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-emphasis)}
+.inp{display:flex;align-items:center;gap:var(--ds-space-2);width:100%;height:var(--ds-control-height);padding:0 var(--ds-space-3);border:var(--ds-border-width) solid var(--ds-color-border);border-radius:var(--ds-radius-md);background:var(--ds-color-surface);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text-emphasis)}
+.inp .ph{color:var(--ds-color-placeholder)}
+.sel{justify-content:space-between}
+.sel svg{width:var(--ds-icon-size-md);height:var(--ds-icon-size-md);color:var(--ds-color-icon)}
+.sel.is-open{border-color:var(--ds-color-border-strong)}
+.sel.is-open svg{transform:rotate(180deg)}
+.sel.f{border-color:var(--ds-color-border-strong)}
+.lb{width:100%;margin-top:var(--ds-space-1);background:var(--ds-color-surface);border:var(--ds-border-width) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-lg);box-shadow:var(--ds-shadow-md);overflow:hidden;color:var(--ds-color-text-emphasis);padding:var(--ds-space-1) 0}
+.lb-i{display:flex;align-items:center;gap:var(--ds-space-2);min-height:var(--ds-control-height);padding:0 var(--ds-space-3);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height)}
+.lb-i .lbl{flex:1 1 auto}
+.lb-i svg{width:var(--ds-icon-size-md);height:var(--ds-icon-size-md)}
+.lb-i.is-hi{background:var(--ds-color-fill);outline:var(--ds-focus-width) solid var(--ds-color-focus);outline-offset:calc(-1 * var(--ds-focus-width))}
+.lb-i.is-on{font-weight:var(--ds-font-weight-medium)}
+.ctl{display:flex;align-items:flex-start;gap:var(--ds-space-3);min-height:var(--ds-control-height)}
+.ctl-lb{padding-block:9px;color:var(--ds-color-text-emphasis)}
+.cb{flex:none;display:inline-flex;align-items:center;justify-content:center;width:var(--ds-space-6);height:var(--ds-space-6);margin-top:10px;border:var(--ds-border-width-strong) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-sm);background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.cb svg{width:var(--ds-icon-size-md);height:var(--ds-icon-size-md)}
+.sw{flex:none;display:inline-flex;align-items:center;justify-content:flex-end;width:var(--ds-space-12);height:var(--ds-space-6);margin-top:10px;padding:var(--ds-border-width-strong);border:var(--ds-border-width-strong) solid var(--ds-color-primary);border-radius:var(--ds-radius-full);background:var(--ds-color-primary)}
+.sw i{display:block;width:var(--ds-space-4);height:var(--ds-space-4);border-radius:var(--ds-radius-full);background:var(--ds-color-primary-contrast)}
+.alert{display:flex;gap:var(--ds-space-3);padding:var(--ds-space-4);border:var(--ds-border-width) solid;border-radius:var(--ds-radius-lg);width:100%}
+.alert svg{flex:none;width:var(--ds-icon-size-lg);height:var(--ds-icon-size-lg)}
+.alert-in{display:flex;flex-direction:column;gap:var(--ds-space-1);min-width:0}
+.alert-t{font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight)}
+.alert-b{font-size:var(--ds-text-body-xs-size);line-height:var(--ds-text-body-xs-line-height);color:var(--ds-color-text)}
+.alert-info{border-color:var(--ds-color-info-border);background:var(--ds-color-info-bg);color:var(--ds-color-info)}
+.alert-success{border-color:var(--ds-color-success-border);background:var(--ds-color-success-bg);color:var(--ds-color-success)}
+.cg{display:flex;flex-direction:column;gap:var(--ds-space-2);flex:none}
+.cg-top{display:flex;align-items:center;justify-content:space-between;gap:var(--ds-space-3)}
+.cg-l{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-emphasis)}
+.seg{display:inline-flex;height:var(--ds-control-height);padding:var(--ds-space-1);border-radius:var(--ds-radius-md);background:var(--ds-color-fill);width:fit-content}
+.seg-i{display:inline-flex;align-items:center;justify-content:center;height:calc(var(--ds-control-height) - 2 * var(--ds-space-1));padding-inline:var(--ds-space-4);border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-md);color:var(--ds-color-text);font-family:var(--ds-font-body);font-weight:var(--ds-font-weight-medium);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);white-space:nowrap}
+.seg-i.is-on{border-color:var(--ds-color-border-strong);background:var(--ds-color-surface);color:var(--ds-color-text-emphasis)}
+
+/* Demo screen (same parts as the Introduction showcase) */
+.demo{padding:var(--ds-space-6);border:var(--ds-border-width) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-lg);background:var(--ds-color-background);color:var(--ds-color-text);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);box-shadow:var(--ds-shadow-lg)}
+.demo.sm{padding:var(--ds-space-4)}
+.demo-t{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ds-space-3)}
+.demo-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--ds-space-6);margin-top:var(--ds-space-4);align-items:start}
+.demo-cap{display:flex;justify-content:space-between;align-items:center;gap:var(--ds-space-3);margin-bottom:var(--ds-space-2)}
+
+/* Keyboard keycaps (video overlay, drawn with DS roles) */
+.keys{display:flex;flex-direction:column;gap:var(--ds-space-3)}
+.key{display:flex;align-items:center;gap:var(--ds-space-3);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);color:var(--ds-color-text-muted)}
+.key.is-last{color:var(--ds-color-text-emphasis)}
+.kc{display:inline-flex;align-items:center;justify-content:center;min-width:var(--ds-space-12);height:var(--ds-space-8);padding:0 var(--ds-space-2);border:var(--ds-border-width-strong) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-sm);background:var(--ds-color-surface);font-family:var(--ds-font-label);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-text-ui-weight);color:var(--ds-color-text-emphasis)}
+.kc.on{border-color:var(--ds-color-primary);background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+
+/* Split panes (icons, type) */
+.panes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ds-space-6)}
+.pane{display:flex;flex-direction:column;gap:var(--ds-space-3);padding:var(--ds-space-4);border:var(--ds-border-width) solid var(--ds-color-divider);border-radius:var(--ds-radius-lg);background:var(--ds-color-background);color:var(--ds-color-text);font-family:var(--ds-font-body)}
+.irow{display:flex;align-items:center;gap:var(--ds-space-3)}
+.cls{font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-sm-size);line-height:var(--ds-text-ui-sm-line-height);color:var(--ds-color-text-muted)}
+.body-lg{margin:0;font-family:var(--ds-font-body);font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height);color:var(--ds-color-text)}
+
+/* Checklist and facts */
+.chk{display:flex;flex-direction:column;gap:var(--ds-space-3);margin:0;padding:0;list-style:none}
+.chk li{display:flex;gap:var(--ds-space-3);align-items:flex-start;font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height);color:var(--ds-color-text-emphasis)}
+.chk svg{flex:none;width:var(--ds-icon-size-lg);height:var(--ds-icon-size-lg);margin-top:0.3em;color:var(--ds-color-icon)}
+.stat{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:var(--ds-text-display-size);line-height:var(--ds-text-display-line-height);letter-spacing:var(--ds-text-display-tracking);color:var(--ds-color-text-emphasis);font-variant-numeric:tabular-nums}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--ds-space-6);margin:0;padding:var(--ds-space-6) 0 0;border-top:var(--ds-border-width) solid var(--ds-color-border-strong)}
+.facts div{display:flex;flex-direction:column-reverse;gap:var(--ds-space-1)}
+.facts dt{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-muted)}
+.facts dd{margin:0;font-family:var(--ds-font-heading);font-weight:var(--ds-text-heading-weight);font-size:var(--ds-text-display-size);line-height:var(--ds-text-display-line-height);letter-spacing:var(--ds-text-display-tracking);color:var(--ds-color-text-emphasis);font-variant-numeric:tabular-nums}
+
+/* Cards (starter, plugin parts) */
+.card{display:flex;flex-direction:column;gap:var(--ds-space-2);padding:var(--ds-space-4);border:var(--ds-border-width) solid var(--ds-color-divider);border-radius:var(--ds-radius-lg);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-sm);min-width:0}
+.card.lg{padding:var(--ds-space-6)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ds-space-6);align-items:start}
+.nm{font-family:var(--ds-font-mono);font-size:var(--ds-text-ui-size);line-height:var(--ds-text-ui-line-height);font-weight:var(--ds-font-weight-medium);color:var(--ds-color-text-emphasis)}
+.ds{margin:0;font-size:var(--ds-text-body-xs-size);line-height:var(--ds-text-body-xs-line-height);color:var(--ds-color-text)}
+.empty{min-height:172px}
+
+/* End card */
+.links{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--ds-space-2) var(--ds-space-6);align-items:baseline;margin:0}
+.links dt{font-family:var(--ds-font-label);font-size:var(--ds-text-label-size);line-height:var(--ds-text-label-line-height);font-weight:var(--ds-text-label-weight);letter-spacing:var(--ds-text-label-tracking);text-transform:var(--ds-text-label-transform);color:var(--ds-color-text-muted)}
+.links dd{margin:0;font-family:var(--ds-font-mono);font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height);color:var(--ds-color-text-emphasis)}
+
+/* Motion filmstrip and contrast boards (chrome) */
+.film{display:flex;gap:16px}
+.film-f{display:flex;flex-direction:column;gap:6px}
+.film-b{width:180px;height:72px;border:1px solid var(--ds-color-divider);display:flex;align-items:center;padding:0 12px;overflow:hidden}
+.film-b span{font-family:var(--ds-font-heading);font-size:20px;color:var(--ds-color-text-emphasis)}
+.cap{font-family:var(--ds-font-mono);font-size:11px;line-height:16px;color:var(--ds-color-text-muted)}
+.cc{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:16px;background:var(--ds-color-background);color:var(--ds-color-text);font-family:var(--ds-font-body)}
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;border:1px solid var(--ds-color-divider);font-size:15px}
+.chip.inv{border-color:transparent;background:var(--ds-color-inverse);color:var(--ds-color-text-inverse)}
+.chip.pri{border-color:transparent;background:var(--ds-color-primary);color:var(--ds-color-primary-contrast)}
+.chip.ok{border-color:var(--ds-color-success-border);background:var(--ds-color-success-bg);color:var(--ds-color-success)}
+.chip.fr{outline:var(--ds-focus-width) solid var(--ds-color-focus);outline-offset:var(--ds-focus-offset)}
+</style>
+</helmet>
+<div style="width: 1440px; min-height: 9800px; box-sizing: border-box; padding: 96px; background: var(--ds-color-background); color: var(--ds-color-text-emphasis); font-family: var(--ds-font-body); display: flex; flex-direction: column; gap: 80px">
+
+<header style="display: flex; flex-direction: column; gap: 24px; border-bottom: 1px solid var(--ds-color-border-strong); padding-bottom: 48px">
+<div style="display: flex; justify-content: space-between; font-family: var(--ds-font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ds-color-text-muted)">
+<span>Design System Wireframe</span>
+<span>Promo video storyboard · DS-74 · draft</span>
+</div>
+<h1 style="margin: 0; font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); font-size: 96px; line-height: 1; letter-spacing: -0.04em">Promo video</h1>
+<p style="margin: 0; max-width: 960px; font-size: 18px; line-height: 1.6; color: var(--ds-color-text)">Storyboard for a 78 s, 1920 × 1080, 30 fps video (2340 frames) built in <code style="font-family: var(--ds-font-mono); font-size: 15px">video/</code> with Remotion (DS-75). Message: don't spend tokens building your own design system. Eleven scenes; each artboard is one keyframe at the frame number in its header, in every theme that scene uses. Every keyframe is a 960 × 540 logical stage rendered at 2×, styled only through <code style="font-family: var(--ds-font-mono); font-size: 15px">var(--ds-*)</code> roles, and sets <code style="font-family: var(--ds-font-mono); font-size: 15px">data-theme</code> on its root; the token block carries tokens.css and themes/bold.css. Copy, frames, sources and motion: <code style="font-family: var(--ds-font-mono); font-size: 15px">docs/specs/PromoVideo.md</code>.</p>
+</header>
+
+<!-- ============================================================ 00 FORMAT AND TIMELINE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">00</span><h2 class="sec-t">Format · safe areas · timeline</h2></div>
+<p class="sec-d">Output 1920 × 1080 at 30 fps. Layout is drawn on a 960 × 540 logical stage at 2×, so every <code>--ds-*</code> size keeps its shipped value (display 72 px logical = 144 px on screen; label 12 px = 24 px, the smallest text in the video). Dashed lines: action-safe (5 %) and title-safe (10 %). All copy sits in the title-safe box (96 × 64 logical inset, from <code>--ds-space-24</code> and <code>--ds-space-16</code>). The guides are canvas-only.</p>
+
+<div class="ab" style="width:1202px"><div class="ab-h"><span>Stage at 1.25 · safe areas · KF01 hook · f 180</span><span>data-theme="default"</span></div>
+<div class="kf lg"><div class="st" data-theme="default">
+<div class="safe mid">
+<p class="hd t-h2 dim">You could ask an agent to build your design system.</p>
+<p class="hd t-display">Don't spend <span class="ul">tokens</span> building your own design system.</p>
+</div>
+<div class="sa act"><span class="sa-l" style="top:2px;left:2px">action safe 5 % · 48 × 27</span></div>
+<div class="sa ttl"><span class="sa-l" style="bottom:2px;right:2px">title safe 10 % · 96 × 54</span></div>
+</div></div>
+<div class="ab-f">Logical px. Output = 2×. Copy box 768 × 412 logical (inset <code>--ds-space-24</code> × <code>--ds-space-16</code>), inside title-safe.</div></div>
+
+<div class="stack" style="gap:8px">
+<p class="note">Timeline, 0 to 2340 frames. Each segment is as wide as its frame count and painted in its theme, so every light/dark change is visible. Ticks below mark the luminance reversals; the closest two are 75 frames apart (at most one change in any 2 s).</p>
+<div class="tline">
+<div class="tseg" style="flex:210" data-theme="default"><b>01 hook</b><span>0 · 210</span></div>
+<div class="tseg" style="flex:180" data-theme="default"><b>02a radix</b><span>210 · 180</span></div>
+<div class="tseg" style="flex:75" data-theme="default"><b>02b</b><span>390</span></div>
+<div class="tseg" style="flex:75" data-theme="dark"><b>dark</b><span>465</span></div>
+<div class="tseg" style="flex:75" data-theme="bold"><b>bold</b><span>540</span></div>
+<div class="tseg" style="flex:75" data-theme="bold-dark"><b>b-dark</b><span>615</span></div>
+<div class="tseg" style="flex:150" data-theme="default"><b>02c icons</b><span>690 · 150</span></div>
+<div class="tseg" style="flex:150" data-theme="default"><b>02d type</b><span>840 · 150</span></div>
+<div class="tseg" style="flex:180" data-theme="dark"><b>02e tested</b><span>990 · 180</span></div>
+<div class="tseg" style="flex:210" data-theme="default"><b>03 skip</b><span>1170 · 210</span></div>
+<div class="tseg" style="flex:180" data-theme="default"><b>04 install</b><span>1380 · 180</span></div>
+<div class="tseg" style="flex:160" data-theme="default"><b>05 customize</b><span>1560 · 300</span></div>
+<div class="tseg" style="flex:140" data-theme="bold"><b>panel</b><span>my-brand</span></div>
+<div class="tseg" style="flex:300" data-theme="dark"><b>06 claude</b><span>1860 · 300</span></div>
+<div class="tseg" style="flex:180" data-theme="default"><b>07 end</b><span>2160 · 180</span></div>
+</div>
+<div class="tflash"><i style="flex:465"></i><i class="r" style="flex:75"></i><i class="r" style="flex:75"></i><i class="r" style="flex:75"></i><i class="r" style="flex:300"></i><i class="r" style="flex:180"></i><i class="r" style="flex:690"></i><i class="r" style="flex:300"></i><i class="r" style="flex:180"></i></div>
+<p class="note">Reversals at f 465, 540, 615 (theme wipes), 690, 990, 1170, 1860, 2160 (scene wipes). The 05 panel turns from default to the light <code>my-brand</code> theme at f 1720: light to light, not a reversal.</p>
+</div>
+
+<table class="tbl">
+<thead><tr><th>#</th><th>Scene</th><th>Start</th><th>Frames</th><th>Seconds</th><th>Theme(s)</th><th>Keyframes</th></tr></thead>
+<tbody>
+<tr><td class="m">01</td><td>Hook</td><td class="m">0</td><td class="m">210</td><td class="m">0.0 – 7.0</td><td class="m">default</td><td class="m">KF01 f 180</td></tr>
+<tr><td class="m">02a</td><td>Key features · Radix keyboard and focus</td><td class="m">210</td><td class="m">180</td><td class="m">7.0 – 13.0</td><td class="m">default</td><td class="m">KF02a f 270 · KF02b f 345</td></tr>
+<tr><td class="m">02b</td><td>Key features · one screen, four themes</td><td class="m">390</td><td class="m">300</td><td class="m">13.0 – 23.0</td><td class="m">default · dark · bold · bold-dark</td><td class="m">KF03 f 440 · 510 · 585 · 660</td></tr>
+<tr><td class="m">02c</td><td>Key features · bring your own icons</td><td class="m">690</td><td class="m">150</td><td class="m">23.0 – 28.0</td><td class="m">default</td><td class="m">KF04 f 810</td></tr>
+<tr><td class="m">02d</td><td>Key features · typography</td><td class="m">840</td><td class="m">150</td><td class="m">28.0 – 33.0</td><td class="m">default + bold pane</td><td class="m">KF05 f 960</td></tr>
+<tr><td class="m">02e</td><td>Key features · Storybook, jest-axe, CI</td><td class="m">990</td><td class="m">180</td><td class="m">33.0 – 39.0</td><td class="m">dark</td><td class="m">KF06 f 1140</td></tr>
+<tr><td class="m">03</td><td>Skip building your own</td><td class="m">1170</td><td class="m">210</td><td class="m">39.0 – 46.0</td><td class="m">default</td><td class="m">KF07 f 1340</td></tr>
+<tr><td class="m">04</td><td>Install in one line</td><td class="m">1380</td><td class="m">180</td><td class="m">46.0 – 52.0</td><td class="m">default</td><td class="m">KF08 f 1530</td></tr>
+<tr><td class="m">05</td><td>Customize in one file</td><td class="m">1560</td><td class="m">300</td><td class="m">52.0 – 62.0</td><td class="m">default + my-brand panel</td><td class="m">KF09a f 1660 · KF09b f 1820</td></tr>
+<tr><td class="m">06</td><td>Works with Claude</td><td class="m">1860</td><td class="m">300</td><td class="m">62.0 – 72.0</td><td class="m">dark</td><td class="m">KF10a f 1980 · KF10b f 2130</td></tr>
+<tr><td class="m">07</td><td>End card</td><td class="m">2160</td><td class="m">180</td><td class="m">72.0 – 78.0</td><td class="m">default</td><td class="m">KF11 f 2310</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ============================================================ 01 HOOK -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">01</span><h2 class="sec-t">Hook · f 0 – 209 · default</h2></div>
+<p class="sec-d">Two lines on the white ground. Line 1 rises in at f 0 – 14, line 2 at f 60 – 74; the bar under "tokens" grows from 0 to full width at f 90 – 104 (a <code>--ds-color-border-strong</code> bar, not a color). No UI yet: the message first.</p>
+<div class="kfs">
+<div class="ab"><div class="ab-h"><span>KF01 · f 180 · 6.00 s</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe mid">
+<p class="hd t-h2 dim">You could ask an agent to build your design system.</p>
+<p class="hd t-display">Don't spend <span class="ul">tokens</span> building your own design system.</p>
+</div></div></div>
+<div class="ab-f">Line 1 <code>heading h2</code> in <code>text-muted</code>; line 2 <code>display</code> in <code>text-emphasis</code>.</div></div>
+</div>
+</section>
+
+<!-- ============================================================ 02a RADIX -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02a</span><h2 class="sec-t">Key features · keyboard and focus · f 210 – 389 · default</h2></div>
+<p class="sec-d">The shipped <code>SelectField</code> (Radix Select) driven by keys. f 255 Tab: the focus ring lands on the trigger. f 285 ArrowDown: the list opens with the current value (Medium) highlighted. f 315 ArrowDown: highlight moves to High. f 360 Enter: High is chosen, the list closes, focus is back on the trigger. The pressed key cap fills with <code>primary</code> for 6 frames; the last key used stays in <code>text-emphasis</code>.</p>
+<div class="kfs">
+
+<div class="ab"><div class="ab-h"><span>KF02a · f 270 · 9.00 s · Tab</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe row">
+<div class="col" style="width:384px;flex:none;gap:var(--ds-space-6)">
+<h2 class="hd t-h1">Keyboard and focus come from Radix.</h2>
+<p class="sub">Every interactive part is a Radix primitive.</p>
+<div class="keys">
+<div class="key is-last"><span class="kc">Tab</span>Move focus</div>
+<div class="key"><span class="kc">↓</span>Open and move</div>
+<div class="key"><span class="kc">Enter</span>Choose</div>
+</div>
+</div>
+<div class="col" style="flex:1;align-self:flex-start;margin-top:var(--ds-space-12)">
+<div class="fld"><span class="fld-l">Priority</span>
+<div class="inp sel f"><span>Medium</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+</div>
+</div>
+</div></div></div>
+<div class="ab-f">Focus ring: <code>focus-width</code> solid <code>focus</code>, <code>focus-offset</code>. Trigger border turns <code>border-strong</code>.</div></div>
+
+<div class="ab"><div class="ab-h"><span>KF02b · f 345 · 11.50 s · ArrowDown</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe row">
+<div class="col" style="width:384px;flex:none;gap:var(--ds-space-6)">
+<h2 class="hd t-h1">Keyboard and focus come from Radix.</h2>
+<p class="sub">Every interactive part is a Radix primitive.</p>
+<div class="keys">
+<div class="key"><span class="kc">Tab</span>Move focus</div>
+<div class="key is-last"><span class="kc">↓</span>Open and move</div>
+<div class="key"><span class="kc">Enter</span>Choose</div>
+</div>
+</div>
+<div class="col" style="flex:1;align-self:flex-start;margin-top:var(--ds-space-12);gap:0">
+<div class="fld"><span class="fld-l">Priority</span>
+<div class="inp sel is-open"><span>Medium</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+</div>
+<div class="lb" role="presentation">
+<div class="lb-i"><span class="lbl">Low</span></div>
+<div class="lb-i is-on"><span class="lbl">Medium</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+<div class="lb-i is-hi"><span class="lbl">High</span></div>
+<div class="lb-i"><span class="lbl">Urgent</span></div>
+</div>
+</div>
+</div></div></div>
+<div class="ab-f">Open list: highlighted item gets <code>fill</code> + inset focus ring (Radix <code>[data-highlighted]</code>); selected item keeps the check.</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ 02b THEMES -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02b</span><h2 class="sec-t">Key features · one screen, four themes · f 390 – 689</h2></div>
+<p class="sec-d">The whole stage switches theme; markup never changes. Wipes start at f 465, 540 and 615 and last 12 frames each (left to right, the new theme revealed by a frame-driven clip). Each theme is fully on screen for at least 63 frames. The SegmentedControl and the <code>data-theme</code> tag show the active theme. Parts: Tag, TextField, Switch, Alert, Button, SegmentedControl.</p>
+<div class="kfs">
+
+<div class="ab"><div class="ab-h"><span>KF03 · f 440 · 14.67 s</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe">
+<div class="hrow"><div class="stack"><h2 class="hd t-h2">One screen. Four themes.</h2><p class="sub sm">Only data-theme changes. The markup stays the same.</p></div>
+<div class="cg"><div class="cg-top"><span class="cg-l">Theme</span><span class="tag tag-neutral tag-sm mono">data-theme="default"</span></div><div class="seg"><span class="seg-i is-on">default</span><span class="seg-i">dark</span><span class="seg-i">bold</span><span class="seg-i">bold-dark</span></div></div></div>
+<div class="demo">
+<div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
+<div class="demo-g">
+<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
+<div class="col"><div class="alert alert-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div>
+</div></div>
+</div></div></div>
+<div class="ab-f">Scene wipe in f 390 – 401; fully default f 402 – 464. The screen arrives with the wipe; only the heading and sub use the enter move.</div></div>
+
+<div class="ab"><div class="ab-h"><span>KF03 · f 510 · 17.00 s</span><span>dark</span></div>
+<div class="kf"><div class="st" data-theme="dark"><div class="safe">
+<div class="hrow"><div class="stack"><h2 class="hd t-h2">One screen. Four themes.</h2><p class="sub sm">Only data-theme changes. The markup stays the same.</p></div>
+<div class="cg"><div class="cg-top"><span class="cg-l">Theme</span><span class="tag tag-neutral tag-sm mono">data-theme="dark"</span></div><div class="seg"><span class="seg-i">default</span><span class="seg-i is-on">dark</span><span class="seg-i">bold</span><span class="seg-i">bold-dark</span></div></div></div>
+<div class="demo">
+<div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
+<div class="demo-g">
+<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
+<div class="col"><div class="alert alert-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div>
+</div></div>
+</div></div></div>
+<div class="ab-f">Wipe f 465 – 476; fully dark f 477 – 539.</div></div>
+
+<div class="ab"><div class="ab-h"><span>KF03 · f 585 · 19.50 s</span><span>bold</span></div>
+<div class="kf"><div class="st" data-theme="bold"><div class="safe">
+<div class="hrow"><div class="stack"><h2 class="hd t-h2">One screen. Four themes.</h2><p class="sub sm">Only data-theme changes. The markup stays the same.</p></div>
+<div class="cg"><div class="cg-top"><span class="cg-l">Theme</span><span class="tag tag-neutral tag-sm mono">data-theme="bold"</span></div><div class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></div></div></div>
+<div class="demo">
+<div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
+<div class="demo-g">
+<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
+<div class="col"><div class="alert alert-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div>
+</div></div>
+</div></div></div>
+<div class="ab-f">Wipe f 540 – 551; fully bold f 552 – 614. Uppercase headings, radius, offset shadow and 48 px controls all come from the theme.</div></div>
+
+<div class="ab"><div class="ab-h"><span>KF03 · f 660 · 22.00 s</span><span>bold-dark</span></div>
+<div class="kf"><div class="st" data-theme="bold-dark"><div class="safe">
+<div class="hrow"><div class="stack"><h2 class="hd t-h2">One screen. Four themes.</h2><p class="sub sm">Only data-theme changes. The markup stays the same.</p></div>
+<div class="cg"><div class="cg-top"><span class="cg-l">Theme</span><span class="tag tag-neutral tag-sm mono">data-theme="bold-dark"</span></div><div class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i">bold</span><span class="seg-i is-on">bold-dark</span></div></div></div>
+<div class="demo">
+<div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
+<div class="demo-g">
+<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
+<div class="col"><div class="alert alert-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div>
+</div></div>
+</div></div></div>
+<div class="ab-f">Wipe f 615 – 626; fully bold-dark f 627 – 689.</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ 02c ICONS -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02c</span><h2 class="sec-t">Key features · bring your own icons · f 690 – 839 · default</h2></div>
+<p class="sec-d">Same four parts twice: left with the private default glyphs (butt caps, miter joins, stroke 1.5), right inside an <code>IconProvider</code> with Lucide icons (round caps). In the video the right pane renders real <code>lucide-react</code> components; the canvas draws them by hand. Parts: Alert, Checkbox, IconButton, Tag (removable).</p>
+<div class="kfs">
+<div class="ab"><div class="ab-h"><span>KF04 · f 810 · 27.00 s</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe">
+<div class="stack"><h2 class="hd t-h2">Bring your own icons.</h2><p class="sub">Lucide, Tabler, Phosphor, Heroicons, or any SVG with createIcon.</p></div>
+<pre class="term sm">&lt;IconProvider icons={{ close: X, check: Check, info: Info }}&gt;</pre>
+<div class="panes">
+<div class="pane">
+<p class="eyebrow">Default glyphs</p>
+<div class="alert alert-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v2"/></svg><div class="alert-in"><span class="alert-t">Heads up</span><span class="alert-b">Icons follow currentColor.</span></div></div>
+<div class="irow"><span class="ctl"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span class="ctl-lb">Notify</span></span><span class="btn btn-secondary btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="tag tag-subtle tag-rm">Q4<span class="tag-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
+</div>
+<div class="pane">
+<p class="eyebrow">With IconProvider · Lucide</p>
+<div class="alert alert-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="alert-in"><span class="alert-t">Heads up</span><span class="alert-b">Icons follow currentColor.</span></div></div>
+<div class="irow"><span class="ctl"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctl-lb">Notify</span></span><span class="btn btn-secondary btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></span><span class="tag tag-subtle tag-rm">Q4<span class="tag-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></span></span></div>
+</div>
+</div>
+</div></div></div>
+<div class="ab-f">Sizes stay the component's (16 px, 20 px in Alert); colour stays <code>currentColor</code>. Only the drawing changes.</div></div>
+</div>
+</section>
+
+<!-- ============================================================ 02d TYPE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02d</span><h2 class="sec-t">Key features · typography · f 840 – 989 · default + bold pane</h2></div>
+<p class="sec-d">The same three lines with the same Tailwind utilities, in a <code>default</code> pane and a <code>bold</code> pane. Fonts, sizes, weights and the heading case all come from roles. The class name is printed above each line.</p>
+<div class="kfs">
+<div class="ab"><div class="ab-h"><span>KF05 · f 960 · 32.00 s</span><span>default · pane bold</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe">
+<div class="stack"><h2 class="hd t-h2">Type that follows the theme.</h2><p class="sub">heading-* and body-* utilities read the font and size roles.</p></div>
+<div class="panes">
+<div class="pane" data-theme="default">
+<span class="tag tag-neutral tag-sm mono" style="align-self:flex-start">default</span>
+<div><span class="cls">heading-lg</span><p class="hd t-h2">Launch plan</p></div>
+<div><span class="cls">heading-md</span><p class="hd t-h3">Owner and dates</p></div>
+<div><span class="cls">body-lg</span><p class="body-lg">One attribute restyles every line.</p></div>
+</div>
+<div class="pane" data-theme="bold">
+<span class="tag tag-neutral tag-sm mono" style="align-self:flex-start">bold</span>
+<div><span class="cls">heading-lg</span><p class="hd t-h2">Launch plan</p></div>
+<div><span class="cls">heading-md</span><p class="hd t-h3">Owner and dates</p></div>
+<div><span class="cls">body-lg</span><p class="body-lg">One attribute restyles every line.</p></div>
+</div>
+</div>
+</div></div></div>
+<div class="ab-f"><code>heading-lg</code> = font-heading + h2 size; <code>heading-md</code> = h3; <code>body-lg</code> = font-body + body-lg (<code>src/styles/tailwind.css</code>).</div></div>
+</div>
+</section>
+
+<!-- ============================================================ 02e TESTED -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">02e</span><h2 class="sec-t">Key features · Storybook, jest-axe, CI · f 990 – 1169 · dark</h2></div>
+<p class="sec-d">Three checklist rows rise in one after another (f 1014, 1026, 1038), then the coverage floor counts up from 0 to 80 (f 1050 – 1069) and the CI step names appear as tags. The four tags are the step names in <code>.github/workflows/ci.yml</code>, read at bundle time.</p>
+<div class="kfs">
+<div class="ab"><div class="ab-h"><span>KF06 · f 1140 · 38.00 s</span><span>dark</span></div>
+<div class="kf"><div class="st" data-theme="dark"><div class="safe row" style="align-items:flex-start;gap:var(--ds-space-12)">
+<div class="col" style="width:420px;flex:none;gap:var(--ds-space-6)">
+<h2 class="hd t-h1">Tested like a product.</h2>
+<ul class="chk">
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Storybook: a story for every component</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>jest-axe in every component test</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>CI on every pull request: lint, typecheck, tests, build</li>
+</ul>
+</div>
+<div class="col" style="flex:1;gap:var(--ds-space-3);margin-top:var(--ds-space-2)">
+<p class="stat">80 %</p>
+<p class="sub">coverage floor, enforced in CI</p>
+<div class="tags" style="margin-top:var(--ds-space-3)"><span class="tag tag-outline">Lint</span><span class="tag tag-outline">Typecheck</span><span class="tag tag-outline">Test with coverage</span><span class="tag tag-outline">Build library</span></div>
+</div>
+</div></div></div>
+<div class="ab-f">80 = lowest of <code>coverageThreshold.global</code> in <code>jest.config.cjs</code>. Icons read <code>icon</code>, not a status color.</div></div>
+</div>
+</section>
+
+<!-- ============================================================ 03 SKIP -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Skip building your own · f 1170 – 1379 · default</h2></div>
+<p class="sec-d">Four counted facts. Numbers count up from 0 over f 1200 – 1229 (tabular figures, so nothing jitters), then hold. Every number is read from the repo at bundle time; the values drawn here are the counts on main today (sources in the spec). The closing line rises in at f 1245 – 1259.</p>
+<div class="kfs">
+<div class="ab"><div class="ab-h"><span>KF07 · f 1340 · 44.67 s</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe mid" style="gap:var(--ds-space-8)">
+<h2 class="hd t-h1">Skip building your own.</h2>
+<dl class="facts">
+<div><dt>component families</dt><dd>25</dd></div>
+<div><dt>themeable roles</dt><dd>87</dd></div>
+<div><dt>themes</dt><dd>4</dd></div>
+<div><dt>tasks already done</dt><dd>61</dd></div>
+</dl>
+<p class="hd t-h3" style="color:var(--ds-color-text)">So your tokens go to your product, not your buttons.</p>
+</div></div></div>
+<div class="ab-f">25 = <code>src/index.ts</code> component exports · 87 = <code>themeRoles.length</code> · 4 = shipped <code>data-theme</code> names · 61 = <code>status: done</code> in <code>roadmap.md</code>.</div></div>
+</div>
+</section>
+
+<!-- ============================================================ 04 INSTALL -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Install in one line · f 1380 – 1559 · default</h2></div>
+<p class="sec-d">The install command types itself at 1.5 characters per frame (f 1410 – 1434); the caret is a steady block, it never blinks. The starter card rises in at f 1450 – 1464. The package name is read from <code>package.json</code> at bundle time.</p>
+<div class="kfs">
+<div class="ab"><div class="ab-h"><span>KF08 · f 1530 · 51.00 s</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe mid">
+<h2 class="hd t-h1">Install in one line.</h2>
+<pre class="term">$ npm install @mikespineu/design-system<span class="caret"></span></pre>
+<div class="card lg" style="margin-top:var(--ds-space-2)">
+<h3 class="hd t-h3">Or start from the React starter.</h3>
+<span class="nm">examples/vite-react</span>
+<p class="p">Form, dialog and toast, themed from ds.theme.json.</p>
+</div>
+</div></div></div>
+<div class="ab-f">Terminal: <code>inverse</code> ground, <code>text-inverse</code> ink, <code>radius-md</code>.</div></div>
+</div>
+</section>
+
+<!-- ============================================================ 05 CUSTOMIZE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Customize in one file · f 1560 – 1859 · default + my-brand panel</h2></div>
+<p class="sec-d">Left: the theme file. Right: the build command and the same screen. f 1680 – 1708 the command types; f 1720 – 1731 the panel wipes into the generated theme; f 1740 – 1754 the contrast result rises in. The JSON is the real fixture <code>video/fixtures/ds.theme.json</code> (it holds the <code>bold</code> input). <b>Stand-in:</b> the canvas paints the built panel with the shipped <code>bold</code> theme; the video paints the <code>theme.css</code> the CLI writes, which is <code>createTheme()</code> output without bold's hand-tuned override block, so a few colors and type steps differ slightly.</p>
+<div class="kfs">
+
+<div class="ab"><div class="ab-h"><span>KF09a · f 1660 · 55.33 s · the file</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe row" style="align-items:flex-start">
+<div class="col" style="width:344px;flex:none">
+<h2 class="hd t-h2">Customize it in one file.</h2>
+<pre class="code" data-ds-code>{
+  "name": "my-brand",
+  "brand": "#4318D1",
+  "neutral": "#140E3D",
+  "fonts": {
+    "heading": "Bricolage Grotesque",
+    "body": "Figtree"
+  },
+  "radius": { "md": "14px" },
+  "mode": "both"
+}</pre>
+<p class="p" style="font-size:var(--ds-text-body-sm-size);line-height:var(--ds-text-body-sm-line-height)">Write it by hand, or with the theme skill: <span class="mono">/wireframe-ds:theme</span></p>
+</div>
+<div class="col" style="flex:1;gap:var(--ds-space-3)">
+<pre class="term sm">$ <span class="caret"></span></pre>
+<div><div class="demo-cap"><span class="eyebrow">Preview</span><span class="tag tag-neutral tag-sm mono">default</span></div>
+<div data-theme="default"><div class="demo sm">
+<div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span></div>
+<div class="fld" style="margin-top:var(--ds-space-3)"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div>
+<div class="row-b" style="margin-top:var(--ds-space-3)"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div>
+</div></div></div>
+</div>
+</div></div></div>
+<div class="ab-f">Code panel is <code>&lt;pre data-ds-code&gt;</code>: the hex values are the literal fixture, not UI colors.</div></div>
+
+<div class="ab"><div class="ab-h"><span>KF09b · f 1820 · 60.67 s · built and checked</span><span>default · panel my-brand (bold stand-in)</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe row" style="align-items:flex-start">
+<div class="col" style="width:344px;flex:none">
+<h2 class="hd t-h2">Customize it in one file.</h2>
+<pre class="code" data-ds-code>{
+  "name": "my-brand",
+  "brand": "#4318D1",
+  "neutral": "#140E3D",
+  "fonts": {
+    "heading": "Bricolage Grotesque",
+    "body": "Figtree"
+  },
+  "radius": { "md": "14px" },
+  "mode": "both"
+}</pre>
+<p class="p" style="font-size:var(--ds-text-body-sm-size);line-height:var(--ds-text-body-sm-line-height)">Write it by hand, or with the theme skill: <span class="mono">/wireframe-ds:theme</span></p>
+</div>
+<div class="col" style="flex:1;gap:var(--ds-space-3)">
+<pre class="term sm">$ npx @mikespineu/design-system theme build</pre>
+<div><div class="demo-cap"><span class="eyebrow">Preview</span><span class="tag tag-neutral tag-sm mono">data-theme="my-brand"</span></div>
+<div data-theme="default"><div class="demo sm" data-theme="bold">
+<div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span></div>
+<div class="fld" style="margin-top:var(--ds-space-3)"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div>
+<div class="row-b" style="margin-top:var(--ds-space-3)"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div>
+</div></div></div>
+<div class="alert alert-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Contrast checked</span><span class="alert-b">checkContrast(): 0 failures, 106 pairs</span></div></div>
+</div>
+</div></div></div>
+<div class="ab-f">0 and 106 = <code>failures.length</code> and <code>checked</code> of <code>checkContrast()</code> on the built fixture, read at bundle time (53 pairs × 2 blocks for <code>mode: both</code>).</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ 06 CLAUDE -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">06</span><h2 class="sec-t">Works with Claude · f 1860 – 2159 · dark</h2></div>
+<p class="sec-d">The two install commands type in (f 1896 – 1935, f 1944 – 1972), then three cards rise in at f 1995, 2010 and 2025. Every name on screen is read from the plugin at bundle time: skills from <code>skills/*/SKILL.md</code>, the agent from <code>agents/*.md</code>, the tools from the MCP server's registered tool list. The commands are the ones in the consumer docs. In dark, the terminal's <code>inverse</code> ground is light.</p>
+<div class="kfs">
+
+<div class="ab"><div class="ab-h"><span>KF10a · f 1980 · 66.00 s · install</span><span>dark</span></div>
+<div class="kf"><div class="st" data-theme="dark"><div class="safe">
+<div class="stack"><h2 class="hd t-h1">Works with Claude.</h2><p class="sub">A Claude Code plugin that reads the manifest of every component.</p></div>
+<pre class="term sm">&gt; /plugin marketplace add mikespineu/design-system-wireframe
+&gt; /plugin install wireframe-ds@wireframe-ds</pre>
+<div class="empty"></div>
+</div></div></div>
+<div class="ab-f">Prompt glyph <code>&gt;</code> marks Claude Code input; <code>$</code> marks a shell.</div></div>
+
+<div class="ab"><div class="ab-h"><span>KF10b · f 2130 · 71.00 s · plugin parts</span><span>dark</span></div>
+<div class="kf"><div class="st" data-theme="dark"><div class="safe">
+<div class="stack"><h2 class="hd t-h1">Works with Claude.</h2><p class="sub">A Claude Code plugin that reads the manifest of every component.</p></div>
+<pre class="term sm">&gt; /plugin marketplace add mikespineu/design-system-wireframe
+&gt; /plugin install wireframe-ds@wireframe-ds</pre>
+<div class="cards">
+<div class="card"><p class="eyebrow">Skills</p>
+<span class="nm">component-usage</span><p class="ds">Picks components and imports.</p>
+<span class="nm">theme</span><p class="ds">Saves your ds.theme.json.</p></div>
+<div class="card"><p class="eyebrow">Agent</p>
+<span class="nm">ui-review</span><p class="ds">Flags hardcoded colors, hand-rolled primitives, missing labels.</p></div>
+<div class="card"><p class="eyebrow">MCP server</p>
+<span class="nm">wireframe-ds</span>
+<div class="tags"><span class="tag tag-subtle tag-sm mono">list_components</span><span class="tag tag-subtle tag-sm mono">search</span><span class="tag tag-subtle tag-sm mono">get_component</span><span class="tag tag-subtle tag-sm mono">get_theme</span><span class="tag tag-subtle tag-sm mono">list_tokens</span><span class="tag tag-subtle tag-sm mono">save_theme</span></div></div>
+</div>
+</div></div></div>
+<div class="ab-f">Names from <code>docs/specs/ClaudePlugin.md</code> today; the video reads them from <code>plugins/wireframe-ds/</code>.</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ 07 END -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">07</span><h2 class="sec-t">End card · f 2160 – 2339 · default</h2></div>
+<p class="sec-d">Wordmark, the message once more, and where to go. Three entrances (f 2172, 2184, 2196), then the last 30 frames hold still so the video ends on a readable frame. The URLs come from <code>package.json</code> (<code>repository.url</code>) and the README Storybook badge.</p>
+<div class="kfs">
+<div class="ab"><div class="ab-h"><span>KF11 · f 2310 · 77.00 s</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe mid">
+<h2 class="hd t-display">Design System Wireframe</h2>
+<p class="hd t-h3" style="color:var(--ds-color-text)">Don't spend tokens building your own design system.</p>
+<dl class="links" style="margin-top:var(--ds-space-2)">
+<dt>Install</dt><dd>npm install @mikespineu/design-system</dd>
+<dt>Code</dt><dd>github.com/mikespineu/design-system-wireframe</dd>
+<dt>Docs</dt><dd>ds.mikespin.dev</dd>
+</dl>
+<div class="tags"><span class="tag tag-outline">MIT</span><span class="tag tag-outline">React</span><span class="tag tag-outline">Radix UI</span></div>
+</div></div></div>
+<div class="ab-f">Poster frame for DS-76 is this keyframe.</div></div>
+</div>
+</section>
+
+<!-- ============================================================ 08 MOTION -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">08</span><h2 class="sec-t">Motion vocabulary · frame-driven only</h2></div>
+<p class="sec-d">Five moves, all computed from <code>useCurrentFrame()</code> with Remotion <code>interpolate</code> (clamped) and the system curve from <code>--ds-motion</code> (<code>cubic-bezier(0.2, 0, 0, 1)</code>, passed as <code>Easing.bezier</code>). No CSS animation or transition (the DS-73 <code>MotionOff</code> stays mounted), no timers. Nothing zooms, spins or parallaxes.</p>
+<div class="film">
+<div class="film-f"><div class="film-b"><span style="opacity:0;transform:translateY(16px)">Line</span></div><span class="cap">enter · s+0 · opacity 0 · y +8</span></div>
+<div class="film-f"><div class="film-b"><span style="opacity:0.55;transform:translateY(7px)">Line</span></div><span class="cap">enter · s+4</span></div>
+<div class="film-f"><div class="film-b"><span style="opacity:0.9;transform:translateY(2px)">Line</span></div><span class="cap">enter · s+9</span></div>
+<div class="film-f"><div class="film-b"><span>Line</span></div><span class="cap">enter · s+14 · settled</span></div>
+</div>
+<table class="tbl">
+<thead><tr><th>Move</th><th>Frames</th><th>Driven value</th><th>Used in</th></tr></thead>
+<tbody>
+<tr><td>Enter</td><td class="m">15</td><td class="m">opacity 0 → 1, translateY 8 → 0 logical px (16 output)</td><td>every line of copy, cards, panes</td></tr>
+<tr><td>Wipe</td><td class="m">12</td><td class="m">clip-path inset(0 100% 0 0) → inset(0 0 0 0) on the incoming layer</td><td>every scene change, 02b theme changes, 05 panel</td></tr>
+<tr><td>Type</td><td class="m">len / 1.5</td><td class="m">visible chars = floor((frame − start) × 1.5); steady block caret</td><td>04, 05, 06 commands</td></tr>
+<tr><td>Count</td><td class="m">20 – 30</td><td class="m">Math.round(interpolate(0 → N)); tabular figures</td><td>02e coverage, 03 facts</td></tr>
+<tr><td>Key / focus</td><td class="m">0 (step)</td><td class="m">focus ring, highlight and value change on the event frame; key cap filled for 6 frames</td><td>02a</td></tr>
+<tr><td>Underline</td><td class="m">15</td><td class="m">bar width 0 → 100 %</td><td>01 "tokens"</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ============================================================ 09 ACCESSIBILITY -->
+<section class="sec">
+<div class="sec-h"><span class="sec-n">09</span><h2 class="sec-t">Accessibility · contrast pairs per theme</h2></div>
+<p class="sec-d">Copy only uses pairs that <code>checkContrast()</code> requires at 4.5:1 (text roles on <code>background</code>, <code>surface</code>, <code>fill</code> and the status grounds; <code>primary-contrast</code> on <code>primary</code>; <code>text-inverse</code> on <code>inverse</code>). No copy sits on <code>surface-subtle</code>, which is not a checked ground. Focus ring and icons use the 3:1 UI pairs. Every chip below is drawn from the role itself in that theme.</p>
+<div class="stack" style="gap:12px">
+<div class="cc" data-theme="default"><span class="cap" style="width:96px">default</span><span class="chip" style="color:var(--ds-color-text-emphasis)">Aa emphasis</span><span class="chip">Aa text</span><span class="chip" style="color:var(--ds-color-text-muted)">Aa muted</span><span class="chip inv">Aa inverse</span><span class="chip pri">Aa primary</span><span class="chip ok">Aa success</span><span class="chip fr">focus</span></div>
+<div class="cc" data-theme="dark"><span class="cap" style="width:96px">dark</span><span class="chip" style="color:var(--ds-color-text-emphasis)">Aa emphasis</span><span class="chip">Aa text</span><span class="chip" style="color:var(--ds-color-text-muted)">Aa muted</span><span class="chip inv">Aa inverse</span><span class="chip pri">Aa primary</span><span class="chip ok">Aa success</span><span class="chip fr">focus</span></div>
+<div class="cc" data-theme="bold"><span class="cap" style="width:96px">bold</span><span class="chip" style="color:var(--ds-color-text-emphasis)">Aa emphasis</span><span class="chip">Aa text</span><span class="chip" style="color:var(--ds-color-text-muted)">Aa muted</span><span class="chip inv">Aa inverse</span><span class="chip pri">Aa primary</span><span class="chip ok">Aa success</span><span class="chip fr">focus</span></div>
+<div class="cc" data-theme="bold-dark"><span class="cap" style="width:96px">bold-dark</span><span class="chip" style="color:var(--ds-color-text-emphasis)">Aa emphasis</span><span class="chip">Aa text</span><span class="chip" style="color:var(--ds-color-text-muted)">Aa muted</span><span class="chip inv">Aa inverse</span><span class="chip pri">Aa primary</span><span class="chip ok">Aa success</span><span class="chip fr">focus</span></div>
+</div>
+<p class="note">Minimum hold per line of copy: max(60, 15 + 10 × words) frames fully visible after its entrance. Flashes: at most one light/dark reversal in any 75 frames (limit is 3 per second). No audio; a WebVTT text track and a described transcript ship with the video (spec, Accessibility).</p>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>

@@ -31,6 +31,7 @@ Canvases are `*.dc.html` files in [`docs/design-system-wireframe/`](design-syste
 | [`Drawer.dc.html`](design-system-wireframe/Drawer.dc.html) | Drawer design (DS-44) |
 | [`Typography.dc.html`](design-system-wireframe/Typography.dc.html) | Heading and body type styles, shipped as Tailwind utilities (DS-37) |
 | [`Introduction.dc.html`](design-system-wireframe/Introduction.dc.html) | Storybook Introduction page redesign in four themes (DS-70) |
+| [`PromoVideo.dc.html`](design-system-wireframe/PromoVideo.dc.html) | Promo video storyboard: a keyframe per scene in the themes it uses (DS-74) |
 
 [`canvas.json`](design-system-wireframe/canvas.json) holds the artboard layout; see the folder's [README](design-system-wireframe/README.md).
 

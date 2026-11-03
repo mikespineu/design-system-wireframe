@@ -21,6 +21,7 @@ const END = '/* ds-tokens:end */'
 const EXTRA_THEMES: Record<string, string[]> = {
   'Themes.dc.html': [join(root, 'src', 'themes', 'bold.css')],
   'Introduction.dc.html': [join(root, 'src', 'themes', 'bold.css')],
+  'PromoVideo.dc.html': [join(root, 'src', 'themes', 'bold.css')],
 }
 
 const squash = (css: string) =>
