@@ -2,11 +2,11 @@
 
 - task: DS-50
 - canvas: none (decision record, no UI)
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-11-03
 - approval_hash:
-- status: proposed, awaiting approval
+- status: approved
 
 This is a decision record, not a component spec. It fixes the scope, names, layout and version policy of the consumer Claude Code plugin so that DS-51 to DS-57, DS-59, DS-60 and DS-10 can build against one source of truth. Verified facts are marked with the date they were checked (2026-11-03). Anything not verified is marked "to confirm in DS-57" (or the task named).
 
