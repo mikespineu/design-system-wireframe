@@ -546,6 +546,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-73** Promo video — Remotion workspace — https://github.com/mikespineu/design-system-wireframe/pull/116
 - **DS-71** Introduction page refresh — implementation — https://github.com/mikespineu/design-system-wireframe/pull/113
 - **DS-72** Fix failing RadioGroup & Toast story play checks — https://github.com/mikespineu/design-system-wireframe/pull/112
 - **DS-66** Starter guide & install accuracy — https://github.com/mikespineu/design-system-wireframe/pull/110
