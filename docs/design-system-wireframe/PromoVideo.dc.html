@@ -658,6 +658,31 @@ body{margin:0;background:var(--ds-color-background)}
 .seg{display:inline-flex;height:var(--ds-control-height);padding:var(--ds-space-1);border-radius:var(--ds-radius-md);background:var(--ds-color-fill);width:fit-content}
 .seg-i{display:inline-flex;align-items:center;justify-content:center;height:calc(var(--ds-control-height) - 2 * var(--ds-space-1));padding-inline:var(--ds-space-4);border:var(--ds-border-width) solid transparent;border-radius:var(--ds-radius-md);color:var(--ds-color-text);font-family:var(--ds-font-body);font-weight:var(--ds-font-weight-medium);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);white-space:nowrap}
 .seg-i.is-on{border-color:var(--ds-color-border-strong);background:var(--ds-color-surface);color:var(--ds-color-text-emphasis)}
+/* Off / unchecked looks (from AllComponents.dc.html: .sw without is-on, .cb without is-on) */
+.sw.is-off{justify-content:flex-start;border-color:var(--ds-color-border-strong);background:var(--ds-color-surface)}
+.sw.is-off i{background:var(--ds-color-primary)}
+.cb.is-off{background:var(--ds-color-surface)}
+/* Slider (src/components/Slider/Slider.css, size md): placeholder hairline track, primary range, surface thumb; attached numeric Input */
+.sl{display:flex;align-items:center;gap:var(--ds-space-4);min-width:0}
+.sl-root{position:relative;flex:1 1 auto;display:flex;align-items:center;height:var(--ds-control-height);min-width:0}
+.sl-track{position:relative;flex-grow:1;height:var(--ds-border-width-strong);border-radius:var(--ds-radius-full);background:var(--ds-color-placeholder)}
+.sl-range{position:absolute;left:0;top:50%;height:var(--ds-space-1);translate:0 -50%;border-radius:var(--ds-radius-full);background:var(--ds-color-primary)}
+.sl-thumb{position:absolute;top:50%;width:var(--ds-space-4);height:var(--ds-space-4);translate:-50% -50%;border:var(--ds-border-width-strong) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-full);background:var(--ds-color-surface);box-shadow:var(--ds-shadow-sm)}
+.inp.num{flex:none;width:var(--ds-space-16);justify-content:flex-end;font-variant-numeric:tabular-nums}
+
+/* 02b component wall: tiles laid out like Grid (4 columns, gap 3); each tile is a Stack with the family name above the live component */
+.wall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--ds-space-3)}
+.tile{display:flex;flex-direction:column;gap:var(--ds-space-2);padding:var(--ds-space-3);border:var(--ds-border-width) solid var(--ds-color-divider);border-radius:var(--ds-radius-lg);background:var(--ds-color-surface);min-width:0}
+.tile .ctl{min-height:var(--ds-control-height);align-items:center}
+.tile .ctl .cb,.tile .ctl .sw{margin-top:0}
+.tile .ctl-lb{padding-block:0}
+.tile .seg-i{padding-inline:var(--ds-space-3)}
+.tile .tags{align-items:center;min-height:var(--ds-control-height)}
+/* 02b key features: three statements, each with a check glyph; empty slots keep their place until they enter */
+.pills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ds-space-6)}
+.pill{display:flex;gap:var(--ds-space-2);align-items:flex-start;font-size:var(--ds-text-body-lg-size);line-height:var(--ds-text-body-lg-line-height);font-weight:var(--ds-font-weight-medium);color:var(--ds-color-text-emphasis);min-width:0}
+.pill svg{flex:none;width:var(--ds-icon-size-lg);height:var(--ds-icon-size-lg);margin-top:0.3em;color:var(--ds-color-icon)}
+.pill.is-empty{visibility:hidden}
 
 /* Demo screen (same parts as the Introduction showcase) */
 .demo{padding:var(--ds-space-6);border:var(--ds-border-width) solid var(--ds-color-border-strong);border-radius:var(--ds-radius-lg);background:var(--ds-color-background);color:var(--ds-color-text);font-family:var(--ds-font-body);font-size:var(--ds-text-body-size);line-height:var(--ds-text-body-line-height);box-shadow:var(--ds-shadow-lg)}
@@ -725,7 +750,7 @@ body{margin:0;background:var(--ds-color-background)}
 <span>Promo video storyboard · DS-74 · draft</span>
 </div>
 <h1 style="margin: 0; font-family: var(--ds-font-heading); font-weight: var(--ds-text-heading-weight); font-size: 96px; line-height: 1; letter-spacing: -0.04em">Promo video</h1>
-<p style="margin: 0; max-width: 960px; font-size: 18px; line-height: 1.6; color: var(--ds-color-text)">Storyboard for a 78 s, 1920 × 1080, 30 fps video (2340 frames) built in <code style="font-family: var(--ds-font-mono); font-size: 15px">video/</code> with Remotion (DS-75). Message: don't spend tokens building your own design system. Eleven scenes; each artboard is one keyframe at the frame number in its header, in every theme that scene uses. Every keyframe is a 960 × 540 logical stage rendered at 2×, styled only through <code style="font-family: var(--ds-font-mono); font-size: 15px">var(--ds-*)</code> roles, and sets <code style="font-family: var(--ds-font-mono); font-size: 15px">data-theme</code> on its root; the token block carries tokens.css and themes/bold.css. Copy, frames, sources and motion: <code style="font-family: var(--ds-font-mono); font-size: 15px">docs/specs/PromoVideo.md</code>.</p>
+<p style="margin: 0; max-width: 960px; font-size: 18px; line-height: 1.6; color: var(--ds-color-text)">Storyboard for a 78 s, 1920 × 1080, 30 fps video (2340 frames) built in <code style="font-family: var(--ds-font-mono); font-size: 15px">video/</code> with Remotion (DS-75). Message: don't spend tokens building your own design system. Eleven scenes; each artboard is one keyframe at the frame number in its header, in every theme that scene uses. The key features are the working components, your own brand theme, and Claude. The shipped demo themes are never the pitch: every branded look in the video is <code style="font-family: var(--ds-font-mono); font-size: 15px">my-brand</code>, built from one <code style="font-family: var(--ds-font-mono); font-size: 15px">ds.theme.json</code>, and the canvas draws it with <code style="font-family: var(--ds-font-mono); font-size: 15px">bold</code> as a stand-in. Every keyframe is a 960 × 540 logical stage rendered at 2×, styled only through <code style="font-family: var(--ds-font-mono); font-size: 15px">var(--ds-*)</code> roles, and sets <code style="font-family: var(--ds-font-mono); font-size: 15px">data-theme</code> on its root; the token block carries tokens.css and themes/bold.css. Copy, frames, sources and motion: <code style="font-family: var(--ds-font-mono); font-size: 15px">docs/specs/PromoVideo.md</code>.</p>
 </header>
 
 <!-- ============================================================ 00 FORMAT AND TIMELINE -->
@@ -745,14 +770,12 @@ body{margin:0;background:var(--ds-color-background)}
 <div class="ab-f">Logical px. Output = 2×. Copy box 768 × 412 logical (inset <code>--ds-space-24</code> × <code>--ds-space-16</code>), inside title-safe.</div></div>
 
 <div class="stack" style="gap:8px">
-<p class="note">Timeline, 0 to 2340 frames. Each segment is as wide as its frame count and painted in its theme, so every light/dark change is visible. Ticks below mark the luminance reversals; the closest two are 75 frames apart (at most one change in any 2 s).</p>
+<p class="note">Timeline, 0 to 2340 frames. Each segment is as wide as its frame count and painted in its theme, so every light/dark change is visible (<code>my-brand</code> segments are drawn with the <code>bold</code> stand-in). Ticks below mark the luminance reversals; the closest two are 180 frames apart (at most one change in any 6 s).</p>
 <div class="tline">
 <div class="tseg" style="flex:210" data-theme="default"><b>01 hook</b><span>0 · 210</span></div>
 <div class="tseg" style="flex:180" data-theme="default"><b>02a radix</b><span>210 · 180</span></div>
-<div class="tseg" style="flex:75" data-theme="default"><b>02b</b><span>390</span></div>
-<div class="tseg" style="flex:75" data-theme="dark"><b>dark</b><span>465</span></div>
-<div class="tseg" style="flex:75" data-theme="bold"><b>bold</b><span>540</span></div>
-<div class="tseg" style="flex:75" data-theme="bold-dark"><b>b-dark</b><span>615</span></div>
+<div class="tseg" style="flex:170" data-theme="default"><b>02b components</b><span>390 · 300</span></div>
+<div class="tseg" style="flex:130" data-theme="bold"><b>your brand</b><span>560 my-brand</span></div>
 <div class="tseg" style="flex:150" data-theme="default"><b>02c icons</b><span>690 · 150</span></div>
 <div class="tseg" style="flex:150" data-theme="default"><b>02d type</b><span>840 · 150</span></div>
 <div class="tseg" style="flex:180" data-theme="dark"><b>02e tested</b><span>990 · 180</span></div>
@@ -763,8 +786,8 @@ body{margin:0;background:var(--ds-color-background)}
 <div class="tseg" style="flex:300" data-theme="dark"><b>06 claude</b><span>1860 · 300</span></div>
 <div class="tseg" style="flex:180" data-theme="default"><b>07 end</b><span>2160 · 180</span></div>
 </div>
-<div class="tflash"><i style="flex:465"></i><i class="r" style="flex:75"></i><i class="r" style="flex:75"></i><i class="r" style="flex:75"></i><i class="r" style="flex:300"></i><i class="r" style="flex:180"></i><i class="r" style="flex:690"></i><i class="r" style="flex:300"></i><i class="r" style="flex:180"></i></div>
-<p class="note">Reversals at f 465, 540, 615 (theme wipes), 690, 990, 1170, 1860, 2160 (scene wipes). The 05 panel turns from default to the light <code>my-brand</code> theme at f 1720: light to light, not a reversal.</p>
+<div class="tflash"><i style="flex:990"></i><i class="r" style="flex:180"></i><i class="r" style="flex:690"></i><i class="r" style="flex:300"></i><i class="r" style="flex:180"></i></div>
+<p class="note">Reversals at f 990, 1170, 1860 and 2160 (scene wipes into and out of dark). The 02b stage (f 560), the 02b → 02c scene wipe (f 690), the 02d pane and the 05 panel (f 1720) all move between default and the light block of <code>my-brand</code>: light to light, not a reversal.</p>
 </div>
 
 <table class="tbl">
@@ -772,9 +795,9 @@ body{margin:0;background:var(--ds-color-background)}
 <tbody>
 <tr><td class="m">01</td><td>Hook</td><td class="m">0</td><td class="m">210</td><td class="m">0.0 – 7.0</td><td class="m">default</td><td class="m">KF01 f 180</td></tr>
 <tr><td class="m">02a</td><td>Key features · Radix keyboard and focus</td><td class="m">210</td><td class="m">180</td><td class="m">7.0 – 13.0</td><td class="m">default</td><td class="m">KF02a f 270 · KF02b f 345</td></tr>
-<tr><td class="m">02b</td><td>Key features · one screen, four themes</td><td class="m">390</td><td class="m">300</td><td class="m">13.0 – 23.0</td><td class="m">default · dark · bold · bold-dark</td><td class="m">KF03 f 440 · 510 · 585 · 660</td></tr>
+<tr><td class="m">02b</td><td>Key features · working components, your brand, Claude</td><td class="m">390</td><td class="m">300</td><td class="m">13.0 – 23.0</td><td class="m">default · my-brand</td><td class="m">KF03a f 465 · KF03b f 550 · KF03c f 640</td></tr>
 <tr><td class="m">02c</td><td>Key features · bring your own icons</td><td class="m">690</td><td class="m">150</td><td class="m">23.0 – 28.0</td><td class="m">default</td><td class="m">KF04 f 810</td></tr>
-<tr><td class="m">02d</td><td>Key features · typography</td><td class="m">840</td><td class="m">150</td><td class="m">28.0 – 33.0</td><td class="m">default + bold pane</td><td class="m">KF05 f 960</td></tr>
+<tr><td class="m">02d</td><td>Key features · type that follows your brand</td><td class="m">840</td><td class="m">150</td><td class="m">28.0 – 33.0</td><td class="m">default + my-brand pane</td><td class="m">KF05 f 960</td></tr>
 <tr><td class="m">02e</td><td>Key features · Storybook, jest-axe, CI</td><td class="m">990</td><td class="m">180</td><td class="m">33.0 – 39.0</td><td class="m">dark</td><td class="m">KF06 f 1140</td></tr>
 <tr><td class="m">03</td><td>Skip building your own</td><td class="m">1170</td><td class="m">210</td><td class="m">39.0 – 46.0</td><td class="m">default</td><td class="m">KF07 f 1340</td></tr>
 <tr><td class="m">04</td><td>Install in one line</td><td class="m">1380</td><td class="m">180</td><td class="m">46.0 – 52.0</td><td class="m">default</td><td class="m">KF08 f 1530</td></tr>
@@ -852,63 +875,83 @@ body{margin:0;background:var(--ds-color-background)}
 </div>
 </section>
 
-<!-- ============================================================ 02b THEMES -->
+<!-- ============================================================ 02b COMPONENTS · YOUR BRAND · CLAUDE -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">02b</span><h2 class="sec-t">Key features · one screen, four themes · f 390 – 689</h2></div>
-<p class="sec-d">The whole stage switches theme; markup never changes. Wipes start at f 465, 540 and 615 and last 12 frames each (left to right, the new theme revealed by a frame-driven clip). Each theme is fully on screen for at least 63 frames. The SegmentedControl and the <code>data-theme</code> tag show the active theme. Parts: Tag, TextField, Switch, Alert, Button, SegmentedControl.</p>
+<div class="sec-h"><span class="sec-n">02b</span><h2 class="sec-t">Key features · working components, your brand, Claude · f 390 – 689 · default + my-brand</h2></div>
+<p class="sec-d">The three key features in one short beat; scenes 05 and 06 then show how. A wall of shipped components (laid out with the package's own <code>Grid</code> and <code>Stack</code>) is used on screen: f 480 Switch on, f 495 Checkbox checked, f 510 SegmentedControl to Month, f 525 – 544 Slider 30 → 70. Then the whole stage wipes from the neutral <code>default</code> look into <code>my-brand</code>, the example brand built from the same <code>ds.theme.json</code> that scene 05 opens (f 560 – 571, light to light). The statements enter with their beat: "25 component families" at f 420, "Your brand, not ours" with the wipe at f 560, "Ready for Claude" at f 590. The video never names the shipped demo themes or counts them. Parts: Button, IconButton, Select, Input, Slider, Switch, Checkbox, SegmentedControl, Tag.</p>
 <div class="kfs">
 
-<div class="ab"><div class="ab-h"><span>KF03 · f 440 · 14.67 s</span><span>default</span></div>
-<div class="kf"><div class="st" data-theme="default"><div class="safe">
-<div class="hrow"><div class="stack"><h2 class="hd t-h2">One screen. Four themes.</h2><p class="sub sm">Only data-theme changes. The markup stays the same.</p></div>
-<div class="cg"><div class="cg-top"><span class="cg-l">Theme</span><span class="tag tag-neutral tag-sm mono">data-theme="default"</span></div><div class="seg"><span class="seg-i is-on">default</span><span class="seg-i">dark</span><span class="seg-i">bold</span><span class="seg-i">bold-dark</span></div></div></div>
-<div class="demo">
-<div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
-<div class="demo-g">
-<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
-<div class="col"><div class="alert alert-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div>
-</div></div>
+<div class="ab"><div class="ab-h"><span>KF03a · f 465 · 15.50 s · rest</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe" style="gap:var(--ds-space-4)">
+<h2 class="hd t-h2">Components that already work.</h2>
+<div class="pills">
+<div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>25 component families</div>
+<div class="pill is-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Your brand, not ours</div>
+<div class="pill is-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Ready for Claude</div>
+</div>
+<div>
+<div class="demo-cap"><span class="eyebrow">From the package</span><span class="tag tag-neutral tag-sm mono">data-theme="default"</span></div>
+<div class="wall">
+<div class="tile"><p class="eyebrow">Button · IconButton</p><div class="row-b" style="flex-wrap:nowrap;gap:var(--ds-space-2)"><span class="btn btn-primary">Save</span><span class="btn btn-secondary btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div></div>
+<div class="tile"><p class="eyebrow">Select</p><div class="inp sel"><span>Medium</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div></div>
+<div class="tile"><p class="eyebrow">Input</p><div class="inp"><span class="ph">Name or email</span></div></div>
+<div class="tile"><p class="eyebrow">Slider</p><div class="sl"><div class="sl-root"><div class="sl-track"><div class="sl-range" style="width:30%"></div><span class="sl-thumb" style="left:30%"></span></div></div><div class="inp num">30</div></div></div>
+<div class="tile"><p class="eyebrow">Switch</p><div class="ctl"><span class="sw is-off"><i></i></span><span class="ctl-lb">Notify</span></div></div>
+<div class="tile"><p class="eyebrow">Checkbox</p><div class="ctl"><span class="cb is-off"></span><span class="ctl-lb">Email me</span></div></div>
+<div class="tile"><p class="eyebrow">SegmentedControl</p><div class="seg"><span class="seg-i is-on">Week</span><span class="seg-i">Month</span></div></div>
+<div class="tile"><p class="eyebrow">Tag</p><div class="tags"><span class="tag tag-solid">New</span><span class="tag tag-subtle tag-rm">Q4<span class="tag-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div></div>
+</div>
+</div>
 </div></div></div>
-<div class="ab-f">Scene wipe in f 390 – 401; fully default f 402 – 464. The screen arrives with the wipe; only the heading and sub use the enter move.</div></div>
+<div class="ab-f">Scene wipe in f 390 – 401; the wall and its caption arrive with it. Heading enters f 402, "25 component families" f 420. Every tile at rest: Switch off, Checkbox unchecked, Week, 30. The other two statements hold their slots, empty.</div></div>
 
-<div class="ab"><div class="ab-h"><span>KF03 · f 510 · 17.00 s</span><span>dark</span></div>
-<div class="kf"><div class="st" data-theme="dark"><div class="safe">
-<div class="hrow"><div class="stack"><h2 class="hd t-h2">One screen. Four themes.</h2><p class="sub sm">Only data-theme changes. The markup stays the same.</p></div>
-<div class="cg"><div class="cg-top"><span class="cg-l">Theme</span><span class="tag tag-neutral tag-sm mono">data-theme="dark"</span></div><div class="seg"><span class="seg-i">default</span><span class="seg-i is-on">dark</span><span class="seg-i">bold</span><span class="seg-i">bold-dark</span></div></div></div>
-<div class="demo">
-<div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
-<div class="demo-g">
-<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
-<div class="col"><div class="alert alert-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div>
-</div></div>
+<div class="ab"><div class="ab-h"><span>KF03b · f 550 · 18.33 s · used</span><span>default</span></div>
+<div class="kf"><div class="st" data-theme="default"><div class="safe" style="gap:var(--ds-space-4)">
+<h2 class="hd t-h2">Components that already work.</h2>
+<div class="pills">
+<div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>25 component families</div>
+<div class="pill is-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Your brand, not ours</div>
+<div class="pill is-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Ready for Claude</div>
+</div>
+<div>
+<div class="demo-cap"><span class="eyebrow">From the package</span><span class="tag tag-neutral tag-sm mono">data-theme="default"</span></div>
+<div class="wall">
+<div class="tile"><p class="eyebrow">Button · IconButton</p><div class="row-b" style="flex-wrap:nowrap;gap:var(--ds-space-2)"><span class="btn btn-primary">Save</span><span class="btn btn-secondary btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div></div>
+<div class="tile"><p class="eyebrow">Select</p><div class="inp sel"><span>Medium</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div></div>
+<div class="tile"><p class="eyebrow">Input</p><div class="inp"><span class="ph">Name or email</span></div></div>
+<div class="tile"><p class="eyebrow">Slider</p><div class="sl"><div class="sl-root"><div class="sl-track"><div class="sl-range" style="width:70%"></div><span class="sl-thumb" style="left:70%"></span></div></div><div class="inp num">70</div></div></div>
+<div class="tile"><p class="eyebrow">Switch</p><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify</span></div></div>
+<div class="tile"><p class="eyebrow">Checkbox</p><div class="ctl"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span class="ctl-lb">Email me</span></div></div>
+<div class="tile"><p class="eyebrow">SegmentedControl</p><div class="seg"><span class="seg-i">Week</span><span class="seg-i is-on">Month</span></div></div>
+<div class="tile"><p class="eyebrow">Tag</p><div class="tags"><span class="tag tag-solid">New</span><span class="tag tag-subtle tag-rm">Q4<span class="tag-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div></div>
+</div>
+</div>
 </div></div></div>
-<div class="ab-f">Wipe f 465 – 476; fully dark f 477 – 539.</div></div>
+<div class="ab-f">After the four step events, driven through each component's controlled props: Switch on (f 480), Checkbox checked (f 495), SegmentedControl Month (f 510), Slider value 30 → 70 over f 525 – 544 (thumb, range and Input move together, tabular figures).</div></div>
 
-<div class="ab"><div class="ab-h"><span>KF03 · f 585 · 19.50 s</span><span>bold</span></div>
-<div class="kf"><div class="st" data-theme="bold"><div class="safe">
-<div class="hrow"><div class="stack"><h2 class="hd t-h2">One screen. Four themes.</h2><p class="sub sm">Only data-theme changes. The markup stays the same.</p></div>
-<div class="cg"><div class="cg-top"><span class="cg-l">Theme</span><span class="tag tag-neutral tag-sm mono">data-theme="bold"</span></div><div class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i is-on">bold</span><span class="seg-i">bold-dark</span></div></div></div>
-<div class="demo">
-<div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
-<div class="demo-g">
-<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
-<div class="col"><div class="alert alert-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div>
-</div></div>
+<div class="ab"><div class="ab-h"><span>KF03c · f 640 · 21.33 s · your brand</span><span>my-brand (bold stand-in)</span></div>
+<div class="kf"><div class="st" data-theme="bold"><div class="safe" style="gap:var(--ds-space-4)">
+<h2 class="hd t-h2">Components that already work.</h2>
+<div class="pills">
+<div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>25 component families</div>
+<div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Your brand, not ours</div>
+<div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Ready for Claude</div>
+</div>
+<div>
+<div class="demo-cap"><span class="eyebrow">From the package</span><span class="tag tag-neutral tag-sm mono">data-theme="my-brand"</span></div>
+<div class="wall">
+<div class="tile"><p class="eyebrow">Button · IconButton</p><div class="row-b" style="flex-wrap:nowrap;gap:var(--ds-space-2)"><span class="btn btn-primary">Save</span><span class="btn btn-secondary btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div></div>
+<div class="tile"><p class="eyebrow">Select</p><div class="inp sel"><span>Medium</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div></div>
+<div class="tile"><p class="eyebrow">Input</p><div class="inp"><span class="ph">Name or email</span></div></div>
+<div class="tile"><p class="eyebrow">Slider</p><div class="sl"><div class="sl-root"><div class="sl-track"><div class="sl-range" style="width:70%"></div><span class="sl-thumb" style="left:70%"></span></div></div><div class="inp num">70</div></div></div>
+<div class="tile"><p class="eyebrow">Switch</p><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify</span></div></div>
+<div class="tile"><p class="eyebrow">Checkbox</p><div class="ctl"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span class="ctl-lb">Email me</span></div></div>
+<div class="tile"><p class="eyebrow">SegmentedControl</p><div class="seg"><span class="seg-i">Week</span><span class="seg-i is-on">Month</span></div></div>
+<div class="tile"><p class="eyebrow">Tag</p><div class="tags"><span class="tag tag-solid">New</span><span class="tag tag-subtle tag-rm">Q4<span class="tag-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div></div>
+</div>
+</div>
 </div></div></div>
-<div class="ab-f">Wipe f 540 – 551; fully bold f 552 – 614. Uppercase headings, radius, offset shadow and 48 px controls all come from the theme.</div></div>
-
-<div class="ab"><div class="ab-h"><span>KF03 · f 660 · 22.00 s</span><span>bold-dark</span></div>
-<div class="kf"><div class="st" data-theme="bold-dark"><div class="safe">
-<div class="hrow"><div class="stack"><h2 class="hd t-h2">One screen. Four themes.</h2><p class="sub sm">Only data-theme changes. The markup stays the same.</p></div>
-<div class="cg"><div class="cg-top"><span class="cg-l">Theme</span><span class="tag tag-neutral tag-sm mono">data-theme="bold-dark"</span></div><div class="seg"><span class="seg-i">default</span><span class="seg-i">dark</span><span class="seg-i">bold</span><span class="seg-i is-on">bold-dark</span></div></div></div>
-<div class="demo">
-<div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span><span class="tag tag-subtle">Q4</span></div>
-<div class="demo-g">
-<div class="col"><div class="fld"><span class="fld-l">Owner</span><div class="inp"><span class="ph">Name or email</span></div></div><div class="ctl"><span class="sw"><i></i></span><span class="ctl-lb">Notify the team</span></div></div>
-<div class="col"><div class="alert alert-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-7"/></svg><div class="alert-in"><span class="alert-t">Saved</span><span class="alert-b">Your changes are live.</span></div></div><div class="row-b"><span class="btn btn-primary">Publish</span><span class="btn btn-secondary">Save draft</span></div></div>
-</div></div>
-</div></div></div>
-<div class="ab-f">Wipe f 615 – 626; fully bold-dark f 627 – 689.</div></div>
+<div class="ab-f">Stage wipe into <code>my-brand</code> f 560 – 571; "Your brand, not ours" enters with it, "Ready for Claude" at f 590. Same markup, same values; fonts, colors, radius, shadow and control height come from the brand file. <b>Stand-in:</b> drawn with <code>bold</code>; the video paints the <code>theme.css</code> that <code>theme build</code> writes from the fixture (see 05).</div></div>
 
 </div>
 </section>
@@ -941,12 +984,12 @@ body{margin:0;background:var(--ds-color-background)}
 
 <!-- ============================================================ 02d TYPE -->
 <section class="sec">
-<div class="sec-h"><span class="sec-n">02d</span><h2 class="sec-t">Key features · typography · f 840 – 989 · default + bold pane</h2></div>
-<p class="sec-d">The same three lines with the same Tailwind utilities, in a <code>default</code> pane and a <code>bold</code> pane. Fonts, sizes, weights and the heading case all come from roles. The class name is printed above each line.</p>
+<div class="sec-h"><span class="sec-n">02d</span><h2 class="sec-t">Key features · type that follows your brand · f 840 – 989 · default + my-brand pane</h2></div>
+<p class="sec-d">The same three lines with the same Tailwind utilities, in a <code>default</code> pane and a <code>my-brand</code> pane (the example brand from 02b and 05). Fonts, sizes and weights all come from roles. The class name is printed above each line. <b>Stand-in:</b> the canvas draws the brand pane with <code>bold</code>; the video uses the built <code>my-brand</code> CSS, whose fonts match the fixture but whose heading case and type steps follow <code>createTheme()</code> output.</p>
 <div class="kfs">
-<div class="ab"><div class="ab-h"><span>KF05 · f 960 · 32.00 s</span><span>default · pane bold</span></div>
+<div class="ab"><div class="ab-h"><span>KF05 · f 960 · 32.00 s</span><span>default · pane my-brand (bold stand-in)</span></div>
 <div class="kf"><div class="st" data-theme="default"><div class="safe">
-<div class="stack"><h2 class="hd t-h2">Type that follows the theme.</h2><p class="sub">heading-* and body-* utilities read the font and size roles.</p></div>
+<div class="stack"><h2 class="hd t-h2">Type that follows your brand.</h2><p class="sub">heading-* and body-* utilities read the font and size roles.</p></div>
 <div class="panes">
 <div class="pane" data-theme="default">
 <span class="tag tag-neutral tag-sm mono" style="align-self:flex-start">default</span>
@@ -955,7 +998,7 @@ body{margin:0;background:var(--ds-color-background)}
 <div><span class="cls">body-lg</span><p class="body-lg">One attribute restyles every line.</p></div>
 </div>
 <div class="pane" data-theme="bold">
-<span class="tag tag-neutral tag-sm mono" style="align-self:flex-start">bold</span>
+<span class="tag tag-neutral tag-sm mono" style="align-self:flex-start">my-brand</span>
 <div><span class="cls">heading-lg</span><p class="hd t-h2">Launch plan</p></div>
 <div><span class="cls">heading-md</span><p class="hd t-h3">Owner and dates</p></div>
 <div><span class="cls">body-lg</span><p class="body-lg">One attribute restyles every line.</p></div>
@@ -994,7 +1037,7 @@ body{margin:0;background:var(--ds-color-background)}
 <!-- ============================================================ 03 SKIP -->
 <section class="sec">
 <div class="sec-h"><span class="sec-n">03</span><h2 class="sec-t">Skip building your own · f 1170 – 1379 · default</h2></div>
-<p class="sec-d">Four counted facts. Numbers count up from 0 over f 1200 – 1229 (tabular figures, so nothing jitters), then hold. Every number is read from the repo at bundle time; the values drawn here are the counts on main today (sources in the spec). The closing line rises in at f 1245 – 1259.</p>
+<p class="sec-d">Four counted facts. Numbers count up from 0 over f 1200 – 1229 (tabular figures, so nothing jitters), then hold. Every number is read from the repo at bundle time; the values drawn here are the counts on main today (sources in the spec). No theme count: the shipped themes are demos, so the facts count what a brand theme gets for free (roles to set, contrast pairs checked). The closing line rises in at f 1245 – 1259.</p>
 <div class="kfs">
 <div class="ab"><div class="ab-h"><span>KF07 · f 1340 · 44.67 s</span><span>default</span></div>
 <div class="kf"><div class="st" data-theme="default"><div class="safe mid" style="gap:var(--ds-space-8)">
@@ -1002,24 +1045,24 @@ body{margin:0;background:var(--ds-color-background)}
 <dl class="facts">
 <div><dt>component families</dt><dd>25</dd></div>
 <div><dt>themeable roles</dt><dd>87</dd></div>
-<div><dt>themes</dt><dd>4</dd></div>
+<div><dt>contrast pairs checked</dt><dd>53</dd></div>
 <div><dt>tasks already done</dt><dd>61</dd></div>
 </dl>
 <p class="hd t-h3" style="color:var(--ds-color-text)">So your tokens go to your product, not your buttons.</p>
 </div></div></div>
-<div class="ab-f">25 = <code>src/index.ts</code> component exports · 87 = <code>themeRoles.length</code> · 4 = shipped <code>data-theme</code> names · 61 = <code>status: done</code> in <code>roadmap.md</code>.</div></div>
+<div class="ab-f">25 = <code>src/index.ts</code> component exports · 87 = <code>themeRoles.length</code> · 53 = <code>requiredPairs.length</code> in <code>checkContrast.ts</code> · 61 = <code>status: done</code> in <code>roadmap.md</code>.</div></div>
 </div>
 </section>
 
 <!-- ============================================================ 04 INSTALL -->
 <section class="sec">
 <div class="sec-h"><span class="sec-n">04</span><h2 class="sec-t">Install in one line · f 1380 – 1559 · default</h2></div>
-<p class="sec-d">The install command types itself at 1.5 characters per frame (f 1410 – 1434); the caret is a steady block, it never blinks. The starter card rises in at f 1450 – 1464. The package name is read from <code>package.json</code> at bundle time.</p>
+<p class="sec-d">The install command types itself at 1.5 characters per frame (f 1410 – 1433, 35 characters); the caret is a steady block, it never blinks. The starter card rises in at f 1450 – 1464. The package name is read from <code>package.json</code> at bundle time.</p>
 <div class="kfs">
 <div class="ab"><div class="ab-h"><span>KF08 · f 1530 · 51.00 s</span><span>default</span></div>
 <div class="kf"><div class="st" data-theme="default"><div class="safe mid">
 <h2 class="hd t-h1">Install in one line.</h2>
-<pre class="term">$ npm install @mikespineu/design-system<span class="caret"></span></pre>
+<pre class="term">$ npm install design-system-wireframe<span class="caret"></span></pre>
 <div class="card lg" style="margin-top:var(--ds-space-2)">
 <h3 class="hd t-h3">Or start from the React starter.</h3>
 <span class="nm">examples/vite-react</span>
@@ -1033,7 +1076,7 @@ body{margin:0;background:var(--ds-color-background)}
 <!-- ============================================================ 05 CUSTOMIZE -->
 <section class="sec">
 <div class="sec-h"><span class="sec-n">05</span><h2 class="sec-t">Customize in one file · f 1560 – 1859 · default + my-brand panel</h2></div>
-<p class="sec-d">Left: the theme file. Right: the build command and the same screen. f 1680 – 1708 the command types; f 1720 – 1731 the panel wipes into the generated theme; f 1740 – 1754 the contrast result rises in. The JSON is the real fixture <code>video/fixtures/ds.theme.json</code> (it holds the <code>bold</code> input). <b>Stand-in:</b> the canvas paints the built panel with the shipped <code>bold</code> theme; the video paints the <code>theme.css</code> the CLI writes, which is <code>createTheme()</code> output without bold's hand-tuned override block, so a few colors and type steps differ slightly.</p>
+<p class="sec-d">Left: the theme file. Right: the build command and the same screen. f 1680 – 1705 the command types; f 1720 – 1731 the panel wipes into the generated theme; f 1740 – 1754 the contrast result rises in. The JSON is the real fixture <code>video/fixtures/ds.theme.json</code> (it holds the <code>bold</code> input under the name <code>my-brand</code>), so this is how the brand seen in 02b and 02d was made. <b>Stand-in:</b> the canvas paints the built panel with the shipped <code>bold</code> theme; the video paints the <code>theme.css</code> the CLI writes, which is <code>createTheme()</code> output without bold's hand-tuned override block, so a few colors and type steps differ slightly.</p>
 <div class="kfs">
 
 <div class="ab"><div class="ab-h"><span>KF09a · f 1660 · 55.33 s · the file</span><span>default</span></div>
@@ -1083,7 +1126,7 @@ body{margin:0;background:var(--ds-color-background)}
 <p class="p" style="font-size:var(--ds-text-body-sm-size);line-height:var(--ds-text-body-sm-line-height)">Write it by hand, or with the theme skill: <span class="mono">/wireframe-ds:theme</span></p>
 </div>
 <div class="col" style="flex:1;gap:var(--ds-space-3)">
-<pre class="term sm">$ npx @mikespineu/design-system theme build</pre>
+<pre class="term sm">$ npx design-system-wireframe theme build</pre>
 <div><div class="demo-cap"><span class="eyebrow">Preview</span><span class="tag tag-neutral tag-sm mono">data-theme="my-brand"</span></div>
 <div data-theme="default"><div class="demo sm" data-theme="bold">
 <div class="demo-t"><h3 class="hd t-h3">Launch plan</h3><span class="tag tag-solid">New</span></div>
@@ -1144,7 +1187,7 @@ body{margin:0;background:var(--ds-color-background)}
 <h2 class="hd t-display">Design System Wireframe</h2>
 <p class="hd t-h3" style="color:var(--ds-color-text)">Don't spend tokens building your own design system.</p>
 <dl class="links" style="margin-top:var(--ds-space-2)">
-<dt>Install</dt><dd>npm install @mikespineu/design-system</dd>
+<dt>Install</dt><dd>npm install design-system-wireframe</dd>
 <dt>Code</dt><dd>github.com/mikespineu/design-system-wireframe</dd>
 <dt>Docs</dt><dd>ds.mikespin.dev</dd>
 </dl>
@@ -1168,10 +1211,10 @@ body{margin:0;background:var(--ds-color-background)}
 <thead><tr><th>Move</th><th>Frames</th><th>Driven value</th><th>Used in</th></tr></thead>
 <tbody>
 <tr><td>Enter</td><td class="m">15</td><td class="m">opacity 0 → 1, translateY 8 → 0 logical px (16 output)</td><td>every line of copy, cards, panes</td></tr>
-<tr><td>Wipe</td><td class="m">12</td><td class="m">clip-path inset(0 100% 0 0) → inset(0 0 0 0) on the incoming layer</td><td>every scene change, 02b theme changes, 05 panel</td></tr>
+<tr><td>Wipe</td><td class="m">12</td><td class="m">clip-path inset(0 100% 0 0) → inset(0 0 0 0) on the incoming layer</td><td>every scene change, 02b stage into my-brand, 05 panel</td></tr>
 <tr><td>Type</td><td class="m">len / 1.5</td><td class="m">visible chars = floor((frame − start) × 1.5); steady block caret</td><td>04, 05, 06 commands</td></tr>
-<tr><td>Count</td><td class="m">20 – 30</td><td class="m">Math.round(interpolate(0 → N)); tabular figures</td><td>02e coverage, 03 facts</td></tr>
-<tr><td>Key / focus</td><td class="m">0 (step)</td><td class="m">focus ring, highlight and value change on the event frame; key cap filled for 6 frames</td><td>02a</td></tr>
+<tr><td>Count</td><td class="m">20 – 30</td><td class="m">Math.round(interpolate(a → b)); tabular figures</td><td>02b Slider value 30 → 70, 02e coverage, 03 facts</td></tr>
+<tr><td>Key / focus / value step</td><td class="m">0 (step)</td><td class="m">focus ring, highlight, checked or on state change on the event frame through the component's props; key cap filled for 6 frames</td><td>02a keys, 02b Switch, Checkbox, SegmentedControl</td></tr>
 <tr><td>Underline</td><td class="m">15</td><td class="m">bar width 0 → 100 %</td><td>01 "tokens"</td></tr>
 </tbody>
 </table>
@@ -1184,10 +1227,9 @@ body{margin:0;background:var(--ds-color-background)}
 <div class="stack" style="gap:12px">
 <div class="cc" data-theme="default"><span class="cap" style="width:96px">default</span><span class="chip" style="color:var(--ds-color-text-emphasis)">Aa emphasis</span><span class="chip">Aa text</span><span class="chip" style="color:var(--ds-color-text-muted)">Aa muted</span><span class="chip inv">Aa inverse</span><span class="chip pri">Aa primary</span><span class="chip ok">Aa success</span><span class="chip fr">focus</span></div>
 <div class="cc" data-theme="dark"><span class="cap" style="width:96px">dark</span><span class="chip" style="color:var(--ds-color-text-emphasis)">Aa emphasis</span><span class="chip">Aa text</span><span class="chip" style="color:var(--ds-color-text-muted)">Aa muted</span><span class="chip inv">Aa inverse</span><span class="chip pri">Aa primary</span><span class="chip ok">Aa success</span><span class="chip fr">focus</span></div>
-<div class="cc" data-theme="bold"><span class="cap" style="width:96px">bold</span><span class="chip" style="color:var(--ds-color-text-emphasis)">Aa emphasis</span><span class="chip">Aa text</span><span class="chip" style="color:var(--ds-color-text-muted)">Aa muted</span><span class="chip inv">Aa inverse</span><span class="chip pri">Aa primary</span><span class="chip ok">Aa success</span><span class="chip fr">focus</span></div>
-<div class="cc" data-theme="bold-dark"><span class="cap" style="width:96px">bold-dark</span><span class="chip" style="color:var(--ds-color-text-emphasis)">Aa emphasis</span><span class="chip">Aa text</span><span class="chip" style="color:var(--ds-color-text-muted)">Aa muted</span><span class="chip inv">Aa inverse</span><span class="chip pri">Aa primary</span><span class="chip ok">Aa success</span><span class="chip fr">focus</span></div>
+<div class="cc" data-theme="bold"><span class="cap" style="width:96px">my-brand<br>(bold stand-in)</span><span class="chip" style="color:var(--ds-color-text-emphasis)">Aa emphasis</span><span class="chip">Aa text</span><span class="chip" style="color:var(--ds-color-text-muted)">Aa muted</span><span class="chip inv">Aa inverse</span><span class="chip pri">Aa primary</span><span class="chip ok">Aa success</span><span class="chip fr">focus</span></div>
 </div>
-<p class="note">Minimum hold per line of copy: max(60, 15 + 10 × words) frames fully visible after its entrance. Flashes: at most one light/dark reversal in any 75 frames (limit is 3 per second). No audio; a WebVTT text track and a described transcript ship with the video (spec, Accessibility).</p>
+<p class="note">Themes on screen: default, dark and the light block of <code>my-brand</code> (02b, 02d pane, 05 panel), checked by <code>checkContrast()</code> at bundle time. <code>bold</code> appears only as the canvas stand-in; <code>bold-dark</code> is not used. Minimum hold per line of copy: max(60, 15 + 10 × words) frames fully visible after its entrance. Flashes: at most one light/dark reversal in any 180 frames (limit is 3 per second). No audio; a WebVTT text track and a described transcript ship with the video (spec, Accessibility).</p>
 </section>
 
 </div>
