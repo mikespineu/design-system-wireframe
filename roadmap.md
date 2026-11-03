@@ -515,6 +515,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-72** Fix failing RadioGroup & Toast story play checks — https://github.com/mikespineu/design-system-wireframe/pull/112
 - **DS-66** Starter guide & install accuracy — https://github.com/mikespineu/design-system-wireframe/pull/110
 - **DS-70** Introduction page refresh — design — https://github.com/mikespineu/design-system-wireframe/pull/109
 - **DS-67** README screenshot script & themed images — https://github.com/mikespineu/design-system-wireframe/pull/107
