@@ -384,6 +384,37 @@ Each task carries its fields in an indented line, read by the [software factory]
     - A test checks every link on the page resolves (Storybook story/docs ids exist; GitHub doc paths exist in the repo)
     - Tab order follows the spec (`userEvent` test) and a `jest-axe` test passes in every theme
     - `docs/images/readme/storybook-introduction.png` is re-captured from the new page
+- [ ] **DS-73 Promo video — Remotion workspace.** Add `video/` as a standalone package with its own package.json and lockfile, not an npm workspace. Pin `remotion` and `@remotion/*` to one exact version. Add a placeholder composition that renders real DS components from the packed library, plus root convenience scripts, a `video` CI job and `video/README.md` (including the Remotion license terms).
+  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: todo
+  - done_when:
+    - Root package.json, package-lock.json and `dist/` contain no Remotion; root `npm ci`, `npm run build` and the dist packaging test pass unchanged
+    - `video/` installs the library from `npm pack` output and imports only public exports (`design-system-test`, `/styles.css`, `/fonts.css`, `/themes/bold.css`, `/themes/bold-fonts.css`) with a single React copy; a placeholder composition renders a Button and a TextField in `default` and `bold`
+    - Fonts load before frames render (Remotion `delayRender` or font loading), and DS CSS motion is off inside compositions (`--ds-motion: 0ms`, no spinner); all movement uses `useCurrentFrame()`
+    - `npm run video:studio` starts Remotion Studio on the per-worktree port formula from CLAUDE.md (never 3000 or 6006); `npm run video:still` and `npm run video:render` work from the root
+    - A `video` CI job installs `video/`, typechecks, runs its tests and renders one still per composition; root `npm run lint` passes with `video/` deliberately linted or ignored
+- [ ] **DS-74 Promo video — design.** Storyboard canvas `docs/design-system-wireframe/PromoVideo.dc.html` and spec `docs/specs/PromoVideo.md` for a 60–90 s, 1920×1080, 30 fps video whose message is "don't spend tokens building your own design system". Scenes: hook; key features (Radix keyboard and focus, one screen switching default/dark/bold/bold-dark, BYO icons, typography, Storybook + jest-axe + CI); "Skip building your own" (the work already done for you, counted from the repo); "Install in one line" (scoped npm package and the React starter); "Customize in minutes" (`ds.theme.json` → `theme build` → new theme checked by `checkContrast()`, plus the theme skill); "Works with Claude" (the Claude Marketplace plugin: component-usage skill, UI-review agent, MCP server tools); end card. Every feature is presented as shipped.
+  - type: design · has_ui: yes · depends_on: DS-50 · needs_human: no · status: todo
+  - done_when:
+    - The canvas shows a keyframe per scene in every theme that scene uses, carries the tokens.css token block and passes `src/test/canvasBoards.test.ts`
+    - The spec lists every scene with start frame, duration, on-screen copy, the components, commands or plugin parts shown, the theme, and frame-driven motion (no CSS animation or transitions)
+    - Every number shown has a named source (done tasks from `roadmap.md`, families from `src/index.ts`, `themeRoles.length`, theme count, coverage from `jest.config.cjs`); the copy makes no token, time or cost figure that isn't measured
+    - The spec maps every feature shown to the roadmap task that ships it (DS-10, DS-51 to DS-57, DS-59, DS-60, DS-61) and to the file that proves it (e.g. `plugin.json`, `dist/manifest.json`, the CLI entry); no "coming soon" or roadmap wording appears in the video
+    - The a11y section covers: text contrast at least 4.5:1 per theme, minimum on-screen time per line of copy, no more than 3 flashes per second (WCAG 2.3.1), a captions/transcript plan, and no audio unless the user supplies a licensed track
+- [ ] **DS-75 Promo video — implementation.** Build the compositions in `video/` per `docs/specs/PromoVideo.md`, using real DS components and themes from the installed package. Motion uses Remotion `interpolate`/`spring` on `useCurrentFrame()`. Facts, the package name, commands and plugin parts are read from their sources at bundle time.
+  - type: build · has_ui: yes · depends_on: DS-74, DS-73, DS-10, DS-51, DS-52, DS-53, DS-54, DS-55, DS-56, DS-57, DS-59, DS-60, DS-61 · needs_human: no · status: todo
+  - done_when:
+    - Matches the approved spec in every state: at the spec's frame numbers, each scene's still matches its canvas keyframe; the CI `video` job renders one still per scene
+    - Scenes render real DS components and theme CSS from the package (no component screenshots, no hard-coded hex or `--ds-*` values), and contain no CSS animation, transition, setTimeout or setInterval (enforced by a test or lint rule)
+    - A test fails if any number shown differs from its source (`roadmap.md` done count, `src/index.ts` exports, `themeRoles`, themes, `jest.config.cjs` coverage)
+    - A test fails if any feature shown doesn't exist: the package name matches `package.json`, the `theme build` CLI command exists, and every skill, agent and MCP tool named on screen is registered in the plugin's `plugin.json` / MCP server
+    - `npm run video:render` writes an H.264 MP4 to the gitignored `video/out/` with no errors
+- [ ] **DS-76 Promo video — render & publish.** Confirm the Remotion license that applies. Once every task the video shows is done, render the final MP4 from main, upload it (GitHub release asset or README attachment), and add a poster frame plus captions so the README can link the video.
+  - type: docs · has_ui: no · depends_on: DS-75, DS-68, DS-69, DS-71, DS-72 · needs_human: yes · status: todo
+  - done_when:
+    - The PR states which Remotion license applies (free license confirmed by the user, or company license bought)
+    - The final MP4 is rendered from a recorded main commit on which every roadmap task is `[x]` done, uploaded by the user, and linked from README.md through a poster image
+    - The poster PNG in `docs/images/readme/` is at most 1600 px wide, under 500 KB, and has alt text describing the video
+    - A captions file or transcript, as the spec requires, is published next to the video link
 
 ### Epic: Icons
 
