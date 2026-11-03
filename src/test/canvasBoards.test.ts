@@ -70,7 +70,7 @@ describe('design-system-wireframe canvas', () => {
 
   it.each([
     ['canvas README', join(dir, 'README.md')],
-    ['root README', join(dir, '..', '..', 'README.md')],
+    ['Claude Design doc', join(dir, '..', 'claude-design.md')],
   ])('%s lists every board', (_name, file) => {
     const text = readFileSync(file, 'utf8')
     boardsOnDisk.forEach((b) => expect(text).toContain(`\`${b}\``))

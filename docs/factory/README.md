@@ -2,7 +2,9 @@
 
 The factory takes tasks from [`roadmap.md`](../../roadmap.md), designs or builds each one in its own worktree with Claude subagents, checks the result with hard gates, opens a pull request, and merges it when checks pass and you've approved what needs approving. Everything is a Claude Code skill: you type `/factory:…`.
 
-Design: [`design.md`](./design.md) · Rules the skills follow: [`factory/plugin/RULES.md`](../../factory/plugin/RULES.md) · Reusable prompt for other projects: [`PROMPT.md`](./PROMPT.md)
+![Factory status page: needs-you panel, in-progress task, runnable tasks with their commands, epic progress bars and the status board](../images/readme/factory-status.png)
+
+Design: [`design.md`](./design.md) · How designs are drawn and approved: [Claude Design](../claude-design.md) · Rules the skills follow: [`factory/plugin/RULES.md`](../../factory/plugin/RULES.md) · Reusable prompt for other projects: [`PROMPT.md`](./PROMPT.md)
 
 ## Setup (once)
 
@@ -99,7 +101,74 @@ To stop a run, press Esc in its session; then `/factory:retry` picks it up later
 
 ## Job files
 
-Each task has `factory/jobs/DS-<n>.md`: status, stage, links (branch, PR, canvas, Storybook), loop counts, model, a timeline of every step, gate results, and notes. It's written on the task branch while the task runs and lands in `factory/jobs/` when the PR merges, so the folder is the factory's history.
+Each task has `factory/jobs/DS-<n>.md`: status, stage, links (branch, PR, canvas, Storybook), loop counts, model, a timeline of every step, gate results, and notes. It's written on the task branch while the task runs and lands in `factory/jobs/` when the PR merges, so the folder is the factory's history. Job files are created from [`TEMPLATE.md`](../../factory/jobs/TEMPLATE.md), so [`factory/jobs/`](../../factory/jobs/) is the factory's history and the status page reads it. See the [jobs README](../../factory/jobs/README.md).
+
+## Reference
+
+### Roadmap task format
+
+Tasks live in `roadmap.md`, each with a unique, never reused ID:
+
+```md
+- [ ] **DS-4 Textarea — implementation.** Description.
+  - type: build · has_ui: yes · depends_on: DS-3 · needs_human: no · status: todo
+  - done_when:
+    - Criterion
+```
+
+- `type`: `design`, `build`, `infra` or `docs`.
+- `has_ui`: whether it touches components, styles or stories. A UI build needs an approved spec from its design task.
+- `depends_on`: task IDs that must be done first.
+- `needs_human`: `yes` tasks are skipped by `/factory:next`, and their PR needs your approval.
+- `status`: `todo`, `ready`, `in-progress`, `review`, `done` or `blocked`.
+- `done_when`: the checklist the work is verified against.
+
+### Skills
+
+All skills live in [`factory/plugin/skills/`](../../factory/plugin/skills/), one folder each with a `SKILL.md`.
+
+| Skill | What it does |
+| --- | --- |
+| [`/factory:status`](../../factory/plugin/skills/status/SKILL.md) | Opens the status page: needs you, in progress, runnable, epics, board. `npm run factory:status` keeps it live (refreshes every 10 s) |
+| [`/factory:next`](../../factory/plugin/skills/next/SKILL.md) | Shows the next runnable task and the command to start it |
+| [`/factory:plan`](../../factory/plugin/skills/plan/SKILL.md) | The Planner researches the repo, backlog and job history and proposes next features as tasks; you pick, a roadmap PR lands them |
+| [`/factory:add`](../../factory/plugin/skills/add/SKILL.md) | Turns a feature into correctly shaped roadmap tasks, previews them, and opens a roadmap PR after your ok |
+| [`/factory:edit`](../../factory/plugin/skills/edit/SKILL.md) | Changes a todo or blocked task (fields, `done_when`, block / unblock) through a PR |
+| [`/factory:design`](../../factory/plugin/skills/design/SKILL.md) | Design line: canvas and spec, published to claude.ai, draft PR waiting for you; also revises with feedback |
+| [`/factory:build`](../../factory/plugin/skills/build/SKILL.md) | Build line: Builder, gates, QA, Reviewer, PR, merge on green checks |
+| [`/factory:approve`](../../factory/plugin/skills/approve/SKILL.md) | Your approval of a design or of a PR that needs a human |
+| [`/factory:merge`](../../factory/plugin/skills/merge/SKILL.md) | Re-checks a PR and squash-merges it if the merge rules allow |
+| [`/factory:retry`](../../factory/plugin/skills/retry/SKILL.md) | Resumes a blocked task, optionally with a stronger model or accepting a UI change |
+
+### Agent pipeline
+
+```text
+planner -> designer -> builder -> QA -> reviewer
+```
+
+Definitions are in [`factory/plugin/agents/`](../../factory/plugin/agents/): [`planner`](../../factory/plugin/agents/planner.md) (read-only research that proposes tasks), [`designer`](../../factory/plugin/agents/designer.md) (canvas and spec), [`builder`](../../factory/plugin/agents/builder.md) (test-first implementation), [`qa`](../../factory/plugin/agents/qa.md) and [`reviewer`](../../factory/plugin/agents/reviewer.md) (independent checks). The orchestrating session runs every check as a real command; pass or fail is decided by exit codes and the rules, never by an agent's opinion, and no agent approves its own output.
+
+### Hard gates
+
+Before QA and review, the task's worktree must pass, in order:
+
+1. `npm run lint`
+2. `npm run typecheck`
+3. `npm test` (coverage threshold 80 %)
+4. `npm run build-storybook`
+
+A `has_ui: no` task is also stopped if it touches UI files. A failure goes back to the Builder; after the loop limit the task is blocked with the reason posted on its PR.
+
+### Human approval points
+
+The factory never approves on your behalf. You are needed to:
+
+- approve a design (`/factory:approve DS-n`) before its spec is merged and the build can start;
+- approve a PR for a `needs_human` task, or one that accepts a UI change on a `has_ui: no` task (`/factory:approve DS-n`, `/factory:retry DS-n --allow-ui`);
+- choose which proposed tasks land from `/factory:plan`, and confirm tasks previewed by `/factory:add` and `/factory:edit`;
+- unblock tasks stopped at the loop limit (`/factory:retry DS-n`).
+
+PRs merge only when all GitHub checks are green, the PR is mergeable, and the approval label is present where required.
 
 ## Where things live
 
