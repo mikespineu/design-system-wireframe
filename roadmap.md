@@ -384,8 +384,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - A test checks every link on the page resolves (Storybook story/docs ids exist; GitHub doc paths exist in the repo)
     - Tab order follows the spec (`userEvent` test) and a `jest-axe` test passes in every theme
     - `docs/images/readme/storybook-introduction.png` is re-captured from the new page
-- [ ] **DS-73 Promo video — Remotion workspace.** Add `video/` as a standalone package with its own package.json and lockfile, not an npm workspace. Pin `remotion` and `@remotion/*` to one exact version. Add a placeholder composition that renders real DS components from the packed library, plus root convenience scripts, a `video` CI job and `video/README.md` (including the Remotion license terms).
-  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: todo
+- [x] **DS-73 Promo video — Remotion workspace.** Add `video/` as a standalone package with its own package.json and lockfile, not an npm workspace. Pin `remotion` and `@remotion/*` to one exact version. Add a placeholder composition that renders real DS components from the packed library, plus root convenience scripts, a `video` CI job and `video/README.md` (including the Remotion license terms).
+  - type: infra · has_ui: no · depends_on: – · needs_human: no · status: done
   - done_when:
     - Root package.json, package-lock.json and `dist/` contain no Remotion; root `npm ci`, `npm run build` and the dist packaging test pass unchanged
     - `video/` installs the library from `npm pack` output and imports only public exports (`design-system-test`, `/styles.css`, `/fonts.css`, `/themes/bold.css`, `/themes/bold-fonts.css`) with a single React copy; a placeholder composition renders a Button and a TextField in `default` and `bold`
@@ -546,6 +546,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-73** Promo video — Remotion workspace — https://github.com/mikespineu/design-system-wireframe/pull/116
 - **DS-68** README rewrite — why, start, customize — https://github.com/mikespineu/design-system-wireframe/pull/114
 - **DS-71** Introduction page refresh — implementation — https://github.com/mikespineu/design-system-wireframe/pull/113
 - **DS-72** Fix failing RadioGroup & Toast story play checks — https://github.com/mikespineu/design-system-wireframe/pull/112

@@ -4,7 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['node_modules', 'coverage', 'dist', 'storybook-static', '.worktrees', '**/*.cjs'] },
+  { ignores: ['node_modules', 'coverage', 'dist', 'storybook-static', '.worktrees', '**/*.cjs', 'video/out', 'video/.pack'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
