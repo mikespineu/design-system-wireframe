@@ -515,6 +515,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-68** README rewrite — why, start, customize — https://github.com/mikespineu/design-system-wireframe/pull/114
 - **DS-66** Starter guide & install accuracy — https://github.com/mikespineu/design-system-wireframe/pull/110
 - **DS-70** Introduction page refresh — design — https://github.com/mikespineu/design-system-wireframe/pull/109
 - **DS-67** README screenshot script & themed images — https://github.com/mikespineu/design-system-wireframe/pull/107
