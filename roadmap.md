@@ -452,8 +452,8 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ### Epic: Claude Marketplace
 
-- [ ] **DS-50 Consumer plugin — scope & layout decision.** Write `docs/specs/ClaudePlugin.md` recording the decided scope: a consumer Claude Code plugin with a component-usage skill, the theme skill (DS-10), a UI-review subagent and an MCP server; its own marketplace, separate from `factory`; and a submission to the official Anthropic marketplace. Define the plugin name, the scoped npm package name, folder layout and version policy.
-  - type: docs · has_ui: no · depends_on: – · needs_human: yes · status: todo
+- [x] **DS-50 Consumer plugin — scope & layout decision.** Write `docs/specs/ClaudePlugin.md` recording the decided scope: a consumer Claude Code plugin with a component-usage skill, the theme skill (DS-10), a UI-review subagent and an MCP server; its own marketplace, separate from `factory`; and a submission to the official Anthropic marketplace. Define the plugin name, the scoped npm package name, folder layout and version policy.
+  - type: docs · has_ui: no · depends_on: – · needs_human: yes · status: done
   - done_when:
     - Spec lists every skill, agent and MCP tool with a one-line purpose
     - Defines the separate marketplace (name, location) and keeps `factory` out of it; decides the scoped npm package name
