@@ -354,8 +354,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - It writes `docs/images/readme/themes-side-by-side.png` from `Foundations/Themes` → `SideBySide`, and `docs/images/readme/contact-form-<theme>.png` for `default`, `dark`, `bold` and `bold-dark` (selected with the `theme` global), all committed
     - Every generated PNG is under 500 KB and at most 1600 px wide
     - The diff touches nothing under `src/`, `.storybook/`, `*.css`, `*.stories.*` or `*.mdx`, so the UI guard passes
-- [ ] **DS-68 README rewrite — why, start, customize.** Restructure `README.md` around the value proposition: a pitch with badges and the themed hero image, a 'Why use it' list where every claim links to its proof, 'Start from it' (starter guide), 'Customize in minutes' (tested `createTheme()` snippet plus the per-theme screenshots), and the component list linked to Storybook. Move the Claude Design material to `docs/claude-design.md` and the factory material into `docs/factory/README.md`, leaving a short 'How it's built' section that links to both.
-  - type: docs · has_ui: no · depends_on: DS-66, DS-67 · needs_human: no · status: todo
+- [x] **DS-68 README rewrite — why, start, customize.** Restructure `README.md` around the value proposition: a pitch with badges and the themed hero image, a 'Why use it' list where every claim links to its proof, 'Start from it' (starter guide), 'Customize in minutes' (tested `createTheme()` snippet plus the per-theme screenshots), and the component list linked to Storybook. Move the Claude Design material to `docs/claude-design.md` and the factory material into `docs/factory/README.md`, leaving a short 'How it's built' section that links to both.
+  - type: docs · has_ui: no · depends_on: DS-66, DS-67 · needs_human: no · status: done
   - done_when:
     - Before the first `##` heading the README has a one-line pitch, badges (CI status, MIT license, live Storybook, a 'Use this template' link to `/generate`) and `docs/images/readme/themes-side-by-side.png`
     - A 'Why use it' section links each claim to its proof: Radix primitives, the role-token contract in `@layer ds` (`docs/specs/Theming.md`), `createTheme()`/`checkContrast()` (`docs/theming-guide.md`), `bold`/`bold-dark` restyling everything with no component changes (per-theme screenshots), and story per state + keyboard stories + `jest-axe` + 80% coverage enforced in CI
@@ -547,6 +547,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 ## Done
 
 - **DS-73** Promo video — Remotion workspace — https://github.com/mikespineu/design-system-wireframe/pull/116
+- **DS-68** README rewrite — why, start, customize — https://github.com/mikespineu/design-system-wireframe/pull/114
 - **DS-71** Introduction page refresh — implementation — https://github.com/mikespineu/design-system-wireframe/pull/113
 - **DS-72** Fix failing RadioGroup & Toast story play checks — https://github.com/mikespineu/design-system-wireframe/pull/112
 - **DS-66** Starter guide & install accuracy — https://github.com/mikespineu/design-system-wireframe/pull/110
