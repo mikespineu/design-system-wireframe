@@ -13,3 +13,9 @@ Close
 # software factory runtime
 .factory
 .qa
+
+# promo video (video/ has its own .gitignore too)
+video/node_modules
+video/out
+video/.pack
+*.tgz

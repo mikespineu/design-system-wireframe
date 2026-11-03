@@ -19,7 +19,11 @@
     "version-packages": "changeset version",
     "release": "npm run build && changeset publish",
     "themes:generate": "UPDATE_THEMES=1 jest src/themes",
-    "readme:screenshots": "node scripts/readme-screenshots.mjs"
+    "readme:screenshots": "node scripts/readme-screenshots.mjs",
+    "video:install": "node scripts/video-install.mjs",
+    "video:studio": "bash scripts/video-studio.sh",
+    "video:still": "npm --prefix video run still --",
+    "video:render": "npm --prefix video run render --"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",

@@ -1,7 +1,7 @@
 name: CI
 
 # Lint, typecheck, test (with coverage) and library build on every PR
-# and on every push to main.
+# and on every push to main. The `video` job checks the Remotion project in video/.
 on:
   pull_request:
   push:
@@ -45,3 +45,51 @@ jobs:
         run: npx jest src/components/Icon/packaging.test.ts --ci
         env:
           REQUIRE_DIST: '1'
+
+  video:
+    name: video
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            video/package-lock.json
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Build library
+        run: npm run build
+
+      - name: Pack library and install into video/
+        run: npm run video:install
+
+      - name: Typecheck
+        run: npm run typecheck
+        working-directory: video
+
+      - name: Test
+        run: npm test
+        working-directory: video
+
+      - name: Ensure Chrome Headless Shell
+        run: npx remotion browser ensure
+        working-directory: video
+
+      - name: Render one still per composition
+        run: npm run still
+        working-directory: video
+
+      - name: Upload stills
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-stills
+          path: video/out/*.png
+          if-no-files-found: ignore
