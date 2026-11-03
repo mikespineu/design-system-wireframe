@@ -136,19 +136,19 @@ The repository holds a design system and also the software factory that built it
 
 | Delete | Lint | Typecheck | `npm test` | Storybook build | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `factory/` | pass | pass | pass | pass | Also delete the `factory:status` script in `package.json`, which points into it |
-| `roadmap.md` | pass | pass | pass | pass | Only the factory reads it |
-| `CLAUDE.md` and `AGENTS.md` | pass | pass | pass | pass | These are instructions for coding agents. Keep them if you work with Claude Code or another agent; edit their rules to match your project |
-| `docs/specs/` | pass | pass | **fail** | pass | `docs/theming-guide/theming-guide.test.ts` reads `docs/specs/Themes.md`. Delete that test file too and `npm test` passes |
-| `docs/design-system-wireframe/` | pass | pass | **fail** | pass | `src/test/canvasBoards.test.ts` and `src/test/canvasBoardsNamedColors.test.ts` read the canvases. Delete those two test files too and `npm test` passes |
+| `factory/` | pass | pass | **fail** | pass | `src/docs/readme.test.ts` checks the skill links in `docs/factory/README.md`. Delete that test file too and `npm test` passes. Also delete the `factory:status` script in `package.json`, which points into it |
+| `roadmap.md` | pass | pass | **fail** | pass | `src/docs/readme.test.ts` checks the `roadmap.md` link in `docs/factory/README.md`. Delete that test file too and `npm test` passes. Only the factory reads the file itself |
+| `CLAUDE.md` and `AGENTS.md` | pass | pass | **fail** | pass | `src/docs/readme.test.ts` checks the three links to `CLAUDE.md` in `README.md`. Delete that test file too and `npm test` passes. These are instructions for coding agents. Keep them if you work with Claude Code or another agent; edit their rules to match your project |
+| `docs/specs/` | pass | pass | **fail** | pass | `docs/theming-guide/theming-guide.test.ts` reads `docs/specs/Themes.md`, and `src/docs/readme.test.ts` checks the links to `docs/specs/` in `README.md` and `docs/claude-design.md`. Delete both test files too and `npm test` passes |
+| `docs/design-system-wireframe/` | pass | pass | **fail** | pass | `src/test/canvasBoards.test.ts` and `src/test/canvasBoardsNamedColors.test.ts` read the canvases, and `src/docs/readme.test.ts` checks the canvas links in `docs/claude-design.md`. Delete those three test files too and `npm test` passes |
 
-Deleting all of the following together, `factory/`, `roadmap.md`, `CLAUDE.md`, `AGENTS.md`, `docs/factory/`, `.claude/`, `.claude-plugin/`, `docs/specs/`, `docs/design-system-wireframe/` and the three test files named above, also passes all four commands.
+Deleting all of the following together, `factory/`, `roadmap.md`, `CLAUDE.md`, `AGENTS.md`, `docs/factory/`, `.claude/`, `.claude-plugin/`, `docs/specs/`, `docs/design-system-wireframe/` and the four test files named above (`src/docs/readme.test.ts`, `docs/theming-guide/theming-guide.test.ts`, `src/test/canvasBoards.test.ts`, `src/test/canvasBoardsNamedColors.test.ts`), also passes all four commands.
 
 What else goes with each choice:
 
-- **`factory/`** is the plugin with the `/factory:*` commands. `.claude/settings.json` enables it and `.claude-plugin/marketplace.json` registers it, so delete those two as well. `docs/factory/` documents it. Remove the "Software Factory" part of `README.md`.
-- **`docs/specs/`** are the approved component specs and the theming contract. Several guides link to `docs/specs/Theming.md`, so fix those links when you delete it. The specs are also useful as written documentation of every component, so consider keeping them.
-- **`docs/design-system-wireframe/`** are the design canvases (`*.dc.html`) and their `README.md`. The `README.md` there is the documentation of the token set. If you keep the canvases and change `tokens.css`, you have to keep them in sync (step 4.2).
+- **`factory/`** is the plugin with the `/factory:*` commands. `.claude/settings.json` enables it and `.claude-plugin/marketplace.json` registers it, so delete those two as well. `docs/factory/` documents it. Remove the "How it's built" section of `README.md`, which links to `docs/factory/README.md` and `docs/claude-design.md`.
+- **`docs/specs/`** are the approved component specs and the theming contract. `README.md`, `docs/claude-design.md` and several guides link to `docs/specs/`, so fix those links when you delete it. The specs are also useful as written documentation of every component, so consider keeping them.
+- **`docs/design-system-wireframe/`** are the design canvases (`*.dc.html`) and their `README.md`. The `README.md` there is the documentation of the token set, and `docs/claude-design.md` links to the canvases, so remove or edit it when you delete them. If you keep the canvases and change `tokens.css`, you have to keep them in sync (step 4.2).
 - **Always keep:** `src/`, `.storybook/`, `docs/theming-guide.md` with `docs/theming-guide/` (its samples are type-checked by `npm run typecheck` and run by `npm test`), `docs/consumer-guide.md`, `.husky/`, `.github/workflows/ci.yml`, and the config files in the root.
 
 Coverage is not part of `npm test`. The CI workflow runs `npm test -- --coverage --ci` against an 80 % threshold, so if you delete tests along with code, run `npm run test:coverage` to check it still passes.
