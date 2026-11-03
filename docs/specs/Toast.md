@@ -5,7 +5,7 @@
 - canvas_url: https://claude.ai/artifact/BRwvxit3ikx6FCkdJYe2Ki
 - approved: yes
 - approved_by: mikespin
-- approved_at: 2026-10-27
+- approved_at: 2026-11-03
 - approval_hash:
 
 A toast is a short, non-modal message. It appears in a fixed region at the bottom of the screen and leaves on its own. It is built on Radix `Toast`. There are three severities: info, success and error. Each toast has a required title, an optional description, at most one optional action (for example Undo or Retry, rendered with the existing secondary `Button`) and a close button that is always shown. Corners are square and there is no shadow. The border separates the toast from the page, the same way the Dialog panel is separated. Severity is shown by fill (none or tinted), border weight (1 or 2 px), icon shape (circle, tick, triangle) and title weight, so it never depends on hue alone (canvas section 10).
