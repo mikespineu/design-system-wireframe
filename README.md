@@ -35,7 +35,7 @@ Components live in `src/components/<Name>/` (`<Name>.tsx`, `.css`, `.stories.tsx
 
 Storybook is the living catalogue: every component has a story per state plus keyboard stories.
 
-![Storybook Introduction page: the "Wireframe the whole app. Style it later." hero with two buttons and the three rules No hue, No decoration, Theme later](docs/images/readme/storybook-introduction.png)
+![Storybook Introduction page: the "Accessible React components. Your look, in minutes." hero with three calls to action, the theme switcher tip and a row of four facts](docs/images/readme/storybook-introduction.png)
 
 Run it locally:
 
