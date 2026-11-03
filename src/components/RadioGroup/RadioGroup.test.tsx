@@ -71,6 +71,23 @@ describe('RadioGroup', () => {
     expect(b).toHaveFocus();
   });
 
+  it('an arrow key checks the focused radio, fires onValueChange once, and the group stays accessible', async () => {
+    const user = userEvent.setup();
+    const onValueChange = jest.fn();
+    const { container } = setup({ onValueChange });
+    await user.tab();
+    const [a, b] = screen.getAllByRole('radio');
+    expect(a).toHaveFocus();
+    expect(a).toHaveAttribute('aria-checked', 'false');
+    await arrow(user, 'ArrowDown');
+    expect(b).toHaveFocus();
+    expect(b).toHaveAttribute('aria-checked', 'true');
+    expect(a).toHaveAttribute('aria-checked', 'false');
+    expect(onValueChange).toHaveBeenCalledTimes(1);
+    expect(onValueChange).toHaveBeenCalledWith('b');
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it('Home/End move focus without selecting; Space selects; Enter does not submit', async () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn((e) => e.preventDefault());

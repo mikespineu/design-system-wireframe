@@ -117,15 +117,18 @@ export const ReducedMotion: Story = {
     const doc = canvasElement.ownerDocument;
     const body = within(doc.body);
     const item = await body.findByRole('listitem');
+    // Library CSS lives in `@layer ds`, so the media rule is nested; walk grouping rules (layer, media, supports).
     const rules: CSSStyleRule[] = [];
-    for (const sheet of Array.from(doc.styleSheets)) {
-      let list: CSSRuleList;
-      try { list = sheet.cssRules; } catch { continue; }
+    const collect = (list: CSSRuleList, inReducedMotion: boolean) => {
       for (const r of Array.from(list)) {
-        if (r instanceof CSSMediaRule && r.conditionText.includes('prefers-reduced-motion')) {
-          rules.push(...(Array.from(r.cssRules) as CSSStyleRule[]).filter((x) => x.selectorText?.includes('.ds-toast')));
-        }
+        if (r instanceof CSSMediaRule) collect(r.cssRules, inReducedMotion || r.conditionText.includes('prefers-reduced-motion'));
+        else if (r instanceof CSSStyleRule) {
+          if (inReducedMotion && r.selectorText.includes('.ds-toast')) rules.push(r);
+        } else if ('cssRules' in r) collect((r as CSSGroupingRule).cssRules, inReducedMotion);
       }
+    };
+    for (const sheet of Array.from(doc.styleSheets)) {
+      try { collect(sheet.cssRules, false); } catch { continue; }
     }
     await expect(rules.some((r) => r.style.animationName === 'none' || r.style.animation === 'none')).toBe(true);
     if (doc.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches) {
