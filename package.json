@@ -90,7 +90,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "skills"
   ],
   "peerDependencies": {
     "react": "^19.0.0",
