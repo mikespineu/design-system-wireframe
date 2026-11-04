@@ -321,8 +321,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Changesets (or similar) handles versions and changelog
     - Publish workflow uses npm trusted publishing (OIDC) with provenance
     - Proposal only until a human approves the release setup
-- [ ] **DS-10 "Create your own theme" skill.** A Claude skill shipped with the package that guides consumers through creating a custom theme: choose the raw values, generate the `[data-theme]` block with `createTheme()`, check contrast with `checkContrast()`, and register the theme.
-  - type: docs · has_ui: no · depends_on: DS-1, DS-7, DS-28 · needs_human: no · status: todo
+- [x] **DS-10 "Create your own theme" skill.** A Claude skill shipped with the package that guides consumers through creating a custom theme: choose the raw values, generate the `[data-theme]` block with `createTheme()`, check contrast with `checkContrast()`, and register the theme.
+  - type: docs · has_ui: no · depends_on: DS-1, DS-7, DS-28 · needs_human: no · status: done
   - done_when:
     - Skill ships with the package
     - Guides choosing raw values, generating the `[data-theme]` block, checking contrast, registering the theme
