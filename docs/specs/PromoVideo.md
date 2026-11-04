@@ -3,9 +3,9 @@
 - task: DS-74
 - canvas: docs/design-system-wireframe/PromoVideo.dc.html
 - canvas_url: https://claude.ai/artifact/1oXGMnDPoUM6Yhf9SKe2fB
-- approved: no
-- approved_by:
-- approved_at:
+- approved: yes
+- approved_by: mikespin
+- approved_at: 2026-11-04
 - approval_hash:
 
 A 78 s promo video, 1920 × 1080, 30 fps, 2340 frames, built with Remotion in `video/` (workspace from DS-73, compositions in DS-75, render and publish in DS-76). Its one message: **don't spend tokens building your own design system.** It shows what is already built, how to install it, how to make it your own, and how it works with Claude.

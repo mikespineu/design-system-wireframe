@@ -392,8 +392,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Fonts load before frames render (Remotion `delayRender` or font loading), and DS CSS motion is off inside compositions (`--ds-motion: 0ms`, no spinner); all movement uses `useCurrentFrame()`
     - `npm run video:studio` starts Remotion Studio on the per-worktree port formula from CLAUDE.md (never 3000 or 6006); `npm run video:still` and `npm run video:render` work from the root
     - A `video` CI job installs `video/`, typechecks, runs its tests and renders one still per composition; root `npm run lint` passes with `video/` deliberately linted or ignored
-- [ ] **DS-74 Promo video — design.** Storyboard canvas `docs/design-system-wireframe/PromoVideo.dc.html` and spec `docs/specs/PromoVideo.md` for a 60–90 s, 1920×1080, 30 fps video whose message is "don't spend tokens building your own design system". Scenes: hook; key features (Radix keyboard and focus, one screen switching default/dark/bold/bold-dark, BYO icons, typography, Storybook + jest-axe + CI); "Skip building your own" (the work already done for you, counted from the repo); "Install in one line" (scoped npm package and the React starter); "Customize in minutes" (`ds.theme.json` → `theme build` → new theme checked by `checkContrast()`, plus the theme skill); "Works with Claude" (the Claude Marketplace plugin: component-usage skill, UI-review agent, MCP server tools); end card. Every feature is presented as shipped.
-  - type: design · has_ui: yes · depends_on: DS-50 · needs_human: no · status: todo
+- [x] **DS-74 Promo video — design.** Storyboard canvas `docs/design-system-wireframe/PromoVideo.dc.html` and spec `docs/specs/PromoVideo.md` for a 60–90 s, 1920×1080, 30 fps video whose message is "don't spend tokens building your own design system". Scenes: hook; key features (Radix keyboard and focus, one screen switching default/dark/bold/bold-dark, BYO icons, typography, Storybook + jest-axe + CI); "Skip building your own" (the work already done for you, counted from the repo); "Install in one line" (scoped npm package and the React starter); "Customize in minutes" (`ds.theme.json` → `theme build` → new theme checked by `checkContrast()`, plus the theme skill); "Works with Claude" (the Claude Marketplace plugin: component-usage skill, UI-review agent, MCP server tools); end card. Every feature is presented as shipped.
+  - type: design · has_ui: yes · depends_on: DS-50 · needs_human: no · status: done
   - done_when:
     - The canvas shows a keyframe per scene in every theme that scene uses, carries the tokens.css token block and passes `src/test/canvasBoards.test.ts`
     - The spec lists every scene with start frame, duration, on-screen copy, the components, commands or plugin parts shown, the theme, and frame-driven motion (no CSS animation or transitions)
@@ -546,6 +546,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-74** Promo video — design — https://github.com/mikespineu/design-system-wireframe/pull/120
 - **DS-69** GitHub repo listing — description, topics, social preview — https://github.com/mikespineu/design-system-wireframe/pull/117
 - **DS-50** Consumer plugin — scope & layout decision — https://github.com/mikespineu/design-system-wireframe/pull/118
 - **DS-51** Generated design-system manifest — https://github.com/mikespineu/design-system-wireframe/pull/119
