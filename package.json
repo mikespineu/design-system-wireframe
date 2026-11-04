@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
     "factory:status": "node factory/plugin/skills/status/scripts/status-page.mjs --watch 10 --open",
-    "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json && node -e \"require('fs').copyFileSync('src/styles/fonts.css','dist/fonts.css')\" && node scripts/copy-themes.mjs",
+    "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json && node -e \"require('fs').copyFileSync('src/styles/fonts.css','dist/fonts.css')\" && node scripts/copy-themes.mjs && node scripts/generate-manifest.cjs",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "npm run build && changeset publish",
@@ -86,6 +86,7 @@
     "./fonts.css": "./dist/fonts.css",
     "./themes/bold.css": "./dist/themes/bold.css",
     "./themes/bold-fonts.css": "./dist/themes/bold-fonts.css",
+    "./manifest.json": "./dist/manifest.json",
     "./package.json": "./package.json"
   },
   "files": [
