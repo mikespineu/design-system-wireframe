@@ -29,13 +29,14 @@ Live canvas: https://claude.ai/artifact/4R5XwSAJ1Hj8gTqgLdwTmK
 | `Drawer.dc.html` | Drawer design (DS-44) |
 | `Typography.dc.html` | Heading and body type styles, shipped as Tailwind utilities (DS-37) |
 | `Introduction.dc.html` | Storybook Introduction page redesign: the whole page in default, dark, bold and bold-dark, phone width, states, keyboard order, heading outline and contrast (DS-70) |
+| `PromoVideo.dc.html` | Promo video storyboard: format and safe areas, timeline, one keyframe per scene in every theme it uses, motion vocabulary and contrast pairs (DS-74) |
 | `canvas.json` | Canvas layout (artboard sizes and positions) |
 
 ### Role tokens
 
 Every board except `AllComponents.dc.html` and `Theming.dc.html` styles only through `var(--ds-*)` role tokens, so each one follows `data-theme`: set `data-theme="dark"` (or `bold`, `bold-dark` where the theme is loaded) on the page and the whole board recolors. `AllComponents.dc.html` already did this; `Theming.dc.html` shows custom themes, so its hex values are the example themes by design.
 
-Each board carries one token block at the top of its `<style>`, between `/* ds-tokens:start */` and `/* ds-tokens:end */`. It is a copy of `src/styles/tokens.css` (default theme and `[data-theme="dark"]`) without the `@layer ds` wrapper; `Themes.dc.html` and `Introduction.dc.html` also carry `src/themes/bold.css`. `src/test/canvasBoards.test.ts` fails when:
+Each board carries one token block at the top of its `<style>`, between `/* ds-tokens:start */` and `/* ds-tokens:end */`. It is a copy of `src/styles/tokens.css` (default theme and `[data-theme="dark"]`) without the `@layer ds` wrapper; `Themes.dc.html`, `Introduction.dc.html` and `PromoVideo.dc.html` also carry `src/themes/bold.css`. `src/test/canvasBoards.test.ts` fails when:
 
 - a board has no token block, more than one, or one that differs from `tokens.css` (whitespace, comments and hex case are ignored);
 - a hex color or a color function (`rgb()`, `hsl()`, ...) appears anywhere outside the block, except in the exceptions below;
@@ -55,6 +56,7 @@ The only values allowed outside a token block. They are drawings, not UI colors,
 | `Themes.dc.html` | Four small color-photo stand-ins in the bold panels (bold turns the photo filter off, so they are colored on purpose). | `<svg data-ds-illustration>` |
 | `Themes.dc.html` | The `createTheme()` input samples in section 08: `brand: '#4318D1'` and shadow strings are the literal API input being documented. | `<pre data-ds-code>` |
 | `Introduction.dc.html` | The `docs/theming-guide/samples/minimal.ts` code sample in the "Customize in minutes" band: `brand: '#0b6e4f'` is the literal sample file shown on the page. | `<pre data-ds-code>` |
+| `PromoVideo.dc.html` | The `ds.theme.json` fixture in scene 05 (KF09a, KF09b): `"brand": "#4318D1"` and `"neutral": "#140E3D"` are the literal file shown on screen. | `<pre data-ds-code>` |
 
 Everything else that used to be a hex label is now a role or token name, a swatch or a contrast chip drawn from the role itself (the Themes color-role and contrast tables), so no value is repeated by hand.
 
@@ -87,6 +89,7 @@ Fixed means edited in DS-58 or DS-63. Shipped component(s) are the exports of `s
 | `Drawer.dc.html` | Drawer, DrawerClose | **Fixed:** overlay row now `--ds-color-overlay` (DS-58); role tokens (DS-63). | Keep; fixed |
 | `Typography.dc.html` | none (Tailwind utilities `heading-*` and `body-*` in `tailwind.css`, DS-38) | **Fixed (DS-63):** role tokens. Correctly shows classes, not components. | Keep; fixed |
 | `Introduction.dc.html` | none (the Storybook page `src/Introduction.stories.tsx`); uses Button, Tag, SegmentedControl, Breadcrumb, TextField, Switch and Alert looks | New (DS-70). Role tokens only; token block carries `tokens.css` and `bold.css`, like `Themes.dc.html`. | Keep |
+| `PromoVideo.dc.html` | none (storyboard for the Remotion video in `video/`, DS-75); uses Button, IconButton, Tag, TextField, Input, Select, Slider, Switch, Checkbox, SegmentedControl and Alert looks | New (DS-74). Role tokens only; token block carries `tokens.css` and `bold.css`, like `Themes.dc.html`. The example brand `my-brand` (scene 02b stage, 02d pane, 05 built panel) is drawn with `bold` as a stand-in for the generated theme (see `docs/specs/PromoVideo.md`). | Keep |
 | `Components.dc.html` (deleted) | none | Showed the unbuilt Cards and Table; checkbox, radio and switch as native 20 px controls (shipped: 24 px, 2 px strong border; switch 48 x 24); Tabs as an underline (rejected); an inverse-fill snackbar (shipped Toast differs); pre-DS-27 hex colors. | Deleted; replaced by `AllComponents.dc.html` |
 
 Components with no dedicated board: Alert, Breadcrumb, Tag and Badge, Input, Field and TextField. They were only drawn on the deleted `Components.dc.html`; `AllComponents.dc.html` is now their canvas. A spec-level board for them is a separate design task.

@@ -149,6 +149,13 @@
       "w": 1440,
       "x": 30400,
       "y": 0
+    },
+    "PromoVideo.dc.html": {
+      "h": 9800,
+      "title": "Promo video storyboard",
+      "w": 1440,
+      "x": 31920,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -190,7 +197,8 @@
     "Drawer.dc.html",
     "Typography.dc.html",
     "Themes.dc.html",
-    "Introduction.dc.html"
+    "Introduction.dc.html",
+    "PromoVideo.dc.html"
   ],
   "pages": [],
   "title": "Design System Wireframe"
