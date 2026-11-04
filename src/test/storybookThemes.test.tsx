@@ -178,9 +178,9 @@ describe('the theme switcher ships nothing', () => {
     expect(index).not.toMatch(/storybook|\.storybook|Themes|themeSwitcher/i);
   });
 
-  it('ships only dist, and the library build has no Storybook input', () => {
+  it('ships only dist and skills, and the library build has no Storybook input', () => {
     const published = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')) as { files?: string[] };
-    expect(published.files).toEqual(['dist']);
+    expect(published.files).toEqual(['dist', 'skills']);
     const lib = readFileSync(join(root, 'vite.lib.config.ts'), 'utf8');
     expect(lib).toContain("new URL('./src/index.ts'");
     expect(lib).not.toMatch(/import .*storybook/i);
