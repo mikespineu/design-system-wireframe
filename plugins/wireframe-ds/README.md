@@ -1,6 +1,10 @@
 # wireframe-ds
 
-Claude Code plugin for people who use the Wireframe design system in their own app. This is the scaffold: skills, the UI-review agent and the MCP server are added in later releases. See `docs/specs/ClaudePlugin.md` for the scope and layout.
+Claude Code plugin for people who use the Wireframe design system in their own app. This is the scaffold: skills and the MCP server are added in later releases. See `docs/specs/ClaudePlugin.md` for the scope and layout.
+
+## UI-review agent
+
+The `ui-review` agent audits UI code for design-system misuse and reports `file:line`, a rule and a fix. It runs `scripts/ui-review.cjs`, a dependency-free checker whose component, prop, Radix and token knowledge comes from the installed design system's `manifest.json` (`design-system-test` today, `@mikespineu/design-system` after the rename; pass `--manifest` if it is not installed). Rules: `hardcoded-color`, `hardcoded-spacing`, `hand-rolled-primitive`, `direct-radix-import`, `missing-label`, `missing-required-prop`, `field-wiring`. Try it directly with `node plugins/wireframe-ds/scripts/ui-review.cjs src/`.
 
 ## Install
 
