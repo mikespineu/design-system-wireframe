@@ -3,6 +3,8 @@ import { Button, Field, Input, IconButton, TextField } from 'design-system-test'
 // padding: 12px in a comment is fine
 export const Clean = () => (
   <div style={{ padding: 'var(--ds-space-4)', color: 'var(--ds-color-text)', gap: 0 }}>
+    <a href="#2026">Jump</a>
+    <p>Issue #123 and #2026 fixed</p>
     <Button variant="primary">Save</Button>
     <Field label="Email" hint="We never share it" error="Required" required>
       <Input />

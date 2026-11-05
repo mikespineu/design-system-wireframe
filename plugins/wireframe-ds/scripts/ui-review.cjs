@@ -11,6 +11,7 @@ const path = require('node:path')
 
 const SOURCE_EXT = /\.(tsx|jsx|ts|js|mjs|cjs|css|scss|html|vue|svelte)$/
 const SKIP_DIRS = new Set(['node_modules', 'dist', 'build', '.git', 'storybook-static', 'coverage', '.next'])
+// @mikespineu/design-system is the planned published name; until the rename (RELEASING.md) the package is design-system-test.
 const MANIFEST_SPECIFIERS = ['@mikespineu/design-system/manifest.json', 'design-system-test/manifest.json']
 
 /** Native element patterns (and ARIA roles) that a Radix-backed component replaces, keyed by Radix primitive. */
@@ -55,7 +56,9 @@ function resolveManifest(cwd = process.cwd()) {
   }
   const snapshot = path.join(__dirname, '..', 'mcp', 'manifest.json')
   if (fs.existsSync(snapshot)) return loadManifest(snapshot)
-  throw new Error('No design-system manifest found. Install the design system or pass --manifest <path>.')
+  throw new Error(
+    `No design-system manifest found. Install the design system in this project (tried ${MANIFEST_SPECIFIERS.join(', ')}) or pass --manifest <path to manifest.json>.`,
+  )
 }
 
 const toPx = (value) => {
@@ -91,10 +94,12 @@ function buildContext(manifest) {
     const px = toPx(resolve(t.default))
     if (px !== null && !spaceByPx.has(px)) spaceByPx.set(px, t.name)
   }
-  // Which component wraps each Radix primitive: prefer the one named like the primitive.
+  // Which component wraps a Radix primitive: the one named like it, or the only one using it.
+  // Shared utilities (Slot, Label, AccessibleIcon...) have no clear owner and return null.
   const wrapperFor = (primitive) => {
     const owners = manifest.components.filter((c) => c.radix.includes(primitive)).map((c) => c.name)
-    return owners.includes(primitive) ? primitive : owners[0] ?? null
+    if (owners.includes(primitive)) return primitive
+    return owners.length === 1 ? owners[0] : null
   }
   return {
     manifest,
@@ -237,8 +242,13 @@ function review(file, src, ctx) {
     const no = idx + 1
     const code = line.replace(/var\(--ds-[\w-]+\s*,[^)]*\)/g, 'var(--ds)') // fallbacks inside token refs are tolerated
 
+    // Hex only counts in a color context: a CSS value, a color-ish style prop/attribute or a Tailwind arbitrary value.
+    // Anchors (href="#2026") and text ("Issue #123") are not colors.
+    const colorContext = /(?:colou?r|background|fill|stroke|border|outline|shadow|gradient|--[\w-]+|\w+-\[)\s*[:=]?\s*[^;]*$|\b(?:color|bg|text|border|fill|stroke)-\[$/i
     for (const m of code.matchAll(/(?<![\w&#/-])#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b/g)) {
-      if (/url\(\s*$/.test(code.slice(0, m.index)) || /href=\S*$/.test(code.slice(0, m.index))) continue
+      const before = code.slice(0, m.index)
+      if (/url\(\s*$/.test(before) || /(?:href|to|src)\s*=\s*["'{]*$/.test(before)) continue
+      if (!(/\.(?:css|scss)$/.test(file) ? /:\s*[^;]*$/.test(before) : colorContext.test(before))) continue
       const token = ctx.colorByHex.get(normHex(m[0]))
       addLine(
         'hardcoded-color',
@@ -293,9 +303,15 @@ function review(file, src, ctx) {
     if (imp) {
       const names = (imp[1] ?? '').split(',').map((n) => n.trim().split(/\s+as\s+/)[0]).filter(Boolean)
       const wrappers = [...new Set(names.map((n) => ctx.wrapperFor(n)).filter(Boolean))]
-      if (wrappers.length || !names.length) {
-        addLine('direct-radix-import', no, imp.index + 1, `Direct import from '${imp[3]}'.`, wrappers.length ? `Use ${wrappers.join(', ')} from the design system instead.` : 'Use the design-system wrapper component instead.')
-      }
+      addLine(
+        'direct-radix-import',
+        no,
+        imp.index + 1,
+        `Direct import from '${imp[3]}'.`,
+        wrappers.length
+          ? `Use ${wrappers.join(', ')} from the design system instead.`
+          : 'Check whether the design system ships a component for this primitive and use it; keep the import only if none does.',
+      )
     }
   })
 
@@ -386,7 +402,18 @@ function main(argv) {
     console.error('usage: ui-review.cjs [--manifest <path>] [--json] <file-or-dir>...')
     return 2
   }
-  const manifest = manifestPath ? loadManifest(manifestPath) : resolveManifest()
+  let manifest
+  try {
+    manifest = manifestPath ? loadManifest(manifestPath) : resolveManifest()
+  } catch (e) {
+    console.error(e.message)
+    return 2
+  }
+  const missing = args.filter((a) => !fs.existsSync(a))
+  if (missing.length) {
+    console.error(`Path not found: ${missing.join(', ')}`)
+    return 2
+  }
   const findings = reviewPaths(args, manifest)
   if (json) console.log(JSON.stringify(findings, null, 2))
   else if (findings.length) console.log(findings.map(formatFinding).join('\n'))

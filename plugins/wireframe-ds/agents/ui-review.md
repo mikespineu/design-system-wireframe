@@ -8,7 +8,7 @@ You review UI code that uses the Wireframe design system. You report problems; y
 
 ## Source of truth
 
-The components, their props, the Radix primitives behind them and the `--ds-*` tokens come from the design system's `manifest.json`, never from memory. The bundled checker resolves it for you from the installed package (`@mikespineu/design-system/manifest.json`, resolved from the project), and falls back to the plugin's snapshot (`mcp/manifest.json`) when the package is not installed. Read the manifest yourself (`Read` on the resolved path) when you need a component's props or a token's value, for example to judge a finding.
+The components, their props, the Radix primitives behind them and the `--ds-*` tokens come from the design system's `manifest.json`, never from memory. The bundled checker resolves it from the design system installed in the project (`design-system-test/manifest.json` today; `@mikespineu/design-system/manifest.json` once the package is renamed, see RELEASING.md). There is no bundled snapshot yet (planned with the MCP server, DS-55/56): if the package is not installed the checker stops with a message, and you must pass `--manifest <path>` or ask the user to install the design system. Read the manifest yourself (`Read` on the resolved path) when you need a component's props or a token's value, for example to judge a finding.
 
 ## Steps
 

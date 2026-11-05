@@ -69,6 +69,19 @@ describe('ui-review checker', () => {
     expect(findings.some((f) => f.message.includes('<button'))).toBe(false)
   })
 
+  it('gives a generic fix for primitives without a clear owner', () => {
+    const slot = bad.find((f) => f.rule === 'direct-radix-import' && f.line === lineOf('Bad.tsx.fixture', 'import { Slot }'))
+    expect(slot?.fix).toMatch(/Check whether the design system ships/)
+    expect(slot?.fix).not.toMatch(/Breadcrumb|Checkbox/)
+    const dialog = bad.find((f) => f.rule === 'direct-radix-import' && f.line === lineOf('Bad.tsx.fixture', 'import { Dialog }'))
+    expect(dialog?.fix).toContain('Use Dialog')
+  })
+
+  it('does not treat anchors or hex-like text as colors (clean sample has both)', () => {
+    expect(readFileSync(join(fixtures, 'clean', 'Clean.tsx.fixture'), 'utf8')).toContain('href="#2026"')
+    expect(clean.filter((f) => f.rule === 'hardcoded-color')).toEqual([])
+  })
+
   it('finds nothing in the clean sample', () => {
     expect(clean).toEqual([])
   })
@@ -97,6 +110,16 @@ describe('ui-review checker', () => {
     it('exits 0 for the clean sample and supports --json', () => {
       const out = execFileSync('node', [checker, '--manifest', manifestFile, '--json', join(fixtures, 'clean')], { encoding: 'utf8' })
       expect(JSON.parse(out)).toEqual([])
+    })
+
+    it('explains how to proceed when no manifest is installed', () => {
+      let err = ''
+      try {
+        execFileSync('node', [checker, join(fixtures, 'clean')], { encoding: 'utf8', stdio: 'pipe', cwd: fixtures })
+      } catch (e) {
+        err = (e as { stderr: string }).stderr
+      }
+      expect(err).toMatch(/pass --manifest/)
     })
 
     it('prints usage without paths', () => {
