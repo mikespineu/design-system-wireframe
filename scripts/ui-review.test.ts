@@ -1,4 +1,5 @@
-import { readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { copyFileSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { execFileSync } from 'node:child_process'
 
@@ -113,11 +114,17 @@ describe('ui-review checker', () => {
     })
 
     it('explains how to proceed when no manifest is installed', () => {
+      const cwd = mkdtempSync(join(tmpdir(), 'ui-review-'))
+      // Run a copy outside the repo: inside it, the package self-reference would resolve dist/manifest.json.
+      const copy = join(cwd, 'ui-review.cjs')
+      copyFileSync(checker, copy)
       let err = ''
       try {
-        execFileSync('node', [checker, join(fixtures, 'clean')], { encoding: 'utf8', stdio: 'pipe', cwd: fixtures })
+        execFileSync('node', [copy, join(fixtures, 'clean')], { encoding: 'utf8', stdio: 'pipe', cwd })
       } catch (e) {
         err = (e as { stderr: string }).stderr
+      } finally {
+        rmSync(cwd, { recursive: true, force: true })
       }
       expect(err).toMatch(/pass --manifest/)
     })
