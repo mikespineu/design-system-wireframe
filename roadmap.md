@@ -546,6 +546,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-52** Plugin scaffold & marketplace entry — https://github.com/mikespineu/design-system-wireframe/pull/122
 - **DS-10** "Create your own theme" skill — https://github.com/mikespineu/design-system-wireframe/pull/121
 - **DS-74** Promo video — design — https://github.com/mikespineu/design-system-wireframe/pull/120
 - **DS-69** GitHub repo listing — description, topics, social preview — https://github.com/mikespineu/design-system-wireframe/pull/117
