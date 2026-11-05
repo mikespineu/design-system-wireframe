@@ -33,7 +33,7 @@ Take a task from `roadmap.md` to a merged PR with as little hand-holding as poss
 ## 4. Layout
 
 ```
-.claude-plugin/marketplace.json      # repo-local marketplace → plugin "factory"
+factory/.claude-plugin/marketplace.json  # repo-local marketplace → plugin "factory"
 .claude/settings.json                # enables factory@design-system-factory for this repo
 factory/
   plugin/

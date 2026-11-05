@@ -1,12 +1,12 @@
 {
-  "name": "design-system-factory",
-  "owner": { "name": "mikespin" },
-  "metadata": { "description": "Local plugins for the design-system repo" },
+  "name": "wireframe-ds",
+  "owner": { "name": "mikespineu" },
+  "metadata": { "description": "Claude Code plugin for using the Wireframe design system in your own app" },
   "plugins": [
     {
-      "name": "factory",
-      "source": "./factory/plugin",
-      "description": "Software factory: /factory:* commands to plan, design, build, approve and merge roadmap tasks"
+      "name": "wireframe-ds",
+      "source": "./plugins/wireframe-ds",
+      "description": "Skills, a UI-review agent and MCP tools for using the Wireframe design system correctly: component choice, imports, theming and accessibility."
     }
   ]
 }

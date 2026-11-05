@@ -1,0 +1,11 @@
+{
+  "name": "wireframe-ds",
+  "displayName": "Wireframe Design System",
+  "version": "0.1.0",
+  "description": "Use the Wireframe design system in your own app: pick components, wire imports and Field labels, build a custom theme and review UI code for design-system misuse.",
+  "author": { "name": "mikespineu", "url": "https://github.com/mikespineu" },
+  "homepage": "https://github.com/mikespineu/design-system-wireframe",
+  "repository": "https://github.com/mikespineu/design-system-wireframe",
+  "license": "MIT",
+  "keywords": ["design-system", "react", "radix", "theming", "accessibility", "wireframe"]
+}
