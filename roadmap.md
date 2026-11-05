@@ -480,8 +480,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - `SKILL.md` reads `manifest.json` instead of hardcoding a component list
     - Covers install, CSS imports, theming, `Field`/`useFieldControl` and `IconProvider`
     - 3 worked examples (form, dialog flow, toast) typecheck against the published API (tested)
-- [ ] **DS-54 UI-review subagent.** Plugin agent that reviews a consumer's UI code for design-system misuse: hardcoded colors or spacing, hand-rolled primitives the DS already ships, missing labels, wrong Field wiring.
-  - type: build · has_ui: no · depends_on: DS-51, DS-52 · needs_human: no · status: todo
+- [x] **DS-54 UI-review subagent.** Plugin agent that reviews a consumer's UI code for design-system misuse: hardcoded colors or spacing, hand-rolled primitives the DS already ships, missing labels, wrong Field wiring.
+  - type: build · has_ui: no · depends_on: DS-51, DS-52 · needs_human: no · status: done
   - done_when:
     - `agents/<name>.md` reads `manifest.json` to know the components and roles
     - Reports findings as `file:line` with a rule and a fix
