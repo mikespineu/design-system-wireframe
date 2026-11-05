@@ -1,0 +1,6 @@
+.card {
+  padding: 13px;
+  margin: 0 8px;
+  background: #fff;
+  gap: 1rem;
+}

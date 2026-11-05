@@ -1,0 +1,6 @@
+.card {
+  padding: var(--ds-space-4);
+  margin: 0 var(--ds-space-2, 8px);
+  background: var(--ds-color-surface);
+  color: var(--ds-color-text, #333);
+}

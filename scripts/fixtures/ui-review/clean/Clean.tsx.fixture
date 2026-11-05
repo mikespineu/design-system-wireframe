@@ -1,0 +1,14 @@
+import { Button, Field, Input, IconButton, TextField } from 'design-system-test'
+
+// padding: 12px in a comment is fine
+export const Clean = () => (
+  <div style={{ padding: 'var(--ds-space-4)', color: 'var(--ds-color-text)', gap: 0 }}>
+    <Button variant="primary">Save</Button>
+    <Field label="Email" hint="We never share it" error="Required" required>
+      <Input />
+    </Field>
+    <TextField label="Name" />
+    <Input aria-label="Search" />
+    <IconButton aria-label="Favourite" icon={Star} />
+  </div>
+)

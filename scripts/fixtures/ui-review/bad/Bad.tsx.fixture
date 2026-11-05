@@ -1,0 +1,17 @@
+import { Dialog } from 'radix-ui'
+import { Input, IconButton, Field, TextField } from 'design-system-test'
+
+export const Bad = () => (
+  <div style={{ padding: '16px', color: '#a3302b', background: 'rgb(0, 0, 0)' }}>
+    <button onClick={() => {}}>Save</button>
+    <div role="switch" aria-checked="false" />
+    <input type="checkbox" />
+    <Input placeholder="Name" />
+    <IconButton icon={Star} />
+    <IconButton aria-label="Close" />
+    <Field label="Email" error="Required">
+      <Input id="email" invalid aria-describedby="x" />
+      <TextField label="Nested" />
+    </Field>
+  </div>
+)
