@@ -29,6 +29,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Validate plugin manifests
+        run: node scripts/validate-plugin-manifests.cjs
+
       - name: Lint
         run: npm run lint
 

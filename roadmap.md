@@ -467,8 +467,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - Lists every `--ds-*` role with its default value
     - `package.json` exports include `./manifest.json`
     - Generator tested, coverage ≥ 80 %
-- [ ] **DS-52 Plugin scaffold & marketplace entry.** Create the consumer plugin and its own marketplace per DS-50, with `plugin.json` (name, version, description, author, homepage, keywords), plus a CI job that validates both manifests.
-  - type: infra · has_ui: no · depends_on: DS-50 · needs_human: no · status: todo
+- [x] **DS-52 Plugin scaffold & marketplace entry.** Create the consumer plugin and its own marketplace per DS-50, with `plugin.json` (name, version, description, author, homepage, keywords), plus a CI job that validates both manifests.
+  - type: infra · has_ui: no · depends_on: DS-50 · needs_human: no · status: done
   - done_when:
     - Plugin folder has `.claude-plugin/plugin.json` with the required fields
     - The separate marketplace lists only the consumer plugin; `factory` is not in it
@@ -546,6 +546,7 @@ Each task carries its fields in an indented line, read by the [software factory]
 
 ## Done
 
+- **DS-52** Plugin scaffold & marketplace entry — https://github.com/mikespineu/design-system-wireframe/pull/122
 - **DS-10** "Create your own theme" skill — https://github.com/mikespineu/design-system-wireframe/pull/121
 - **DS-74** Promo video — design — https://github.com/mikespineu/design-system-wireframe/pull/120
 - **DS-69** GitHub repo listing — description, topics, social preview — https://github.com/mikespineu/design-system-wireframe/pull/117

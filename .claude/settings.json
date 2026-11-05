@@ -1,7 +1,7 @@
 {
   "extraKnownMarketplaces": {
     "design-system-factory": {
-      "source": { "source": "directory", "path": "./" }
+      "source": { "source": "directory", "path": "./factory" }
     }
   },
   "enabledPlugins": {

@@ -10,7 +10,7 @@ Design: [`design.md`](./design.md) · How designs are drawn and approved: [Claud
 
 1. Be logged in to Claude Code in the terminal (`claude`). No API key needed; your usage limit is the only budget.
 2. Be logged in to GitHub CLI: `gh auth status`.
-3. Open Claude Code in this repo and trust the folder. `.claude/settings.json` registers the repo-local plugin. Run `/plugin` and check that **factory@design-system-factory** is enabled; if it isn't, install it from the `design-system-factory` marketplace there.
+3. Open Claude Code in this repo and trust the folder. `.claude/settings.json` registers the repo-local plugin. Run `/plugin` and check that **factory@design-system-factory** is enabled; if it isn't, install it from the `design-system-factory` marketplace there (`/plugin marketplace add ./factory`). The root `.claude-plugin/marketplace.json` is the consumer marketplace `wireframe-ds`, not this one.
 
 ## Commands
 
