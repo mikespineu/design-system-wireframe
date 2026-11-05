@@ -611,3 +611,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-49** Bring your own icons — docs & library examples — https://github.com/mikespineu/design-system-wireframe/pull/87
 - **DS-11** Consumer docs — https://github.com/mikespineu/design-system-wireframe/pull/92
 - **DS-28** createTheme() — implementation — https://github.com/mikespineu/design-system-wireframe/pull/91
+- **DS-53** Component-usage skill — https://github.com/mikespineu/design-system-wireframe/pull/123
