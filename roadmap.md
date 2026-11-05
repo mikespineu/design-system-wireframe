@@ -474,8 +474,8 @@ Each task carries its fields in an indented line, read by the [software factory]
     - The separate marketplace lists only the consumer plugin; `factory` is not in it
     - `/plugin marketplace add` and `/plugin install` work from a local path (documented manual check)
     - CI validates `marketplace.json` and `plugin.json`
-- [ ] **DS-53 Component-usage skill.** Given a UI need, the skill picks components from the manifest and shows correct imports (CSS + components), Field wiring, custom icons and a11y rules. It replaces hardcoded colors with `--ds-*` roles.
-  - type: build · has_ui: no · depends_on: DS-51, DS-52 · needs_human: no · status: todo
+- [x] **DS-53 Component-usage skill.** Given a UI need, the skill picks components from the manifest and shows correct imports (CSS + components), Field wiring, custom icons and a11y rules. It replaces hardcoded colors with `--ds-*` roles.
+  - type: build · has_ui: no · depends_on: DS-51, DS-52 · needs_human: no · status: done
   - done_when:
     - `SKILL.md` reads `manifest.json` instead of hardcoding a component list
     - Covers install, CSS imports, theming, `Field`/`useFieldControl` and `IconProvider`
@@ -611,3 +611,4 @@ Each task carries its fields in an indented line, read by the [software factory]
 - **DS-49** Bring your own icons — docs & library examples — https://github.com/mikespineu/design-system-wireframe/pull/87
 - **DS-11** Consumer docs — https://github.com/mikespineu/design-system-wireframe/pull/92
 - **DS-28** createTheme() — implementation — https://github.com/mikespineu/design-system-wireframe/pull/91
+- **DS-53** Component-usage skill — https://github.com/mikespineu/design-system-wireframe/pull/123
